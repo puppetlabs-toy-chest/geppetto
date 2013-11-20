@@ -35,7 +35,7 @@ public class Release extends AbbrevRelease {
 	private Long file_size;
 
 	@Expose
-	private String file_type;
+	private String file_uri;
 
 	@Expose
 	private String file_md5;
@@ -104,10 +104,10 @@ public class Release extends AbbrevRelease {
 	}
 
 	/**
-	 * @return File type
+	 * @return File Download URI
 	 */
-	public String getFileType() {
-		return file_type;
+	public String getFileURI() {
+		return file_uri;
 	}
 
 	/**
@@ -203,11 +203,11 @@ public class Release extends AbbrevRelease {
 	}
 
 	/**
-	 * @param fileType
-	 *            the fileType to set
+	 * @param fileURI
+	 *            the fileURI to set
 	 */
-	public void setFileType(String fileType) {
-		this.file_type = fileType;
+	public void setFileURI(String fileURI) {
+		this.file_uri = fileURI;
 	}
 
 	/**
