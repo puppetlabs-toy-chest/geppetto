@@ -157,12 +157,19 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 		if(baseDir == null) {
 			MavenProject project = session.getCurrentProject();
 			URI basedirURI;
-			File basedir = project.getBasedir();
-			if(basedir != null)
-				basedirURI = basedir.toURI();
+			File pbd = project.getBasedir();
+			if(pbd != null)
+				basedirURI = pbd.toURI();
 			else
 				basedirURI = URI.create(session.getExecutionRootDirectory());
-			baseDir = new File(basedirURI.normalize());
+			try {
+				baseDir = new File(basedirURI.normalize());
+			}
+			catch(IllegalArgumentException e) {
+				// URI is not absolute. Try and make it relative to the current directory
+				URI here = new File(".").getAbsoluteFile().toURI();
+				baseDir = new File(here.resolve(basedirURI).normalize());
+			}
 		}
 		return baseDir;
 	}
