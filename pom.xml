@@ -14,7 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<mavenVersion>3.0.5</mavenVersion>
 		<geppettoVersion>4.0.0-SNAPSHOT</geppettoVersion>
-		<nexusServer>http://geppetto-nexus.puppetlabs.com</nexusServer>
+		<nexusServer>https://geppetto-nexus.puppetlabs.com</nexusServer>
 		<parentSiteURL>${nexusServer}/content/sites/geppetto-site</parentSiteURL>
 
 		<!-- We use property injection. But instead of '${' and '}' we use '.qual' 

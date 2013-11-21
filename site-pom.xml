@@ -4,7 +4,7 @@
 
 	<groupId>com.puppetlabs.geppetto</groupId>
 	<artifactId>parent</artifactId>
-	<version>4.0.0-SNAPSHOT</version>
+	<version>4.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Geppetto Site Project</name>
@@ -14,7 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<mavenVersion>3.0.5</mavenVersion>
 		<geppettoVersion>4.0.0-SNAPSHOT</geppettoVersion>
-		<nexusServer>http://nexus.tada.se</nexusServer>
+		<nexusServer>https://geppetto-nexus.puppetlabs.com</nexusServer>
 		<parentSiteURL>${nexusServer}/content/sites/geppetto-site</parentSiteURL>
 
 		<!-- We use property injection. But instead of '${' and '}' we use '.qual' 
@@ -42,8 +42,9 @@
 	<scm>
 		<connection>scm:git:git://github.com/puppetlabs/geppetto.git</connection>
 		<url>https://github.com/puppetlabs/geppetto</url>
-		<developerConnection>scm:git:git@github.com:cloudsmith/geppetto.git</developerConnection>
-	</scm>
+		<developerConnection>scm:git:git@github.com:puppetlabs/geppetto.git</developerConnection>
+	  <tag>HEAD</tag>
+  </scm>
 
 	<distributionManagement>
 		<repository>
@@ -553,7 +554,7 @@
 					<!-- Hardcode here to avoid Maven guessing and appending submodule path -->
 					<anonymousConnection>scm:git:git://github.com/puppetlabs/geppetto.git</anonymousConnection>
 					<webAccessUrl>https://github.com/puppetlabs/geppetto</webAccessUrl>
-					<developerConnection>scm:git:git@github.com:cloudsmith/geppetto.git</developerConnection>
+					<developerConnection>scm:git:git@github.com:puppetlabs/geppetto.git</developerConnection>
 				</configuration>
 			</plugin>
 			<plugin>
