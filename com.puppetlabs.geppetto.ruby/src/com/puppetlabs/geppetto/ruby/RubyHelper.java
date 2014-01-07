@@ -20,6 +20,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.puppetlabs.geppetto.pp.pptp.Function;
 import com.puppetlabs.geppetto.pp.pptp.ITargetElementContainer;
 import com.puppetlabs.geppetto.pp.pptp.MetaType;
@@ -37,22 +47,11 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
 import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
 import com.puppetlabs.geppetto.ruby.spi.IRubyServices;
 import com.puppetlabs.geppetto.ruby.spi.IRubyServicesFactory;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * Provides access to ruby parsing / information services. If an implementation
- * is not available, a mock service is used - this can be checked with {@link #isRubyServicesAvailable()}. The mock service will provide an empty
+ * is not available, a mock service is used - this can be checked with {@link #isRubyServicesAvailable()}. The mock
+ * service will provide an empty
  * parse result (i.e. "no errors or warning"), and will return empty results for
  * information.
  * 
@@ -673,12 +672,10 @@ public class RubyHelper {
 
 		var = PPTPFactory.eINSTANCE.createTPVariable();
 		var.setName("servername");
-		var.setDocumentation(Joiner.on("").join(
-			ImmutableList.of(
-				"The puppet master’s fully-qualified domain name. (Note that this information ",
-				"is gathered from the puppet master by Facter, rather than read from the config files; even if the ",
-				"master’s certname is set to something other than its fully-qualified domain name, this variable ",
-				"will still contain the server’s fqdn.)")));
+		var.setDocumentation("The puppet master’s fully-qualified domain name. (Note that this information "
+				+ "is gathered from the puppet master by Facter, rather than read from the config files; even if the "
+				+ "master’s certname is set to something other than its fully-qualified domain name, this variable "
+				+ "will still contain the server’s fqdn.)");
 		var.setDeprecated(false);
 		target.getContents().add(var);
 
@@ -694,6 +691,11 @@ public class RubyHelper {
 		var.setDeprecated(false);
 		target.getContents().add(var);
 
+		var = PPTPFactory.eINSTANCE.createTPVariable();
+		var.setName("trusted");
+		var.setDocumentation("$trusted will automatically contain trusted node data in future versions");
+		var.setDeprecated(false);
+		target.getContents().add(var);
 	}
 
 	/**
