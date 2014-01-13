@@ -30,6 +30,11 @@ public class DefaultUserService extends AbstractForgeService implements UserServ
 	}
 
 	@Override
+	public User current() throws IOException {
+		return getClient(false).getV2("user", null, User.class);
+	}
+
+	@Override
 	public User get(String name) throws IOException {
 		return getClient(false).getV2(getUserPath(name), null, User.class);
 	}

@@ -24,6 +24,14 @@ import com.puppetlabs.geppetto.forge.v2.model.User;
 public interface UserService {
 
 	/**
+	 * Returns the currently authenticated user. An exception is thrown if the user is not authenticated
+	 * 
+	 * @return Details for the currently authenticated user
+	 * @throws IOException
+	 */
+	User current() throws IOException;
+
+	/**
 	 * 
 	 * @param name
 	 *            The name of the user
