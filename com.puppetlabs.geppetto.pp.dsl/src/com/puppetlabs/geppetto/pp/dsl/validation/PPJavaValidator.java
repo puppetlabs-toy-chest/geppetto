@@ -21,6 +21,30 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.Exceptions;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
+import org.eclipse.xtext.validation.Check;
+
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.puppetlabs.geppetto.pp.AdditiveExpression;
 import com.puppetlabs.geppetto.pp.AndExpression;
 import com.puppetlabs.geppetto.pp.AppendExpression;
@@ -95,30 +119,6 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPClassifier;
 import com.puppetlabs.geppetto.pp.dsl.linking.ValidationBasedMessageAcceptor;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import com.puppetlabs.geppetto.pp.util.TextExpressionHelper;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.util.Exceptions;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
-import org.eclipse.xtext.validation.Check;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagnostics {
 	/**
@@ -375,6 +375,15 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_STRING);
 		}
 
+		// The name "$trusted" will automatically contain trusted node data in future versions.
+		preference = advisor().assignmentToVarNamedTrusted();
+		if(preference.isWarningOrError() &&
+				("trusted".equals(varExpr.getVarName()) || "$trusted".equals(varExpr.getVarName()))) {
+			warningOrError(
+				acceptor, preference,
+				"$trusted will automatically contain trusted node data in future versions - avoid using this name.",
+				varExpr, IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
+		}
 	}
 
 	@Check
@@ -770,6 +779,12 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			acceptor.acceptError(
 				"A parameter must start with a lower case letter", o, PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME,
 				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_INITIAL_LOWERCASE);
+		else if("$trusted".equals(argName)) {
+			warningOrError(
+				acceptor, advisor().assignmentToVarNamedTrusted(),
+				"$trusted will automatically contain trusted node data in future versions - avoid using this name.", o,
+				PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME, IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
+		}
 
 		if(o.getOp() != null && !"=".equals(o.getOp()))
 			acceptor.acceptError(

@@ -10,7 +10,6 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
-import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.XtextResource;
@@ -18,6 +17,7 @@ import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
 
 /**
  * Tests specific to reported issues using Puppet 3.0 and 3.0 validation.

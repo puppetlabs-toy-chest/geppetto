@@ -48,5 +48,11 @@
 			<version>4.0.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.puppetlabs.geppetto</groupId>
+			<artifactId>com.puppetlabs.geppetto.forge</artifactId>
+			<version>4.0.1-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

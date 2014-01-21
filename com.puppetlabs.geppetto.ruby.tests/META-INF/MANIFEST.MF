@@ -12,7 +12,9 @@ Require-Bundle: com.puppetlabs.geppetto.ruby,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.core.runtime,
  com.google.guava,
- org.junit
+ org.junit,
+ org.apache.commons.compress,
+ com.puppetlabs.geppetto.forge
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: com.puppetlabs.geppetto.injectable,

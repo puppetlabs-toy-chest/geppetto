@@ -22,6 +22,11 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	}
 
 	@Override
+	public ValidationPreference assignmentToVarNamedTrusted() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
 	public ValidationPreference booleansInStringForm() {
 		return ValidationPreference.WARNING;
 	}

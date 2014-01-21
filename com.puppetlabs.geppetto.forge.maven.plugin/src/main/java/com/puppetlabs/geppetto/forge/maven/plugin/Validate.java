@@ -117,6 +117,12 @@ public class Validate extends AbstractForgeServiceMojo {
 	private ValidationPreference assignmentToVarNamedString = WARNING;
 
 	/**
+	 * How should assignment to variable $trusted be treated.
+	 */
+	@Parameter(property = "forge.validation.assignmentToVarNamedTrusted", defaultValue = "WARNING")
+	private ValidationPreference assignmentToVarNamedTrusted = WARNING;
+
+	/**
 	 * Puppet interprets the strings "false" and "true" as boolean true when they are used in a boolean context.
 	 * This validation preference flags them as "not a boolean value"
 	 */
@@ -209,6 +215,11 @@ public class Validate extends AbstractForgeServiceMojo {
 		@Override
 		public ValidationPreference assignmentToVarNamedString() {
 			return assignmentToVarNamedString;
+		}
+
+		@Override
+		public ValidationPreference assignmentToVarNamedTrusted() {
+			return assignmentToVarNamedTrusted;
 		}
 
 		@Override

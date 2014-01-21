@@ -22,6 +22,11 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	public ValidationPreference assignmentToVarNamedString();
 
 	/**
+	 * How should assignment to variable $trusted be treated.
+	 */
+	public ValidationPreference assignmentToVarNamedTrusted();
+
+	/**
 	 * Puppet interprets the strings "false" and "true" as boolean true when they are used in a boolean context.
 	 * This validation preference flags them as "not a boolean value"
 	 * 
@@ -72,5 +77,4 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	 * 
 	 */
 	public ValidationPreference unquotedResourceTitles();
-
 }

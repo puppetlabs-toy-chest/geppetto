@@ -35,6 +35,9 @@ public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 		this.addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, "Assignment to $string",
 			getFieldEditorParent()));
+		this.addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, "Assignment to $trusted",
+			getFieldEditorParent()));
 	}
 
 }

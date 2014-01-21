@@ -10,15 +10,15 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.validation;
 
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 
-import com.google.inject.Inject;
-
 /**
  * A potential problems advisor based on preference settings.
- * Note, that the preferences are read when this advisor is instantiated. Get a new instance when a preference has changed.
+ * Note, that the preferences are read when this advisor is instantiated. Get a new instance when a preference has
+ * changed.
  * 
  * 
  */
@@ -34,6 +34,11 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	@Override
 	public ValidationPreference assignmentToVarNamedString() {
 		return preferences.getAssignmentToVariableNamedString();
+	}
+
+	@Override
+	public ValidationPreference assignmentToVarNamedTrusted() {
+		return preferences.getAssignmentToVariableNamedTrusted();
 	}
 
 	@Override

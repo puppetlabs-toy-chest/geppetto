@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
-import com.puppetlabs.geppetto.pp.dsl.validation.PPPatternHelper;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
@@ -25,6 +23,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
+import com.puppetlabs.geppetto.pp.dsl.validation.PPPatternHelper;
 
 /**
  * Test validation/linking of variables.
@@ -79,6 +79,16 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 		code = "$01 = 10"; //
 		r = loadAndLinkSingleResource(code);
 		tester.validate(r.getContents().get(0)).assertOK();
+	}
+
+	@Test
+	public void test_assignmentToTrustedTrusted() throws Exception {
+		String code = "$trusted = 'gotcha'";
+		XtextResource r = getResourceFromString(code);
+
+		tester.validate(r.getContents().get(0)).assertWarning(IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
+		resourceErrorDiagnostics(r).assertOK();
+
 	}
 
 	@Test

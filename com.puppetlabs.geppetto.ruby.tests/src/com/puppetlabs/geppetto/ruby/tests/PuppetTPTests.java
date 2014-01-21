@@ -14,10 +14,27 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.junit.Test;
+
+import com.puppetlabs.geppetto.common.os.OsUtil;
+import com.puppetlabs.geppetto.common.os.StreamUtil;
+import com.puppetlabs.geppetto.forge.util.TarUtils;
 import com.puppetlabs.geppetto.pp.facter.Facter.Facter1_6;
 import com.puppetlabs.geppetto.pp.pptp.AbstractType;
 import com.puppetlabs.geppetto.pp.pptp.Function;
@@ -27,14 +44,41 @@ import com.puppetlabs.geppetto.pp.pptp.TargetEntry;
 import com.puppetlabs.geppetto.pp.pptp.Type;
 import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
 import com.puppetlabs.geppetto.ruby.RubyHelper;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.junit.Test;
 
 public class PuppetTPTests {
+
+	private static final String PUPPET_DOWNLOADS = "http://downloads.puppetlabs.com/";
+
+	private File download(String type, String tgzFileName) throws Exception {
+		File downloadedFile = new File(getDownloadsDir(), tgzFileName);
+		if(downloadedFile.exists())
+			return downloadedFile;
+
+		URL ascURL = new URL(PUPPET_DOWNLOADS + type + '/' + tgzFileName);
+		InputStream input = ascURL.openStream();
+		try {
+			OutputStream output = new FileOutputStream(downloadedFile);
+			StreamUtil.copy(input, output);
+			output.close();
+		}
+		catch(Exception e) {
+			downloadedFile.delete();
+			throw e;
+		}
+		finally {
+			input.close();
+		}
+		return downloadedFile;
+	}
+
+	/* uncomment and modify path to test load of puppet distribution and creating an xml version */
+
+	private File getDownloadsDir() {
+		File downloads = new File(TestDataProvider.getBasedir(), "downloads");
+		if(!(downloads.isDirectory() || downloads.mkdirs()))
+			fail("Unable to create directory: " + downloads.getAbsolutePath());
+		return downloads;
+	}
 
 	private Function getFunction(String name, TargetEntry target) {
 		for(Function f : target.getFunctions())
@@ -50,14 +94,50 @@ public class PuppetTPTests {
 		return null;
 	}
 
-	/* uncomment and modify path to test load of puppet distribution and creating an xml version */
-
 	private Property getProperty(String name, AbstractType type) {
 		for(Property p : type.getProperties())
 			if(name.equals(p.getName()))
 				return p;
 		return null;
 	}
+
+	private File getPuppetDistribution(String version) throws Exception {
+		return getUnpackedDownload(getDownloadsDir(), "puppet", version);
+	}
+
+	private File getPuppetPlugins(String version) throws Exception {
+		String pluginsName = "plugins-" + version;
+		File downloads = new File(getDownloadsDir(), pluginsName);
+		return getUnpackedDownload(downloads, "hiera", "1.3.0");
+	}
+
+	private File getUnpackedDownload(File destDir, String type, String version) throws Exception {
+		String distroName = type + '-' + version;
+		File distroDir = new File(destDir, distroName);
+		if(distroDir.isDirectory())
+			return distroDir;
+
+		InputStream input = new GZIPInputStream(new FileInputStream(download(type, distroName + ".tar.gz")));
+		try {
+			TarUtils.unpack(input, destDir, false, null);
+			input.close();
+			return distroDir;
+		}
+		catch(Exception e) {
+			OsUtil.deleteRecursive(distroDir);
+			throw e;
+		}
+		finally {
+			input.close();
+		}
+	}
+
+	// Puppet PE 2.0 unzipped is not a full distribution - has no source to scan
+	// public void testLoad_PE_2_0() throws Exception {
+	// performLoad(new File("/Users/henrik/PuppetDistributions/puppet-enterprise-2.0.0-el-4-i386/lib/puppet"), //
+	// null, //
+	// new File("puppet_enterprise-2.0.0.pptp"));
+	// }
 
 	private void performLoad(File distroDir, File pluginsDir, File tptpFile) throws Exception {
 		RubyHelper helper = new RubyHelper();
@@ -99,12 +179,15 @@ public class PuppetTPTests {
 
 	}
 
-	// Puppet PE 2.0 unzipped is not a full distribution - has no source to scan
-	// public void testLoad_PE_2_0() throws Exception {
-	// performLoad(new File("/Users/henrik/PuppetDistributions/puppet-enterprise-2.0.0-el-4-i386/lib/puppet"), //
-	// null, //
-	// new File("puppet_enterprise-2.0.0.pptp"));
-	// }
+	private void performLoad(String version) throws Exception {
+		performLoad(version, version);
+	}
+
+	private void performLoad(String version, String pptpVersion) throws Exception {
+		performLoad(new File(getPuppetDistribution(version), "lib/puppet"), //
+			getPuppetPlugins(version), //
+			new File(TestDataProvider.getTestOutputDir(), "puppet-" + pptpVersion + ".pptp"));
+	}
 
 	/**
 	 * This is a really odd place to do this, but since the other generators of pptp modesl
@@ -130,51 +213,55 @@ public class PuppetTPTests {
 	}
 
 	@Test
-	public void testLoad2_6_9() throws Exception {
-		final File puppetDistros = new File("/Users/henrik/PuppetDistributions/");
-		if(puppetDistros.isDirectory()) {
-			performLoad(new File(puppetDistros, "puppet-2.6.9/lib/puppet"), //
-				new File(puppetDistros, "plugins-3.0.0"), //
-				new File(TestDataProvider.getTestOutputDir(), "puppet-2.6.9.pptp"));
+	public void testLoad_Facter1_7() throws Exception {
+		File pptpFile = new File(TestDataProvider.getTestOutputDir(), "facter-1.7.pptp");
+		Facter1_6 facter = new Facter1_6();
 
-			// performLoad(new File("/Users/henrik/PuppetDistributions/puppet-2.6.9/lib/puppet"), //
-			// null, //
-			// new File("puppet-2.6.9.pptp"));
-		}
+		// Save the TargetEntry as a loadable resource
+		ResourceSet resourceSet = new ResourceSetImpl();
+		URI fileURI = URI.createFileURI(pptpFile.getAbsolutePath());
+		Resource targetResource = resourceSet.createResource(fileURI);
+
+		// Add all (optional) plugins
+		targetResource.getContents().add(facter.asPPTP());
+		targetResource.save(null);
+		System.err.println("Target saved to: " + fileURI.toString());
+
 	}
 
 	@Test
-	public void testLoad2_7_19() throws Exception {
-		final File puppetDistros = new File("/Users/henrik/PuppetDistributions/");
-		if(puppetDistros.isDirectory()) {
-			performLoad(new File(puppetDistros, "puppet-2.7.19/lib/puppet"), //
-				new File(puppetDistros, "plugins-3.0.0"), //
-				new File(TestDataProvider.getTestOutputDir(), "puppet-2.7.19.pptp"));
-		}
+	public void testLoad2_6_18() throws Exception {
+		performLoad("2.6.18");
 	}
 
 	@Test
-	public void testLoad3_0_0() throws Exception {
-		final File puppetDistros = new File("/Users/henrik/PuppetDistributions/");
-		if(puppetDistros.isDirectory()) {
-			performLoad(new File(puppetDistros, "puppet-3.0.0-rc7/lib/puppet"), //
-				new File(puppetDistros, "plugins-3.0.0"), //
-				new File(TestDataProvider.getTestOutputDir(), "puppet-3.0.0.pptp"));
-		}
+	public void testLoad2_7_23() throws Exception {
+		performLoad("2.7.23");
 	}
 
 	@Test
-	public void testLoad3_2_0() throws Exception {
-		// Load puppet 3.2.0 from the puppet repo (since 3.2 RC not yet avail, load plugins from
-		// the 3.0 release
-		// TODO: UPDATE WHEN 3.2 is released
-		//
-		final File puppetDistros = new File("/Users/henrik/PuppetDistributions/");
-		if(puppetDistros.isDirectory()) {
-			performLoad(new File(puppetDistros, "puppet-3.2.0-rc0/lib/puppet"), //
-				new File(puppetDistros, "plugins-3.0.0"), //
-				new File(TestDataProvider.getTestOutputDir(), "puppet-3.2.0.pptp"));
-		}
+	public void testLoad3_0_2() throws Exception {
+		performLoad("3.0.2");
+	}
+
+	@Test
+	public void testLoad3_1_1() throws Exception {
+		performLoad("3.1.1");
+	}
+
+	@Test
+	public void testLoad3_2_4() throws Exception {
+		performLoad("3.2.4");
+	}
+
+	@Test
+	public void testLoad3_3_2() throws Exception {
+		performLoad("3.3.2");
+	}
+
+	@Test
+	public void testLoad3_4_2() throws Exception {
+		performLoad("3.4.2");
 	}
 
 	@Test

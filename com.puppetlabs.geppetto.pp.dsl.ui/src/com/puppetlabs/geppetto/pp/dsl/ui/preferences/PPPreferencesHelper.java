@@ -13,13 +13,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.puppetlabs.geppetto.forge.model.Constants;
-import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.pp.dsl.ui.builder.PPBuildJob;
-import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -35,6 +28,12 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.puppetlabs.geppetto.forge.model.Constants;
+import com.puppetlabs.geppetto.forge.model.ModuleName;
+import com.puppetlabs.geppetto.pp.dsl.ui.builder.PPBuildJob;
+import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 
 /**
  * A facade that helps with preference checking.
@@ -172,6 +171,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getAssignmentToVariableNamedString() {
 		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING));
+	}
+
+	public ValidationPreference getAssignmentToVariableNamedTrusted() {
+		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED));
 	}
 
 	public ValidationPreference getBooleansInStringForm() {

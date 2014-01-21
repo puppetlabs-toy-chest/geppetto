@@ -203,6 +203,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__ASSIGNMENT_TO_VAR_NAMED_STRING = ISSUE_PREFIX + "AssignmentToVarNamedString";
 
+	public static final String ISSUE__ASSIGNMENT_TO_VAR_NAMED_TRUSTED = ISSUE_PREFIX + "AssignmentToVarNamedTrusted";
+
 	public static final String ISSUE__INHERITANCE_WITH_PARAMETERS = ISSUE_PREFIX + "InheritenceOfParameterizedClass";
 
 	public static final String ISSUE__ENSURE_NOT_FIRST = ISSUE_PREFIX + "EnsureNotFirst";

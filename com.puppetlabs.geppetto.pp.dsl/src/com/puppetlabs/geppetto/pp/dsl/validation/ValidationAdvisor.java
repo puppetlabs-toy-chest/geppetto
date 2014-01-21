@@ -28,6 +28,11 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference assignmentToVarNamedTrusted() {
+			return problemsAdvisor.assignmentToVarNamedTrusted();
+		}
+
+		@Override
 		public ValidationPreference booleansInStringForm() {
 			return problemsAdvisor.booleansInStringForm();
 		}
@@ -91,7 +96,6 @@ public class ValidationAdvisor {
 		public ValidationPreference unquotedResourceTitles() {
 			return problemsAdvisor.unquotedResourceTitles();
 		}
-
 	}
 
 	/**
@@ -345,8 +349,39 @@ public class ValidationAdvisor {
 		}
 	}
 
-	public static class ValidationAdvisor_3_2_future extends ValidationAdvisor_3_2 implements IValidationAdvisor {
-		protected ValidationAdvisor_3_2_future(IPotentialProblemsAdvisor problemsAdvisor) {
+	public static class ValidationAdvisor_3_4 extends ValidationAdvisor_3_2 implements IValidationAdvisor {
+		protected ValidationAdvisor_3_4(IPotentialProblemsAdvisor problemsAdvisor) {
+			super(problemsAdvisor);
+		}
+
+		@Override
+		public boolean allowExpressionLastInBlocks() {
+			return true;
+		}
+
+		@Override
+		public boolean allowLambdas() {
+			return true;
+		}
+
+		@Override
+		public boolean allowSeparatorExpression() {
+			return true;
+		}
+
+		@Override
+		public boolean allowUnlessElse() {
+			return true;
+		}
+
+		@Override
+		public ValidationPreference assignmentToVarNamedTrusted() {
+			return ValidationPreference.ERROR;
+		}
+	}
+
+	public static class ValidationAdvisor_3_4_future extends ValidationAdvisor_3_2 implements IValidationAdvisor {
+		protected ValidationAdvisor_3_4_future(IPotentialProblemsAdvisor problemsAdvisor) {
 			super(problemsAdvisor);
 		}
 
@@ -381,8 +416,10 @@ public class ValidationAdvisor {
 				return new ValidationAdvisor_3_0(problemsAdvisor);
 			case PUPPET_3_2:
 				return new ValidationAdvisor_3_2(problemsAdvisor);
+			case PUPPET_3_4:
+				return new ValidationAdvisor_3_4(problemsAdvisor);
 			case PUPPET_FUTURE:
-				return new ValidationAdvisor_3_2_future(problemsAdvisor);
+				return new ValidationAdvisor_3_4_future(problemsAdvisor);
 		}
 		throw new IllegalArgumentException("Unsupported compliance level");
 	}

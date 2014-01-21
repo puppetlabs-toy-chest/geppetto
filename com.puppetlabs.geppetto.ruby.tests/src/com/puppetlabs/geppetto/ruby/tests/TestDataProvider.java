@@ -17,8 +17,9 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 
-import com.puppetlabs.geppetto.common.util.BundleAccess;
 import org.eclipse.core.runtime.IPath;
+
+import com.puppetlabs.geppetto.common.util.BundleAccess;
 
 public class TestDataProvider {
 
@@ -30,7 +31,7 @@ public class TestDataProvider {
 	 * 
 	 * @return absolute path of the project.
 	 */
-	private static File getBasedir() {
+	public static File getBasedir() {
 		if(basedir == null) {
 			String basedirProp = System.getProperty("basedir");
 			if(basedirProp == null) {
