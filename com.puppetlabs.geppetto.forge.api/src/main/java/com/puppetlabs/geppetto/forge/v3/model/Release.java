@@ -11,6 +11,7 @@
  */
 package com.puppetlabs.geppetto.forge.v3.model;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Release extends AbbrevRelease {
 	private Long file_size;
 
 	@Expose
-	private String file_uri;
+	private URI file_uri;
 
 	@Expose
 	private String file_md5;
@@ -106,7 +107,7 @@ public class Release extends AbbrevRelease {
 	/**
 	 * @return File Download URI
 	 */
-	public String getFileURI() {
+	public URI getFileUri() {
 		return file_uri;
 	}
 
@@ -206,7 +207,7 @@ public class Release extends AbbrevRelease {
 	 * @param fileURI
 	 *            the fileURI to set
 	 */
-	public void setFileURI(String fileURI) {
+	public void setFileUri(URI fileURI) {
 		this.file_uri = fileURI;
 	}
 
