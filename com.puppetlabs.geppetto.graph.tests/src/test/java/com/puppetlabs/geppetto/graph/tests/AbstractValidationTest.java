@@ -15,6 +15,12 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
+import org.junit.Before;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.inject.Injector;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.client.GsonModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeModule;
@@ -35,12 +41,6 @@ import com.puppetlabs.geppetto.validation.runner.AllModuleReferences;
 import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.Export;
 import com.puppetlabs.geppetto.validation.runner.IEncodingProvider;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsSetup;
-import org.eclipse.emf.common.util.URI;
-import org.junit.Before;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.inject.Injector;
 
 public class AbstractValidationTest {
 	private Injector injector;
@@ -100,7 +100,7 @@ public class AbstractValidationTest {
 	}
 
 	protected ValidationOptions getValidationOptions() {
-		return getValidationOptions(PuppetTarget.DEFAULT.getComplianceLevel());
+		return getValidationOptions(PuppetTarget.getDefault().getComplianceLevel());
 	}
 
 	protected ValidationOptions getValidationOptions(ComplianceLevel complianceLevel) {

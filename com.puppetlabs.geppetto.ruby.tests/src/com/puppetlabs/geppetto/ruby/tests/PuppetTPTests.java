@@ -235,8 +235,8 @@ public class PuppetTPTests {
 	}
 
 	@Test
-	public void testLoad2_7_23() throws Exception {
-		performLoad("2.7.23");
+	public void testLoad2_7_25() throws Exception {
+		performLoad("2.7.25");
 	}
 
 	@Test

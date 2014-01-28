@@ -18,19 +18,17 @@ import com.puppetlabs.geppetto.semver.Version;
 public enum PuppetTarget {
 	// @fmtOff
 	PUPPET26("2.6.18", "2.6", "puppet-2.6.18.pptp", null, ComplianceLevel.PUPPET_2_6),
-	PUPPET27("2.7.23", "2.7", "puppet-2.7.23.pptp", null, ComplianceLevel.PUPPET_2_7),
+	PUPPET27("2.7.25", "2.7", "puppet-2.7.25.pptp", null, ComplianceLevel.PUPPET_2_7),
 	PUPPET30("3.0.2", "3.0", "puppet-3.0.2.pptp", null, ComplianceLevel.PUPPET_3_0),
 	PUPPET32("3.2.4", "3.2", "puppet-3.2.4.pptp", null, ComplianceLevel.PUPPET_3_2),
 	PUPPET34("3.4.2", "3.4", "puppet-3.4.2.pptp", null, ComplianceLevel.PUPPET_3_4),
 	PUPPET_FUTURE("3.4.2", "future", "puppet-3.4.2.pptp", null, ComplianceLevel.PUPPET_FUTURE),
 	PUPPET_ENTERPRISE20("2.7.9", "PE 2.0", "puppet-2.7.19.pptp", "2.0.2", ComplianceLevel.PUPPET_2_7),
 	PUPPET_ENTERPRISE27("2.7.19", "PE 2.7", "puppet-2.7.19.pptp", "2.7.2", ComplianceLevel.PUPPET_2_7),
-	PUPPET_ENTERPRISE28("2.7.23", "PE 2.8", "puppet-2.7.23.pptp", "2.8.1", ComplianceLevel.PUPPET_2_7),
+	PUPPET_ENTERPRISE28("2.7.25", "PE 2.8", "puppet-2.7.25.pptp", "2.8.1", ComplianceLevel.PUPPET_2_7),
 	PUPPET_ENTERPRISE30("3.2.4", "PE 3.0", "puppet-3.2.4.pptp", "3.0.1", ComplianceLevel.PUPPET_3_2),
 	PUPPET_ENTERPRISE31("3.3.2", "PE 3.1", "puppet-3.3.2.pptp", "3.1.0", ComplianceLevel.PUPPET_3_2);
 	// @fmtOn
-
-	public static PuppetTarget DEFAULT = PUPPET34;
 
 	public static PuppetTarget forComplianceLevel(ComplianceLevel level, boolean enterprise) {
 		for(PuppetTarget target : values())

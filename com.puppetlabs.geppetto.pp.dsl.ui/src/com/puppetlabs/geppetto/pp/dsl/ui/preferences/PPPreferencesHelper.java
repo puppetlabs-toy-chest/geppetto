@@ -234,7 +234,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 			return PuppetTarget.forLiteral(targetLiteral);
 		}
 		catch(IllegalArgumentException e) {
-			return PuppetTarget.DEFAULT;
+			return PuppetTarget.getDefault();
 		}
 	}
 
@@ -318,7 +318,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store = preferenceStoreAccess.getWritablePreferenceStore();
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_STRATEGY, 0);
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_COMPLETE_COMPOUND_BLOCKS, true);
-		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.DEFAULT.getLiteral());
+		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.getDefault().getLiteral());
 		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, defaultProjectPath);
 		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, defaultPuppetEnvironment);
 		store.setDefault(PPPreferenceConstants.FORGE_LOCATION, Constants.FORGE_SERVICE_BASE_URL);
