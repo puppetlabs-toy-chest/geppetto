@@ -152,7 +152,7 @@ public class PptpTargetProjectHandler {
 
 		URI uri;
 		try {
-			uri = PuppetTarget.forLiteral(preferenceHelper.getPptpVersion()).getPlatformURI();
+			uri = preferenceHelper.getPuppetTarget().getPlatformURI();
 		}
 		catch(IllegalArgumentException e) {
 			log.error(e.getMessage());

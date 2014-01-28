@@ -100,7 +100,7 @@ public class AbstractValidationTest {
 	}
 
 	protected ValidationOptions getValidationOptions() {
-		return getValidationOptions(ComplianceLevel.PUPPET_2_7);
+		return getValidationOptions(PuppetTarget.DEFAULT.getComplianceLevel());
 	}
 
 	protected ValidationOptions getValidationOptions(ComplianceLevel complianceLevel) {

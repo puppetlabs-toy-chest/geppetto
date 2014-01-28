@@ -30,6 +30,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.forge.model.Constants;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
+import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.ui.builder.PPBuildJob;
 import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
@@ -222,14 +223,19 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ML_COMMENTS));
 	}
 
-	public String getPptpVersion() {
-		String result = store.getString(PPPreferenceConstants.PUPPET_TARGET_VERSION);
+	public PuppetTarget getPuppetTarget() {
+		String targetLiteral = store.getString(PPPreferenceConstants.PUPPET_TARGET_VERSION);
+
 		// there never was a 2.8, but older preferences settings may still have this string, use 3.0 instead
-		if("2.8".equals(result))
-			return "3.0";
-		else if("PE 2.0".equals(result)) // PE 2.0 includes puppet 2.7
-			return "2.7";
-		return result;
+		if("2.8".equals(targetLiteral))
+			targetLiteral = "3.0";
+
+		try {
+			return PuppetTarget.forLiteral(targetLiteral);
+		}
+		catch(IllegalArgumentException e) {
+			return PuppetTarget.DEFAULT;
+		}
 	}
 
 	private boolean getResourceSpecificBoolean(IResource r, String property) {
@@ -300,18 +306,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	}
 
 	synchronized public IValidationAdvisor.ComplianceLevel getValidationComplianceLevel() {
-		String result = store.getString(PPPreferenceConstants.PUPPET_TARGET_VERSION);
-		if("2.6".equals(result))
-			return IValidationAdvisor.ComplianceLevel.PUPPET_2_6;
-		if("3.0".equals(result) || "2.8".equals(result))
-			return IValidationAdvisor.ComplianceLevel.PUPPET_3_0;
-		if("3.2".equals(result))
-			return IValidationAdvisor.ComplianceLevel.PUPPET_3_2;
-		if("future".equals(result))
-			return IValidationAdvisor.ComplianceLevel.PUPPET_FUTURE;
-
-		// for 2.7 and default
-		return IValidationAdvisor.ComplianceLevel.PUPPET_2_7;
+		return getPuppetTarget().getComplianceLevel();
 	}
 
 	@Override
@@ -323,7 +318,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store = preferenceStoreAccess.getWritablePreferenceStore();
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_STRATEGY, 0);
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_COMPLETE_COMPOUND_BLOCKS, true);
-		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, "3.0");
+		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.DEFAULT.getLiteral());
 		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, defaultProjectPath);
 		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, defaultPuppetEnvironment);
 		store.setDefault(PPPreferenceConstants.FORGE_LOCATION, Constants.FORGE_SERVICE_BASE_URL);

@@ -30,6 +30,8 @@ public enum PuppetTarget {
 	PUPPET_ENTERPRISE31("3.3.2", "PE 3.1", "puppet-3.3.2.pptp", "3.1.0", ComplianceLevel.PUPPET_3_2);
 	// @fmtOn
 
+	public static PuppetTarget DEFAULT = PUPPET34;
+
 	public static PuppetTarget forComplianceLevel(ComplianceLevel level, boolean enterprise) {
 		for(PuppetTarget target : values())
 			if(target.complianceLevel == level && enterprise == target.isPuppetEnterprise())

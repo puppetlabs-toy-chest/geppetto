@@ -355,32 +355,12 @@ public class ValidationAdvisor {
 		}
 
 		@Override
-		public boolean allowExpressionLastInBlocks() {
-			return true;
-		}
-
-		@Override
-		public boolean allowLambdas() {
-			return true;
-		}
-
-		@Override
-		public boolean allowSeparatorExpression() {
-			return true;
-		}
-
-		@Override
-		public boolean allowUnlessElse() {
-			return true;
-		}
-
-		@Override
 		public ValidationPreference assignmentToVarNamedTrusted() {
 			return ValidationPreference.ERROR;
 		}
 	}
 
-	public static class ValidationAdvisor_3_4_future extends ValidationAdvisor_3_2 implements IValidationAdvisor {
+	public static class ValidationAdvisor_3_4_future extends ValidationAdvisor_3_4 implements IValidationAdvisor {
 		protected ValidationAdvisor_3_4_future(IPotentialProblemsAdvisor problemsAdvisor) {
 			super(problemsAdvisor);
 		}
