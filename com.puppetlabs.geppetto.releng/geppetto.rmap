@@ -99,7 +99,7 @@
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/eclipse/updates/4.3">
+      <rm:uri format="{0}/eclipse/updates/4.3-M-builds">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
@@ -108,7 +108,7 @@
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/releases/kepler">
+      <rm:uri format="{0}/releases/maintenance">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
@@ -117,7 +117,7 @@
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/tools/orbit/downloads/drops/R20130827064939/repository">
+      <rm:uri format="{0}/tools/orbit/downloads/drops/R20140114142710/repository">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
