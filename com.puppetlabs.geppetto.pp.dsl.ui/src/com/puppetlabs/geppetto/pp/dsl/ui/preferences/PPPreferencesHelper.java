@@ -148,6 +148,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_ML_COMMENTS, //
 		PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, //
 		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, //
+		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, //
 		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST //
 
 	);
@@ -334,6 +335,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, ValidationPreference.WARNING.toString());
 		store.setDefault(
 			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, ValidationPreference.WARNING.toString());
+		store.setDefault(
+			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, ValidationPreference.WARNING.toString());
 
 		// stylistic
 		store.setDefault(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST, ValidationPreference.IGNORE.toString());

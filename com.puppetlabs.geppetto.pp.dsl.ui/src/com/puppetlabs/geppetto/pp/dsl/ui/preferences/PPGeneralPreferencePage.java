@@ -10,9 +10,11 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.swt.widgets.Composite;
+
+import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 
 /**
  * A simple preference page for selection of puppet target.
@@ -74,17 +76,14 @@ public class PPGeneralPreferencePage extends AbstractPreferencePage {
 
 	@Override
 	protected void createFieldEditors() {
+		PuppetTarget[] targets = PuppetTarget.values();
+		String[][] strings = new String[targets.length][];
+		for(int idx = 0; idx < targets.length; ++idx) {
+			PuppetTarget target = targets[idx];
+			strings[idx] = new String[] { target.getLiteral(), target.getLiteral() };
+		}
 
 		addField(new PuppetVersionFieldEditor(PPPreferenceConstants.PUPPET_TARGET_VERSION, //
-			"Puppet target version", 1, //
-			new String[][] { { "2.6", "2.6" }, //
-					{ "2.7", "2.7" }, //
-					{ "3.0", "3.0" }, // NOTE: 2.8 release does not exist, it got bumped to 3.0
-					{ "3.2", "3.2" }, //
-					{ "future", "future" }, // What ever the future is...
-					{ "PE 2.0", "PE 2.0" }, //
-					{ "PE 2.7", "PE 2.7" } //
-			}, getFieldEditorParent()));
-
+			"Puppet target version", 1, strings, getFieldEditorParent()));
 	}
 }
