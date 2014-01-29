@@ -213,6 +213,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__UNSUPPORTED_LAMBDA = ISSUE_PREFIX + "UnsupportedLambda";
 
+	public static final String ISSUE__ALTERNATIVE_LAMBDA_SYNTAX = ISSUE_PREFIX + "AlternativeLambdaSyntax";
+
 	public static final String ISSUE__EMPTY_STATEMENT = ISSUE_PREFIX + "EmptyStatement";
 
 	public static final String ISSUE__UNSUPPORTED_METHOD_CALL = ISSUE_PREFIX + "UnsupportedMethodCall";

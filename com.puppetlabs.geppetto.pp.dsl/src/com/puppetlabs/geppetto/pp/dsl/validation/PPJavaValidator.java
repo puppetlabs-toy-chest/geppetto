@@ -72,6 +72,7 @@ import com.puppetlabs.geppetto.pp.IQuotedString;
 import com.puppetlabs.geppetto.pp.IfExpression;
 import com.puppetlabs.geppetto.pp.ImportExpression;
 import com.puppetlabs.geppetto.pp.InExpression;
+import com.puppetlabs.geppetto.pp.JavaLambda;
 import com.puppetlabs.geppetto.pp.Lambda;
 import com.puppetlabs.geppetto.pp.LiteralBoolean;
 import com.puppetlabs.geppetto.pp.LiteralDefault;
@@ -93,6 +94,7 @@ import com.puppetlabs.geppetto.pp.RelationalExpression;
 import com.puppetlabs.geppetto.pp.RelationshipExpression;
 import com.puppetlabs.geppetto.pp.ResourceBody;
 import com.puppetlabs.geppetto.pp.ResourceExpression;
+import com.puppetlabs.geppetto.pp.RubyLambda;
 import com.puppetlabs.geppetto.pp.SelectorEntry;
 import com.puppetlabs.geppetto.pp.SelectorExpression;
 import com.puppetlabs.geppetto.pp.SeparatorExpression;
@@ -1030,7 +1032,13 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				o, IPPDiagnostics.ISSUE__UNSUPPORTED_LAMBDA);
 		}
 		else {
-			internalCheckTopLevelExpressions(o.getStatements());
+			if(o instanceof RubyLambda || (o instanceof JavaLambda && ((JavaLambda) o).isFarrow())) {
+				acceptor.acceptError(
+					"A Lambda expression should be written as \"func |$x| {...}\"", o,
+					IPPDiagnostics.ISSUE__ALTERNATIVE_LAMBDA_SYNTAX);
+			}
+			else
+				internalCheckTopLevelExpressions(o.getStatements());
 		}
 	}
 
