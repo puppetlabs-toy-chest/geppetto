@@ -18,6 +18,28 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 import com.puppetlabs.geppetto.common.tracer.ITracer;
 import com.puppetlabs.geppetto.pp.AtExpression;
 import com.puppetlabs.geppetto.pp.AttributeOperation;
@@ -68,28 +90,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.PPPatternHelper;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 /**
  * Handles special linking of ResourceExpression, ResourceBody and Function references.
@@ -179,7 +179,8 @@ public class PPResourceLinker implements IPPDiagnostics {
 	}
 
 	/**
-	 * Links an arbitrary interpolation expression. Handles the special case of a literal name expression e.g. "${literalName}" as
+	 * Links an arbitrary interpolation expression. Handles the special case of a literal name expression e.g.
+	 * "${literalName}" as
 	 * if it was "${$literalname}"
 	 * 
 	 * @param o
@@ -1099,7 +1100,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 				if(qualified || advisor.unqualifiedVariables().isWarningOrError()) {
 					StringBuilder message = new StringBuilder();
 					if(disqualified)
-						message.append("Reference to not yet initialized variable: ");
+						message.append("Reference to not yet initialized variable: '");
 					else
 						message.append(qualified
 								? "Unknown variable: '"
@@ -1366,6 +1367,10 @@ public class PPResourceLinker implements IPPDiagnostics {
 		EObject p = null;
 		for(p = o; p != null; p = p.eContainer()) {
 			int classifierId = p.eClass().getClassifierID();
+			if(classifierId == PPPackage.JAVA_LAMBDA || classifierId == PPPackage.RUBY_LAMBDA)
+				// Assignment expression can not pass block boundary
+				return 0;
+
 			if(classifierId == PPPackage.ASSIGNMENT_EXPRESSION || classifierId == PPPackage.APPEND_EXPRESSION)
 				break;
 		}
@@ -1396,7 +1401,8 @@ public class PPResourceLinker implements IPPDiagnostics {
 	 * defined in the same name and type if the variable is contained in a definition argument
 	 * 
 	 * <p>
-	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or x are disqualified.
+	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or
+	 * x are disqualified.
 	 * 
 	 * @param descs
 	 * @param o
