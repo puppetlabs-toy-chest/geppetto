@@ -1028,7 +1028,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkLambda(Lambda o) {
 		if(!advisor().allowLambdas()) {
 			acceptor.acceptError(
-				"A Lambda expressions is only available in Puppet version >= 3.2 --parser future. (Change target preference?)",
+				"A Lambda expression is only available in Puppet version >= 3.2 --parser future. (Change target preference?)",
 				o, IPPDiagnostics.ISSUE__UNSUPPORTED_LAMBDA);
 		}
 		else {
