@@ -16,25 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import com.puppetlabs.geppetto.common.tracer.ITracer;
-import com.puppetlabs.geppetto.pp.AppendExpression;
-import com.puppetlabs.geppetto.pp.AssignmentExpression;
-import com.puppetlabs.geppetto.pp.BinaryExpression;
-import com.puppetlabs.geppetto.pp.Definition;
-import com.puppetlabs.geppetto.pp.DefinitionArgument;
-import com.puppetlabs.geppetto.pp.Expression;
-import com.puppetlabs.geppetto.pp.HostClassDefinition;
-import com.puppetlabs.geppetto.pp.Lambda;
-import com.puppetlabs.geppetto.pp.NodeDefinition;
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.ResourceBody;
-import com.puppetlabs.geppetto.pp.VariableExpression;
-import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
-import com.puppetlabs.geppetto.pp.dsl.linking.NameInScopeFilter.Match;
-import com.puppetlabs.geppetto.pp.dsl.linking.NameInScopeFilter.SearchStrategy;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
-import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -58,6 +39,25 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.puppetlabs.geppetto.common.tracer.ITracer;
+import com.puppetlabs.geppetto.pp.AppendExpression;
+import com.puppetlabs.geppetto.pp.AssignmentExpression;
+import com.puppetlabs.geppetto.pp.BinaryExpression;
+import com.puppetlabs.geppetto.pp.Definition;
+import com.puppetlabs.geppetto.pp.DefinitionArgument;
+import com.puppetlabs.geppetto.pp.Expression;
+import com.puppetlabs.geppetto.pp.HostClassDefinition;
+import com.puppetlabs.geppetto.pp.Lambda;
+import com.puppetlabs.geppetto.pp.NodeDefinition;
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.ResourceBody;
+import com.puppetlabs.geppetto.pp.VariableExpression;
+import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
+import com.puppetlabs.geppetto.pp.dsl.linking.NameInScopeFilter.Match;
+import com.puppetlabs.geppetto.pp.dsl.linking.NameInScopeFilter.SearchStrategy;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 
 /**
  * Utility class for finding references.
@@ -477,7 +477,7 @@ public class PPFinder {
 					String vname = ((VariableExpression) lhs).getVarName();
 					if(vname.startsWith("$"))
 						if(vname.length() > 1)
-							vname = name.substring(1);
+							vname = vname.substring(1);
 						else
 							vname = "";
 					if(name.equals(vname))
