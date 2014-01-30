@@ -65,7 +65,7 @@ public class PptpTargetProjectHandler {
 	 * defining the target platform.
 	 * Calls {@link #ensureTargetProjectConfiguration()} if the target project is not created.
 	 */
-	public void ensureStateOfPuppetProjects(IProgressMonitor monitor) {
+	public synchronized void ensureStateOfPuppetProjects(IProgressMonitor monitor) {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject targetProject = workspace.getRoot().getProject(PPUiConstants.PPTP_TARGET_PROJECT_NAME);
 		ensureTargetProjectConfiguration(monitor);
@@ -100,7 +100,7 @@ public class PptpTargetProjectHandler {
 		}
 	}
 
-	public void ensureTargetProjectConfiguration(IProgressMonitor monitor) {
+	public synchronized void ensureTargetProjectConfiguration(IProgressMonitor monitor) {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		// While developing, keep this here to enable removal of hidden project in safe way
 		IProject oldTargetProject = workspace.getRoot().getProject(PPUiConstants.OLD_PPTP_TARGET_PROJECT_NAME);
