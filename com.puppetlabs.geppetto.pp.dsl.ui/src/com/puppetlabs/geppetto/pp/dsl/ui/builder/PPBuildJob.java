@@ -13,7 +13,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.builder;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
@@ -27,6 +26,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.ui.editor.preferences.AbstractPreferencePage;
 
 import com.google.common.collect.Lists;
+import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
 
 /**
  * The PPBuildJob is used when there is a need to rebuild projects (such as after preference changes).
@@ -45,6 +45,7 @@ public class PPBuildJob extends Job {
 		this.projects = projects;
 		setPriority(Job.BUILD);
 		this.cleanOnly = false;
+		setRule(ResourcesPlugin.getWorkspace().getRoot());
 	}
 
 	public PPBuildJob(IWorkspace workspace) {
@@ -67,6 +68,7 @@ public class PPBuildJob extends Job {
 			}
 		this.projects = puppetProjects.toArray(new IProject[puppetProjects.size()]);
 		setPriority(Job.BUILD);
+		setRule(ResourcesPlugin.getWorkspace().getRoot());
 	}
 
 	@Override

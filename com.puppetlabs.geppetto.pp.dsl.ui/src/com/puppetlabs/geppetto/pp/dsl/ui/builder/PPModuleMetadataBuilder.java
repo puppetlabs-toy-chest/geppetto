@@ -32,9 +32,13 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.Wrapper;
 
@@ -71,7 +75,34 @@ import com.puppetlabs.geppetto.semver.VersionRange;
  */
 
 public class PPModuleMetadataBuilder extends IncrementalProjectBuilder implements PPUiConstants {
-	private final static Logger log = Logger.getLogger(PPModuleMetadataBuilder.class);
+	private static class SequencedJob extends Job {
+		boolean scheduled = false;
+
+		SequencedJob(String name) {
+			super(name);
+		}
+
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			try {
+				ResourcesPlugin.getWorkspace().build(
+					IncrementalProjectBuilder.FULL_BUILD, new SubProgressMonitor(monitor, 2));
+				return Status.OK_STATUS;
+			}
+			catch(CoreException e) {
+				return e.getStatus();
+			}
+			finally {
+				synchronized(this) {
+					scheduled = false;
+				}
+			}
+		}
+	}
+
+	private static final SequencedJob delayedFullBuild = new SequencedJob("Full build after dependency changes");
+
+	private final static Logger log = Logger.getLogger(PPModuleMetadataBuilder.class);;
 
 	/**
 	 * Returns the best matching project (or null if there is no match) among the projects in the
@@ -644,14 +675,28 @@ public class PPModuleMetadataBuilder extends IncrementalProjectBuilder implement
 			project.refreshLocal(IResource.DEPTH_INFINITE, subMon.newChild(1));
 			final IProjectDescription description = getProject().getDescription();
 			List<IProject> current = Lists.newArrayList(description.getDynamicReferences());
-			if(current.size() == wanted.size() && current.containsAll(wanted))
-				return; // already in sync
-			// not in sync, set them
-			IProjectDescription desc = getProject().getDescription();
-			desc.setDynamicReferences(wanted.toArray(new IProject[wanted.size()]));
-			project.setDescription(desc, subMon.newChild(1));
-			// Trigger full rebuild once we're done here
-			new PPBuildJob(getWorkspaceRoot().getWorkspace()).schedule();
+			if(!(current.size() == wanted.size() && current.containsAll(wanted))) {
+				// not in sync, set them
+				IProjectDescription desc = getProject().getDescription();
+				desc.setDynamicReferences(wanted.toArray(new IProject[wanted.size()]));
+				project.setDescription(desc, subMon.newChild(1));
+
+				// We need a full build when dependencies change. This is tricky since a large number of
+				// projects may hit this point in a very short time period. Without a delay here to
+				// collect all requests for a full build, the number of full builds becomes very large
+				// in fractions of a second when, say, importing a large number of projects from a git
+				// repository.
+				//
+				// The correct way to do this is probably to make the metadata part of the Xtext model and
+				// a proper resource. Lot's of work so this will have to do for now.
+				//
+				synchronized(delayedFullBuild) {
+					if(!delayedFullBuild.scheduled) {
+						delayedFullBuild.schedule(3000);
+						delayedFullBuild.scheduled = true;
+					}
+				}
+			}
 		}
 		catch(CoreException e) {
 			log.error("Can not sync project's dynamic dependencies", e);
