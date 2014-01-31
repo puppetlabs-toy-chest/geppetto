@@ -132,7 +132,7 @@ public class PPWorkspaceProjectsStateHelper extends AbstractStorage2UriMapperCli
 	}
 
 	protected boolean isAccessibleXtextProject(IProject p) {
-		return p != null && XtextProjectHelper.hasNature(p);
+		return p != null && XtextProjectHelper.hasNature(p) && p.getLocation() != null;
 	}
 
 	public void setWorkspace(IWorkspace workspace) {
