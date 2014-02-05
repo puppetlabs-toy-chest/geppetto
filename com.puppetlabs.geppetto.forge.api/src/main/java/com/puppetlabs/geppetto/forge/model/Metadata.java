@@ -31,6 +31,7 @@ public class Metadata extends Entity {
 				List<Type> copy = new ArrayList<Type>(types.size());
 				for(Type type : types)
 					copy.add(new Type(type));
+				return copy;
 			}
 		}
 		return Collections.emptyList();
@@ -107,7 +108,7 @@ public class Metadata extends Entity {
 
 		types = copyTypes(src.types);
 
-		if(checksums == null || checksums.isEmpty())
+		if(src.checksums == null || src.checksums.isEmpty())
 			checksums = Collections.emptyMap();
 		else
 			checksums = new HashMap<String, byte[]>(src.checksums);
