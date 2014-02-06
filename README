@@ -2,9 +2,9 @@ Geppetto is aimed at developing tools to simplify the process of authoring and
 consuming Puppet modules and manifests.
 
 The Geppetto IDE tooling can be downloaded as a stand-alone product
-from https://downloads.puppetlabs.com/geppetto
+from https://downloads.puppetlabs.com/geppetto/4.x/
 or installed into an existing Eclipse IDE from
-http://updates.puppetlabs.com/geppetto.
+http://geppetto-updates.puppetlabs.com/4.x/
 
 For FAQ, and more information visit the Geppetto site:
 http://puppetlabs.github.io/geppetto/faq.html
