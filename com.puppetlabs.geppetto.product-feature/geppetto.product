@@ -42,10 +42,6 @@
    <vm>
    </vm>
 
-   <license>
-        <url>%licenseURL</url>
-   </license>
-
    <plugins>
    </plugins>
 
