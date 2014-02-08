@@ -102,6 +102,9 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 			addChild(child);
 	}
 
+	protected void appendExceptionMessage(StringBuilder bld) {
+	}
+
 	public boolean appendLocationLabel(StringBuilder builder, boolean withOffsets) {
 		return false;
 	}
@@ -350,6 +353,8 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 				bld.append(getMessage());
 				bld.append(':');
 			}
+
+			appendExceptionMessage(bld);
 
 			bld.setLength(bld.length() - 1);
 			if(children != null) {
