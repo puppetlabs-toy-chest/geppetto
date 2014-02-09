@@ -17,7 +17,19 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
  */
 public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public enum ComplianceLevel {
-		PUPPET_2_6, PUPPET_2_7, PUPPET_3_0, PUPPET_3_2, PUPPET_3_4, PUPPET_FUTURE
+		PUPPET_2_6("2.6"), PUPPET_2_7("2.7"), PUPPET_3_0("3.0"), PUPPET_3_2("3.2"), PUPPET_3_4("3.4"), PUPPET_FUTURE(
+				"Future");
+
+		private final String label;
+
+		private ComplianceLevel(String label) {
+			this.label = label;
+		}
+
+		@Override
+		public String toString() {
+			return label;
+		}
 	}
 
 	/**
