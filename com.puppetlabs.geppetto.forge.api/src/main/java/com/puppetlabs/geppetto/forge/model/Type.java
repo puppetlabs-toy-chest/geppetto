@@ -42,6 +42,8 @@ public class Type extends NamedTypeItem {
 	}
 
 	Type(Type src) {
+		setName(src.getName());
+		setDocumentation(src.getDocumentation());
 		properties = copyList(src.properties);
 		parameters = copyList(src.parameters);
 		providers = copyList(src.providers);
