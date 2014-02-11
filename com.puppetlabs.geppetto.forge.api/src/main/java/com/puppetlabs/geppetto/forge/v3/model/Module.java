@@ -28,6 +28,9 @@ public class Module extends AbbrevModule {
 	@Expose
 	private String issues_url;
 
+	@Expose
+	private Boolean supported;
+
 	/**
 	 * @return date when this module was created
 	 */
@@ -71,6 +74,13 @@ public class Module extends AbbrevModule {
 	 */
 	public Date getUpdatedAt() {
 		return updated_at;
+	}
+
+	/**
+	 * @return <code>true</code> if this module has at least one release that is supported by Puppet Labs Inc.
+	 */
+	public boolean isSupported() {
+		return supported != null && supported.booleanValue();
 	}
 
 	/**
@@ -119,6 +129,13 @@ public class Module extends AbbrevModule {
 	 */
 	public void setReleases(List<AbbrevRelease> releases) {
 		this.releases = releases;
+	}
+
+	/**
+	 * @param supported
+	 */
+	public void setSupported(boolean supported) {
+		supported = Boolean.valueOf(supported);
 	}
 
 	/**

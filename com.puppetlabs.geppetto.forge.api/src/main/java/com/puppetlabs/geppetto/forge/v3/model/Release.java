@@ -54,6 +54,9 @@ public class Release extends AbbrevRelease {
 	private String license;
 
 	@Expose
+	private Boolean supported;
+
+	@Expose
 	private Date created_at;
 
 	@Expose
@@ -156,6 +159,13 @@ public class Release extends AbbrevRelease {
 	}
 
 	/**
+	 * @return code>true</code> if this release is supported by Puppet Labs Inc.
+	 */
+	public boolean isSupported() {
+		return supported != null && supported.booleanValue();
+	}
+
+	/**
 	 * @param changelog
 	 *            the changelog to set
 	 */
@@ -241,6 +251,13 @@ public class Release extends AbbrevRelease {
 	 */
 	public void setReadme(String readme) {
 		this.readme = readme;
+	}
+
+	/**
+	 * @param supported
+	 */
+	public void setSupported(boolean supported) {
+		supported = Boolean.valueOf(supported);
 	}
 
 	/**
