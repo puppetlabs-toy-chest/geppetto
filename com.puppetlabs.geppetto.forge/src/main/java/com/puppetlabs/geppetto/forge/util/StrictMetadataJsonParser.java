@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
@@ -233,5 +234,11 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 		type.setProperties(properties);
 		type.setProviders(providers);
 		return type;
+	}
+
+	@Override
+	protected void handleDynamicAttribute(JEntry entry, Diagnostic chain) {
+		super.handleDynamicAttribute(entry, chain);
+		md.addDynamicAttribute(entry.getKey(), entry.getValue());
 	}
 }

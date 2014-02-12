@@ -12,6 +12,7 @@ package com.puppetlabs.geppetto.ui.editor;
 
 import java.util.List;
 
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.util.CallSymbol;
 import com.puppetlabs.geppetto.forge.util.MetadataJsonParser;
 
@@ -40,5 +41,9 @@ public class LenientMetadataJsonParser extends MetadataJsonParser {
 	@Override
 	protected String getBadNameMessage(IllegalArgumentException e, boolean dependency) {
 		return MetadataModel.getBadNameMessage(e, dependency);
+	}
+
+	@Override
+	protected void handleDynamicAttribute(JEntry entry, Diagnostic chain) {
 	}
 }

@@ -18,7 +18,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +36,7 @@ import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.Type;
 import com.puppetlabs.geppetto.forge.util.Checksums;
 import com.puppetlabs.geppetto.forge.util.ModuleUtils;
+import com.puppetlabs.geppetto.forge.util.StrictMetadataJsonParser;
 import com.puppetlabs.geppetto.forge.util.Types;
 
 public class MetadataTest extends AbstractForgeTest {
@@ -93,6 +99,79 @@ public class MetadataTest extends AbstractForgeTest {
 		}
 		catch(IOException e) {
 			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	public void testDynamicDataRead() throws IOException {
+		Reader input = new FileReader(getTestData("metadata.json"));
+		try {
+			Metadata md = getGson().fromJson(input, Metadata.class);
+			Map<String, Object> dynAttrs = md.getDynamicAttributes();
+			assertNotNull(dynAttrs);
+			validateMetadataExtraMap(dynAttrs.get("extra_map"));
+		}
+		finally {
+			input.close();
+		}
+	}
+
+	@Test
+	public void testDynamicDataReadStrict() throws IOException {
+		File file = getTestData("metadata.json");
+		StringWriter swr = new StringWriter((int) file.length());
+		FileReader reader = new FileReader(file);
+		try {
+			char[] buf = new char[4096];
+			int cnt;
+			while((cnt = reader.read(buf)) > 0)
+				swr.write(buf, 0, cnt);
+		}
+		finally {
+			reader.close();
+		}
+
+		Metadata md = new Metadata();
+		StrictMetadataJsonParser mdParser = new StrictMetadataJsonParser(md);
+		Diagnostic chain = new Diagnostic();
+		mdParser.parse(file, swr.toString(), chain);
+		assertEquals(chain.getSeverity(), Diagnostic.WARNING);
+		Map<String, Object> dynAttrs = md.getDynamicAttributes();
+		assertNotNull(dynAttrs);
+		validateMetadataExtraMap(dynAttrs.get("extra_map"));
+	}
+
+	@Test
+	public void testDynamicDataWriteRead() throws IOException {
+		File outputDir = getTestOutputFolder("metadata-ouput", true);
+		File metaOut = new File(outputDir, "metadata.json");
+		Gson gson = getGson();
+		Metadata md;
+		Reader input = new FileReader(getTestData("metadata.json"));
+		try {
+			md = gson.fromJson(input, Metadata.class);
+		}
+		finally {
+			input.close();
+		}
+
+		Writer out = new FileWriter(metaOut);
+		try {
+			gson.toJson(md, out);
+		}
+		finally {
+			out.close();
+		}
+
+		input = new FileReader(metaOut);
+		try {
+			md = gson.fromJson(input, Metadata.class);
+			Map<String, Object> dynAttrs = md.getDynamicAttributes();
+			assertNotNull(dynAttrs);
+			validateMetadataExtraMap(dynAttrs.get("extra_map"));
+		}
+		finally {
+			input.close();
 		}
 	}
 
@@ -177,5 +256,15 @@ public class MetadataTest extends AbstractForgeTest {
 		catch(IOException e) {
 			fail(e.getMessage());
 		}
+	}
+
+	private void validateMetadataExtraMap(Object extra_map) {
+		assertTrue(extra_map instanceof Map);
+		assertEquals(((Map<?, ?>) extra_map).size(), 1);
+		Object extra_submap = ((Map<?, ?>) extra_map).get("extra_submap");
+		assertTrue(extra_submap instanceof Map);
+		assertEquals(((Map<?, ?>) extra_submap).size(), 2);
+		assertEquals(((Map<?, ?>) extra_submap).get("key1"), "Value of key1");
+		assertEquals(((Map<?, ?>) extra_submap).get("key2"), "Value of key2");
 	}
 }

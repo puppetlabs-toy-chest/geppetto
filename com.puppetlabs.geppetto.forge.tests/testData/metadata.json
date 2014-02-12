@@ -1,0 +1,88 @@
+{
+  "name": "testcorp-module1",
+  "dependencies": [
+
+  ],
+  "author": "",
+  "license": "",
+  "version": "1.0.0",
+  "types": [
+    {
+      "name": "type1",
+      "doc": "Doc for type1",
+      "parameters": [
+        {
+          "name": "param1",
+          "doc": "Doc for param1"
+        }
+      ],
+      "providers": [
+        {
+          "name": "provider1",
+          "doc": "Doc for provider1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "property1",
+          "doc": "Doc for property1"
+        },
+        {
+          "name": "property2",
+          "doc": "Doc for property2"
+        }
+      ]
+    },
+   {
+      "name": "type2",
+      "doc": "Doc for type2",
+      "parameters": [
+        {
+          "name": "param1",
+          "doc": "Doc for param1"
+        }
+      ],
+      "providers": [
+        {
+          "name": "provider1",
+          "doc": "Doc for provider1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "property1",
+          "doc": "Doc for property1"
+        },
+        {
+          "name": "property2",
+          "doc": "Doc for property2"
+        }
+      ]
+    }
+  ],
+  "checksums": {
+    "foo": "b4ce92b22496ece34a80ffac9edc7ec7",
+    "fee": "ba644bad53adc954399aaeca13379b4e",
+    "fum": "38a636fa3d1285893e4aa2198cb48e3f"
+  },
+  "source": "",
+  "operatingsystem_support": [
+     {
+       "operatingsystem":"RedHat",
+       "operatingsystemrelease":[ "5.0", "6.0" ]
+     },
+     {
+       "operatingsystem": "Ubuntu",
+       "operatingsystemrelease": [
+           "12.04",
+           "10.04"
+       ]
+     }
+   ],
+   "extra_map": {
+      "extra_submap": {
+         "key1": "Value of key1",
+         "key2": "Value of key2"
+      }
+   }
+}

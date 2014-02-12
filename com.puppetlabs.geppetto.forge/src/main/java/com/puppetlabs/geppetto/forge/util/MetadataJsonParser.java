@@ -96,6 +96,10 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 		return pfx + e.getMessage();
 	}
 
+	protected void handleDynamicAttribute(JEntry entry, Diagnostic chain) {
+		chain.addChild(createDiagnostic(entry, WARNING, "Unrecognized metadata attribute: " + entry.getKey()));
+	}
+
 	public void parse(File file, String content, Diagnostic chain) throws JsonParseException, IOException {
 		JElement root = parse(file, content);
 		if(!(root instanceof JObject))
@@ -144,7 +148,7 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 						Collections.singletonList(entry.getElement()));
 			}
 			catch(IllegalArgumentException e) {
-				chain.addChild(createDiagnostic(entry, ERROR, "Unrecognized call: " + entry.getKey()));
+				handleDynamicAttribute(entry, chain);
 			}
 		}
 

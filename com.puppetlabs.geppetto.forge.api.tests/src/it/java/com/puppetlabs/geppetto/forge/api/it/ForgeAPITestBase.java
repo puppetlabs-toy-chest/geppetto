@@ -44,7 +44,7 @@ public class ForgeAPITestBase {
 
 	private static final String FORGE_CLIENT_SECRET = "2227c9a7392382f58b5e4d084b705827cb574673ff7d2a5905ef21685fd48e40";
 
-	private static final String FORGE_STAGING_SERVICE_BASE_URL = "https://forge-staging-api.puppetlabs.com";
+	private static final String FORGE_STAGING_SERVICE_BASE_URL = "https://forge-staging-api-lb02.puppetlabs.com";
 
 	private static ForgeAPI testUserForge;
 

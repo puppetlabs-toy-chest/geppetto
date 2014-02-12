@@ -78,6 +78,8 @@ public class Metadata extends Entity {
 	@Expose
 	private Version version;
 
+	private transient Map<String, Object> dynamicAttributes;
+
 	/**
 	 * Creates an empty Metadata instance
 	 */
@@ -112,6 +114,18 @@ public class Metadata extends Entity {
 			checksums = Collections.emptyMap();
 		else
 			checksums = new HashMap<String, byte[]>(src.checksums);
+	}
+
+	/**
+	 * Add a named value to the dynamic attribute map of this instance.
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	public void addDynamicAttribute(String name, Object value) {
+		if(dynamicAttributes == null)
+			dynamicAttributes = new HashMap<String, Object>();
+		dynamicAttributes.put(name, value);
 	}
 
 	/**
@@ -152,6 +166,18 @@ public class Metadata extends Entity {
 	 */
 	public String getDescription() {
 		return description;
+	}
+
+	/**
+	 * Returns a map of attributes that were present in the JSON for this metadata
+	 * but not recognized as proper attributes.
+	 * 
+	 * @return An unmodifiable Map of dynamic attributes, possibly empty but never null.
+	 */
+	public Map<String, Object> getDynamicAttributes() {
+		return dynamicAttributes == null
+				? Collections.<String, Object> emptyMap()
+				: Collections.unmodifiableMap(dynamicAttributes);
 	}
 
 	/**
