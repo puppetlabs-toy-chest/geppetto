@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Composite Repository Management" default="unspecified">
 	<property name="framework.location" location="/usr/local/buckminster-3.7" />
+	<property name="target.dir" location="${user.dir}" />
 
 	<fail message="child.repository property must be defined" unless="child.repository" />
 
@@ -18,7 +19,7 @@
 
 	<target name="-add.named" if="composite.name">
 		<p2.composite.repository>
-			<repository location="${user.dir}" name="${composite.name}" />
+			<repository location="${target.dir}" name="${composite.name}" />
 			<add>
 				<repository location="${child.repository}" />
 			</add>
@@ -27,7 +28,7 @@
 
 	<target name="-add" depends="-add.named" unless="composite.name">
 		<p2.composite.repository>
-			<repository location="${user.dir}" />
+			<repository location="${target.dir}" />
 			<add>
 				<repository location="${child.repository}" />
 			</add>
@@ -36,7 +37,7 @@
 
 	<target name="-remove">
 		<p2.composite.repository>
-			<repository location="${user.dir}" />
+			<repository location="${target.dir}" />
 			<remove>
 				<repository location="${child.repository}" />
 			</remove>
@@ -52,7 +53,7 @@
 
 	<target name="-call.operation.indirectly" depends="-locate.framework.launcher">
 		<tempfile property="temporary.workspace" destdir="${java.io.tmpdir}" prefix="temporary-workspace-" />
-		<java jvm="${java.home}/bin/java" jar="${framework.launcher}" fork="true" dir="${user.dir}" failonerror="true">
+		<java jvm="${java.home}/bin/java" jar="${framework.launcher}" fork="true" dir="${target.dir}" failonerror="true">
 			<syspropertyset>
 				<propertyref builtin="commandline" />
 			</syspropertyset>
