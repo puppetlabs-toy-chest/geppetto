@@ -1,0 +1,33 @@
+<project name="Download artifacts" default="download">
+	<fail message="build.url property must be specified" unless="build.url" />
+
+	<property name="artifact.prefix" value="" />
+
+	<target name="download">
+		<dirname property="project.directory" file="${ant.file}" />
+		<basename property="script.name.stem" file="${ant.file}" suffix=".xml" />
+		<tempfile property="download.artifacts.ant.file" destdir="${java.io.tmpdir}" prefix="${script.name.stem}-" suffix=".ant" />
+
+		<!-- create an ant script for downloading all artifacts produced by a build -->
+		<xslt in="${ant.file}" out="${download.artifacts.ant.file}" style="${project.directory}/${script.name.stem}.xsl" force="true">
+			<param name="build-url" expression="${build.url}" />
+			<param name="artifact-prefix" expression="${artifact.prefix}" />
+			<param name="download-target" expression="-download.build.artifacts" />
+		</xslt>
+
+		<!-- call the created ant script to download the build's artifacts -->
+		<ant antfile="${download.artifacts.ant.file}" dir="${user.dir}" />
+
+		<!-- cleanup -->
+		<delete file="${download.artifacts.ant.file}" />
+	</target>
+
+	<!--
+		This target is used as a template for the default target when constructing
+		the artifacts download ant script.
+		Any tasks in this target are executed after the download of artifacts has completed.
+	-->
+	<target name="-download.build.artifacts">
+		<echo message="Done downloading artifacts." />
+	</target>
+</project>
