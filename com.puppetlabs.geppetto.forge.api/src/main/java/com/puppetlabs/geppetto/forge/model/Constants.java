@@ -27,7 +27,7 @@ public interface Constants {
 	/**
 	 * The default base URL
 	 */
-	String FORGE_SERVICE_BASE_URL = "http://forgeapi.puppetlabs.com";
+	String FORGE_SERVICE_BASE_URL = "https://forgeapi.puppetlabs.com";
 
 	/**
 	 * Binding name for base URI

@@ -15,18 +15,18 @@ import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
+
+import com.google.inject.Module;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.ForgeService;
 import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeServiceModule;
 
-import com.google.inject.Module;
-
 public abstract class AbstractForgeServiceMojo extends AbstractForgeMojo {
 	/**
 	 * The service URL of the Puppet ForgeAPI server
 	 */
-	@Parameter(property = "forge.serviceURL", defaultValue = "http://forgeapi.puppetlabs.com/")
+	@Parameter(property = "forge.serviceURL", defaultValue = "https://forgeapi.puppetlabs.com/")
 	private String serviceURL;
 
 	@Override
