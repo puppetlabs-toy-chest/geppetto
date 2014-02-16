@@ -134,7 +134,7 @@ class ForgeImpl implements Forge {
 
 		File metadataJSON = new File(destModuleDir, METADATA_JSON_NAME);
 		if(!extractedFrom[0].getName().equals(METADATA_JSON_NAME))
-			internalSaveJSONMetadata(md, metadataJSON);
+			saveJSONMetadata(md, metadataJSON);
 
 		final File moduleArchive = new File(destination, zipArchiveName);
 		OutputStream out = new GZIPOutputStream(new FileOutputStream(moduleArchive));
@@ -286,16 +286,6 @@ class ForgeImpl implements Forge {
 		}
 	}
 
-	private void internalSaveJSONMetadata(Metadata md, File jsonFile) throws IOException {
-		Writer writer = new BufferedWriter(new FileWriter(jsonFile));
-		try {
-			gson.toJson(md, writer);
-		}
-		finally {
-			StreamUtil.close(writer);
-		}
-	}
-
 	@Override
 	public boolean isMetadataFile(String source) {
 		if(source != null) {
@@ -325,7 +315,13 @@ class ForgeImpl implements Forge {
 	}
 
 	public void saveJSONMetadata(Metadata md, File jsonFile) throws IOException {
-		internalSaveJSONMetadata(new Metadata(md), jsonFile);
+		Writer writer = new BufferedWriter(new FileWriter(jsonFile));
+		try {
+			gson.toJson(md, writer);
+		}
+		finally {
+			StreamUtil.close(writer);
+		}
 	}
 
 	@Override

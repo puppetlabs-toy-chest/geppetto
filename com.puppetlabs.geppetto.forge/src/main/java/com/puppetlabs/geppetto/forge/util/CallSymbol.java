@@ -11,5 +11,5 @@
 package com.puppetlabs.geppetto.forge.util;
 
 public enum CallSymbol {
-	name, author, description, license, project_page, source, summary, version, dependency, dependencies, types, checksums
+	name, author, description, license, project_page, source, summary, version, dependency, dependencies, requirements, operatingsystem_support, tags, types, checksums
 }

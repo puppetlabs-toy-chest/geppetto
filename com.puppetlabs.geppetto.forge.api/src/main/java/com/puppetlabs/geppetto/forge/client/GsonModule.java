@@ -41,6 +41,8 @@ import com.google.inject.name.Named;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
+import com.puppetlabs.geppetto.forge.model.Requirement;
+import com.puppetlabs.geppetto.forge.model.SupportedOS;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
 
@@ -111,13 +113,17 @@ public class GsonModule extends AbstractModule {
 	 */
 	public static class MetadataJsonAdapter implements JsonSerializer<Metadata>, JsonDeserializer<Metadata> {
 		// @fmtOff
+		public static final Type STRINGS_TYPE = new TypeToken<List<String>>() {}.getType();
 		public static final Type TYPES_TYPE = new TypeToken<List<com.puppetlabs.geppetto.forge.model.Type>>() {}.getType();
 		public static final Type DEPENDENCIES_TYPE = new TypeToken<List<Dependency>>() {}.getType();
+		public static final Type REQUIREMENTS_TYPE = new TypeToken<List<Requirement>>() {}.getType();
+		public static final Type SUPPORTEDOS_TYPE = new TypeToken<List<SupportedOS>>() {}.getType();
 		// @fmtOn
 
 		private static void addProperty(JsonObject obj, String key, String value) {
-			if(value != null)
-				obj.addProperty(key, value);
+			obj.addProperty(key, value == null
+					? ""
+					: value);
 		}
 
 		private static void appendHex(StringBuilder bld, byte b) {
@@ -184,12 +190,18 @@ public class GsonModule extends AbstractModule {
 					md.setLicense(val.getAsString());
 				else if("name".equals(key))
 					md.setName(context.<ModuleName> deserialize(val, ModuleName.class));
+				else if("operatingsystem_support".equals(key))
+					md.setOperatingSystemSupport(context.<List<SupportedOS>> deserialize(val, SUPPORTEDOS_TYPE));
 				else if("project_page".equals(key))
 					md.setProjectPage(val.getAsString());
+				else if("requirements".equals(key))
+					md.setRequirements(context.<List<Requirement>> deserialize(val, REQUIREMENTS_TYPE));
 				else if("source".equals(key))
 					md.setSource(val.getAsString());
 				else if("summary".equals(key))
 					md.setSummary(val.getAsString());
+				else if("tags".equals(key))
+					md.setTags(context.<List<String>> deserialize(val, STRINGS_TYPE));
 				else if("types".equals(key))
 					md.setTypes(context.<List<com.puppetlabs.geppetto.forge.model.Type>> deserialize(val, TYPES_TYPE));
 				else if("version".equals(key))
@@ -209,14 +221,19 @@ public class GsonModule extends AbstractModule {
 			json.add("dependencies", context.serialize(src.getDependencies(), DEPENDENCIES_TYPE));
 			addProperty(json, "description", src.getDescription());
 			addProperty(json, "license", src.getLicense());
-			if(src.getName() != null)
-				json.addProperty("name", src.getName().toString());
+			json.addProperty("name", src.getName() == null
+					? ""
+					: src.getName().toString());
+			json.add("operatingsystem_support", context.serialize(src.getOperatingSystemSupport(), SUPPORTEDOS_TYPE));
 			addProperty(json, "project_page", src.getProjectPage());
+			json.add("requirements", context.serialize(src.getRequirements(), REQUIREMENTS_TYPE));
 			addProperty(json, "source", src.getSource());
 			addProperty(json, "summary", src.getSummary());
+			json.add("tags", context.serialize(src.getTags(), STRINGS_TYPE));
 			json.add("types", context.serialize(src.getTypes(), TYPES_TYPE));
-			if(src.getVersion() != null)
-				json.addProperty("version", src.getVersion().toString());
+			json.addProperty("version", src.getVersion() == null
+					? ""
+					: src.getVersion().toString());
 			for(Map.Entry<String, Object> dynAttr : src.getDynamicAttributes().entrySet())
 				json.add(dynAttr.getKey(), context.serialize(dynAttr.getValue()));
 			return json;

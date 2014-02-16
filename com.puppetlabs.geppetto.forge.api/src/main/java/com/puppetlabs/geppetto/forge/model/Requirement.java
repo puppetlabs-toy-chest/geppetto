@@ -7,37 +7,22 @@
  * 
  * Contributors:
  *   Puppet Labs
+ * 
  */
 package com.puppetlabs.geppetto.forge.model;
 
 import com.google.gson.annotations.Expose;
+import com.puppetlabs.geppetto.semver.VersionRange;
 
 /**
- * Property, Parameter, or Provider for a {@link Type}.
+ * A module release requirement
  */
-public class NamedTypeItem extends Entity {
+public class Requirement extends Entity {
 	@Expose
 	private String name;
 
 	@Expose
-	private String doc;
-
-	@Override
-	public boolean equals(Object o) {
-		if(this == o)
-			return true;
-		if(!(o instanceof NamedTypeItem))
-			return false;
-		NamedTypeItem no = (NamedTypeItem) o;
-		return safeEquals(name, no.name) && safeEquals(doc, no.doc);
-	}
-
-	/**
-	 * @return Documentation for the property
-	 */
-	public String getDocumentation() {
-		return doc;
-	}
+	private VersionRange version_requirement;
 
 	/**
 	 * @return the name
@@ -46,18 +31,11 @@ public class NamedTypeItem extends Entity {
 		return name;
 	}
 
-	@Override
-	public int hashCode() {
-		return safeHash(name) * 31 + safeHash(doc);
-	}
-
 	/**
-	 * @param documentation
-	 *            Documentation for the property
-	 * 
+	 * @return the version requirement
 	 */
-	public void setDocumentation(String documentation) {
-		this.doc = trimToNull(documentation);
+	public VersionRange getVersionRequirement() {
+		return version_requirement;
 	}
 
 	/**
@@ -66,5 +44,13 @@ public class NamedTypeItem extends Entity {
 	 */
 	public void setName(String name) {
 		this.name = trimToNull(name);
+	}
+
+	/**
+	 * @param versionRequirement
+	 *            the version requirement to set
+	 */
+	public void setVersionRequirement(VersionRange versionRequirement) {
+		this.version_requirement = versionRequirement;
 	}
 }

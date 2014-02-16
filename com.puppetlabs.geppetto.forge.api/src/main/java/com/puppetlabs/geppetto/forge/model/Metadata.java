@@ -10,7 +10,6 @@
  */
 package com.puppetlabs.geppetto.forge.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -24,35 +23,14 @@ import com.puppetlabs.geppetto.semver.Version;
  */
 public class Metadata extends Entity {
 
-	private static List<Type> copyTypes(List<Type> types) {
-		if(types != null) {
-			int top = types.size();
-			if(top > 0) {
-				List<Type> copy = new ArrayList<Type>(types.size());
-				for(Type type : types)
-					copy.add(new Type(type));
-				return copy;
-			}
-		}
-		return Collections.emptyList();
-	}
-
-	private static String nullToEmpty(String s) {
-		if(s == null)
-			s = "";
-		else
-			s = s.trim();
-		return s;
-	}
-
 	@Expose
 	private String author;
 
 	@Expose
-	private Map<String, byte[]> checksums;
+	private Map<String, byte[]> checksums = Collections.emptyMap();
 
 	@Expose
-	private List<Dependency> dependencies;
+	private List<Dependency> dependencies = Collections.emptyList();
 
 	@Expose
 	private String description;
@@ -73,48 +51,21 @@ public class Metadata extends Entity {
 	private String summary;
 
 	@Expose
-	private List<Type> types;
+	private List<String> tags = Collections.emptyList();;
+
+	@Expose
+	private List<Type> types = Collections.emptyList();;
+
+	@Expose
+	private List<Requirement> requirements = Collections.emptyList();;
+
+	@Expose
+	private List<SupportedOS> operatingsystem_support = Collections.emptyList();
 
 	@Expose
 	private Version version;
 
 	private transient Map<String, Object> dynamicAttributes;
-
-	/**
-	 * Creates an empty Metadata instance
-	 */
-	public Metadata() {
-	}
-
-	/**
-	 * Copy values from the given instance and assign default values for
-	 * values that has not been filled in.
-	 * 
-	 * @param src
-	 *            The instance to copy values from
-	 */
-	public Metadata(Metadata src) {
-		name = src.name;
-		version = src.version;
-		summary = nullToEmpty(src.summary);
-		author = nullToEmpty(src.author);
-		description = nullToEmpty(src.description);
-		source = nullToEmpty(src.source);
-		project_page = nullToEmpty(src.project_page);
-		license = nullToEmpty(src.license);
-
-		if(src.dependencies == null || src.dependencies.isEmpty())
-			dependencies = Collections.emptyList();
-		else
-			dependencies = new ArrayList<Dependency>(src.dependencies);
-
-		types = copyTypes(src.types);
-
-		if(src.checksums == null || src.checksums.isEmpty())
-			checksums = Collections.emptyMap();
-		else
-			checksums = new HashMap<String, byte[]>(src.checksums);
-	}
 
 	/**
 	 * Add a named value to the dynamic attribute map of this instance.
@@ -126,6 +77,25 @@ public class Metadata extends Entity {
 		if(dynamicAttributes == null)
 			dynamicAttributes = new HashMap<String, Object>();
 		dynamicAttributes.put(name, value);
+	}
+
+	public void clear() {
+		name = null;
+		version = null;
+		summary = null;
+		author = null;
+		description = null;
+		source = null;
+		project_page = null;
+		license = null;
+		dependencies = Collections.emptyList();
+		operatingsystem_support = Collections.emptyList();
+		requirements = Collections.emptyList();
+		types = Collections.emptyList();
+		tags = Collections.emptyList();
+		checksums = Collections.emptyMap();
+		if(dynamicAttributes != null)
+			dynamicAttributes.clear();
 	}
 
 	/**
@@ -140,22 +110,18 @@ public class Metadata extends Entity {
 	/**
 	 * A map with filename &lt;-&gt; checksum entries for each file in the module
 	 * 
-	 * @return the checksums or an empty map if no checksums has been assigned
+	 * @return An unmodifiable map of checksums
 	 */
 	public Map<String, byte[]> getChecksums() {
-		if(checksums == null)
-			checksums = new HashMap<String, byte[]>();
 		return checksums;
 	}
 
 	/**
 	 * The list of module dependencies.
 	 * 
-	 * @return the dependencies or an empty list.
+	 * @return An unmodifiable list of dependencies.
 	 */
 	public List<Dependency> getDependencies() {
-		if(dependencies == null)
-			dependencies = new ArrayList<Dependency>();
 		return dependencies;
 	}
 
@@ -199,12 +165,26 @@ public class Metadata extends Entity {
 	}
 
 	/**
+	 * @return An unmodifiable list of supported operating systems
+	 */
+	public List<SupportedOS> getOperatingSystemSupport() {
+		return operatingsystem_support;
+	}
+
+	/**
 	 * A URL that points to the project page for this module.
 	 * 
 	 * @return the project_page
 	 */
 	public String getProjectPage() {
 		return project_page;
+	}
+
+	/**
+	 * @return An unmodifiable list of requirements
+	 */
+	public List<Requirement> getRequirements() {
+		return requirements;
 	}
 
 	/**
@@ -226,13 +206,20 @@ public class Metadata extends Entity {
 	}
 
 	/**
+	 * The list of Tags that this module includes.
+	 * 
+	 * @return An unmodifiable list of tags or an emtpy list.
+	 */
+	public List<String> getTags() {
+		return tags;
+	}
+
+	/**
 	 * The list of Types that this module includes.
 	 * 
-	 * @return the types or an emtpy list.
+	 * @return An unmodifiable list of types
 	 */
 	public List<Type> getTypes() {
-		if(types == null)
-			types = new ArrayList<Type>();
 		return types;
 	}
 
@@ -250,7 +237,7 @@ public class Metadata extends Entity {
 	 *            the author to set
 	 */
 	public void setAuthor(String author) {
-		this.author = author;
+		this.author = trimToNull(author);
 	}
 
 	/**
@@ -258,7 +245,7 @@ public class Metadata extends Entity {
 	 *            the checksums to set
 	 */
 	public void setChecksums(Map<String, byte[]> checksums) {
-		this.checksums = checksums;
+		this.checksums = asUnmodifiableMap(checksums);
 	}
 
 	/**
@@ -266,7 +253,7 @@ public class Metadata extends Entity {
 	 *            the dependencies to set
 	 */
 	public void setDependencies(List<Dependency> dependencies) {
-		this.dependencies = dependencies;
+		this.dependencies = asUnmodifiableList(dependencies);
 	}
 
 	/**
@@ -274,7 +261,7 @@ public class Metadata extends Entity {
 	 *            the description to set
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = trimToNull(description);
 	}
 
 	/**
@@ -282,7 +269,7 @@ public class Metadata extends Entity {
 	 *            the license to set
 	 */
 	public void setLicense(String license) {
-		this.license = license;
+		this.license = trimToNull(license);
 	}
 
 	/**
@@ -294,11 +281,27 @@ public class Metadata extends Entity {
 	}
 
 	/**
+	 * @param operatingSystemSupport
+	 *            the list of supported operating systems to set
+	 */
+	public void setOperatingSystemSupport(List<SupportedOS> operatingSystemSupport) {
+		this.operatingsystem_support = asUnmodifiableList(operatingSystemSupport);
+	}
+
+	/**
 	 * @param project_page
 	 *            the project_page to set
 	 */
 	public void setProjectPage(String project_page) {
-		this.project_page = project_page;
+		this.project_page = trimToNull(project_page);
+	}
+
+	/**
+	 * @param requirements
+	 *            the requirements to set
+	 */
+	public void setRequirements(List<Requirement> requirements) {
+		this.requirements = asUnmodifiableList(requirements);
 	}
 
 	/**
@@ -306,7 +309,7 @@ public class Metadata extends Entity {
 	 *            the source to set
 	 */
 	public void setSource(String source) {
-		this.source = source;
+		this.source = trimToNull(source);
 	}
 
 	/**
@@ -314,7 +317,15 @@ public class Metadata extends Entity {
 	 *            the summary to set
 	 */
 	public void setSummary(String summary) {
-		this.summary = summary;
+		this.summary = trimToNull(summary);
+	}
+
+	/**
+	 * @param tags
+	 *            the tags to set
+	 */
+	public void setTags(List<String> tags) {
+		this.tags = asUnmodifiableList(tags);
 	}
 
 	/**
@@ -322,7 +333,7 @@ public class Metadata extends Entity {
 	 *            the types to set
 	 */
 	public void setTypes(List<Type> types) {
-		this.types = types;
+		this.types = asUnmodifiableList(types);
 	}
 
 	/**

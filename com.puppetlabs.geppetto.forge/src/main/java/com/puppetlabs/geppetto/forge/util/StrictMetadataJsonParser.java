@@ -20,6 +20,8 @@ import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.forge.model.NamedTypeItem;
+import com.puppetlabs.geppetto.forge.model.Requirement;
+import com.puppetlabs.geppetto.forge.model.SupportedOS;
 import com.puppetlabs.geppetto.forge.model.Type;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
@@ -56,6 +58,16 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 	@Override
 	protected void call(CallSymbol key, int line, int offset, int length, List<JElement> args) {
 		switch(key) {
+			case tags: {
+				List<String> tags = new ArrayList<String>(args.size());
+				for(JElement jsonTag : args) {
+					String tag = jsonTag.toStringOrNull();
+					if(tag != null)
+						tags.add(tag);
+				}
+				md.setTags(tags);
+				break;
+			}
 			case types: {
 				List<Type> types = new ArrayList<Type>(args.size());
 				for(JElement jsonType : args) {
@@ -74,6 +86,26 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 						deps.add(dep);
 				}
 				md.setDependencies(deps);
+				break;
+			}
+			case requirements: {
+				List<Requirement> reqs = new ArrayList<Requirement>(args.size());
+				for(JElement jsonReq : args) {
+					Requirement req = createRequirement(jsonReq);
+					if(req != null)
+						reqs.add(req);
+				}
+				md.setRequirements(reqs);
+				break;
+			}
+			case operatingsystem_support: {
+				List<SupportedOS> soss = new ArrayList<SupportedOS>(args.size());
+				for(JElement jsonSos : args) {
+					SupportedOS sos = createSupportedOS(jsonSos);
+					if(sos != null)
+						soss.add(sos);
+				}
+				md.setOperatingSystemSupport(soss);
 				break;
 			}
 			case checksums:
@@ -199,6 +231,55 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 		for(JElement item : ((JArray) element).getValues())
 			items.add(createNamedTypeItem(item));
 		return items;
+	}
+
+	private Requirement createRequirement(JElement jsonDep) {
+		if(!(jsonDep instanceof JObject))
+			return null;
+
+		String name = null;
+		String vreq = null;
+		for(JEntry entry : ((JObject) jsonDep).getEntries()) {
+			String key = entry.getKey();
+			if("name".equals(key))
+				name = entry.getElement().toStringOrNull();
+			else if("version_requirement".equals(key) || "versionRequirement".equals(key))
+				vreq = entry.getElement().toStringOrNull();
+		}
+		Requirement req = new RequirementWithPosition(jsonDep);
+		req.setName(name);
+		try {
+			req.setVersionRequirement(VersionRange.create(vreq));
+		}
+		catch(IllegalArgumentException e) {
+		}
+		return req;
+	}
+
+	private SupportedOS createSupportedOS(JElement jsonSos) {
+		if(!(jsonSos instanceof JObject))
+			return null;
+
+		List<String> osReleases = null;
+		String os = null;
+		for(JEntry entry : ((JObject) jsonSos).getEntries()) {
+			String key = entry.getKey();
+			JElement val = entry.getElement();
+			if("operatingsystem".equals(key))
+				os = val.toStringOrNull();
+			else if("operatingsystemrelease".equals(key)) {
+				List<JElement> jsonRels = ((JArray) val).getValues();
+				osReleases = new ArrayList<String>(jsonRels.size());
+				for(JElement jsonRel : jsonRels)
+					osReleases.add(jsonRel.toString());
+			}
+		}
+		if(os == null)
+			return null;
+		SupportedOS sos = new SupportedOS();
+		sos.setOperatingSystem(os);
+		sos.setOperatingSystemRelease(osReleases);
+		return sos;
 	}
 
 	private Type createType(JElement jsonType) {

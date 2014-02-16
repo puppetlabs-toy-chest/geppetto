@@ -130,6 +130,15 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 						case dependencies:
 							validateDependencies(args, symbol.name(), chain);
 							break;
+						case requirements:
+							validateRequirements(args, symbol.name(), chain);
+							break;
+						case operatingsystem_support:
+							validateOperatingsystemSupport(args, symbol.name(), chain);
+							break;
+						case tags:
+							validateTags(args, symbol.name(), chain);
+							break;
 						case types:
 							validateTypes(args, symbol.name(), chain);
 							break;
@@ -175,7 +184,7 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 
 	private void validateDependencies(JElement args, String name, Diagnostic chain) {
 		for(JElement dep : validateArray(args, name, chain)) {
-			for(JEntry entry : validateObject(dep, name, chain)) {
+			for(JEntry entry : validateObject(dep, "dependencies element", chain)) {
 				if("name".equals(entry.getKey()))
 					createModuleName(entry.getElement(), true, chain);
 				else if("version_requirement".equals(entry.getKey()) || "versionRequirement".equals(entry.getKey()))
@@ -203,6 +212,33 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 		return Collections.emptyList();
 	}
 
+	private void validateOperatingsystemSupport(JElement args, String name, Diagnostic chain) {
+		for(JElement dep : validateArray(args, name, chain)) {
+			for(JEntry entry : validateObject(dep, "operatingsystem_support element", chain)) {
+				if("operatingsystem".equals(entry.getKey()))
+					validateString(entry.getElement(), entry.getKey(), chain);
+				else if("operatingsystemrelease".equals(entry.getKey()))
+					for(JElement osRel : validateArray(entry.getElement(), entry.getKey(), chain))
+						validateString(osRel, "operatingsystemrelease element", chain);
+				else
+					chain.addChild(createDiagnostic(entry, WARNING, "Unrecognized entry: " + entry.getKey()));
+			}
+		}
+	}
+
+	private void validateRequirements(JElement args, String name, Diagnostic chain) {
+		for(JElement req : validateArray(args, name, chain)) {
+			for(JEntry entry : validateObject(req, "requirement element", chain)) {
+				if("name".equals(entry.getKey()))
+					validateString(entry.getElement(), entry.getKey(), chain);
+				else if("version_requirement".equals(entry.getKey()) || "versionRequirement".equals(entry.getKey()))
+					createVersionRequirement(entry.getElement(), chain);
+				else
+					chain.addChild(createDiagnostic(entry, WARNING, "Unrecognized entry: " + entry.getKey()));
+			}
+		}
+	}
+
 	protected String validateString(JElement element, String symbol, Diagnostic chain) {
 		String str = null;
 		if(element instanceof JPrimitive) {
@@ -215,9 +251,14 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 		return str;
 	}
 
+	private void validateTags(JElement args, String name, Diagnostic chain) {
+		for(JElement tag : validateArray(args, name, chain))
+			validateString(tag, "tags element", chain);
+	}
+
 	protected void validateTypes(JElement args, String name, Diagnostic chain) {
 		for(JElement dep : validateArray(args, name, chain)) {
-			for(JEntry entry : validateObject(dep, name, chain)) {
+			for(JEntry entry : validateObject(dep, "types element", chain)) {
 				String key = entry.getKey();
 				if("name".equals(entry.getKey()) || "doc".equals(entry.getKey()))
 					validateString(entry.getElement(), entry.getKey(), chain);

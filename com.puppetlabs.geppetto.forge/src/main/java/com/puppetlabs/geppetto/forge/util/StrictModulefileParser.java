@@ -10,14 +10,16 @@
  */
 package com.puppetlabs.geppetto.forge.util;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.forge.model.Metadata;
-import com.puppetlabs.geppetto.forge.model.ModuleName;
 
 import org.jrubyparser.SourcePosition;
 import org.jrubyparser.ast.RootNode;
+
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.forge.model.Dependency;
+import com.puppetlabs.geppetto.forge.model.Metadata;
+import com.puppetlabs.geppetto.forge.model.ModuleName;
 
 /**
  * A Modulefile parser that only accepts strict entries and adds them
@@ -27,12 +29,14 @@ public class StrictModulefileParser extends ModulefileParser {
 
 	private final Metadata md;
 
+	private final List<Dependency> dependencies = new ArrayList<Dependency>();
+
 	public StrictModulefileParser(Metadata md) {
 		this.md = md;
 	}
 
 	private void addDependency(String name, String versionRequirement, SourcePosition pos) {
-		md.getDependencies().add(createDependency(name, versionRequirement, pos));
+		dependencies.add(createDependency(name, versionRequirement, pos));
 	}
 
 	@Override
@@ -94,9 +98,8 @@ public class StrictModulefileParser extends ModulefileParser {
 
 	@Override
 	public void parseRubyAST(RootNode root, Diagnostic diagnostics) {
-		md.getDependencies().clear();
-		md.getTypes().clear();
-		md.getChecksums().clear();
+		md.clear();
 		super.parseRubyAST(root, diagnostics);
+		md.setDependencies(dependencies);
 	}
 }

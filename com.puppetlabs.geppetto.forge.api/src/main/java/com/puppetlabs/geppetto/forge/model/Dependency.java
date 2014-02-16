@@ -138,7 +138,7 @@ public class Dependency extends Entity {
 	 *            the repository to set
 	 */
 	public void setRepository(String repository) {
-		this.repository = repository;
+		this.repository = trimToNull(repository);
 	}
 
 	/**

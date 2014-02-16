@@ -135,7 +135,8 @@ public class MetadataTest extends AbstractForgeTest {
 		StrictMetadataJsonParser mdParser = new StrictMetadataJsonParser(md);
 		Diagnostic chain = new Diagnostic();
 		mdParser.parse(file, swr.toString(), chain);
-		assertEquals(chain.getSeverity(), Diagnostic.WARNING);
+		System.err.println(chain.toString());
+		assertEquals("WARNING", Diagnostic.getSeverityString(chain.getSeverity()));
 		Map<String, Object> dynAttrs = md.getDynamicAttributes();
 		assertNotNull(dynAttrs);
 		validateMetadataExtraMap(dynAttrs.get("extra_map"));
