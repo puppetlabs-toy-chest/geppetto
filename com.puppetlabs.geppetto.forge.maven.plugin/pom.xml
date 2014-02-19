@@ -29,7 +29,7 @@
 		<testForgePassword>geppetto tester</testForgePassword>
 		<testForgeLoginSecond>geppetto2</testForgeLoginSecond>
 		<testForgePasswordSecond>geppetto tester</testForgePasswordSecond>
-		<testForgeServiceURL>https://forge-staging-api.puppetlabs.com/</testForgeServiceURL>
+		<testForgeServiceURL>https://forge-apilb01-stage.puppetlabs.com/</testForgeServiceURL>
 	</properties>
 
 	<dependencies>
