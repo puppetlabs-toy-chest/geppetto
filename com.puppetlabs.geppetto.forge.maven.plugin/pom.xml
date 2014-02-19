@@ -29,7 +29,7 @@
 		<testForgePassword>geppetto tester</testForgePassword>
 		<testForgeLoginSecond>geppetto2</testForgeLoginSecond>
 		<testForgePasswordSecond>geppetto tester</testForgePasswordSecond>
-		<testForgeServiceURL>https://forge-staging-api.puppetlabs.com/</testForgeServiceURL>
+		<testForgeServiceURL>https://forge-apilb01-stage.puppetlabs.com/</testForgeServiceURL>
 	</properties>
 
 	<dependencies>
@@ -162,7 +162,6 @@
 							<goal>test</goal>
 						</goals>
 						<configuration>
-							<forkMode>never</forkMode>
 							<systemProperties>
 								<my.property>This is the my.property value</my.property>
 							</systemProperties>
