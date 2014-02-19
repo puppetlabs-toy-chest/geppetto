@@ -10,12 +10,12 @@
   	<dependency>
   		<groupId>com.puppetlabs.geppetto</groupId>
   		<artifactId>com.puppetlabs.geppetto.validation</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>com.puppetlabs.geppetto</groupId>
   		<artifactId>com.puppetlabs.geppetto.ruby</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>com.puppetlabs.graph</groupId>
