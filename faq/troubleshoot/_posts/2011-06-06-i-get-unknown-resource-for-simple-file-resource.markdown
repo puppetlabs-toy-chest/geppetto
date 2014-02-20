@@ -13,5 +13,3 @@ The wizards, which create Puppet projects from with an empty module or from an e
 module in the Forge, automatically set the Puppet Nature on creation, but if you create
 a General project or import a project from from Git (or another repository), 
 Geppetto does not assume that the Puppet code in the project should be linked.
-
-Also see [Issue #85](https://github.com/cloudsmith/geppetto/issues/85)

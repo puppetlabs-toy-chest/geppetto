@@ -11,7 +11,7 @@ What you need is to create a file with '.pptp' extension and place it in Geppett
 You can do this in Geppetto by:
 
 * Use the Open View > Navigator
-* Open the project .org_cloudsmith_geppetto_pptp_target
+* Open the project .com_puppetlabs_geppetto_pptp_target
 * Create a new file called something like "myvariables.pptp"
 * Enter the text below
 
@@ -19,7 +19,7 @@ You can do this in Geppetto by:
        <pptp:PuppetDistribution xmi:version="2.0"
          xmlns:xmi="http://www.omg.org/XMI"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns:pptp="http://www.cloudsmith.org/geppetto/1.0.0/PPTP"
+         xmlns:pptp="http://www.puppetlabs.com/geppetto/1.0.0/PPTP"
          description="Adds Global vars"
          version=""
          label="puppet ">
