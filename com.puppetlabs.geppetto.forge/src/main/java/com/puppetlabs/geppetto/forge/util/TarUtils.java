@@ -200,6 +200,10 @@ public class TarUtils {
 					continue;
 
 				String name = te.getName();
+				if(name.startsWith("./._"))
+					// MacOS specific extended attributes addition. Just skip it
+					continue;
+
 				if(skipTopFolder) {
 					int firstSlash = name.indexOf('/');
 					if(firstSlash < 0)
