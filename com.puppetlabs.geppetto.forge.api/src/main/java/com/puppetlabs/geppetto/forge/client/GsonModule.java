@@ -16,6 +16,8 @@ import static com.puppetlabs.geppetto.forge.model.ModuleName.MODULE_NAME_ADAPTER
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +28,7 @@ import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -149,6 +152,28 @@ public class GsonModule extends AbstractModule {
 			return result;
 		}
 
+		private static List<SupportedOS> deserializeSupportedOs(JsonElement supportedOS,
+				JsonDeserializationContext context) {
+			if(supportedOS == null || !supportedOS.isJsonArray())
+				return Collections.emptyList();
+
+			JsonArray soss = supportedOS.getAsJsonArray();
+			List<SupportedOS> result = new ArrayList<SupportedOS>(soss.size());
+			for(JsonElement elem : soss) {
+				SupportedOS sos;
+				if(elem.isJsonPrimitive()) {
+					sos = new SupportedOS();
+					sos.setOperatingSystem(elem.getAsString());
+				}
+				else if(elem.isJsonObject())
+					sos = context.<SupportedOS> deserialize(elem, SupportedOS.class);
+				else
+					continue;
+				result.add(sos);
+			}
+			return result;
+		}
+
 		private static int hexToByte(char c) {
 			return c >= 'a'
 					? c - ('a' - 10)
@@ -175,6 +200,7 @@ public class GsonModule extends AbstractModule {
 				throw new JsonParseException("Expected JSON object");
 
 			Metadata md = new Metadata();
+			List<Requirement> reqs = new ArrayList<Requirement>();
 			for(Map.Entry<String, JsonElement> entry : json.getAsJsonObject().entrySet()) {
 				String key = entry.getKey();
 				JsonElement val = entry.getValue();
@@ -191,11 +217,11 @@ public class GsonModule extends AbstractModule {
 				else if("name".equals(key))
 					md.setName(context.<ModuleName> deserialize(val, ModuleName.class));
 				else if("operatingsystem_support".equals(key))
-					md.setOperatingSystemSupport(context.<List<SupportedOS>> deserialize(val, SUPPORTEDOS_TYPE));
+					md.setOperatingSystemSupport(deserializeSupportedOs(val, context));
 				else if("project_page".equals(key))
 					md.setProjectPage(val.getAsString());
 				else if("requirements".equals(key))
-					md.setRequirements(context.<List<Requirement>> deserialize(val, REQUIREMENTS_TYPE));
+					reqs.addAll(context.<List<Requirement>> deserialize(val, REQUIREMENTS_TYPE));
 				else if("source".equals(key))
 					md.setSource(val.getAsString());
 				else if("summary".equals(key))
@@ -210,6 +236,8 @@ public class GsonModule extends AbstractModule {
 					// We don't know what this is. Parse and assign dynamically
 					md.addDynamicAttribute(key, context.deserialize(val, Object.class));
 			}
+			if(!reqs.isEmpty())
+				md.setRequirements(reqs);
 			return md;
 		}
 

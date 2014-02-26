@@ -262,16 +262,20 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 
 		List<String> osReleases = null;
 		String os = null;
-		for(JEntry entry : ((JObject) jsonSos).getEntries()) {
-			String key = entry.getKey();
-			JElement val = entry.getElement();
-			if("operatingsystem".equals(key))
-				os = val.toStringOrNull();
-			else if("operatingsystemrelease".equals(key)) {
-				List<JElement> jsonRels = ((JArray) val).getValues();
-				osReleases = new ArrayList<String>(jsonRels.size());
-				for(JElement jsonRel : jsonRels)
-					osReleases.add(jsonRel.toString());
+		if(jsonSos instanceof JPrimitive)
+			os = jsonSos.toStringOrNull();
+		else {
+			for(JEntry entry : ((JObject) jsonSos).getEntries()) {
+				String key = entry.getKey();
+				JElement val = entry.getElement();
+				if("operatingsystem".equals(key))
+					os = val.toStringOrNull();
+				else if("operatingsystemrelease".equals(key)) {
+					List<JElement> jsonRels = ((JArray) val).getValues();
+					osReleases = new ArrayList<String>(jsonRels.size());
+					for(JElement jsonRel : jsonRels)
+						osReleases.add(jsonRel.toString());
+				}
 			}
 		}
 		if(os == null)

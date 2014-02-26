@@ -214,6 +214,11 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 
 	private void validateOperatingsystemSupport(JElement args, String name, Diagnostic chain) {
 		for(JElement dep : validateArray(args, name, chain)) {
+			if(dep instanceof JPrimitive) {
+				// Legacy. Just a list of names
+				validateString(dep, "operatingsystem_support element", chain);
+				continue;
+			}
 			for(JEntry entry : validateObject(dep, "operatingsystem_support element", chain)) {
 				if("operatingsystem".equals(entry.getKey()))
 					validateString(entry.getElement(), entry.getKey(), chain);
