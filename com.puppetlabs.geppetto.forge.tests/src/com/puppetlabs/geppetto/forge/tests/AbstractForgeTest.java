@@ -17,6 +17,11 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 
+import com.google.gson.Gson;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.puppetlabs.geppetto.common.util.BundleAccess;
 import com.puppetlabs.geppetto.forge.Cache;
 import com.puppetlabs.geppetto.forge.Forge;
@@ -26,14 +31,8 @@ import com.puppetlabs.geppetto.forge.client.GsonModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeServiceModule;
 
-import com.google.gson.Gson;
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-
 public class AbstractForgeTest {
-	private static String TEST_FORGE_URI = "http://forge-staging-api.puppetlabs.com/";
+	private static String TEST_FORGE_URI = "https://forge-apilb01-stage.puppetlabs.com/";
 
 	// private static String TEST_FORGE_URI = "http://localhost:4567/";
 
