@@ -17,6 +17,7 @@
  */
 package com.puppetlabs.geppetto.forge.client;
 
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -108,6 +109,12 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 		}
 	}
 
+	private synchronized void abortRequest() {
+		if(currentRequest != null)
+			currentRequest.abort();
+		currentRequest = null;
+	}
+
 	protected void assignJSONContent(HttpEntityEnclosingRequestBase request, Object params) {
 		if(params != null) {
 			request.addHeader(HttpHeaders.CONTENT_TYPE, CONTENT_TYPE_JSON + "; charset=" + UTF_8.name()); //$NON-NLS-1$
@@ -172,19 +179,25 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 	private void doDownload(String urlStr, Map<String, String> params, final OutputStream output) throws IOException {
 		HttpGet request = createGetRequest(urlStr, params);
 		configureRequest(request);
-		httpClient.execute(request, new ResponseHandler<Void>() {
-			@Override
-			public Void handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-				StatusLine statusLine = response.getStatusLine();
-				int code = statusLine.getStatusCode();
-				if(code != HttpStatus.SC_OK)
-					throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase());
+		startRequest(request);
+		try {
+			httpClient.execute(request, new ResponseHandler<Void>() {
+				@Override
+				public Void handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+					StatusLine statusLine = response.getStatusLine();
+					int code = statusLine.getStatusCode();
+					if(code != HttpStatus.SC_OK)
+						throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase());
 
-				HttpEntity entity = response.getEntity();
-				entity.writeTo(output);
-				return null;
-			}
-		});
+					HttpEntity entity = response.getEntity();
+					entity.writeTo(output);
+					return null;
+				}
+			});
+		}
+		finally {
+			endRequest();
+		}
 	}
 
 	private <V> V doGet(String urlStr, Map<String, String> params, Type type) throws IOException {
@@ -196,8 +209,22 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 	public InputStream download(String urlStr, Map<String, String> params) throws IOException {
 		HttpGet request = createGetRequest(v3URL + urlStr, params);
 		configureRequest(request);
+		startRequest(request);
 		HttpResponse response = httpClient.execute(request);
-		return response.getEntity().getContent();
+		StatusLine statusLine = response.getStatusLine();
+		int code = statusLine.getStatusCode();
+		if(code != HttpStatus.SC_OK) {
+			abortRequest();
+			throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase());
+		}
+
+		return new FilterInputStream(response.getEntity().getContent()) {
+			@Override
+			public void close() throws IOException {
+				super.close();
+				endRequest();
+			}
+		};
 	}
 
 	@Override
@@ -225,6 +252,11 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 	}
 
 	@Override
+	public <V> V get(String urlStr, Map<String, String> params, Type type) throws IOException {
+		return doGet(v3URL + urlStr, params, type);
+	}
+
+	@Override
 	public <V> V getBaseRelative(String urlStr, Map<String, String> params, Type type) throws IOException {
 		return doGet(baseURL + urlStr, params, type);
 	}
@@ -237,11 +269,6 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 	@Override
 	public <V> V getV2(String urlStr, Map<String, String> params, Type type) throws IOException {
 		return doGet(v2URL + urlStr, params, type);
-	}
-
-	@Override
-	public <V> V get(String urlStr, Map<String, String> params, Type type) throws IOException {
-		return doGet(v3URL + urlStr, params, type);
 	}
 
 	@Override
