@@ -11,7 +11,7 @@
 			<plugin>
 				<groupId>com.puppetlabs.geppetto</groupId>
 				<artifactId>forge-maven-plugin</artifactId>
-				<version>4.1.0-SNAPSHOT</version>
+				<version>4.1.1-SNAPSHOT</version>
 				<executions>
 					<execution>
 						<id>validate</id>
