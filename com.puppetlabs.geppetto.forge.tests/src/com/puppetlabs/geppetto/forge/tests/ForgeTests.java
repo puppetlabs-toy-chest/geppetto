@@ -10,7 +10,6 @@
  */
 package com.puppetlabs.geppetto.forge.tests;
 
-
 import junit.framework.TestSuite;
 
 import org.junit.runner.RunWith;
@@ -21,6 +20,7 @@ import org.junit.runners.Suite.SuiteClasses;
 // @fmtOff
 	ModuleNameTest.class,
 	ForgeUtilTest.class,
+	ForgeTest.class,
 	ForgeServiceTest.class,
 	MetadataTest.class,
 	ModuleUtilsTest.class,

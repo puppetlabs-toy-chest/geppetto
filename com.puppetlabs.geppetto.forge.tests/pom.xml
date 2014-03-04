@@ -10,6 +10,12 @@
 	<packaging>jar</packaging>
 	<name>Geppetto Forge Service Tests</name>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<testForgeServiceURL>https://forge-apilb01-stage.puppetlabs.com/</testForgeServiceURL>
+	</properties>
+
+
 	<build>
 		<testSourceDirectory>src</testSourceDirectory>
 		<testOutputDirectory>bin</testOutputDirectory>
@@ -20,6 +26,9 @@
 					<includes>
 						<include>**/ForgeTests.java</include>
 					</includes>
+					<systemProperties>
+						<testForgeServiceURL>${testForgeServiceURL}</testForgeServiceURL>
+					</systemProperties>
 				</configuration>
 			</plugin>
 		</plugins>

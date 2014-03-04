@@ -10,39 +10,26 @@
  */
 package com.puppetlabs.geppetto.forge.tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.io.File;
 import java.io.IOException;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.puppetlabs.geppetto.forge.ForgeService;
+import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
 
 public class ForgeTest extends AbstractForgeTest {
 
-	private ForgeService fixture = null;
-
 	@Test
-	public void install() {
+	public void testLoadJSONMetadata__File() {
 		try {
-			File installFolder = getTestOutputFolder("stdlib-install", true);
-			fixture.install(ModuleName.fromString("puppetlabs/stdlib"), null, installFolder, false, true);
-			File found = new File(installFolder, "stdlib");
-			assertTrue("Installation did not produce the expected result", found.isDirectory());
+			Metadata md = getForgeUtil().loadJSONMetadata(getTestData("puppetlabs-apache/metadata.json"));
+			assertEquals("Unexpected module name", ModuleName.fromString("puppetlabs-apache"), md.getName());
 		}
 		catch(IOException e) {
-			e.printStackTrace();
 			fail(e.getMessage());
 		}
 	}
-
-	@Before
-	public void setUp() throws Exception {
-		fixture = getForge();
-	}
-
 }

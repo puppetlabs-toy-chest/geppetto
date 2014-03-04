@@ -162,10 +162,6 @@
 							<goal>test</goal>
 						</goals>
 						<configuration>
-							<forkMode>never</forkMode>
-							<systemProperties>
-								<my.property>This is the my.property value</my.property>
-							</systemProperties>
 							<skip>${skipITs}</skip>
 						</configuration>
 					</execution>

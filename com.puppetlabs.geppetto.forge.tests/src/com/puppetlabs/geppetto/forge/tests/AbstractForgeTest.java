@@ -109,7 +109,7 @@ public class AbstractForgeTest {
 				injector = commonInjector.createChildInjector(GsonModule.INSTANCE, new ForgeHttpModule() {
 					@Override
 					protected String getBaseURL() {
-						return TEST_FORGE_URI;
+						return System.getProperty("testForgeServiceURL", TEST_FORGE_URI);
 					}
 				}, new ForgeServiceModule(), new ForgeModule(), testBindings);
 			}
