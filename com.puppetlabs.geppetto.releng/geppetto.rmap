@@ -11,7 +11,6 @@
   <rm:locator pattern="^com\.puppetlabs\.graph(\..+)?$" searchPathRef="graph"/>
   <rm:locator pattern="^com\.puppetlabs\.jrubyparser(\..+)?$" searchPathRef="jrubyparser"/>
   <rm:locator pattern="^org\.polarion\.eclipse\.team\.svn\.connector(\..+)?$" searchPathRef="svn.connectors"/>
-  <rm:locator pattern="^org\.apache\.commons\.compress(\..+)?$" searchPathRef="commons-compress"/>
   <rm:locator pattern="^org\.jruby(\..+)?$" searchPathRef="maven.central"/>
   <rm:locator searchPathRef="orbit" failOnError="false"/>
   <rm:locator searchPathRef="platform" failOnError="false"/>
@@ -67,14 +66,6 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
-  <rm:searchPath name="commons-compress">
-    <rm:provider componentTypes="osgi.bundle" readerType="git">
-      <rm:property key="git.remote.uri" value="${puppetlabs.github.prefix}/commons-compress.git"/>
-      <rm:uri format="{0}/commons-compress">
-        <bc:propertyRef key="git.clones.root"/>
-      </rm:uri>
-    </rm:provider>
-  </rm:searchPath>
   <rm:searchPath name="svn.connectors">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
@@ -117,7 +108,7 @@
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/tools/orbit/downloads/drops/R20130827064939/repository">
+      <rm:uri format="{0}/tools/orbit/downloads/drops/R20140114142710/repository">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
