@@ -166,6 +166,9 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	public void toString(StringBuilder bld, char versionSep) {
 		getModuleName().toString(bld);
 		bld.append(versionSep);
-		getVersion().toString(bld);
+		if(version == null)
+			bld.append("0.0.0");
+		else
+			version.toString(bld);
 	}
 }
