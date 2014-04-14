@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,12 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonLocation;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import com.puppetlabs.geppetto.forge.FilePosition;
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonLocation;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonToken;
 
 public class JsonPositionalParser {
 	public static class JArray extends JElement {
@@ -160,9 +160,10 @@ public class JsonPositionalParser {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	static class JsonExtFactory extends JsonFactory {
 		public JsonParser createJsonParser(File f, Reader reader) throws IOException, JsonParseException {
-			return _createJsonParser(reader, _createContext(f, true));
+			return _createParser(reader, _createContext(f, true));
 		}
 	}
 

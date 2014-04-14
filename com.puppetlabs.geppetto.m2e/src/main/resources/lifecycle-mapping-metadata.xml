@@ -4,8 +4,9 @@
 			<pluginExecutionFilter>
 				<groupId>com.puppetlabs.geppetto</groupId>
 				<artifactId>forge-maven-plugin</artifactId>
-				<versionRange>[4.0.0,)</versionRange>
+				<versionRange>[4.0.0,5.0.0)</versionRange>
 				<goals>
+					<goal>compile</goal>
 					<goal>validate</goal>
 				</goals>
 			</pluginExecutionFilter>
