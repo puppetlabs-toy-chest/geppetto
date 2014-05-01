@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * ended ranges can be created by using an inclusive {@link Version#MIN} as the lower bound or an inclusive
  * {@link Version#MAX} as the upper bound.
  * </p>
- * 
+ *
  * <p>
  * A version range can also be created from a string. The string is parsed according to the following rules:
  * <ul>
@@ -67,7 +67,7 @@ public class VersionRange implements Serializable {
 
 	/**
 	 * Same as {@link #fromString(String)}
-	 * 
+	 *
 	 * @param versionRequirement
 	 *            The string form of the version requirement
 	 * @return The created range
@@ -78,7 +78,7 @@ public class VersionRange implements Serializable {
 
 	/**
 	 * Creates a new VersionRange according to detailed specification.
-	 * 
+	 *
 	 * @param lower
 	 * @param lowerBoundInclusive
 	 * @param upper
@@ -101,7 +101,7 @@ public class VersionRange implements Serializable {
 
 	/**
 	 * Returns a range that will be an exact match for the given version.
-	 * 
+	 *
 	 * @param version
 	 *            The version that the range must match
 	 * @return The created range
@@ -115,7 +115,7 @@ public class VersionRange implements Serializable {
 	/**
 	 * Returns a range based on the given string. See class documentation
 	 * for details.
-	 * 
+	 *
 	 * @param versionRequirement
 	 *            The string form of the version requirement
 	 * @return The created range
@@ -157,7 +157,7 @@ public class VersionRange implements Serializable {
 					throw vomit("Not a valid tilde version", versionRequirement);
 
 				maxInclude = false;
-				int major = Integer.parseInt(m.group(1));
+				int major = Version.parseInt(m.group(1));
 				String minorStr = m.group(2);
 				String patchStr = m.group(3);
 				if(minorStr == null) {
@@ -165,13 +165,13 @@ public class VersionRange implements Serializable {
 					max = Version.create(major, 1, 0, Version.MIN_PRE_RELEASE);
 				}
 				else {
-					int minor = Integer.parseInt(minorStr);
+					int minor = Version.parseInt(minorStr);
 					if(patchStr == null) {
 						min = Version.create(major, minor, 0);
 						max = Version.create(major, minor + 1, 0, Version.MIN_PRE_RELEASE);
 					}
 					else {
-						int patch = Integer.parseInt(patchStr);
+						int patch = Version.parseInt(patchStr);
 						min = Version.create(major, minor, patch);
 						max = Version.create(major, minor + 1, 0, Version.MIN_PRE_RELEASE);
 					}
@@ -189,14 +189,14 @@ public class VersionRange implements Serializable {
 				}
 
 				maxInclude = false;
-				int major = Integer.parseInt(m.group(1));
+				int major = Version.parseInt(m.group(1));
 				String minorStr = m.group(2);
 				if(minorStr == null || "x".equals(minorStr)) {
 					min = Version.create(major, 0, 0);
 					max = Version.create(major + 1, 0, 0, Version.MIN_PRE_RELEASE);
 				}
 				else {
-					int minor = Integer.parseInt(minorStr);
+					int minor = Version.parseInt(minorStr);
 					min = Version.create(major, minor, 0);
 					max = Version.create(major, minor + 1, 0, Version.MIN_PRE_RELEASE);
 				}
@@ -268,7 +268,7 @@ public class VersionRange implements Serializable {
 
 	/**
 	 * Returns a range that will match versions greater than the given version.
-	 * 
+	 *
 	 * @param version
 	 *            The version that serves as the non inclusive lower bound
 	 * @return The created range
@@ -281,7 +281,7 @@ public class VersionRange implements Serializable {
 
 	/**
 	 * Returns a range that will match versions greater than or equal the given version.
-	 * 
+	 *
 	 * @param version
 	 *            The version that serves as the inclusive lower bound
 	 * @return The created range
@@ -298,7 +298,7 @@ public class VersionRange implements Serializable {
 
 	/**
 	 * Returns a range that will match versions less than the given version.
-	 * 
+	 *
 	 * @param version
 	 *            The version that serves as the non inclusive upper bound
 	 * @return The created range
@@ -311,7 +311,7 @@ public class VersionRange implements Serializable {
 
 	/**
 	 * Returns a range that will match versions less than or equal to the given version.
-	 * 
+	 *
 	 * @param version
 	 *            The version that serves as the non inclusive upper bound
 	 * @return The created range
@@ -434,7 +434,7 @@ public class VersionRange implements Serializable {
 	/**
 	 * Scans the provided collection of candidates and returns the highest version
 	 * that is included in this range.
-	 * 
+	 *
 	 * @param candidateVersions
 	 *            The collection of candidate versions
 	 * @return The best match or <tt>null</tt> if no match was found
@@ -450,7 +450,7 @@ public class VersionRange implements Serializable {
 	/**
 	 * Returns the upper bound of the match. Whether or not this upper bound is included
 	 * in the match is determined by {@link #isMaxIncluded()}.
-	 * 
+	 *
 	 * @return The upper bound. Might be equal to {@link Version#MAX} but will never be <code>null</code>.
 	 * @see #isMaxIncluded()
 	 */
@@ -461,7 +461,7 @@ public class VersionRange implements Serializable {
 	/**
 	 * Returns the lower bound of the match. Whether or not this lower bound is included
 	 * in the match is determined by {@link #isMinIncluded()}.
-	 * 
+	 *
 	 * @return The lower bound. Might be equal to {@link Version#MIN} but will never be <code>null</code>.
 	 * @see #isMinIncluded()
 	 */
@@ -532,7 +532,7 @@ public class VersionRange implements Serializable {
 	 * if this requirement is equally or more restrictive in appointing a range
 	 * of versions. More restrictive means that the appointed range equal or
 	 * smaller and completely within the range appointed by the other version.
-	 * 
+	 *
 	 * @param vr
 	 *            The requirement to compare with
 	 * @return <tt>true</tt> if this requirement is as restrictive as the argument
@@ -551,7 +551,7 @@ public class VersionRange implements Serializable {
 
 	/**
 	 * Checks if <tt>version</tt> is included in the range described by this instance.
-	 * 
+	 *
 	 * @param version
 	 *            the version to test.
 	 * @return <tt>true</tt> if the version is include. <tt>false</tt> if the version
@@ -577,7 +577,7 @@ public class VersionRange implements Serializable {
 	/**
 	 * Returns true if the maximum version is included in the match and
 	 * false if a match must be less than the maximum version.
-	 * 
+	 *
 	 * @return <code>true</code> to indicate that a version equal to the maximum version will be considered a match
 	 */
 	public boolean isMaxIncluded() {
@@ -587,7 +587,7 @@ public class VersionRange implements Serializable {
 	/**
 	 * Returns true if the minimum version is included in the match and
 	 * false if a match must be greater than the minimum version.
-	 * 
+	 *
 	 * @return <code>true</code> to indicate that a version equal to the minimum version will be considered a match
 	 */
 	public boolean isMinIncluded() {

@@ -52,7 +52,7 @@ public class Version implements Comparable<Version>, Serializable {
 
 	/**
 	 * Same as {@link #fromString(String)}
-	 * 
+	 *
 	 * @param version
 	 *            The version in string form
 	 * @return The created version
@@ -61,31 +61,52 @@ public class Version implements Comparable<Version>, Serializable {
 		return fromString(version);
 	}
 
+	private static Version fromMatch(Matcher m) {
+		return instanceCache.cache(new Version(
+			parseInt(m.group(1)), parseInt(m.group(2)), parseInt(m.group(3)), m.group(4)));
+	}
+
 	/**
 	 * Creates a new instance from the given <code>version</code> string. This method will return <code>null</code> on
 	 * <code>null</code> input.
-	 * 
+	 *
 	 * @param version
 	 *            The version in string form
 	 * @return The created version.
 	 * @throws IllegalArgumentException
 	 *             if the version string is not a valid semver version.
 	 */
-	public static Version fromString(String version) {
+	public static Version fromString(String version) throws IllegalArgumentException {
 		if(version == null || version.length() == 0)
 			return null;
 
 		Matcher m = VERSION_PATTERN.matcher(version);
-		if(!m.matches())
-			throw new IllegalArgumentException("The string '" + version +
-					"' does not represent a valid semantic version");
-		return instanceCache.cache(new Version(
-			Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2)), Integer.parseInt(m.group(3)), m.group(4)));
+		if(m.matches())
+			return fromMatch(m);
+		throw new IllegalArgumentException("The string '" + version + "' does not represent a valid semantic version");
+	}
+
+	/**
+	 * Creates a new instance from the given <code>version</code> string. This method will return <code>null</code> on
+	 * <code>null</code> or invalid input.
+	 *
+	 * @param version
+	 *            The version in string form
+	 * @return The created version.
+	 */
+	public static Version fromStringOrNull(String version) {
+		if(version == null || version.length() == 0)
+			return null;
+
+		Matcher m = VERSION_PATTERN.matcher(version);
+		return m.matches()
+				? fromMatch(m)
+				: null;
 	}
 
 	/**
 	 * Checks if the given <code>version</code> is a valid semver version.
-	 * 
+	 *
 	 * @param version
 	 *            The version to check. Passing <code>null</code> yields a response of <code>false</code>.
 	 * @return <code>true</code> if the given <code>version</code> is valid.
@@ -96,6 +117,15 @@ public class Version implements Comparable<Version>, Serializable {
 			return m.matches();
 		}
 		return false;
+	}
+
+	// Parse a string that is known to consists of only digits (stems from regexp group)
+	static int parseInt(String g) {
+		int top = g.length();
+		int val = 0;
+		for(int idx = 0; idx < top; ++idx)
+			val = val * 10 + (g.charAt(idx) - '0');
+		return val;
 	}
 
 	private final int major;
