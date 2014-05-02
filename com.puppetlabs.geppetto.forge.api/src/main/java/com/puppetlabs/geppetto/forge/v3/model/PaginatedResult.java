@@ -16,7 +16,7 @@ public class PaginatedResult<T extends Entity> extends Entity {
 
 	/**
 	 * Returns the pagination info needed to get the next page
-	 * 
+	 *
 	 * @return Pagination info to get the next page or <code>null</code> if at the last page
 	 */
 	public PaginationInfo getNext() {
@@ -40,7 +40,7 @@ public class PaginatedResult<T extends Entity> extends Entity {
 
 	/**
 	 * Returns the pagination info needed to get the previous page
-	 * 
+	 *
 	 * @return Pagination info to get the previous page or <code>null</code> if at the first page
 	 */
 	public PaginationInfo getPrevious() {

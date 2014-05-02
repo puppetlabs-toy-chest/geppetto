@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.forge.v3.model;
 
@@ -16,7 +16,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
+import com.puppetlabs.geppetto.forge.client.GsonModule;
+import com.puppetlabs.geppetto.forge.client.GsonModule.InlineJson;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 
 /**
@@ -27,7 +30,7 @@ public class Release extends AbbrevRelease {
 	private AbbrevModule module;
 
 	@Expose
-	private Metadata metadata;
+	private InlineJson metadata;
 
 	@Expose
 	private List<String> tags;
@@ -64,6 +67,8 @@ public class Release extends AbbrevRelease {
 
 	@Expose
 	private Date deleted_at;
+
+	private transient Metadata parsedMetadata;
 
 	/**
 	 * @return the changelog file extracted from the module
@@ -125,7 +130,21 @@ public class Release extends AbbrevRelease {
 	 * @return the metadata for this release
 	 */
 	public Metadata getMetadata() {
-		return metadata;
+		if(metadata == null)
+			return null;
+		if(parsedMetadata == null) {
+			Gson gson = GsonModule.INSTANCE.getGson();
+			synchronized(gson) {
+				parsedMetadata = gson.fromJson(metadata.getJson(), Metadata.class);
+			}
+		}
+		return parsedMetadata;
+	}
+
+	public String getMetadataJSON() {
+		return metadata == null
+				? null
+				: metadata.getJson();
 	}
 
 	/**
@@ -233,8 +252,8 @@ public class Release extends AbbrevRelease {
 	 * @param metadata
 	 *            the metadata to set
 	 */
-	public void setMetadata(Metadata metadata) {
-		this.metadata = metadata;
+	public void setMetadataJSON(String metadataJSON) {
+		this.metadata = new InlineJson(metadataJSON);
 	}
 
 	/**

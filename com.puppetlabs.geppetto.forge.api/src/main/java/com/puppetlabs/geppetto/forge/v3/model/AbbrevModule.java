@@ -18,7 +18,7 @@ public class AbbrevModule extends Entity {
 	/**
 	 * Returns the name. Please note that this name does not include
 	 * the owner so it is not a full module identifier.
-	 * 
+	 *
 	 * @return the name of this module
 	 */
 	public String getName() {

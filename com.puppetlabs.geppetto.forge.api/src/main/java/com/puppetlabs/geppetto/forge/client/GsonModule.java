@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,13 +34,13 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import com.google.inject.name.Named;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
@@ -52,26 +52,14 @@ import com.puppetlabs.geppetto.semver.VersionRange;
 /**
  */
 public class GsonModule extends AbstractModule {
-
 	/**
 	 * A json adapter capable of serializing/deserializing a version requirement as a string.
 	 */
 	public static class DateJsonAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
 		public static String dateToString(Date src) {
-			String target;
-			synchronized(ISO_8601_TZ) {
-				target = ISO_8601_TZ.format(src);
+			synchronized(HR_8601_TZ) {
+				return HR_8601_TZ.format(src);
 			}
-			Matcher m = RFC_822_PTRN.matcher(target);
-			if(m.matches()) {
-				String tz = m.group(2);
-				if("+0000".equals(tz))
-					tz = "Z";
-				else
-					tz = tz.substring(0, 3) + ':' + tz.substring(3, 5);
-				target = m.group(1) + tz;
-			}
-			return target;
 		}
 
 		public static Date stringToDate(String source) {
@@ -111,12 +99,39 @@ public class GsonModule extends AbstractModule {
 		}
 	}
 
+	public static class InlineJson {
+		private final String json;
+
+		public InlineJson(String json) {
+			this.json = json;
+		}
+
+		public String getJson() {
+			return json;
+		}
+	}
+
+	public class InlineJsonAdapter implements JsonSerializer<InlineJson>, JsonDeserializer<InlineJson> {
+		@Override
+		public InlineJson deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
+			Gson gson = getGson();
+			synchronized(gson) {
+				return new InlineJson(gson.toJson(json));
+			}
+		}
+
+		@Override
+		public JsonElement serialize(InlineJson src, Type typeOfSrc, JsonSerializationContext context) {
+			return new JsonParser().parse(src.getJson());
+		}
+	}
+
 	/**
 	 * A json adapter capable of serializing/deserializing the metadata structure.
 	 */
 	public static class MetadataJsonAdapter implements JsonSerializer<Metadata>, JsonDeserializer<Metadata> {
 		// @fmtOff
-		public static final Type STRINGS_TYPE = new TypeToken<List<String>>() {}.getType();
 		public static final Type TYPES_TYPE = new TypeToken<List<com.puppetlabs.geppetto.forge.model.Type>>() {}.getType();
 		public static final Type DEPENDENCIES_TYPE = new TypeToken<List<Dependency>>() {}.getType();
 		public static final Type REQUIREMENTS_TYPE = new TypeToken<List<Requirement>>() {}.getType();
@@ -137,7 +152,7 @@ public class GsonModule extends AbstractModule {
 		private static Map<String, byte[]> deserializeChecksums(JsonElement json) throws JsonParseException {
 
 			Set<Map.Entry<String, JsonElement>> entrySet = json.getAsJsonObject().entrySet();
-			Map<String, byte[]> result = new HashMap<String, byte[]>();
+			Map<String, byte[]> result = new HashMap<String, byte[]>(entrySet.size());
 			for(Map.Entry<String, JsonElement> entry : entrySet) {
 				String hexString = entry.getValue().getAsString();
 				int top = hexString.length() / 2;
@@ -205,27 +220,27 @@ public class GsonModule extends AbstractModule {
 				String key = entry.getKey();
 				JsonElement val = entry.getValue();
 				if("author".equals(key))
-					md.setAuthor(val.getAsString());
+					md.setAuthor(getString(val));
 				else if("checksums".equals(key))
 					md.setChecksums(deserializeChecksums(val));
 				else if("dependencies".equals(key))
 					md.setDependencies(context.<List<Dependency>> deserialize(val, DEPENDENCIES_TYPE));
 				else if("description".equals(key))
-					md.setDescription(val.getAsString());
+					md.setDescription(getString(val));
 				else if("license".equals(key))
-					md.setLicense(val.getAsString());
+					md.setLicense(getString(val));
 				else if("name".equals(key))
 					md.setName(context.<ModuleName> deserialize(val, ModuleName.class));
 				else if("operatingsystem_support".equals(key))
 					md.setOperatingSystemSupport(deserializeSupportedOs(val, context));
 				else if("project_page".equals(key))
-					md.setProjectPage(val.getAsString());
+					md.setProjectPage(getString(val));
 				else if("requirements".equals(key))
 					reqs.addAll(context.<List<Requirement>> deserialize(val, REQUIREMENTS_TYPE));
 				else if("source".equals(key))
-					md.setSource(val.getAsString());
+					md.setSource(getString(val));
 				else if("summary".equals(key))
-					md.setSummary(val.getAsString());
+					md.setSummary(getString(val));
 				else if("tags".equals(key))
 					md.setTags(context.<List<String>> deserialize(val, STRINGS_TYPE));
 				else if("types".equals(key))
@@ -302,6 +317,9 @@ public class GsonModule extends AbstractModule {
 		}
 	}
 
+	public static final Type STRINGS_TYPE = new TypeToken<List<String>>() {
+	}.getType();
+
 	public static final MetadataJsonAdapter METADATA_ADAPTER = new MetadataJsonAdapter();
 
 	public static final VersionJsonAdapter VERSION_ADAPTER = new VersionJsonAdapter();
@@ -312,17 +330,63 @@ public class GsonModule extends AbstractModule {
 
 	private static final Pattern ISO_8601_PTRN = Pattern.compile("^(\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d)(Z|(?:[+-]\\d\\d:\\d\\d))$");
 
-	private static final Pattern RFC_822_PTRN = Pattern.compile("^(\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d)([+-]\\d\\d\\d\\d)$");
-
 	private static final SimpleDateFormat ISO_8601_TZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
 	private static final SimpleDateFormat HR_8601_TZ = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
 
 	private static char[] hexChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
-	private final GsonBuilder gsonBuilder;
+	public static void addProperty(JsonObject json, String key, Boolean value) {
+		if(value != null)
+			json.addProperty(key, value);
+	}
 
-	private final GsonBuilder gsonV3Builder;
+	public static void addProperty(JsonObject json, String key, Date value) {
+		if(value != null)
+			json.addProperty(key, DateJsonAdapter.dateToString(value));
+	}
+
+	public static void addProperty(JsonObject json, String key, Number value) {
+		if(value != null)
+			json.addProperty(key, value);
+	}
+
+	public static void addProperty(JsonObject json, String key, String value) {
+		if(value != null)
+			json.addProperty(key, value);
+	}
+
+	public static Boolean getBoolean(JsonElement json) {
+		return json.isJsonNull()
+				? null
+				: json.getAsBoolean();
+	}
+
+	public static Date getDate(JsonElement json) {
+		return json.isJsonNull()
+				? null
+				: DateJsonAdapter.stringToDate(json.getAsString());
+	}
+
+	public static Integer getInteger(JsonElement json) {
+		return json.isJsonNull()
+				? null
+				: json.getAsInt();
+	}
+
+	public static Long getLong(JsonElement json) {
+		return json.isJsonNull()
+				? null
+				: json.getAsLong();
+	}
+
+	public static String getString(JsonElement json) {
+		return json.isJsonNull()
+				? null
+				: json.getAsString();
+	}
+
+	private final GsonBuilder gsonBuilder;
 
 	private final Gson gson;
 
@@ -336,22 +400,20 @@ public class GsonModule extends AbstractModule {
 		gsonBuilder.registerTypeAdapter(ModuleName.class, MODULE_NAME_ADAPTER);
 		gsonBuilder.registerTypeAdapter(Metadata.class, METADATA_ADAPTER);
 		gsonBuilder.registerTypeAdapter(Date.class, new DateJsonAdapter());
+		gsonBuilder.registerTypeAdapter(InlineJson.class, new InlineJsonAdapter());
 
 		gson = gsonBuilder.create();
-
-		gsonV3Builder = new GsonBuilder();
-		gsonV3Builder.excludeFieldsWithoutExposeAnnotation();
-		gsonV3Builder.serializeNulls();
-		gsonV3Builder.registerTypeAdapter(VersionRange.class, VERSION_RANGE_ADAPTER);
-		gsonV3Builder.registerTypeAdapter(Version.class, VERSION_ADAPTER);
-		gsonV3Builder.registerTypeAdapter(Dependency.class, DEPENDENCY_ADAPTER);
-		gsonV3Builder.registerTypeAdapter(ModuleName.class, MODULE_NAME_ADAPTER);
-		gsonV3Builder.registerTypeAdapter(Metadata.class, METADATA_ADAPTER);
-		gsonV3Builder.setDateFormat("yyyy-MM-dd HH:mm:ss Z");
 	}
 
 	@Override
 	protected void configure() {
+	}
+
+	/**
+	 * @return a predeclared gson instance. Must be synchronized by user
+	 */
+	public Gson getGson() {
+		return gson;
 	}
 
 	@Provides
@@ -364,22 +426,10 @@ public class GsonModule extends AbstractModule {
 		return gsonBuilder;
 	}
 
-	@Provides
-	@Named("gson-v3")
-	public Gson provideV3Gson() {
-		return gsonV3Builder.create();
-	}
-
-	@Provides
-	@Named("gson-v3")
-	public GsonBuilder provideV3GsonBuilder() {
-		return gsonV3Builder;
-	}
-
 	/**
 	 * Creates a JSON representation for the given object using an internal
 	 * synchronized {@link Gson} instance.
-	 * 
+	 *
 	 * @param object
 	 *            The object to produce JSON for
 	 * @return JSON representation of the given <code>object</code>
