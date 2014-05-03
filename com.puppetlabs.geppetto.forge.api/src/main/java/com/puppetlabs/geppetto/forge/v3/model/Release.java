@@ -253,7 +253,9 @@ public class Release extends AbbrevRelease {
 	 *            the metadata to set
 	 */
 	public void setMetadataJSON(String metadataJSON) {
-		this.metadata = new InlineJson(metadataJSON);
+		this.metadata = metadataJSON == null
+				? null
+				: new InlineJson(metadataJSON);
 	}
 
 	/**
