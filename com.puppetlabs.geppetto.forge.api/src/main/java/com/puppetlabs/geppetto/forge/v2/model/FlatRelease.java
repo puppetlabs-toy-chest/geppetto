@@ -4,13 +4,16 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.forge.v2.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
+import com.puppetlabs.geppetto.forge.client.GsonModule;
+import com.puppetlabs.geppetto.forge.client.GsonModule.InlineJson;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.semver.Version;
 
@@ -22,7 +25,7 @@ public class FlatRelease extends TimestampedEntity {
 	private Version version;
 
 	@Expose
-	private Metadata metadata;
+	private InlineJson metadata;
 
 	@Expose
 	private Long downloads;
@@ -47,6 +50,8 @@ public class FlatRelease extends TimestampedEntity {
 
 	@Expose
 	private String license;
+
+	private transient Metadata parsedMetadata;
 
 	/**
 	 * @return the changelog
@@ -91,10 +96,24 @@ public class FlatRelease extends TimestampedEntity {
 	}
 
 	/**
-	 * @return JSON metadata
+	 * @return the metadata for this release
 	 */
 	public Metadata getMetadata() {
-		return metadata;
+		if(metadata == null)
+			return null;
+		if(parsedMetadata == null) {
+			Gson gson = GsonModule.INSTANCE.getGson();
+			synchronized(gson) {
+				parsedMetadata = gson.fromJson(metadata.getJson(), Metadata.class);
+			}
+		}
+		return parsedMetadata;
+	}
+
+	public String getMetadataJSON() {
+		return metadata == null
+				? null
+				: metadata.getJson();
 	}
 
 	/**
@@ -170,8 +189,10 @@ public class FlatRelease extends TimestampedEntity {
 	 * @param metadata
 	 *            the metadata to set
 	 */
-	public void setMetadata(Metadata metadata) {
-		this.metadata = metadata;
+	public void setMetadataJSON(String metadataJSON) {
+		this.metadata = metadataJSON == null
+				? null
+				: new InlineJson(metadataJSON);
 	}
 
 	/**
