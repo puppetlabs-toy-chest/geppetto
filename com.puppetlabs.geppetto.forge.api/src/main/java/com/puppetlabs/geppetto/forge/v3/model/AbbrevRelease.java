@@ -13,6 +13,9 @@ public class AbbrevRelease extends Entity {
 	@Expose
 	private Version version;
 
+	@Expose
+	private Boolean supported;
+
 	/**
 	 * @return the uri for this release
 	 */
@@ -25,6 +28,20 @@ public class AbbrevRelease extends Entity {
 	 */
 	public Version getVersion() {
 		return version;
+	}
+
+	/**
+	 * @return code>true</code> if this release is supported by Puppet Labs Inc.
+	 */
+	public boolean isSupported() {
+		return supported != null && supported.booleanValue();
+	}
+
+	/**
+	 * @param supported
+	 */
+	public void setSupported(boolean supported) {
+		this.supported = Boolean.valueOf(supported);
 	}
 
 	/**
