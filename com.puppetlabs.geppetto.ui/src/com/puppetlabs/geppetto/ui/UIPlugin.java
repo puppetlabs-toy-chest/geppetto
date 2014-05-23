@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,10 +16,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
-import com.puppetlabs.geppetto.forge.impl.ForgeServiceModule;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -35,6 +31,10 @@ import org.osgi.framework.BundleContext;
 
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
+import com.puppetlabs.geppetto.forge.impl.ForgeServiceModule;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
 
 /**
  * This is the central singleton for the Geppetto UI plugin.
@@ -116,7 +116,7 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 	}
 
 	@Override
-	public ResourceLocator getPluginResourceLocator() {
+	public EclipseUIPlugin getPluginResourceLocator() {
 		return plugin;
 	}
 

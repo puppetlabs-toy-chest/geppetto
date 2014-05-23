@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,13 +14,11 @@ import static com.puppetlabs.geppetto.common.Strings.trimToNull;
 import static com.puppetlabs.geppetto.forge.Forge.METADATA_JSON_NAME;
 import static com.puppetlabs.geppetto.forge.Forge.MODULEFILE_NAME;
 import static com.puppetlabs.geppetto.ui.UIPlugin.getLocalString;
-import static com.puppetlabs.geppetto.ui.util.ModuleUtil.getFullName;
-import static com.puppetlabs.geppetto.ui.util.ModuleUtil.getText;
-import static com.puppetlabs.geppetto.ui.util.ModuleUtil.getModuleVersion;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -54,16 +52,20 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.common.Strings;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.ForgeService;
 import com.puppetlabs.geppetto.forge.model.Metadata;
+import com.puppetlabs.geppetto.forge.model.VersionedName;
 import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.forge.v3.Modules;
+import com.puppetlabs.geppetto.forge.v3.model.AbbrevRelease;
 import com.puppetlabs.geppetto.forge.v3.model.Module;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
 import com.puppetlabs.geppetto.ui.UIPlugin;
-import com.puppetlabs.geppetto.ui.dialog.ModuleListSelectionDialog;
+import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog;
+import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog.Elem;
 import com.puppetlabs.geppetto.ui.util.ResourceUtil;
 
 public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizard {
@@ -72,7 +74,7 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 		protected Text projectNameField;
 
-		protected Text moduleField = null;
+		protected Text keywordField = null;
 
 		protected PuppetProjectFromForgeCreationPage(String pageName) {
 			super(pageName);
@@ -121,16 +123,16 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 			Label moduleLabel = new Label(parent, SWT.NONE);
 			moduleLabel.setText(getLocalString("_UI_Module_label")); //$NON-NLS-1$
 
-			moduleField = new Text(parent, SWT.BORDER | SWT.READ_ONLY);
-			moduleField.addMouseListener(new MouseAdapter() {
+			keywordField = new Text(parent, SWT.BORDER);
+			keywordField.addMouseListener(new MouseAdapter() {
 
 				@Override
 				public void mouseDoubleClick(MouseEvent me) {
-					promptForModuleSelection();
+					promptForReleaseSelection();
 				}
 			});
 
-			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).applyTo(moduleField);
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).applyTo(keywordField);
 
 			Button resultTypeButton = new Button(parent, SWT.PUSH);
 			resultTypeButton.setText(getLocalString("_UI_Select_label")); //$NON-NLS-1$
@@ -138,16 +140,14 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 				@Override
 				public void widgetSelected(SelectionEvent se) {
-					promptForModuleSelection();
+					promptForReleaseSelection();
 				}
 			});
 		}
 
-		protected Module[] getModuleChoices(final String keyword) {
-			Module[] zeroModules = new Module[0];
+		protected List<Elem> getReleaseChoices(final String keyword) {
 			try {
-				final Module[][] choicesResult = new Module[1][];
-				choicesResult[0] = zeroModules;
+				final List<Elem> choices = new ArrayList<Elem>();
 				getContainer().run(true, true, new IRunnableWithProgress() {
 					@Override
 					public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
@@ -158,11 +158,11 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 								@Override
 								public void run() {
 									try {
-										List<Module> choices = moduleService.listAll(
-											new Modules.WithText(keyword), null, false);
-										int top = choices.size();
-										if(top > 0)
-											choicesResult[0] = choices.toArray(new Module[top]);
+										for(Module module : moduleService.listAll(
+											new Modules.WithText(keyword), Modules.LAST_RELEASED, false)) {
+											for(AbbrevRelease ab : module.getReleases())
+												choices.add(new Elem(ab));
+										}
 									}
 									catch(SocketException e) {
 										// A user abort will cause a "Socket closed" exception We don't
@@ -203,8 +203,7 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 						}
 					}
 				});
-				Module[] choices = choicesResult[0];
-				if(choices.length > 0)
+				if(!choices.isEmpty())
 					return choices;
 				MessageDialog.openConfirm(
 					getShell(), getLocalString("_UI_No_modules_found"),
@@ -223,55 +222,55 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 			}
 			catch(InterruptedException e) {
 			}
-			return zeroModules;
+			return Collections.emptyList();
 		}
 
-		protected void promptForModuleSelection() {
-			InputDialog askKeywordDialog = new InputDialog(
-				getShell(), getLocalString("_UI_Keyword_Search_title"), getLocalString("_UI_Keyword_Search_message"),
-				null, new IInputValidator() {
-					@Override
-					public String isValid(String newText) {
-						newText = trimToNull(newText);
-						if(newText != null) {
-							if(newText.length() > 30)
-								return getLocalString("_UI_Keyword_Search_max_length_exceeded", 30);
-							Matcher m = OK_KEYWORD_CHARACTERS.matcher(newText);
-							if(!m.matches())
-								return getLocalString("_UI_Keyword_Search_bad_characters");
-							m = KEYWORD_AT_LEAST_ONE_CHARACTER.matcher(newText);
-							if(m.find())
-								return null;
+		protected void promptForReleaseSelection() {
+			String keyword = Strings.emptyToNull(keywordField.getText());
+			if(keyword == null) {
+				InputDialog askKeywordDialog = new InputDialog(
+					getShell(), getLocalString("_UI_Keyword_Search_title"),
+					getLocalString("_UI_Keyword_Search_message"), keyword, new IInputValidator() {
+						@Override
+						public String isValid(String newText) {
+							newText = trimToNull(newText);
+							if(newText != null) {
+								if(newText.length() > 30)
+									return getLocalString("_UI_Keyword_Search_max_length_exceeded", 30);
+								Matcher m = OK_KEYWORD_CHARACTERS.matcher(newText);
+								if(!m.matches())
+									return getLocalString("_UI_Keyword_Search_bad_characters");
+								m = KEYWORD_AT_LEAST_ONE_CHARACTER.matcher(newText);
+								if(m.find())
+									return null;
+							}
+							return getLocalString("_UI_Keyword_Search_at_least_one_character");
 						}
-						return getLocalString("_UI_Keyword_Search_at_least_one_character");
-					}
-				});
+					});
 
-			if(askKeywordDialog.open() != Window.OK)
-				return;
-
-			Module[] choices = getModuleChoices(askKeywordDialog.getValue());
-			if(choices.length == 0)
-				return;
-
-			ModuleListSelectionDialog dialog = new ModuleListSelectionDialog(getShell());
-			dialog.setMultipleSelection(false);
-			dialog.setElements(choices);
-
-			if(module != null) {
-				dialog.setInitialElementSelections(Collections.singletonList(module));
+				if(askKeywordDialog.open() != Window.OK)
+					return;
+				keyword = askKeywordDialog.getValue();
 			}
+			List<Elem> choices = getReleaseChoices(keyword);
+			if(choices.isEmpty())
+				return;
+
+			ReleaseListSelectionDialog dialog = new ReleaseListSelectionDialog(getShell(), choices);
+			if(release != null)
+				dialog.setInitialElementSelections(Collections.singletonList(release));
 
 			if(dialog.open() == Window.OK) {
-				setModule((Module) dialog.getFirstResult());
+				setRelease((Elem) dialog.getFirstResult());
 			}
 		}
 
-		protected void setModule(Module selectedModule) {
-			module = selectedModule;
+		protected void setRelease(Elem selectedRelease) {
+			release = selectedRelease.getVersionedName();
 
-			moduleField.setText(getText(module));
-			projectNameField.setText(getFullName(module).getName());
+			String ns = release.getModuleName().toString();
+			keywordField.setText(ns + ' ' + release.getVersion());
+			projectNameField.setText(ns);
 
 			validatePage();
 		}
@@ -281,21 +280,21 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 			super.setVisible(visible);
 
 			if(visible) {
-				moduleField.setFocus();
+				keywordField.setFocus();
 			}
 		}
 
 		@Override
 		protected boolean validatePage() {
 
-			if(module == null) {
+			if(release == null) {
 				setErrorMessage(null);
 				setMessage(getLocalString("_UI_ModuleCannotBeEmpty_message")); //$NON-NLS-1$
 				return false;
 			}
 
 			if(super.validatePage()) {
-				String preferredProjectName = getFullName(module).getName();
+				String preferredProjectName = release.getModuleName().getName();
 
 				if(!preferredProjectName.equals(getProjectName())) {
 					setErrorMessage(null);
@@ -311,19 +310,19 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 	}
 
+	private static final Pattern OK_KEYWORD_CHARACTERS = Pattern.compile("^[0-9A-Za-z_/-]*$");
+
+	private static final Pattern KEYWORD_AT_LEAST_ONE_CHARACTER = Pattern.compile("[A-Za-z]+");
+
+	private static final Logger log = Logger.getLogger(NewPuppetProjectFromForgeWizard.class);
+
 	@Inject
 	private ForgeService forgeService;
 
 	@Inject
 	private Modules moduleService;
 
-	private static final Pattern OK_KEYWORD_CHARACTERS = Pattern.compile("^[0-9A-Za-z_-]*$");
-
-	private static final Pattern KEYWORD_AT_LEAST_ONE_CHARACTER = Pattern.compile("[A-Za-z]+");
-
-	private static final Logger log = Logger.getLogger(NewPuppetProjectFromForgeWizard.class);
-
-	protected Module module;
+	protected VersionedName release;
 
 	@Override
 	protected String getProjectCreationPageDescription() {
@@ -344,18 +343,18 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 	@Override
 	protected void initializeProjectContents(IProgressMonitor monitor) throws Exception {
 
-		if(module == null)
+		if(release == null)
 			return;
 
 		SubMonitor submon = SubMonitor.convert(monitor, "Generating project...", 100);
 		try {
-			Version v = getModuleVersion(module);
+			Version v = release.getVersion();
 			VersionRange vr = v == null
 					? null
 					: VersionRange.exact(v);
 
 			File projectDir = project.getLocation().toFile();
-			forgeService.install(getFullName(module), vr, projectDir, true, true);
+			forgeService.install(release.getModuleName(), vr, projectDir, true, true);
 
 			File moduleFile = new File(projectDir, MODULEFILE_NAME);
 			boolean moduleFileExists = moduleFile.exists();

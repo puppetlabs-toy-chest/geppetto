@@ -4,20 +4,21 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.ui.editor;
 
-import static com.puppetlabs.geppetto.common.Strings.trimToNull;
 import static com.puppetlabs.geppetto.forge.Forge.MODULEFILE_NAME;
 import static org.eclipse.xtext.util.Strings.emptyIfNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -25,8 +26,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -37,6 +36,7 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
@@ -53,6 +53,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
@@ -62,7 +63,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.dialogs.FilteredList;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.IMessage;
 import org.eclipse.ui.forms.IMessageManager;
@@ -78,13 +78,14 @@ import com.puppetlabs.geppetto.forge.model.VersionedName;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
 import com.puppetlabs.geppetto.ui.UIPlugin;
-import com.puppetlabs.geppetto.ui.dialog.ModuleListSelectionDialog;
+import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog;
+import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog.Elem;
 import com.puppetlabs.geppetto.ui.editor.MetadataModel.Dependency;
 
 class ModuleDependenciesPage extends GuardedModulePage {
 	protected class DependenciesSectionPart extends ModuleSectionPart {
 
-		protected class EditDependencyDialog extends ModuleListSelectionDialog {
+		protected class EditDependencyDialog extends ReleaseListSelectionDialog {
 
 			private String initialVersionRequirement;
 
@@ -101,21 +102,18 @@ class ModuleDependenciesPage extends GuardedModulePage {
 
 			private String versionRequirement = null;
 
-			public EditDependencyDialog(Shell parent, MetadataModel.Dependency dependency) {
-				super(parent);
+			public EditDependencyDialog(Shell parent, MetadataModel.Dependency dependency, List<Elem> elements) {
+				super(parent, elements);
 				if(dependency != null) {
 					initialName = dependency.getModuleName();
 					initialVersionRequirement = dependency.getVersionRequirement();
 				}
-				setMultipleSelection(false);
 				setTitle(UIPlugin.getLocalString("_UI_EditDependency_title")); //$NON-NLS-1$
 				setStatusLineAboveButtons(true);
 			}
 
 			@Override
-			protected FilteredList createFilteredList(Composite parent) {
-				FilteredList filteredList = super.createFilteredList(parent);
-
+			protected Control createExtendedContentArea(Composite parent) {
 				Composite composite = new Composite(parent, SWT.NONE);
 
 				GridLayout gridLayout = new GridLayout(2, false);
@@ -178,7 +176,7 @@ class ModuleDependenciesPage extends GuardedModulePage {
 
 				GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).applyTo(
 					versionRequirementText);
-				return filteredList;
+				return composite;
 			}
 
 			protected String getName() {
@@ -190,18 +188,11 @@ class ModuleDependenciesPage extends GuardedModulePage {
 			}
 
 			@Override
-			protected void handleDefaultSelected() {
-				setSelectedValuesIfSingle();
-				super.handleDefaultSelected();
-			}
+			protected void handleSelected(StructuredSelection selection) {
+				super.handleSelected(selection);
+				if(selection.size() != 1)
+					return;
 
-			@Override
-			protected void handleSelectionChanged() {
-				setSelectedValuesIfSingle();
-				super.handleSelectionChanged();
-			}
-
-			private void setSelectedValuesIfSingle() {
 				if(initialName != null) {
 					// First selection doesn't count since we trust the initial values. Next time around is
 					// a different matter
@@ -210,31 +201,13 @@ class ModuleDependenciesPage extends GuardedModulePage {
 					return;
 				}
 
-				Object[] selection = getSelectedElements();
-				if(selection.length == 1) {
-					VersionedName mi = (VersionedName) selection[0];
-					moduleNameText.setText(mi.getModuleName().toString());
-					Version v = mi.getVersion();
-					versionRequirementText.setText(v == null
-							? ""
-							: v.toString());
-				}
-			}
-
-			@Override
-			protected void updateOkState() {
-				Button okButton = getOkButton();
-				if(okButton != null) {
-					String moduleName = trimToNull(moduleNameText.getText());
-					String versionRequirement = trimToNull(versionRequirementText.getText());
-					if(getSelectedElements().length != 0)
-						okButton.setEnabled(true);
-					else {
-						boolean weHaveData = moduleName != null && !moduleName.equals(initialName) &&
-								(versionRequirement == null || !versionRequirement.equals(initialVersionRequirement));
-						okButton.setEnabled(weHaveData);
-					}
-				}
+				Elem elem = (Elem) selection.toArray()[0];
+				VersionedName vn = elem.getVersionedName();
+				moduleNameText.setText(vn.getModuleName().toString());
+				Version v = vn.getVersion();
+				versionRequirementText.setText(v == null
+						? ""
+						: v.toString());
 			}
 		}
 
@@ -387,10 +360,8 @@ class ModuleDependenciesPage extends GuardedModulePage {
 				@Override
 				public void widgetSelected(SelectionEvent se) {
 					if(allowModification()) {
-						EditDependencyDialog dialog = new EditDependencyDialog(getEditor().getSite().getShell(), null);
-
-						dialog.setMultipleSelection(true);
-						dialog.setElements(getModuleChoices(null));
+						EditDependencyDialog dialog = new EditDependencyDialog(
+							getEditor().getSite().getShell(), null, getModuleChoices(null));
 
 						if(dialog.open() == Window.OK) {
 							getEditor().getSourcePage().startInternalTextChange();
@@ -430,10 +401,19 @@ class ModuleDependenciesPage extends GuardedModulePage {
 				public void widgetSelected(SelectionEvent se) {
 					if(allowModification()) {
 						MetadataModel.Dependency dependency = (MetadataModel.Dependency) ((IStructuredSelection) tableViewer.getSelection()).getFirstElement();
+						String depName = dependency.getModuleName();
+						ModuleName moduleName = null;
+						if(depName != null) {
+							try {
+								moduleName = ModuleName.create(depName, false);
+							}
+							catch(IllegalArgumentException e) {
+							}
+						}
+						List<Elem> choices = getModuleChoices(moduleName);
 						EditDependencyDialog dialog = new EditDependencyDialog(
-							getEditor().getSite().getShell(), dependency);
-						dialog.setElements(getModuleChoices(dependency.getModuleName()));
-						dialog.setFilter(dependency.getModuleName());
+							getEditor().getSite().getShell(), dependency, choices);
+						dialog.setInitialPattern(moduleName.toString());
 
 						if(dialog.open() == Window.OK) {
 							getEditor().getSourcePage().startInternalTextChange();
@@ -513,21 +493,13 @@ class ModuleDependenciesPage extends GuardedModulePage {
 			moduleInfos.put(vn.toString(), vn);
 		}
 
-		private VersionedName[] getModuleChoices(String toBeEdited) {
+		private List<Elem> getModuleChoices(ModuleName always) {
 
 			Forge forge = getEditor().getForge();
 
 			Map<String, VersionedName> modules = new HashMap<String, VersionedName>();
 			IProject current = getCurrentProject();
 			Diagnostic chain = new Diagnostic();
-			ModuleName always = null;
-			if(toBeEdited != null)
-				try {
-					always = ModuleName.fromString(toBeEdited);
-				}
-				catch(IllegalArgumentException e) {
-					// Keep always as null since a match is impossible
-				}
 
 			for(IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
 
@@ -547,8 +519,10 @@ class ModuleDependenciesPage extends GuardedModulePage {
 					UIPlugin.getInstance().log(e);
 				}
 			}
-			EList<VersionedName> choices = new UniqueEList.FastCompare<VersionedName>(modules.values());
-			return choices.toArray(new VersionedName[choices.size()]);
+			List<Elem> choices = new ArrayList<Elem>(modules.size());
+			for(VersionedName vn : modules.values())
+				choices.add(new Elem(vn, false));
+			return choices;
 		}
 
 		int getRowNumber(Object element) {
