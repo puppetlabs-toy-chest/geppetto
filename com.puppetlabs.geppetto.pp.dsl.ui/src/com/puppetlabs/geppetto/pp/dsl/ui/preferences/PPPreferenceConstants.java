@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -12,7 +12,7 @@ package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
 /**
  * Constants for PP Preferences
- * 
+ *
  */
 public class PPPreferenceConstants {
 
@@ -30,13 +30,7 @@ public class PPPreferenceConstants {
 
 	public static final String PUPPET_ENVIRONMENT__ENABLED = "puppetEnvironmentEnabled";
 
-	public static final String FORGE_LOCATION = "forgeLocation";
-
-	public static final String FORGE_LOGIN = "forgeLogin";
-
 	public static final String PROBLEM_INTERPOLATED_HYPHEN = "problemInterpolatedHyphen";
-
-	public static final String PROBLEM_CIRCULAR_DEPENDENCY = "circularModuleDependency";
 
 	public static final String PROBLEM_BOOLEAN_STRING = "booleanString";
 

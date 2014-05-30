@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -40,49 +40,12 @@ import com.puppetlabs.geppetto.semver.VersionRange;
  * Utility class with helper methods for Forge Module related tasks.
  */
 public class ModuleUtils {
-	// @fmtOff
-	public static final String[] DEFAULT_EXCLUDES = {
-		"*~",
-		"#*#",
-		".#*",
-		"%*%",
-		"._*",
-		"CVS",
-		".cvsignore",
-		"SCCS",
-		"vssver.scc",
-		".svn",
-		".DS_Store",
-		".git",
-		".gitattributes",
-		".gitignore",
-		".gitmodules",
-		".hg",
-		".hgignore",
-		".hgsub",
-		".hgsubstate",
-		".hgtags",
-		".bzr",
-		".bzrignore",
-		".project",
-		".forge-releng",
-		".settings",
-		".classpath",
-		".bzrignore",
-		"pkg",
-		"coverage"
-	};
-	// @fmtOn
-
-	// Directory names that should not be checksummed or copied.
-	public static final Pattern DEFAULT_EXCLUDES_PATTERN = compileExcludePattern(DEFAULT_EXCLUDES);
-
-	public static final FileFilter DEFAULT_FILE_FILTER = new FileFilter() {
+	public static class DefaultFileFilter implements FileFilter {
 		@Override
 		public boolean accept(File file) {
 			return !DEFAULT_EXCLUDES_PATTERN.matcher(file.getName()).matches();
 		}
-	};
+	}
 
 	private static void addKeyValueNode(PrintWriter out, String key, String... strs) throws IOException {
 		if(strs.length == 0)
@@ -157,7 +120,7 @@ public class ModuleUtils {
 
 	/**
 	 * Creates an error diagnostic based on the information found in the <code>syntaxException</code>.
-	 * 
+	 *
 	 * @param syntaxException
 	 *            The exception containing the diagnostic error
 	 * @param id
@@ -181,7 +144,7 @@ public class ModuleUtils {
 	 * Scan for valid directories containing 'metadata.json' files or other types of build time artifacts
 	 * that provides metadata and is recognized by the provided <tt>metadataExtractors</tt>.
 	 * A directory that contains such a file will not be scanned in turn.
-	 * 
+	 *
 	 * @return A list of directories where such files were found
 	 */
 	public static Collection<File> findModuleRoots(File modulesRoot, FileFilter filter,
@@ -225,7 +188,7 @@ public class ModuleUtils {
 	 * Parse a Modulefile and create a Metadata instance from the result. The parser <i>will not evaluate</i> actual
 	 * ruby code. It
 	 * just parses the code and extracts values from the resulting AST.
-	 * 
+	 *
 	 * @param moduleFile
 	 *            The file to parse
 	 * @param receiver
@@ -254,7 +217,7 @@ public class ModuleUtils {
 	 * evaluate</i> actual
 	 * ruby code. It
 	 * just parses the code and extracts values from the resulting AST.
-	 * 
+	 *
 	 * @param id
 	 *            The full path of the file to parse
 	 * @param content
@@ -282,7 +245,7 @@ public class ModuleUtils {
 	/**
 	 * Print a {@link Metadata} instance in the Ruby form used in a &quot;Modulefile&quot; on
 	 * the given stream
-	 * 
+	 *
 	 * @param md
 	 *            The metadata to use as input.
 	 * @param out
@@ -319,7 +282,7 @@ public class ModuleUtils {
 
 	/**
 	 * Store a {@link Metadata} instance in the Ruby form used in a &quot;Modulefile&quot;.
-	 * 
+	 *
 	 * @param md
 	 *            The metadata to store.
 	 * @param moduleFile
@@ -338,7 +301,7 @@ public class ModuleUtils {
 
 	/**
 	 * Produce Modulefile content in string form
-	 * 
+	 *
 	 * @param metadata
 	 *            The metadata to use as input
 	 * @return The Modulefile content that represents the metadata
@@ -355,5 +318,44 @@ public class ModuleUtils {
 		}
 		return bld.toString();
 	}
+
+	// @fmtOff
+	public static final String[] DEFAULT_EXCLUDES = {
+		"*~",
+		"#*#",
+		".#*",
+		"%*%",
+		"._*",
+		"CVS",
+		".cvsignore",
+		"SCCS",
+		"vssver.scc",
+		".svn",
+		".DS_Store",
+		".git",
+		".gitattributes",
+		".gitignore",
+		".gitmodules",
+		".hg",
+		".hgignore",
+		".hgsub",
+		".hgsubstate",
+		".hgtags",
+		".bzr",
+		".bzrignore",
+		".project",
+		".forge-releng",
+		".settings",
+		".classpath",
+		".bzrignore",
+		"pkg",
+		"coverage"
+	};
+	// @fmtOn
+
+	// Directory names that should not be checksummed or copied.
+	public static final Pattern DEFAULT_EXCLUDES_PATTERN = compileExcludePattern(DEFAULT_EXCLUDES);
+
+	public static final FileFilter DEFAULT_FILE_FILTER = new DefaultFileFilter();
 
 }

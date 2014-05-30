@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.puppetlabs.geppetto</groupId>
 		<artifactId>parent</artifactId>
-		<version>4.1.2-SNAPSHOT</version>
+		<version>4.2.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>com.puppetlabs.geppetto.forge.tests</artifactId>
@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<testForgeServiceURL>https://forge-apilb01-stage.puppetlabs.com/</testForgeServiceURL>
+		<testForgeServiceURL>https://forgestagingapi.puppetlabs.com/</testForgeServiceURL>
 	</properties>
 
 

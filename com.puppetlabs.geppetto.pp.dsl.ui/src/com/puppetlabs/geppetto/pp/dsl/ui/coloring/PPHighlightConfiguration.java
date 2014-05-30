@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -96,8 +96,6 @@ public class PPHighlightConfiguration extends DefaultHighlightingConfiguration {
 		acceptor.acceptDefaultHighlighting(VARIABLE_ID, "Variable", variableTextStyle());
 		acceptor.acceptDefaultHighlighting(RESOURCE_REF_ID, "Resource Reference", resourceRefTextStyle());
 		acceptor.acceptDefaultHighlighting(RESOURCE_TITLE_ID, "Resource Title", resourceTitleTextStyle());
-
-		acceptor.acceptDefaultHighlighting(TASK_ID, "Tasks", taskTextStyle());
 	}
 
 	public TextStyle documentationBoldStyle() {
@@ -247,6 +245,7 @@ public class PPHighlightConfiguration extends DefaultHighlightingConfiguration {
 		return textStyle;
 	}
 
+	@Override
 	public TextStyle taskTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(68, 68, 68));

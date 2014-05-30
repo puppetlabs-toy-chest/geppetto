@@ -35,8 +35,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 			fail("Interpolated complex ruby was not detected");
 		}
 		catch(MojoFailureException e) {
-			assertTrue(
-				"Interpolated complex ruby was not detected", e.getMessage().contains("version must be specified"));
+			assertContains("Interpolated complex ruby was not detected", "version must be specified", e);
 		}
 	}
 
@@ -51,7 +50,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 			fail("Invalid metadata was not detected");
 		}
 		catch(MojoFailureException e) {
-			assertTrue("Invalid metadata was not detected", e.getMessage().contains("Unexpected character"));
+			assertContains("Invalid metadata was not detected", "mismatched input", e);
 		}
 	}
 
@@ -66,9 +65,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 			fail("Module found although both metadata.json and Modulefile is missing");
 		}
 		catch(MojoFailureException e) {
-			assertTrue(
-				"Module found although both metadata.json and Modulefile is missing",
-				e.getMessage().contains("No modules found"));
+			assertContains("Module found although both metadata.json and Modulefile is missing", "No modules found", e);
 		}
 	}
 
@@ -97,9 +94,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 			fail("Missing module name in metadata.json was not detected");
 		}
 		catch(MojoFailureException e) {
-			assertTrue(
-				"Missing module name in metadata.json was not detected",
-				e.getMessage().contains("name (user-module) must be specified"));
+			assertMissingAttribute("Missing module name in metadata.json was not detected", "name", e);
 		}
 	}
 
@@ -114,9 +109,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 			fail("Missing module version in metadata.json was not detected");
 		}
 		catch(MojoFailureException e) {
-			assertTrue(
-				"Missing module version in metadata.json was not detected",
-				e.getMessage().contains("version must be specified"));
+			assertMissingAttribute("Missing module version in metadata.json was not detected", "version", e);
 		}
 	}
 
@@ -131,8 +124,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 			fail("Missing module name was not detected");
 		}
 		catch(MojoFailureException e) {
-			assertTrue(
-				"Missing module name was not detected", e.getMessage().contains("name (user-module) must be specified"));
+			assertContains("Missing module name was not detected", "A full name (user-module) must be specified", e);
 		}
 	}
 
@@ -147,7 +139,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 			fail("Missing module version was not detected");
 		}
 		catch(MojoFailureException e) {
-			assertTrue("Missing module version was not detected", e.getMessage().contains("version must be specified"));
+			assertContains("Missing module version was not detected", "A version must be specified", e);
 		}
 	}
 
@@ -162,7 +154,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 			fail("Unresolved dependency was not detected");
 		}
 		catch(MojoFailureException e) {
-			assertTrue("Unresolved dependency was not detected", e.getMessage().contains("Unresolved"));
+			assertContains("Unresolved dependency was not detected", "Couldn't resolve reference to Module", e);
 		}
 	}
 

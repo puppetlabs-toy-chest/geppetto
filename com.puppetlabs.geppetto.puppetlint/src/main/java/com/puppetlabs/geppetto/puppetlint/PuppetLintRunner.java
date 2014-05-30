@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -65,6 +65,12 @@ public interface PuppetLintRunner {
 
 		/** Skip the case_without_default check */
 		NoCaseWithoutDefaultCheck("no-case_without_default-check"),
+
+		/** Skip the parameterized class inherits from 'params' class check */
+		NoClassInheritsFromParamsClassCheck("no-class_inherits_from_params_class-check"),
+
+		/** Skip the calss parameter defaults check */
+		NoClassParameterDefaultsCheck("no-class_parameter_defaults-check"),
 
 		/** Skip the documentation check */
 		NoDocumentationCheck("no-documentation-check"),
@@ -175,7 +181,7 @@ public interface PuppetLintRunner {
 
 	/**
 	 * Run puppet lint on the specified directory or file
-	 * 
+	 *
 	 * @param fileOrDirectory
 	 * @param parameters
 	 * @return

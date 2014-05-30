@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -51,9 +52,10 @@ import com.puppetlabs.geppetto.forge.ERB;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.ForgeService;
 import com.puppetlabs.geppetto.forge.MetadataExtractor;
+import com.puppetlabs.geppetto.forge.model.Checksums;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.forge.util.Checksums;
+import com.puppetlabs.geppetto.forge.util.ChecksumUtils;
 import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.forge.util.TarUtils;
 import com.puppetlabs.geppetto.forge.util.TarUtils.FileCatcher;
@@ -89,7 +91,7 @@ class ForgeImpl implements Forge {
 
 		File[] extractedFrom = new File[1];
 
-		Metadata md = createFromModuleDirectory(moduleSource, true, fileFilter, extractedFrom, result);
+		Metadata md = createFromModuleDirectory(moduleSource, fileFilter, extractedFrom, result);
 		if(result.getSeverity() >= ERROR)
 			return null;
 
@@ -136,13 +138,17 @@ class ForgeImpl implements Forge {
 		if(!extractedFrom[0].getName().equals(METADATA_JSON_NAME))
 			saveJSONMetadata(md, metadataJSON);
 
+		Map<String, byte[]> checksums = ChecksumUtils.loadChecksums(moduleSource, metadataJSON, fileFilter);
+		File checksumsJSON = new File(destModuleDir, Forge.CHECKSUMS_JSON_NAME);
+		saveJSONChecksums(checksums, checksumsJSON);
+
 		final File moduleArchive = new File(destination, zipArchiveName);
 		OutputStream out = new GZIPOutputStream(new FileOutputStream(moduleArchive));
 		if(resultingMD5 == null)
 			// Pack closes its output
 			TarUtils.pack(destModuleDir, out, null, true, null);
 		else {
-			MessageDigest digest = Checksums.getMessageDigest();
+			MessageDigest digest = ChecksumUtils.getMessageDigest();
 			DigestOutputStream digestOut = new DigestOutputStream(out, digest);
 
 			// Pack closes its output
@@ -156,15 +162,15 @@ class ForgeImpl implements Forge {
 	public List<File> changes(File path, FileFilter fileFilter) throws IOException {
 		if(fileFilter == null)
 			fileFilter = moduleFileFilter;
-		Metadata md = loadJSONMetadata(new File(path, METADATA_JSON_NAME));
+		Map<String, byte[]> checksums = loadJSONChecksums(new File(path, CHECKSUMS_JSON_NAME));
 		List<File> result = new ArrayList<File>();
-		Checksums.appendChangedFiles(md.getChecksums(), path, result, fileFilter);
+		ChecksumUtils.appendChangedFiles(checksums, path, result, fileFilter);
 		return result;
 	}
 
 	@Override
-	public Metadata createFromModuleDirectory(File moduleDirectory, boolean includeTypesAndChecksums,
-			FileFilter filter, File[] extractedFrom, Diagnostic result) throws IOException {
+	public Metadata createFromModuleDirectory(File moduleDirectory, FileFilter filter, File[] extractedFrom,
+			Diagnostic result) throws IOException {
 
 		if(filter == null)
 			filter = moduleFileFilter;
@@ -175,7 +181,7 @@ class ForgeImpl implements Forge {
 		Metadata md = null;
 		for(MetadataExtractor extractor : getMetadataExtractors())
 			if(extractor.canExtractFrom(moduleDirectory, filter)) {
-				md = extractor.parseMetadata(moduleDirectory, includeTypesAndChecksums, filter, extractedFrom, result);
+				md = extractor.parseMetadata(moduleDirectory, filter, extractedFrom, result);
 				break;
 			}
 
@@ -284,6 +290,7 @@ class ForgeImpl implements Forge {
 				FileUtils.cp(template, destination.getParentFile(), destination.getName());
 			}
 		}
+		saveJSONMetadata(metadata, new File(destinationBase, Forge.METADATA_JSON_NAME));
 	}
 
 	@Override
@@ -296,6 +303,18 @@ class ForgeImpl implements Forge {
 		return false;
 	}
 
+	@Override
+	public Map<String, byte[]> loadJSONChecksums(File jsonFile) throws IOException {
+		Reader reader = new BufferedReader(new FileReader(jsonFile));
+		try {
+			return gson.fromJson(reader, Checksums.class).getChecksums();
+		}
+		finally {
+			StreamUtil.close(reader);
+		}
+	}
+
+	@Override
 	public Metadata loadJSONMetadata(File jsonFile) throws IOException {
 		Reader reader = new BufferedReader(new FileReader(jsonFile));
 		try {
@@ -314,6 +333,20 @@ class ForgeImpl implements Forge {
 		return metadata;
 	}
 
+	@Override
+	public void saveJSONChecksums(Map<String, byte[]> checksums, File jsonFile) throws IOException {
+		Writer writer = new BufferedWriter(new FileWriter(jsonFile));
+		try {
+			Checksums checksumsObj = new Checksums();
+			checksumsObj.setChecksums(checksums);
+			gson.toJson(checksumsObj, writer);
+		}
+		finally {
+			StreamUtil.close(writer);
+		}
+	}
+
+	@Override
 	public void saveJSONMetadata(Metadata md, File jsonFile) throws IOException {
 		Writer writer = new BufferedWriter(new FileWriter(jsonFile));
 		try {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="metadata" nsURI="http://www.puppetlabs.com/geppetto/module/dsl/Module"
+    nsPrefix="metadata">
+  <eClassifiers xsi:type="ecore:EClass" name="JsonObject" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pairs" upperBound="-1"
+        eType="#//Pair" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonMetadata" eSuperTypes="#//JsonObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Pair">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnrecognizedPair" eSuperTypes="#//Pair"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonArray" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="#//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonDependency" eSuperTypes="#//JsonObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MetadataRefPair" eSuperTypes="#//Pair">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//JsonMetadata"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonRequirement" eSuperTypes="#//JsonObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonValue" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequirementNameValue" eSuperTypes="#//JsonValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonVersionRange" eSuperTypes="#//JsonValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonModuleName" eSuperTypes="#//JsonValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonTag" eSuperTypes="#//JsonValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonVersion" eSuperTypes="#//JsonValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonOS" eSuperTypes="#//JsonObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value"/>
+</ecore:EPackage>

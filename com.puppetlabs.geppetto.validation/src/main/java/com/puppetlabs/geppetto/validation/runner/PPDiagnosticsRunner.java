@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Itemis AB (http://www.itemis.eu) - initial API and implementation
  *   Puppet Labs - adpated for validation
- * 
+ *
  */
 package com.puppetlabs.geppetto.validation.runner;
 
@@ -21,20 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
-import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapterFactory;
-import com.puppetlabs.geppetto.pp.dsl.linking.DiagnosticConsumerBasedMessageAcceptor;
-import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceLinker;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.IConfigurableProvider;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
-import com.puppetlabs.geppetto.pp.dsl.parser.antlr.PPParser;
-import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -77,24 +63,28 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.Provider;
-import com.google.inject.TypeLiteral;
+import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
+import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.linking.DiagnosticConsumerBasedMessageAcceptor;
+import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceLinker;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.IConfigurableProvider;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
+import com.puppetlabs.geppetto.pp.dsl.parser.antlr.PPParser;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
+import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 
 /**
  * Runner/Helper that can perform diagnostics/validation of PP files.
- * 
+ *
  */
 public class PPDiagnosticsRunner {
 
-	public static final class Keys {
-		private static final TypeLiteral<Provider<XtextResourceSet>> resourceSetLiteral = new TypeLiteral<Provider<XtextResourceSet>>() {
-		};
-
-		public static final Key<Provider<XtextResourceSet>> RESOURCE_SET_KEY = Key.get(resourceSetLiteral);
-	}
-
-	private class ModuleExport implements AllModuleReferences.Export {
+	private class ModuleExport implements AllModulesState.Export {
 
 		private static final long serialVersionUID = 1L;
 
@@ -126,7 +116,7 @@ public class PPDiagnosticsRunner {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.validation.runner.IExportsPerModule.Export #getEClass()
 		 */
 		@Override
@@ -136,7 +126,7 @@ public class PPDiagnosticsRunner {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.validation.runner.ExportsPerModule.Export #getFile()
 		 */
 		@Override
@@ -151,7 +141,7 @@ public class PPDiagnosticsRunner {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.validation.runner.ExportsPerModule.Export #getLength()
 		 */
 		@Override
@@ -161,7 +151,7 @@ public class PPDiagnosticsRunner {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.validation.runner.ExportsPerModule.Export #getLine()
 		 */
 		@Override
@@ -171,7 +161,7 @@ public class PPDiagnosticsRunner {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.validation.runner.IExportsPerModule.Export #getName()
 		 */
 		@Override
@@ -186,7 +176,7 @@ public class PPDiagnosticsRunner {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.validation.runner.IExportsPerModule.Export #getParentName()
 		 */
 		@Override
@@ -196,7 +186,7 @@ public class PPDiagnosticsRunner {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.validation.runner.ExportsPerModule.Export #getStart()
 		 */
 		@Override
@@ -267,7 +257,7 @@ public class PPDiagnosticsRunner {
 	/**
 	 * Configure containers if something else than "everything is visible to everything" is wanted. This method must be
 	 * called before resources are loaded.
-	 * 
+	 *
 	 * @param root
 	 *            - where non modular content is contained
 	 * @param moduleInfo
@@ -315,8 +305,10 @@ public class PPDiagnosticsRunner {
 			Path p = new Path(uri.toFileString());
 			IPath modulePath = null;
 			for(IPath prefix : modulePaths)
-				if(prefix.isPrefixOf(p))
+				if(prefix.isPrefixOf(p)) {
 					modulePath = prefix;
+					break;
+				}
 
 			// if not in any module, it is in the root container
 			if(modulePath == null)
@@ -347,9 +339,9 @@ public class PPDiagnosticsRunner {
 	private void configureTransitiveClosure(final IPath rootModule, final Multimap<String, String> restricted,
 			final MetadataInfo mi) {
 		Set<MetadataInfo> processed = Sets.newHashSet();
-		restricted.put(rootModule.toString(), rootModule.toString()); // it can
-																		// see
-																		// itself
+
+		// it can see itself
+		restricted.put(rootModule.toString(), rootModule.toString());
 		_configureTransitiveClosure(processed, rootModule, restricted, mi);
 	}
 
@@ -371,7 +363,7 @@ public class PPDiagnosticsRunner {
 
 	/**
 	 * Get instance of class via the PP RT injector.
-	 * 
+	 *
 	 * @param <T>
 	 * @param clazz
 	 * @return
@@ -384,11 +376,11 @@ public class PPDiagnosticsRunner {
 
 	/**
 	 * Translates all Exports and Imports and stores this in an ExportsPerModule.
-	 * 
+	 *
 	 * @return
 	 */
-	public AllModuleReferences getAllModulesState() {
-		final AllModuleReferences result = new AllModuleReferences();
+	public AllModulesState getAllModulesState() {
+		final AllModulesState result = new AllModulesState();
 
 		if(resourceSet == null || resourceSet.getResources().size() < 1)
 			return result;
@@ -548,7 +540,7 @@ public class PPDiagnosticsRunner {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private ISearchPathProvider getSearchPathProvider() {
 		return get(ISearchPathProvider.class);
@@ -588,7 +580,7 @@ public class PPDiagnosticsRunner {
 	/**
 	 * Load a resource from a String. The URI must be well formed for the language being the content of the given
 	 * sourceString (the uri determined the factory to use and the encoding via an IEncodingProvider).
-	 * 
+	 *
 	 * @param sourceString
 	 * @param uri
 	 * @return
@@ -611,10 +603,10 @@ public class PPDiagnosticsRunner {
 
 	/**
 	 * Loads a resource to the resource set. The intended use is to load a .pptp resource.
-	 * 
+	 *
 	 * @param uri
 	 *            uri to a .pptp resource (typically).
-	 * 
+	 *
 	 * @return the resource
 	 */
 	public Resource loadResource1(URI uri) {
@@ -647,10 +639,8 @@ public class PPDiagnosticsRunner {
 			if(profileThis)
 				System.err.printf("LazyLinkingResource.resolveLazyCrossReferences: (%s)\n", afterLazy - before);
 
-			// just in case some other crazy thing is sent here check that it is
-			// a pp resource
-			// (pp resource linking is not relevant on anything but .pp
-			// resources).
+			// just in case some other crazy thing is sent here, check that it is a pp resource
+			// (pp resource linking is not relevant on anything but .pp resources).
 			if(ppResourceServiceProvider.canHandle(resource.getURI())) {
 				// The PP resource linking (normally done by PP Linker (but
 				// without documentation association)
@@ -681,7 +671,7 @@ public class PPDiagnosticsRunner {
 	 * Perform an equals scan of exports (instead of using identity). (Pity that IEObjectDescription does not have an
 	 * equals method). For some reason some descriptions change identify (but are otherwise compatible) - don't know
 	 * why. TODO: Figure out what is going on.
-	 * 
+	 *
 	 * @param importingModuleDir
 	 * @param moduleDir
 	 * @param exports
@@ -716,7 +706,7 @@ public class PPDiagnosticsRunner {
 
 	/**
 	 * Must be called prior to calling any other methods. Creates an injector and sets things up.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void setUp(IValidationAdvisor.ComplianceLevel complianceLevel, IPotentialProblemsAdvisor problemsAdvisor)

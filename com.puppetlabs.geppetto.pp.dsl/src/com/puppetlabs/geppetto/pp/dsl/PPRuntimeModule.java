@@ -4,12 +4,26 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl;
 
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
+import org.eclipse.xtext.validation.CompositeEValidator;
+
+import com.google.inject.Provider;
+import com.google.inject.TypeLiteral;
+import com.google.inject.name.Names;
 import com.puppetlabs.geppetto.common.tracer.AbstractTracer.DefaultStringProvider;
 import com.puppetlabs.geppetto.common.tracer.DefaultTracer;
 import com.puppetlabs.geppetto.common.tracer.IStringProvider;
@@ -27,6 +41,7 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.ppformatting.PPIndentationInformation;
 import com.puppetlabs.geppetto.pp.dsl.serialization.PPValueSerializer;
+import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
 import com.puppetlabs.xtext.dommodel.DomModelUtils;
@@ -46,19 +61,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.debug.FormattingTracer;
 import com.puppetlabs.xtext.resource.ResourceAccess;
 import com.puppetlabs.xtext.resource.ResourceAccessScope;
 import com.puppetlabs.xtext.serializer.DomBasedSerializer;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.formatting.IIndentationInformation;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.parser.antlr.Lexer;
-import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
-import org.eclipse.xtext.validation.CompositeEValidator;
-
-import com.google.inject.TypeLiteral;
-import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -67,7 +69,7 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 
 	/**
 	 * Binds resource description strategy that binds parent data for inheritance
-	 * 
+	 *
 	 * @return
 	 */
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
@@ -96,7 +98,7 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 
 	/**
 	 * Handles creation of QualifiedNames for referenceable PP model elements.
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.AbstractPPRuntimeModule#bindIQualifiedNameProvider()
 	 */
 	@Override
@@ -107,7 +109,7 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 	/**
 	 * Binds a resource description manager version that provides a resource description
 	 * that takes specially imported names into account.
-	 * 
+	 *
 	 * @return
 	 */
 	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
@@ -200,7 +202,7 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 
 	/**
 	 * Configures the {@code ResourceAccessScope}.
-	 * 
+	 *
 	 */
 	public void configureResourceContext(com.google.inject.Binder binder) {
 		final ResourceAccessScope resourceAccessScope = new ResourceAccessScope();
@@ -218,18 +220,18 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
-	public com.google.inject.Provider<PPOverridingLexer> providePPOverridingLexer() {
+	public Provider<PPOverridingLexer> providePPOverridingLexer() {
 		return org.eclipse.xtext.parser.antlr.LexerProvider.create(PPOverridingLexer.class);
 	}
 
 	/**
-	 * Bind a ValidationAdvisorProvider. This default implementation returns a 2.7 advisor, configured with
+	 * Bind a ValidationAdvisorProvider. This default implementation returns a 3.4 advisor, configured with
 	 * a DefaultPotentialProblemsAdvisor.
-	 * 
+	 *
 	 * @return
 	 */
-	public com.google.inject.Provider<IValidationAdvisor> provideValidationAdvisor() {
-		return ValidationAdvisorProvider.create(IValidationAdvisor.ComplianceLevel.PUPPET_2_7);
+	public Provider<IValidationAdvisor> provideValidationAdvisor() {
+		return ValidationAdvisorProvider.create(PuppetTarget.getDefault().getComplianceLevel());
 	}
 
 }

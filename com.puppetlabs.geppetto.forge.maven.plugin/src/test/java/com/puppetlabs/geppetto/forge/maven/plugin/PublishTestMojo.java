@@ -52,7 +52,7 @@ public class PublishTestMojo extends AbstractForgeTestMojo {
 		catch(MojoFailureException e) {
 			Throwable t = e.getCause();
 			assertTrue("Exception cause is not the right class", t instanceof HttpResponseException);
-			assertTrue("Wrong owner not detected correctly", t.getMessage().contains("Forbidden"));
+			assertContains("Wrong owner not detected correctly", "Forbidden", t);
 		}
 	}
 }

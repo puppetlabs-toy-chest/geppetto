@@ -25,7 +25,7 @@ import com.puppetlabs.geppetto.common.annotations.Nullable;
 import com.puppetlabs.geppetto.common.os.StreamUtil;
 import com.puppetlabs.geppetto.forge.Cache;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.forge.util.Checksums;
+import com.puppetlabs.geppetto.forge.util.ChecksumUtils;
 import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.forge.v2.service.ReleaseService;
 import com.puppetlabs.geppetto.semver.Version;
@@ -67,7 +67,7 @@ class CacheImpl implements Cache {
 			if(bld.charAt(last) == '_')
 				bld.setLength(last);
 			bld.append('-');
-			Checksums.appendSHA1(bld, apiV2URL);
+			ChecksumUtils.appendSHA1(bld, apiV2URL);
 			cacheKey = bld.toString();
 		}
 		return cacheKey;

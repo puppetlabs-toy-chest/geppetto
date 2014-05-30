@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -13,18 +13,6 @@ package com.puppetlabs.geppetto.ui.wizard;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import com.puppetlabs.geppetto.common.Strings;
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.forge.Forge;
-import com.puppetlabs.geppetto.forge.ForgeService;
-import com.puppetlabs.geppetto.forge.client.OAuthModule;
-import com.puppetlabs.geppetto.forge.model.Metadata;
-import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.forge.util.Checksums;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
-import com.puppetlabs.geppetto.ui.UIPlugin;
-import com.puppetlabs.geppetto.ui.wizard.ModuleExportOperation.ExportSpec;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -52,6 +40,17 @@ import org.eclipse.ui.internal.wizards.datatransfer.DataTransferMessages;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.puppetlabs.geppetto.common.Strings;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.forge.Forge;
+import com.puppetlabs.geppetto.forge.ForgeService;
+import com.puppetlabs.geppetto.forge.client.OAuthModule;
+import com.puppetlabs.geppetto.forge.model.Metadata;
+import com.puppetlabs.geppetto.forge.model.ModuleName;
+import com.puppetlabs.geppetto.forge.util.ChecksumUtils;
+import com.puppetlabs.geppetto.module.dsl.ui.preferences.ModulePreferencesHelper;
+import com.puppetlabs.geppetto.ui.UIPlugin;
+import com.puppetlabs.geppetto.ui.wizard.ModuleExportOperation.ExportSpec;
 
 public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 
@@ -254,7 +253,7 @@ public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 				for(ExportSpec spec : getExportSpecs(whiteCheckedResources)) {
 					try {
 						Metadata md = getForge().createFromModuleDirectory(
-							spec.getModuleRoot(), false, spec.getFileFilter(), null, diag);
+							spec.getModuleRoot(), spec.getFileFilter(), null, diag);
 						if(md != null) {
 							ModuleName name = md.getName();
 							if(owner == null)
@@ -303,7 +302,7 @@ public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 	private static final String FORGE_CLIENT_SECRET = "2227c9a7392382f58b5e4d084b705827cb574673ff7d2a5905ef21685fd48e40";
 
 	@Inject
-	private PPPreferencesHelper preferenceHelper;
+	private ModulePreferencesHelper preferenceHelper;
 
 	private static final String STORE_LOGIN = "ModuleExportToForgeWizardPage.STORE_LOGIN"; //$NON-NLS-1$
 
@@ -328,7 +327,7 @@ public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 		bld.append("/Puppetforge Credentials/"); //$NON-NLS-1$
 		bld.append(login);
 		bld.append('/');
-		Checksums.appendSHA1(bld, host);
+		ChecksumUtils.appendSHA1(bld, host);
 		return preferences.node(bld.toString());
 	}
 

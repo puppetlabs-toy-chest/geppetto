@@ -11,7 +11,7 @@
 package com.puppetlabs.geppetto.graph;
 
 import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.Export;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 
 /**
  * Produces HREFs in the form of javascript function calls.

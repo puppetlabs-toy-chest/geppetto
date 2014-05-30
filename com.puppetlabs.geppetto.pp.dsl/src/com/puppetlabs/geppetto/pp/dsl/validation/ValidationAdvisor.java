@@ -4,13 +4,12 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.validation;
 
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 
 public class ValidationAdvisor {
 
@@ -40,11 +39,6 @@ public class ValidationAdvisor {
 		@Override
 		public ValidationPreference caseDefaultShouldAppearLast() {
 			return problemsAdvisor.caseDefaultShouldAppearLast();
-		}
-
-		@Override
-		public ValidationPreference circularDependencyPreference() {
-			return problemsAdvisor.circularDependencyPreference();
 		}
 
 		@Override
@@ -100,7 +94,7 @@ public class ValidationAdvisor {
 
 	/**
 	 * Validation Advisor for Puppet 2.6
-	 * 
+	 *
 	 */
 	public static class ValidationAdvisor_2_6 extends BaseValidationAdvisor implements IValidationAdvisor {
 		/**
@@ -232,7 +226,7 @@ public class ValidationAdvisor {
 
 	/**
 	 * Validation Advisor for Puppet 2.7
-	 * 
+	 *
 	 */
 	public static class ValidationAdvisor_2_7 extends ValidationAdvisor_2_6 implements IValidationAdvisor {
 
@@ -276,7 +270,7 @@ public class ValidationAdvisor {
 
 	/**
 	 * Validation Advisor for Puppet 3.0
-	 * 
+	 *
 	 */
 	public static class ValidationAdvisor_3_0 extends ValidationAdvisor_2_7 implements IValidationAdvisor {
 		/**
@@ -385,23 +379,4 @@ public class ValidationAdvisor {
 			return true;
 		}
 	}
-
-	public static IValidationAdvisor create(ComplianceLevel level, IPotentialProblemsAdvisor problemsAdvisor) {
-		switch(level) {
-			case PUPPET_2_6:
-				return new ValidationAdvisor_2_6(problemsAdvisor);
-			case PUPPET_2_7:
-				return new ValidationAdvisor_2_7(problemsAdvisor);
-			case PUPPET_3_0:
-				return new ValidationAdvisor_3_0(problemsAdvisor);
-			case PUPPET_3_2:
-				return new ValidationAdvisor_3_2(problemsAdvisor);
-			case PUPPET_3_4:
-				return new ValidationAdvisor_3_4(problemsAdvisor);
-			case PUPPET_FUTURE:
-				return new ValidationAdvisor_3_4_future(problemsAdvisor);
-		}
-		throw new IllegalArgumentException("Unsupported compliance level");
-	}
-
 }

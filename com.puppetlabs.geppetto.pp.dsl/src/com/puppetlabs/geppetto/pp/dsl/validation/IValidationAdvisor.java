@@ -4,27 +4,70 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.validation;
 
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_2_6;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_2_7;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_0;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_2;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_4;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_4_future;
+
 /**
  * An advisor to validation. Different implementations of this class capture the validation rules specific
  * to a language version.
- * 
+ *
  */
 public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public enum ComplianceLevel {
-		PUPPET_2_6("2.6"), PUPPET_2_7("2.7"), PUPPET_3_0("3.0"), PUPPET_3_2("3.2"), PUPPET_3_4("3.4"), PUPPET_FUTURE(
-				"Future");
+		PUPPET_2_6("2.6") {
+			@Override
+			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+				return new ValidationAdvisor_2_6(problemsAdvisor);
+			}
+		},
+		PUPPET_2_7("2.7") {
+			@Override
+			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+				return new ValidationAdvisor_2_7(problemsAdvisor);
+			}
+		},
+		PUPPET_3_0("3.0") {
+			@Override
+			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+				return new ValidationAdvisor_3_0(problemsAdvisor);
+			}
+		},
+		PUPPET_3_2("3.2") {
+			@Override
+			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+				return new ValidationAdvisor_3_2(problemsAdvisor);
+			}
+		},
+		PUPPET_3_4("3.4") {
+			@Override
+			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+				return new ValidationAdvisor_3_4(problemsAdvisor);
+			}
+		},
+		PUPPET_FUTURE("Future") {
+			@Override
+			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+				return new ValidationAdvisor_3_4_future(problemsAdvisor);
+			}
+		};
 
 		private final String label;
 
 		private ComplianceLevel(String label) {
 			this.label = label;
 		}
+
+		public abstract IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor);
 
 		@Override
 		public String toString() {
@@ -62,7 +105,7 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 
 	/**
 	 * Before 3.2 modulo operator '%' was not supported.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean allowModulo();
@@ -80,7 +123,7 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 
 	/**
 	 * The "unless" statement was added in Puppet 3.0.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean allowUnless();
@@ -92,14 +135,14 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 
 	/**
 	 * Prior to 2.7 it was not possible to use unquoted qualified resource names.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean allowUnquotedQualifiedResourceNames();
 
 	/**
 	 * Prior to version 2.7.8, an optional end comma in a definition argument list causes parse exception.
-	 * 
+	 *
 	 * @return
 	 */
 	public ValidationPreference definitionArgumentListEndComma();
@@ -119,7 +162,7 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 
 	/**
 	 * Prior to 2.7 (?) it was not possible to have case labels with a ".".
-	 * 
+	 *
 	 * @return
 	 */
 	public ValidationPreference periodInCase();

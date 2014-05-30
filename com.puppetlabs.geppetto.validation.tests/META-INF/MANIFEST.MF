@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.puppetlabs.geppetto.validation.tests;singleton:=true
-Bundle-Version: 4.1.1.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -13,6 +13,7 @@ Require-Bundle: org.eclipse.xtext,
  com.puppetlabs.geppetto.ruby,
  com.puppetlabs.geppetto.forge,
  com.puppetlabs.geppetto.forge.api,
+ com.puppetlabs.geppetto.module.dsl;bundle-version="4.2.0",
  com.puppetlabs.geppetto.catalog,
  com.puppetlabs.geppetto.diagnostic,
  com.puppetlabs.geppetto.common,

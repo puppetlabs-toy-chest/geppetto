@@ -10,21 +10,21 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.validation.FileType;
-import com.puppetlabs.geppetto.validation.IValidationConstants;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
-import com.puppetlabs.geppetto.validation.ValidationService;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.ClassDescription;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.Export;
-import com.puppetlabs.geppetto.validation.runner.BuildResult;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.module.dsl.validation.ModuleDiagnostics;
+import com.puppetlabs.geppetto.validation.FileType;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
+import com.puppetlabs.geppetto.validation.ValidationService;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState.ClassDescription;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
+import com.puppetlabs.geppetto.validation.runner.BuildResult;
 
 public class TestNodeHandling extends AbstractValidationTest {
 
@@ -44,15 +44,15 @@ public class TestNodeHandling extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 		options.setSearchPath("modules/*:roles/production/*");
-		BuildResult buildResult = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 
 		// Without constraint that only things on path are validated - there should be two redefinition errors
 		//
 		assertEquals("There should be no errors", 0, countErrors(chain));
-		AllModuleReferences exports = buildResult.getAllModuleReferences();
+		AllModulesState exports = buildResult.getAllModuleReferences();
 		// dumpExports(exports);
 
-		Iterable<Export> visibleExports = exports.getVisibleExports(new File("roles/production/X"));
+		Iterable<Export> visibleExports = exports.getVisibleExports(new File("roles/production/x"));
 		Export exporteda = exports.findExportedClass("aclass", visibleExports);
 		assertNotNull("Should have found exported 'aclass'", exporteda);
 		Export exportedb = exports.findExportedClass("bclass", visibleExports);
@@ -65,7 +65,7 @@ public class TestNodeHandling extends AbstractValidationTest {
 		assertEquals("Should have one parameter", 1, Iterables.size(paramsForA));
 
 		// Test new API as well
-		List<AllModuleReferences.ClassDescription> classes = exports.getClassDescriptions(visibleExports);
+		List<AllModulesState.ClassDescription> classes = exports.getClassDescriptions(visibleExports);
 		Map<String, ClassDescription> classMap = Maps.newHashMap();
 		for(ClassDescription cd : classes)
 			classMap.put(cd.getExportedClass().getName(), cd);
@@ -88,7 +88,7 @@ public class TestNodeHandling extends AbstractValidationTest {
 	 * Tests that role X (with declares a dependency on module A, which has a
 	 * transitive dependency on B) can see functions afunc and bfunc, but not
 	 * cfunc.
-	 * 
+	 *
 	 * Use a path that reveals two versions of the role X.
 	 */
 	@Test
@@ -102,7 +102,7 @@ public class TestNodeHandling extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 		// options.setSearchPath("modules/*:roles/production/*");
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 
 		// Without constraint that only things on path are validated - there should be two redefinition errors
 		//
@@ -110,7 +110,7 @@ public class TestNodeHandling extends AbstractValidationTest {
 		int count = 0;
 		for(Diagnostic d : children)
 			if(d.getSeverity() >= Diagnostic.ERROR) {
-				assertEquals(IValidationConstants.ISSUE__MODULEFILE_REDEFINITION, d.getIssue());
+				assertEquals(ModuleDiagnostics.ISSUE__MODULE_REDEFINITION, d.getIssue());
 				++count;
 			}
 		assertEquals("There should be two errors", 2, count);
@@ -131,10 +131,11 @@ public class TestNodeHandling extends AbstractValidationTest {
 		options.setCheckModuleSemantics(true);
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
-		BuildResult buildResult = vs.validate(chain, root, options, null, SubMonitor.convert(null));
-		AllModuleReferences exports = buildResult.getAllModuleReferences();
+		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
+		AllModulesState exports = buildResult.getAllModuleReferences();
+		assertNotNull("Should have found exported references", exports);
 
-		Iterable<Export> visibleExports = exports.getVisibleExports(new File("roles/X"));
+		Iterable<Export> visibleExports = exports.getVisibleExports(new File("roles/x"));
 		Export exporteda = exports.findExportedClass("aclass", visibleExports);
 		assertNotNull("Should have found exported 'aclass'", exporteda);
 		Export exportedb = exports.findExportedClass("b::bclass", visibleExports);
@@ -168,11 +169,11 @@ public class TestNodeHandling extends AbstractValidationTest {
 		options.setCheckModuleSemantics(true);
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
-		BuildResult buildResult = vs.validate(chain, root, options, null, SubMonitor.convert(null));
-		AllModuleReferences exports = buildResult.getAllModuleReferences();
+		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
+		AllModulesState exports = buildResult.getAllModuleReferences();
 		// dumpExports(exports);
 
-		Iterable<Export> visibleExports = exports.getVisibleExports(new File("roles/X"));
+		Iterable<Export> visibleExports = exports.getVisibleExports(new File("roles/x"));
 		Export exporteda = exports.findExportedClass("aclass", visibleExports);
 		assertNotNull("Should have found exported 'aclass'", exporteda);
 		Export exportedb = exports.findExportedClass("bclass", visibleExports);
@@ -185,7 +186,7 @@ public class TestNodeHandling extends AbstractValidationTest {
 		assertEquals("Should have one parameter", 1, Iterables.size(paramsForA));
 
 		// Test new API as well
-		List<AllModuleReferences.ClassDescription> classes = exports.getClassDescriptions(visibleExports);
+		List<AllModulesState.ClassDescription> classes = exports.getClassDescriptions(visibleExports);
 		Map<String, ClassDescription> classMap = Maps.newHashMap();
 		for(ClassDescription cd : classes)
 			classMap.put(cd.getExportedClass().getName(), cd);

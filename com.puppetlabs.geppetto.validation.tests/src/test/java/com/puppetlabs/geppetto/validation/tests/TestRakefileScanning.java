@@ -6,6 +6,11 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.SubMonitor;
+import org.junit.Test;
+
+import com.google.common.collect.Lists;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
 import com.puppetlabs.geppetto.validation.ValidationService;
@@ -13,11 +18,6 @@ import com.puppetlabs.geppetto.validation.runner.BuildResult;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Rakefile;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Raketask;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.SubMonitor;
-import org.junit.Test;
-
-import com.google.common.collect.Lists;
 
 public class TestRakefileScanning extends AbstractValidationTest {
 
@@ -37,7 +37,7 @@ public class TestRakefileScanning extends AbstractValidationTest {
 
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		BuildResult result = vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		assertTrue(
 			"CONFIGURATION ERROR:: Configuration should include ruby services!!", result.isRubyServicesAvailable());
 	}
@@ -57,7 +57,7 @@ public class TestRakefileScanning extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/simple/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		BuildResult result = vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertAll(asserter.issue(IPPDiagnostics.ISSUE__STRING_BOOLEAN).optional().greedy());
 
@@ -78,7 +78,7 @@ public class TestRakefileScanning extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/withcode/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		BuildResult result = vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertAll(asserter.issue(IPPDiagnostics.ISSUE__STRING_BOOLEAN).optional().greedy());
 
@@ -101,7 +101,7 @@ public class TestRakefileScanning extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/fromJenkinsModule/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		BuildResult result = vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertAll(asserter.issue(IPPDiagnostics.ISSUE__STRING_BOOLEAN).optional().greedy());
 
@@ -128,7 +128,7 @@ public class TestRakefileScanning extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/twice/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		BuildResult result = vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertAll(asserter.issue(IPPDiagnostics.ISSUE__STRING_BOOLEAN).optional().greedy());
 

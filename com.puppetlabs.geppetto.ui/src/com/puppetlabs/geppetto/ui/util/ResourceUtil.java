@@ -4,20 +4,17 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.ui.util;
 
 import static com.puppetlabs.geppetto.forge.Forge.METADATA_JSON_NAME;
-import static com.puppetlabs.geppetto.forge.Forge.MODULEFILE_NAME;
 
 import java.io.File;
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
-import com.puppetlabs.geppetto.ui.UIPlugin;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -40,6 +37,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+
+import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
+import com.puppetlabs.geppetto.ui.UIPlugin;
 
 public class ResourceUtil {
 
@@ -142,13 +142,12 @@ public class ResourceUtil {
 	}
 
 	protected static boolean isMetadata(IFile file) {
-		String name = file.getName();
-		return MODULEFILE_NAME.equals(name) || METADATA_JSON_NAME.equals(name);
+		return METADATA_JSON_NAME.equals(file.getName());
 	}
 
 	public static void openEditor(IFile file) throws PartInitException {
 		openEditor(file, isMetadata(file)
-				? "com.puppetlabs.geppetto.ui.moduleMetadataEditor" //$NON-NLS-1$
+				? "com.puppetlabs.geppetto.module.dsl.Metadata" //$NON-NLS-1$
 				: "com.puppetlabs.geppetto.pp.dsl.Puppet"); //$NON-NLS-1$
 	}
 

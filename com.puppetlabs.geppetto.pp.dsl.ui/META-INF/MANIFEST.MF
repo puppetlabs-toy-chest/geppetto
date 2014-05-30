@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-Version: 4.1.1.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-SymbolicName: com.puppetlabs.geppetto.pp.dsl.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.common.base;version="12.0.0",
@@ -104,6 +104,7 @@ Import-Package: com.google.common.base;version="12.0.0",
  org.eclipse.ui.handlers,
  org.eclipse.ui.ide,
  org.eclipse.ui.internal,
+ org.eclipse.ui.internal.dialogs,
  org.eclipse.ui.internal.editors.text,
  org.eclipse.ui.part,
  org.eclipse.ui.plugin,
@@ -142,6 +143,7 @@ Import-Package: com.google.common.base;version="12.0.0",
  org.eclipse.xtext.ui.editor.contentassist,
  org.eclipse.xtext.ui.editor.contentassist.antlr,
  org.eclipse.xtext.ui.editor.contentassist.antlr.internal,
+ org.eclipse.xtext.ui.editor.copyqualifiedname,
  org.eclipse.xtext.ui.editor.findrefs,
  org.eclipse.xtext.ui.editor.folding,
  org.eclipse.xtext.ui.editor.formatting,
@@ -206,7 +208,7 @@ Export-Package: com.puppetlabs.geppetto.pp.dsl.ui;
    org.eclipse.xtext.nodemodel,
    com.puppetlabs.xtext.dommodel.formatter",
  com.puppetlabs.geppetto.pp.dsl.ui.contentassist;uses:="org.eclipse.xtext,org.eclipse.emf.ecore,org.eclipse.xtext.ui.editor.contentassist",
- com.puppetlabs.geppetto.pp.dsl.ui.internal;x-friends:="com.puppetlabs.geppetto.ui",
+ com.puppetlabs.geppetto.pp.dsl.ui.internal;x-friends:="com.puppetlabs.geppetto.ui,com.puppetlabs.geppetto.module.dsl.ui",
  com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz;uses:="org.eclipse.jface.resource,org.eclipse.jface.viewers",
  com.puppetlabs.geppetto.pp.dsl.ui.pptp;
   uses:="org.eclipse.core.runtime,
@@ -227,4 +229,5 @@ Export-Package: com.puppetlabs.geppetto.pp.dsl.ui;
    org.eclipse.core.resources,
    org.eclipse.jface.util,
    com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors,
-   org.eclipse.xtext.ui.editor.preferences"
+   org.eclipse.xtext.ui.editor.preferences",
+ com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors

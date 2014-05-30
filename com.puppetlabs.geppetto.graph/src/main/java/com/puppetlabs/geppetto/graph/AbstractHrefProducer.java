@@ -13,7 +13,7 @@ package com.puppetlabs.geppetto.graph;
 import java.io.File;
 
 import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.Export;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 import com.puppetlabs.geppetto.validation.runner.MetadataInfo;
 
 import org.eclipse.core.runtime.IPath;

@@ -4,62 +4,12 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.ui;
 
-import com.puppetlabs.geppetto.common.tracer.AbstractTracer.DefaultStringProvider;
-import com.puppetlabs.geppetto.common.tracer.DefaultTracer;
-import com.puppetlabs.geppetto.common.tracer.IStringProvider;
-import com.puppetlabs.geppetto.common.tracer.ITracer;
-import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice;
-import com.puppetlabs.geppetto.pp.dsl.formatting.PPCommentConfiguration;
-import com.puppetlabs.geppetto.pp.dsl.lexer.PPOverridingLexer;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.builder.NatureAddingEditorCallback;
-import com.puppetlabs.geppetto.pp.dsl.ui.builder.PPModuleMetadataBuilder;
-import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPHighlightConfiguration;
-import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPSemanticHighlightingCalculator;
-import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPTokenToAttributeIdMapper;
-import com.puppetlabs.geppetto.pp.dsl.ui.container.PPWorkspaceProjectsStateProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.contentassist.PPContentAssistLexer;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.PPSourceViewerConfiguration;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.actions.SaveActions;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.autoedit.PPEditStrategyProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.autoedit.PPTokenTypeToPartionMapper;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.folding.PPFoldingRegionProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.hover.PPDocumentationProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.hover.PPHoverProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.hyperlinking.PPHyperlinkHelper;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.model.PPPartitionTokenScanner;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.toggleComments.PPSingleLineCommentHelper;
-import com.puppetlabs.geppetto.pp.dsl.ui.formatting.ResourceIBreakAndAlignAdviceProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.formatting.ResourceICommentFormatterAdviceProviders;
-import com.puppetlabs.geppetto.pp.dsl.ui.formatting.ResourceIIndentationInformationProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.formatting.ResourceIPreferredWidthInformationProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.linked.ExtLinkedXtextEditor;
-import com.puppetlabs.geppetto.pp.dsl.ui.linked.IExtXtextEditorCustomizer;
-import com.puppetlabs.geppetto.pp.dsl.ui.linked.ISaveActions;
-import com.puppetlabs.geppetto.pp.dsl.ui.linked.PPEditorCustomizer;
-import com.puppetlabs.geppetto.pp.dsl.ui.linking.PPUISearchPathProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.outline.PPLocationInFileProvider;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.BreakAndAlignPreferences;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.CommentPreferences;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.FormatterGeneralPreferences;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.PPPreferenceStoreAccess;
-import com.puppetlabs.geppetto.pp.dsl.ui.resource.PPResource;
-import com.puppetlabs.geppetto.pp.dsl.ui.resource.PPResourceFactory;
-import com.puppetlabs.geppetto.pp.dsl.ui.validation.PreferenceBasedPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.ui.validation.PreferenceBasedValidationAdvisorProvider;
-import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
-import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice;
-import com.puppetlabs.xtext.formatting.IPreferredMaxWidthInformation;
-import com.puppetlabs.xtext.ui.editor.formatting.ContentFormatterFactory;
-import com.puppetlabs.xtext.ui.editor.formatting.ResourceILineSeparatorProvider;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -89,7 +39,58 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.name.Names;
+import com.puppetlabs.geppetto.common.tracer.AbstractTracer.DefaultStringProvider;
+import com.puppetlabs.geppetto.common.tracer.DefaultTracer;
+import com.puppetlabs.geppetto.common.tracer.IStringProvider;
+import com.puppetlabs.geppetto.common.tracer.ITracer;
+import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice;
+import com.puppetlabs.geppetto.pp.dsl.formatting.PPCommentConfiguration;
+import com.puppetlabs.geppetto.pp.dsl.lexer.PPOverridingLexer;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.builder.NatureAddingEditorCallback;
+import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPHighlightConfiguration;
+import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPSemanticHighlightingCalculator;
+import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPTokenToAttributeIdMapper;
+import com.puppetlabs.geppetto.pp.dsl.ui.container.PPWorkspaceProjectsStateProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.contentassist.PPContentAssistLexer;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.PPSourceViewerConfiguration;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.actions.SaveActions;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.autoedit.PPEditStrategyProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.autoedit.PPTokenTypeToPartionMapper;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.folding.PPFoldingRegionProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.hover.PPDocumentationProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.hover.PPHoverProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.hyperlinking.PPHyperlinkHelper;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.model.PPPartitionTokenScanner;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.toggleComments.PPSingleLineCommentHelper;
+import com.puppetlabs.geppetto.pp.dsl.ui.formatting.ResourceIBreakAndAlignAdviceProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.formatting.ResourceICommentFormatterAdviceProviders;
+import com.puppetlabs.geppetto.pp.dsl.ui.formatting.ResourceIIndentationInformationProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.formatting.ResourceIPreferredWidthInformationProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.linked.ExtLinkedXtextEditor;
+import com.puppetlabs.geppetto.pp.dsl.ui.linked.IExtXtextEditorCustomizer;
+import com.puppetlabs.geppetto.pp.dsl.ui.linked.ISaveActions;
+import com.puppetlabs.geppetto.pp.dsl.ui.linked.PPEditorCustomizer;
+import com.puppetlabs.geppetto.pp.dsl.ui.linking.PPUISearchPathProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.outline.PPLocationInFileProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelperProvider;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.BreakAndAlignPreferences;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.CommentPreferences;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.FormatterGeneralPreferences;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.PPPreferenceStoreAccess;
+import com.puppetlabs.geppetto.pp.dsl.ui.resource.PPResource;
+import com.puppetlabs.geppetto.pp.dsl.ui.resource.PPResourceFactory;
+import com.puppetlabs.geppetto.pp.dsl.ui.validation.PreferenceBasedPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.ui.validation.PreferenceBasedValidationAdvisorProvider;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
+import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice;
+import com.puppetlabs.xtext.formatting.IPreferredMaxWidthInformation;
+import com.puppetlabs.xtext.ui.editor.formatting.ContentFormatterFactory;
+import com.puppetlabs.xtext.ui.editor.formatting.ResourceILineSeparatorProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -155,7 +156,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	 * as part of the linking process. This is not suitable for use in the UI, where the PPResource is
 	 * instead taking over the responsibility. <br/>
 	 * Overrides the default runtime module's binding
-	 * 
+	 *
 	 * @see #bindIResourceFactory()
 	 */
 	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
@@ -166,7 +167,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	 * Add specialization that selects better "significant part" per semantic object than the default.
 	 * (This is used when a location in a file is wanted for selection when opening the file and there is a reference
 	 * to the object - which of each features / text should be selected).
-	 * 
+	 *
 	 */
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return PPLocationInFileProvider.class;
@@ -188,7 +189,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	/**
 	 * This is an override of the runtime module's configuration as the UI should use PPResource instead of
 	 * LazyLinkingResource for PP linking to work correctly with the global build index.
-	 * 
+	 *
 	 */
 	public Class<? extends IResourceFactory> bindIResourceFactory() {
 		return PPResourceFactory.class;
@@ -233,10 +234,6 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 		return NatureAddingEditorCallback.class;
 	}
 
-	public Class<? extends PPModuleMetadataBuilder> bindModulefileBuilder() {
-		return PPModuleMetadataBuilder.class;
-	}
-
 	public Class<? extends ISearchPathProvider> bindSearchPathProvider() {
 		return PPUISearchPathProvider.class;
 	}
@@ -255,7 +252,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	/**
 	 * Override that injects a wrapper for the external lexer used by the main parser.
 	 * contributed by org.eclipse.xtext.generator.parser.antlr.ex.ca.ContentAssistParserGeneratorFragment.
-	 * 
+	 *
 	 * Without this override, a default generated lexer will be used and this lexer will not be correct as
 	 * PP parsing requires an external lexer. The binding reuses the main lexer.
 	 */
@@ -280,15 +277,12 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 
 	public void configureDebugTracing(com.google.inject.Binder binder) {
 		binder.bind(IStringProvider.class).to(DefaultStringProvider.class);
-		binder.bind(ITracer.class).annotatedWith(Names.named(PPUiConstants.DEBUG_OPTION_MODULEFILE)).toInstance(
-			new DefaultTracer(PPUiConstants.DEBUG_OPTION_MODULEFILE));
 		binder.bind(ITracer.class).annotatedWith(Names.named(PPUiConstants.DEBUG_OPTION_PARSER)).toInstance(
 			new DefaultTracer(PPUiConstants.DEBUG_OPTION_PARSER));
 	}
 
 	public void configureDefaultPreferences(Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("PPPreferencesHelper")) //$NON-NLS-1$
-		.to(PPPreferencesHelper.class);
+		binder.bind(PPPreferencesHelper.class).toProvider(PPPreferencesHelperProvider.class);
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("FormatterGeneralPreferences")) //$NON-NLS-1$
 		.to(FormatterGeneralPreferences.class);
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("CommentPreferences")) //$NON-NLS-1$
@@ -349,7 +343,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	 * Deal with dependency on JDT (not wanted).
 	 */
 	@Override
-	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
+	public Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		// return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
 		return new PPWorkspaceProjectsStateProvider();
 	}
@@ -357,7 +351,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	/**
 	 * A Provider of validation compliance based on preferences.
 	 */
-	public com.google.inject.Provider<IValidationAdvisor> provideValidationAdvisor() {
+	public Provider<IValidationAdvisor> provideValidationAdvisor() {
 		return PreferenceBasedValidationAdvisorProvider.create();
 	}
 

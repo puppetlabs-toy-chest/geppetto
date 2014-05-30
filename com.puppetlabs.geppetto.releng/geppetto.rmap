@@ -2,7 +2,7 @@
 <rm:rmap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:maven="http://www.eclipse.org/buckminster/MavenProvider-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   <rm:property key="puppetlabs.github.prefix" value="git://github.com/puppetlabs"/>
   <rm:property key="git.clones.root" value="${user.home}/git"/>
-  <rm:property key="svn.connectors.repository.url" value="http://community.polarion.com/projects/subversive/download/eclipse/3.0/kepler-site/"/>
+  <rm:property key="svn.connectors.repository.url" value="http://community.polarion.com/projects/subversive/download/eclipse/4.0/update-site/"/>
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
   <rm:property key="geppetto.clone" value="geppetto"/>
   <rm:locator pattern="^com\.puppetlabs\.geppetto\.parent$" searchPathRef="geppetto-parent"/>
@@ -14,9 +14,9 @@
   <rm:locator pattern="^com\.fasterxml\.jackson(\..+)?$" searchPathRef="maven.central"/>
   <rm:locator pattern="^org\.jruby(\..+)?$" searchPathRef="maven.central"/>
   <rm:locator pattern="^org\.apache\.commons\.compress(\..+)?$" searchPathRef="maven.central" failOnError= "false"/>
-  <rm:locator searchPathRef="orbit" failOnError="false"/>
   <rm:locator searchPathRef="platform" failOnError="false"/>
-  <rm:locator searchPathRef="kepler" failOnError="false"/>
+  <rm:locator searchPathRef="luna" failOnError="false"/>
+  <rm:locator searchPathRef="orbit" failOnError="false"/>
   <rm:searchPath name="geppetto-parent">
     <rm:provider componentTypes="buckminster" readerType="git">
       <rm:property key="git.remote.uri" value="${puppetlabs.github.prefix}/geppetto.git"/>
@@ -95,16 +95,16 @@
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/eclipse/updates/4.3">
+      <rm:uri format="{0}/eclipse/updates/4.4">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
-  <rm:searchPath name="kepler">
+  <rm:searchPath name="luna">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/releases/kepler">
+      <rm:uri format="{0}/releases/luna">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
@@ -113,7 +113,7 @@
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/tools/orbit/downloads/drops/R20140114142710/repository">
+      <rm:uri format="{0}/tools/orbit/downloads/drops/R20140525021250/repository">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>

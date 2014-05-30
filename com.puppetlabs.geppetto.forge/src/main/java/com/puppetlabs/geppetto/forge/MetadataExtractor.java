@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -24,7 +24,7 @@ import com.puppetlabs.geppetto.forge.model.Metadata;
 public interface MetadataExtractor {
 	/**
 	 * Checks if the files needed to extract metadata are present.
-	 * 
+	 *
 	 * @param moduleDirectory
 	 * @param filter
 	 *            The filter that is used by the scan.
@@ -36,7 +36,7 @@ public interface MetadataExtractor {
 	 * Determines the order in which extractors will be consulted. The &quot;metadata.json&quot; extractor
 	 * will have a cardinal of 20, the Modulefile extractor has a cardinal of 10.
 	 * Please allow for gaps when implementing new extractors.
-	 * 
+	 *
 	 * @return The cardinal for this extractor.
 	 */
 	int getCardinal();
@@ -44,28 +44,16 @@ public interface MetadataExtractor {
 	/**
 	 * Returns the relative path of the file that this extractor will attempt to use as the primary source
 	 * for metadata extraction.
-	 * 
+	 *
 	 * @return The abstract file name, relative to the expected module directory.
 	 */
 	String getPrimarySource();
 
 	/**
-	 * The &quot;metadata.json&quot; extractor will responde <code>true</code> to this method. The
-	 * &quot;Modulefile&quot; extractor will respond <code>false</code> since that file doesn't contain
-	 * information about types and providers.
-	 * 
-	 * @return <code>true</code> to denote that the primary source for extraction contains type and provider
-	 *         information.
-	 */
-	boolean hasTypesAndProviders();
-
-	/**
 	 * Extracts metadata from the given module.
-	 * 
+	 *
 	 * @param moduleDir
 	 *            The module directory
-	 * @param includeTypesAndChecksums
-	 *            If set, analyze all types in and generated checksums
 	 * @param filter
 	 *            The filter that is used by the scan.
 	 * @param extractedFrom
@@ -79,6 +67,6 @@ public interface MetadataExtractor {
 	 * @throws IOException
 	 *             if extraction failed
 	 */
-	Metadata parseMetadata(File moduleDir, boolean includeTypesAndChecksums, FileFilter filter, File[] extractedFrom,
-			Diagnostic result) throws IOException;
+	Metadata parseMetadata(File moduleDir, FileFilter filter, File[] extractedFrom, Diagnostic result)
+			throws IOException;
 }

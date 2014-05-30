@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,6 +33,7 @@ import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Metadata;
+import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
@@ -80,8 +81,8 @@ public class Validate extends AbstractForgeServiceMojo {
 	 * An advisor to validation. Different implementations of this class capture the validation rules specific
 	 * to a puppet language version.
 	 */
-	@Parameter(property = "forge.validation.complianceLevel", defaultValue = "PUPPET_2_7")
-	private ComplianceLevel complianceLevel = ComplianceLevel.PUPPET_2_7;
+	@Parameter(property = "forge.validation.complianceLevel", defaultValue = "PUPPET_3_4")
+	private ComplianceLevel complianceLevel = PuppetTarget.getDefault().getComplianceLevel();
 
 	/**
 	 * What environment to use during validation.
@@ -134,12 +135,6 @@ public class Validate extends AbstractForgeServiceMojo {
 	 */
 	@Parameter(property = "forge.validation.caseDefaultShouldAppearLast", defaultValue = "IGNORE")
 	private ValidationPreference caseDefaultShouldAppearLast = IGNORE;
-
-	/**
-	 * How should circular module dependencies be reported (ignore, warning, error).
-	 */
-	@Parameter(property = "forge.validation.circularDependencyPreference", defaultValue = "WARNING")
-	private ValidationPreference circularDependencyPreference = WARNING;
 
 	/**
 	 * How to validate a dq string - style guide says single quoted should be used if possible.
@@ -205,11 +200,146 @@ public class Validate extends AbstractForgeServiceMojo {
 	/**
 	 * A list of {@link PuppetLintRunner.Option Option} declarations that controls the behavior
 	 * of the puppetlint gem.
-	 * 
+	 *
 	 * @See {@link #enablePuppetLintValidation}
 	 */
 	@Parameter(property = "forge.lint.options")
 	private PuppetLintRunner.Option[] puppetLintOptions;
+
+	/**
+	 * How should circular module dependencies be reported
+	 */
+	@Parameter(property = "forge.validation.circularDependency", defaultValue = "WARNING")
+	private ValidationPreference circularDependency = WARNING;
+
+	/**
+	 * How should version ranges that doesn't match the target version be reported
+	 */
+	@Parameter(property = "forge.validation.dependencyVersionMismatch", defaultValue = "WARNING")
+	private ValidationPreference dependencyVersionMismatch = WARNING;
+
+	/**
+	 * How should deprecated keys be reported
+	 */
+	@Parameter(property = "forge.validation.deprecatedKey", defaultValue = "WARNING")
+	private ValidationPreference deprecatedKey = WARNING;
+
+	/**
+	 * How should empty or missing fields required by Puppet Forge be reported
+	 */
+	@Parameter(property = "forge.validation.missingForgeRequiredFields", defaultValue = "WARNING")
+	private ValidationPreference missingForgeRequiredFields = WARNING;
+
+	/**
+	 * How should ModuleNames that contains upper cased characters or owner that start with a digit be reported
+	 */
+	@Parameter(property = "forge.validation.moduleNameNotStrict", defaultValue = "WARNING")
+	private ValidationPreference moduleNameNotStrict = WARNING;
+
+	/**
+	 * How should detection of multiple modules with the same name be reported
+	 */
+	@Parameter(property = "forge.validation.moduleRedefinition", defaultValue = "WARNING")
+	private ValidationPreference moduleRedefinition = WARNING;
+
+	/**
+	 * How should existence of the deprecated Modulefile be reported
+	 */
+	@Parameter(property = "forge.validation.modulefileExists", defaultValue = "IGNORE")
+	private ValidationPreference modulefileExists = IGNORE;
+
+	/**
+	 * How should existence of the deprecated Modulefile be reported in case the metadata.json is missing
+	 */
+	@Parameter(property = "forge.validation.modulefileExistsAndIsUsed", defaultValue = "WARNING")
+	private ValidationPreference modulefileExistsAndIsUsed = WARNING;
+
+	/**
+	 * How should submodule directories be reported
+	 */
+	@Parameter(property = "forge.validation.unexpectedSubmodule", defaultValue = "WARNING")
+	private ValidationPreference unexpectedSubmodule = WARNING;
+
+	/**
+	 * How should unrecognized keys be reported
+	 */
+	@Parameter(property = "forge.validation.unrecognizedKey", defaultValue = "WARNING")
+	private ValidationPreference unrecognizedKey = WARNING;
+
+	/**
+	 * How should unresolved references be reported
+	 */
+	@Parameter(property = "forge.validation.unresolvedReference", defaultValue = "WARNING")
+	private ValidationPreference unresolvedReference = WARNING;
+
+	/**
+	 * How should tags containing whitespace characters be reported
+	 */
+	@Parameter(property = "forge.validation.whitespaceInTag", defaultValue = "WARNING")
+	private ValidationPreference whitespaceInTag = WARNING;
+
+	private final IModuleValidationAdvisor moduleValidationAdvisor = new IModuleValidationAdvisor() {
+
+		@Override
+		public ValidationPreference getCircularDependency() {
+			return circularDependency;
+		}
+
+		@Override
+		public ValidationPreference getDependencyVersionMismatch() {
+			return dependencyVersionMismatch;
+		}
+
+		@Override
+		public ValidationPreference getDeprecatedKey() {
+			return deprecatedKey;
+		}
+
+		@Override
+		public ValidationPreference getMissingForgeRequiredFields() {
+			return missingForgeRequiredFields;
+		}
+
+		@Override
+		public ValidationPreference getModulefileExists() {
+			return modulefileExists;
+		}
+
+		@Override
+		public ValidationPreference getModulefileExistsAndIsUsed() {
+			return modulefileExistsAndIsUsed;
+		}
+
+		@Override
+		public ValidationPreference getModuleNameNotStrict() {
+			return moduleNameNotStrict;
+		}
+
+		@Override
+		public ValidationPreference getModuleRedefinition() {
+			return moduleRedefinition;
+		}
+
+		@Override
+		public ValidationPreference getUnexpectedSubmodule() {
+			return unexpectedSubmodule;
+		}
+
+		@Override
+		public ValidationPreference getUnrecognizedKey() {
+			return unrecognizedKey;
+		}
+
+		@Override
+		public ValidationPreference getUnresolvedReference() {
+			return unresolvedReference;
+		}
+
+		@Override
+		public ValidationPreference getWhitespaceInTag() {
+			return whitespaceInTag;
+		}
+	};
 
 	private final IPotentialProblemsAdvisor potentialProblemsAdvisor = new IPotentialProblemsAdvisor() {
 		@Override
@@ -230,11 +360,6 @@ public class Validate extends AbstractForgeServiceMojo {
 		@Override
 		public ValidationPreference caseDefaultShouldAppearLast() {
 			return caseDefaultShouldAppearLast;
-		}
-
-		@Override
-		public ValidationPreference circularDependencyPreference() {
-			return circularDependencyPreference;
 		}
 
 		@Override
@@ -316,17 +441,13 @@ public class Validate extends AbstractForgeServiceMojo {
 	private void geppettoValidation(Collection<File> moduleLocations, Diagnostic result) throws IOException {
 
 		Collection<File> importedModuleLocations = null;
-		List<Metadata> metadatas = new ArrayList<Metadata>();
-		for(File moduleRoot : moduleLocations) {
-			Metadata md = getModuleMetadata(moduleRoot, result);
-			if(md != null)
-				metadatas.add(md);
-		}
-
-		if(result.getSeverity() == Diagnostic.ERROR)
-			return;
-
 		if(checkModuleSemantics) {
+			List<Metadata> metadatas = new ArrayList<Metadata>();
+			for(File moduleRoot : moduleLocations) {
+				Metadata md = getModuleMetadata(moduleRoot, result);
+				if(md != null)
+					metadatas.add(md);
+			}
 			File importedModulesDir = new File(getBuildDir(), IMPORTED_MODULES_ROOT);
 			importedModuleLocations = getForge().downloadDependencies(metadatas, importedModulesDir, result);
 		}
@@ -336,10 +457,7 @@ public class Validate extends AbstractForgeServiceMojo {
 		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
 		ValidationOptions options = getValidationOptions(moduleLocations, importedModuleLocations);
 		new PPDiagnosticsSetup(complianceLevel, options.getProblemsAdvisor()).createInjectorAndDoEMFRegistration();
-
-		getValidationService().validate(
-			result, getModulesDir(), options,
-			importedModuleLocations.toArray(new File[importedModuleLocations.size()]), new NullProgressMonitor());
+		getValidationService().validate(result, options, getModulesDir(), new NullProgressMonitor());
 	}
 
 	@Override
@@ -356,7 +474,7 @@ public class Validate extends AbstractForgeServiceMojo {
 			searchPath.append(":" + getRelativePath(moduleLocation) + "/*");
 
 		for(File importedModuleLocation : importedModuleLocations)
-			searchPath.append(":" + getRelativePath(importedModuleLocation) + "/*");
+			searchPath.append(":" + importedModuleLocation.getPath() + "/*");
 		return searchPath.toString();
 	}
 
@@ -371,6 +489,7 @@ public class Validate extends AbstractForgeServiceMojo {
 			options.setFileType(FileType.MODULE_ROOT);
 		else
 			options.setFileType(FileType.PUPPET_ROOT);
+		options.setFileFilter(getFileFilter());
 		options.setPlatformURI(PuppetTarget.forComplianceLevel(complianceLevel, false).getPlatformURI());
 		options.setEncodingProvider(new IEncodingProvider() {
 			public String getEncoding(URI file) {
@@ -380,6 +499,7 @@ public class Validate extends AbstractForgeServiceMojo {
 
 		options.setSearchPath(getSearchPath(moduleLocations, importedModuleLocations));
 		options.setProblemsAdvisor(potentialProblemsAdvisor);
+		options.setModuleValidationAdvisor(moduleValidationAdvisor);
 		return options;
 	}
 

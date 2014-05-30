@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,7 +14,7 @@ import com.google.inject.Provider;
 
 /**
  * A parameterized provider of validation advisor.
- * 
+ *
  */
 public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements Provider<IValidationAdvisor> {
 	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(
@@ -38,13 +38,12 @@ public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements 
 
 	/**
 	 * Provides an IValidatioNAdvisor configured from the ComplianceLevel and (optional) ProblemsAdvisor
-	 * passed to {@link #create(com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel, IPotentialProblemsAdvisor)}.
-	 * 
+	 *
 	 * If the problems advisor is null, an instance of {@link DefaultPotentialProblemsAdvisor} is used.
 	 */
 	@Override
 	public IValidationAdvisor get() {
-		return ValidationAdvisor.create(level, problemsAdvisor != null
+		return level.createValidationAdvisor(problemsAdvisor != null
 				? problemsAdvisor
 				: new DefaultPotentialProblemsAdvisor());
 	}

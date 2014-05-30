@@ -4,16 +4,26 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.validation;
 
+import java.io.File;
+import java.io.FileFilter;
+
+import org.eclipse.emf.common.util.URI;
+
+import com.puppetlabs.geppetto.forge.util.ModuleUtils;
+import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
+import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
+import com.puppetlabs.geppetto.validation.runner.DefaultEncodingProvider;
 import com.puppetlabs.geppetto.validation.runner.IEncodingProvider;
-import org.eclipse.emf.common.util.URI;
 
 public class ValidationOptions {
 	private ComplianceLevel complianceLevel;
@@ -36,12 +46,38 @@ public class ValidationOptions {
 
 	private boolean checkReferences;
 
+	private IModuleValidationAdvisor moduleValidationAdvisor;
+
+	private FileFilter fileFilter;
+
+	private FileFilter validationFilter;
+
+	public ValidationOptions() {
+		fileType = FileType.DETECT;
+	}
+
+	public ValidationOptions(ValidationOptions source) {
+		complianceLevel = source.complianceLevel;
+		encodingProvider = source.encodingProvider;
+		environment = source.environment;
+		fileType = source.fileType;
+		platformURI = source.platformURI;
+		problemsAdvisor = source.problemsAdvisor;
+		searchPath = source.searchPath;
+		checkLayout = source.checkLayout;
+		checkModuleSemantics = source.checkModuleSemantics;
+		checkReferences = source.checkReferences;
+		moduleValidationAdvisor = source.moduleValidationAdvisor;
+	}
+
 	/**
-	 * Defaults to 2.7 if not specified.
-	 * 
+	 * Defaults to {@link PuppetTarget#getDefault()#getComplianceLevel()} if not specified.
+	 *
 	 * @return the value of the '<em>complianceLevel</em>' attribute.
 	 */
 	public ComplianceLevel getComplianceLevel() {
+		if(complianceLevel == null)
+			complianceLevel = PuppetTarget.getDefault().getComplianceLevel();
 		return complianceLevel;
 	}
 
@@ -49,6 +85,8 @@ public class ValidationOptions {
 	 * @return the value of the '<em>encodingProvider</em>' attribute.
 	 */
 	public IEncodingProvider getEncodingProvider() {
+		if(encodingProvider == null)
+			encodingProvider = new DefaultEncodingProvider();
 		return encodingProvider;
 	}
 
@@ -60,6 +98,15 @@ public class ValidationOptions {
 	}
 
 	/**
+	 * @return the fileFilter
+	 */
+	public FileFilter getFileFilter() {
+		if(fileFilter == null)
+			fileFilter = ModuleUtils.DEFAULT_FILE_FILTER;
+		return fileFilter;
+	}
+
+	/**
 	 * @return the value of the '<em>fileType</em>' attribute.
 	 */
 	public FileType getFileType() {
@@ -67,10 +114,19 @@ public class ValidationOptions {
 	}
 
 	/**
+	 * @return The advisor used when validating metadata.json
+	 */
+	public IModuleValidationAdvisor getModuleValidationAdvisor() {
+		if(moduleValidationAdvisor == null)
+			moduleValidationAdvisor = new DefaultModuleValidationAdvisor();
+		return moduleValidationAdvisor;
+	}
+
+	/**
 	 * A URI to a pptp resource in string form. If null, a default pptp will be
 	 * used when validating. An unloadable pptp reference will result in an
 	 * internal error.
-	 * 
+	 *
 	 * @return the value of the '<em>platformURI</em>' attribute.
 	 */
 	public URI getPlatformURI() {
@@ -81,6 +137,8 @@ public class ValidationOptions {
 	 * @return the value of the '<em>problemsAdvisor</em>' attribute.
 	 */
 	public IPotentialProblemsAdvisor getProblemsAdvisor() {
+		if(problemsAdvisor == null)
+			problemsAdvisor = getComplianceLevel().createValidationAdvisor(new DefaultPotentialProblemsAdvisor());
 		return problemsAdvisor;
 	}
 
@@ -101,7 +159,7 @@ public class ValidationOptions {
 	/**
 	 * Checking module semantics means that the module's dependencies are
 	 * satisfied.
-	 * 
+	 *
 	 * @return the value of the '<em>checkModuleSemantics</em>' attribute.
 	 */
 	public boolean isCheckModuleSemantics() {
@@ -109,7 +167,7 @@ public class ValidationOptions {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the value of the '<em>checkReferences</em>' attribute.
 	 */
 	public boolean isCheckReferences() {
@@ -117,103 +175,146 @@ public class ValidationOptions {
 	}
 
 	/**
+	 * Returns <code>true</code> if no validation filter has been specified or if the filter
+	 * accepts the given candidate
+	 *
+	 * @param candidate
+	 *            The candidate to check
+	 * @return <code>true</code> if the file should be validated.
+	 * @see #setValidationFilter(FileFilter)
+	 */
+	public boolean isValidationCandidate(File candidate) {
+		return validationFilter == null || validationFilter.accept(candidate);
+	}
+
+	/**
 	 * Sets the value of the '<em>checkLayout</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param checkLayout
 	 *            the new value of the '<em>checkLayout</em>' attribute.
 	 */
-	public void setCheckLayout(boolean value) {
-		checkLayout = value;
+	public void setCheckLayout(boolean checkLayout) {
+		this.checkLayout = checkLayout;
 	}
 
 	/**
 	 * Sets the value of the '<em>checkModuleSemantics</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param checkModuleSemantics
 	 *            the new value of the '<em>checkModuleSemantics</em>'
 	 *            attribute.
 	 */
-	public void setCheckModuleSemantics(boolean value) {
-		checkModuleSemantics = value;
+	public void setCheckModuleSemantics(boolean checkModuleSemantics) {
+		this.checkModuleSemantics = checkModuleSemantics;
 	}
 
 	/**
 	 * Sets the value of the '<em>checkReferences</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param checkReferences
 	 *            the new value of the '<em>checkReferences</em>' attribute.
 	 */
-	public void setCheckReferences(boolean value) {
-		checkReferences = value;
+	public void setCheckReferences(boolean checkReferences) {
+		this.checkReferences = checkReferences;
 	}
 
 	/**
 	 * Sets the value of the '<em>complianceLevel</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param complianceLevel
 	 *            the new value of the '<em>complianceLevel</em>' attribute.
 	 */
-	public void setComplianceLevel(ComplianceLevel value) {
-		complianceLevel = value;
+	public void setComplianceLevel(ComplianceLevel complianceLevel) {
+		this.complianceLevel = complianceLevel;
 	}
 
 	/**
 	 * Sets the value of the '<em>encodingProvider</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param encodingProvider
 	 *            the new value of the '<em>encodingProvider</em>' attribute.
 	 */
-	public void setEncodingProvider(IEncodingProvider value) {
-		encodingProvider = value;
+	public void setEncodingProvider(IEncodingProvider encodingProvider) {
+		this.encodingProvider = encodingProvider;
 	}
 
 	/**
 	 * Sets the value of the '<em>environment</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param environment
 	 *            the new value of the '<em>environment</em>' attribute.
 	 */
-	public void setEnvironment(String value) {
-		environment = value;
+	public void setEnvironment(String environment) {
+		this.environment = environment;
+	}
+
+	/**
+	 * @param fileFilter
+	 *            the fileFilter to set
+	 */
+	public void setFileFilter(FileFilter fileFilter) {
+		this.fileFilter = fileFilter;
 	}
 
 	/**
 	 * Sets the value of the '<em>fileType</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param fileType
 	 *            the new value of the '<em>fileType</em>' attribute.
 	 */
-	public void setFileType(FileType value) {
-		fileType = value;
+	public void setFileType(FileType fileType) {
+		this.fileType = fileType == null
+				? FileType.DETECT
+				: fileType;
+	}
+
+	/**
+	 * @param moduleValidationAdvisor
+	 *            the moduleValidationAdvisor to set
+	 */
+	public void setModuleValidationAdvisor(IModuleValidationAdvisor moduleValidationAdvisor) {
+		this.moduleValidationAdvisor = moduleValidationAdvisor;
 	}
 
 	/**
 	 * Sets the value of the '<em>platformURI</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param platformURI
 	 *            the new value of the '<em>platformURI</em>' attribute.
 	 */
-	public void setPlatformURI(URI value) {
-		platformURI = value;
+	public void setPlatformURI(URI platformURI) {
+		this.platformURI = platformURI;
 	}
 
 	/**
 	 * Sets the value of the '<em>problemsAdvisor</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param problemsAdvisor
 	 *            the new value of the '<em>problemsAdvisor</em>' attribute.
 	 */
-	public void setProblemsAdvisor(IPotentialProblemsAdvisor value) {
-		problemsAdvisor = value;
+	public void setProblemsAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+		this.problemsAdvisor = problemsAdvisor;
 	}
 
 	/**
 	 * Sets the value of the '<em>searchPath</em>' attribute.
-	 * 
-	 * @param value
+	 *
+	 * @param searchPath
 	 *            the new value of the '<em>searchPath</em>' attribute.
 	 */
-	public void setSearchPath(String value) {
-		searchPath = value;
+	public void setSearchPath(String searchPath) {
+		this.searchPath = searchPath;
+	}
+
+	/**
+	 * Specify a specific a filter for the candidates to be validated. This filter does not limit the scope
+	 * used when for the validating, just the actual files that will be validated.
+	 *
+	 * @param validationFilter
+	 *            The filter for the candidates to validate
+	 * @see #isValidationCandidate(File)
+	 */
+	public void setValidationFilter(FileFilter validationFilter) {
+		this.validationFilter = validationFilter;
 	}
 }

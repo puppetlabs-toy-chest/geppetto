@@ -11,8 +11,8 @@
 # Sample Usage:
 #
 # [Remember: No empty lines between comments and class definition]
-class test-module {
-	$java_release = $java_version ? {
+class test_module {
+	$java_release = $::java_version ? {
 		/^(\d+\.\d+)(?:\.|$)/ => $1,
 		default => undef
 	}

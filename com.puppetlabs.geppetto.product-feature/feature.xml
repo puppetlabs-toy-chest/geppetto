@@ -2,7 +2,7 @@
 <feature
       id="com.puppetlabs.geppetto.product"
       label="%featureName"
-      version="4.1.1.qualifier"
+      version="4.2.0.qualifier"
       provider-name="%providerName"
       plugin="com.puppetlabs.geppetto"
       image="geppetto_update_120.jpg">
@@ -44,7 +44,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="com.google.inject"/>
       <import plugin="org.antlr.runtime"/>
       <import plugin="org.aopalliance"/>
-      <import plugin="org.apache.commons.compress"/>
+      <import plugin="org.apache.commons.compress" version="1.7.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.lang"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.core.externaltools"/>
@@ -56,7 +56,6 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.ui.navigator.resources"/>
       <import plugin="org.eclipse.xtext"/>
       <import plugin="org.eclipse.xtext.builder"/>
-      <import plugin="org.eclipse.xtext.logging"/>
       <import plugin="org.eclipse.xtext.ui"/>
       <import plugin="org.eclipse.xtext.ui.shared"/>
       <import plugin="org.eclipse.xtext.util"/>

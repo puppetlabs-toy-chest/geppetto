@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -44,7 +44,6 @@ import org.apache.maven.project.ProjectBuilder;
 import org.apache.maven.project.ProjectBuildingRequest;
 import org.apache.maven.repository.RepositorySystem;
 import org.apache.maven.repository.internal.MavenRepositorySystemSession;
-import com.puppetlabs.geppetto.common.os.FileUtils;
 import org.codehaus.plexus.ContainerConfiguration;
 import org.codehaus.plexus.DefaultContainerConfiguration;
 import org.codehaus.plexus.DefaultPlexusContainer;
@@ -62,6 +61,8 @@ import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.junit.Assert;
 import org.junit.Before;
 
+import com.puppetlabs.geppetto.common.os.FileUtils;
+
 public class AbstractForgeTestMojo {
 	File pom;
 
@@ -78,6 +79,26 @@ public class AbstractForgeTestMojo {
 	private File basedir;
 
 	private MavenSession mavenSession;
+
+	protected void assertContains(String message, String match, Throwable e) {
+		String em = e.getMessage();
+		if(em == null)
+			em = "null";
+		if(!em.contains(match)) {
+			StringBuilder bld = new StringBuilder();
+			bld.append(message);
+			bld.append(": No '");
+			bld.append(match);
+			bld.append("' in '");
+			bld.append(em);
+			bld.append('\'');
+			fail(bld.toString());
+		}
+	}
+
+	protected void assertMissingAttribute(String message, String key, Throwable e) {
+		assertContains(message, "Missing required attribute \"" + key + '"', e);
+	}
 
 	protected MavenSession createMavenSession() {
 		buildingRequest.setUserProperties(userProps);

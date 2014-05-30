@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,16 +32,6 @@ import com.puppetlabs.geppetto.forge.impl.ForgeModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeServiceModule;
 
 public class AbstractForgeTest {
-	private static String TEST_FORGE_URI = "https://forge-apilb01-stage.puppetlabs.com/";
-
-	// private static String TEST_FORGE_URI = "http://localhost:4567/";
-
-	private static Injector injector;
-
-	private static Injector commonInjector = Guice.createInjector(getCommonModule());
-
-	private static File basedir;
-
 	public static void delete(File fileOrDir) throws IOException {
 		File[] children = fileOrDir.listFiles();
 		if(children != null)
@@ -50,6 +40,8 @@ public class AbstractForgeTest {
 		if(!fileOrDir.delete() && fileOrDir.exists())
 			throw new IOException("Unable to delete " + fileOrDir);
 	}
+
+	// private static String TEST_FORGE_URI = "http://localhost:4567/";
 
 	private static File getBasedir() {
 		if(basedir == null) {
@@ -135,4 +127,12 @@ public class AbstractForgeTest {
 		}
 		return testFolder;
 	}
+
+	private static String TEST_FORGE_URI = "https://forgestagingapi.puppetlabs.com/";
+
+	private static Injector injector;
+
+	private static Injector commonInjector = Guice.createInjector(getCommonModule());
+
+	private static File basedir;
 }

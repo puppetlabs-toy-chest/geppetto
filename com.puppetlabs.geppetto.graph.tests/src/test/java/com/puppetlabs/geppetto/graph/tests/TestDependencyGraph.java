@@ -2,6 +2,7 @@ package com.puppetlabs.geppetto.graph.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedInputStream;
@@ -11,16 +12,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.graph.GraphHrefType;
-import com.puppetlabs.geppetto.graph.IHrefProducer;
-import com.puppetlabs.geppetto.graph.SVGProducer;
-import com.puppetlabs.geppetto.graph.dependency.DependencyGraphModule;
-import com.puppetlabs.geppetto.validation.FileType;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
-import com.puppetlabs.geppetto.validation.ValidationService;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.Export;
-import com.puppetlabs.geppetto.validation.runner.BuildResult;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
@@ -29,6 +20,17 @@ import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.graph.GraphHrefType;
+import com.puppetlabs.geppetto.graph.IHrefProducer;
+import com.puppetlabs.geppetto.graph.SVGProducer;
+import com.puppetlabs.geppetto.graph.dependency.DependencyGraphModule;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
+import com.puppetlabs.geppetto.validation.FileType;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
+import com.puppetlabs.geppetto.validation.ValidationService;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
+import com.puppetlabs.geppetto.validation.runner.BuildResult;
 
 public class TestDependencyGraph extends AbstractValidationTest {
 	@Test
@@ -40,13 +42,14 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		options.setCheckLayout(true);
 		options.setCheckModuleSemantics(true);
 		options.setCheckReferences(true);
+		options.setComplianceLevel(ComplianceLevel.PUPPET_2_7);
 		options.setFileType(FileType.PUPPET_ROOT);
 
 		// Write the dot to a file:
 		File outputFolder = TestDataProvider.getTestOutputDir();
 		FileOutputStream dotStream = new FileOutputStream(new File(outputFolder, "demoGraphSVG.dot"));
 
-		BuildResult buildResult = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertTrue("Validation had errors", chain.getSeverity() < Diagnostic.ERROR);
 		getDependencyGraphProducer().produceGraph(
 			null, "Demo DefaultModules Dependencies", null, dotStream, buildResult, chain);
@@ -75,18 +78,16 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
 		ValidationService vs = getValidationService();
-		BuildResult result = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		BuildResult result = vs.validate(chain, options, root, SubMonitor.convert(null));
+		assertNotNull("Should have found exported references", result.getAllModuleReferences());
 		getDependencyGraphProducer().produceGraph(
 			null, "Module dependencies for graphTestData", null, stream, result, chain);
 
 		assertTrue("Stream contains data", stream.size() > 10);
-		String output = stream.toString();
-		System.err.println(output);
-
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void dependencyGraph_Include() throws Exception {
@@ -99,7 +100,9 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		BuildResult result = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		BuildResult result = vs.validate(chain, options, root, SubMonitor.convert(null));
+		assertNotNull("Should have found exported references", result.getAllModuleReferences());
+
 		getDependencyGraphProducer().produceGraph(
 			null, "Module dependencies for graphDataIncludeRequire/include", null, stream, result, chain);
 
@@ -109,9 +112,6 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		// Currently found ok by dump or visual inspection.
 
 		assertTrue("Stream contains data", stream.size() > 10);
-		String output = stream.toString();
-		System.err.println(output);
-
 	}
 
 	@Test
@@ -125,14 +125,14 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		File[] modules = new File[] { new File(root, "modules/B/Modulefile") };
-		BuildResult buildResult = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		File[] modules = new File[] { new File(root, "modules/b/metadata.json") };
+		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
+		assertNotNull("Should have found exported references", buildResult.getAllModuleReferences());
 		// dumpExports(buildResult.getExportsForAll());
 		getDependencyGraphProducer().produceGraph(
 			null, "Module dependencies for graphTestData", modules, stream, buildResult, chain);
 
 		String output = stream.toString();
-		System.err.println(output);
 		assertTrue("Stream should contain data", stream.size() > 10);
 		assertFalse("xfunc should not be included", output.contains("xfunc"));
 		assertTrue("cfunc should  be included", output.contains("cfunc"));
@@ -151,7 +151,9 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		options.setFileType(FileType.PUPPET_ROOT);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-		BuildResult buildResult = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
+		assertNotNull("Should have found exported references", buildResult.getAllModuleReferences());
+
 		getDependencyGraphProducer().produceGraph(
 			null, "Module dependencies for graphTestData", null, stream, buildResult, chain);
 
@@ -179,7 +181,6 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		tmp.close();
 
 		String svgString = svgStream.toString();
-		// System.err.println(svgString);
 		assertTrue("SVG should contain the string 'xfunc'", svgString.contains("xfunc"));
 
 		assertFalse("SVG should not contain the string \"\\L\"", svgString.contains("\"\\L\""));
@@ -203,7 +204,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		// Write the dot to a file:
 		File outputFolder = TestDataProvider.getTestOutputDir();
 		FileOutputStream dotStream = new FileOutputStream(new File(outputFolder, "forgeGraphSVG.dot"));
-		BuildResult buildResult = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		getDependencyGraphProducer().produceGraph(
 			null, "Forge DefaultModules Dependencies", null, dotStream, buildResult, chain);
 
@@ -300,7 +301,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		File outputFolder = TestDataProvider.getTestOutputDir();
 		FileOutputStream dotStream = new FileOutputStream(new File(outputFolder, "karelGraphSVG.dot"));
 
-		BuildResult buildResult = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		getDependencyGraphProducer().produceGraph(
 			null, "Karel DefaultModules Dependencies", null, dotStream, buildResult, chain);
 

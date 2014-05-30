@@ -30,6 +30,10 @@ Workflow {
 	}
 
 	component = Generator {
+    	// We don't want the generator messing with our carefully tailored MANIFEST.MF files
+ 		// This might make manual merges necessary, see MANIFEST.MF_gen
+		mergeManifest = false
+
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
 		projectNameRt = projectName

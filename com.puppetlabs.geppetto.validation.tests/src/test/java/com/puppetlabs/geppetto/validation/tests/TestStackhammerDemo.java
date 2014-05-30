@@ -8,19 +8,22 @@ import java.io.File;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.validation.FileType;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
-import com.puppetlabs.geppetto.validation.ValidationService;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.ClassDescription;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.Export;
-import com.puppetlabs.geppetto.validation.runner.BuildResult;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.forge.util.ModuleUtils;
+import com.puppetlabs.geppetto.validation.FileType;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
+import com.puppetlabs.geppetto.validation.ValidationService;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState.ClassDescription;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
+import com.puppetlabs.geppetto.validation.runner.BuildResult;
 
 public class TestStackhammerDemo extends AbstractValidationTest {
 	@Test
@@ -36,7 +39,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			options.setCheckModuleSemantics(true);
 			options.setCheckReferences(true);
 			options.setFileType(FileType.PUPPET_ROOT);
-			BuildResult br = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+			BuildResult br = vs.validate(chain, options, root, SubMonitor.convert(null));
 
 			// System.err.println(errorsToString(chain));
 			StringBuilder builder = new StringBuilder();
@@ -52,7 +55,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			assertEquals("There should be the expected errors", builder.toString(), errorsToString(chain));
 
 			// Get the exports for nodes
-			AllModuleReferences allModuleReferences = br.getAllModuleReferences();
+			AllModulesState allModuleReferences = br.getAllModuleReferences();
 
 			// Get the map with exports for nodes
 			Multimap<String, String> restricted = allModuleReferences.getRestricted();
@@ -73,7 +76,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 				// File(f)));
 
 				// API2
-				List<AllModuleReferences.ClassDescription> classes = allModuleReferences.getClassDescriptions(allModuleReferences.getVisibleExports(new File(
+				List<AllModulesState.ClassDescription> classes = allModuleReferences.getClassDescriptions(allModuleReferences.getVisibleExports(new File(
 					f)));
 				numberOfClasses = classes.size();
 				assertEquals("There should be 47 exported classes", 47, numberOfClasses);
@@ -112,8 +115,16 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			options.setCheckModuleSemantics(true);
 			options.setCheckReferences(true);
 			options.setFileType(FileType.PUPPET_ROOT);
-			BuildResult br = vs.validate(chain, root, options, new File[] { new File(
-				"/Users/henrik/gitrepos/stackhammer-demo/nodes/foo/") }, SubMonitor.convert(null));
+
+			options.setFileFilter(new ModuleUtils.DefaultFileFilter() {
+				private final IPath parent = new Path("/Users/henrik/gitrepos/stackhammer-demo/nodes/foo");
+
+				@Override
+				public boolean accept(File file) {
+					return super.accept(file) && parent.isPrefixOf(Path.fromOSString(file.getPath()));
+				}
+			});
+			BuildResult br = vs.validate(chain, options, root, SubMonitor.convert(null));
 
 			// System.err.println(errorsToString(chain));
 			StringBuilder builder = new StringBuilder();
@@ -128,7 +139,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			assertEquals("There should be the expected errors", builder.toString(), errorsToString(chain));
 
 			// Get the exports for nodes
-			AllModuleReferences allModuleReferences = br.getAllModuleReferences();
+			AllModulesState allModuleReferences = br.getAllModuleReferences();
 
 			// Get the map with exports for nodes
 			Multimap<String, String> restricted = allModuleReferences.getRestricted();
@@ -149,7 +160,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 				// File(f)));
 
 				// API2
-				List<AllModuleReferences.ClassDescription> classes = allModuleReferences.getClassDescriptions(allModuleReferences.getVisibleExports(new File(
+				List<AllModulesState.ClassDescription> classes = allModuleReferences.getClassDescriptions(allModuleReferences.getVisibleExports(new File(
 					f)));
 				numberOfClasses = classes.size();
 				assertEquals("There should be 47 exported classes", 47, numberOfClasses);
@@ -188,7 +199,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			options.setCheckModuleSemantics(true);
 			options.setCheckReferences(true);
 			options.setFileType(FileType.PUPPET_ROOT);
-			BuildResult br = vs.validate(chain, root, options, null, SubMonitor.convert(null));
+			BuildResult br = vs.validate(chain, options, root, SubMonitor.convert(null));
 
 			// System.err.println(errorsToString(chain));
 			// StringBuilder builder = new StringBuilder();
@@ -196,7 +207,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			assertEquals("There should be the expected errors", "", errorsToString(chain));
 
 			// Get the exports for nodes
-			AllModuleReferences allModuleReferences = br.getAllModuleReferences();
+			AllModulesState allModuleReferences = br.getAllModuleReferences();
 
 			// Get the map with exports for nodes
 			Multimap<String, String> restricted = allModuleReferences.getRestricted();
@@ -217,7 +228,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 				// File(f)));
 
 				// API2
-				List<AllModuleReferences.ClassDescription> classes = allModuleReferences.getClassDescriptions(allModuleReferences.getVisibleExports(new File(
+				List<AllModulesState.ClassDescription> classes = allModuleReferences.getClassDescriptions(allModuleReferences.getVisibleExports(new File(
 					f)));
 				numberOfClasses = classes.size();
 				assertEquals("There should be 47 exported classes", 47, numberOfClasses);

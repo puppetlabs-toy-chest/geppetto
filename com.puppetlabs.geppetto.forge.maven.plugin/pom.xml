@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.puppetlabs.geppetto</groupId>
 		<artifactId>parent</artifactId>
-		<version>4.1.2-SNAPSHOT</version>
+		<version>4.2.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>forge-maven-plugin</artifactId>
@@ -29,7 +29,7 @@
 		<testForgePassword>geppetto tester</testForgePassword>
 		<testForgeLoginSecond>geppetto2</testForgeLoginSecond>
 		<testForgePasswordSecond>geppetto tester</testForgePasswordSecond>
-		<testForgeServiceURL>https://forge-apilb01-stage.puppetlabs.com/</testForgeServiceURL>
+		<testForgeServiceURL>https://forgestagingapi.puppetlabs.com/</testForgeServiceURL>
 	</properties>
 
 	<dependencies>
@@ -74,6 +74,11 @@
 		<dependency>
 			<groupId>com.puppetlabs.geppetto</groupId>
 			<artifactId>com.puppetlabs.geppetto.pp.dsl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.puppetlabs.geppetto</groupId>
+			<artifactId>com.puppetlabs.geppetto.module.dsl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -145,6 +150,21 @@
 							<target>
 								<mkdir dir="${project.build.directory}/generated-site/xhtml" />
 								<move failonerror="false" file="${project.build.directory}/generated-site/xdoc/plugin-info.html" tofile="${project.build.directory}/generated-site/xhtml/plugin-info.xhtml.vm" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>copy-test-resources</id>
+						<phase>process-test-resources</phase>
+						<configuration>
+							<target>
+								<mkdir dir="${project.build.directory}/test-projects" />
+								<copy todir="${project.build.directory}/test-projects">
+									<fileset dir="${basedir}/src/test/projects" />
+								</copy>
 							</target>
 						</configuration>
 						<goals>

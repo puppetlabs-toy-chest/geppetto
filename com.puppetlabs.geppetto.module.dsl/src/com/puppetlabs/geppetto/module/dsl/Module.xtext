@@ -1,0 +1,255 @@
+grammar com.puppetlabs.geppetto.module.dsl.Module hidden(WS)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate metadata "http://www.puppetlabs.com/geppetto/module/dsl/Module"
+
+Model returns JsonObject: JsonMetadata;
+
+JsonMetadata:
+	'{' pairs+=MetadataPair (',' pairs+=MetadataPair)* '}';
+
+JsonObject:
+	{JsonObject}
+	'{' (pairs+=Pair (',' pairs+=Pair)*)? '}';
+
+MetadataPair returns Pair:
+	AuthorPair
+	| DependenciesPair
+	| DescriptionPair
+	| LicensePair
+	| NamePair
+	| ProjectPagePair
+	| SourcePair
+	| SummaryPair
+	| RequirementsPair
+	| OperatingsystemSupportPair
+	| TagsPair
+	| VersionPair
+	| UnrecognizedMetadataPair;
+
+AuthorPair returns Pair:
+	name='"author"' ':' value=StringLiteral;
+
+DependenciesPair returns Pair:
+	name='"dependencies"' ':' value=DependencyArray;
+
+DescriptionPair returns Pair:
+	name='"description"' ':' value=StringLiteral;
+
+LicensePair returns Pair:
+	name='"license"' ':' value=StringLiteral;
+
+NamePair returns Pair:
+	name='"name"' ':' value=ModuleName;
+
+OperatingsystemSupportPair returns Pair:
+	name='"operatingsystem_support"' ':' value=OSArray;
+
+ProjectPagePair returns Pair:
+	name='"project_page"' ':' value=StringLiteral;
+
+RequirementsPair returns Pair:
+	name='"requirements"' ':' value=RequirementArray;
+
+SourcePair returns Pair:
+	name='"source"' ':' value=StringLiteral;
+
+SummaryPair returns Pair:
+	name='"summary"' ':' value=StringLiteral;
+
+TagsPair returns Pair:
+	name='"tags"' ':' value=TagArray;
+
+VersionPair returns Pair:
+	name='"version"' ':' value=Version;
+
+UnrecognizedMetadataPair returns UnrecognizedPair:
+	name=STRING ':' value=Value;
+
+StringArray returns JsonArray:
+	{JsonArray}
+	'[' (value+=StringLiteral (',' value+=StringLiteral)*)? ']';
+
+DependencyArray returns JsonArray:
+	{JsonArray}
+	'[' (value+=DependencyObject (',' value+=DependencyObject)*)? ']';
+
+DependencyObject returns JsonObject: JsonDependency;
+
+JsonDependency:
+	'{' pairs+=DependencyPair (',' pairs+=DependencyPair)* '}';
+
+DependencyPair returns Pair:
+	MetadataRefPair | VRPair | UnrecognizedRequirementPair;
+
+MetadataRefPair:
+	name='"name"' ':' ref=[JsonMetadata|STRING];
+
+RequirementArray returns JsonArray:
+	{JsonArray}
+	'[' (value+=RequirementObject (',' value+=RequirementObject)*)? ']';
+
+RequirementObject returns JsonObject: JsonRequirement;
+
+JsonRequirement:
+	'{' pairs+=RequirementPair (',' pairs+=RequirementPair)* '}';
+
+RequirementPair returns Pair:
+	name='"name"' ':' value=RequirementName | VRPair | UnrecognizedRequirementPair;
+
+RequirementName returns JsonValue: RequirementNameValue;
+
+RequirementNameValue:
+	value=STRING;
+
+VRPair returns Pair:
+	name='"version_requirement"' ':' value=VersionRange;
+
+UnrecognizedRequirementPair returns UnrecognizedPair:
+	name=Q_ReqUnknownKey ':' value=Value;
+
+VersionRange returns JsonValue: JsonVersionRange;
+
+JsonVersionRange:
+	value=STRING;
+
+ModuleName returns JsonValue: JsonModuleName;
+
+JsonModuleName:
+	value=STRING;
+
+TagArray returns JsonArray:
+	{JsonArray}
+	'[' (value+=Tag (',' value+=Tag)*)? ']';
+
+Tag returns JsonValue: JsonTag;
+
+JsonTag:
+	value=Q_StringOrKey;
+
+Version returns JsonValue: JsonVersion;
+
+JsonVersion:
+	value=STRING;
+
+OSArray returns JsonArray:
+	{JsonArray}
+	'[' (value+=OSObject (',' value+=OSObject)*)? ']';
+
+OSObject returns JsonObject: JsonOS;
+
+JsonOS:
+	'{' pairs+=OSPair (',' pairs+=OSPair)* '}';
+
+OSPair returns Pair:
+	name='"operatingsystem"' ':' value=StringLiteral
+	| name='"operatingsystemrelease"' ':' value=StringArray
+	| UnrecognizedOSPair;
+
+UnrecognizedOSPair returns UnrecognizedPair:
+	name=Q_OsUnknownKey ':' value=Value;
+
+Pair:
+	name=Q_StringOrKey ':' value=Value;
+
+Value:
+	 BooleanLiteral | NullValue | StringLiteral | DoubleLiteral | LongLiteral | JsonObject | JsonArray;
+
+StringLiteral returns JsonValue:
+	value=Q_StringOrKey;
+
+/* Any key literal or a String */
+Q_StringOrKey returns ecore::EString:
+	('"author"'
+	| '"dependencies"'
+	| '"description"'
+	| '"license"'
+	| '"name"'
+	| '"operatingsystem"'
+	| '"operatingsystem_support"'
+	| '"operatingsystemrelease"'
+	| '"parameters"'
+	| '"project_page"'
+	| '"requirements"'
+	| '"source"'
+	| '"summary"'
+	| '"tags"'
+	| '"version"'
+	| '"version_requirement"'
+	| STRING);
+
+/* Any key literal or a String except the ones recognized by DependencyPair or RequirementPair */
+Q_ReqUnknownKey returns ecore::EString:
+	('"author"'
+	| '"dependencies"'
+	| '"description"'
+	| '"license"'
+	| '"operatingsystem"'
+	| '"operatingsystem_support"'
+	| '"operatingsystemrelease"'
+	| '"parameters"'
+	| '"project_page"'
+	| '"requirements"'
+	| '"source"'
+	| '"summary"'
+	| '"tags"'
+	| '"version"'
+	| STRING);
+
+/* Any key literal or a String except the ones listed in OSPair */
+Q_OsUnknownKey returns ecore::EString:
+	('"author"'
+	| '"dependencies"'
+	| '"description"'
+	| '"license"'
+	| '"name"'
+	| '"operatingsystem_support"'
+	| '"parameters"'
+	| '"project_page"'
+	| '"requirements"'
+	| '"source"'
+	| '"summary"'
+	| '"tags"'
+	| '"version"'
+	| '"version_requirement"'
+	| STRING);
+
+NullValue returns JsonValue:
+	value=NULL;
+
+DoubleLiteral returns JsonValue:
+	value=DOUBLE;
+
+LongLiteral returns JsonValue:
+	value=LONG;
+
+JsonArray:
+	{JsonArray}
+	'[' (value+=Value (',' value+=Value)*)? ']';
+
+BooleanLiteral returns JsonValue:
+	value=BOOL;
+
+BOOL returns ecore::EBooleanObject:
+	"true" | "false";
+
+NULL returns ecore::EJavaObject:
+	"null";
+
+terminal fragment DIGIT:
+	'0'..'9';
+
+terminal fragment EXPONENT:
+	('e' | 'E') ('+' | '-')? DIGIT+;
+
+terminal LONG returns ecore::ELongObject:
+	'-'? DIGIT+;
+
+terminal DOUBLE returns ecore::EDoubleObject:
+	'-'? DIGIT+ EXPONENT | '-'? DIGIT+ '.' DIGIT+ EXPONENT?;
+
+terminal STRING:
+	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | '"'))* '"';
+
+terminal WS:
+	(' ' | '\t' | '\r' | '\n')+;

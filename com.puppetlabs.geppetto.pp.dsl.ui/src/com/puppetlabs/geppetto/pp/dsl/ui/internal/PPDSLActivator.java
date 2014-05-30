@@ -4,42 +4,29 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.internal;
 
+import static org.eclipse.core.resources.IResourceDelta.ADDED;
 import static org.eclipse.core.resources.IResourceDelta.REMOVED;
 
 import java.util.Collections;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import com.puppetlabs.geppetto.forge.client.GsonModule;
-import com.puppetlabs.geppetto.forge.impl.ForgeModule;
-import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
-import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRubyRuntimeModule;
-import com.puppetlabs.geppetto.pp.dsl.ui.builder.PPBuildJob;
-import com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz.ImagesOnFileSystemRegistry;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
-import com.puppetlabs.geppetto.ruby.RubyHelper;
-import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.QualifiedName;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -48,21 +35,20 @@ import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
+import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRubyRuntimeModule;
+import com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz.ImagesOnFileSystemRegistry;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.RebuildChecker;
+import com.puppetlabs.geppetto.ruby.RubyHelper;
+import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
 
 /**
  * Adds support for PPTP Ruby by creating injectors and caching them using a language key
- * 
+ *
  */
 public class PPDSLActivator extends PPActivator {
-	public static final String PP_LANGUAGE_NAME = "com.puppetlabs.geppetto.pp.dsl.PP";
-
-	private static BundleContext slaActivatorContext;
-
-	private static final Logger logger = Logger.getLogger(PPDSLActivator.class);
-
-	private static final QualifiedName LAST_BUILDER_VERSION = new QualifiedName(
-		"com.puppetlabs.geppetto.dsl.ui", "builder.version");
-
 	public static PPDSLActivator getDefault() {
 		return (PPDSLActivator) getInstance();
 	}
@@ -70,7 +56,7 @@ public class PPDSLActivator extends PPActivator {
 	/**
 	 * org.eclipse.jdt.core is added as an optional dependency in o.c.g.pp.dsl.ui and if JDT is present in
 	 * the runtime, there is no need for the AggregateErrorLabel to do anything.
-	 * 
+	 *
 	 * @return true if JDT is present.
 	 */
 	public static boolean isJavaEnabled() {
@@ -85,11 +71,18 @@ public class PPDSLActivator extends PPActivator {
 		return false;
 	}
 
+	public static final String PP_LANGUAGE_NAME = "com.puppetlabs.geppetto.pp.dsl.PP";
+
+	private static BundleContext slaActivatorContext;
+
+	private static final Logger logger = Logger.getLogger(PPDSLActivator.class);
+
+	private static final QualifiedName LAST_BUILDER_VERSION = new QualifiedName(
+		"com.puppetlabs.geppetto.dsl.ui", "builder.version");
+
 	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
 
-	private ImagesOnFileSystemRegistry imagesOnFileSystemRegistry;
-
-	private IResourceChangeListener projectRemovedListener;
+	private IResourceChangeListener projectChangeListener;
 
 	@Override
 	protected Injector createInjector(String language) {
@@ -98,10 +91,7 @@ public class PPDSLActivator extends PPActivator {
 			Module runtimeModule = getRuntimeModule(language);
 			Module sharedStateModule = getSharedStateModule();
 			Module uiModule = getUiModule(language);
-			Module forgeModule = getForgeModule();
-			Module gsonModule = getGsonModule();
-			Module mergedModule = Modules2.mixin(
-				commonModule, runtimeModule, sharedStateModule, uiModule, gsonModule, forgeModule);
+			Module mergedModule = Modules2.mixin(commonModule, runtimeModule, sharedStateModule, uiModule);
 			return Guice.createInjector(mergedModule);
 		}
 		catch(Exception e) {
@@ -109,18 +99,6 @@ public class PPDSLActivator extends PPActivator {
 			logger.error(e.getMessage(), e);
 			throw new RuntimeException("Failed to create injector for " + language, e);
 		}
-	}
-
-	protected Module getForgeModule() {
-		return new ForgeModule();
-	}
-
-	protected Module getGsonModule() {
-		return GsonModule.INSTANCE;
-	}
-
-	public ImagesOnFileSystemRegistry getImagesOnFSRegistry() {
-		return imagesOnFileSystemRegistry;
 	}
 
 	@Override
@@ -143,7 +121,7 @@ public class PPDSLActivator extends PPActivator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator#getRuntimeModule(java.lang.String)
 	 */
 	@Override
@@ -157,7 +135,7 @@ public class PPDSLActivator extends PPActivator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator#getUiModule(java.lang.String)
 	 */
 	@Override
@@ -178,6 +156,12 @@ public class PPDSLActivator extends PPActivator {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+
+		// Force the PreferenceConverter class to be loaded at this point to get rid
+		// of intermittent 'invalid thread access' when it's loaded by another thread
+		// during injection
+		PreferenceConverter.class.getCanonicalName();
+
 		slaActivatorContext = context;
 		try {
 			registerInjectorFor(PPDSLConstants.PPTP_RUBY_LANGUAGE_NAME);
@@ -187,33 +171,20 @@ public class PPDSLActivator extends PPActivator {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
 			throw e;
 		}
-		imagesOnFileSystemRegistry = new ImagesOnFileSystemRegistry();
 		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
 
 		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		String lastBuilderVersion = workspace.getRoot().getPersistentProperty(LAST_BUILDER_VERSION);
-		final Bundle bundle = context.getBundle();
+		Bundle bundle = context.getBundle();
 		String currentVersion = bundle.getVersion().toString();
 		if(lastBuilderVersion == null || !lastBuilderVersion.equals(currentVersion)) {
 			// Workspace was built using another version of Geppetto so schedule a
 			// clean rebuild
-			Job buildJob = new Job("Workspace build") {
-				@Override
-				protected IStatus run(IProgressMonitor monitor) {
-					try {
-						workspace.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
-						workspace.getRoot().setPersistentProperty(LAST_BUILDER_VERSION, bundle.getVersion().toString());
-						return Status.OK_STATUS;
-					}
-					catch(CoreException e) {
-						return e.getStatus();
-					}
-				}
-			};
-			buildJob.schedule();
+			getPPInjector().getInstance(RebuildChecker.class).triggerBuild();
+			workspace.getRoot().setPersistentProperty(LAST_BUILDER_VERSION, bundle.getVersion().toString());
 		}
 
-		projectRemovedListener = new IResourceChangeListener() {
+		projectChangeListener = new IResourceChangeListener() {
 
 			@Override
 			public void resourceChanged(IResourceChangeEvent event) {
@@ -229,12 +200,12 @@ public class PPDSLActivator extends PPActivator {
 							if(done)
 								return false;
 
-							if(delta.getResource() instanceof IProject) {
-								switch(delta.getKind()) {
-									case REMOVED:
-										new PPBuildJob(workspace, true).schedule();
-										done = true;
-								}
+							// Rebuild if a project was added, removed, or changed its open status
+							if(delta.getResource() instanceof IProject &&
+									((delta.getKind() & (ADDED | REMOVED)) != 0 || (delta.getKind() & IResourceDelta.CHANGED) != 0 &&
+											(delta.getFlags() & IResourceDelta.OPEN) != 0)) {
+								done = true;
+								getPPInjector().getInstance(RebuildChecker.class).triggerBuild();
 								return false;
 							}
 							return true;
@@ -245,16 +216,17 @@ public class PPDSLActivator extends PPActivator {
 				}
 			}
 		};
-		workspace.addResourceChangeListener(projectRemovedListener, IResourceChangeEvent.POST_CHANGE);
+		workspace.addResourceChangeListener(projectChangeListener, IResourceChangeEvent.POST_CHANGE);
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		ResourcesPlugin.getWorkspace().removeResourceChangeListener(projectRemovedListener);
-		PPPreferencesHelper preferenceHelper = getInjector(PP_LANGUAGE_NAME).getInstance(PPPreferencesHelper.class);
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(projectChangeListener);
+		Injector injector = getPPInjector();
+		PPPreferencesHelper preferenceHelper = injector.getInstance(PPPreferencesHelper.class);
 		preferenceHelper.stop();
 		slaActivatorContext = null;
-		imagesOnFileSystemRegistry.dispose();
+		injector.getInstance(ImagesOnFileSystemRegistry.class).dispose();
 		super.stop(context);
 	}
 }

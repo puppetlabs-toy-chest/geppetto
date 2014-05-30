@@ -1,0 +1,8 @@
+{
+  "name": "stackhammer-b",
+  "version": "1.0.0",
+  "dependencies": [
+     {"name": "stackhammer/a", "version_requirement": ">= 1.0.0" },
+     {"name": "stackhammer/c", "version_requirement": ">= 1.0.0" }
+  ]
+}

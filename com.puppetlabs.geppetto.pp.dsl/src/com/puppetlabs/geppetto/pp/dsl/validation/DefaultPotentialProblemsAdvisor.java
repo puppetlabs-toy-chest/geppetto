@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,11 +34,6 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	@Override
 	public ValidationPreference caseDefaultShouldAppearLast() {
 		return ValidationPreference.IGNORE;
-	}
-
-	@Override
-	public ValidationPreference circularDependencyPreference() {
-		return ValidationPreference.WARNING;
 	}
 
 	@Override

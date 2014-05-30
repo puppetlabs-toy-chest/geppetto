@@ -1,0 +1,5 @@
+{
+  "name": "stackhammer-nodex",
+  "version": "1.0.0",
+  "dependencies": [{ "name": "stackhammer/a", "version_requirement": ">= 1.0.0" }]
+}

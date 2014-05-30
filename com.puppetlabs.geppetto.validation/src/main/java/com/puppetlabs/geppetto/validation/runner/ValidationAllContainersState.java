@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,8 +21,9 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 /**
- * This specialization of the default {@link ResourceSetBasedAllContainersState} adds the ability to use more than a single container.
- * 
+ * This specialization of the default {@link ResourceSetBasedAllContainersState} adds the ability to use more than a
+ * single container.
+ *
  */
 public class ValidationAllContainersState extends ResourceSetBasedAllContainersState {
 
@@ -49,20 +50,13 @@ public class ValidationAllContainersState extends ResourceSetBasedAllContainersS
 	 * returns the set of visible container handles for the given handle. The
 	 * handle should be a File path to a module directory, a path to the root
 	 * (non modular content) of a repository, or the special string "_pptp".
-	 * 
+	 *
 	 * @return
 	 */
 	public Multimap<String, String> getRestricted() {
 		return Multimaps.unmodifiableMultimap(restricted);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersState
-	 * #getVisibleContainerHandles(java.lang.String)
-	 */
 	@Override
 	public List<String> getVisibleContainerHandles(String handle) {
 		if(restricted.containsKey(handle))

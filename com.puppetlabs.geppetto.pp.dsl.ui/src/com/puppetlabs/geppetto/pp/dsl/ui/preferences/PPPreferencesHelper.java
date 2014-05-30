@@ -4,21 +4,15 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
 import java.util.List;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -27,11 +21,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.puppetlabs.geppetto.forge.model.Constants;
-import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
-import com.puppetlabs.geppetto.pp.dsl.ui.builder.PPBuildJob;
 import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
@@ -39,61 +29,9 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 /**
  * A facade that helps with preference checking.
  * (The idea is to not litter the code with specifics about how preferences are stated, where they are stored etc.)
- * 
+ *
  */
-@Singleton
 public class PPPreferencesHelper implements IPreferenceStoreInitializer, IPropertyChangeListener {
-
-	private class RebuildChecker extends Job {
-		private boolean drainAndBuild;
-
-		/**
-		 * The purpose of the RebuildChecker is to collect/aggregate events for validation preferences
-		 * to avoid having to issue multiple rebuilds for a set of changes.
-		 * This job reschedules itself.
-		 */
-		RebuildChecker() {
-			super("Puppet RebuildChecker");
-			setSystem(true);
-			this.setUser(false);
-			drainAndBuild = false;
-		}
-
-		@Override
-		protected IStatus run(IProgressMonitor monitor) {
-			if(monitor.isCanceled())
-				return Status.CANCEL_STATUS;
-			if(problemChanges.peek() == null) {
-				drainAndBuild = false;
-				this.schedule(500);
-				return Status.OK_STATUS;
-			}
-			// if one event found, wait 500ms and then drain queue and rebuild
-			if(!drainAndBuild) {
-				drainAndBuild = true;
-				this.schedule(500);
-				return Status.OK_STATUS;
-			}
-			drainAndBuild = false;
-
-			if(monitor.isCanceled())
-				return Status.CANCEL_STATUS;
-			// drain the queue of everything pending
-			List<String> drained = Lists.newArrayList();
-			problemChanges.drainTo(drained);
-
-			if(monitor.isCanceled())
-				return Status.CANCEL_STATUS;
-
-			// run a build
-			PPBuildJob job = new PPBuildJob(workspace);
-			job.schedule();
-			this.schedule(1000);
-
-			return Status.OK_STATUS;
-		}
-
-	}
 
 	private int autoInsertOverrides = 0;
 
@@ -113,30 +51,23 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	private IPreferenceStore store;
 
-	@Inject
-	private PptpTargetProjectHandler pptpHandler;
-
 	private static final String defaultProjectPath = "lib/*:environments/$environment/*:manifests/*:modules/*"; //$NON-NLS-1$
 
 	private static final String defaultPuppetEnvironment = "production"; //$NON-NLS-1$
 
-	@Inject
-	IWorkspace workspace;
+	private final PptpTargetProjectHandler pptpHandler;
 
-	LinkedBlockingQueue<String> problemChanges;
-
-	Job backgroundRebuildChecker;
+	private final RebuildChecker backgroundRebuildChecker;
 
 	/**
 	 * IMPORTANT:
 	 * Add all preference that requires a rebuild when their value change.
 	 */
-	private List<String> requiresRebuild = Lists.newArrayList(//
+	private final List<String> requiresRebuild = Lists.newArrayList(//
 		PPPreferenceConstants.PUPPET_TARGET_VERSION, //
 		PPPreferenceConstants.PUPPET_ENVIRONMENT, //
 		PPPreferenceConstants.PUPPET_PROJECT_PATH, //
 		PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, //
-		PPPreferenceConstants.PROBLEM_CIRCULAR_DEPENDENCY, //
 		PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, //
 		PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, //
 		PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST, //
@@ -156,7 +87,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
-	public PPPreferencesHelper() {
+	@Inject
+	public PPPreferencesHelper(PptpTargetProjectHandler pptpHandler, RebuildChecker backgroundRebuildChecker) {
+		this.pptpHandler = pptpHandler;
+		this.backgroundRebuildChecker = backgroundRebuildChecker;
 		configureAutoInsertOverride();
 	}
 
@@ -187,10 +121,6 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST));
 	}
 
-	public ValidationPreference getcircularDependencyPreference() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_CIRCULAR_DEPENDENCY));
-	}
-
 	public ValidationPreference getDqStringNotRequired() {
 		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED));
 	}
@@ -201,14 +131,6 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getEnsureShouldAppearFirst() {
 		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST));
-	}
-
-	public String getForgeLogin() {
-		return store.getString(PPPreferenceConstants.FORGE_LOGIN);
-	}
-
-	public String getForgeURI() {
-		return store.getString(PPPreferenceConstants.FORGE_LOCATION);
 	}
 
 	public ValidationPreference getInterpolatedNonBraceEnclosedHypens() {
@@ -321,11 +243,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.getDefault().getLiteral());
 		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, defaultProjectPath);
 		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, defaultPuppetEnvironment);
-		store.setDefault(PPPreferenceConstants.FORGE_LOCATION, Constants.FORGE_SERVICE_BASE_URL);
-		store.setDefault(PPPreferenceConstants.FORGE_LOGIN, ModuleName.safeOwner(System.getProperty("user.name")));
 
 		store.setDefault(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, ValidationPreference.WARNING.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_CIRCULAR_DEPENDENCY, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, ValidationPreference.WARNING.toString());
 		store.setDefault(
@@ -356,9 +275,6 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 		// Schedule the background job that makes rebuild after property changes more efficient
 		// (Removes the need to run one rebuild per changing preference).
-		problemChanges = new LinkedBlockingQueue<String>();
-		backgroundRebuildChecker = new RebuildChecker();
-		backgroundRebuildChecker.schedule();
 		store.addPropertyChangeListener(this);
 
 	}
@@ -403,7 +319,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 			// problemChanges.offer(event.getProperty());
 		}
 		if(requiresRebuild.contains(event.getProperty()))
-			problemChanges.offer(event.getProperty());
+			backgroundRebuildChecker.triggerBuild();
 		// System.out.println("PPHelper gets event:" + event.getProperty());
 	}
 

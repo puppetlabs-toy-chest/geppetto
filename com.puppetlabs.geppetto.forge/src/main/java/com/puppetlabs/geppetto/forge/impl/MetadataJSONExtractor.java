@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,26 +17,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.common.os.StreamUtil;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.util.StrictMetadataJsonParser;
-import com.google.inject.Singleton;
 
 @Singleton
 public class MetadataJSONExtractor extends AbstractMetadataExtractor {
 	public int getCardinal() {
-		return 20;
+		return 10;
 	}
 
 	@Override
 	public String getPrimarySource() {
 		return METADATA_JSON_NAME;
-	}
-
-	@Override
-	public boolean hasTypesAndProviders() {
-		return true;
 	}
 
 	@Override
