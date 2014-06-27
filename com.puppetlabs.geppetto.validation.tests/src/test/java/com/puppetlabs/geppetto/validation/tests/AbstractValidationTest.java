@@ -118,6 +118,11 @@ public class AbstractValidationTest {
 			public ValidationPreference getMissingForgeRequiredFields() {
 				return ValidationPreference.IGNORE;
 			}
+
+			@Override
+			public ValidationPreference getModulefileExists() {
+				return ValidationPreference.IGNORE;
+			}
 		});
 		return options;
 	}
