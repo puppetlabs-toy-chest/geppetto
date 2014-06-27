@@ -123,6 +123,8 @@ class ModuleUtil {
 					apiMd.dependencies = metadata.apiDependencies
 				case 'description':
 					apiMd.description = pair.value.string
+				case 'issues_url':
+					apiMd.issuesURL = pair.value.string
 				case 'license':
 					apiMd.license = pair.value.string
 				case 'name':

@@ -7,6 +7,8 @@ public interface Metadata {
 
 	String KEY_DESCRIPTION = "description";
 
+	String KEY_ISSUES_URL = "issues_url";
+
 	String KEY_LICENSE = "license";
 
 	String KEY_NAME = "name";
@@ -26,12 +28,12 @@ public interface Metadata {
 	String KEY_VERSION = "version";
 
 	String[] ALL_KEYS = new String[] {
-			KEY_AUTHOR, KEY_NAME, KEY_DEPENDENCIES, KEY_DESCRIPTION, KEY_LICENSE, KEY_OPERATINGSYSTEM_SUPPORT, KEY_PROJECT_PAGE,
+			KEY_AUTHOR, KEY_NAME, KEY_DEPENDENCIES, KEY_ISSUES_URL, KEY_LICENSE, KEY_OPERATINGSYSTEM_SUPPORT, KEY_PROJECT_PAGE,
 			KEY_REQUIREMENTS, KEY_SOURCE, KEY_SUMMARY, KEY_TAGS, KEY_VERSION };
 
 	String KEY_CHECKSUMS = "checksums";
 
 	String KEY_TYPES = "types";
 
-	String[] DEPRECATED_KEYS = new String[] { KEY_CHECKSUMS, KEY_TYPES };
+	String[] DEPRECATED_KEYS = new String[] { KEY_CHECKSUMS, KEY_DESCRIPTION, KEY_TYPES };
 }

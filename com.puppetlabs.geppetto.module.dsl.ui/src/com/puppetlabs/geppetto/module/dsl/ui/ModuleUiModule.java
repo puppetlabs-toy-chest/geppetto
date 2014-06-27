@@ -6,8 +6,10 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
@@ -24,6 +26,8 @@ import com.puppetlabs.geppetto.module.dsl.ModuleContentHandler;
 import com.puppetlabs.geppetto.module.dsl.ui.builder.ModuleBuildParticipant;
 import com.puppetlabs.geppetto.module.dsl.ui.coloring.ModuleHighlightingConfiguration;
 import com.puppetlabs.geppetto.module.dsl.ui.coloring.ModuleSemanticHighlightingCalculator;
+import com.puppetlabs.geppetto.module.dsl.ui.labeling.ModuleDocumentationProvider;
+import com.puppetlabs.geppetto.module.dsl.ui.labeling.ModuleHover;
 import com.puppetlabs.geppetto.module.dsl.ui.labeling.ModuleHoverProvider;
 import com.puppetlabs.geppetto.module.dsl.ui.preferences.PreferencedBasedValidationAdvisor;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
@@ -42,6 +46,15 @@ public class ModuleUiModule extends AbstractModuleUiModule {
 		IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().put(
 			MODULE_CONTENT_TYPE, new ResourceServiceProviderProvider());
 		Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().put(MODULE_CONTENT_TYPE, new ResourceFactoryDescriptor());
+	}
+
+	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
+		return ModuleDocumentationProvider.class;
+	}
+
+	@Override
+	public Class<? extends IEObjectHover> bindIEObjectHover() {
+		return ModuleHover.class;
 	}
 
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {

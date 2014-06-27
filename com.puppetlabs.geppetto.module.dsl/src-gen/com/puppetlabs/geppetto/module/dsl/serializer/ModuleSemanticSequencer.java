@@ -164,7 +164,7 @@ public class ModuleSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case MetadataPackage.PAIR:
 				if(context == grammarAccess.getMetadataPairRule()) {
-					sequence_AuthorPair_DependenciesPair_DescriptionPair_LicensePair_MetadataPair_NamePair_OperatingsystemSupportPair_ProjectPagePair_RequirementsPair_SourcePair_SummaryPair_TagsPair_VersionPair(context, (Pair) semanticObject); 
+					sequence_AuthorPair_DependenciesPair_IssuesUrlPair_LicensePair_MetadataPair_NamePair_OperatingsystemSupportPair_ProjectPagePair_RequirementsPair_SourcePair_SummaryPair_TagsPair_VersionPair(context, (Pair) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getAuthorPairRule()) {
@@ -175,8 +175,8 @@ public class ModuleSemanticSequencer extends AbstractDelegatingSemanticSequencer
 					sequence_DependenciesPair(context, (Pair) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getDescriptionPairRule()) {
-					sequence_DescriptionPair(context, (Pair) semanticObject); 
+				else if(context == grammarAccess.getIssuesUrlPairRule()) {
+					sequence_IssuesUrlPair(context, (Pair) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getLicensePairRule()) {
@@ -264,7 +264,7 @@ public class ModuleSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     (
 	 *         (name='"author"' value=StringLiteral) | 
 	 *         (name='"dependencies"' value=DependencyArray) | 
-	 *         (name='"description"' value=StringLiteral) | 
+	 *         (name='"issues_url"' value=StringLiteral) | 
 	 *         (name='"license"' value=StringLiteral) | 
 	 *         (name='"name"' value=ModuleName) | 
 	 *         (name='"project_page"' value=StringLiteral) | 
@@ -276,7 +276,7 @@ public class ModuleSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *         (name='"version"' value=Version)
 	 *     )
 	 */
-	protected void sequence_AuthorPair_DependenciesPair_DescriptionPair_LicensePair_MetadataPair_NamePair_OperatingsystemSupportPair_ProjectPagePair_RequirementsPair_SourcePair_SummaryPair_TagsPair_VersionPair(EObject context, Pair semanticObject) {
+	protected void sequence_AuthorPair_DependenciesPair_IssuesUrlPair_LicensePair_MetadataPair_NamePair_OperatingsystemSupportPair_ProjectPagePair_RequirementsPair_SourcePair_SummaryPair_TagsPair_VersionPair(EObject context, Pair semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -355,25 +355,6 @@ public class ModuleSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (name='"description"' value=StringLiteral)
-	 */
-	protected void sequence_DescriptionPair(EObject context, Pair semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, MetadataPackage.Literals.PAIR__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MetadataPackage.Literals.PAIR__NAME));
-			if(transientValues.isValueTransient(semanticObject, MetadataPackage.Literals.PAIR__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MetadataPackage.Literals.PAIR__VALUE));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getDescriptionPairAccess().getNameDescriptionKeyword_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getDescriptionPairAccess().getValueStringLiteralParserRuleCall_2_0(), semanticObject.getValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     value=DOUBLE
 	 */
 	protected void sequence_DoubleLiteral(EObject context, JsonValue semanticObject) {
@@ -384,6 +365,25 @@ public class ModuleSemanticSequencer extends AbstractDelegatingSemanticSequencer
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getDoubleLiteralAccess().getValueDOUBLETerminalRuleCall_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name='"issues_url"' value=StringLiteral)
+	 */
+	protected void sequence_IssuesUrlPair(EObject context, Pair semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, MetadataPackage.Literals.PAIR__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MetadataPackage.Literals.PAIR__NAME));
+			if(transientValues.isValueTransient(semanticObject, MetadataPackage.Literals.PAIR__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MetadataPackage.Literals.PAIR__VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getIssuesUrlPairAccess().getNameIssues_urlKeyword_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getIssuesUrlPairAccess().getValueStringLiteralParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	

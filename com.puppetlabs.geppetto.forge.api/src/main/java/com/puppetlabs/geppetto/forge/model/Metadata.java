@@ -36,6 +36,9 @@ public class Metadata extends Entity {
 	private String description;
 
 	@Expose
+	private String issues_url;
+
+	@Expose
 	private String license;
 
 	@Expose
@@ -131,7 +134,9 @@ public class Metadata extends Entity {
 	 * A description of the module.
 	 *
 	 * @return the description
+	 * @deprecated Use summary for a one-liner or a readme.md if more doc is needed
 	 */
+	@Deprecated
 	public String getDescription() {
 		return description;
 	}
@@ -146,6 +151,15 @@ public class Metadata extends Entity {
 		return dynamicAttributes == null
 				? Collections.<String, Object> emptyMap()
 				: Collections.unmodifiableMap(dynamicAttributes);
+	}
+
+	/**
+	 * URL to issue tracker
+	 *
+	 * @return the description
+	 */
+	public String getIssuesURL() {
+		return issues_url;
 	}
 
 	/**
@@ -268,6 +282,14 @@ public class Metadata extends Entity {
 	 */
 	public void setDescription(String description) {
 		this.description = trimToNull(description);
+	}
+
+	/**
+	 * @param issues_url
+	 *            the issues_url to set
+	 */
+	public void setIssuesURL(String issues_url) {
+		this.issues_url = trimToNull(issues_url);
 	}
 
 	/**

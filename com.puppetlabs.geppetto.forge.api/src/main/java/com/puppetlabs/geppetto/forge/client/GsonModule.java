@@ -207,6 +207,8 @@ public class GsonModule extends AbstractModule {
 					md.setDependencies(context.<List<Dependency>> deserialize(val, DEPENDENCIES_TYPE));
 				else if("description".equals(key))
 					md.setDescription(getString(val));
+				else if("issues_url".equals(key))
+					md.setIssuesURL(getString(val));
 				else if("license".equals(key))
 					md.setLicense(getString(val));
 				else if("name".equals(key))

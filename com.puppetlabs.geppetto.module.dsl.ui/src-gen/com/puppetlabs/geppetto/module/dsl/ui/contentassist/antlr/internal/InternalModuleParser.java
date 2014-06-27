@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalModuleParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_DOUBLE", "RULE_LONG", "RULE_DIGIT", "RULE_EXPONENT", "RULE_WS", "'null'", "'\"author\"'", "'\"dependencies\"'", "'\"description\"'", "'\"license\"'", "'\"name\"'", "'\"operatingsystem\"'", "'\"operatingsystem_support\"'", "'\"operatingsystemrelease\"'", "'\"parameters\"'", "'\"project_page\"'", "'\"requirements\"'", "'\"source\"'", "'\"summary\"'", "'\"tags\"'", "'\"version\"'", "'\"version_requirement\"'", "'true'", "'false'", "'{'", "'}'", "','", "':'", "'['", "']'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_DOUBLE", "RULE_LONG", "RULE_DIGIT", "RULE_EXPONENT", "RULE_WS", "'null'", "'\"author\"'", "'\"dependencies\"'", "'\"issues_url\"'", "'\"license\"'", "'\"name\"'", "'\"operatingsystem\"'", "'\"operatingsystem_support\"'", "'\"operatingsystemrelease\"'", "'\"parameters\"'", "'\"project_page\"'", "'\"requirements\"'", "'\"source\"'", "'\"summary\"'", "'\"tags\"'", "'\"version\"'", "'\"version_requirement\"'", "'true'", "'false'", "'{'", "'}'", "','", "':'", "'['", "']'"
     };
     public static final int T__29=29;
     public static final int T__28=28;
@@ -550,21 +550,21 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleDependenciesPair"
 
 
-    // $ANTLR start "entryRuleDescriptionPair"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:228:1: entryRuleDescriptionPair : ruleDescriptionPair EOF ;
-    public final void entryRuleDescriptionPair() throws RecognitionException {
+    // $ANTLR start "entryRuleIssuesUrlPair"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:228:1: entryRuleIssuesUrlPair : ruleIssuesUrlPair EOF ;
+    public final void entryRuleIssuesUrlPair() throws RecognitionException {
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:229:1: ( ruleDescriptionPair EOF )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:230:1: ruleDescriptionPair EOF
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:229:1: ( ruleIssuesUrlPair EOF )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:230:1: ruleIssuesUrlPair EOF
             {
-             before(grammarAccess.getDescriptionPairRule()); 
-            pushFollow(FOLLOW_ruleDescriptionPair_in_entryRuleDescriptionPair420);
-            ruleDescriptionPair();
+             before(grammarAccess.getIssuesUrlPairRule()); 
+            pushFollow(FOLLOW_ruleIssuesUrlPair_in_entryRuleIssuesUrlPair420);
+            ruleIssuesUrlPair();
 
             state._fsp--;
 
-             after(grammarAccess.getDescriptionPairRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDescriptionPair427); 
+             after(grammarAccess.getIssuesUrlPairRule()); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIssuesUrlPair427); 
 
             }
 
@@ -577,35 +577,35 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleDescriptionPair"
+    // $ANTLR end "entryRuleIssuesUrlPair"
 
 
-    // $ANTLR start "ruleDescriptionPair"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:237:1: ruleDescriptionPair : ( ( rule__DescriptionPair__Group__0 ) ) ;
-    public final void ruleDescriptionPair() throws RecognitionException {
+    // $ANTLR start "ruleIssuesUrlPair"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:237:1: ruleIssuesUrlPair : ( ( rule__IssuesUrlPair__Group__0 ) ) ;
+    public final void ruleIssuesUrlPair() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:241:2: ( ( ( rule__DescriptionPair__Group__0 ) ) )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:242:1: ( ( rule__DescriptionPair__Group__0 ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:241:2: ( ( ( rule__IssuesUrlPair__Group__0 ) ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:242:1: ( ( rule__IssuesUrlPair__Group__0 ) )
             {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:242:1: ( ( rule__DescriptionPair__Group__0 ) )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:243:1: ( rule__DescriptionPair__Group__0 )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:242:1: ( ( rule__IssuesUrlPair__Group__0 ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:243:1: ( rule__IssuesUrlPair__Group__0 )
             {
-             before(grammarAccess.getDescriptionPairAccess().getGroup()); 
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:244:1: ( rule__DescriptionPair__Group__0 )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:244:2: rule__DescriptionPair__Group__0
+             before(grammarAccess.getIssuesUrlPairAccess().getGroup()); 
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:244:1: ( rule__IssuesUrlPair__Group__0 )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:244:2: rule__IssuesUrlPair__Group__0
             {
-            pushFollow(FOLLOW_rule__DescriptionPair__Group__0_in_ruleDescriptionPair453);
-            rule__DescriptionPair__Group__0();
+            pushFollow(FOLLOW_rule__IssuesUrlPair__Group__0_in_ruleIssuesUrlPair453);
+            rule__IssuesUrlPair__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getDescriptionPairAccess().getGroup()); 
+             after(grammarAccess.getIssuesUrlPairAccess().getGroup()); 
 
             }
 
@@ -624,7 +624,7 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleDescriptionPair"
+    // $ANTLR end "ruleIssuesUrlPair"
 
 
     // $ANTLR start "entryRuleLicensePair"
@@ -4497,13 +4497,13 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MetadataPair__Alternatives"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1686:1: rule__MetadataPair__Alternatives : ( ( ruleAuthorPair ) | ( ruleDependenciesPair ) | ( ruleDescriptionPair ) | ( ruleLicensePair ) | ( ruleNamePair ) | ( ruleProjectPagePair ) | ( ruleSourcePair ) | ( ruleSummaryPair ) | ( ruleRequirementsPair ) | ( ruleOperatingsystemSupportPair ) | ( ruleTagsPair ) | ( ruleVersionPair ) | ( ruleUnrecognizedMetadataPair ) );
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1686:1: rule__MetadataPair__Alternatives : ( ( ruleAuthorPair ) | ( ruleDependenciesPair ) | ( ruleIssuesUrlPair ) | ( ruleLicensePair ) | ( ruleNamePair ) | ( ruleProjectPagePair ) | ( ruleSourcePair ) | ( ruleSummaryPair ) | ( ruleRequirementsPair ) | ( ruleOperatingsystemSupportPair ) | ( ruleTagsPair ) | ( ruleVersionPair ) | ( ruleUnrecognizedMetadataPair ) );
     public final void rule__MetadataPair__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1690:1: ( ( ruleAuthorPair ) | ( ruleDependenciesPair ) | ( ruleDescriptionPair ) | ( ruleLicensePair ) | ( ruleNamePair ) | ( ruleProjectPagePair ) | ( ruleSourcePair ) | ( ruleSummaryPair ) | ( ruleRequirementsPair ) | ( ruleOperatingsystemSupportPair ) | ( ruleTagsPair ) | ( ruleVersionPair ) | ( ruleUnrecognizedMetadataPair ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1690:1: ( ( ruleAuthorPair ) | ( ruleDependenciesPair ) | ( ruleIssuesUrlPair ) | ( ruleLicensePair ) | ( ruleNamePair ) | ( ruleProjectPagePair ) | ( ruleSourcePair ) | ( ruleSummaryPair ) | ( ruleRequirementsPair ) | ( ruleOperatingsystemSupportPair ) | ( ruleTagsPair ) | ( ruleVersionPair ) | ( ruleUnrecognizedMetadataPair ) )
             int alt1=13;
             switch ( input.LA(1) ) {
             case 11:
@@ -4618,18 +4618,18 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1703:6: ( ruleDescriptionPair )
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1703:6: ( ruleIssuesUrlPair )
                     {
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1703:6: ( ruleDescriptionPair )
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1704:1: ruleDescriptionPair
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1703:6: ( ruleIssuesUrlPair )
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1704:1: ruleIssuesUrlPair
                     {
-                     before(grammarAccess.getMetadataPairAccess().getDescriptionPairParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleDescriptionPair_in_rule__MetadataPair__Alternatives3577);
-                    ruleDescriptionPair();
+                     before(grammarAccess.getMetadataPairAccess().getIssuesUrlPairParserRuleCall_2()); 
+                    pushFollow(FOLLOW_ruleIssuesUrlPair_in_rule__MetadataPair__Alternatives3577);
+                    ruleIssuesUrlPair();
 
                     state._fsp--;
 
-                     after(grammarAccess.getMetadataPairAccess().getDescriptionPairParserRuleCall_2()); 
+                     after(grammarAccess.getMetadataPairAccess().getIssuesUrlPairParserRuleCall_2()); 
 
                     }
 
@@ -5445,13 +5445,13 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Q_StringOrKey__Alternatives"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1910:1: rule__Q_StringOrKey__Alternatives : ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"description\"' ) | ( '\"license\"' ) | ( '\"name\"' ) | ( '\"operatingsystem\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"operatingsystemrelease\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( '\"version_requirement\"' ) | ( RULE_STRING ) );
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1910:1: rule__Q_StringOrKey__Alternatives : ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"issues_url\"' ) | ( '\"license\"' ) | ( '\"name\"' ) | ( '\"operatingsystem\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"operatingsystemrelease\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( '\"version_requirement\"' ) | ( RULE_STRING ) );
     public final void rule__Q_StringOrKey__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1914:1: ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"description\"' ) | ( '\"license\"' ) | ( '\"name\"' ) | ( '\"operatingsystem\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"operatingsystemrelease\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( '\"version_requirement\"' ) | ( RULE_STRING ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1914:1: ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"issues_url\"' ) | ( '\"license\"' ) | ( '\"name\"' ) | ( '\"operatingsystem\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"operatingsystemrelease\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( '\"version_requirement\"' ) | ( RULE_STRING ) )
             int alt6=17;
             switch ( input.LA(1) ) {
             case 11:
@@ -5578,14 +5578,14 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1931:6: ( '\"description\"' )
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1931:6: ( '\"issues_url\"' )
                     {
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1931:6: ( '\"description\"' )
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1932:1: '\"description\"'
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1931:6: ( '\"issues_url\"' )
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:1932:1: '\"issues_url\"'
                     {
-                     before(grammarAccess.getQ_StringOrKeyAccess().getDescriptionKeyword_2()); 
+                     before(grammarAccess.getQ_StringOrKeyAccess().getIssues_urlKeyword_2()); 
                     match(input,13,FOLLOW_13_in_rule__Q_StringOrKey__Alternatives4155); 
-                     after(grammarAccess.getQ_StringOrKeyAccess().getDescriptionKeyword_2()); 
+                     after(grammarAccess.getQ_StringOrKeyAccess().getIssues_urlKeyword_2()); 
 
                     }
 
@@ -5820,13 +5820,13 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Q_ReqUnknownKey__Alternatives"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2054:1: rule__Q_ReqUnknownKey__Alternatives : ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"description\"' ) | ( '\"license\"' ) | ( '\"operatingsystem\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"operatingsystemrelease\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( RULE_STRING ) );
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2054:1: rule__Q_ReqUnknownKey__Alternatives : ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"issues_url\"' ) | ( '\"license\"' ) | ( '\"operatingsystem\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"operatingsystemrelease\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( RULE_STRING ) );
     public final void rule__Q_ReqUnknownKey__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2058:1: ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"description\"' ) | ( '\"license\"' ) | ( '\"operatingsystem\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"operatingsystemrelease\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( RULE_STRING ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2058:1: ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"issues_url\"' ) | ( '\"license\"' ) | ( '\"operatingsystem\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"operatingsystemrelease\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( RULE_STRING ) )
             int alt7=15;
             switch ( input.LA(1) ) {
             case 11:
@@ -5943,14 +5943,14 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2075:6: ( '\"description\"' )
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2075:6: ( '\"issues_url\"' )
                     {
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2075:6: ( '\"description\"' )
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2076:1: '\"description\"'
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2075:6: ( '\"issues_url\"' )
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2076:1: '\"issues_url\"'
                     {
-                     before(grammarAccess.getQ_ReqUnknownKeyAccess().getDescriptionKeyword_2()); 
+                     before(grammarAccess.getQ_ReqUnknownKeyAccess().getIssues_urlKeyword_2()); 
                     match(input,13,FOLLOW_13_in_rule__Q_ReqUnknownKey__Alternatives4507); 
-                     after(grammarAccess.getQ_ReqUnknownKeyAccess().getDescriptionKeyword_2()); 
+                     after(grammarAccess.getQ_ReqUnknownKeyAccess().getIssues_urlKeyword_2()); 
 
                     }
 
@@ -6155,13 +6155,13 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Q_OsUnknownKey__Alternatives"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2182:1: rule__Q_OsUnknownKey__Alternatives : ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"description\"' ) | ( '\"license\"' ) | ( '\"name\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( '\"version_requirement\"' ) | ( RULE_STRING ) );
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2182:1: rule__Q_OsUnknownKey__Alternatives : ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"issues_url\"' ) | ( '\"license\"' ) | ( '\"name\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( '\"version_requirement\"' ) | ( RULE_STRING ) );
     public final void rule__Q_OsUnknownKey__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2186:1: ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"description\"' ) | ( '\"license\"' ) | ( '\"name\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( '\"version_requirement\"' ) | ( RULE_STRING ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2186:1: ( ( '\"author\"' ) | ( '\"dependencies\"' ) | ( '\"issues_url\"' ) | ( '\"license\"' ) | ( '\"name\"' ) | ( '\"operatingsystem_support\"' ) | ( '\"parameters\"' ) | ( '\"project_page\"' ) | ( '\"requirements\"' ) | ( '\"source\"' ) | ( '\"summary\"' ) | ( '\"tags\"' ) | ( '\"version\"' ) | ( '\"version_requirement\"' ) | ( RULE_STRING ) )
             int alt8=15;
             switch ( input.LA(1) ) {
             case 11:
@@ -6278,14 +6278,14 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2203:6: ( '\"description\"' )
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2203:6: ( '\"issues_url\"' )
                     {
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2203:6: ( '\"description\"' )
-                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2204:1: '\"description\"'
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2203:6: ( '\"issues_url\"' )
+                    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2204:1: '\"issues_url\"'
                     {
-                     before(grammarAccess.getQ_OsUnknownKeyAccess().getDescriptionKeyword_2()); 
+                     before(grammarAccess.getQ_OsUnknownKeyAccess().getIssues_urlKeyword_2()); 
                     match(input,13,FOLLOW_13_in_rule__Q_OsUnknownKey__Alternatives4819); 
-                     after(grammarAccess.getQ_OsUnknownKeyAccess().getDescriptionKeyword_2()); 
+                     after(grammarAccess.getQ_OsUnknownKeyAccess().getIssues_urlKeyword_2()); 
 
                     }
 
@@ -8182,23 +8182,23 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DependenciesPair__Group__2__Impl"
 
 
-    // $ANTLR start "rule__DescriptionPair__Group__0"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2969:1: rule__DescriptionPair__Group__0 : rule__DescriptionPair__Group__0__Impl rule__DescriptionPair__Group__1 ;
-    public final void rule__DescriptionPair__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__IssuesUrlPair__Group__0"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2969:1: rule__IssuesUrlPair__Group__0 : rule__IssuesUrlPair__Group__0__Impl rule__IssuesUrlPair__Group__1 ;
+    public final void rule__IssuesUrlPair__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2973:1: ( rule__DescriptionPair__Group__0__Impl rule__DescriptionPair__Group__1 )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2974:2: rule__DescriptionPair__Group__0__Impl rule__DescriptionPair__Group__1
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2973:1: ( rule__IssuesUrlPair__Group__0__Impl rule__IssuesUrlPair__Group__1 )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2974:2: rule__IssuesUrlPair__Group__0__Impl rule__IssuesUrlPair__Group__1
             {
-            pushFollow(FOLLOW_rule__DescriptionPair__Group__0__Impl_in_rule__DescriptionPair__Group__06382);
-            rule__DescriptionPair__Group__0__Impl();
+            pushFollow(FOLLOW_rule__IssuesUrlPair__Group__0__Impl_in_rule__IssuesUrlPair__Group__06382);
+            rule__IssuesUrlPair__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DescriptionPair__Group__1_in_rule__DescriptionPair__Group__06385);
-            rule__DescriptionPair__Group__1();
+            pushFollow(FOLLOW_rule__IssuesUrlPair__Group__1_in_rule__IssuesUrlPair__Group__06385);
+            rule__IssuesUrlPair__Group__1();
 
             state._fsp--;
 
@@ -8217,35 +8217,35 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DescriptionPair__Group__0"
+    // $ANTLR end "rule__IssuesUrlPair__Group__0"
 
 
-    // $ANTLR start "rule__DescriptionPair__Group__0__Impl"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2981:1: rule__DescriptionPair__Group__0__Impl : ( ( rule__DescriptionPair__NameAssignment_0 ) ) ;
-    public final void rule__DescriptionPair__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__IssuesUrlPair__Group__0__Impl"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2981:1: rule__IssuesUrlPair__Group__0__Impl : ( ( rule__IssuesUrlPair__NameAssignment_0 ) ) ;
+    public final void rule__IssuesUrlPair__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2985:1: ( ( ( rule__DescriptionPair__NameAssignment_0 ) ) )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2986:1: ( ( rule__DescriptionPair__NameAssignment_0 ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2985:1: ( ( ( rule__IssuesUrlPair__NameAssignment_0 ) ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2986:1: ( ( rule__IssuesUrlPair__NameAssignment_0 ) )
             {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2986:1: ( ( rule__DescriptionPair__NameAssignment_0 ) )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2987:1: ( rule__DescriptionPair__NameAssignment_0 )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2986:1: ( ( rule__IssuesUrlPair__NameAssignment_0 ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2987:1: ( rule__IssuesUrlPair__NameAssignment_0 )
             {
-             before(grammarAccess.getDescriptionPairAccess().getNameAssignment_0()); 
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2988:1: ( rule__DescriptionPair__NameAssignment_0 )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2988:2: rule__DescriptionPair__NameAssignment_0
+             before(grammarAccess.getIssuesUrlPairAccess().getNameAssignment_0()); 
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2988:1: ( rule__IssuesUrlPair__NameAssignment_0 )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2988:2: rule__IssuesUrlPair__NameAssignment_0
             {
-            pushFollow(FOLLOW_rule__DescriptionPair__NameAssignment_0_in_rule__DescriptionPair__Group__0__Impl6412);
-            rule__DescriptionPair__NameAssignment_0();
+            pushFollow(FOLLOW_rule__IssuesUrlPair__NameAssignment_0_in_rule__IssuesUrlPair__Group__0__Impl6412);
+            rule__IssuesUrlPair__NameAssignment_0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getDescriptionPairAccess().getNameAssignment_0()); 
+             after(grammarAccess.getIssuesUrlPairAccess().getNameAssignment_0()); 
 
             }
 
@@ -8264,26 +8264,26 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DescriptionPair__Group__0__Impl"
+    // $ANTLR end "rule__IssuesUrlPair__Group__0__Impl"
 
 
-    // $ANTLR start "rule__DescriptionPair__Group__1"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2998:1: rule__DescriptionPair__Group__1 : rule__DescriptionPair__Group__1__Impl rule__DescriptionPair__Group__2 ;
-    public final void rule__DescriptionPair__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__IssuesUrlPair__Group__1"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:2998:1: rule__IssuesUrlPair__Group__1 : rule__IssuesUrlPair__Group__1__Impl rule__IssuesUrlPair__Group__2 ;
+    public final void rule__IssuesUrlPair__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3002:1: ( rule__DescriptionPair__Group__1__Impl rule__DescriptionPair__Group__2 )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3003:2: rule__DescriptionPair__Group__1__Impl rule__DescriptionPair__Group__2
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3002:1: ( rule__IssuesUrlPair__Group__1__Impl rule__IssuesUrlPair__Group__2 )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3003:2: rule__IssuesUrlPair__Group__1__Impl rule__IssuesUrlPair__Group__2
             {
-            pushFollow(FOLLOW_rule__DescriptionPair__Group__1__Impl_in_rule__DescriptionPair__Group__16442);
-            rule__DescriptionPair__Group__1__Impl();
+            pushFollow(FOLLOW_rule__IssuesUrlPair__Group__1__Impl_in_rule__IssuesUrlPair__Group__16442);
+            rule__IssuesUrlPair__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DescriptionPair__Group__2_in_rule__DescriptionPair__Group__16445);
-            rule__DescriptionPair__Group__2();
+            pushFollow(FOLLOW_rule__IssuesUrlPair__Group__2_in_rule__IssuesUrlPair__Group__16445);
+            rule__IssuesUrlPair__Group__2();
 
             state._fsp--;
 
@@ -8302,12 +8302,12 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DescriptionPair__Group__1"
+    // $ANTLR end "rule__IssuesUrlPair__Group__1"
 
 
-    // $ANTLR start "rule__DescriptionPair__Group__1__Impl"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3010:1: rule__DescriptionPair__Group__1__Impl : ( ':' ) ;
-    public final void rule__DescriptionPair__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__IssuesUrlPair__Group__1__Impl"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3010:1: rule__IssuesUrlPair__Group__1__Impl : ( ':' ) ;
+    public final void rule__IssuesUrlPair__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8318,9 +8318,9 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
             // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3015:1: ( ':' )
             // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3016:1: ':'
             {
-             before(grammarAccess.getDescriptionPairAccess().getColonKeyword_1()); 
-            match(input,32,FOLLOW_32_in_rule__DescriptionPair__Group__1__Impl6473); 
-             after(grammarAccess.getDescriptionPairAccess().getColonKeyword_1()); 
+             before(grammarAccess.getIssuesUrlPairAccess().getColonKeyword_1()); 
+            match(input,32,FOLLOW_32_in_rule__IssuesUrlPair__Group__1__Impl6473); 
+             after(grammarAccess.getIssuesUrlPairAccess().getColonKeyword_1()); 
 
             }
 
@@ -8339,21 +8339,21 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DescriptionPair__Group__1__Impl"
+    // $ANTLR end "rule__IssuesUrlPair__Group__1__Impl"
 
 
-    // $ANTLR start "rule__DescriptionPair__Group__2"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3029:1: rule__DescriptionPair__Group__2 : rule__DescriptionPair__Group__2__Impl ;
-    public final void rule__DescriptionPair__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__IssuesUrlPair__Group__2"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3029:1: rule__IssuesUrlPair__Group__2 : rule__IssuesUrlPair__Group__2__Impl ;
+    public final void rule__IssuesUrlPair__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3033:1: ( rule__DescriptionPair__Group__2__Impl )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3034:2: rule__DescriptionPair__Group__2__Impl
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3033:1: ( rule__IssuesUrlPair__Group__2__Impl )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3034:2: rule__IssuesUrlPair__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__DescriptionPair__Group__2__Impl_in_rule__DescriptionPair__Group__26504);
-            rule__DescriptionPair__Group__2__Impl();
+            pushFollow(FOLLOW_rule__IssuesUrlPair__Group__2__Impl_in_rule__IssuesUrlPair__Group__26504);
+            rule__IssuesUrlPair__Group__2__Impl();
 
             state._fsp--;
 
@@ -8372,35 +8372,35 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DescriptionPair__Group__2"
+    // $ANTLR end "rule__IssuesUrlPair__Group__2"
 
 
-    // $ANTLR start "rule__DescriptionPair__Group__2__Impl"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3040:1: rule__DescriptionPair__Group__2__Impl : ( ( rule__DescriptionPair__ValueAssignment_2 ) ) ;
-    public final void rule__DescriptionPair__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__IssuesUrlPair__Group__2__Impl"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3040:1: rule__IssuesUrlPair__Group__2__Impl : ( ( rule__IssuesUrlPair__ValueAssignment_2 ) ) ;
+    public final void rule__IssuesUrlPair__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3044:1: ( ( ( rule__DescriptionPair__ValueAssignment_2 ) ) )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3045:1: ( ( rule__DescriptionPair__ValueAssignment_2 ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3044:1: ( ( ( rule__IssuesUrlPair__ValueAssignment_2 ) ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3045:1: ( ( rule__IssuesUrlPair__ValueAssignment_2 ) )
             {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3045:1: ( ( rule__DescriptionPair__ValueAssignment_2 ) )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3046:1: ( rule__DescriptionPair__ValueAssignment_2 )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3045:1: ( ( rule__IssuesUrlPair__ValueAssignment_2 ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3046:1: ( rule__IssuesUrlPair__ValueAssignment_2 )
             {
-             before(grammarAccess.getDescriptionPairAccess().getValueAssignment_2()); 
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3047:1: ( rule__DescriptionPair__ValueAssignment_2 )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3047:2: rule__DescriptionPair__ValueAssignment_2
+             before(grammarAccess.getIssuesUrlPairAccess().getValueAssignment_2()); 
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3047:1: ( rule__IssuesUrlPair__ValueAssignment_2 )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:3047:2: rule__IssuesUrlPair__ValueAssignment_2
             {
-            pushFollow(FOLLOW_rule__DescriptionPair__ValueAssignment_2_in_rule__DescriptionPair__Group__2__Impl6531);
-            rule__DescriptionPair__ValueAssignment_2();
+            pushFollow(FOLLOW_rule__IssuesUrlPair__ValueAssignment_2_in_rule__IssuesUrlPair__Group__2__Impl6531);
+            rule__IssuesUrlPair__ValueAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getDescriptionPairAccess().getValueAssignment_2()); 
+             after(grammarAccess.getIssuesUrlPairAccess().getValueAssignment_2()); 
 
             }
 
@@ -8419,7 +8419,7 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DescriptionPair__Group__2__Impl"
+    // $ANTLR end "rule__IssuesUrlPair__Group__2__Impl"
 
 
     // $ANTLR start "rule__LicensePair__Group__0"
@@ -18466,30 +18466,30 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DependenciesPair__ValueAssignment_2"
 
 
-    // $ANTLR start "rule__DescriptionPair__NameAssignment_0"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6980:1: rule__DescriptionPair__NameAssignment_0 : ( ( '\"description\"' ) ) ;
-    public final void rule__DescriptionPair__NameAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__IssuesUrlPair__NameAssignment_0"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6980:1: rule__IssuesUrlPair__NameAssignment_0 : ( ( '\"issues_url\"' ) ) ;
+    public final void rule__IssuesUrlPair__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6984:1: ( ( ( '\"description\"' ) ) )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6985:1: ( ( '\"description\"' ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6984:1: ( ( ( '\"issues_url\"' ) ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6985:1: ( ( '\"issues_url\"' ) )
             {
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6985:1: ( ( '\"description\"' ) )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6986:1: ( '\"description\"' )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6985:1: ( ( '\"issues_url\"' ) )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6986:1: ( '\"issues_url\"' )
             {
-             before(grammarAccess.getDescriptionPairAccess().getNameDescriptionKeyword_0_0()); 
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6987:1: ( '\"description\"' )
-            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6988:1: '\"description\"'
+             before(grammarAccess.getIssuesUrlPairAccess().getNameIssues_urlKeyword_0_0()); 
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6987:1: ( '\"issues_url\"' )
+            // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:6988:1: '\"issues_url\"'
             {
-             before(grammarAccess.getDescriptionPairAccess().getNameDescriptionKeyword_0_0()); 
-            match(input,13,FOLLOW_13_in_rule__DescriptionPair__NameAssignment_014276); 
-             after(grammarAccess.getDescriptionPairAccess().getNameDescriptionKeyword_0_0()); 
+             before(grammarAccess.getIssuesUrlPairAccess().getNameIssues_urlKeyword_0_0()); 
+            match(input,13,FOLLOW_13_in_rule__IssuesUrlPair__NameAssignment_014276); 
+             after(grammarAccess.getIssuesUrlPairAccess().getNameIssues_urlKeyword_0_0()); 
 
             }
 
-             after(grammarAccess.getDescriptionPairAccess().getNameDescriptionKeyword_0_0()); 
+             after(grammarAccess.getIssuesUrlPairAccess().getNameIssues_urlKeyword_0_0()); 
 
             }
 
@@ -18508,12 +18508,12 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DescriptionPair__NameAssignment_0"
+    // $ANTLR end "rule__IssuesUrlPair__NameAssignment_0"
 
 
-    // $ANTLR start "rule__DescriptionPair__ValueAssignment_2"
-    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:7003:1: rule__DescriptionPair__ValueAssignment_2 : ( ruleStringLiteral ) ;
-    public final void rule__DescriptionPair__ValueAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__IssuesUrlPair__ValueAssignment_2"
+    // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:7003:1: rule__IssuesUrlPair__ValueAssignment_2 : ( ruleStringLiteral ) ;
+    public final void rule__IssuesUrlPair__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -18524,13 +18524,13 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
             // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:7008:1: ( ruleStringLiteral )
             // ../com.puppetlabs.geppetto.module.dsl.ui/src-gen/com/puppetlabs/geppetto/module/dsl/ui/contentassist/antlr/internal/InternalModule.g:7009:1: ruleStringLiteral
             {
-             before(grammarAccess.getDescriptionPairAccess().getValueStringLiteralParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleStringLiteral_in_rule__DescriptionPair__ValueAssignment_214315);
+             before(grammarAccess.getIssuesUrlPairAccess().getValueStringLiteralParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_ruleStringLiteral_in_rule__IssuesUrlPair__ValueAssignment_214315);
             ruleStringLiteral();
 
             state._fsp--;
 
-             after(grammarAccess.getDescriptionPairAccess().getValueStringLiteralParserRuleCall_2_0()); 
+             after(grammarAccess.getIssuesUrlPairAccess().getValueStringLiteralParserRuleCall_2_0()); 
 
             }
 
@@ -18549,7 +18549,7 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DescriptionPair__ValueAssignment_2"
+    // $ANTLR end "rule__IssuesUrlPair__ValueAssignment_2"
 
 
     // $ANTLR start "rule__LicensePair__NameAssignment_0"
@@ -21230,9 +21230,9 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleDependenciesPair_in_entryRuleDependenciesPair360 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleDependenciesPair367 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DependenciesPair__Group__0_in_ruleDependenciesPair393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDescriptionPair_in_entryRuleDescriptionPair420 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDescriptionPair427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DescriptionPair__Group__0_in_ruleDescriptionPair453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIssuesUrlPair_in_entryRuleIssuesUrlPair420 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIssuesUrlPair427 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IssuesUrlPair__Group__0_in_ruleIssuesUrlPair453 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLicensePair_in_entryRuleLicensePair480 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLicensePair487 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__LicensePair__Group__0_in_ruleLicensePair513 = new BitSet(new long[]{0x0000000000000002L});
@@ -21388,7 +21388,7 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_10_in_ruleNULL3506 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAuthorPair_in_rule__MetadataPair__Alternatives3543 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDependenciesPair_in_rule__MetadataPair__Alternatives3560 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDescriptionPair_in_rule__MetadataPair__Alternatives3577 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIssuesUrlPair_in_rule__MetadataPair__Alternatives3577 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLicensePair_in_rule__MetadataPair__Alternatives3594 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNamePair_in_rule__MetadataPair__Alternatives3611 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleProjectPagePair_in_rule__MetadataPair__Alternatives3628 = new BitSet(new long[]{0x0000000000000002L});
@@ -21516,14 +21516,14 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_32_in_rule__DependenciesPair__Group__1__Impl6288 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DependenciesPair__Group__2__Impl_in_rule__DependenciesPair__Group__26319 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DependenciesPair__ValueAssignment_2_in_rule__DependenciesPair__Group__2__Impl6346 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DescriptionPair__Group__0__Impl_in_rule__DescriptionPair__Group__06382 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_rule__DescriptionPair__Group__1_in_rule__DescriptionPair__Group__06385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DescriptionPair__NameAssignment_0_in_rule__DescriptionPair__Group__0__Impl6412 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DescriptionPair__Group__1__Impl_in_rule__DescriptionPair__Group__16442 = new BitSet(new long[]{0x0000000007FFF810L});
-    public static final BitSet FOLLOW_rule__DescriptionPair__Group__2_in_rule__DescriptionPair__Group__16445 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__DescriptionPair__Group__1__Impl6473 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DescriptionPair__Group__2__Impl_in_rule__DescriptionPair__Group__26504 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DescriptionPair__ValueAssignment_2_in_rule__DescriptionPair__Group__2__Impl6531 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IssuesUrlPair__Group__0__Impl_in_rule__IssuesUrlPair__Group__06382 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_rule__IssuesUrlPair__Group__1_in_rule__IssuesUrlPair__Group__06385 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IssuesUrlPair__NameAssignment_0_in_rule__IssuesUrlPair__Group__0__Impl6412 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IssuesUrlPair__Group__1__Impl_in_rule__IssuesUrlPair__Group__16442 = new BitSet(new long[]{0x0000000007FFF810L});
+    public static final BitSet FOLLOW_rule__IssuesUrlPair__Group__2_in_rule__IssuesUrlPair__Group__16445 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__IssuesUrlPair__Group__1__Impl6473 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IssuesUrlPair__Group__2__Impl_in_rule__IssuesUrlPair__Group__26504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IssuesUrlPair__ValueAssignment_2_in_rule__IssuesUrlPair__Group__2__Impl6531 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__LicensePair__Group__0__Impl_in_rule__LicensePair__Group__06567 = new BitSet(new long[]{0x0000000100000000L});
     public static final BitSet FOLLOW_rule__LicensePair__Group__1_in_rule__LicensePair__Group__06570 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__LicensePair__NameAssignment_0_in_rule__LicensePair__Group__0__Impl6597 = new BitSet(new long[]{0x0000000000000002L});
@@ -21844,8 +21844,8 @@ public class InternalModuleParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleStringLiteral_in_rule__AuthorPair__ValueAssignment_214165 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_12_in_rule__DependenciesPair__NameAssignment_014201 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDependencyArray_in_rule__DependenciesPair__ValueAssignment_214240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__DescriptionPair__NameAssignment_014276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringLiteral_in_rule__DescriptionPair__ValueAssignment_214315 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__IssuesUrlPair__NameAssignment_014276 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringLiteral_in_rule__IssuesUrlPair__ValueAssignment_214315 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_14_in_rule__LicensePair__NameAssignment_014351 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStringLiteral_in_rule__LicensePair__ValueAssignment_214390 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_15_in_rule__NamePair__NameAssignment_014426 = new BitSet(new long[]{0x0000000000000002L});

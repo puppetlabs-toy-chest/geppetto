@@ -130,7 +130,7 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAuthorPairParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDependenciesPairParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cDescriptionPairParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cIssuesUrlPairParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cLicensePairParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cNamePairParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cProjectPagePairParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
@@ -143,11 +143,11 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cUnrecognizedMetadataPairParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
 		
 		//MetadataPair returns Pair:
-		//	AuthorPair | DependenciesPair | DescriptionPair | LicensePair | NamePair | ProjectPagePair | SourcePair | SummaryPair
-		//	| RequirementsPair | OperatingsystemSupportPair | TagsPair | VersionPair | UnrecognizedMetadataPair;
+		//	AuthorPair | DependenciesPair | IssuesUrlPair | LicensePair | NamePair | ProjectPagePair | SourcePair | SummaryPair |
+		//	RequirementsPair | OperatingsystemSupportPair | TagsPair | VersionPair | UnrecognizedMetadataPair;
 		public ParserRule getRule() { return rule; }
 
-		//AuthorPair | DependenciesPair | DescriptionPair | LicensePair | NamePair | ProjectPagePair | SourcePair | SummaryPair |
+		//AuthorPair | DependenciesPair | IssuesUrlPair | LicensePair | NamePair | ProjectPagePair | SourcePair | SummaryPair |
 		//RequirementsPair | OperatingsystemSupportPair | TagsPair | VersionPair | UnrecognizedMetadataPair
 		public Alternatives getAlternatives() { return cAlternatives; }
 
@@ -157,8 +157,8 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		//DependenciesPair
 		public RuleCall getDependenciesPairParserRuleCall_1() { return cDependenciesPairParserRuleCall_1; }
 
-		//DescriptionPair
-		public RuleCall getDescriptionPairParserRuleCall_2() { return cDescriptionPairParserRuleCall_2; }
+		//IssuesUrlPair
+		public RuleCall getIssuesUrlPairParserRuleCall_2() { return cIssuesUrlPairParserRuleCall_2; }
 
 		//LicensePair
 		public RuleCall getLicensePairParserRuleCall_3() { return cLicensePairParserRuleCall_3; }
@@ -255,27 +255,27 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getValueDependencyArrayParserRuleCall_2_0() { return cValueDependencyArrayParserRuleCall_2_0; }
 	}
 
-	public class DescriptionPairElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DescriptionPair");
+	public class IssuesUrlPairElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IssuesUrlPair");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cNameDescriptionKeyword_0_0 = (Keyword)cNameAssignment_0.eContents().get(0);
+		private final Keyword cNameIssues_urlKeyword_0_0 = (Keyword)cNameAssignment_0.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueStringLiteralParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
-		//DescriptionPair returns Pair:
-		//	name="\"description\"" ":" value=StringLiteral;
+		//IssuesUrlPair returns Pair:
+		//	name="\"issues_url\"" ":" value=StringLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//name="\"description\"" ":" value=StringLiteral
+		//name="\"issues_url\"" ":" value=StringLiteral
 		public Group getGroup() { return cGroup; }
 
-		//name="\"description\""
+		//name="\"issues_url\""
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		//"\"description\""
-		public Keyword getNameDescriptionKeyword_0_0() { return cNameDescriptionKeyword_0_0; }
+		//"\"issues_url\""
+		public Keyword getNameIssues_urlKeyword_0_0() { return cNameIssues_urlKeyword_0_0; }
 
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
@@ -1534,7 +1534,7 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cAuthorKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cDependenciesKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cDescriptionKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cIssues_urlKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cLicenseKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cNameKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cOperatingsystemKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
@@ -1551,12 +1551,12 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSTRINGTerminalRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
 		
 		/// * Any key literal or a String * / Q_StringOrKey returns ecore::EString:
-		//	"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"name\"" | "\"operatingsystem\"" |
+		//	"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"name\"" | "\"operatingsystem\"" |
 		//	"\"operatingsystem_support\"" | "\"operatingsystemrelease\"" | "\"parameters\"" | "\"project_page\"" |
 		//	"\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\"" | "\"version_requirement\"" | STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"name\"" | "\"operatingsystem\"" |
+		//"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"name\"" | "\"operatingsystem\"" |
 		//"\"operatingsystem_support\"" | "\"operatingsystemrelease\"" | "\"parameters\"" | "\"project_page\"" |
 		//"\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\"" | "\"version_requirement\"" | STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -1567,8 +1567,8 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		//"\"dependencies\""
 		public Keyword getDependenciesKeyword_1() { return cDependenciesKeyword_1; }
 
-		//"\"description\""
-		public Keyword getDescriptionKeyword_2() { return cDescriptionKeyword_2; }
+		//"\"issues_url\""
+		public Keyword getIssues_urlKeyword_2() { return cIssues_urlKeyword_2; }
 
 		//"\"license\""
 		public Keyword getLicenseKeyword_3() { return cLicenseKeyword_3; }
@@ -1618,7 +1618,7 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cAuthorKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cDependenciesKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cDescriptionKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cIssues_urlKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cLicenseKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cOperatingsystemKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cOperatingsystem_supportKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
@@ -1634,12 +1634,12 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// * Any key literal or a String except the ones recognized by DependencyPair or RequirementPair * / Q_ReqUnknownKey
 		//returns ecore::EString:
-		//	"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"operatingsystem\"" |
+		//	"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"operatingsystem\"" |
 		//	"\"operatingsystem_support\"" | "\"operatingsystemrelease\"" | "\"parameters\"" | "\"project_page\"" |
 		//	"\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\"" | STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"operatingsystem\"" |
+		//"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"operatingsystem\"" |
 		//"\"operatingsystem_support\"" | "\"operatingsystemrelease\"" | "\"parameters\"" | "\"project_page\"" |
 		//"\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\"" | STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -1650,8 +1650,8 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		//"\"dependencies\""
 		public Keyword getDependenciesKeyword_1() { return cDependenciesKeyword_1; }
 
-		//"\"description\""
-		public Keyword getDescriptionKeyword_2() { return cDescriptionKeyword_2; }
+		//"\"issues_url\""
+		public Keyword getIssues_urlKeyword_2() { return cIssues_urlKeyword_2; }
 
 		//"\"license\""
 		public Keyword getLicenseKeyword_3() { return cLicenseKeyword_3; }
@@ -1695,7 +1695,7 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cAuthorKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cDependenciesKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cDescriptionKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cIssues_urlKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cLicenseKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cNameKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cOperatingsystem_supportKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
@@ -1710,12 +1710,12 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSTRINGTerminalRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
 		
 		/// * Any key literal or a String except the ones listed in OSPair * / Q_OsUnknownKey returns ecore::EString:
-		//	"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"name\"" | "\"operatingsystem_support\"" |
+		//	"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"name\"" | "\"operatingsystem_support\"" |
 		//	"\"parameters\"" | "\"project_page\"" | "\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\""
 		//	| "\"version_requirement\"" | STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"name\"" | "\"operatingsystem_support\"" |
+		//"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"name\"" | "\"operatingsystem_support\"" |
 		//"\"parameters\"" | "\"project_page\"" | "\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\""
 		//| "\"version_requirement\"" | STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -1726,8 +1726,8 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		//"\"dependencies\""
 		public Keyword getDependenciesKeyword_1() { return cDependenciesKeyword_1; }
 
-		//"\"description\""
-		public Keyword getDescriptionKeyword_2() { return cDescriptionKeyword_2; }
+		//"\"issues_url\""
+		public Keyword getIssues_urlKeyword_2() { return cIssues_urlKeyword_2; }
 
 		//"\"license\""
 		public Keyword getLicenseKeyword_3() { return cLicenseKeyword_3; }
@@ -1921,7 +1921,7 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 	private MetadataPairElements pMetadataPair;
 	private AuthorPairElements pAuthorPair;
 	private DependenciesPairElements pDependenciesPair;
-	private DescriptionPairElements pDescriptionPair;
+	private IssuesUrlPairElements pIssuesUrlPair;
 	private LicensePairElements pLicensePair;
 	private NamePairElements pNamePair;
 	private OperatingsystemSupportPairElements pOperatingsystemSupportPair;
@@ -2041,8 +2041,8 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MetadataPair returns Pair:
-	//	AuthorPair | DependenciesPair | DescriptionPair | LicensePair | NamePair | ProjectPagePair | SourcePair | SummaryPair
-	//	| RequirementsPair | OperatingsystemSupportPair | TagsPair | VersionPair | UnrecognizedMetadataPair;
+	//	AuthorPair | DependenciesPair | IssuesUrlPair | LicensePair | NamePair | ProjectPagePair | SourcePair | SummaryPair |
+	//	RequirementsPair | OperatingsystemSupportPair | TagsPair | VersionPair | UnrecognizedMetadataPair;
 	public MetadataPairElements getMetadataPairAccess() {
 		return (pMetadataPair != null) ? pMetadataPair : (pMetadataPair = new MetadataPairElements());
 	}
@@ -2071,14 +2071,14 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 		return getDependenciesPairAccess().getRule();
 	}
 
-	//DescriptionPair returns Pair:
-	//	name="\"description\"" ":" value=StringLiteral;
-	public DescriptionPairElements getDescriptionPairAccess() {
-		return (pDescriptionPair != null) ? pDescriptionPair : (pDescriptionPair = new DescriptionPairElements());
+	//IssuesUrlPair returns Pair:
+	//	name="\"issues_url\"" ":" value=StringLiteral;
+	public IssuesUrlPairElements getIssuesUrlPairAccess() {
+		return (pIssuesUrlPair != null) ? pIssuesUrlPair : (pIssuesUrlPair = new IssuesUrlPairElements());
 	}
 	
-	public ParserRule getDescriptionPairRule() {
-		return getDescriptionPairAccess().getRule();
+	public ParserRule getIssuesUrlPairRule() {
+		return getIssuesUrlPairAccess().getRule();
 	}
 
 	//LicensePair returns Pair:
@@ -2493,7 +2493,7 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * Any key literal or a String * / Q_StringOrKey returns ecore::EString:
-	//	"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"name\"" | "\"operatingsystem\"" |
+	//	"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"name\"" | "\"operatingsystem\"" |
 	//	"\"operatingsystem_support\"" | "\"operatingsystemrelease\"" | "\"parameters\"" | "\"project_page\"" |
 	//	"\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\"" | "\"version_requirement\"" | STRING;
 	public Q_StringOrKeyElements getQ_StringOrKeyAccess() {
@@ -2506,7 +2506,7 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// * Any key literal or a String except the ones recognized by DependencyPair or RequirementPair * / Q_ReqUnknownKey
 	//returns ecore::EString:
-	//	"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"operatingsystem\"" |
+	//	"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"operatingsystem\"" |
 	//	"\"operatingsystem_support\"" | "\"operatingsystemrelease\"" | "\"parameters\"" | "\"project_page\"" |
 	//	"\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\"" | STRING;
 	public Q_ReqUnknownKeyElements getQ_ReqUnknownKeyAccess() {
@@ -2518,7 +2518,7 @@ public class ModuleGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * Any key literal or a String except the ones listed in OSPair * / Q_OsUnknownKey returns ecore::EString:
-	//	"\"author\"" | "\"dependencies\"" | "\"description\"" | "\"license\"" | "\"name\"" | "\"operatingsystem_support\"" |
+	//	"\"author\"" | "\"dependencies\"" | "\"issues_url\"" | "\"license\"" | "\"name\"" | "\"operatingsystem_support\"" |
 	//	"\"parameters\"" | "\"project_page\"" | "\"requirements\"" | "\"source\"" | "\"summary\"" | "\"tags\"" | "\"version\""
 	//	| "\"version_requirement\"" | STRING;
 	public Q_OsUnknownKeyElements getQ_OsUnknownKeyAccess() {

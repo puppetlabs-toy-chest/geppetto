@@ -15,7 +15,7 @@ JsonObject:
 MetadataPair returns Pair:
 	AuthorPair
 	| DependenciesPair
-	| DescriptionPair
+	| IssuesUrlPair
 	| LicensePair
 	| NamePair
 	| ProjectPagePair
@@ -33,8 +33,8 @@ AuthorPair returns Pair:
 DependenciesPair returns Pair:
 	name='"dependencies"' ':' value=DependencyArray;
 
-DescriptionPair returns Pair:
-	name='"description"' ':' value=StringLiteral;
+IssuesUrlPair returns Pair:
+	name='"issues_url"' ':' value=StringLiteral;
 
 LicensePair returns Pair:
 	name='"license"' ':' value=StringLiteral;
@@ -162,7 +162,7 @@ StringLiteral returns JsonValue:
 Q_StringOrKey returns ecore::EString:
 	('"author"'
 	| '"dependencies"'
-	| '"description"'
+	| '"issues_url"'
 	| '"license"'
 	| '"name"'
 	| '"operatingsystem"'
@@ -182,7 +182,7 @@ Q_StringOrKey returns ecore::EString:
 Q_ReqUnknownKey returns ecore::EString:
 	('"author"'
 	| '"dependencies"'
-	| '"description"'
+	| '"issues_url"'
 	| '"license"'
 	| '"operatingsystem"'
 	| '"operatingsystem_support"'
@@ -200,7 +200,7 @@ Q_ReqUnknownKey returns ecore::EString:
 Q_OsUnknownKey returns ecore::EString:
 	('"author"'
 	| '"dependencies"'
-	| '"description"'
+	| '"issues_url"'
 	| '"license"'
 	| '"name"'
 	| '"operatingsystem_support"'
