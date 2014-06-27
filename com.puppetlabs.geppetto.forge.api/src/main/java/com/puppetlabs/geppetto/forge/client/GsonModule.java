@@ -248,8 +248,25 @@ public class GsonModule extends AbstractModule {
 			if(!(checksums == null || checksums.isEmpty()))
 				json.add("checksums", serializeChecksums(checksums));
 
+			// Mandatory
 			json.add("dependencies", context.serialize(src.getDependencies(), DEPENDENCIES_TYPE));
-			addProperty(json, "description", src.getDescription());
+
+			// Description is deprecated
+			String tmp = src.getDescription();
+			if(tmp != null)
+				addProperty(json, "description", tmp);
+
+			// Types are deprecated
+			List<com.puppetlabs.geppetto.forge.model.Type> types = src.getTypes();
+			if(!(types == null || types.isEmpty()))
+				json.add("types", context.serialize(types, TYPES_TYPE));
+
+			// Optional
+			tmp = src.getIssuesURL();
+			if(tmp != null)
+				addProperty(json, "issues_url", tmp);
+
+			// Mandatory
 			addProperty(json, "license", src.getLicense());
 			json.addProperty("name", src.getName() == null
 					? ""
@@ -260,11 +277,6 @@ public class GsonModule extends AbstractModule {
 			addProperty(json, "source", src.getSource());
 			addProperty(json, "summary", src.getSummary());
 			json.add("tags", context.serialize(src.getTags(), STRINGS_TYPE));
-
-			// Types are deprecated
-			List<com.puppetlabs.geppetto.forge.model.Type> types = src.getTypes();
-			if(!(types == null || types.isEmpty()))
-				json.add("types", context.serialize(types, TYPES_TYPE));
 
 			json.addProperty("version", src.getVersion() == null
 					? ""
