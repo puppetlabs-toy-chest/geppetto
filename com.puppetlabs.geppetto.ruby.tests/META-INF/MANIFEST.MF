@@ -18,6 +18,6 @@ Require-Bundle: com.puppetlabs.geppetto.ruby,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: com.puppetlabs.geppetto.injectable,
- com.puppetlabs.geppetto.ruby.jruby;resolution:=optional,
- com.puppetlabs.geppetto.ruby.jrubyparser;resolution:=optional
+ com.puppetlabs.geppetto.ruby.jrubyparser;resolution:=optional,
+ org.apache.log4j
 Export-Package: com.puppetlabs.geppetto.ruby.tests

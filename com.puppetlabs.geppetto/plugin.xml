@@ -28,7 +28,7 @@
 		productId="com.puppetlabs.geppetto.ide"> </introProductBinding> </extension> -->
 	<extension point="org.eclipse.ui.newWizards">
 		<primaryWizard id="com.puppetlabs.geppetto.ui.NewManifestWizard" />
-		<primaryWizard id="com.puppetlabs.geppetto.ui.NewModulefileWizard" />
+		<primaryWizard id="com.puppetlabs.geppetto.ui.NewMetadataFileWizard" />
 		<primaryWizard id="com.puppetlabs.geppetto.ui.NewPuppetProjectWizard" />
 		<primaryWizard
 			id="com.puppetlabs.geppetto.ui.NewPuppetModuleProjectWizard" />
@@ -75,5 +75,4 @@
 			id="org.eclipse.e4.ui.css.theme.e4_default" label="%theme.hpux" os="hpux">
 		</theme>
 	</extension>
-
 </plugin>

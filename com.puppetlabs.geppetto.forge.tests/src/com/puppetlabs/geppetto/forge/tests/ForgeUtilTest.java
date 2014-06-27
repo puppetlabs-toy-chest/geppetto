@@ -4,12 +4,13 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.forge.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -32,6 +33,7 @@ import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.forge.util.TarUtils;
+import com.puppetlabs.geppetto.semver.Version;
 
 public class ForgeUtilTest extends AbstractForgeTest {
 
@@ -78,18 +80,28 @@ public class ForgeUtilTest extends AbstractForgeTest {
 	}
 
 	@Test
-	public void changes() {
-		try {
-			File installFolder = getTestOutputFolder("test-changes", true);
-			File resultFolder = getTestOutputFolder("test-changes-result", true);
-			FileUtils.cpR(getTestData("puppetlabs-apache"), installFolder, ModuleUtils.DEFAULT_FILE_FILTER, false, true);
-			fixture.build(installFolder, resultFolder, null, null, null, new Diagnostic());
-			Collection<File> changes = fixture.changes(installFolder, null);
-			assertTrue("Unexpected changes", changes.isEmpty());
-		}
-		catch(IOException e) {
-			fail(e.getMessage());
-		}
+	public void changes() throws Exception {
+		String testModule = "puppetlabs-vcsrepo-1.0.1";
+		File installFolder = getTestOutputFolder("test-changes", true);
+		File resultFolder = getTestOutputFolder("test-changes-result", true);
+		File resultModuleRoot = new File(resultFolder, testModule);
+		FileUtils.cpR(getTestData(testModule), installFolder, ModuleUtils.DEFAULT_FILE_FILTER, false, true);
+		fixture.build(installFolder, resultFolder, null, null, null, new Diagnostic());
+		Collection<File> changes = fixture.changes(installFolder, null);
+		assertTrue("Unexpected changes", changes.isEmpty());
+
+		changes = fixture.changes(resultModuleRoot, null);
+		assertTrue("Unexpected changes", changes.isEmpty());
+
+		File mdJsonFile = new File(installFolder, Forge.METADATA_JSON_NAME);
+		Metadata md = fixture.loadJSONMetadata(mdJsonFile);
+		Version v = md.getVersion();
+		md.setVersion(Version.create(v.getMajor(), v.getMinor(), v.getPatch() + 1));
+		fixture.saveJSONMetadata(md, mdJsonFile);
+
+		changes = fixture.changes(installFolder, null);
+		assertEquals("Unexpected number of changes", 1, changes.size());
+		assertEquals("Change detected on wrong file", mdJsonFile, changes.iterator().next());
 	}
 
 	@Test

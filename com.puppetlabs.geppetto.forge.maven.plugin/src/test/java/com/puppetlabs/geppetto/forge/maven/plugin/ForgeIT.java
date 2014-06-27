@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -12,11 +12,12 @@ package com.puppetlabs.geppetto.forge.maven.plugin;
 
 import java.io.File;
 
-import com.puppetlabs.geppetto.common.os.FileUtils;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+
+import com.puppetlabs.geppetto.common.os.FileUtils;
 
 // @fmtOff
 @SuiteClasses({
@@ -29,11 +30,11 @@ import org.junit.runners.Suite.SuiteClasses;
 // @fmtOn
 @RunWith(Suite.class)
 public class ForgeIT {
-	static final File TEST_POM_DIR = new File(
-		new File(System.getProperty("basedir", ".")), "target/test-classes/unit/publisher");
-
 	@BeforeClass
 	public static void init() {
 		FileUtils.rmR(new File(TEST_POM_DIR, "target"));
 	}
+
+	static final File TEST_POM_DIR = new File(
+		new File(System.getProperty("basedir", ".")), "target/test-projects/publisher");
 }

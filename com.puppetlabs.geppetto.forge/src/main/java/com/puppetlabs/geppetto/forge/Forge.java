@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Map;
 
 import com.google.inject.name.Named;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
@@ -34,6 +35,8 @@ public interface Forge {
 
 	public static final String MODULEFILE_NAME = "Modulefile";
 
+	public static final String CHECKSUMS_JSON_NAME = "checksums.json";
+
 	public static final String METADATA_JSON_NAME = "metadata.json";
 
 	/**
@@ -49,7 +52,7 @@ public interface Forge {
 	/**
 	 * Build a module for release. The end result is a gzipped tar file (.tar.gz) archive that
 	 * contains the module source and a freshly generated metadata.json.
-	 * 
+	 *
 	 * @param moduleSource
 	 *            The module directory
 	 * @param destination
@@ -74,7 +77,7 @@ public interface Forge {
 
 	/**
 	 * List modified files in an installed module
-	 * 
+	 *
 	 * @param path
 	 *            The module directory
 	 * @param filter
@@ -91,11 +94,9 @@ public interface Forge {
 	 * will consult injected {@link MetadataExtractor metadata extractors} to load the initial metadata,
 	 * and then, unless <tt>includeTypesAndChecksums</tt> is <tt>false</tt> reads puppet types from the directory
 	 * &quot;lib/puppet&quot; and generates checksums for all files.
-	 * 
+	 *
 	 * @param moduleDirectory
 	 *            The directory containing the module
-	 * @param includeTypesAndChecksums
-	 *            If set, analyze all types in and generated checksums
 	 * @param filter
 	 *            The filter that is used by the scan. Can be null in which case the injected
 	 *            filter annotated by {@link Named @Named}({@link ForgeConstants#MODULE_FILE_FILTER}) will be used.
@@ -108,14 +109,14 @@ public interface Forge {
 	 * @return The extracted metadata
 	 * @throws IOException
 	 */
-	Metadata createFromModuleDirectory(File moduleDirectory, boolean includeTypesAndChecksums, FileFilter filter,
-			File[] extractedFrom, Diagnostic result) throws IOException;
+	Metadata createFromModuleDirectory(File moduleDirectory, FileFilter filter, File[] extractedFrom, Diagnostic result)
+			throws IOException;
 
 	/**
 	 * Scan for valid directories containing a &quot;metadata.json&quot; or other files recognized by injected
 	 * {@link MetadataExtractor metadata extractors} using the provided <tt>filter</tt> to discriminate unwanted files.
 	 * A directory that contains such a file will not be scanned in turn.
-	 * 
+	 *
 	 * @param modulesRoot
 	 *            The directory where the scan starts. Can be a module in itself.
 	 * @param filter
@@ -127,7 +128,7 @@ public interface Forge {
 
 	/**
 	 * Generate boilerplate for a new module
-	 * 
+	 *
 	 * @param destination
 	 *            The module directory
 	 * @param metadata
@@ -138,7 +139,7 @@ public interface Forge {
 
 	/**
 	 * Extract metadata from a packaged module
-	 * 
+	 *
 	 * @param gzippedTarball
 	 *            The packaged module file in gzipped tar format
 	 * @return The metadata or null if no metadata was present in the file
@@ -149,7 +150,7 @@ public interface Forge {
 	/**
 	 * Consults injected {@link MetadataExtractor metadata extractors} to check if metadata can
 	 * be extracted from the given location.
-	 * 
+	 *
 	 * @param moduleDirectory
 	 * @param filter
 	 *            The filter that is used for selecting the files. Can be null in which case the injected
@@ -161,7 +162,7 @@ public interface Forge {
 	/**
 	 * Checks if the file <tt>source</tt> is a file that one of the injected {@link MetadataExtractor metadata
 	 * extractors} would consider.
-	 * 
+	 *
 	 * @param source
 	 *            The path to check. Should be relative to the expected module root
 	 * @return <tt>true</tt> if the file would be used for metadata extraction
@@ -169,8 +170,18 @@ public interface Forge {
 	boolean isMetadataFile(String source);
 
 	/**
+	 * Load checksums from a JSON file
+	 *
+	 * @param jsonFile
+	 *            The file containing the JSON representation
+	 * @return The resulting checksums
+	 * @throws IOException
+	 */
+	Map<String, byte[]> loadJSONChecksums(File jsonFile) throws IOException;
+
+	/**
 	 * Load metadata from a JSON file
-	 * 
+	 *
 	 * @param jsonFile
 	 *            The file containing the JSON representation
 	 * @return The resulting metadata
@@ -182,8 +193,8 @@ public interface Forge {
 	 * Parse a Modulefile and create a Metadata instance from the result. The parser <i>will not evaluate</i> actual
 	 * ruby code. It
 	 * just parses the code and extracts values from the resulting AST.
-	 * 
-	 * 
+	 *
+	 *
 	 * @param moduleFile
 	 *            The file to parse
 	 * @param result
@@ -197,8 +208,19 @@ public interface Forge {
 	Metadata loadModulefile(File moduleFile, Diagnostic result) throws IOException;
 
 	/**
+	 * Store the given checksums as JSON
+	 *
+	 * @param checksums
+	 *            The checksums to store
+	 * @param jsonFile
+	 *            THe file to create
+	 * @throws IOException
+	 */
+	void saveJSONChecksums(Map<String, byte[]> checksums, File jsonFile) throws IOException;
+
+	/**
 	 * Store the given metadata as JSON
-	 * 
+	 *
 	 * @param md
 	 *            The metadata to store
 	 * @param jsonFile
@@ -209,7 +231,7 @@ public interface Forge {
 
 	/**
 	 * Store the given <code>metadata</code> as a Modulefile (ruby format)
-	 * 
+	 *
 	 * @param metadata
 	 *            The metadata to store
 	 * @param moduleFile

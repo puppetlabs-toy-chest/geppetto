@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -12,7 +12,7 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 
 /**
  * An interface for potential problems preferences.
- * 
+ *
  */
 public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 
@@ -29,28 +29,21 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	/**
 	 * Puppet interprets the strings "false" and "true" as boolean true when they are used in a boolean context.
 	 * This validation preference flags them as "not a boolean value"
-	 * 
+	 *
 	 * @return
 	 */
 	public ValidationPreference booleansInStringForm();
 
 	/**
-	 * How should circular module dependencies be reported (ignore, warning, error).
-	 * 
-	 * @return
-	 */
-	public ValidationPreference circularDependencyPreference();
-
-	/**
 	 * How to validate a dq string - style guide says single quoted should be used if possible.
-	 * 
+	 *
 	 * @return
 	 */
 	public ValidationPreference dqStringNotRequired();
 
 	/**
 	 * How to validate a dq string when it only contains a single interpolated variable.
-	 * 
+	 *
 	 * @return
 	 */
 	public ValidationPreference dqStringNotRequiredVariable();
@@ -58,7 +51,7 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	/**
 	 * How to validate hyphens in non brace enclosed interpolations. In < 2.7 interpolation stops at a hyphen, but
 	 * not in 2.7. Thus when using 2.6 code in 2.7 or vice versa, the result is different.
-	 * 
+	 *
 	 */
 	public ValidationPreference interpolatedNonBraceEnclosedHyphens();
 
@@ -74,7 +67,7 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 
 	/**
 	 * How to validate a literal resource title. Style guide says they should be single quoted.
-	 * 
+	 *
 	 */
 	public ValidationPreference unquotedResourceTitles();
 }

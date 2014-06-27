@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -13,7 +13,7 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 /**
  * Interface declaring diagnostic codess.
  * These can be used for association of quick fixes with errors and warnings.
- * 
+ *
  */
 public interface IPPDiagnostics {
 	public static final String ISSUE_PREFIX = "com.puppetlabs.geppetto.pp.dsl.validation.issue.";
@@ -194,8 +194,6 @@ public interface IPPDiagnostics {
 	public static final String ISSUE__UNSUPPORTED_UNLESS = ISSUE_PREFIX + "UnsupportedUnless";
 
 	public static final String ISSUE__UNQUOTED_INTERPOLATION = ISSUE_PREFIX + "UnquotedInterpolation";
-
-	public static final String ISSUE__CIRCULAR_MODULE_DEPENDENCY = ISSUE_PREFIX + "CircularModuleDependency";
 
 	public static final String ISSUE__RESERVED_NAME = ISSUE_PREFIX + "ReservedName";
 

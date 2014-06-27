@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.puppetlabs.geppetto.module.dsl.tests
+Bundle-Vendor: My Company
+Bundle-Version: 4.2.0.qualifier
+Bundle-SymbolicName: com.puppetlabs.geppetto.module.dsl.tests;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.puppetlabs.geppetto.module.dsl,
+ com.puppetlabs.geppetto.module.dsl.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.junit4,
+ org.eclipse.ui.workbench;resolution:=optional,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
+Import-Package: com.google.inject;version="1.4.0",
+ org.apache.log4j,
+ org.hamcrest.core,
+ org.junit;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

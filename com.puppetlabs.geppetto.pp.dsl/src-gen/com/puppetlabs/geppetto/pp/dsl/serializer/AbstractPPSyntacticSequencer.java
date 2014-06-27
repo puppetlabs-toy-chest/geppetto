@@ -1,8 +1,8 @@
 package com.puppetlabs.geppetto.pp.dsl.serializer;
 
 import com.google.inject.Inject;
-import java.util.List;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;

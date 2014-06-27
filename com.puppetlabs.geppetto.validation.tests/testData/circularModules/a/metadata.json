@@ -1,0 +1,5 @@
+{
+  "name": "stackhammer-a",
+  "version": "1.0.0",
+  "dependencies": [{ "name": "stackhammer/b", "version_requirement": ">= 1.0.0" }]
+}

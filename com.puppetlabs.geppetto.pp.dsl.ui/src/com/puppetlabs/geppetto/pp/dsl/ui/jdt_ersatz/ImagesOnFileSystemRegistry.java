@@ -17,11 +17,13 @@ import java.net.URL;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
+
+import com.google.inject.Singleton;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 
 //import org.eclipse.jdt.core.IJavaElement;
 
@@ -29,9 +31,10 @@ import org.eclipse.swt.graphics.ImageLoader;
 
 /**
  * Image registry that keeps its images on the local file system.
- * 
+ *
  * @since 3.4
  */
+@Singleton
 public class ImagesOnFileSystemRegistry {
 
 	private static final String IMAGE_DIR = "pp-images"; //$NON-NLS-1$

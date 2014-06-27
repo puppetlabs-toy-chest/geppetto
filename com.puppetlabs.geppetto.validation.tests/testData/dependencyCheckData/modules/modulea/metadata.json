@@ -1,0 +1,8 @@
+{
+  "name": "test-modulea",
+  "version": "0.1.1",
+  "dependencies": [
+     {"name": "test/moduleb", "version_requirement": ">= 0.0.1" },
+     {"name": "test/modulec", "version_requirement": ">= 0.0.1" }
+  ]
+}

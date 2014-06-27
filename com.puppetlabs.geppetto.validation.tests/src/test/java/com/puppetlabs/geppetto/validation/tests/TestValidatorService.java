@@ -9,18 +9,19 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.Set;
 
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
-import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
-import com.puppetlabs.geppetto.validation.FileType;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
-import com.puppetlabs.geppetto.validation.ValidationService;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
+import com.puppetlabs.geppetto.module.dsl.validation.ModuleDiagnostics;
+import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
+import com.puppetlabs.geppetto.validation.FileType;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
+import com.puppetlabs.geppetto.validation.ValidationService;
 
 public class TestValidatorService extends AbstractValidationTest {
 
@@ -33,7 +34,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		String code = "$a = ";
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateManifest(chain, code, null);
+		vs.validateManifest(chain, getValidationOptions(), code, null);
 		assertTrue("There should be errors", chain.getChildren().size() != 0);
 	}
 
@@ -42,7 +43,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		String code = "$a = 'a::b'";
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateManifest(chain, code, SubMonitor.convert(null));
+		vs.validateManifest(chain, getValidationOptions(), code, SubMonitor.convert(null));
 		assertTrue("There should be no errors", chain.getChildren().size() == 0);
 	}
 
@@ -60,13 +61,13 @@ public class TestValidatorService extends AbstractValidationTest {
 		options.setFileType(FileType.PUPPET_ROOT);
 		options.setProblemsAdvisor(new DefaultPotentialProblemsAdvisor());
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 
 		int circularity = 0;
 		int otherErrors = 0;
 
 		for(Diagnostic e : chain)
-			if(IPPDiagnostics.ISSUE__CIRCULAR_MODULE_DEPENDENCY.equals(e.getIssue()))
+			if(ModuleDiagnostics.ISSUE__CIRCULAR_DEPENDENCY.equals(e.getIssue()))
 				circularity++;
 			else if(e.getSeverity() >= Diagnostic.ERROR)
 				otherErrors++;
@@ -90,7 +91,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		File manifest = TestDataProvider.getTestFile(new Path("testData/manifests/not_ok_manifest.pp"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateManifest(chain, manifest, SubMonitor.convert(null));
+		vs.validateManifest(chain, getValidationOptions(), manifest, SubMonitor.convert(null));
 		assertTrue("There should be errors", countErrors(chain) > 0);
 	}
 
@@ -99,7 +100,9 @@ public class TestValidatorService extends AbstractValidationTest {
 		File manifest = TestDataProvider.getTestFile(new Path("testData/manifests/ok_manifest.pp"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateManifest(chain, manifest, SubMonitor.convert(null));
+		ValidationOptions options = getValidationOptions();
+		options.setFileType(FileType.SINGLE_SOURCE_FILE);
+		vs.validateManifest(chain, options, manifest, SubMonitor.convert(null));
 		assertTrue("There should be no errors", countErrors(chain) == 0);
 	}
 
@@ -108,13 +111,14 @@ public class TestValidatorService extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/broken/broken-module/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateRepository(chain, root, SubMonitor.convert(null));
+		vs.validateRepository(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
-		asserter.assertErrors(asserter.issue("jruby.syntax.error"));
-		// optionally accept Unknown variables, and hyphen in name, but no other warnings
-		asserter.assertWarnings(
-			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE).optional().greedy(),
-			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME).optional().greedy());
+		asserter.assertErrors(//
+			asserter.messageFragment("mismatched input"), //
+			asserter.issue(ModuleDiagnostics.ISSUE__MISSING_REQUIRED_ATTRIBUTE), //
+			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE), //
+			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME), //
+			asserter.messageFragment("unexpected tIDENTIFIER"));
 	}
 
 	@Test
@@ -122,14 +126,12 @@ public class TestValidatorService extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/test-module/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateRepository(chain, root, SubMonitor.convert(null));
+		vs.validateRepository(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		// no errors
 		asserter.assertErrors();
-		// optionally accept Unknown variables, and hyphen in name, but no other warnings
-		asserter.assertWarnings(
-			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE).optional().greedy(),
-			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME).optional().greedy());
+		// no warnings
+		asserter.assertWarnings();
 	}
 
 	@Test
@@ -137,7 +139,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/broken withSpaces/module"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateRepository(chain, root, SubMonitor.convert(null));
+		vs.validateRepository(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		assertNotEquals("There should be errors", 0, chain.getChildren().size());
 		for(Diagnostic d : chain)
 			if(d instanceof FileDiagnostic) {
@@ -160,7 +162,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		options.setCheckReferences(false);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotEquals("There should be  errors", 0, chain.getChildren().size());
 		Set<String> fileNames = Sets.newHashSet();
 		for(Diagnostic d : chain) {
@@ -189,7 +191,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		options.setCheckReferences(false);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertAll(asserter.issue(IPPDiagnostics.ISSUE__STRING_BOOLEAN).optional().greedy());
 	}
@@ -213,7 +215,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		options.setCheckReferences(false);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		int hyphenWarning = 0;
 		for(Diagnostic e : chain)
 			if(IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN.equals(e.getIssue()) ||

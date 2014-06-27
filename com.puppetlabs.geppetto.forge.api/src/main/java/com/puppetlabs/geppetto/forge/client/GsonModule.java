@@ -41,6 +41,7 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.puppetlabs.geppetto.forge.model.Checksums;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
@@ -52,6 +53,25 @@ import com.puppetlabs.geppetto.semver.VersionRange;
 /**
  */
 public class GsonModule extends AbstractModule {
+	/**
+	 * A json adapter capable of serializing/deserializing the Checksums structure.
+	 */
+	public static class ChecksumsJsonAdapter implements JsonSerializer<Checksums>, JsonDeserializer<Checksums> {
+		@Override
+		public Checksums deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
+			Checksums checksums = new Checksums();
+			checksums.setChecksums(deserializeChecksums(json));
+			return checksums;
+		}
+
+		@Override
+		public JsonElement serialize(Checksums src, Type typeOfSrc, JsonSerializationContext context) {
+			return serializeChecksums(src.getChecksums());
+		}
+
+	}
+
 	/**
 	 * A json adapter capable of serializing/deserializing a version requirement as a string.
 	 */
@@ -131,40 +151,10 @@ public class GsonModule extends AbstractModule {
 	 * A json adapter capable of serializing/deserializing the metadata structure.
 	 */
 	public static class MetadataJsonAdapter implements JsonSerializer<Metadata>, JsonDeserializer<Metadata> {
-		// @fmtOff
-		public static final Type TYPES_TYPE = new TypeToken<List<com.puppetlabs.geppetto.forge.model.Type>>() {}.getType();
-		public static final Type DEPENDENCIES_TYPE = new TypeToken<List<Dependency>>() {}.getType();
-		public static final Type REQUIREMENTS_TYPE = new TypeToken<List<Requirement>>() {}.getType();
-		public static final Type SUPPORTEDOS_TYPE = new TypeToken<List<SupportedOS>>() {}.getType();
-		// @fmtOn
-
 		private static void addProperty(JsonObject obj, String key, String value) {
 			obj.addProperty(key, value == null
 					? ""
 					: value);
-		}
-
-		private static void appendHex(StringBuilder bld, byte b) {
-			bld.append(hexChars[(b & 0xf0) >> 4]);
-			bld.append(hexChars[b & 0x0f]);
-		}
-
-		private static Map<String, byte[]> deserializeChecksums(JsonElement json) throws JsonParseException {
-
-			Set<Map.Entry<String, JsonElement>> entrySet = json.getAsJsonObject().entrySet();
-			Map<String, byte[]> result = new HashMap<String, byte[]>(entrySet.size());
-			for(Map.Entry<String, JsonElement> entry : entrySet) {
-				String hexString = entry.getValue().getAsString();
-				int top = hexString.length() / 2;
-				byte[] bytes = new byte[top];
-				for(int idx = 0, cidx = 0; idx < top; ++idx) {
-					int val = hexToByte(hexString.charAt(cidx++)) << 4;
-					val |= hexToByte(hexString.charAt(cidx++));
-					bytes[idx] = (byte) (val & 0xff);
-				}
-				result.put(entry.getKey(), bytes);
-			}
-			return result;
 		}
 
 		private static List<SupportedOS> deserializeSupportedOs(JsonElement supportedOS,
@@ -189,24 +179,14 @@ public class GsonModule extends AbstractModule {
 			return result;
 		}
 
-		private static int hexToByte(char c) {
-			return c >= 'a'
-					? c - ('a' - 10)
-					: c - '0';
-		}
+		// @fmtOff
+		public static final Type TYPES_TYPE = new TypeToken<List<com.puppetlabs.geppetto.forge.model.Type>>() {}.getType();
+		public static final Type DEPENDENCIES_TYPE = new TypeToken<List<Dependency>>() {}.getType();
 
-		private static JsonElement serializeChecksums(Map<String, byte[]> src) {
-			JsonObject result = new JsonObject();
-			StringBuilder hexBuilder = new StringBuilder(32);
-			for(Map.Entry<String, byte[]> entry : src.entrySet()) {
-				hexBuilder.setLength(0);
-				byte[] bytes = entry.getValue();
-				for(int idx = 0; idx < bytes.length; ++idx)
-					appendHex(hexBuilder, bytes[idx]);
-				result.addProperty(entry.getKey(), hexBuilder.toString());
-			}
-			return result;
-		}
+		public static final Type REQUIREMENTS_TYPE = new TypeToken<List<Requirement>>() {}.getType();
+
+		public static final Type SUPPORTEDOS_TYPE = new TypeToken<List<SupportedOS>>() {}.getType();
+		// @fmtOn
 
 		@Override
 		public Metadata deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -260,7 +240,12 @@ public class GsonModule extends AbstractModule {
 		public JsonElement serialize(Metadata src, Type typeOfSrc, JsonSerializationContext context) {
 			JsonObject json = new JsonObject();
 			addProperty(json, "author", src.getAuthor());
-			json.add("checksums", serializeChecksums(src.getChecksums()));
+
+			// Checksums are deprecated (moved to separate file)
+			Map<String, byte[]> checksums = src.getChecksums();
+			if(!(checksums == null || checksums.isEmpty()))
+				json.add("checksums", serializeChecksums(checksums));
+
 			json.add("dependencies", context.serialize(src.getDependencies(), DEPENDENCIES_TYPE));
 			addProperty(json, "description", src.getDescription());
 			addProperty(json, "license", src.getLicense());
@@ -273,7 +258,12 @@ public class GsonModule extends AbstractModule {
 			addProperty(json, "source", src.getSource());
 			addProperty(json, "summary", src.getSummary());
 			json.add("tags", context.serialize(src.getTags(), STRINGS_TYPE));
-			json.add("types", context.serialize(src.getTypes(), TYPES_TYPE));
+
+			// Types are deprecated
+			List<com.puppetlabs.geppetto.forge.model.Type> types = src.getTypes();
+			if(!(types == null || types.isEmpty()))
+				json.add("types", context.serialize(types, TYPES_TYPE));
+
 			json.addProperty("version", src.getVersion() == null
 					? ""
 					: src.getVersion().toString());
@@ -317,25 +307,6 @@ public class GsonModule extends AbstractModule {
 		}
 	}
 
-	public static final Type STRINGS_TYPE = new TypeToken<List<String>>() {
-	}.getType();
-
-	public static final MetadataJsonAdapter METADATA_ADAPTER = new MetadataJsonAdapter();
-
-	public static final VersionJsonAdapter VERSION_ADAPTER = new VersionJsonAdapter();
-
-	public static final VersionRangeJsonAdapter VERSION_RANGE_ADAPTER = new VersionRangeJsonAdapter();
-
-	public static GsonModule INSTANCE = new GsonModule();
-
-	private static final Pattern ISO_8601_PTRN = Pattern.compile("^(\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d)(Z|(?:[+-]\\d\\d:\\d\\d))$");
-
-	private static final SimpleDateFormat ISO_8601_TZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-
-	private static final SimpleDateFormat HR_8601_TZ = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
-
-	private static char[] hexChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-
 	public static void addProperty(JsonObject json, String key, Boolean value) {
 		if(value != null)
 			json.addProperty(key, value);
@@ -354,6 +325,29 @@ public class GsonModule extends AbstractModule {
 	public static void addProperty(JsonObject json, String key, String value) {
 		if(value != null)
 			json.addProperty(key, value);
+	}
+
+	private static void appendHex(StringBuilder bld, byte b) {
+		bld.append(hexChars[(b & 0xf0) >> 4]);
+		bld.append(hexChars[b & 0x0f]);
+	}
+
+	private static Map<String, byte[]> deserializeChecksums(JsonElement json) throws JsonParseException {
+
+		Set<Map.Entry<String, JsonElement>> entrySet = json.getAsJsonObject().entrySet();
+		Map<String, byte[]> result = new HashMap<String, byte[]>(entrySet.size());
+		for(Map.Entry<String, JsonElement> entry : entrySet) {
+			String hexString = entry.getValue().getAsString();
+			int top = hexString.length() / 2;
+			byte[] bytes = new byte[top];
+			for(int idx = 0, cidx = 0; idx < top; ++idx) {
+				int val = hexToByte(hexString.charAt(cidx++)) << 4;
+				val |= hexToByte(hexString.charAt(cidx++));
+				bytes[idx] = (byte) (val & 0xff);
+			}
+			result.put(entry.getKey(), bytes);
+		}
+		return result;
 	}
 
 	public static Boolean getBoolean(JsonElement json) {
@@ -386,6 +380,38 @@ public class GsonModule extends AbstractModule {
 				: json.getAsString();
 	}
 
+	private static int hexToByte(char c) {
+		return c >= 'a'
+				? c - ('a' - 10)
+				: c - '0';
+	}
+
+	private static JsonElement serializeChecksums(Map<String, byte[]> src) {
+		JsonObject result = new JsonObject();
+		StringBuilder hexBuilder = new StringBuilder(32);
+		for(Map.Entry<String, byte[]> entry : src.entrySet()) {
+			hexBuilder.setLength(0);
+			byte[] bytes = entry.getValue();
+			for(int idx = 0; idx < bytes.length; ++idx)
+				appendHex(hexBuilder, bytes[idx]);
+			result.addProperty(entry.getKey(), hexBuilder.toString());
+		}
+		return result;
+	}
+
+	public static final Type STRINGS_TYPE = new TypeToken<List<String>>() {
+	}.getType();
+
+	public static GsonModule INSTANCE = new GsonModule();
+
+	private static final Pattern ISO_8601_PTRN = Pattern.compile("^(\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d)(Z|(?:[+-]\\d\\d:\\d\\d))$");
+
+	private static final SimpleDateFormat ISO_8601_TZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+	private static final SimpleDateFormat HR_8601_TZ = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
+
+	private static char[] hexChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+
 	private final GsonBuilder gsonBuilder;
 
 	private final Gson gson;
@@ -394,11 +420,12 @@ public class GsonModule extends AbstractModule {
 		gsonBuilder = new GsonBuilder();
 		gsonBuilder.excludeFieldsWithoutExposeAnnotation();
 		gsonBuilder.setPrettyPrinting();
-		gsonBuilder.registerTypeAdapter(VersionRange.class, VERSION_RANGE_ADAPTER);
-		gsonBuilder.registerTypeAdapter(Version.class, VERSION_ADAPTER);
+		gsonBuilder.registerTypeAdapter(Checksums.class, new ChecksumsJsonAdapter());
+		gsonBuilder.registerTypeAdapter(VersionRange.class, new VersionRangeJsonAdapter());
+		gsonBuilder.registerTypeAdapter(Version.class, new VersionJsonAdapter());
 		gsonBuilder.registerTypeAdapter(Dependency.class, DEPENDENCY_ADAPTER);
 		gsonBuilder.registerTypeAdapter(ModuleName.class, MODULE_NAME_ADAPTER);
-		gsonBuilder.registerTypeAdapter(Metadata.class, METADATA_ADAPTER);
+		gsonBuilder.registerTypeAdapter(Metadata.class, new MetadataJsonAdapter());
 		gsonBuilder.registerTypeAdapter(Date.class, new DateJsonAdapter());
 		gsonBuilder.registerTypeAdapter(InlineJson.class, new InlineJsonAdapter());
 

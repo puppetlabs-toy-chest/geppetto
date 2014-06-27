@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
-<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xtext to Maven" buildRoot="target/xtext-maven-repo" packedStrategy="UNPACK_AS_SIBLING" mavenResult="true" strictMavenVersions="true">
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xtext to Maven" buildRoot="target/xtext-maven-repo" packedStrategy="SKIP" mavenResult="true" strictMavenVersions="true">
   <validationSets label="main">
     <contributions label="Xtext">
-      <repositories location="http://download.eclipse.org/releases/kepler">
+      <repositories location="xtextcomposite">
         <bundles name="org.eclipse.xtext"/>
         <bundles name="org.eclipse.xtext.junit4"/>
+        <bundles name="org.eclipse.xtext.xbase.lib"/>
+        <bundles name="org.eclipse.xtext.xbase"/>
+        <bundles name="org.eclipse.xtext.common.types"/>
         <mapRules xsi:type="aggregator:ExclusionRule" name="org.eclipse.jdt.annotation"/>
         <mapRules xsi:type="aggregator:ExclusionRule" name="org.eclipse.jdt.core"/>
         <mapRules xsi:type="aggregator:ExclusionRule" name="org.eclipse.jdt.launching"/>
@@ -18,10 +21,7 @@
         <mapRules xsi:type="aggregator:ExclusionRule" name="org.eclipse.xtend"/>
         <mapRules xsi:type="aggregator:ExclusionRule" name="org.eclipse.xtend.typesystem.emf"/>
         <mapRules xsi:type="aggregator:ExclusionRule" name="org.eclipse.xtext.smap"/>
-        <mapRules xsi:type="aggregator:ExclusionRule" name="org.objectweb.asm"/>
         <mapRules xsi:type="aggregator:ExclusionRule" name="javax.inject"/>
-        <mapRules xsi:type="aggregator:ExclusionRule" name="com.google.inject"/>
-        <mapRules xsi:type="aggregator:ExclusionRule" name="com.google.guava"/>
         <mapRules xsi:type="aggregator:ExclusionRule" name="javax.xml"/>
       </repositories>
     </contributions>

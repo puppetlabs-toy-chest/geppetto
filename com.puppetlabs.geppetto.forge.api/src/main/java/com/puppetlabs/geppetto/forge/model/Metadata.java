@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -69,7 +69,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * Add a named value to the dynamic attribute map of this instance.
-	 * 
+	 *
 	 * @param name
 	 * @param value
 	 */
@@ -100,7 +100,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * The verbose name of the author of this module.
-	 * 
+	 *
 	 * @return the author
 	 */
 	public String getAuthor() {
@@ -109,16 +109,18 @@ public class Metadata extends Entity {
 
 	/**
 	 * A map with filename &lt;-&gt; checksum entries for each file in the module
-	 * 
+	 *
 	 * @return An unmodifiable map of checksums
+	 * @deprecated Checksums are stored in a separater checksums.json file
 	 */
+	@Deprecated
 	public Map<String, byte[]> getChecksums() {
 		return checksums;
 	}
 
 	/**
 	 * The list of module dependencies.
-	 * 
+	 *
 	 * @return An unmodifiable list of dependencies.
 	 */
 	public List<Dependency> getDependencies() {
@@ -127,7 +129,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * A description of the module.
-	 * 
+	 *
 	 * @return the description
 	 */
 	public String getDescription() {
@@ -137,7 +139,7 @@ public class Metadata extends Entity {
 	/**
 	 * Returns a map of attributes that were present in the JSON for this metadata
 	 * but not recognized as proper attributes.
-	 * 
+	 *
 	 * @return An unmodifiable Map of dynamic attributes, possibly empty but never null.
 	 */
 	public Map<String, Object> getDynamicAttributes() {
@@ -148,7 +150,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * The license pertaining to this module.
-	 * 
+	 *
 	 * @return the license
 	 */
 	public String getLicense() {
@@ -157,7 +159,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * The qualified name of the module.
-	 * 
+	 *
 	 * @return the qualified name
 	 */
 	public ModuleName getName() {
@@ -173,7 +175,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * A URL that points to the project page for this module.
-	 * 
+	 *
 	 * @return the project_page
 	 */
 	public String getProjectPage() {
@@ -189,7 +191,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * A URL that points to the source for this module.
-	 * 
+	 *
 	 * @return the source
 	 */
 	public String getSource() {
@@ -198,7 +200,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * A brief summary
-	 * 
+	 *
 	 * @return the summary
 	 */
 	public String getSummary() {
@@ -207,7 +209,7 @@ public class Metadata extends Entity {
 
 	/**
 	 * The list of Tags that this module includes.
-	 * 
+	 *
 	 * @return An unmodifiable list of tags or an emtpy list.
 	 */
 	public List<String> getTags() {
@@ -216,16 +218,18 @@ public class Metadata extends Entity {
 
 	/**
 	 * The list of Types that this module includes.
-	 * 
+	 *
 	 * @return An unmodifiable list of types
+	 * @deprecated Types are no longer stored in the metadata.json file
 	 */
+	@Deprecated
 	public List<Type> getTypes() {
 		return types;
 	}
 
 	/**
 	 * The version of the module.
-	 * 
+	 *
 	 * @return the version
 	 */
 	public Version getVersion() {
@@ -243,7 +247,9 @@ public class Metadata extends Entity {
 	/**
 	 * @param checksums
 	 *            the checksums to set
+	 * @deprecated Checksums are stored in a separater checksums.json file
 	 */
+	@Deprecated
 	public void setChecksums(Map<String, byte[]> checksums) {
 		this.checksums = asUnmodifiableMap(checksums);
 	}
@@ -331,7 +337,9 @@ public class Metadata extends Entity {
 	/**
 	 * @param types
 	 *            the types to set
+	 * @deprecated Types are no longer stored in the metadata.json file
 	 */
+	@Deprecated
 	public void setTypes(List<Type> types) {
 		this.types = asUnmodifiableList(types);
 	}

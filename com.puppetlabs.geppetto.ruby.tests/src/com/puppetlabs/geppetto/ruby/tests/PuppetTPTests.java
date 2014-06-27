@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -25,6 +25,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -46,6 +47,8 @@ import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
 import com.puppetlabs.geppetto.ruby.RubyHelper;
 
 public class PuppetTPTests {
+
+	private static final Logger log = Logger.getLogger(PuppetTPTests.class);
 
 	private static final String PUPPET_DOWNLOADS = "http://downloads.puppetlabs.com/";
 
@@ -153,9 +156,9 @@ public class PuppetTPTests {
 			helper.loadPuppetVariables(target);
 
 			for(Type t : target.getTypes())
-				System.err.println("Found t: " + t.getName());
+				log.info("Found t: " + t.getName());
 			for(Function f : target.getFunctions())
-				System.err.println("Found f: " + f.getName());
+				log.info("Found f: " + f.getName());
 
 			// Load (optional) any plugins
 			List<TargetEntry> plugins = helper.loadPluginsTarget(pluginsDir);
@@ -170,7 +173,7 @@ public class PuppetTPTests {
 			for(TargetEntry entry : plugins)
 				targetResource.getContents().add(entry);
 			targetResource.save(null);
-			System.err.println("Target saved to: " + fileURI.toString());
+			log.info("Target saved to: " + fileURI.toString());
 
 		}
 		finally {
@@ -192,7 +195,7 @@ public class PuppetTPTests {
 	/**
 	 * This is a really odd place to do this, but since the other generators of pptp modesl
 	 * are here...
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -208,7 +211,7 @@ public class PuppetTPTests {
 		// Add all (optional) plugins
 		targetResource.getContents().add(facter.asPPTP());
 		targetResource.save(null);
-		System.err.println("Target saved to: " + fileURI.toString());
+		log.info("Target saved to: " + fileURI.toString());
 
 	}
 
@@ -225,7 +228,7 @@ public class PuppetTPTests {
 		// Add all (optional) plugins
 		targetResource.getContents().add(facter.asPPTP());
 		targetResource.save(null);
-		System.err.println("Target saved to: " + fileURI.toString());
+		log.info("Target saved to: " + fileURI.toString());
 
 	}
 
@@ -381,7 +384,7 @@ public class PuppetTPTests {
 	 * for(Function f : target.getFunctions())
 	 * System.err.println("Found f: " + f.getName());
 	 * assertEquals("Should have found 29 functions", 29, target.getFunctions().size());
-	 * 
+	 *
 	 * // Save the TargetEntry as a loadable resource
 	 * ResourceSet resourceSet = new ResourceSetImpl();
 	 * URI fileURI = URI.createFileURI(new File("puppet-2.6.4_0.pptp").getAbsolutePath());
@@ -389,12 +392,12 @@ public class PuppetTPTests {
 	 * targetResource.getContents().add(target);
 	 * targetResource.save(null);
 	 * System.err.println("Target saved to: " + fileURI.toString());
-	 * 
+	 *
 	 * }
 	 * finally {
 	 * helper.tearDown();
 	 * }
-	 * 
+	 *
 	 * }
 	 */
 }

@@ -34,7 +34,27 @@
                     definitionId="com.puppetlabs.geppetto.pp.dsl.PP.Editor.opened">
             </reference>
          </activeWhen>
-      </handler>
+      	</handler>
+      	<!-- copy qualified name -->
+        <handler
+            class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+            <activeWhen>
+				<reference definitionId="com.puppetlabs.geppetto.pp.dsl.PP.Editor.opened" />
+            </activeWhen>
+        </handler>
+        <handler
+            class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+            <activeWhen>
+            	<and>
+            		<reference definitionId="com.puppetlabs.geppetto.pp.dsl.PP.XtextEditor.opened" />
+	                <iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+            </activeWhen>
+        </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
         <definition id="com.puppetlabs.geppetto.pp.dsl.PP.Editor.opened">
@@ -47,13 +67,29 @@
                 </with>        
             </and>
         </definition>
+        <definition id="com.puppetlabs.geppetto.pp.dsl.PP.XtextEditor.opened">
+            <and>
+                <reference definitionId="isXtextEditorActive"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="com.puppetlabs.geppetto.pp.dsl.PP" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
     </extension>
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
+              class="org.eclipse.ui.internal.dialogs.EmptyPreferencePage"
+              id="com.puppetlabs.geppetto.puppet.ui"
+              name="Puppet">
+        </page>
+        <page
+              category="com.puppetlabs.geppetto.puppet.ui"
               class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPGeneralPreferencePage"
               id="com.puppetlabs.geppetto.pp.dsl.PP"
-              name="Puppet">
+              name="PP">
             <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
         </page>
         <page
@@ -93,15 +129,6 @@
               class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPEnvironmentPreferencePage"
               id="com.puppetlabs.geppetto.pp.dsl.PP.environment"
               name="Environment">
-           <keywordReference
-                 id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP">
-           </keywordReference>
-        </page>
-        <page
-              category="com.puppetlabs.geppetto.pp.dsl.PP"
-              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPForgePreferencePage"
-              id="com.puppetlabs.geppetto.pp.dsl.PP.forge"
-              name="Puppet Forge">
            <keywordReference
                  id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP">
            </keywordReference>
@@ -174,6 +201,19 @@
             id="com.puppetlabs.geppetto.pp.dsl.PP.validate"
             name="Validate">
       </command>
+      <!-- copy qualified name -->
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
         <menuContribution
@@ -188,6 +228,36 @@
                 </reference>
             </visibleWhen>
          </command>  
+         </menuContribution>
+         <!-- copy qualified name -->
+         <menuContribution locationURI="popup:#TextEditorContext?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+         		style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="com.puppetlabs.geppetto.pp.dsl.PP.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="menu:edit?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            	style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="com.puppetlabs.geppetto.pp.dsl.PP.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+				style="push" tooltip="Copy Qualified Name">
+         		<visibleWhen checkEnabled="false">
+	            	<and>
+	            		<reference definitionId="com.puppetlabs.geppetto.pp.dsl.PP.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
          </menuContribution>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -229,7 +299,28 @@
     </extension>
 
 
-
+    <!-- marker definitions for com.puppetlabs.geppetto.pp.dsl.PP -->
+    <extension
+            id="pp.check.fast"
+            name="PP Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="pp.check.normal"
+            name="PP Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="pp.check.expensive"
+            name="PP Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -295,10 +386,9 @@
           id="modulefileBuilder"
           name="Puppet Modulefile Builder"
           point="org.eclipse.core.resources.builders">
-       <builder
-             hasNature="true">
+       <builder hasNature="false">
           <run
-                class="com.puppetlabs.geppetto.pp.dsl.ui.builder.PPModuleMetadataBuilder">
+                class="com.puppetlabs.geppetto.pp.dsl.ui.builder.ModulefileBuilder">
           </run>
        </builder>
     </extension>
@@ -311,9 +401,6 @@
                 class="com.puppetlabs.geppetto.pp.dsl.ui.builder.PuppetNature">
           </run>
        </runtime>
-       <builder
-             id="com.puppetlabs.geppetto.pp.dsl.ui.modulefileBuilder">
-       </builder>
     </extension>
     <extension
           point="org.eclipse.ui.popupMenus">
@@ -330,17 +417,6 @@
                 menubarPath="additions">
           </action>
        </objectContribution>
-    </extension>
-    <extension
-          id="puppetModuleProblem"
-          name="Puppet Module Problem"
-          point="org.eclipse.core.resources.markers">
-       <super
-             type="org.eclipse.core.resources.problemmarker">
-       </super>
-       <persistent
-             value="true">
-       </persistent>
     </extension>
     <extension
           point="org.eclipse.xtext.extension_resourceServiceProvider">
@@ -428,61 +504,85 @@
        </decorator>
     </extension>
     <extension
-          point="org.eclipse.ui.propertyPages">
+            point="org.eclipse.ui.propertyPages">
+        <page
+              class="org.eclipse.ui.internal.dialogs.EmptyPropertyPage"
+              id="com.puppetlabs.geppetto.puppet.ui"
+              name="Puppet">
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
        <page
-             adaptable="true"
+             category="com.puppetlabs.geppetto.puppet.ui"
              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPropertiesRootPage"
              id="com.puppetlabs.geppetto.pp.dsl.PP.properties"
-             name="Puppet Project Properties"
-             objectClass="org.eclipse.core.resources.IProject">
+             name="Puppet Project Properties">
+             <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
        </page>
        <page
-             adaptable="true"
              category="com.puppetlabs.geppetto.pp.dsl.PP.properties"
              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPEnvironmentPreferencePage"
              id="com.puppetlabs.geppetto.pp.dsl.PP.environment"
-             name="Puppet Environment"
-             objectClass="org.eclipse.core.resources.IProject">
+             name="Puppet Environment">
+            <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
        </page>
        <page
-             adaptable="true"
              category="com.puppetlabs.geppetto.pp.dsl.PP.properties"
              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPathPreferencePage"
              id="com.puppetlabs.geppetto.pp.dsl.PP.searchPath"
-             name="Puppet Search Path"
-             objectClass="org.eclipse.core.resources.IProject">
+             name="Puppet Search Path">
+            <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
        </page>
        <page
-             adaptable="true"
              category="com.puppetlabs.geppetto.pp.dsl.PP.properties"
              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPSaveActionsPreferencePage"
              id="com.puppetlabs.geppetto.pp.dsl.PP.saveactions"
-             name="Save Actions"
-             objectClass="org.eclipse.core.resources.IProject">
+             name="Save Actions">
+            <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
        </page>
        <page
-             adaptable="true"
              category="com.puppetlabs.geppetto.pp.dsl.PP.properties"
              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPFormatterPreferencePage"
              id="com.puppetlabs.geppetto.pp.dsl.PP.formatter"
-             name="Formatter"
-             objectClass="org.eclipse.core.resources.IProject">
+             name="Formatter">
+            <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
        </page>
        <page
-             adaptable="true"
              category="com.puppetlabs.geppetto.pp.dsl.PP.formatter"
              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPCommentsPreferencePage"
              id="com.puppetlabs.geppetto.pp.dsl.PP.formatter.comments"
-             name="Comments"
-             objectClass="org.eclipse.core.resources.IProject">
+             name="Comments">
+            <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
        </page>
        <page
-             adaptable="true"
              category="com.puppetlabs.geppetto.pp.dsl.PP.formatter"
              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPBreakAndAlignPreferencePage"
              id="com.puppetlabs.geppetto.pp.dsl.PP.formatter.align"
-             name="Break and Align"
-             objectClass="org.eclipse.core.resources.IProject">
+             name="Break and Align">
+            <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
        </page>
     </extension>
     <extension

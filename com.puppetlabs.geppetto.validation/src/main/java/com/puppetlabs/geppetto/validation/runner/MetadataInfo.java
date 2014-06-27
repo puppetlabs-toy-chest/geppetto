@@ -4,19 +4,17 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.validation.runner;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
@@ -68,17 +66,15 @@ public class MetadataInfo {
 		}
 	}
 
-	private Metadata metadata;
+	private final Metadata metadata;
 
-	private File file;
+	private final File file;
 
-	private List<Resolution> resolvedDependencies;
+	private final List<Resolution> resolvedDependencies;
 
-	private List<Dependency> unresolvedDependencies;
+	private final List<Dependency> unresolvedDependencies;
 
-	private List<List<MetadataInfo>> circularities = Lists.newArrayList();
-
-	private boolean roleFlag;
+	private final boolean roleFlag;
 
 	public MetadataInfo(Metadata data, File f, boolean roleFlag) {
 		this.metadata = data;
@@ -86,13 +82,6 @@ public class MetadataInfo {
 		this.resolvedDependencies = Lists.newArrayList();
 		this.unresolvedDependencies = Lists.newArrayList();
 		this.roleFlag = roleFlag;
-	}
-
-	/**
-	 * @param circle
-	 */
-	public void addCircularity(List<MetadataInfo> circle) {
-		circularities.add(ImmutableList.copyOf(Lists.reverse(circle)));
 	}
 
 	public void addResolvedDependency(Dependency d, MetadataInfo mi) {
@@ -105,25 +94,6 @@ public class MetadataInfo {
 	public void addUnresolvedDependency(Dependency d) {
 		unresolvedDependencies.add(d);
 
-	}
-
-	public List<List<MetadataInfo>> getCircularities() {
-		return Collections.unmodifiableList(circularities);
-	}
-
-	public List<String> getCircularityMessages() {
-		if(circularities.isEmpty())
-			return Collections.emptyList();
-
-		List<String> labels = new ArrayList<String>();
-		StringBuilder result = new StringBuilder("Circular dependency: ");
-		int resetLen = result.length();
-		for(List<MetadataInfo> circularity : circularities) {
-			result.setLength(resetLen);
-			circularityLabel(circularity, result);
-			labels.add(result.toString());
-		}
-		return labels;
 	}
 
 	public File getFile() {
@@ -145,7 +115,7 @@ public class MetadataInfo {
 	/**
 	 * Returns true if this Metadatainfo represents a puppet module describing a
 	 * "role"
-	 * 
+	 *
 	 * @return true if this instance represents a role.
 	 */
 	public boolean isRole() {
@@ -163,10 +133,6 @@ public class MetadataInfo {
 		metadata.getName().toString(bld);
 		bld.append('/');
 		metadata.getVersion().toString(bld);
-		for(List<MetadataInfo> circularity : circularities) {
-			bld.append("\n\tCircular dependency: ");
-			circularityLabel(circularity, bld);
-		}
 		for(Dependency dep : unresolvedDependencies) {
 			bld.append("\n\tUnresolved dependency: ");
 			dependencyToString(dep, bld);

@@ -4,13 +4,12 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
@@ -19,19 +18,24 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
  * This specialization of the PreferenceStoreAccessImpl makes use of a ProjectAwareScopedPreferenceStore
  * to deal with writing project scope preferences and to deliver events from instance and project scopes
  * at all times since project scope does not have to have any values set.
- * 
+ *
  */
 @Singleton
 public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
+	@Inject
+	private AbstractUIPlugin plugin;
+
 	private IScopeContext[] instanceAndConfigurationScopes = new IScopeContext[] {
 			InstanceScope.INSTANCE, ConfigurationScope.INSTANCE };
 
@@ -40,7 +44,7 @@ public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] { //
 			getReadableAndWritablePreferenceStore(context), //
-					PPDSLActivator.getDefault().getPreferenceStore(), //
+					plugin.getPreferenceStore(), //
 					EditorsUI.getPreferenceStore() });
 	}
 
@@ -49,14 +53,14 @@ public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] { //
 			getWritablePreferenceStore(), //
-					PPDSLActivator.getDefault().getPreferenceStore(), //
+					plugin.getPreferenceStore(), //
 					EditorsUI.getPreferenceStore() });
 	}
 
 	/**
 	 * Returns a store that has project, instance, ui stores. This is not suitable for Writing
 	 * as it writes in the project scope !
-	 * 
+	 *
 	 * @param context
 	 * @return
 	 */

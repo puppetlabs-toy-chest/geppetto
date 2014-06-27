@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -93,20 +93,6 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 		}
 	}
 
-	public static final JsonAdapter MODULE_NAME_ADAPTER = new JsonAdapter();
-
-	private static final long serialVersionUID = 1L;
-
-	private static final String NO_VALUE = "";
-
-	private static final Pattern OWNER_PATTERN = Pattern.compile("^[a-zA-Z0-9]+$");
-
-	private static final Pattern STRICT_OWNER_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
-
-	private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9_-]*$");
-
-	private static final Pattern STRICT_NAME_PATTERN = Pattern.compile("^[a-z][a-z0-9_]*$");
-
 	/**
 	 * <p>
 	 * Checks that the given name only contains lowercase letters, numbers and underscores and that it begins with a
@@ -117,7 +103,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * <li>main</li>
 	 * <li>settings</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param name
 	 *            The name to check
 	 * @param strict
@@ -142,7 +128,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	/**
 	 * Checks that the given name only contains letters and numbers. This is suitable for the <i>owner</i> part of a
 	 * full module name.
-	 * 
+	 *
 	 * @param owner
 	 *            The name to check
 	 * @param strict
@@ -173,7 +159,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * &quot;foo/bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '/'<br/>
 	 * &quot;foo-bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '-'<br/>
 	 * </p>
-	 * 
+	 *
 	 * @param fullName
 	 *            The name to set
 	 * @param strict
@@ -185,12 +171,14 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 */
 	public static ModuleName create(String fullName, boolean strict) throws BadNameSyntaxException,
 			BadNameCharactersException, BadOwnerCharactersException {
-		return new ModuleName(fullName, strict);
+		return fullName == null
+				? null
+				: new ModuleName(fullName, strict);
 	}
 
 	/**
 	 * Creates a name using specified owner, name, and separator.
-	 * 
+	 *
 	 * @param owner
 	 * @param name
 	 * @param strict
@@ -216,7 +204,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * Creates a name from a string with a separator. This is a equivalent to {@link #create(String, boolean)
 	 * ModuleName(fullName, false)} although this method will yield a <code>null</code> return on <code>null</code> or
 	 * empty input.
-	 * 
+	 *
 	 * @param fullName
 	 *            The name to set or <code>null</code>
 	 * @throws BadOwnerCharactersException
@@ -240,7 +228,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * <li>If an underscore or digit is found at the first position (after replacement), then it is replaced by the
 	 * letter 'z'</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param name
 	 *            The name to convert. Can be <code>null</code> in which case <code>null</code>it is returned.
 	 * @param strict
@@ -280,7 +268,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	/**
 	 * Creates a &quot;safe&quot; owner name from the given name. All characters that are a digit or a letter is
 	 * replaced with a 'z'.
-	 * 
+	 *
 	 * @param owner
 	 *            The name to convert. Can be <code>null</code> in which case <code>null</code>it is returned.
 	 * @return The safe name or <code>null</code>.
@@ -321,7 +309,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * </p>
 	 * In case no separator is found, owner will be considered missing and the argument is returned as the
 	 * second element.</p>
-	 * 
+	 *
 	 * @param moduleName
 	 * @return A two element array with the owner and name of the module. The first element in this array may be
 	 *         <code>null</code> .
@@ -345,6 +333,20 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 			name = moduleName;
 		return new String[] { owner, name };
 	}
+
+	public static final JsonAdapter MODULE_NAME_ADAPTER = new JsonAdapter();
+
+	private static final long serialVersionUID = 1L;
+
+	private static final String NO_VALUE = "";
+
+	private static final Pattern OWNER_PATTERN = Pattern.compile("^[a-zA-Z0-9]+$");
+
+	private static final Pattern STRICT_OWNER_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
+
+	private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9_-]*$");
+
+	private static final Pattern STRICT_NAME_PATTERN = Pattern.compile("^[a-z][a-z0-9_]*$");
 
 	private final String owner;
 
@@ -388,7 +390,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * <p>
 	 * Compare this name to <tt>other</tt> for lexical magnitude using case insensitive comparisons.
 	 * </p>
-	 * 
+	 *
 	 * @param other
 	 *            The name to compare this name to.
 	 * @return a positive integer to indicate that this name is lexicographically greater than <tt>other</tt>.
@@ -406,7 +408,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 
 	/**
 	 * Compares the two names for equality. Names can have different separators or different case and still be equal.
-	 * 
+	 *
 	 * @return The result of the comparison.
 	 */
 	@Override
@@ -430,7 +432,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 
 	/**
 	 * Computes the hash value for this qualified name. The separator is excluded from the computation
-	 * 
+	 *
 	 * @return The computed hash code.
 	 */
 	@Override
@@ -462,7 +464,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 
 	/**
 	 * Present this object as a string onto the given builder using the default '-' separator.
-	 * 
+	 *
 	 * @param builder
 	 */
 	public void toString(StringBuilder builder) {
@@ -471,7 +473,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 
 	/**
 	 * Present this object as a string onto the given builder.
-	 * 
+	 *
 	 * @param builder
 	 */
 	public void toString(StringBuilder builder, char separator) {

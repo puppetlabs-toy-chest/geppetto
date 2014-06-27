@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,18 +15,6 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.AssignmentExpression;
-import com.puppetlabs.geppetto.pp.AttributeOperation;
-import com.puppetlabs.geppetto.pp.Definition;
-import com.puppetlabs.geppetto.pp.ExpressionTE;
-import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
-import com.puppetlabs.geppetto.pp.NodeDefinition;
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.VariableExpression;
-import com.puppetlabs.geppetto.pp.VariableTE;
-import com.puppetlabs.geppetto.pp.VerbatimTE;
-import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapter;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -51,11 +39,24 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.AssignmentExpression;
+import com.puppetlabs.geppetto.pp.AttributeOperation;
+import com.puppetlabs.geppetto.pp.Definition;
+import com.puppetlabs.geppetto.pp.ExpressionTE;
+import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
+import com.puppetlabs.geppetto.pp.NodeDefinition;
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.VariableExpression;
+import com.puppetlabs.geppetto.pp.VariableTE;
+import com.puppetlabs.geppetto.pp.VerbatimTE;
+import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapter;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
+import com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz.ImagesOnFileSystemRegistry;
 
 /**
  * Provides Hover information - for what should there be a hover, and what (the actual content is
  * produce by {@link PPDocumentationProvider} (labels, documentation, and images).
- * 
+ *
  */
 public class PPHoverProvider extends DefaultEObjectHoverProvider {
 
@@ -63,7 +64,7 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 	 * Basically a copy of the class with the same name in DefaultEObjectHoverProvider.
 	 * A complete copy required since it is not possible to access the openDeclarationAction
 	 * instance and siable it from the outside.
-	 * 
+	 *
 	 */
 	public class PresenterControlCreator extends AbstractReusableInformationControlCreator {
 
@@ -127,6 +128,9 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 	@Inject
 	private PPDocumentationProvider documentationProvider;
 
+	@Inject
+	private ImagesOnFileSystemRegistry imagesOnFileSystemRegistry;
+
 	private PresenterControlCreator presenterControlCreator;
 
 	protected Boolean _hover(AttributeOperation o) {
@@ -180,7 +184,7 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 	/**
 	 * Overrides the default implementation which does not seem to link to something somewhere else than in
 	 * the same file. Also, does not handle hovers without a target very well.
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider#createURI(org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
@@ -200,8 +204,7 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 		StringBuilder builder = new StringBuilder();
 		Image image = documentationProvider.getImage(o);
 		if(image != null) {
-			URL imageURL = PPDSLActivator.getDefault().getImagesOnFSRegistry().getImageURL(
-				ImageDescriptor.createFromImage(image));
+			URL imageURL = imagesOnFileSystemRegistry.getImageURL(ImageDescriptor.createFromImage(image));
 			builder.append("<IMG src=\"").append(imageURL.toExternalForm()).append("\"/>");
 		}
 		builder.append("<b>").append(getLabel(o)).append("</b>");
@@ -214,7 +217,7 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 	/**
 	 * Overrides the default implementation simply because the PPPresenterControlCreator always enables
 	 * the OpenDeclaration link.
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider#getInformationPresenterControlCreator()
 	 */
 	@Override

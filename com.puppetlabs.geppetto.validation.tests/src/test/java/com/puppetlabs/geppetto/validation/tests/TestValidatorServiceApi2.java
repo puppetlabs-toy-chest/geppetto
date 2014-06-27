@@ -1,6 +1,6 @@
 package com.puppetlabs.geppetto.validation.tests;
 
-import static com.puppetlabs.geppetto.forge.Forge.MODULEFILE_NAME;
+import static com.puppetlabs.geppetto.forge.Forge.METADATA_JSON_NAME;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
@@ -8,22 +8,24 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.List;
 import java.util.Set;
 
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
-import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
-import com.puppetlabs.geppetto.validation.FileType;
-import com.puppetlabs.geppetto.validation.IValidationConstants;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
-import com.puppetlabs.geppetto.validation.ValidationService;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
+import com.puppetlabs.geppetto.forge.Forge;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
+import com.puppetlabs.geppetto.validation.FileType;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
+import com.puppetlabs.geppetto.validation.ValidationService;
 
 public class TestValidatorServiceApi2 extends AbstractValidationTest {
 
@@ -42,7 +44,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.MODULE_ROOT);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE);
 		assertTrue(
 			"Message text should contain a relative reference",
@@ -56,7 +58,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		String code = "$a = ";
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, code, SubMonitor.convert(null));
+		vs.validate(chain, getValidationOptions(), code, SubMonitor.convert(null));
 		assertTrue("There should be errors", countErrors(chain) != 0);
 	}
 
@@ -65,7 +67,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		String code = "$a = 'a::b'";
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, code, SubMonitor.convert(null));
+		vs.validate(chain, getValidationOptions(), code, SubMonitor.convert(null));
 		assertTrue("There should be no errors", countErrors(chain) == 0);
 	}
 
@@ -74,7 +76,9 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		File manifest = TestDataProvider.getTestFile(new Path("testData/manifests/not_ok_manifest.pp"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, manifest, null, null, SubMonitor.convert(null));
+		ValidationOptions options = getValidationOptions();
+		options.setFileType(FileType.SINGLE_SOURCE_FILE);
+		vs.validate(chain, options, manifest, SubMonitor.convert(null));
 		assertTrue("There should be errors", countErrors(chain) != 0);
 	}
 
@@ -83,7 +87,9 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		File manifest = TestDataProvider.getTestFile(new Path("testData/manifests/ok_manifest.pp"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, manifest, null, null, SubMonitor.convert(null));
+		ValidationOptions options = getValidationOptions();
+		options.setFileType(FileType.SINGLE_SOURCE_FILE);
+		vs.validate(chain, options, manifest, SubMonitor.convert(null));
 		assertTrue("There should be no errors", countErrors(chain) == 0);
 	}
 
@@ -92,13 +98,13 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/broken/broken-module/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		ValidationOptions options = getValidationOptions();
+		options.setFileType(FileType.MODULE_ROOT);
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
-		asserter.assertErrors(asserter.messageFragment("unexpected tIDENTIFIER"));
-		// optionally accept Unknown variables, and hyphen in name, but no other warnings
-		asserter.assertWarnings(
-			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE).optional().greedy(),
-			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME).optional().greedy());
+		asserter.assertErrors(//
+			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME), //
+			asserter.messageFragment("unexpected tIDENTIFIER"));
 
 		assertEquals("There should be two diagnostic entries", 2, chain.getChildren().size());
 	}
@@ -108,18 +114,10 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/test-module/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, root, null, null, SubMonitor.convert(null));
-
-		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
-		// no errors
-		asserter.assertErrors();
-		// optionally accept Unknown variables, and hyphen in name, but no other warnings
-		asserter.assertWarnings(
-			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE).optional().greedy(),
-			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME).optional().greedy());
-
-		assertEquals("There should be one diagnostic entriy", 1, chain.getChildren().size());
-
+		ValidationOptions options = getValidationOptions();
+		options.setFileType(FileType.MODULE_ROOT);
+		vs.validate(chain, options, root, SubMonitor.convert(null));
+		assertEquals("There should be no diagnostic entry", 0, chain.getChildren().size());
 	}
 
 	@Test
@@ -127,7 +125,9 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/broken withSpaces/module"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		ValidationOptions options = getValidationOptions();
+		options.setFileType(FileType.MODULE_ROOT);
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotEquals("There should be errors", 0, countErrors(chain));
 		for(Diagnostic d : chain)
 			if(d instanceof FileDiagnostic) {
@@ -148,7 +148,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(false);
 		options.setFileType(FileType.MODULE_ROOT);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotEquals("There should be  errors", 0, countErrors(chain));
 		Set<String> fileNames = Sets.newHashSet();
 		for(Diagnostic d : chain) {
@@ -162,20 +162,25 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		for(String s : fileNames) {
 			File f = new File(s);
 			assertTrue(
-				"Only files with errors (starts with 'x-', or 'Modulefile') should be reported. Was:" + f.getName(),
-				f.getName().startsWith("x-") || f.getName().equals(MODULEFILE_NAME));
+				"Only files with errors (starts with 'x-', or 'metadata.json') should be reported. Was:" + f.getName(),
+				f.getName().startsWith("x-") || f.getName().equals(METADATA_JSON_NAME));
 		}
 		assertEquals("Number of files with errors", 7, fileNames.size());
 		List<FileDiagnostic> modulefileDiag = Lists.newArrayList();
 		for(Diagnostic d : chain)
-			if(d instanceof FileDiagnostic && ((FileDiagnostic) d).getFile().getName().equals(MODULEFILE_NAME))
+			if(d instanceof FileDiagnostic && ((FileDiagnostic) d).getFile().getName().equals(METADATA_JSON_NAME))
 				modulefileDiag.add((FileDiagnostic) d);
 
 		assertEquals("There should have been two dependency error", 2, modulefileDiag.size());
-		for(FileDiagnostic diag : modulefileDiag)
+		for(FileDiagnostic diag : modulefileDiag) {
 			assertEquals(
-				"Should have been reported as unsatisifed depedency",
-				IValidationConstants.ISSUE__MODULEFILE_UNSATISFIED_DEPENDENCY, diag.getIssue());
+				"Should have been reported as linking error",
+				org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, diag.getIssue());
+			assertEquals(
+				"Should have been reported as linking error with a metadata.json target", Forge.METADATA_JSON_NAME,
+				diag.getFile().getName());
+
+		}
 	}
 
 	@Test
@@ -183,7 +188,9 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/forgeModules/lab42-activemq-0.1.2/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		ValidationOptions options = getValidationOptions();
+		options.setFileType(FileType.MODULE_ROOT);
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertAll(asserter.issue(IPPDiagnostics.ISSUE__STRING_BOOLEAN).optional().greedy());
 	}
@@ -199,7 +206,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(false);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotEquals("There should be  errors", 0, countErrors(chain));
 		Set<String> fileNames = Sets.newHashSet();
 		for(Diagnostic d : chain)
@@ -209,21 +216,25 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		for(String s : fileNames) {
 			File f = new File(s);
 			assertTrue(
-				"Only files with errors (starts with 'x-', or 'Modulefile') should be reported. Was:" + f.getName(),
-				f.getName().startsWith("x-") || f.getName().equals(MODULEFILE_NAME));
+				"Only files with errors (starts with 'x-', or 'metadata.json') should be reported. Was:" + f.getName(),
+				f.getName().startsWith("x-") || f.getName().equals(METADATA_JSON_NAME));
 		}
 		assertEquals("Number of files with errors", 1, fileNames.size());
 		List<FileDiagnostic> modulefileDiag = Lists.newArrayList();
 		for(Diagnostic d : chain) {
 			if(d instanceof FileDiagnostic && d.getSeverity() >= Diagnostic.ERROR &&
-					((FileDiagnostic) d).getFile().getName().equals(MODULEFILE_NAME))
+					((FileDiagnostic) d).getFile().getName().equals(METADATA_JSON_NAME))
 				modulefileDiag.add((FileDiagnostic) d);
 		}
 		assertEquals("There should have been one dependency error", 1, modulefileDiag.size());
-		for(FileDiagnostic diag : modulefileDiag)
+		for(FileDiagnostic diag : modulefileDiag) {
 			assertEquals(
-				"Should have been reported as unsatisifed depedency",
-				IValidationConstants.ISSUE__MODULEFILE_UNSATISFIED_DEPENDENCY, diag.getIssue());
+				"Should have been reported as linking error",
+				org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, diag.getIssue());
+			assertEquals(
+				"Should have been reported as linking error with a metadata.json target", Forge.METADATA_JSON_NAME,
+				diag.getFile().getName());
+		}
 	}
 
 	@Test
@@ -237,7 +248,15 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(false);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validate(chain, root, options, new File[] { new File(root, "moduleB/") }, SubMonitor.convert(null));
+		final IPath parent = Path.fromOSString(new File(root, "moduleb/").getPath());
+		options.setValidationFilter(new FileFilter() {
+			@Override
+			public boolean accept(File file) {
+				return parent.isPrefixOf(Path.fromOSString(file.getPath()));
+			}
+		});
+
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertEquals("There should be no errors", 0, countErrors(chain));
 
 	}
@@ -247,7 +266,9 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/"));
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validate(chain, root, null, null, SubMonitor.convert(null));
+		ValidationOptions options = getValidationOptions();
+		options.setFileType(FileType.DETECT);
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 
 		int hyphenWarning = 0;
 		int otherIssues = 0;
@@ -258,7 +279,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 			else
 				otherIssues++;
 
-		assertEquals("There should be 12 hyphen warnings", 12, hyphenWarning);
+		assertEquals("There should be 11 hyphen warnings", 11, hyphenWarning);
 		assertEquals("There should be 2 other issues", 2, otherIssues);
 	}
 
@@ -273,7 +294,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(false);
 		options.setFileType(FileType.MODULE_ROOT);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// Same but using a repository layout
@@ -282,11 +303,11 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		chain = new Diagnostic();
 		options = getValidationOptions();
 		options.setCheckLayout(true);
-		options.setCheckModuleSemantics(true);
+		options.setCheckModuleSemantics(false);
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// Use API1 call to do the same as repository layout validation above
@@ -298,7 +319,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validateRepository(chain, root, SubMonitor.convert(null));
+		vs.validateRepository(chain, options, root, SubMonitor.convert(null));
 		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// just the manifest
@@ -313,7 +334,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(false);
 		options.setFileType(FileType.SINGLE_SOURCE_FILE);
 
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// Validate single file in context of repo
@@ -326,18 +347,26 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validate(chain, root, options, new File[] { new File(
-			root, "modules/ghoneycutt-bind-1.0.0/manifests/master.pp") }, SubMonitor.convert(null));
+		final File singleFile = new File(root, "modules/ghoneycutt-bind-1.0.0/manifests/master.pp");
+		options.setValidationFilter(new FileFilter() {
+			@Override
+			public boolean accept(File file) {
+				return file.equals(singleFile);
+			}
+		});
+
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
-		asserter.assertErrors(//
+		asserter.assertErrors(
+			//
 			asserter.messageFragment("Unknown class: 'generic'"), //
 			asserter.messageFragment("Unknown class: 'pam'"), //
 			asserter.messageFragment("Unknown class: 'ssh'"), //
 			asserter.messageFragment("Unknown class: 'svn'"), //
 			asserter.messageFragment("Unknown resource type: 'pam::accesslogin'"), //
-			asserter.messageFragment("Unknown resource type: 'svn::checkout'"), //
+			asserter.messageFragment("Unknown resource type: 'svn::checkout'"),
+			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE).greedy(), //
 			asserter.messageFragment("Missing comma."));
-		asserter.assertWarnings(asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE).optional().greedy());
 	}
 }

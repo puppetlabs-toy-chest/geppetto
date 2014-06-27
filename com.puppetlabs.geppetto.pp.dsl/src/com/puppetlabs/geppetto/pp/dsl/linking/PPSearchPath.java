@@ -4,12 +4,13 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.linking;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,15 +26,15 @@ import com.google.common.collect.Lists;
 /**
  * notes:
  * rootURI - URI to file:: root, used to make paths relative if URI is an absolute file uri
- * 
- * 
+ *
+ *
  */
 public class PPSearchPath {
 	public interface IConfigurableProvider {
 		/**
 		 * Configure the search path provider so it knows the container of (distro) pptp, and
 		 * root for absolute files (may be null).
-		 * 
+		 *
 		 * @param rootDirectory
 		 */
 		public void configure(URI rootPath, String defalutPath, String environment);
@@ -80,7 +81,7 @@ public class PPSearchPath {
 	/**
 	 * Evaluates the search path by replacing every occurrence of '$environment' with the
 	 * given value.
-	 * 
+	 *
 	 * @param environment
 	 * @return a new PPSearchPath if there were replacements.
 	 */
@@ -99,6 +100,20 @@ public class PPSearchPath {
 		if(replacements > 0)
 			return new PPSearchPath(newSearchPath, this.rootURI);
 		return this;
+	}
+
+	public List<File> getResolvedPath() {
+		List<File> resolved = new ArrayList<File>();
+		for(IPath p : searchPath) {
+			String s = p.toPortableString();
+			if(s.contains("$environment"))
+				continue;
+			if(rootURI == null)
+				resolved.add(p.toFile());
+			else
+				resolved.add(new File(URI.createURI(p.toPortableString()).resolve(rootURI).toFileString()));
+		}
+		return resolved;
 	}
 
 	public boolean isMatch(IPath candidate, IPath p) {
@@ -138,7 +153,7 @@ public class PPSearchPath {
 	 * The pptp is always on the search path with index 0. TODO: This is wrong!
 	 * It is only the distro path that is on 0, other pptp contributions are subject to filtering (i.e.
 	 * ruby code).
-	 * 
+	 *
 	 * @param uri
 	 * @return search path index or -1 if not found
 	 */

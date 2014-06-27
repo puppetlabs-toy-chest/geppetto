@@ -19,7 +19,7 @@ import com.google.common.collect.Multimap;
  */
 public class BuildResult {
 
-	private AllModuleReferences allModuleReferences;
+	private AllModulesState allModuleReferences;
 
 	private RakefileInfo rakefileInfo;
 
@@ -31,7 +31,7 @@ public class BuildResult {
 		this.rubyServicesAvailable = rubyAvailable;
 	}
 
-	public AllModuleReferences getAllModuleReferences() {
+	public AllModulesState getAllModuleReferences() {
 		return allModuleReferences;
 	}
 
@@ -53,7 +53,7 @@ public class BuildResult {
 		return rubyServicesAvailable;
 	}
 
-	public void setAllModuleReferences(AllModuleReferences allReferences) {
+	public void setAllModuleReferences(AllModulesState allReferences) {
 		this.allModuleReferences = allReferences;
 	}
 

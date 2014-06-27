@@ -11,8 +11,6 @@
 package com.puppetlabs.geppetto.ui.wizard;
 
 import static com.puppetlabs.geppetto.common.Strings.trimToNull;
-import static com.puppetlabs.geppetto.forge.Forge.METADATA_JSON_NAME;
-import static com.puppetlabs.geppetto.forge.Forge.MODULEFILE_NAME;
 import static com.puppetlabs.geppetto.ui.UIPlugin.getLocalString;
 
 import java.io.File;
@@ -25,39 +23,32 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.jface.dialogs.IInputValidator;
-import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 
 import com.google.inject.Inject;
-import com.puppetlabs.geppetto.common.Strings;
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.ForgeService;
-import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.VersionedName;
-import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.forge.v3.Modules;
 import com.puppetlabs.geppetto.forge.v3.model.AbbrevRelease;
 import com.puppetlabs.geppetto.forge.v3.model.Module;
@@ -66,15 +57,23 @@ import com.puppetlabs.geppetto.semver.VersionRange;
 import com.puppetlabs.geppetto.ui.UIPlugin;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog.Elem;
-import com.puppetlabs.geppetto.ui.util.ResourceUtil;
 
 public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizard {
 
 	protected class PuppetProjectFromForgeCreationPage extends NewPuppetModuleProjectWizard.PuppetProjectCreationPage {
+		private Listener keywordModifyListener = new Listener() {
+			public void handleEvent(Event e) {
+				selectButton.setEnabled(validateKeyword());
+			}
+		};
 
 		protected Text projectNameField;
 
-		protected Text keywordField = null;
+		protected Text keywordField;
+
+		protected Text selectedReleaseField;
+
+		protected Button selectButton;
 
 		protected PuppetProjectFromForgeCreationPage(String pageName) {
 			super(pageName);
@@ -103,7 +102,7 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(composite);
 
-			createModuleGroup(composite);
+			createReleaseGroup(composite);
 
 			super.createControl(parent);
 			for(Control c1 : parent.getChildren())
@@ -119,30 +118,31 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 			setControl(parent);
 		}
 
-		protected void createModuleGroup(Composite parent) {
-			Label moduleLabel = new Label(parent, SWT.NONE);
-			moduleLabel.setText(getLocalString("_UI_Module_label")); //$NON-NLS-1$
+		protected void createReleaseGroup(Composite parent) {
+			Label keywordLabel = new Label(parent, SWT.NONE);
+			keywordLabel.setText(getLocalString("_UI_Keyword_label")); //$NON-NLS-1$
 
 			keywordField = new Text(parent, SWT.BORDER);
-			keywordField.addMouseListener(new MouseAdapter() {
-
-				@Override
-				public void mouseDoubleClick(MouseEvent me) {
-					promptForReleaseSelection();
-				}
-			});
+			keywordField.addListener(SWT.Modify, keywordModifyListener);
 
 			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).applyTo(keywordField);
 
-			Button resultTypeButton = new Button(parent, SWT.PUSH);
-			resultTypeButton.setText(getLocalString("_UI_Select_label")); //$NON-NLS-1$
-			resultTypeButton.addSelectionListener(new SelectionAdapter() {
+			selectButton = new Button(parent, SWT.PUSH);
+			selectButton.setText(getLocalString("_UI_Select_label")); //$NON-NLS-1$
+			selectButton.addSelectionListener(new SelectionAdapter() {
 
 				@Override
 				public void widgetSelected(SelectionEvent se) {
 					promptForReleaseSelection();
 				}
 			});
+			selectButton.setEnabled(false);
+
+			Label selectedReleaseLabel = new Label(parent, SWT.NONE);
+			selectedReleaseLabel.setText(getLocalString("_UI_SelectedRelease_label")); //$NON-NLS-1$
+
+			selectedReleaseField = new Text(parent, SWT.BORDER | SWT.READ_ONLY);
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).applyTo(selectedReleaseField);
 		}
 
 		protected List<Elem> getReleaseChoices(final String keyword) {
@@ -226,33 +226,9 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 		}
 
 		protected void promptForReleaseSelection() {
-			String keyword = Strings.emptyToNull(keywordField.getText());
-			if(keyword == null) {
-				InputDialog askKeywordDialog = new InputDialog(
-					getShell(), getLocalString("_UI_Keyword_Search_title"),
-					getLocalString("_UI_Keyword_Search_message"), keyword, new IInputValidator() {
-						@Override
-						public String isValid(String newText) {
-							newText = trimToNull(newText);
-							if(newText != null) {
-								if(newText.length() > 30)
-									return getLocalString("_UI_Keyword_Search_max_length_exceeded", 30);
-								Matcher m = OK_KEYWORD_CHARACTERS.matcher(newText);
-								if(!m.matches())
-									return getLocalString("_UI_Keyword_Search_bad_characters");
-								m = KEYWORD_AT_LEAST_ONE_CHARACTER.matcher(newText);
-								if(m.find())
-									return null;
-							}
-							return getLocalString("_UI_Keyword_Search_at_least_one_character");
-						}
-					});
-
-				if(askKeywordDialog.open() != Window.OK)
-					return;
-				keyword = askKeywordDialog.getValue();
-			}
-			List<Elem> choices = getReleaseChoices(keyword);
+			if(!validateKeyword())
+				return;
+			List<Elem> choices = getReleaseChoices(keywordField.getText());
 			if(choices.isEmpty())
 				return;
 
@@ -267,11 +243,8 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 		protected void setRelease(Elem selectedRelease) {
 			release = selectedRelease.getVersionedName();
-
-			String ns = release.getModuleName().toString();
-			keywordField.setText(ns + ' ' + release.getVersion());
-			projectNameField.setText(ns);
-
+			selectedReleaseField.setText(release.toString());
+			projectNameField.setText(release.getModuleName().getName());
 			validatePage();
 		}
 
@@ -284,11 +257,37 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 			}
 		}
 
+		protected boolean validateKeyword() {
+			String keyword = trimToNull(keywordField.getText());
+			if(keyword == null) {
+				setErrorMessage(getLocalString("_UI_Keyword_Search_at_least_one_character"));
+				return false;
+			}
+			if(keyword.length() > 30) {
+				setErrorMessage(getLocalString("_UI_Keyword_Search_max_length_exceeded", 30));
+				return false;
+			}
+			Matcher m = OK_KEYWORD_CHARACTERS.matcher(keyword);
+			if(!m.matches()) {
+				setErrorMessage(getLocalString("_UI_Keyword_Search_bad_characters"));
+				return false;
+			}
+			m = KEYWORD_AT_LEAST_ONE_CHARACTER.matcher(keyword);
+			if(!m.find()) {
+				setErrorMessage(getLocalString("_UI_Keyword_Search_at_least_one_character"));
+				return false;
+			}
+			setErrorMessage(null);
+			return true;
+		}
+
 		@Override
 		protected boolean validatePage() {
-
+			setErrorMessage(null);
 			if(release == null) {
-				setErrorMessage(null);
+				if(!validateKeyword())
+					return false;
+
 				setMessage(getLocalString("_UI_ModuleCannotBeEmpty_message")); //$NON-NLS-1$
 				return false;
 			}
@@ -297,14 +296,12 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 				String preferredProjectName = release.getModuleName().getName();
 
 				if(!preferredProjectName.equals(getProjectName())) {
-					setErrorMessage(null);
 					setMessage(
 						getLocalString("_UI_ProjectNameShouldMatchModule_message", preferredProjectName), WARNING); //$NON-NLS-1$
 				}
 
 				return true;
 			}
-
 			return false;
 		}
 
@@ -342,11 +339,10 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 	@Override
 	protected void initializeProjectContents(IProgressMonitor monitor) throws Exception {
-
 		if(release == null)
 			return;
 
-		SubMonitor submon = SubMonitor.convert(monitor, "Generating project...", 100);
+		SubMonitor submon = SubMonitor.convert(monitor, "Installing project...", 100);
 		try {
 			Version v = release.getVersion();
 			VersionRange vr = v == null
@@ -355,47 +351,8 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 			File projectDir = project.getLocation().toFile();
 			forgeService.install(release.getModuleName(), vr, projectDir, true, true);
-
-			File moduleFile = new File(projectDir, MODULEFILE_NAME);
-			boolean moduleFileExists = moduleFile.exists();
-			if(moduleFileExists) {
-				// Check if this file is viable.
-				boolean renameModuleFile = false;
-				Diagnostic chain = new Diagnostic();
-				Metadata receiver = new Metadata();
-				try {
-					ModuleUtils.parseModulefile(moduleFile, receiver, chain);
-					for(Diagnostic problem : chain)
-						if(problem.getSeverity() >= Diagnostic.ERROR) {
-							// Trust the metadata.json as the source and recreate the Modulefile
-							renameModuleFile = true;
-							break;
-						}
-				}
-				catch(Exception e) {
-					renameModuleFile = true;
-				}
-
-				if(renameModuleFile) {
-					File renamedModuleFile = new File(projectDir, MODULEFILE_NAME + ".ignored");
-					renamedModuleFile.delete();
-					if(moduleFile.renameTo(renamedModuleFile))
-						moduleFileExists = false;
-				}
-			}
-
-			submon.worked(60);
-
-			if(submon.isCanceled())
-				throw new OperationCanceledException();
-
-			// This will cause a build. The build will recreate the metadata.json file
+			submon.worked(70);
 			project.refreshLocal(IResource.DEPTH_INFINITE, submon.newChild(30));
-			if(moduleFileExists) {
-				IFile mdjsonFile = ResourceUtil.getFile(project.getFullPath().append(METADATA_JSON_NAME));
-				if(mdjsonFile.exists())
-					mdjsonFile.setDerived(true, null);
-			}
 		}
 		finally {
 			monitor.done();

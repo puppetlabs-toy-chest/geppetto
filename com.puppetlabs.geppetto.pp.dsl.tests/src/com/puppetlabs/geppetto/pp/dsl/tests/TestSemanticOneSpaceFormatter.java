@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -13,17 +13,6 @@ package com.puppetlabs.geppetto.pp.dsl.tests;
 import static com.google.inject.util.Modules.override;
 import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
 
-import com.puppetlabs.geppetto.pp.AssignmentExpression;
-import com.puppetlabs.geppetto.pp.LiteralList;
-import com.puppetlabs.geppetto.pp.PPFactory;
-import com.puppetlabs.geppetto.pp.PuppetManifest;
-import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
-import com.puppetlabs.xtext.dommodel.DomModelUtils;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.OneWhitespaceDomFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
@@ -36,18 +25,28 @@ import org.junit.Test;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.puppetlabs.geppetto.pp.AssignmentExpression;
+import com.puppetlabs.geppetto.pp.LiteralList;
+import com.puppetlabs.geppetto.pp.PPFactory;
+import com.puppetlabs.geppetto.pp.PuppetManifest;
+import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.OneWhitespaceDomFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
+import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 
 /**
  * Tests the OneSpace Semantic Formatter.
  * (This is not the most important formatter, and there are only a few smoke tests).
- * 
+ *
  */
 public class TestSemanticOneSpaceFormatter extends AbstractPuppetTests {
 	public static class DebugFormatter extends OneWhitespaceDomFormatter {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.pp.dsl.xt.dommodel.formatter.IDomModelFormatter#format(com.puppetlabs.geppetto.pp.dsl.xt.dommodel.IDomNode,
 		 * org.eclipse.xtext.util.ITextRegion, com.puppetlabs.geppetto.pp.dsl.xt.dommodel.formatter.IFormattingContext,
 		 * org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor)
@@ -55,7 +54,7 @@ public class TestSemanticOneSpaceFormatter extends AbstractPuppetTests {
 		@Override
 		public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext,
 				Acceptor errors) {
-			System.err.println(DomModelUtils.compactDump(dom, true));
+			// System.err.println(DomModelUtils.compactDump(dom, true));
 			return super.format(dom, regionToFormat, formattingContext, errors);
 		}
 
@@ -65,7 +64,7 @@ public class TestSemanticOneSpaceFormatter extends AbstractPuppetTests {
 		public static class TestModule extends PPTestModule {
 			/*
 			 * (non-Javadoc)
-			 * 
+			 *
 			 * @see org.eclipse.xtext.service.AbstractGenericModule#configure(com.google.inject.Binder)
 			 */
 			@Override

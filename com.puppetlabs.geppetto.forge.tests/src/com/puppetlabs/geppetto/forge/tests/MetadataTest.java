@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,9 +32,10 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.Type;
-import com.puppetlabs.geppetto.forge.util.Checksums;
+import com.puppetlabs.geppetto.forge.util.ChecksumUtils;
 import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.forge.util.StrictMetadataJsonParser;
 import com.puppetlabs.geppetto.forge.util.Types;
@@ -95,7 +96,7 @@ public class MetadataTest extends AbstractForgeTest {
 
 	private void populateFromModule(String module) {
 		try {
-			fixture = getForgeUtil().createFromModuleDirectory(getTestData(module), true, null, null, new Diagnostic());
+			fixture = getForgeUtil().createFromModuleDirectory(getTestData(module), null, null, new Diagnostic());
 		}
 		catch(IOException e) {
 			fail(e.getMessage());
@@ -135,7 +136,6 @@ public class MetadataTest extends AbstractForgeTest {
 		StrictMetadataJsonParser mdParser = new StrictMetadataJsonParser(md);
 		Diagnostic chain = new Diagnostic();
 		mdParser.parse(file, swr.toString(), chain);
-		System.err.println(chain.toString());
 		assertEquals("WARNING", Diagnostic.getSeverityString(chain.getSeverity()));
 		Map<String, Object> dynAttrs = md.getDynamicAttributes();
 		assertNotNull(dynAttrs);
@@ -204,8 +204,10 @@ public class MetadataTest extends AbstractForgeTest {
 	@Test
 	public void testLoadChecksums__File() {
 		try {
-			Map<String, byte[]> checksums = Checksums.loadChecksums(getTestData("puppetlabs-apache"), null);
-			assertEquals("Incorrect number of checksums", 18, checksums.size());
+			File moduleDir = getTestData("puppetlabs-apache");
+			Map<String, byte[]> checksums = ChecksumUtils.loadChecksums(moduleDir, new File(
+				moduleDir, Forge.METADATA_JSON_NAME), null);
+			assertEquals("Incorrect number of checksums", 19, checksums.size());
 		}
 		catch(IOException e) {
 			fail(e.getMessage());

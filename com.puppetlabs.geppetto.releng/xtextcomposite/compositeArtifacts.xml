@@ -1,0 +1,9 @@
+<?compositeMetadataRepository version='1.0.0'?>
+<repository name="Xtext and Luna"
+	type="org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository"
+	version="1.0.0">
+	<children size="2">
+		<child location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201406120726/" />
+		<child location="http://download.eclipse.org/releases/luna/" />
+	</children>
+</repository>

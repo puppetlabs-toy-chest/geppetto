@@ -54,15 +54,15 @@
       </wizard>
       <wizard
             category="com.puppetlabs.geppetto.ui.newWizardCategory"
-            class="com.puppetlabs.geppetto.ui.wizard.NewModulefileWizard"
+            class="com.puppetlabs.geppetto.ui.wizard.NewMetadataFileWizard"
             icon="icons/obj16/puppet-16.png"
-            id="com.puppetlabs.geppetto.ui.NewModulefileWizard"
-            name="New Puppet Modulefile">
+            id="com.puppetlabs.geppetto.ui.NewMetadataFileWizard"
+            name="New Puppet Metadata">
          <selection
                class="org.eclipse.core.resources.IResource">
          </selection>
          <description>
-            %_UI_NewPuppetModulefile_description
+            %_UI_NewPuppetMetadata_description
          </description>
       </wizard>
    </extension>
@@ -79,16 +79,6 @@
       </viewerContribution>
    </extension>
    -->
-   <extension point="org.eclipse.ui.editors">
-      <editor
-            class="com.puppetlabs.geppetto.ui.GeppettoExecutableExtensionFactory:com.puppetlabs.geppetto.ui.editor.ModuleMetadataEditor"
-            default="true"
-            filenames="Modulefile,metadata.json"
-			matchingStrategy="com.puppetlabs.geppetto.ui.editor.ModuleMetadataEditorMatchingStrategy"
-            icon="icons/obj16/puppet-16.png"
-            id="com.puppetlabs.geppetto.ui.moduleMetadataEditor"
-            name="%_UI_ModuleMetadataEditor_title"/>
-   </extension>
    <extension
          point="org.eclipse.ui.exportWizards">
       <category

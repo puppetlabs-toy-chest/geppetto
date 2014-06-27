@@ -46,8 +46,8 @@ import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences;
-import com.puppetlabs.geppetto.validation.runner.AllModuleReferences.Export;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState;
+import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 import com.puppetlabs.geppetto.validation.runner.BuildResult;
 import com.puppetlabs.geppetto.validation.runner.MetadataInfo;
 import com.puppetlabs.graph.ICancel;
@@ -348,7 +348,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 	 * @return
 	 */
 	public Map<File, ModuleNodeData> calculateDependencyData(File root, Multimap<ModuleName, MetadataInfo> moduleData,
-			AllModuleReferences exportData) {
+			AllModulesState exportData) {
 
 		// create node data for all existing modules and check if there are ambiguities
 		Multimap<ModuleName, ModuleNodeData> processedModules = ArrayListMultimap.create();
@@ -417,7 +417,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 			}
 		}
 		Map<File, Multimap<File, Export>> ambiguities = exportData.getAmbiguityMap();
-		for(Map.Entry<File, Multimap<File, AllModuleReferences.Export>> x : exportData.getImportMap().entrySet()) {
+		for(Map.Entry<File, Multimap<File, AllModulesState.Export>> x : exportData.getImportMap().entrySet()) {
 			// get the imported
 			File fromFile = x.getKey();
 			Multimap<File, Export> m = x.getValue();
@@ -706,7 +706,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 		if(title == null)
 			title = "Module Dependencies";
 
-		AllModuleReferences all = buildResult.getAllModuleReferences();
+		AllModulesState all = buildResult.getAllModuleReferences();
 		produceGraph(cancel, title, roots, output, all.getRoot(), buildResult.getModuleData(), all, chain);
 	}
 
@@ -717,7 +717,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 	 *            Name -> 0* MetadataInfo representing one version of a module with given name
 	 */
 	public void produceGraph(ICancel cancel, String title, File[] roots, OutputStream output, File root,
-			Multimap<ModuleName, MetadataInfo> moduleData, AllModuleReferences exportData, Diagnostic chain) {
+			Multimap<ModuleName, MetadataInfo> moduleData, AllModulesState exportData, Diagnostic chain) {
 
 		if(cancel == null)
 			cancel = new NullIndicator();
@@ -757,7 +757,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 	 * @return
 	 */
 	private RootGraph produceRootGraph(ICancel cancel, String title, Multimap<ModuleName, MetadataInfo> moduleData,
-			AllModuleReferences exportData, boolean renderAll, Diagnostic chain) {
+			AllModulesState exportData, boolean renderAll, Diagnostic chain) {
 
 		if(title == null)
 			title = "";

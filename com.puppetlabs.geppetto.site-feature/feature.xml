@@ -2,7 +2,7 @@
 <feature
       id="com.puppetlabs.geppetto.site"
       label="Puppet Labs Geppetto Update Site"
-      version="4.1.1.qualifier">
+      version="4.2.0.qualifier">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -81,11 +81,35 @@
          version="0.0.0"/>
 
    <includes
-         id="org.polarion.eclipse.team.svn.connector.svnkit17"
+         id="org.polarion.eclipse.team.svn.connector.svnkit18"
          version="0.0.0"/>
 
    <includes
          id="com.puppetlabs.geppetto.puppetdb"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ecf.core.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ecf.core.ssl.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ecf.filetransfer.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ecf.filetransfer.httpclient4.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ecf.filetransfer.httpclient4.ssl.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ecf.filetransfer.ssl.feature"
          version="0.0.0"/>
 
    <plugin
@@ -191,7 +215,7 @@
          id="org.apache.commons.compress"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.8.1"
          unpack="false"/>
 
    <plugin
@@ -336,6 +360,20 @@
          unpack="false"/>
 
    <plugin
+         id="org.eclipse.xtext.ui.codetemplates"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.ui.codetemplates.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.xtext.util"
          download-size="0"
          install-size="0"
@@ -344,6 +382,13 @@
 
    <plugin
          id="org.eclipse.xtext.xbase.lib"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtend.lib"
          download-size="0"
          install-size="0"
          version="0.0.0"

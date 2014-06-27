@@ -4,12 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.core.runtime.SubMonitor;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
-import org.eclipse.core.runtime.SubMonitor;
-import org.junit.Test;
 
 public class TestForgeModules extends AbstractValidationTest {
 	@Test
@@ -27,7 +28,7 @@ public class TestForgeModules extends AbstractValidationTest {
 		options.setCheckModuleSemantics(true);
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertEquals("There should be 0 errors", 0, chain.getChildren().size());
 	}
 }

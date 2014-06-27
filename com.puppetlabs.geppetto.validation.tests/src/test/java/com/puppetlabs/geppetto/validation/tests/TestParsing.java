@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -12,19 +12,20 @@ package com.puppetlabs.geppetto.validation.tests;
 
 import static org.junit.Assert.assertTrue;
 
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.PuppetManifest;
-import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
-import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
-import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsRunner;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.IParseResult;
 import org.junit.Test;
 
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.PuppetManifest;
+import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
+import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsRunner;
+
 /**
  * Tests PPDiagnosticsRunner's parseString method.
- * 
+ *
  */
 public class TestParsing {
 
@@ -33,7 +34,7 @@ public class TestParsing {
 
 		// The diagnostics runner has all the capabilities to perform parsing
 		PPDiagnosticsRunner runner = new PPDiagnosticsRunner();
-		runner.setUp(IValidationAdvisor.ComplianceLevel.PUPPET_2_7, new DefaultPotentialProblemsAdvisor());
+		runner.setUp(PuppetTarget.getDefault().getComplianceLevel(), new DefaultPotentialProblemsAdvisor());
 
 		// The grammar access provides methods to obtain any parser rule.
 		// It is possible to start anywhere in the grammar and only get specific

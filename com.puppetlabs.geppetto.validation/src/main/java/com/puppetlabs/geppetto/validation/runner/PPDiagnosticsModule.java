@@ -4,26 +4,28 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.validation.runner;
 
-import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
-import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
-import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.resource.IContainer.Manager;
 
+import com.google.inject.Provider;
+import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
+
 /**
  * Provides bindings for the PPDiagnostician.
- * 
+ *
  */
 public class PPDiagnosticsModule extends PPRuntimeModule {
 
@@ -64,12 +66,11 @@ public class PPDiagnosticsModule extends PPRuntimeModule {
 
 	/**
 	 * Bind a ValidationAdvisorProvider.
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
-	public com.google.inject.Provider<IValidationAdvisor> provideValidationAdvisor() {
+	public Provider<IValidationAdvisor> provideValidationAdvisor() {
 		return ValidationAdvisorProvider.create(complicanceLevel, problemsAdvisor);
 	}
-
 }

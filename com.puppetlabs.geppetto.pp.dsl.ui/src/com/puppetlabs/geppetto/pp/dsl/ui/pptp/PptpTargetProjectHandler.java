@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,7 +31,6 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -39,24 +38,21 @@ import com.puppetlabs.geppetto.common.util.BundleAccess;
 import com.puppetlabs.geppetto.pp.dsl.target.PptpResourceUtil;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelperProvider;
 
 /**
  * Handler of the hidden puppet target project.
  * Is used to check the state of the workspace and all projects with puppet nature.
- * 
+ *
  */
 @Singleton
 public class PptpTargetProjectHandler {
 
 	@Inject
-	PPPreferencesHelper preferenceHelper;
+	private PPPreferencesHelperProvider preferenceHelper;
 
 	@Inject
-	IPreferenceStoreAccess storeAccess;
-
-	@Inject
-	BundleAccess bundleAccess;
+	private BundleAccess bundleAccess;
 
 	private final static Logger log = Logger.getLogger(PptpTargetProjectHandler.class);
 
@@ -152,7 +148,7 @@ public class PptpTargetProjectHandler {
 
 		URI uri;
 		try {
-			uri = preferenceHelper.getPuppetTarget().getPlatformURI();
+			uri = preferenceHelper.get().getPuppetTarget().getPlatformURI();
 		}
 		catch(IllegalArgumentException e) {
 			log.error(e.getMessage());
@@ -184,7 +180,6 @@ public class PptpTargetProjectHandler {
 			protected IStatus run(IProgressMonitor monitor) {
 				monitor.beginTask("Checking Puppet Projects ...", 100);
 				// ensure that store is initialized before doing anything else
-				preferenceHelper.initialize(storeAccess);
 				ensureStateOfPuppetProjects(monitor);
 				monitor.done();
 				return Status.OK_STATUS;

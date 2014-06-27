@@ -10,8 +10,6 @@
  */
 package com.puppetlabs.geppetto.ui;
 
-import static com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator.COM_PUPPETLABS_GEPPETTO_PP_DSL_PP;
-
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,21 +31,13 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeServiceModule;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
+import com.puppetlabs.geppetto.module.dsl.ui.internal.Activator;
+import com.puppetlabs.geppetto.module.dsl.ui.preferences.ModulePreferencesHelper;
 
 /**
  * This is the central singleton for the Geppetto UI plugin.
  */
 public final class UIPlugin extends EMFPlugin implements BundleActivator {
-	private Injector injector;
-
-	private BundleContext context;
-
-	private EclipseUIPlugin plugin;
-
-	private static UIPlugin INSTANCE;
-
 	public static Image createImage(String file) {
 		return getImageDesc(file).createImage();
 	}
@@ -84,12 +74,21 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 		Platform.getLog(bundle).log(new Status(IStatus.ERROR, bundle.getSymbolicName(), message, e));
 	}
 
+	private Injector injector;
+
+	private BundleContext context;
+
+	private EclipseUIPlugin plugin;
+
+	private static UIPlugin INSTANCE;
+
 	public UIPlugin() {
 		super(new ResourceLocator[] {});
 	}
 
 	public Injector createInjector(Module... modules) {
-		final Injector ppInjector = PPActivator.getInstance().getInjector(COM_PUPPETLABS_GEPPETTO_PP_DSL_PP);
+		final Injector moduleInjector = Activator.getInstance().getInjector(
+			Activator.COM_PUPPETLABS_GEPPETTO_MODULE_DSL_MODULE);
 		List<Module> forgeModules = new ArrayList<Module>();
 		for(Module module : modules)
 			forgeModules.add(module);
@@ -97,10 +96,10 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 		forgeModules.add(new ForgeHttpModule() {
 			@Override
 			protected String getBaseURL() {
-				return ppInjector.getInstance(PPPreferencesHelper.class).getForgeURI();
+				return moduleInjector.getInstance(ModulePreferencesHelper.class).getForgeURI();
 			}
 		});
-		return ppInjector.createChildInjector(forgeModules);
+		return moduleInjector.createChildInjector(forgeModules);
 	}
 
 	public BundleContext getContext() {

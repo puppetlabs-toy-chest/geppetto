@@ -8,4 +8,5 @@
     <cq:advisorNode namePattern="^org\.eclipse\.jdt(\..+)?$" filter="(pruned.product.build=true)" skipComponent="true"/>
     <cq:advisorNode namePattern="^com\.puppetlabs\.graph(\..+)?$" branchTagPath="dev"/>
     <cq:advisorNode namePattern="^com\.puppetlabs\.jrubyparser(\..+)?$" branchTagPath="dev"/>
+    <cq:advisorNode namePattern="^org\.apache\.commons\.compress\.source" componentType="osgi.bundle" skipComponent="true"/>
 </cq:componentQuery>

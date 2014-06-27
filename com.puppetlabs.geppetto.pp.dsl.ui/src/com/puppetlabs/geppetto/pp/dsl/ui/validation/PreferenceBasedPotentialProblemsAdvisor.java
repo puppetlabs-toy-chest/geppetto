@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,8 +19,8 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
  * A potential problems advisor based on preference settings.
  * Note, that the preferences are read when this advisor is instantiated. Get a new instance when a preference has
  * changed.
- * 
- * 
+ *
+ *
  */
 public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProblemsAdvisor {
 
@@ -49,11 +49,6 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	@Override
 	public ValidationPreference caseDefaultShouldAppearLast() {
 		return preferences.getCaseDefaultShouldAppearLast();
-	}
-
-	@Override
-	public ValidationPreference circularDependencyPreference() {
-		return preferences.getcircularDependencyPreference();
 	}
 
 	@Override

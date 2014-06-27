@@ -4,14 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.SubMonitor;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.SubMonitor;
-import org.junit.Test;
 
 public class TestPptpOptionHandling extends AbstractValidationTest {
 	/**
@@ -30,13 +31,13 @@ public class TestPptpOptionHandling extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 		options.setPlatformURI(PuppetTarget.PUPPET26.getPlatformURI());
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 
 		assertEquals("There should be 1 errors", 1, chain.getChildren().size());
 
 		chain = new Diagnostic();
 		options.setPlatformURI(PuppetTarget.PUPPET27.getPlatformURI());
-		vs.validate(chain, root, options, null, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		dumpErrors(chain);
 		assertEquals("There should be 0 errors", 0, chain.getChildren().size());
 

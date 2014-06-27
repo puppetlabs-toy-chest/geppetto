@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.puppetlabs.geppetto.validation;singleton:=true
-Bundle-Version: 4.1.1.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -51,7 +51,11 @@ Import-Package: com.google.common.base;version="12.0.0",
  com.puppetlabs.geppetto.diagnostic,
  com.puppetlabs.geppetto.forge,
  com.puppetlabs.geppetto.forge.model,
+ com.puppetlabs.geppetto.forge.util,
  com.puppetlabs.geppetto.injectable,
+ com.puppetlabs.geppetto.module.dsl,
+ com.puppetlabs.geppetto.module.dsl.metadata,
+ com.puppetlabs.geppetto.module.dsl.validation,
  com.puppetlabs.geppetto.pp,
  com.puppetlabs.geppetto.pp.dsl,
  com.puppetlabs.geppetto.pp.dsl.adapters,

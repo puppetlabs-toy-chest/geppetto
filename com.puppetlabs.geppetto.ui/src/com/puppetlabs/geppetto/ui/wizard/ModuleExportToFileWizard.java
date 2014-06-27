@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,14 +16,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.puppetlabs.geppetto.common.Strings;
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.forge.Forge;
-import com.puppetlabs.geppetto.forge.model.Metadata;
-import com.puppetlabs.geppetto.ui.UIPlugin;
-import com.puppetlabs.geppetto.ui.wizard.ModuleExportOperation.ExportSpec;
-import com.puppetlabs.geppetto.ui.wizard.ModuleExportOperation.ResourceFileFilter;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -57,6 +49,13 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.puppetlabs.geppetto.common.Strings;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.forge.Forge;
+import com.puppetlabs.geppetto.forge.model.Metadata;
+import com.puppetlabs.geppetto.ui.UIPlugin;
+import com.puppetlabs.geppetto.ui.wizard.ModuleExportOperation.ExportSpec;
+import com.puppetlabs.geppetto.ui.wizard.ModuleExportOperation.ResourceFileFilter;
 
 public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 	class ModuleExportToFileWizardPage extends WizardFileSystemResourceExportPage1 implements ModuleExportWizardPage {
@@ -252,7 +251,7 @@ public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 	protected boolean isValidModule(File moduleDirectory, FileFilter filter) {
 		Metadata md;
 		try {
-			md = forge.createFromModuleDirectory(moduleDirectory, false, filter, null, new Diagnostic());
+			md = forge.createFromModuleDirectory(moduleDirectory, filter, null, new Diagnostic());
 			return md != null && md.getName() != null && md.getName().getOwner() != null &&
 					md.getName().getName() != null && md.getVersion() != null;
 		}

@@ -4,99 +4,114 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.builder;
 
-import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.internal.resources.Workspace;
+import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.xtext.ui.editor.preferences.AbstractPreferencePage;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
 
 /**
  * The PPBuildJob is used when there is a need to rebuild projects (such as after preference changes).
- * 
+ *
  */
 public class PPBuildJob extends Job {
+	final private IWorkspace workspace;
 
-	final private IProject[] projects;
+	final private Set<IProject> projects;
 
-	final private boolean cleanOnly;
+	final private Job jobToScheduleAfterBuild;
 
-	private static final Logger log = Logger.getLogger(AbstractPreferencePage.class);
+	final private int buildType;
 
-	public PPBuildJob(IProject... projects) {
+	private static final Logger log = Logger.getLogger(PPBuildJob.class);
+
+	public PPBuildJob(IProject project) {
 		super("Building Puppet Projects");
-		this.projects = projects;
+		this.workspace = project.getWorkspace();
+		this.projects = Sets.newHashSet(project);
+		this.jobToScheduleAfterBuild = null;
 		setPriority(Job.BUILD);
-		this.cleanOnly = false;
-		setRule(ResourcesPlugin.getWorkspace().getRoot());
+		this.buildType = IncrementalProjectBuilder.FULL_BUILD;
+		setRule(workspace.getRoot());
 	}
 
-	public PPBuildJob(IWorkspace workspace) {
-		this(workspace, false);
-	}
-
-	public PPBuildJob(IWorkspace workspace, boolean cleanOnly) {
+	public PPBuildJob(IWorkspace workspace, int buildType, Job jobToScheduleAfterBuild) {
 		super("Building Puppet Projects");
-		this.cleanOnly = cleanOnly;
-		List<IProject> puppetProjects = Lists.newArrayList();
+		this.buildType = buildType;
+		this.workspace = workspace;
+		this.jobToScheduleAfterBuild = jobToScheduleAfterBuild;
+		projects = Sets.newHashSet();
+		;
 		for(IProject p : workspace.getRoot().getProjects())
 			try {
 				if(!p.isAccessible())
 					continue;
 				if(p.getNature(PPUiConstants.PUPPET_NATURE_ID) != null)
-					puppetProjects.add(p);
+					projects.add(p);
 			}
 			catch(CoreException e) {
 				log.error("Failed to get puppet nature information from project", e);
 			}
-		this.projects = puppetProjects.toArray(new IProject[puppetProjects.size()]);
 		setPriority(Job.BUILD);
-		setRule(ResourcesPlugin.getWorkspace().getRoot());
+		setRule(workspace.getRoot());
+	}
+
+	public PPBuildJob(IWorkspace workspace, Job jobToScheduleAfterBuild) {
+		this(workspace, IncrementalProjectBuilder.FULL_BUILD, jobToScheduleAfterBuild);
 	}
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		final SubMonitor ticker = SubMonitor.convert(monitor, projects.length * 100 * 2);
+		try {
+			if(projects.isEmpty())
+				return Status.OK_STATUS;
 
-		// Clean projects individually (if there are other kinds of projects than puppet, they do not need to be
-		// cleaned.
-		for(IProject p : projects) {
-			try {
-				ticker.setTaskName("Cleaning project " + p.getName());
-				p.build(IncrementalProjectBuilder.CLEAN_BUILD, ticker.newChild(100));
+			final SubMonitor ticker = SubMonitor.convert(monitor, projects.size() * 100 * 2);
+
+			MultiStatus status = new MultiStatus(
+				PPActivator.getInstance().getBundle().getSymbolicName(), Status.OK, "Build failures", null);
+
+			// Rebuild the given projects in the order stipulated by the workspace
+			for(IBuildConfiguration buildConfig : ((Workspace) workspace).getBuildOrder()) {
+				IProject p = buildConfig.getProject();
+				if(projects.contains(p)) {
+					try {
+						ticker.setTaskName("Building project " + p.getName());
+						p.build(buildType, ticker.newChild(100));
+					}
+					catch(CoreException e) {
+						status.add(e.getStatus());
+					}
+				}
 			}
-			catch(CoreException e) {
-				return e.getStatus();
-			}
+			return status.isOK()
+					? Status.OK_STATUS
+					: status;
+
 		}
-		if(!cleanOnly)
-			// do a full build
-			try {
-				ticker.setTaskName("Building projects");
-				ResourcesPlugin.getWorkspace().build(
-					IncrementalProjectBuilder.FULL_BUILD, ticker.newChild(projects.length * 100));
-			}
-			catch(CoreException e) {
-				return e.getStatus();
-			}
-
-		return Status.OK_STATUS;
+		finally {
+			if(jobToScheduleAfterBuild != null)
+				jobToScheduleAfterBuild.schedule();
+		}
 	}
 }

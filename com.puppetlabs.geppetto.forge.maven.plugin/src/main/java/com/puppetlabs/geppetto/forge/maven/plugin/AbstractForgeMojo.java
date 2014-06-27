@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -53,10 +53,6 @@ import com.puppetlabs.geppetto.validation.impl.ValidationModule;
  * Goal which performs basic validation.
  */
 public abstract class AbstractForgeMojo extends AbstractMojo {
-	static final String IMPORTED_MODULES_ROOT = "importedModules";
-
-	static final Charset UTF_8 = Charset.forName("UTF-8");
-
 	public static boolean isNull(String field) {
 		if(field == null)
 			return true;
@@ -88,6 +84,10 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 			inStream.close();
 		}
 	}
+
+	static final String IMPORTED_MODULES_ROOT = "importedModules";
+
+	static final Charset UTF_8 = Charset.forName("UTF-8");
 
 	/**
 	 * The directory where this plug-in will search for modules. The directory itself
@@ -150,7 +150,7 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 
 	/**
 	 * Returns the basedir as an absolute path string without any '..' constructs.
-	 * 
+	 *
 	 * @return The absolute path of basedir
 	 */
 	public File getBasedir() {
@@ -193,7 +193,7 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 	/**
 	 * Returns an exclusion filter that rejects everything beneath the build directory plus everything that
 	 * the default exclusion filter would reject.
-	 * 
+	 *
 	 * @return <tt>true</tt> if the file can be accepted for inclusion
 	 */
 	protected FileFilter getFileFilter() {
@@ -225,7 +225,22 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 	}
 
 	protected Metadata getModuleMetadata(File moduleDirectory, Diagnostic diag) throws IOException {
-		return getForgeUtil().createFromModuleDirectory(moduleDirectory, true, null, null, diag);
+		File mdJson = new File(moduleDirectory, Forge.METADATA_JSON_NAME);
+		if(mdJson.exists())
+			try {
+				return getForgeUtil().loadJSONMetadata(mdJson);
+			}
+			catch(Exception e) {
+				// We don't want metadata.json diagnostics at this point since xtext validation
+				// will provide them later
+				return null;
+			}
+
+		File moduleFile = new File(moduleDirectory, Forge.MODULEFILE_NAME);
+		if(moduleFile.exists())
+			return getForgeUtil().loadModulefile(moduleFile, diag);
+
+		return null;
 	}
 
 	protected File getModulesDir() {

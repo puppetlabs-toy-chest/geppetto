@@ -15,7 +15,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	com.puppetlabs.geppetto.forge.tests.ForgeTests.class,
 	com.puppetlabs.geppetto.ruby.tests.AllTests.class,
 	com.puppetlabs.geppetto.pp.dsl.tests.AllTests.class,
-	com.puppetlabs.geppetto.validation.tests.AllTests.class,
+	com.puppetlabs.geppetto.validation.tests.AllValidationTests.class,
 	com.puppetlabs.geppetto.graph.tests.AllTests.class
 	// @fmtOn
 })

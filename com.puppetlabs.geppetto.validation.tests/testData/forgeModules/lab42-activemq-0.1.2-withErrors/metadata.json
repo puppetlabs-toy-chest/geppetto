@@ -1,0 +1,9 @@
+{
+  "name": "lab42-activemq",
+  "version": "0.1.2",
+  "dependencies": [
+     {"name": "lab42/common", "version_requirement": ">= 0.0.1" },
+     {"name": "lab42/monitor", "version_requirement": ">= 0.0.1" }
+  ]
+}
+ 

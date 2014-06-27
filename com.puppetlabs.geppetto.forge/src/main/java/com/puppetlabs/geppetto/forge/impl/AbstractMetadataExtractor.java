@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -18,8 +18,6 @@ import java.io.IOException;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.MetadataExtractor;
 import com.puppetlabs.geppetto.forge.model.Metadata;
-import com.puppetlabs.geppetto.forge.util.Checksums;
-import com.puppetlabs.geppetto.forge.util.Types;
 
 public abstract class AbstractMetadataExtractor implements MetadataExtractor {
 	@Override
@@ -29,13 +27,8 @@ public abstract class AbstractMetadataExtractor implements MetadataExtractor {
 	}
 
 	@Override
-	public boolean hasTypesAndProviders() {
-		return false;
-	}
-
-	@Override
-	public Metadata parseMetadata(File moduleDirectory, boolean includeTypesAndChecksums, FileFilter filter,
-			File[] extractedFrom, Diagnostic result) throws IOException {
+	public Metadata parseMetadata(File moduleDirectory, FileFilter filter, File[] extractedFrom, Diagnostic result)
+			throws IOException {
 		File metadataFile = new File(moduleDirectory, getPrimarySource());
 		if(extractedFrom != null)
 			extractedFrom[0] = metadataFile;
@@ -43,12 +36,7 @@ public abstract class AbstractMetadataExtractor implements MetadataExtractor {
 		if(!canExtractFrom(moduleDirectory, filter))
 			throw new FileNotFoundException(metadataFile.getAbsolutePath());
 
-		Metadata md = performMetadataExtraction(metadataFile, result);
-		if(md != null && !hasTypesAndProviders() && includeTypesAndChecksums) {
-			md.setTypes(Types.loadTypes(new File(moduleDirectory, "lib/puppet"), filter));
-			md.setChecksums(Checksums.loadChecksums(moduleDirectory, filter));
-		}
-		return md;
+		return performMetadataExtraction(metadataFile, result);
 	}
 
 	protected abstract Metadata performMetadataExtraction(File existingFile, Diagnostic result) throws IOException;

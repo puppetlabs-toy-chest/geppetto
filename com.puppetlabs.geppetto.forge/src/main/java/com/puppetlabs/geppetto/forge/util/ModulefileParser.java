@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -43,9 +43,6 @@ import com.puppetlabs.geppetto.semver.VersionRange;
  * arguments.
  */
 public abstract class ModulefileParser {
-	private static final String[] validProperties = new String[] {
-			"name", "author", "description", "license", "project_page", "source", "summary", "version", "dependency" };
-
 	private static Argument createArgument(Node n) {
 		SourcePosition p = n.getPosition();
 		String v = getString(n);
@@ -72,6 +69,9 @@ public abstract class ModulefileParser {
 				return true;
 		return false;
 	}
+
+	private static final String[] validProperties = new String[] {
+			"name", "author", "description", "license", "project_page", "source", "summary", "version", "dependency" };
 
 	private Diagnostic diagnostics;
 
