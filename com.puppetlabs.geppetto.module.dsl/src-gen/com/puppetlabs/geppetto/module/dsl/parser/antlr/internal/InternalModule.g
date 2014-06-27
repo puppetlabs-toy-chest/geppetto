@@ -273,11 +273,11 @@ ruleMetadataPair returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getMetadataPairAccess().getDescriptionPairParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getMetadataPairAccess().getIssuesUrlPairParserRuleCall_2()); 
     }
-    this_DescriptionPair_2=ruleDescriptionPair
+    this_IssuesUrlPair_2=ruleIssuesUrlPair
     { 
-        $current = $this_DescriptionPair_2.current; 
+        $current = $this_IssuesUrlPair_2.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -503,47 +503,47 @@ ruleDependenciesPair returns [EObject current=null]
 
 
 
-// Entry rule entryRuleDescriptionPair
-entryRuleDescriptionPair returns [EObject current=null] 
+// Entry rule entryRuleIssuesUrlPair
+entryRuleIssuesUrlPair returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getDescriptionPairRule()); }
-	 iv_ruleDescriptionPair=ruleDescriptionPair 
-	 { $current=$iv_ruleDescriptionPair.current; } 
+	{ newCompositeNode(grammarAccess.getIssuesUrlPairRule()); }
+	 iv_ruleIssuesUrlPair=ruleIssuesUrlPair 
+	 { $current=$iv_ruleIssuesUrlPair.current; } 
 	 EOF 
 ;
 
-// Rule DescriptionPair
-ruleDescriptionPair returns [EObject current=null] 
+// Rule IssuesUrlPair
+ruleIssuesUrlPair returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 ((
 (
-		lv_name_0_0=	'"description"' 
+		lv_name_0_0=	'"issues_url"' 
     {
-        newLeafNode(lv_name_0_0, grammarAccess.getDescriptionPairAccess().getNameDescriptionKeyword_0_0());
+        newLeafNode(lv_name_0_0, grammarAccess.getIssuesUrlPairAccess().getNameIssues_urlKeyword_0_0());
     }
  
 	    {
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getDescriptionPairRule());
+	            $current = createModelElement(grammarAccess.getIssuesUrlPairRule());
 	        }
-       		setWithLastConsumed($current, "name", lv_name_0_0, "\"description\"");
+       		setWithLastConsumed($current, "name", lv_name_0_0, "\"issues_url\"");
 	    }
 
 )
 )	otherlv_1=':' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getDescriptionPairAccess().getColonKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getIssuesUrlPairAccess().getColonKeyword_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getDescriptionPairAccess().getValueStringLiteralParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getIssuesUrlPairAccess().getValueStringLiteralParserRuleCall_2_0()); 
 	    }
 		lv_value_2_0=ruleStringLiteral		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getDescriptionPairRule());
+	            $current = createModelElementForParent(grammarAccess.getIssuesUrlPairRule());
 	        }
        		set(
        			$current, 
@@ -2847,10 +2847,10 @@ ruleQ_StringOrKey returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }
 
     |
-	kw='"description"' 
+	kw='"issues_url"' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQ_StringOrKeyAccess().getDescriptionKeyword_2()); 
+        newLeafNode(kw, grammarAccess.getQ_StringOrKeyAccess().getIssues_urlKeyword_2()); 
     }
 
     |
@@ -2987,10 +2987,10 @@ ruleQ_ReqUnknownKey returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRul
     }
 
     |
-	kw='"description"' 
+	kw='"issues_url"' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQ_ReqUnknownKeyAccess().getDescriptionKeyword_2()); 
+        newLeafNode(kw, grammarAccess.getQ_ReqUnknownKeyAccess().getIssues_urlKeyword_2()); 
     }
 
     |
@@ -3113,10 +3113,10 @@ ruleQ_OsUnknownKey returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRule
     }
 
     |
-	kw='"description"' 
+	kw='"issues_url"' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQ_OsUnknownKeyAccess().getDescriptionKeyword_2()); 
+        newLeafNode(kw, grammarAccess.getQ_OsUnknownKeyAccess().getIssues_urlKeyword_2()); 
     }
 
     |

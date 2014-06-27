@@ -239,28 +239,36 @@ public class ModuleUtil {
           }
         }
         if (!_matched) {
-          if (Objects.equal(_name, "license")) {
+          if (Objects.equal(_name, "issues_url")) {
             _matched=true;
             Value _value_2 = pair.getValue();
             String _string_2 = this.getString(_value_2);
-            apiMd.setLicense(_string_2);
+            apiMd.setIssuesURL(_string_2);
+          }
+        }
+        if (!_matched) {
+          if (Objects.equal(_name, "license")) {
+            _matched=true;
+            Value _value_3 = pair.getValue();
+            String _string_3 = this.getString(_value_3);
+            apiMd.setLicense(_string_3);
           }
         }
         if (!_matched) {
           if (Objects.equal(_name, "name")) {
             _matched=true;
-            Value _value_3 = pair.getValue();
-            String _string_3 = this.getString(_value_3);
-            ModuleName _create = ModuleName.create(_string_3, false);
+            Value _value_4 = pair.getValue();
+            String _string_4 = this.getString(_value_4);
+            ModuleName _create = ModuleName.create(_string_4, false);
             apiMd.setName(_create);
           }
         }
         if (!_matched) {
           if (Objects.equal(_name, "project_page")) {
             _matched=true;
-            Value _value_4 = pair.getValue();
-            String _string_4 = this.getString(_value_4);
-            apiMd.setProjectPage(_string_4);
+            Value _value_5 = pair.getValue();
+            String _string_5 = this.getString(_value_5);
+            apiMd.setProjectPage(_string_5);
           }
         }
         if (!_matched) {
@@ -280,17 +288,17 @@ public class ModuleUtil {
         if (!_matched) {
           if (Objects.equal(_name, "summary")) {
             _matched=true;
-            Value _value_5 = pair.getValue();
-            String _string_5 = this.getString(_value_5);
-            apiMd.setSummary(_string_5);
+            Value _value_6 = pair.getValue();
+            String _string_6 = this.getString(_value_6);
+            apiMd.setSummary(_string_6);
           }
         }
         if (!_matched) {
           if (Objects.equal(_name, "source")) {
             _matched=true;
-            Value _value_6 = pair.getValue();
-            String _string_6 = this.getString(_value_6);
-            apiMd.setSource(_string_6);
+            Value _value_7 = pair.getValue();
+            String _string_7 = this.getString(_value_7);
+            apiMd.setSource(_string_7);
           }
         }
         if (!_matched) {
@@ -303,16 +311,16 @@ public class ModuleUtil {
         if (!_matched) {
           if (Objects.equal(_name, "version")) {
             _matched=true;
-            Value _value_7 = pair.getValue();
-            String _string_7 = this.getString(_value_7);
-            Version _create_1 = Version.create(_string_7);
+            Value _value_8 = pair.getValue();
+            String _string_8 = this.getString(_value_8);
+            Version _create_1 = Version.create(_string_8);
             apiMd.setVersion(_create_1);
           }
         }
         if (!_matched) {
           String _name_1 = pair.getName();
-          Value _value_8 = pair.getValue();
-          Object _apiValue = this.getApiValue(_value_8);
+          Value _value_9 = pair.getValue();
+          Object _apiValue = this.getApiValue(_value_9);
           apiMd.addDynamicAttribute(_name_1, _apiValue);
         }
       }

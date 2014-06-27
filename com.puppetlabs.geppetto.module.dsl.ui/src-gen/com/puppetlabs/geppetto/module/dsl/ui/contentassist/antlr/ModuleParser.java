@@ -53,7 +53,7 @@ public class ModuleParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJsonObjectAccess().getGroup_2_1(), "rule__JsonObject__Group_2_1__0");
 					put(grammarAccess.getAuthorPairAccess().getGroup(), "rule__AuthorPair__Group__0");
 					put(grammarAccess.getDependenciesPairAccess().getGroup(), "rule__DependenciesPair__Group__0");
-					put(grammarAccess.getDescriptionPairAccess().getGroup(), "rule__DescriptionPair__Group__0");
+					put(grammarAccess.getIssuesUrlPairAccess().getGroup(), "rule__IssuesUrlPair__Group__0");
 					put(grammarAccess.getLicensePairAccess().getGroup(), "rule__LicensePair__Group__0");
 					put(grammarAccess.getNamePairAccess().getGroup(), "rule__NamePair__Group__0");
 					put(grammarAccess.getOperatingsystemSupportPairAccess().getGroup(), "rule__OperatingsystemSupportPair__Group__0");
@@ -104,8 +104,8 @@ public class ModuleParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAuthorPairAccess().getValueAssignment_2(), "rule__AuthorPair__ValueAssignment_2");
 					put(grammarAccess.getDependenciesPairAccess().getNameAssignment_0(), "rule__DependenciesPair__NameAssignment_0");
 					put(grammarAccess.getDependenciesPairAccess().getValueAssignment_2(), "rule__DependenciesPair__ValueAssignment_2");
-					put(grammarAccess.getDescriptionPairAccess().getNameAssignment_0(), "rule__DescriptionPair__NameAssignment_0");
-					put(grammarAccess.getDescriptionPairAccess().getValueAssignment_2(), "rule__DescriptionPair__ValueAssignment_2");
+					put(grammarAccess.getIssuesUrlPairAccess().getNameAssignment_0(), "rule__IssuesUrlPair__NameAssignment_0");
+					put(grammarAccess.getIssuesUrlPairAccess().getValueAssignment_2(), "rule__IssuesUrlPair__ValueAssignment_2");
 					put(grammarAccess.getLicensePairAccess().getNameAssignment_0(), "rule__LicensePair__NameAssignment_0");
 					put(grammarAccess.getLicensePairAccess().getValueAssignment_2(), "rule__LicensePair__ValueAssignment_2");
 					put(grammarAccess.getNamePairAccess().getNameAssignment_0(), "rule__NamePair__NameAssignment_0");
