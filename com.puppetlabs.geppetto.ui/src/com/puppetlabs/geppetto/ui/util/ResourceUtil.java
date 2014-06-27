@@ -147,7 +147,7 @@ public class ResourceUtil {
 
 	public static void openEditor(IFile file) throws PartInitException {
 		openEditor(file, isMetadata(file)
-				? "com.puppetlabs.geppetto.module.dsl.Metadata" //$NON-NLS-1$
+				? "com.puppetlabs.geppetto.module.dsl.Module" //$NON-NLS-1$
 				: "com.puppetlabs.geppetto.pp.dsl.Puppet"); //$NON-NLS-1$
 	}
 
