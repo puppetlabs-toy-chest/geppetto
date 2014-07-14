@@ -14,6 +14,8 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
 import com.puppetlabs.geppetto.module.dsl.metadata.JsonObject;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonValue;
+import com.puppetlabs.geppetto.module.dsl.metadata.Pair;
 import com.puppetlabs.geppetto.module.dsl.metadata.UnrecognizedPair;
 import com.puppetlabs.geppetto.module.dsl.ui.coloring.ModuleHighlightingConfiguration;
 import org.eclipse.emf.ecore.EObject;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -36,7 +39,7 @@ public class ModuleSemanticHighlightingCalculator extends DefaultSemanticHighlig
   @Extension
   private ModuleUtil _moduleUtil;
   
-  public ILeafNode getFirstVisibleChildLeaf(final ICompositeNode node) {
+  private ILeafNode getFirstVisibleChildLeaf(final ICompositeNode node) {
     for (INode child = node.getFirstChild(); (!Objects.equal(child, null)); child = child.getNextSibling()) {
       {
         if ((child instanceof ICompositeNode)) {
@@ -61,6 +64,58 @@ public class ModuleSemanticHighlightingCalculator extends DefaultSemanticHighlig
       int _offset = keyNode.getOffset();
       int _length = keyNode.getLength();
       acceptor.addPosition(_offset, _length, id);
+    }
+  }
+  
+  /**
+   * Calculates the correct highligh id to use when highlighting the key of the given
+   * pair.
+   * 
+   * @return the correct highligh id for the key of the given pair
+   */
+  public String getKeywordHighlightId(final Pair pair) {
+    String _xblockexpression = null;
+    {
+      EObject _eContainer = pair.eContainer();
+      final JsonObject container = ((JsonObject) _eContainer);
+      final String name = pair.getName();
+      String _xifexpression = null;
+      boolean _isKnownKey = this._moduleUtil.isKnownKey(container, name);
+      if (_isKnownKey) {
+        _xifexpression = DefaultHighlightingConfiguration.KEYWORD_ID;
+      } else {
+        String _xifexpression_1 = null;
+        boolean _isDeprecatedKey = this._moduleUtil.isDeprecatedKey(container, name);
+        if (_isDeprecatedKey) {
+          _xifexpression_1 = ModuleHighlightingConfiguration.DEPRECATED_KEY_ID;
+        } else {
+          String _xifexpression_2 = null;
+          if ((pair instanceof UnrecognizedPair)) {
+            _xifexpression_2 = ModuleHighlightingConfiguration.UNRECOGNIZED_KEY_ID;
+          } else {
+            _xifexpression_2 = DefaultHighlightingConfiguration.STRING_ID;
+          }
+          _xifexpression_1 = _xifexpression_2;
+        }
+        _xifexpression = _xifexpression_1;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public void highlightSemanticNode(final ICompositeNode node, final IHighlightedPositionAcceptor acceptor) {
+    final EObject elem = node.getSemanticElement();
+    if ((elem instanceof Pair)) {
+      String _keywordHighlightId = this.getKeywordHighlightId(((Pair)elem));
+      this.highlightKey(node, acceptor, _keywordHighlightId);
+    } else {
+      if ((elem instanceof JsonValue)) {
+        Object _value = ((JsonValue)elem).getValue();
+        if ((_value instanceof String)) {
+          this.highlightKey(node, acceptor, DefaultHighlightingConfiguration.STRING_ID);
+        }
+      }
     }
   }
   
@@ -89,26 +144,7 @@ public class ModuleSemanticHighlightingCalculator extends DefaultSemanticHighlig
           _and = _hasDirectSemanticElement;
         }
         if (_and) {
-          final EObject elem = node.getSemanticElement();
-          if ((elem instanceof UnrecognizedPair)) {
-            EObject _semanticElement = node.getSemanticElement();
-            EObject _eContainer = _semanticElement.eContainer();
-            final JsonObject container = ((JsonObject) _eContainer);
-            String _name = ((UnrecognizedPair)elem).getName();
-            boolean _isKnownKey = this._moduleUtil.isKnownKey(container, _name);
-            boolean _not = (!_isKnownKey);
-            if (_not) {
-              String _xifexpression = null;
-              String _name_1 = ((UnrecognizedPair)elem).getName();
-              boolean _isDeprecatedKey = this._moduleUtil.isDeprecatedKey(container, _name_1);
-              if (_isDeprecatedKey) {
-                _xifexpression = ModuleHighlightingConfiguration.DEPRECATED_KEY_ID;
-              } else {
-                _xifexpression = ModuleHighlightingConfiguration.UNRECOGNIZED_KEY_ID;
-              }
-              this.highlightKey(((ICompositeNode) node), acceptor, _xifexpression);
-            }
-          }
+          this.highlightSemanticNode(((ICompositeNode) node), acceptor);
         }
       }
     }
