@@ -19,6 +19,7 @@ import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -222,6 +223,10 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	@Override
 	public Class<? extends ISingleLineCommentHelper> bindISingleLineCommentHelper() {
 		return PPSingleLineCommentHelper.class;
+	}
+
+	public Class<? extends ITaskFinder> bindITaskFinder() {
+		return FindNoTasks.class;
 	}
 
 	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper() {
