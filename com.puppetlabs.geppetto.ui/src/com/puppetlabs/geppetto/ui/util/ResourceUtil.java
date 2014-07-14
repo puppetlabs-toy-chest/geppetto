@@ -75,7 +75,9 @@ public class ResourceUtil {
 
 			IProjectDescription projectDescription = null;
 
-			if(!project.exists()) {
+			if(project.exists())
+				projectDescription = project.getDescription();
+			else {
 				projectDescription = ResourcesPlugin.getWorkspace().newProjectDescription(projectName);
 
 				if(!(projectLocationURI == null || defaultLocation.equals(projectLocationURI))) {
@@ -83,45 +85,45 @@ public class ResourceUtil {
 				}
 
 				project.create(projectDescription, new SubProgressMonitor(progressMonitor, 1));
-				project.open(new SubProgressMonitor(progressMonitor, 1));
 			}
-			else {
-				projectDescription = project.getDescription();
-				project.open(new SubProgressMonitor(progressMonitor, 1));
-			}
+			project.open(new SubProgressMonitor(progressMonitor, 1));
 
-			if(referencedProjects.size() != 0) {
+			if(!referencedProjects.isEmpty())
 				projectDescription.setReferencedProjects(referencedProjects.toArray(new IProject[referencedProjects.size()]));
-			}
 
-			String[] natureIds = projectDescription.getNatureIds();
+			String[] oldNatureIds = projectDescription.getNatureIds();
+			String[] newNatureIds = oldNatureIds;
 
-			if(natureIds == null) {
-				natureIds = new String[] { PPUiConstants.PUPPET_NATURE_ID, XtextProjectHelper.NATURE_ID };
-			}
+			if(oldNatureIds == null || oldNatureIds.length == 0)
+				newNatureIds = new String[] { PPUiConstants.PUPPET_NATURE_ID, XtextProjectHelper.NATURE_ID };
 			else {
-				final boolean missingXtextNature = !project.hasNature(XtextProjectHelper.NATURE_ID);
-				final boolean missingPuppetNature = !project.hasNature(PPUiConstants.PUPPET_NATURE_ID);
-				final int missingCount = (missingXtextNature
-						? 1
-						: 0) + (missingPuppetNature
-						? 1
-						: 0);
+				boolean missingXtextNature = true;
+				boolean missingPuppetNature = true;
+				int missingCount = 2;
+				for(String natureId : oldNatureIds) {
+					if(PPUiConstants.PUPPET_NATURE_ID.equals(natureId)) {
+						missingPuppetNature = false;
+						--missingCount;
+					}
+					if(XtextProjectHelper.NATURE_ID.equals(natureId)) {
+						missingXtextNature = false;
+						--missingCount;
+					}
+				}
 				if(missingCount > 0) {
-					String[] oldNatureIds = natureIds;
-					natureIds = new String[oldNatureIds.length + missingCount];
-					System.arraycopy(oldNatureIds, 0, natureIds, missingCount, oldNatureIds.length);
+					newNatureIds = new String[oldNatureIds.length + missingCount];
+					System.arraycopy(oldNatureIds, 0, newNatureIds, missingCount, oldNatureIds.length);
 					int addAt = 0;
 					if(missingPuppetNature)
-						natureIds[addAt++] = PPUiConstants.PUPPET_NATURE_ID;
+						newNatureIds[addAt++] = PPUiConstants.PUPPET_NATURE_ID;
 					if(missingXtextNature)
-						natureIds[addAt++] = XtextProjectHelper.NATURE_ID;
+						newNatureIds[addAt++] = XtextProjectHelper.NATURE_ID;
 				}
 			}
-
-			projectDescription.setNatureIds(natureIds);
-
-			project.setDescription(projectDescription, new SubProgressMonitor(progressMonitor, 1));
+			if(!(oldNatureIds == newNatureIds && referencedProjects.isEmpty())) {
+				projectDescription.setNatureIds(newNatureIds);
+				project.setDescription(projectDescription, new SubProgressMonitor(progressMonitor, 1));
+			}
 		}
 		catch(Exception exception) {
 			UIPlugin.logException("Unable to create project", exception);

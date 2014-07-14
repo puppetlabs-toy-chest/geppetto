@@ -367,6 +367,11 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 	}
 
 	@Override
+	protected boolean mayHaveExistingContents() {
+		return false;
+	}
+
+	@Override
 	protected WizardNewProjectCreationPage newProjectCreationPage(String pageName) {
 		return new PuppetProjectFromForgeCreationPage(pageName);
 	}

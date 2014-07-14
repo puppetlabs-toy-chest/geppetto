@@ -162,24 +162,39 @@ public class NewPuppetModuleProjectWizard extends Wizard implements INewWizard {
 
 	protected void initializeProjectContents(IProgressMonitor monitor) throws Exception {
 		SubMonitor submon = SubMonitor.convert(monitor, 100);
-		Metadata metadata = new Metadata();
-		metadata.setName(ModuleName.create(getModuleOwner(), project.getName().toLowerCase(), true));
-		metadata.setVersion(Version.fromString("0.1.0"));
-
-		if(ResourceUtil.getFile(project.getFullPath().append("manifests/init.pp")).exists()) { //$NON-NLS-1$
-			File metadataFile = project.getLocation().append(METADATA_JSON_NAME).toFile();
-			submon.worked(20);
-
-			if(!metadataFile.exists())
-				forge.saveJSONMetadata(metadata, metadataFile);
-			submon.worked(50);
-		}
-		else {
-			forge.generate(project.getLocation().toFile(), metadata);
+		File metadataFile = project.getLocation().append(METADATA_JSON_NAME).toFile();
+		if(metadataFile.exists())
 			submon.worked(70);
+		else {
+			submon.worked(20);
+			Metadata metadata = new Metadata();
+			metadata.setName(ModuleName.create(getModuleOwner(), project.getName().toLowerCase(), true));
+			metadata.setVersion(Version.fromString("0.1.0"));
+
+			if(ResourceUtil.getFile(project.getFullPath().append("manifests/init.pp")).exists()) { //$NON-NLS-1$
+				submon.worked(20);
+				forge.saveJSONMetadata(metadata, metadataFile);
+				submon.worked(30);
+			}
+			else {
+				forge.generate(project.getLocation().toFile(), metadata);
+				submon.worked(50);
+			}
 		}
 		project.refreshLocal(IResource.DEPTH_INFINITE, submon.newChild(30));
 		monitor.done();
+	}
+
+	/**
+	 * When creating a new Puppet Module we might end up in the wizard from an import operation such
+	 * as "Import projects from Git". When this happens, we want to preserve the contents. Subclasses
+	 * that actually perform import (such as the NewPuppetProjectFromForgeWizard) must instead ask
+	 * the user if existing content should be cleared prior to import.
+	 *
+	 * @return
+	 */
+	protected boolean mayHaveExistingContents() {
+		return true;
 	}
 
 	protected WizardNewProjectCreationPage newProjectCreationPage(String pageName) {
@@ -200,7 +215,7 @@ public class NewPuppetModuleProjectWizard extends Wizard implements INewWizard {
 						if(projectLocation == null)
 							projectLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().append(projectName);
 						File projectDir = projectLocation.toFile();
-						if(projectDir.exists()) {
+						if(projectDir.exists() && !mayHaveExistingContents()) {
 							if(!MessageDialog.openConfirm(
 								getShell(), UIPlugin.getLocalString("_UI_Confirm_Overwrite"),
 								UIPlugin.getLocalString("_UI_Directory_not_empty", projectDir.getAbsolutePath())))
