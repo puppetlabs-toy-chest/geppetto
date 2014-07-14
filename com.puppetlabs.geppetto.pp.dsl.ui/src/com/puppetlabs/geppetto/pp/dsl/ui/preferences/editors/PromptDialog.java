@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -125,6 +125,7 @@ public class PromptDialog extends Dialog {
 
 		if(value[0] != null)
 			valueText.setText(value[0]);
+
 		data = new GridData();
 		width = valueText.computeSize(500, SWT.DEFAULT).x;
 		if(width > maxWidth)
@@ -140,6 +141,7 @@ public class PromptDialog extends Dialog {
 		valueText.setLayoutData(data);
 
 		buttons = new Button[3];
+
 		Listener listener = new Listener() {
 			public void handleEvent(Event event) {
 				if(buttons[0] != null)
@@ -185,6 +187,12 @@ public class PromptDialog extends Dialog {
 		shell.pack();
 		shell.open();
 		Display display = parent.getDisplay();
+
+		// Defaults when loop breaks for other reasons than button press (such
+		// as user hitting escape)
+		value[0] = null;
+		result[0] = 0;
+
 		while(!shell.isDisposed()) {
 			if(!display.readAndDispatch())
 				display.sleep();
