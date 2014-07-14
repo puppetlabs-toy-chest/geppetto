@@ -52,13 +52,14 @@ import com.puppetlabs.geppetto.forge.model.VersionedName;
 import com.puppetlabs.geppetto.forge.v3.Modules;
 import com.puppetlabs.geppetto.forge.v3.model.AbbrevRelease;
 import com.puppetlabs.geppetto.forge.v3.model.Module;
+import com.puppetlabs.geppetto.module.dsl.ui.quickfix.NewWithKeyword;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
 import com.puppetlabs.geppetto.ui.UIPlugin;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog.Elem;
 
-public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizard {
+public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizard implements NewWithKeyword {
 
 	protected class PuppetProjectFromForgeCreationPage extends NewPuppetModuleProjectWizard.PuppetProjectCreationPage {
 		private Listener keywordModifyListener = new Listener() {
@@ -254,6 +255,11 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 			if(visible) {
 				keywordField.setFocus();
+				if(initialKeyword != null) {
+					keywordField.setText(initialKeyword);
+					initialKeyword = null;
+					promptForReleaseSelection();
+				}
 			}
 		}
 
@@ -304,7 +310,6 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 			}
 			return false;
 		}
-
 	}
 
 	private static final Pattern OK_KEYWORD_CHARACTERS = Pattern.compile("^[0-9A-Za-z_/-]*$");
@@ -320,6 +325,8 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 	private Modules moduleService;
 
 	protected VersionedName release;
+
+	protected String initialKeyword;
 
 	@Override
 	protected String getProjectCreationPageDescription() {
@@ -362,6 +369,10 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 	@Override
 	protected WizardNewProjectCreationPage newProjectCreationPage(String pageName) {
 		return new PuppetProjectFromForgeCreationPage(pageName);
+	}
+
+	public void startWithKeyword(String keyword) {
+		initialKeyword = keyword;
 	}
 
 }

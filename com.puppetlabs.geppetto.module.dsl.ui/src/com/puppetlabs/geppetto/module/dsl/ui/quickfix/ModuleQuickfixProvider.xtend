@@ -16,18 +16,28 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
+import java.util.regex.Pattern
+import javax.inject.Singleton
+import org.eclipse.ui.IWorkbench
+import org.eclipse.jface.wizard.WizardDialog
 
 /**
  * Custom quickfixes.
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
+@Singleton
 class ModuleQuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	extension ModuleUtil
 
 	@Inject
 	ModulePreferencesHelper preferenceHelper
+
+	@Inject
+	IWorkbench workbench
+
+	Pattern REF_PATTERN = Pattern.compile("reference to Module '([^']+)'\\.")
 
 	def private getResolvedMetadataVersion(EObject element) {
 		(element.eContainer.eContainer as JsonDependency).referencedModule.version
@@ -38,6 +48,24 @@ class ModuleQuickfixProvider extends DefaultQuickfixProvider {
 		if (moduleOwner === null)
 			moduleOwner = ModuleName.safeOwner(System.getProperty("user.name"))
 		moduleOwner
+	}
+
+	override createLinkingIssueResolutions(Issue issue, IssueResolutionAcceptor acceptor) {
+		super.createLinkingIssueResolutions(issue, acceptor)
+		val m = REF_PATTERN.matcher(issue.message)
+		if (m.find) {
+			val key = m.group(1)
+			acceptor.accept(issue, 'Import ' + key + ' from Puppet Forge',
+				'Import the missing ' + key + ' module from the Puppet Forge repository', null) [ element, context |
+				val descriptor = workbench.newWizardRegistry.findWizard(
+					'com.puppetlabs.geppetto.ui.NewPuppetProjectFromForgeWizard')
+				val wizard = descriptor.createWizard
+				val wd = new WizardDialog(workbench.activeWorkbenchWindow.shell, wizard)
+				(wizard as NewWithKeyword).startWithKeyword(key)
+				wd.setTitle(wizard.windowTitle)
+				wd.open()
+			]
+		}
 	}
 
 	@Fix(ModuleDiagnostics::ISSUE__MISSING_REQUIRED_ATTRIBUTE)

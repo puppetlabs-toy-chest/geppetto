@@ -10,11 +10,22 @@ import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
 import com.puppetlabs.geppetto.module.dsl.metadata.JsonDependency;
 import com.puppetlabs.geppetto.module.dsl.metadata.JsonMetadata;
 import com.puppetlabs.geppetto.module.dsl.ui.preferences.ModulePreferencesHelper;
+import com.puppetlabs.geppetto.module.dsl.ui.quickfix.NewWithKeyword;
 import com.puppetlabs.geppetto.module.dsl.validation.ModuleDiagnostics;
 import com.puppetlabs.geppetto.semver.Version;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Singleton;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.IWorkbenchWizard;
+import org.eclipse.ui.wizards.IWizardDescriptor;
+import org.eclipse.ui.wizards.IWizardRegistry;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -29,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * 
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
+@Singleton
 @SuppressWarnings("all")
 public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
   @Inject
@@ -37,6 +49,11 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
   
   @Inject
   private ModulePreferencesHelper preferenceHelper;
+  
+  @Inject
+  private IWorkbench workbench;
+  
+  private Pattern REF_PATTERN = Pattern.compile("reference to Module \'([^\']+)\'\\.");
   
   private Version getResolvedMetadataVersion(final EObject element) {
     EObject _eContainer = element.eContainer();
@@ -58,6 +75,33 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
       _xblockexpression = moduleOwner;
     }
     return _xblockexpression;
+  }
+  
+  public void createLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    super.createLinkingIssueResolutions(issue, acceptor);
+    String _message = issue.getMessage();
+    final Matcher m = this.REF_PATTERN.matcher(_message);
+    boolean _find = m.find();
+    if (_find) {
+      final String key = m.group(1);
+      final ISemanticModification _function = new ISemanticModification() {
+        public void apply(final EObject element, final IModificationContext context) throws Exception {
+          IWizardRegistry _newWizardRegistry = ModuleQuickfixProvider.this.workbench.getNewWizardRegistry();
+          final IWizardDescriptor descriptor = _newWizardRegistry.findWizard(
+            "com.puppetlabs.geppetto.ui.NewPuppetProjectFromForgeWizard");
+          final IWorkbenchWizard wizard = descriptor.createWizard();
+          IWorkbenchWindow _activeWorkbenchWindow = ModuleQuickfixProvider.this.workbench.getActiveWorkbenchWindow();
+          Shell _shell = _activeWorkbenchWindow.getShell();
+          final WizardDialog wd = new WizardDialog(_shell, wizard);
+          ((NewWithKeyword) wizard).startWithKeyword(key);
+          String _windowTitle = wizard.getWindowTitle();
+          wd.setTitle(_windowTitle);
+          wd.open();
+        }
+      };
+      acceptor.accept(issue, (("Import " + key) + " from Puppet Forge"), 
+        (("Import the missing " + key) + " module from the Puppet Forge repository"), null, _function);
+    }
   }
   
   @Fix(ModuleDiagnostics.ISSUE__MISSING_REQUIRED_ATTRIBUTE)
