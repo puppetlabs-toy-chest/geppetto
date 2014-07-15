@@ -20,23 +20,13 @@
          </selection>
       </wizard>
       <wizard
-            id="com.puppetlabs.geppetto.ui.NewPuppetModuleProjectWizard"
-            name="%_UI_PuppetModuleProject_title"
+            id="com.puppetlabs.geppetto.ui.NewPuppetModuleWizard"
+            name="%_UI_PuppetModule_title"
             class="com.puppetlabs.geppetto.ui.GeppettoExecutableExtensionFactory:com.puppetlabs.geppetto.ui.wizard.NewPuppetModuleProjectWizard"
             category="com.puppetlabs.geppetto.ui.newWizardCategory"
             project="true"
             icon="icons/full/etool16/NewPuppetProject.gif">
-         <description>%_UI_PuppetModuleProject_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-      <wizard
-            id="com.puppetlabs.geppetto.ui.NewPuppetProjectFromForgeWizard"
-            name="%_UI_PuppetProjectFromForge_title"
-            class="com.puppetlabs.geppetto.ui.GeppettoExecutableExtensionFactory:com.puppetlabs.geppetto.ui.wizard.NewPuppetProjectFromForgeWizard"
-            category="com.puppetlabs.geppetto.ui.newWizardCategory"
-            project="true"
-            icon="icons/full/etool16/NewPuppetProject.gif">
-         <description>%_UI_PuppetProjectFromForge_description</description>
+         <description>%_UI_PuppetModule_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
       <wizard
@@ -66,19 +56,6 @@
          </description>
       </wizard>
    </extension>
-   <!--
-   <extension point="org.eclipse.ui.popupMenus">
-      <viewerContribution
-            id="com.puppetlabs.geppetto.ui.importModulesFromForgeViewerContribution"
-            targetID="org.eclipse.ui.navigator.ProjectExplorer#PopupMenu">
-         <action
-               id="com.puppetlabs.geppetto.ui.importModulesFromForgeActionDelegate"
-               label="%_UI_ImportModulesFromForge_label"
-               menubarPath="group.port"
-               class="com.puppetlabs.geppetto.ui.action.ImportModulesFromForgeActionDelegate"/>
-      </viewerContribution>
-   </extension>
-   -->
    <extension
          point="org.eclipse.ui.exportWizards">
       <category
@@ -98,6 +75,33 @@
             icon="icons/obj16/puppet-16.png"
             id="com.puppetlabs.geppetto.ui.ModuleExportToFileWizard"
             name="%_UI_ExportModulesToFileSystem">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="com.puppetlabs.geppetto.ui.importWizardCategory"
+            name="%_UI_Wizard_Category">
+      </category>
+      <wizard
+            category="com.puppetlabs.geppetto.ui.importWizardCategory"
+            class="com.puppetlabs.geppetto.ui.GeppettoExecutableExtensionFactory:com.puppetlabs.geppetto.ui.wizard.ImportPuppetModuleFromSourceWizard"
+            icon="icons/full/etool16/NewPuppetProject.gif"
+            id="com.puppetlabs.geppetto.ui.ImportPuppetModuleFromSourceWizard"
+            name="%_UI_PuppetModuleFromSource_title">
+         <description>
+            %_UI_PuppetModuleFromSource_description
+         </description>
+      </wizard>
+      <wizard
+            category="com.puppetlabs.geppetto.ui.importWizardCategory"
+            class="com.puppetlabs.geppetto.ui.GeppettoExecutableExtensionFactory:com.puppetlabs.geppetto.ui.wizard.ImportPuppetModuleFromForgeWizard"
+            icon="icons/full/etool16/NewPuppetProject.gif"
+            id="com.puppetlabs.geppetto.ui.ImportPuppetModuleFromForgeWizard"
+            name="%_UI_PuppetModuleFromForge_title">
+         <description>
+            %_UI_PuppetModuleFromForge_description
+         </description>
       </wizard>
    </extension>
 </plugin>

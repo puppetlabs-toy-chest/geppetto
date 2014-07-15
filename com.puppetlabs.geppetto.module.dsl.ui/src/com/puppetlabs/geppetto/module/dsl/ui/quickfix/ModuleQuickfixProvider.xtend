@@ -57,11 +57,20 @@ class ModuleQuickfixProvider extends DefaultQuickfixProvider {
 			val key = m.group(1)
 			acceptor.accept(issue, 'Import ' + key + ' from Puppet Forge',
 				'Import the missing ' + key + ' module from the Puppet Forge repository', null) [ element, context |
-				val descriptor = workbench.newWizardRegistry.findWizard(
-					'com.puppetlabs.geppetto.ui.NewPuppetProjectFromForgeWizard')
+				val descriptor = workbench.importWizardRegistry.findWizard(
+					'com.puppetlabs.geppetto.ui.ImportPuppetModuleFromForgeWizard')
 				val wizard = descriptor.createWizard
 				val wd = new WizardDialog(workbench.activeWorkbenchWindow.shell, wizard)
 				(wizard as NewWithKeyword).startWithKeyword(key)
+				wd.setTitle(wizard.windowTitle)
+				wd.open()
+			]
+			acceptor.accept(issue, 'Import ' + key + ' from local disk',
+				'Import the missing ' + key + ' module from a local source folder', null) [ element, context |
+				val descriptor = workbench.importWizardRegistry.findWizard(
+					'com.puppetlabs.geppetto.ui.ImportPuppetModuleFromSourceWizard')
+				val wizard = descriptor.createWizard
+				val wd = new WizardDialog(workbench.activeWorkbenchWindow.shell, wizard)
 				wd.setTitle(wizard.windowTitle)
 				wd.open()
 			]

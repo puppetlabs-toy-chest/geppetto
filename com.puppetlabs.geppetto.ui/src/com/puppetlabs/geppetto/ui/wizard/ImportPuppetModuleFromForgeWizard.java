@@ -30,8 +30,8 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -43,8 +43,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.ui.IImportWizard;
 
 import com.google.inject.Inject;
 import com.puppetlabs.geppetto.forge.ForgeService;
@@ -55,13 +54,13 @@ import com.puppetlabs.geppetto.forge.v3.model.Module;
 import com.puppetlabs.geppetto.module.dsl.ui.quickfix.NewWithKeyword;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
-import com.puppetlabs.geppetto.ui.UIPlugin;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog.Elem;
 
-public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizard implements NewWithKeyword {
+public class ImportPuppetModuleFromForgeWizard extends AbstractPuppetModuleWizard implements NewWithKeyword,
+		IImportWizard {
 
-	protected class PuppetProjectFromForgeCreationPage extends NewPuppetModuleProjectWizard.PuppetProjectCreationPage {
+	protected class PuppetProjectFromForgeCreationPage extends AbstractPuppetProjectWizard.PuppetProjectCreationPage {
 		private Listener keywordModifyListener = new Listener() {
 			public void handleEvent(Event e) {
 				selectButton.setEnabled(validateKeyword());
@@ -316,7 +315,7 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 
 	private static final Pattern KEYWORD_AT_LEAST_ONE_CHARACTER = Pattern.compile("[A-Za-z]+");
 
-	private static final Logger log = Logger.getLogger(NewPuppetProjectFromForgeWizard.class);
+	private static final Logger log = Logger.getLogger(ImportPuppetModuleFromForgeWizard.class);
 
 	@Inject
 	private ForgeService forgeService;
@@ -329,19 +328,18 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 	protected String initialKeyword;
 
 	@Override
-	protected String getProjectCreationPageDescription() {
-		return getLocalString("_UI_PuppetProjectFromForge_description"); //$NON-NLS-1$
+	protected String getWizardPageDescriptionKey() {
+		return "_UI_PuppetModuleFromForge_description"; //$NON-NLS-1$
 	}
 
 	@Override
-	protected String getProjectCreationPageTitle() {
-		return getLocalString("_UI_PuppetProjectFromForge_title"); //$NON-NLS-1$
+	protected String getWizardPageTitleKey() {
+		return "_UI_PuppetModuleFromForge_title"; //$NON-NLS-1$
 	}
 
 	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		setDefaultPageImageDescriptor(UIPlugin.getImageDesc("full/wizban/NewPuppetProject.png")); //$NON-NLS-1$
-		setWindowTitle(getLocalString("_UI_NewPuppetProjectFromForge_title")); //$NON-NLS-1$
+	protected String getWizardWindowTitleKey() {
+		return "_UI_ImportPuppetModule_title"; //$NON-NLS-1$
 	}
 
 	@Override
@@ -372,7 +370,7 @@ public class NewPuppetProjectFromForgeWizard extends NewPuppetModuleProjectWizar
 	}
 
 	@Override
-	protected WizardNewProjectCreationPage newProjectCreationPage(String pageName) {
+	protected WizardPage newProjectCreationPage(String pageName) {
 		return new PuppetProjectFromForgeCreationPage(pageName);
 	}
 

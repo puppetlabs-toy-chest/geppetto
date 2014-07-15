@@ -86,9 +86,9 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
       final String key = m.group(1);
       final ISemanticModification _function = new ISemanticModification() {
         public void apply(final EObject element, final IModificationContext context) throws Exception {
-          IWizardRegistry _newWizardRegistry = ModuleQuickfixProvider.this.workbench.getNewWizardRegistry();
-          final IWizardDescriptor descriptor = _newWizardRegistry.findWizard(
-            "com.puppetlabs.geppetto.ui.NewPuppetProjectFromForgeWizard");
+          IWizardRegistry _importWizardRegistry = ModuleQuickfixProvider.this.workbench.getImportWizardRegistry();
+          final IWizardDescriptor descriptor = _importWizardRegistry.findWizard(
+            "com.puppetlabs.geppetto.ui.ImportPuppetModuleFromForgeWizard");
           final IWorkbenchWizard wizard = descriptor.createWizard();
           IWorkbenchWindow _activeWorkbenchWindow = ModuleQuickfixProvider.this.workbench.getActiveWorkbenchWindow();
           Shell _shell = _activeWorkbenchWindow.getShell();
@@ -101,6 +101,22 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
       };
       acceptor.accept(issue, (("Import " + key) + " from Puppet Forge"), 
         (("Import the missing " + key) + " module from the Puppet Forge repository"), null, _function);
+      final ISemanticModification _function_1 = new ISemanticModification() {
+        public void apply(final EObject element, final IModificationContext context) throws Exception {
+          IWizardRegistry _importWizardRegistry = ModuleQuickfixProvider.this.workbench.getImportWizardRegistry();
+          final IWizardDescriptor descriptor = _importWizardRegistry.findWizard(
+            "com.puppetlabs.geppetto.ui.ImportPuppetModuleFromSourceWizard");
+          final IWorkbenchWizard wizard = descriptor.createWizard();
+          IWorkbenchWindow _activeWorkbenchWindow = ModuleQuickfixProvider.this.workbench.getActiveWorkbenchWindow();
+          Shell _shell = _activeWorkbenchWindow.getShell();
+          final WizardDialog wd = new WizardDialog(_shell, wizard);
+          String _windowTitle = wizard.getWindowTitle();
+          wd.setTitle(_windowTitle);
+          wd.open();
+        }
+      };
+      acceptor.accept(issue, (("Import " + key) + " from local disk"), 
+        (("Import the missing " + key) + " module from a local source folder"), null, _function_1);
     }
   }
   
