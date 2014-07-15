@@ -4,13 +4,12 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.forge.v2.api.it;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -23,13 +22,12 @@ import org.junit.Test;
 import com.puppetlabs.geppetto.forge.api.it.ForgeAPITestBase;
 import com.puppetlabs.geppetto.forge.v2.model.AnnotatedLink;
 import com.puppetlabs.geppetto.forge.v2.model.Module;
-import com.puppetlabs.geppetto.forge.v2.model.Release;
 import com.puppetlabs.geppetto.forge.v2.service.ListPreferences;
 import com.puppetlabs.geppetto.forge.v2.service.ModuleService;
 
 /**
  * @author thhal
- * 
+ *
  */
 public class ModuleTests extends ForgeAPITestBase {
 	@Test
@@ -51,10 +49,6 @@ public class ModuleTests extends ForgeAPITestBase {
 			assertNotNull("Null module releases list", releases);
 			for(AnnotatedLink release : releases) {
 				assertNotNull("Null module release slug", release.getSlug());
-				assertNotNull("Null module release link", release.getLink());
-				Release resolved = service.resolveLink(release.getLink(), Release.class);
-				assertNotNull("Null resolved release", resolved);
-				assertEquals("Resolved release version mismatch", resolved.getVersion().toString(), release.getKey());
 				someReleaseLinkTested = true;
 			}
 		}
