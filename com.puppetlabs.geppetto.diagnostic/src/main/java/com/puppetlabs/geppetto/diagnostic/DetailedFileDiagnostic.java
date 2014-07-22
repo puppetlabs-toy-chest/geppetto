@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,9 +15,9 @@ import java.io.File;
 public class DetailedFileDiagnostic extends FileDiagnostic {
 	private static final long serialVersionUID = 1L;
 
-	private Integer offset;
+	private int offset;
 
-	private Integer length;
+	private int length;
 
 	public DetailedFileDiagnostic(int severity, DiagnosticType type, String message, File file) {
 		super(severity, type, message, file);
@@ -48,29 +48,33 @@ public class DetailedFileDiagnostic extends FileDiagnostic {
 	 * Length is the length (from offset) that is the textual representation
 	 * that the diagnostic apply to , or 0 if there where no visible textual
 	 * representation. A length of -1 indicates that length is irrelevant.
-	 * 
+	 *
 	 * @return the value of the '<em>length</em>' attribute.
 	 */
-	public Integer getLength() {
+	public int getLength() {
 		return length;
 	}
 
 	/**
 	 * The offset from the beginning of the parsed text, or -1 if offset is not
 	 * available.
-	 * 
+	 *
 	 * @return the value of the '<em>offset</em>' attribute.
 	 */
-	public Integer getOffset() {
+	public int getOffset() {
 		return offset;
 	}
 
 	public void setLength(Integer newLength) {
-		length = newLength;
+		length = newLength == null
+				? 0
+				: newLength.intValue();
 	}
 
 	public void setOffset(Integer newOffset) {
-		offset = newOffset;
+		offset = newOffset == null
+				? 0
+				: newOffset.intValue();
 	}
 
 }
