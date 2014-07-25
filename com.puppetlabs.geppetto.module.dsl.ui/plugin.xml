@@ -286,13 +286,8 @@
 	    <persistent value="true"/>
 	</extension>
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="com.puppetlabs.geppetto.module.dsl.ui.ModuleExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-            fileExtensions="json"
-            >
-      </participant>
+   <extension point="org.eclipse.xtext.builder.participant">
+      <participant class="com.puppetlabs.geppetto.module.dsl.ui.ModuleExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"/>
    </extension>
 
 	<!-- Quick Outline -->

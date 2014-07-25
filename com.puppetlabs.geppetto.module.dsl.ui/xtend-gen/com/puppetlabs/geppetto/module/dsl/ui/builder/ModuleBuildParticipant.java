@@ -17,11 +17,14 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.RebuildChecker;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.log4j.Logger;
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -123,31 +126,23 @@ public class ModuleBuildParticipant extends BuilderParticipant {
    * <li>Generates a metadata.json file if it's missing and the Modulefile is present</li>
    * </ol>
    */
-  private void legacyCheck(final IProject project, final SubMonitor subMon) {
-    try {
-      subMon.setWorkRemaining(2);
-      ValidationPreference _modulefileExists = this.validationAdvisor.getModulefileExists();
-      boolean _tripleNotEquals = (_modulefileExists != ValidationPreference.IGNORE);
-      if (_tripleNotEquals) {
-        final IFile moduleFile = project.getFile(Forge.MODULEFILE_NAME);
-        boolean _isAccessible = moduleFile.isAccessible();
-        if (_isAccessible) {
-          SubMonitor _newChild = subMon.newChild(1);
-          this.onModulefileDetected(moduleFile, _newChild);
-        } else {
-          subMon.worked(1);
-        }
-      }
-      final IFile mdJsonFile = project.getFile(Forge.METADATA_JSON_NAME);
-      boolean _isDerived = mdJsonFile.isDerived();
-      if (_isDerived) {
-        SubMonitor _newChild_1 = subMon.newChild(1);
-        mdJsonFile.setDerived(false, _newChild_1);
-      } else {
-        subMon.worked(1);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  private void legacyCheck(final IProject project, final SubMonitor subMon) throws CoreException {
+    subMon.setWorkRemaining(2);
+    final IFile moduleFile = project.getFile(Forge.MODULEFILE_NAME);
+    boolean _isAccessible = moduleFile.isAccessible();
+    if (_isAccessible) {
+      SubMonitor _newChild = subMon.newChild(1);
+      this.onModulefileDetected(moduleFile, _newChild);
+    } else {
+      subMon.worked(1);
+    }
+    final IFile mdJsonFile = project.getFile(Forge.METADATA_JSON_NAME);
+    boolean _isDerived = mdJsonFile.isDerived();
+    if (_isDerived) {
+      SubMonitor _newChild_1 = subMon.newChild(1);
+      mdJsonFile.setDerived(false, _newChild_1);
+    } else {
+      subMon.worked(1);
     }
   }
   
@@ -227,6 +222,12 @@ public class ModuleBuildParticipant extends BuilderParticipant {
     return _xblockexpression;
   }
   
+  public static File toLocalFile(final IFile file, final IProgressMonitor monitor) throws CoreException {
+    URI _locationURI = file.getLocationURI();
+    IFileStore _store = EFS.getStore(_locationURI);
+    return _store.toLocalFile(EFS.NONE, monitor);
+  }
+  
   private void onModulefileDetected(final IFile moduleFile, final SubMonitor monitor) throws CoreException {
     final IContainer parentDir = moduleFile.getParent();
     IPath _fromPortableString = Path.fromPortableString(Forge.METADATA_JSON_NAME);
@@ -235,20 +236,28 @@ public class ModuleBuildParticipant extends BuilderParticipant {
     boolean _isAccessible = metadataJSON.isAccessible();
     if (_isAccessible) {
       ValidationPreference _modulefileExists = this.validationAdvisor.getModulefileExists();
-      int _diagnosticSeverity = this.getDiagnosticSeverity(_modulefileExists);
-      Diagnostic _diagnostic = new Diagnostic(_diagnosticSeverity, Forge.FORGE, 
-        "Modulefile is deprecated. Using metadata.json");
-      diag.addChild(_diagnostic);
+      boolean _tripleNotEquals = (_modulefileExists != ValidationPreference.IGNORE);
+      if (_tripleNotEquals) {
+        ValidationPreference _modulefileExists_1 = this.validationAdvisor.getModulefileExists();
+        int _diagnosticSeverity = this.getDiagnosticSeverity(_modulefileExists_1);
+        Diagnostic _diagnostic = new Diagnostic(_diagnosticSeverity, Forge.FORGE, 
+          "Modulefile is deprecated. Using metadata.json");
+        diag.addChild(_diagnostic);
+      }
     } else {
       ValidationPreference _modulefileExistsAndIsUsed = this.validationAdvisor.getModulefileExistsAndIsUsed();
-      int _diagnosticSeverity_1 = this.getDiagnosticSeverity(_modulefileExistsAndIsUsed);
-      Diagnostic _diagnostic_1 = new Diagnostic(_diagnosticSeverity_1, Forge.FORGE, 
-        "Modulefile is deprecated. Building metadata.json from modulefile");
-      diag.addChild(_diagnostic_1);
+      boolean _tripleNotEquals_1 = (_modulefileExistsAndIsUsed != ValidationPreference.IGNORE);
+      if (_tripleNotEquals_1) {
+        ValidationPreference _modulefileExistsAndIsUsed_1 = this.validationAdvisor.getModulefileExistsAndIsUsed();
+        int _diagnosticSeverity_1 = this.getDiagnosticSeverity(_modulefileExistsAndIsUsed_1);
+        Diagnostic _diagnostic_1 = new Diagnostic(_diagnosticSeverity_1, Forge.FORGE, 
+          "Modulefile is deprecated. Building metadata.json from modulefile");
+        diag.addChild(_diagnostic_1);
+      }
       try {
-        IPath _fullPath = moduleFile.getFullPath();
-        File _file = _fullPath.toFile();
-        final Metadata md = this.forge.loadModulefile(_file, diag);
+        SubMonitor _newChild = monitor.newChild(1);
+        File _localFile = ModuleBuildParticipant.toLocalFile(moduleFile, _newChild);
+        final Metadata md = this.forge.loadModulefile(_localFile, diag);
         boolean _and = false;
         boolean _notEquals = (!Objects.equal(md, null));
         if (!_notEquals) {
@@ -259,16 +268,18 @@ public class ModuleBuildParticipant extends BuilderParticipant {
           _and = _lessThan;
         }
         if (_and) {
-          IPath _fullPath_1 = metadataJSON.getFullPath();
-          File _file_1 = _fullPath_1.toFile();
-          this.forge.saveJSONMetadata(md, _file_1);
-          parentDir.refreshLocal(IResource.DEPTH_ONE, monitor);
+          SubMonitor _newChild_1 = monitor.newChild(1);
+          File _localFile_1 = ModuleBuildParticipant.toLocalFile(metadataJSON, _newChild_1);
+          this.forge.saveJSONMetadata(md, _localFile_1);
+          SubMonitor _newChild_2 = monitor.newChild(1);
+          parentDir.refreshLocal(IResource.DEPTH_ONE, _newChild_2);
         }
       } catch (final Throwable _t) {
         if (_t instanceof IOException) {
           final IOException e = (IOException)_t;
-          ExceptionDiagnostic _exceptionDiagnostic = new ExceptionDiagnostic(Diagnostic.ERROR, Forge.FORGE, 
-            "Unable to create metadata.json from Modulefile", e);
+          String _message = e.getMessage();
+          String _plus = ("Unable to create metadata.json from Modulefile: " + _message);
+          ExceptionDiagnostic _exceptionDiagnostic = new ExceptionDiagnostic(Diagnostic.ERROR, Forge.FORGE, _plus, e);
           diag.addChild(_exceptionDiagnostic);
         } else {
           throw Exceptions.sneakyThrow(_t);
@@ -327,41 +338,32 @@ public class ModuleBuildParticipant extends BuilderParticipant {
     return wanted;
   }
   
-  private void syncProjectReferences(final IProject project, final List<IProject> wanted, final SubMonitor subMon) {
-    try {
-      subMon.setWorkRemaining(2);
-      SubMonitor _newChild = subMon.newChild(1);
-      project.refreshLocal(IResource.DEPTH_INFINITE, _newChild);
-      final IProjectDescription description = project.getDescription();
-      IProject[] _dynamicReferences = description.getDynamicReferences();
-      final HashSet<IProject> current = CollectionLiterals.<IProject>newHashSet(_dynamicReferences);
-      boolean _and = false;
-      int _size = current.size();
-      int _size_1 = wanted.size();
-      boolean _tripleEquals = (_size == _size_1);
-      if (!_tripleEquals) {
-        _and = false;
-      } else {
-        boolean _containsAll = current.containsAll(wanted);
-        _and = _containsAll;
-      }
-      boolean _not = (!_and);
-      if (_not) {
-        int _size_2 = wanted.size();
-        IProject[] _newArrayOfSize = new IProject[_size_2];
-        IProject[] _array = wanted.<IProject>toArray(_newArrayOfSize);
-        description.setDynamicReferences(_array);
-        SubMonitor _newChild_1 = subMon.newChild(1);
-        project.setDescription(description, _newChild_1);
-        this.rebuildChecker.triggerBuild();
-      }
-    } catch (final Throwable _t) {
-      if (_t instanceof CoreException) {
-        final CoreException e = (CoreException)_t;
-        ModuleBuildParticipant.log.error("Can not sync project\'s dynamic dependencies", e);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+  private void syncProjectReferences(final IProject project, final List<IProject> wanted, final SubMonitor subMon) throws CoreException {
+    subMon.setWorkRemaining(2);
+    SubMonitor _newChild = subMon.newChild(1);
+    project.refreshLocal(IResource.DEPTH_INFINITE, _newChild);
+    final IProjectDescription description = project.getDescription();
+    IProject[] _dynamicReferences = description.getDynamicReferences();
+    final HashSet<IProject> current = CollectionLiterals.<IProject>newHashSet(_dynamicReferences);
+    boolean _and = false;
+    int _size = current.size();
+    int _size_1 = wanted.size();
+    boolean _tripleEquals = (_size == _size_1);
+    if (!_tripleEquals) {
+      _and = false;
+    } else {
+      boolean _containsAll = current.containsAll(wanted);
+      _and = _containsAll;
+    }
+    boolean _not = (!_and);
+    if (_not) {
+      int _size_2 = wanted.size();
+      IProject[] _newArrayOfSize = new IProject[_size_2];
+      IProject[] _array = wanted.<IProject>toArray(_newArrayOfSize);
+      description.setDynamicReferences(_array);
+      SubMonitor _newChild_1 = subMon.newChild(1);
+      project.setDescription(description, _newChild_1);
+      this.rebuildChecker.triggerBuild();
     }
   }
 }

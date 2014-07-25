@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.Path
 import org.eclipse.core.runtime.SubMonitor
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.BuilderParticipant
+import org.eclipse.core.filesystem.EFS
 
 @Singleton
 class ModuleBuildParticipant extends BuilderParticipant {
@@ -85,15 +86,13 @@ class ModuleBuildParticipant extends BuilderParticipant {
 	 * <li>Generates a metadata.json file if it's missing and the Modulefile is present</li>
 	 * </ol> 
 	 */
-	def private legacyCheck(IProject project, SubMonitor subMon) {
+	def private legacyCheck(IProject project, SubMonitor subMon) throws CoreException {
 		subMon.workRemaining = 2
-		if (validationAdvisor.modulefileExists !== ValidationPreference.IGNORE) {
-			val moduleFile = project.getFile(Forge.MODULEFILE_NAME)
-			if (moduleFile.accessible)
-				moduleFile.onModulefileDetected(subMon.newChild(1))
-			else
-				subMon.worked(1)
-		}
+		val moduleFile = project.getFile(Forge.MODULEFILE_NAME)
+		if (moduleFile.accessible)
+			moduleFile.onModulefileDetected(subMon.newChild(1))
+		else
+			subMon.worked(1)
 
 		val mdJsonFile = project.getFile(Forge.METADATA_JSON_NAME)
 		if (mdJsonFile.derived)
@@ -151,29 +150,36 @@ class ModuleBuildParticipant extends BuilderParticipant {
 		severity
 	}
 
+	def static toLocalFile(IFile file, IProgressMonitor monitor) throws CoreException {
+		EFS.getStore(file.locationURI).toLocalFile(EFS.NONE, monitor)
+	}
+
 	def private void onModulefileDetected(IFile moduleFile, SubMonitor monitor) throws CoreException {
 		val parentDir = moduleFile.parent
 		val metadataJSON = parentDir.getFile(Path.fromPortableString(Forge.METADATA_JSON_NAME))
 		val diag = new Diagnostic()
 
-		if (metadataJSON.accessible)
-			diag.addChild(
-				new Diagnostic(validationAdvisor.modulefileExists.diagnosticSeverity, Forge.FORGE,
-					"Modulefile is deprecated. Using metadata.json"))
-		else {
-			diag.addChild(
-				new Diagnostic(validationAdvisor.modulefileExistsAndIsUsed.diagnosticSeverity, Forge.FORGE,
-					"Modulefile is deprecated. Building metadata.json from modulefile"))
+		if (metadataJSON.accessible) {
+			if (validationAdvisor.modulefileExists !== ValidationPreference.IGNORE)
+				diag.addChild(
+					new Diagnostic(validationAdvisor.modulefileExists.diagnosticSeverity, Forge.FORGE,
+						"Modulefile is deprecated. Using metadata.json"))
+		} else {
+			if (validationAdvisor.modulefileExistsAndIsUsed !== ValidationPreference.IGNORE)
+				diag.addChild(
+					new Diagnostic(validationAdvisor.modulefileExistsAndIsUsed.diagnosticSeverity, Forge.FORGE,
+						"Modulefile is deprecated. Building metadata.json from modulefile"))
+			
 			try {
-				val md = forge.loadModulefile(moduleFile.fullPath.toFile, diag)
+				val md = forge.loadModulefile(moduleFile.toLocalFile(monitor.newChild(1)), diag)
 				if (md != null && diag.severity < Diagnostic.ERROR) {
-					forge.saveJSONMetadata(md, metadataJSON.fullPath.toFile)
-					parentDir.refreshLocal(IResource.DEPTH_ONE, monitor)
+					forge.saveJSONMetadata(md, metadataJSON.toLocalFile(monitor.newChild(1)))
+					parentDir.refreshLocal(IResource.DEPTH_ONE, monitor.newChild(1))
 				}
 			} catch (IOException e) {
 				diag.addChild(
 					new ExceptionDiagnostic(Diagnostic.ERROR, Forge.FORGE,
-						"Unable to create metadata.json from Modulefile", e))
+						"Unable to create metadata.json from Modulefile: " + e.getMessage(), e))
 			}
 		}
 		moduleFile.createResourceMarkers(diag)
@@ -209,24 +215,20 @@ class ModuleBuildParticipant extends BuilderParticipant {
 		return wanted
 	}
 
-	def private void syncProjectReferences(IProject project, List<IProject> wanted, SubMonitor subMon) {
-		try {
-			subMon.workRemaining = 2
-			project.refreshLocal(IResource.DEPTH_INFINITE, subMon.newChild(1))
-			val description = project.description
-			val current = newHashSet(description.dynamicReferences)
-			if (!(current.size() === wanted.size() && current.containsAll(wanted))) {
+	def private void syncProjectReferences(IProject project, List<IProject> wanted, SubMonitor subMon) throws CoreException {
+		subMon.workRemaining = 2
+		project.refreshLocal(IResource.DEPTH_INFINITE, subMon.newChild(1))
+		val description = project.description
+		val current = newHashSet(description.dynamicReferences)
+		if (!(current.size() === wanted.size() && current.containsAll(wanted))) {
 
-				// not in sync, set them
-				description.dynamicReferences = wanted.toArray(newArrayOfSize(wanted.size()))
-				project.setDescription(description, subMon.newChild(1))
+			// not in sync, set them
+			description.dynamicReferences = wanted.toArray(newArrayOfSize(wanted.size()))
+			project.setDescription(description, subMon.newChild(1))
 
-				// We need a full build when dependencies change
-				//
-				rebuildChecker.triggerBuild
-			}
-		} catch (CoreException e) {
-			log.error("Can not sync project's dynamic dependencies", e)
+			// We need a full build when dependencies change
+			//
+			rebuildChecker.triggerBuild
 		}
 	}
 }
