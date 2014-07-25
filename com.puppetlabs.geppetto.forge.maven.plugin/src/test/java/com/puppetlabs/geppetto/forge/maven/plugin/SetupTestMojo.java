@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,17 +15,16 @@ import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonM
 import java.io.IOException;
 import java.util.Properties;
 
-import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
-import com.puppetlabs.geppetto.forge.client.GsonModule;
-import com.puppetlabs.geppetto.forge.client.OAuthModule;
-import com.puppetlabs.geppetto.forge.v2.ForgeAPI;
-import com.puppetlabs.geppetto.forge.v2.service.ModuleService;
-import com.puppetlabs.geppetto.forge.v2.service.ReleaseService;
-import com.puppetlabs.geppetto.semver.Version;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Module;
+import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
+import com.puppetlabs.geppetto.forge.client.GsonModule;
+import com.puppetlabs.geppetto.forge.client.OAuthModule;
+import com.puppetlabs.geppetto.forge.v2.ForgeAPI;
+import com.puppetlabs.geppetto.forge.v2.service.ReleaseService;
+import com.puppetlabs.geppetto.semver.Version;
 
 public class SetupTestMojo extends AbstractForgeTestMojo {
 	private static Module createCredentialsModule(Properties props, String login, String password) throws IOException {
@@ -50,34 +49,24 @@ public class SetupTestMojo extends AbstractForgeTestMojo {
 			props, owner, System.getProperty("forge.password")), forgeModule);
 
 		// Create the modules used in publishing tests
-		ModuleService moduleService = forge.createModuleService();
 		ReleaseService releaseService = forge.createReleaseService();
 		try {
 			releaseService.delete(owner, "test_module_a", Version.create(1, 0, 0));
-			moduleService.delete(owner, "test_module_a");
 		}
 		catch(Exception e) {
 		}
 		try {
 			releaseService.delete(owner, "test_module_b", Version.create(1, 0, 0));
-			moduleService.delete(owner, "test_module_b");
 		}
 		catch(Exception e) {
 		}
 		try {
 			releaseService.delete(owner, "test_module_c", Version.create(1, 0, 0));
-			moduleService.delete(owner, "test_module_c");
 		}
 		catch(Exception e) {
 		}
 		try {
 			releaseService.delete(owner, "test_module_d", Version.create(1, 0, 0));
-			moduleService.delete(owner, "test_module_d");
-		}
-		catch(Exception e) {
-		}
-		try {
-			moduleService.delete(System.getProperty("forge.login.second"), "test_module_wrong_owner");
 		}
 		catch(Exception e) {
 		}

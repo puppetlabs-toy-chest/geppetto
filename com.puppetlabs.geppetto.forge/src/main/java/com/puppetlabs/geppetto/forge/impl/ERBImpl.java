@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,10 +21,10 @@ import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.common.os.StreamUtil;
 import com.puppetlabs.geppetto.forge.ERB;
 import com.puppetlabs.geppetto.forge.model.Metadata;
-import com.google.inject.Singleton;
 
 @Singleton
 class ERBImpl implements ERB {
@@ -124,6 +124,7 @@ class ERBImpl implements ERB {
 		throw new UnsupportedOperationException("Ruby code not handled");
 	}
 
+	@SuppressWarnings("deprecation")
 	private void handleExpression(Metadata metadata, Reader input, Writer dest) throws IOException {
 		String expr = consumeUntilEndMark(input);
 		Matcher m = expressionPattern.matcher(expr);

@@ -9,7 +9,6 @@ import com.google.inject.AbstractModule;
 import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
 import com.puppetlabs.geppetto.forge.client.GsonModule;
 import com.puppetlabs.geppetto.forge.client.OAuthModule;
-import com.puppetlabs.geppetto.forge.v2.ForgeAPI;
 import com.puppetlabs.geppetto.semver.Version;
 
 public class ForgeAPITestBase {
@@ -34,12 +33,6 @@ public class ForgeAPITestBase {
 		return new String[] { FORGE_CLIENT_ID, FORGE_CLIENT_SECRET };
 	}
 
-	protected static ForgeAPI getTestUserForge() {
-		if(testUserForge == null)
-			testUserForge = new ForgeAPI(new TestModule());
-		return testUserForge;
-	}
-
 	public static final String TEST_USER = "geppetto";
 
 	public static final String TEST_PASSWORD = "geppetto tester";
@@ -55,6 +48,4 @@ public class ForgeAPITestBase {
 	private static final String FORGE_CLIENT_SECRET = "2227c9a7392382f58b5e4d084b705827cb574673ff7d2a5905ef21685fd48e40";
 
 	private static final String FORGE_STAGING_SERVICE_BASE_URL = "https://forgestagingapi.puppetlabs.com";
-
-	private static ForgeAPI testUserForge;
 }

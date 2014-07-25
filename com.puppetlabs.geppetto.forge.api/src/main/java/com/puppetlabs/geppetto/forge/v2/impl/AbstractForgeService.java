@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,13 +14,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.client.HttpResponseException;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.inject.Inject;
 import com.puppetlabs.geppetto.forge.client.ForgeClient;
-import com.puppetlabs.geppetto.forge.v2.model.HalLink;
 import com.puppetlabs.geppetto.forge.v2.service.ForgeService;
 
 /**
@@ -44,24 +41,9 @@ public abstract class AbstractForgeService implements ForgeService {
 		return forgeClient;
 	}
 
-	@Override
-	public <T> T resolveLink(HalLink link, Class<T> type) throws IOException {
-		if(link == null)
-			return null;
-
-		String href = link.getHref();
-		if(href == null)
-			return null;
-
-		if(!href.startsWith("/v2/"))
-			throw new HttpResponseException(404, "Not found: " + href);
-
-		return getClient(false).getV2(href.substring(4), null, type);
-	}
-
 	/**
 	 * Converts a java bean into a hash map using the beans json representation.
-	 * 
+	 *
 	 * @param bean
 	 *            The bean to convert
 	 * @return The resulting map

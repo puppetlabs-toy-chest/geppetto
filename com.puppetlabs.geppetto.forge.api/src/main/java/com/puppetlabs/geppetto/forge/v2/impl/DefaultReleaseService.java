@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -12,18 +12,11 @@ package com.puppetlabs.geppetto.forge.v2.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpResponseException;
 
 import com.puppetlabs.geppetto.forge.model.Constants;
 import com.puppetlabs.geppetto.forge.v2.model.Release;
-import com.puppetlabs.geppetto.forge.v2.service.ListPreferences;
 import com.puppetlabs.geppetto.forge.v2.service.ReleaseService;
 import com.puppetlabs.geppetto.semver.Version;
 
@@ -56,32 +49,6 @@ public class DefaultReleaseService extends AbstractForgeService implements Relea
 	@Override
 	public void delete(String owner, String name, Version version) throws IOException {
 		getClient(true).delete(getReleasePath(owner, name, version));
-	}
-
-	@Override
-	public void download(String owner, String name, Version version, OutputStream output) throws IOException {
-		String path = Constants.COMMAND_GROUP_FILES + '/' + owner + '-' + name + '-' + version + ".tar.gz";
-		getClient(false).downloadV2(path, null, output);
-	}
-
-	@Override
-	public Release get(String owner, String name, Version version) throws IOException {
-		return getClient(false).getV2(getReleasePath(owner, name, version), null, Release.class);
-	}
-
-	@Override
-	public List<Release> list(ListPreferences listPreferences) throws IOException {
-		List<Release> releases = null;
-		try {
-			releases = getClient(false).getV2(Constants.COMMAND_GROUP_RELEASES, null, Constants.LIST_RELEASE);
-		}
-		catch(HttpResponseException e) {
-			if(e.getStatusCode() != HttpStatus.SC_NOT_FOUND)
-				throw e;
-		}
-		if(releases == null)
-			releases = Collections.emptyList();
-		return releases;
 	}
 
 	@Override

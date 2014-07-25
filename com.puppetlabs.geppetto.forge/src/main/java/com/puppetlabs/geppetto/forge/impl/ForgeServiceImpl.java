@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -53,9 +53,10 @@ import com.puppetlabs.geppetto.forge.model.MetadataRepository;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.forge.util.TarUtils;
-import com.puppetlabs.geppetto.forge.v2.model.Release;
-import com.puppetlabs.geppetto.forge.v2.service.ModuleService;
 import com.puppetlabs.geppetto.forge.v2.service.ReleaseService;
+import com.puppetlabs.geppetto.forge.v3.Modules;
+import com.puppetlabs.geppetto.forge.v3.model.AbbrevRelease;
+import com.puppetlabs.geppetto.forge.v3.model.Module;
 import com.puppetlabs.geppetto.semver.VersionRange;
 
 class ForgeServiceImpl implements ForgeService {
@@ -63,10 +64,10 @@ class ForgeServiceImpl implements ForgeService {
 	private Cache cache;
 
 	@Inject
-	private ModuleService moduleService;
+	private Modules moduleService;
 
-	@Inject
-	private ReleaseService releaseService;
+	@Inject(optional = true)
+	private ReleaseService v2ReleaseService;
 
 	@Inject
 	private MetadataRepository metadataRepo;
@@ -130,12 +131,13 @@ class ForgeServiceImpl implements ForgeService {
 			throw new UnsupportedOperationException(
 				"Unable to install since no module service is configured. Was a serviceURL provided in the preferences?");
 
-		List<Release> releases = moduleService.getReleases(moduleName.getOwner(), moduleName.getName(), null);
+		Module module = moduleService.get(moduleName);
+		List<AbbrevRelease> releases = module.getReleases();
 		if(releases.isEmpty())
 			throw new FileNotFoundException("No releases found for module '" + moduleName + '\'');
 
-		Release best = null;
-		for(Release release : releases)
+		AbbrevRelease best = null;
+		for(AbbrevRelease release : releases)
 			if((best == null || release.getVersion().compareTo(best.getVersion()) > 0) &&
 					(range == null || range.isIncluded(release.getVersion())))
 				best = release;
@@ -156,7 +158,7 @@ class ForgeServiceImpl implements ForgeService {
 			FileUtils.rmR(destination, FileUtils.DEFAULT_EXCLUDES);
 		}
 
-		File moduleFile = cache.retrieve(best.getFullName(), best.getVersion());
+		File moduleFile = cache.retrieve(moduleName, best.getVersion());
 
 		// Unpack closes its input.
 		TarUtils.unpack(new GZIPInputStream(new FileInputStream(moduleFile)), destination, true, null);
@@ -165,7 +167,7 @@ class ForgeServiceImpl implements ForgeService {
 
 	@Override
 	public void publish(File moduleArchive, boolean dryRun, Diagnostic result) throws IOException {
-		if(releaseService == null)
+		if(v2ReleaseService == null)
 			throw new UnsupportedOperationException(
 				"Unable to publish since no release service is configured. Was a serviceURL provided in the preferences?");
 
@@ -201,7 +203,7 @@ class ForgeServiceImpl implements ForgeService {
 		InputStream gzInput = new FileInputStream(moduleArchive);
 		try {
 			ModuleName name = metadata.getName();
-			releaseService.create(
+			v2ReleaseService.create(
 				name.getOwner(), name.getName(), "Published using GitHub trigger", gzInput, moduleArchive.length());
 			result.addChild(new Diagnostic(INFO, PUBLISHER, "Module file " + moduleArchive.getName() +
 					" has been uploaded"));

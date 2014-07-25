@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -25,9 +25,10 @@ import com.puppetlabs.geppetto.common.annotations.Nullable;
 import com.puppetlabs.geppetto.common.os.StreamUtil;
 import com.puppetlabs.geppetto.forge.Cache;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
+import com.puppetlabs.geppetto.forge.model.VersionedName;
 import com.puppetlabs.geppetto.forge.util.ChecksumUtils;
 import com.puppetlabs.geppetto.forge.util.ModuleUtils;
-import com.puppetlabs.geppetto.forge.v2.service.ReleaseService;
+import com.puppetlabs.geppetto.forge.v3.Files;
 import com.puppetlabs.geppetto.semver.Version;
 
 @Singleton
@@ -42,7 +43,7 @@ class CacheImpl implements Cache {
 	}
 
 	@Inject
-	private ReleaseService releaseService;
+	private Files files;
 
 	private transient String cacheKey;
 
@@ -101,7 +102,7 @@ class CacheImpl implements Cache {
 			dir.mkdirs();
 			OutputStream output = new FileOutputStream(cachedFile);
 			try {
-				releaseService.download(qname.getOwner(), qname.getName(), version, output);
+				files.download(new VersionedName(qname, version), output);
 			}
 			finally {
 				StreamUtil.close(output);

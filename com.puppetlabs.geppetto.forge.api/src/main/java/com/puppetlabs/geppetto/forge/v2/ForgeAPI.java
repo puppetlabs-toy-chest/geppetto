@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -18,26 +18,23 @@ import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
 import com.puppetlabs.geppetto.forge.client.GsonModule;
 import com.puppetlabs.geppetto.forge.model.Constants;
 import com.puppetlabs.geppetto.forge.model.MetadataRepository;
-import com.puppetlabs.geppetto.forge.v2.service.ModuleService;
 import com.puppetlabs.geppetto.forge.v2.service.ReleaseService;
-import com.puppetlabs.geppetto.forge.v2.service.TagService;
-import com.puppetlabs.geppetto.forge.v2.service.UserService;
 
 /**
  * This is the main entry point to the API. Sample usage:
- * 
+ *
  * <pre>
- * // Obtain preferences in some way. Command line options, property settings, etc. 
+ * // Obtain preferences in some way. Command line options, property settings, etc.
  * ForgeAPIPreferences prefs = ...;
- * 
+ *
  * Injector injector = Guice.createInjector(new ForgeHttpModule(prefs));
- * 
+ *
  * // Create a new forge instance
  * ForgeAPI forge = new ForgeAPI(injector);
- * 
+ *
  * // Use the forge instance to create a service.
  * DefaultModuleService moduleService = forge.createModuleService();
- * 
+ *
  * // Use the service
  * List<Release> stdLibReleases = moduleService.getReleases("puppetlabs", "stdlib", null);
  * </pre>
@@ -61,7 +58,7 @@ public class ForgeAPI {
 
 	/**
 	 * Create a new instance based on a set of Guice modules.
-	 * 
+	 *
 	 * @param modules
 	 *            Guice modules that provides the needed bindings.
 	 */
@@ -72,7 +69,7 @@ public class ForgeAPI {
 	/**
 	 * Creates a {@link Gson} instance that is configured in accordance with
 	 * the API.
-	 * 
+	 *
 	 * @return A new instance.
 	 */
 	public Gson createGson() {
@@ -83,7 +80,7 @@ public class ForgeAPI {
 	 * Creates a service that can be used when interacting with the ForgeAPI as
 	 * a metadata repository. This service is used by the transitive dependency
 	 * resolver.
-	 * 
+	 *
 	 * @return The new metadata service
 	 */
 	public MetadataRepository createMetadataRepository() {
@@ -92,41 +89,11 @@ public class ForgeAPI {
 
 	/**
 	 * Creates a new service that can be used when creating, updating, browsing, or
-	 * deleting modules.
-	 * 
-	 * @return The new module service.
-	 */
-	public ModuleService createModuleService() {
-		return injector.getInstance(ModuleService.class);
-	}
-
-	/**
-	 * Creates a new service that can be used when creating, updating, browsing, or
 	 * deleting module releases.
-	 * 
+	 *
 	 * @return The new release service.
 	 */
 	public ReleaseService createReleaseService() {
 		return injector.getInstance(ReleaseService.class);
-	}
-
-	/**
-	 * Creates a new service that can be used when creating, updating, browsing, or
-	 * deleting tags.
-	 * 
-	 * @return The new tag service.
-	 */
-	public TagService createTagService() {
-		return injector.getInstance(TagService.class);
-	}
-
-	/**
-	 * Creates a new service that can be used when creating, updating, browsing, or
-	 * deleting users releases.
-	 * 
-	 * @return The new user service.
-	 */
-	public UserService createUserService() {
-		return injector.getInstance(UserService.class);
 	}
 }

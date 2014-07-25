@@ -252,6 +252,7 @@ public class ModuleUtils {
 	 *            The stream that will receive the Modulefile content
 	 * @throws IOException
 	 */
+	@SuppressWarnings("deprecation")
 	public static void printModulefile(Metadata md, PrintWriter out) throws IOException {
 		ModuleName name = md.getName();
 		if(name != null)
