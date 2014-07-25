@@ -122,8 +122,20 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
   
   @Fix(ModuleDiagnostics.ISSUE__MISSING_REQUIRED_ATTRIBUTE)
   public void addMissingAttribute(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    String[] _data = issue.getData();
-    final String key = _data[0];
+    final String[] data = issue.getData();
+    boolean _or = false;
+    boolean _equals = Objects.equal(data, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      int _length = data.length;
+      boolean _equals_1 = (_length == 0);
+      _or = _equals_1;
+    }
+    if (_or) {
+      return;
+    }
+    final String key = data[0];
     final ISemanticModification _function = new ISemanticModification() {
       public void apply(final EObject element, final IModificationContext context) throws Exception {
         final IXtextDocument doc = context.getXtextDocument();

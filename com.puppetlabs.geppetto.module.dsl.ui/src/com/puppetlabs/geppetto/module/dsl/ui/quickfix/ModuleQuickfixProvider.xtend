@@ -79,7 +79,10 @@ class ModuleQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(ModuleDiagnostics::ISSUE__MISSING_REQUIRED_ATTRIBUTE)
 	def addMissingAttribute(Issue issue, IssueResolutionAcceptor acceptor) {
-		val key = issue.data.get(0)
+		val data = issue.data
+		if(data == null || data.length == 0)
+			return
+		val key = data.get(0)
 		acceptor.accept(issue, 'Add entry for "' + key + '"',
 			'Add missing entry for attribute "' + key + '"with template value', null) [ element, context |
 			val doc = context.xtextDocument
