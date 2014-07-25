@@ -16,7 +16,8 @@
    <launcherArgs>
       <programArgs>--launcher.XXMaxPermSize 256m</programArgs>
       <vmArgs>-Xms40m
--Xmx256m</vmArgs>
+-Xmx256m
+-Dfile.encoding=UTF-8</vmArgs>
       <vmArgsMac>-Xdock:icon=../Resources/geppetto.icns -XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
