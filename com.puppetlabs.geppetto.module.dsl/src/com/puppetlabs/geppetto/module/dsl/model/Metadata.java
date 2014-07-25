@@ -5,8 +5,6 @@ public interface Metadata {
 
 	String KEY_DEPENDENCIES = "dependencies";
 
-	String KEY_DESCRIPTION = "description";
-
 	String KEY_ISSUES_URL = "issues_url";
 
 	String KEY_LICENSE = "license";
@@ -31,9 +29,15 @@ public interface Metadata {
 			KEY_AUTHOR, KEY_NAME, KEY_DEPENDENCIES, KEY_ISSUES_URL, KEY_LICENSE, KEY_OPERATINGSYSTEM_SUPPORT, KEY_PROJECT_PAGE,
 			KEY_REQUIREMENTS, KEY_SOURCE, KEY_SUMMARY, KEY_TAGS, KEY_VERSION };
 
+	String KEY_BUILD = "build";
+
 	String KEY_CHECKSUMS = "checksums";
+
+	String KEY_DESCRIPTION = "description";
+
+	String KEY_MODULE_BUILD = "module_build";
 
 	String KEY_TYPES = "types";
 
-	String[] DEPRECATED_KEYS = new String[] { KEY_CHECKSUMS, KEY_DESCRIPTION, KEY_TYPES };
+	String[] DEPRECATED_KEYS = new String[] { KEY_BUILD, KEY_CHECKSUMS, KEY_DESCRIPTION, KEY_MODULE_BUILD, KEY_TYPES };
 }
