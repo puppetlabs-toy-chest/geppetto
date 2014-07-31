@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cspecExtension xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<dependencies>
+		<dependency name="com.puppetlabs.geppetto.module.dsl" componentType="osgi.bundle" />
+		<dependency name="com.puppetlabs.geppetto.module.dsl.ui" componentType="osgi.bundle" />
+	</dependencies>
+	<actions>
+		<public name="buckminster.postbind" actor="launch">
+			<actorProperties>
+				<property key="path" value="GenerateModuleUI.xtend.launch" />
+			</actorProperties>
+			<prerequisites>
+				<attribute name="xtend.generate"/>
+				<attribute component="com.puppetlabs.geppetto.module.dsl" name="java.binaries"/>
+			</prerequisites>
+		</public>
+		<private name="xtend.generate" actor="launch">
+			<actorProperties>
+				<property key="path" value="GenerateModule.xtend.launch" />
+			</actorProperties>
+			<prerequisites>
+				<attribute name="mwe.generate"/>
+			</prerequisites>
+		</private>
+		<private name="mwe.generate" actor="launch">
+			<actorProperties>
+				<property key="path" value="GenerateModule.mwe2.launch" />
+			</actorProperties>
+		</private>
+	</actions>
+</cspecExtension>

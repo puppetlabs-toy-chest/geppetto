@@ -4,7 +4,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/com/puppetlabs/geppetto/pp/dsl/PP.xtext"
+var grammarURI = "../com.puppetlabs.geppetto.pp.dsl/src/com/puppetlabs/geppetto/pp/dsl/PP.xtext"
 var file.extensions = "pp"
 var projectName = "com.puppetlabs.geppetto.pp.dsl"
 var runtimeProject = "../${projectName}"

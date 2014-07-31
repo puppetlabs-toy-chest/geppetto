@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cspecExtension xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<actions>
+		<public name="buckminster.postbind" actor="launch">
+			<actorProperties>
+				<property key="path" value="GeneratePP.mwe2.launch" />
+			</actorProperties>
+			<prerequisites>
+				<!-- We must build the pp model since it's imported by mwe -->
+				<attribute component="com.puppetlabs.geppetto.pp" name="java.binaries"/>
+			</prerequisites>
+		</public>
+	</actions>
+</cspecExtension>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/com.puppetlabs.geppetto.module.dsl.generate"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.xtend.core.compiler.batch.Main"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-cp ${project_classpath:com.puppetlabs.geppetto.module.dsl.ui} -useCurrentClassLoader -d xtend-gen src"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="com.puppetlabs.geppetto.module.dsl.generate"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:com.puppetlabs.geppetto.module.dsl.ui}"/>
+</launchConfiguration>

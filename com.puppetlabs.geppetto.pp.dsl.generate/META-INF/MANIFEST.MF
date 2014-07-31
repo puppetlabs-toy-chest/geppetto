@@ -20,8 +20,6 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.3.0.v201206120633",
  org.eclipse.emf.common;bundle-version="2.7.0",
  org.antlr.runtime;bundle-version="3.2.0",
  com.puppetlabs.geppetto.pp,
- com.puppetlabs.geppetto.pp.dsl,
- com.puppetlabs.geppetto.pp.dsl.ui,
  org.eclipse.emf.mwe2.launch,
  org.eclipse.core.runtime;bundle-version="3.6.0"
 Bundle-ActivationPolicy: lazy
