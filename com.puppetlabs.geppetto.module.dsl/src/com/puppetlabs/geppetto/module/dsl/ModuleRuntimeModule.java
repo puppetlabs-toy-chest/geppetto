@@ -4,6 +4,7 @@
 package com.puppetlabs.geppetto.module.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -15,6 +16,7 @@ import com.google.inject.Binder;
 import com.puppetlabs.geppetto.forge.client.GsonModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeModule;
 import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
+import com.puppetlabs.geppetto.module.dsl.generator.ModuleGenerator;
 import com.puppetlabs.geppetto.module.dsl.linking.ModuleLinkingDiagnosticMessageProvider;
 import com.puppetlabs.geppetto.module.dsl.scoping.ModuleQualifiedNameConverter;
 import com.puppetlabs.geppetto.module.dsl.scoping.ModuleQualifiedNameProvider;
@@ -42,6 +44,10 @@ public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 	 */
 	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
 		return ModuleQualifiedNameConverter.class;
+	}
+
+	public Class<? extends IGenerator> bindIGenerator() {
+		return ModuleGenerator.class;
 	}
 
 	/**

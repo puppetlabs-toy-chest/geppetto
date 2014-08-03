@@ -74,8 +74,8 @@ Workflow {
     		//  }
     		}
     
-    		// Xtend-based API for validation
-    		fragment = validation.ValidatorFragment auto-inject {
+    		// Java-based API for validation
+    		fragment = validation.JavaValidatorFragment auto-inject {
     		//    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
     		//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
     		}
@@ -92,23 +92,35 @@ Workflow {
     		fragment = builder.BuilderIntegrationFragment auto-inject {}
     
     		// generator API
-    		fragment = generator.GeneratorFragment auto-inject {}
+    		fragment = generator.GeneratorFragment auto-inject {
+    			generateStub = false
+    		}
     
     		// formatter API
-    		fragment = formatting.FormatterFragment auto-inject {}
+    		fragment = formatting.FormatterFragment auto-inject {
+    			generateXtendStub = false
+    		}
     
     		// labeling API
-    		fragment = labeling.LabelProviderFragment auto-inject {}
+    		fragment = labeling.LabelProviderFragment auto-inject {
+    			generateXtendStub = false
+    		}
     
     		// outline API
-    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
+    		fragment = outline.OutlineTreeProviderFragment auto-inject {
+    			generateXtendStub=false
+    		}
     		fragment = outline.QuickOutlineFragment auto-inject {}
     
     		// quickfix API
-    		fragment = quickfix.QuickfixProviderFragment auto-inject {}
+    		fragment = quickfix.QuickfixProviderFragment auto-inject {
+    			generateXtendStub = false
+    		}
     
     		// content assist API
-    		fragment = contentAssist.ContentAssistFragment auto-inject {}
+    		fragment = contentAssist.ContentAssistFragment auto-inject {
+    			generateStub = false
+    		}
     
     		// generates a more lightweight Antlr parser and lexer tailored for content assist
     		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
