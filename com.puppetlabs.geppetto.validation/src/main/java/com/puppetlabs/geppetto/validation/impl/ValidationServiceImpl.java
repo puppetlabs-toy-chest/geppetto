@@ -188,23 +188,6 @@ public class ValidationServiceImpl implements ValidationService {
 	}
 
 	/**
-	 * Translate a URI to the file to a file relative to rootFolder (if under this root, else return an absolute File).
-	 *
-	 * @param uri
-	 * @param rootFolder
-	 *            - root directory/folder or a file name
-	 * @return
-	 */
-	private static File uriToFile(URI uri, File rootFolder) {
-		// relativize file:
-		if(!uri.isFile())
-			return null;
-		IPath problemPath = Path.fromOSString(uri.toFileString());
-		IPath relativePath = problemPath.makeRelativeTo(Path.fromOSString(rootFolder.getPath()));
-		return relativePath.toFile();
-	}
-
-	/**
 	 * Asserts a file/directory's existence and that it can be read.
 	 *
 	 * @throw IllegalArgumentException if the file is not the right type, does not exists, or is not readable.

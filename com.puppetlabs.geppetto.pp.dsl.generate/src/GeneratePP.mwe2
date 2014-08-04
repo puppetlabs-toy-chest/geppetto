@@ -8,7 +8,6 @@ var grammarURI = "../com.puppetlabs.geppetto.pp.dsl/src/com/puppetlabs/geppetto/
 var file.extensions = "pp"
 var projectName = "com.puppetlabs.geppetto.pp.dsl"
 var runtimeProject = "../${projectName}"
-var puppetModelURI =   "platform:/plugin/com.puppetlabs.geppetto.pp/model"
 
 Workflow {
     bean = StandaloneSetup {

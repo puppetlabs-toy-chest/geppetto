@@ -188,6 +188,7 @@ public class GsonModule extends AbstractModule {
 		public static final Type SUPPORTEDOS_TYPE = new TypeToken<List<SupportedOS>>() {}.getType();
 		// @fmtOn
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public Metadata deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
@@ -244,6 +245,7 @@ public class GsonModule extends AbstractModule {
 			addProperty(json, "author", src.getAuthor());
 
 			// Checksums are deprecated (moved to separate file)
+			@SuppressWarnings("deprecation")
 			Map<String, byte[]> checksums = src.getChecksums();
 			if(!(checksums == null || checksums.isEmpty()))
 				json.add("checksums", serializeChecksums(checksums));
@@ -252,17 +254,19 @@ public class GsonModule extends AbstractModule {
 			json.add("dependencies", context.serialize(src.getDependencies(), DEPENDENCIES_TYPE));
 
 			// Description is deprecated
-			String tmp = src.getDescription();
-			if(tmp != null)
-				addProperty(json, "description", tmp);
+			@SuppressWarnings("deprecation")
+			String description = src.getDescription();
+			if(description != null)
+				addProperty(json, "description", description);
 
 			// Types are deprecated
+			@SuppressWarnings("deprecation")
 			List<com.puppetlabs.geppetto.forge.model.Type> types = src.getTypes();
 			if(!(types == null || types.isEmpty()))
 				json.add("types", context.serialize(types, TYPES_TYPE));
 
 			// Optional
-			tmp = src.getIssuesURL();
+			String tmp = src.getIssuesURL();
 			if(tmp != null)
 				addProperty(json, "issues_url", tmp);
 

@@ -71,6 +71,7 @@ public class MetadataTest extends AbstractForgeTest {
 
 	private Metadata fixture = new Metadata();
 
+	@SuppressWarnings("deprecation")
 	private void assertMetadataEquals(Metadata metadata) {
 		assertNotNull(metadata);
 		assertEquals(fixture.getAuthor(), metadata.getAuthor());
@@ -240,6 +241,7 @@ public class MetadataTest extends AbstractForgeTest {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testSaveModulefile__File() {
 		try {

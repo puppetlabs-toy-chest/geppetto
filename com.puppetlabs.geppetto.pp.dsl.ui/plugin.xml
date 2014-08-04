@@ -81,7 +81,7 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-              class="org.eclipse.ui.internal.dialogs.EmptyPreferencePage"
+              class="com.puppetlabs.geppetto.pp.dsl.ui.preferences.EmptyPreferencePage"
               id="com.puppetlabs.geppetto.puppet.ui"
               name="Puppet">
         </page>
@@ -403,22 +403,6 @@
        </runtime>
     </extension>
     <extension
-          point="org.eclipse.ui.popupMenus">
-       <objectContribution
-             adaptable="true"
-             id="com.puppetlabs.geppetto.pp.dsl.ui.contribution1"
-             nameFilter="*"
-             objectClass="org.eclipse.core.resources.IProject">
-          <action
-                class="com.puppetlabs.geppetto.pp.dsl.ui.builder.ToggleNatureAction"
-                enablesFor="+"
-                id="com.puppetlabs.geppetto.pp.dsl.ui.addRemoveNatureAction"
-                label="Add/Remove Puppet Nature"
-                menubarPath="additions">
-          </action>
-       </objectContribution>
-    </extension>
-    <extension
           point="org.eclipse.xtext.extension_resourceServiceProvider">
        <resourceServiceProvider
              class="com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpRubyExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
@@ -506,7 +490,7 @@
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-              class="org.eclipse.ui.internal.dialogs.EmptyPropertyPage"
+              class="com.puppetlabs.geppetto.pp.dsl.ui.preferences.EmptyPropertyPage"
               id="com.puppetlabs.geppetto.puppet.ui"
               name="Puppet">
             <enabledWhen>

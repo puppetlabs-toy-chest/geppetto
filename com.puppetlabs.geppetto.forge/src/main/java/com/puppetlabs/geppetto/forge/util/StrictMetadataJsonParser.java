@@ -55,6 +55,7 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 		this.md = md;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void call(CallSymbol key, int line, int offset, int length, List<JElement> args) {
 		switch(key) {
