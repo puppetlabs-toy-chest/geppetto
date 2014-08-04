@@ -4,7 +4,7 @@ Bundle-Name: Geppetto Tracer Bundle
 Bundle-SymbolicName: com.puppetlabs.geppetto.common.tracer
 Bundle-Version: 4.3.0.qualifier
 Bundle-Vendor: Puppet Labs, Inc.
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.puppetlabs.geppetto.common.tracer
 Import-Package: com.google.inject;version="[1.3.0,1.4.0)",

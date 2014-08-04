@@ -5,7 +5,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: com.puppetlabs.geppetto.ruby.jrubyparser;singleton:=true
 Bundle-Version: 4.3.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: com.puppetlabs.geppetto.ruby.jrubyparser;
  x-friends:="com.puppetlabs.geppetto.ruby.tests"
 Import-Package: com.google.common.base;version="12.0.0",
