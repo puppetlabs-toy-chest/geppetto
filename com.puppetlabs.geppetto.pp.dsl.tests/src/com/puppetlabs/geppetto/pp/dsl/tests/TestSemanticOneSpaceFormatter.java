@@ -10,9 +10,6 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
-import static com.google.inject.util.Modules.override;
-import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
-
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
@@ -23,13 +20,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Binder;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.puppetlabs.geppetto.pp.AssignmentExpression;
 import com.puppetlabs.geppetto.pp.LiteralList;
 import com.puppetlabs.geppetto.pp.PPFactory;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
-import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
 import com.puppetlabs.xtext.dommodel.formatter.OneWhitespaceDomFormatter;
@@ -43,14 +38,6 @@ import com.puppetlabs.xtext.serializer.DomBasedSerializer;
  */
 public class TestSemanticOneSpaceFormatter extends AbstractPuppetTests {
 	public static class DebugFormatter extends OneWhitespaceDomFormatter {
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see com.puppetlabs.geppetto.pp.dsl.xt.dommodel.formatter.IDomModelFormatter#format(com.puppetlabs.geppetto.pp.dsl.xt.dommodel.IDomNode,
-		 * org.eclipse.xtext.util.ITextRegion, com.puppetlabs.geppetto.pp.dsl.xt.dommodel.formatter.IFormattingContext,
-		 * org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor)
-		 */
 		@Override
 		public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext,
 				Acceptor errors) {
@@ -60,13 +47,9 @@ public class TestSemanticOneSpaceFormatter extends AbstractPuppetTests {
 
 	}
 
-	public static class TestSetup extends PPTestSetup {
-		public static class TestModule extends PPTestModule {
-			/*
-			 * (non-Javadoc)
-			 *
-			 * @see org.eclipse.xtext.service.AbstractGenericModule#configure(com.google.inject.Binder)
-			 */
+	@Override
+	public Module getTestModule() {
+		return new PPTestModule() {
 			@Override
 			public void configure(Binder binder) {
 				super.configure(binder);
@@ -74,20 +57,14 @@ public class TestSemanticOneSpaceFormatter extends AbstractPuppetTests {
 				binder.bind(IIndentationInformation.class).to(IIndentationInformation.Default.class);
 				binder.bind(IDomModelFormatter.class).to(DebugFormatter.class);
 			}
-		}
-
-		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(override(getCommonModule(), new PPRuntimeModule()).with(new TestModule()));
-		}
+		};
 	}
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		// with(PPStandaloneSetup.class);
-		with(TestSetup.class);
+		with(getSetupInstance());
 	}
 
 	@Override

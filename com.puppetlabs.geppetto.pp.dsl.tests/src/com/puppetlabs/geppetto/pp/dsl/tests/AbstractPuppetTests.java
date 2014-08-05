@@ -4,29 +4,20 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
+
+import static com.google.inject.util.Modules.override;
+import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import com.puppetlabs.geppetto.pp.AttributeOperation;
-import com.puppetlabs.geppetto.pp.AttributeOperations;
-import com.puppetlabs.geppetto.pp.Expression;
-import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
-import com.puppetlabs.geppetto.pp.PPFactory;
-import com.puppetlabs.geppetto.pp.ResourceBody;
-import com.puppetlabs.geppetto.pp.ResourceExpression;
-import com.puppetlabs.geppetto.pp.SingleQuotedString;
-import com.puppetlabs.geppetto.pp.VariableExpression;
-import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
-import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
-import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -40,11 +31,13 @@ import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.mwe.ContainersStateFactory;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.StringInputStream;
@@ -55,8 +48,59 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.Provider;
+import com.puppetlabs.geppetto.pp.AttributeOperation;
+import com.puppetlabs.geppetto.pp.AttributeOperations;
+import com.puppetlabs.geppetto.pp.Expression;
+import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
+import com.puppetlabs.geppetto.pp.PPFactory;
+import com.puppetlabs.geppetto.pp.ResourceBody;
+import com.puppetlabs.geppetto.pp.ResourceExpression;
+import com.puppetlabs.geppetto.pp.SingleQuotedString;
+import com.puppetlabs.geppetto.pp.VariableExpression;
+import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
+import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
+import com.puppetlabs.geppetto.pp.dsl.PPStandaloneSetup;
+import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
+import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
+import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 
 public class AbstractPuppetTests extends AbstractXtextTests {
+	public class PPTestModule extends AbstractGenericModule {
+
+		public Provider<IValidationAdvisor> provideValidationAdvisor() {
+			return ValidationAdvisorProvider.create(getComplianceLevel(), getPotentialProblemsAdvisor());
+		}
+
+		// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
+		public Provider<XtextResourceSet> provideXtextResourceSet() {
+			return new Provider<XtextResourceSet>() {
+
+				@Override
+				public XtextResourceSet get() {
+					XtextResourceSet resourceSet = new SynchronizedXtextResourceSet();
+					resourceSet.getResource(
+						PuppetTarget.forComplianceLevel(getComplianceLevel(), false).getPlatformURI(), true);
+					return resourceSet;
+				}
+			};
+		}
+	}
+
+	public class PPTestSetup extends PPStandaloneSetup {
+		@Override
+		public Injector createInjector() {
+			return Guice.createInjector(override(getCommonModule(), new PPRuntimeModule()).with(getTestModule()));
+		}
+	}
 
 	interface SerializationTestControl {
 		public boolean shouldTestSerializer(XtextResource resource);
@@ -77,7 +121,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 	/**
 	 * Asserts that instance is assignable to expected. Appends information to message about what was
 	 * expected and given.
-	 * 
+	 *
 	 * @param message
 	 * @param expected
 	 * @param instance
@@ -258,13 +302,25 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		return createResourceExpression(true, false, type, title, keyValPairs);
 	}
 
-	protected Class<? extends ISetup> getSetupClass() {
-		return PPTestSetup.class;
+	protected ComplianceLevel getComplianceLevel() {
+		return ComplianceLevel.PUPPET_2_7;
+	}
+
+	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
+		return new DefaultPotentialProblemsAdvisor();
+	}
+
+	protected final ISetup getSetupInstance() {
+		return new PPTestSetup();
+	}
+
+	public Module getTestModule() {
+		return new PPTestModule();
 	}
 
 	/**
 	 * Configures the resoureset used by the various load methods. Must be called before loading.
-	 * 
+	 *
 	 * @param paths
 	 */
 	protected void initializeResourceSet(List<URI> urisInTestContainer) {
@@ -294,7 +350,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 	 * The linked result can be obtained from the returned ResourceSet.
 	 * Use makeManifestURI(int) to get the URI for given resources, staring with 1 for the first
 	 * given resource.
-	 * 
+	 *
 	 * @param sourceStrings
 	 * @throws Exception
 	 */
@@ -362,7 +418,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 	 * Load a resource from a String. The URI must be well formed for the language being the
 	 * content of the given sourceString (the uri determined the factory to use and the encoding
 	 * via an IEncodingProvider).
-	 * 
+	 *
 	 * @param sourceString
 	 * @param uri
 	 * @return
@@ -384,7 +440,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 
 	/**
 	 * Create a "fake" URI for a "file"
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -452,8 +508,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		// with(PPStandaloneSetup.class);
-		with(getSetupClass());
+		with(getSetupInstance());
 		PPJavaValidator validator = get(PPJavaValidator.class);
 		EValidatorRegistrar registrar = get(EValidatorRegistrar.class);
 		tester = new ValidatorTester<PPJavaValidator>(validator, registrar, "com.puppetlabs.geppetto.pp.dsl.PP");

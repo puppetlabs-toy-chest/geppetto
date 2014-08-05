@@ -4,43 +4,21 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
-import static com.google.inject.util.Modules.override;
-import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
-
 import java.util.Iterator;
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.AssignmentExpression;
-import com.puppetlabs.geppetto.pp.LiteralList;
-import com.puppetlabs.geppetto.pp.PPFactory;
-import com.puppetlabs.geppetto.pp.PuppetManifest;
-import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
-import com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout;
-import com.puppetlabs.geppetto.pp.dsl.formatting.PPStylesheetProvider;
-import com.puppetlabs.geppetto.pp.dsl.ppformatting.PPIndentationInformation;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.CSSDomFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.DomNodeLayoutFeeder;
-import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
-import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -49,16 +27,21 @@ import org.eclipse.xtext.util.Tuples;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
-import com.google.inject.name.Names;
+import com.puppetlabs.geppetto.pp.AssignmentExpression;
+import com.puppetlabs.geppetto.pp.LiteralList;
+import com.puppetlabs.geppetto.pp.PPFactory;
+import com.puppetlabs.geppetto.pp.PuppetManifest;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.CSSDomFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.DomNodeLayoutFeeder;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
+import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
 
 /**
  * Tests PP language formatting using the new DomFormatter.
- * 
+ *
  */
 public class TestPPFormatting extends AbstractPuppetTests {
 	public static class DebugFormatter extends CSSDomFormatter {
@@ -76,34 +59,6 @@ public class TestPPFormatting extends AbstractPuppetTests {
 			return super.format(dom, regionToFormat, formattingContext, errors);
 		}
 
-	}
-
-	public static class TestSetup extends PPTestSetup {
-		public static class TestModule extends PPTestModule {
-
-			@Override
-			public void configure(Binder binder) {
-				super.configure(binder);
-				binder.bind(ISerializer.class).to(DomBasedSerializer.class);
-				binder.bind(IDomModelFormatter.class).to(DebugFormatter.class);
-				// Want serializer to insert empty WS even if there is no node model
-				binder.bind(IHiddenTokenSequencer.class).to(
-					com.puppetlabs.xtext.serializer.acceptor.HiddenTokenSequencer.class);
-
-				// Bind the default style sheet (TODO: should use a test specific sheet)
-				binder.bind(DomCSS.class).toProvider(PPStylesheetProvider.class);
-				// specific to pp (2 spaces).
-				binder.bind(IIndentationInformation.class).to(PPIndentationInformation.class);
-				// binder.bind(IIndentationInformation.class).to(IIndentationInformation.Default.class);
-
-				binder.bind(ILayoutManager.class).annotatedWith(Names.named("Default")).to(PPSemanticLayout.class);
-			}
-		}
-
-		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(override(getCommonModule(), new PPRuntimeModule()).with(new TestModule()));
-		}
 	}
 
 	protected void brutalDetachNodeModel(EObject eObject) {

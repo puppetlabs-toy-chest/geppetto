@@ -4,29 +4,30 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
-import static com.google.inject.util.Modules.override;
-import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
-
 import java.util.EnumSet;
 import java.util.Set;
 
-import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
-import com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout;
-import com.puppetlabs.geppetto.pp.dsl.formatting.PPStylesheetProvider;
-import com.puppetlabs.geppetto.pp.dsl.ppformatting.PPIndentationInformation;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.Triple;
+import org.junit.Test;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
 import com.puppetlabs.xtext.dommodel.RegionMatch;
 import com.puppetlabs.xtext.dommodel.formatter.CSSDomFormatter;
 import com.puppetlabs.xtext.dommodel.formatter.DomNodeLayoutFeeder;
-import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
 import com.puppetlabs.xtext.dommodel.formatter.comments.CommentProcessor;
 import com.puppetlabs.xtext.dommodel.formatter.comments.CommentProcessor.CommentFormattingOptions;
 import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentContainerInformation;
@@ -34,7 +35,6 @@ import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentContainerInforma
 import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice;
 import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
-import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 import com.puppetlabs.xtext.textflow.CharSequences;
 import com.puppetlabs.xtext.textflow.CharSequences.Fixed;
 import com.puppetlabs.xtext.textflow.IMetrics;
@@ -42,23 +42,6 @@ import com.puppetlabs.xtext.textflow.ITextFlow;
 import com.puppetlabs.xtext.textflow.MeasuredTextFlow;
 import com.puppetlabs.xtext.textflow.TextFlow;
 import com.puppetlabs.xtext.textflow.TextFlowRecording;
-import org.eclipse.xtext.formatting.IIndentationInformation;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
-import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.util.Triple;
-import org.junit.Test;
-
-import com.google.inject.Binder;
-import com.google.inject.Guice;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
-import com.google.inject.name.Names;
 
 /**
  * Tests CSS formatting using the new DomFormatter.
@@ -80,34 +63,6 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 			return super.format(dom, regionToFormat, formattingContext, errors);
 		}
 
-	}
-
-	public static class TestSetup extends PPTestSetup {
-		public static class TestModule extends PPTestModule {
-
-			@Override
-			public void configure(Binder binder) {
-				super.configure(binder);
-				binder.bind(ISerializer.class).to(DomBasedSerializer.class);
-				binder.bind(IDomModelFormatter.class).to(DebugFormatter.class);
-				// Want serializer to insert empty WS even if there is no node model
-				binder.bind(IHiddenTokenSequencer.class).to(
-					com.puppetlabs.xtext.serializer.acceptor.HiddenTokenSequencer.class);
-
-				// Bind the default style sheet (TODO: should use a test specific sheet)
-				binder.bind(DomCSS.class).toProvider(PPStylesheetProvider.class);
-				// specific to pp (2 spaces).
-				binder.bind(IIndentationInformation.class).to(PPIndentationInformation.class);
-				// binder.bind(IIndentationInformation.class).to(IIndentationInformation.Default.class);
-
-				binder.bind(ILayoutManager.class).annotatedWith(Names.named("Default")).to(PPSemanticLayout.class);
-			}
-		}
-
-		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(override(getCommonModule(), new PPRuntimeModule()).with(new TestModule()));
-		}
 	}
 
 	private void appendSampleFlow(ITextFlow flow) {

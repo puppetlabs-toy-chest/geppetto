@@ -4,30 +4,12 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
-import static com.google.inject.util.Modules.override;
-import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
-
-import com.puppetlabs.geppetto.pp.AssignmentExpression;
-import com.puppetlabs.geppetto.pp.PuppetManifest;
-import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
-import com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout;
-import com.puppetlabs.geppetto.pp.dsl.formatting.PPStylesheetProvider;
-import com.puppetlabs.geppetto.pp.dsl.ppformatting.PPIndentationInformation;
-import com.puppetlabs.geppetto.pp.dsl.tests.utils.DebugHiddenTokenSequencer;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.CSSDomFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.DomNodeLayoutFeeder;
-import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
-import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.junit4.serializer.DebugSequenceAcceptor;
@@ -41,16 +23,28 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.name.Names;
+import com.puppetlabs.geppetto.pp.AssignmentExpression;
+import com.puppetlabs.geppetto.pp.PuppetManifest;
+import com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout;
+import com.puppetlabs.geppetto.pp.dsl.formatting.PPStylesheetProvider;
+import com.puppetlabs.geppetto.pp.dsl.ppformatting.PPIndentationInformation;
+import com.puppetlabs.geppetto.pp.dsl.tests.utils.DebugHiddenTokenSequencer;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.CSSDomFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.DomNodeLayoutFeeder;
+import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
+import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
+import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 
 /**
  * Triggers problems with computation of the current hidden state during sequencing.
- * 
+ *
  */
 public class TestPPFormattingFailing extends AbstractPuppetTests {
 	public static class DebugFormatter extends CSSDomFormatter {
@@ -94,63 +88,44 @@ public class TestPPFormattingFailing extends AbstractPuppetTests {
 	// }
 	//
 	// }
-
-	public static class TestSetupDebugOutput extends TestSpecificSetup {
-		public static class TestDebugModule extends TestSpecificSetup.TestModule {
-
-			@Override
-			public void configureIHiddenTokenSequencer(Binder binder) {
-				binder.bind(IHiddenTokenSequencer.class).toProvider(DebugHiddenProvider.class);
-				// binder.bind(IHiddenTokenSequencerAdvisor.class).to(NonSaveRestorHiddenStateAdvise.class);
-			}
-		}
+	public class TestDebugModule extends TestModule {
 
 		@Override
-		public Module getModule() {
-			return new TestDebugModule();
+		public void configureIHiddenTokenSequencer(Binder binder) {
+			binder.bind(IHiddenTokenSequencer.class).toProvider(DebugHiddenProvider.class);
+			// binder.bind(IHiddenTokenSequencerAdvisor.class).to(NonSaveRestorHiddenStateAdvise.class);
 		}
 	}
 
-	public static class TestSpecificSetup extends PPTestSetup {
-		public static class TestModule extends PPTestModule {
-
-			@Override
-			public void configure(Binder binder) {
-				super.configure(binder);
-				binder.bind(ISerializer.class).to(DomBasedSerializer.class);
-				binder.bind(IDomModelFormatter.class).to(DebugFormatter.class);
-				// Want serializer to insert empty WS even if there is no node model
-				// binder.bind(IHiddenTokenSequencer.class).to(
-				// com.puppetlabs.xtext.serializer.acceptor.HiddenTokenSequencer.class);
-
-				// Bind the default style sheet (TODO: should use a test specific sheet)
-				binder.bind(DomCSS.class).toProvider(PPStylesheetProvider.class);
-				// specific to pp (2 spaces).
-				binder.bind(IIndentationInformation.class).to(PPIndentationInformation.class);
-				// binder.bind(IIndentationInformation.class).to(IIndentationInformation.Default.class);
-
-				binder.bind(ILayoutManager.class).annotatedWith(Names.named("Default")).to(PPSemanticLayout.class);
-
-				// configureIHiddenTokenSequencer(binder);
-			}
-
-			public void configureIHiddenTokenSequencer(Binder binder) {
-				// bind the real HiddenTokenSequencer
-				binder.bind(IHiddenTokenSequencer.class).to(
-					com.puppetlabs.xtext.serializer.acceptor.HiddenTokenSequencer.class);
-				// advise it to not save / restore hidden state to trigger error
-				// binder.bind(IHiddenTokenSequencerAdvisor.class).to(NonSaveRestorHiddenStateAdvise.class);
-
-			}
-		}
+	public class TestModule extends PPTestModule {
 
 		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(override(getCommonModule(), new PPRuntimeModule()).with(getModule()));
+		public void configure(Binder binder) {
+			super.configure(binder);
+			binder.bind(ISerializer.class).to(DomBasedSerializer.class);
+			binder.bind(IDomModelFormatter.class).to(DebugFormatter.class);
+			// Want serializer to insert empty WS even if there is no node model
+			// binder.bind(IHiddenTokenSequencer.class).to(
+			// com.puppetlabs.xtext.serializer.acceptor.HiddenTokenSequencer.class);
+
+			// Bind the default style sheet (TODO: should use a test specific sheet)
+			binder.bind(DomCSS.class).toProvider(PPStylesheetProvider.class);
+			// specific to pp (2 spaces).
+			binder.bind(IIndentationInformation.class).to(PPIndentationInformation.class);
+			// binder.bind(IIndentationInformation.class).to(IIndentationInformation.Default.class);
+
+			binder.bind(ILayoutManager.class).annotatedWith(Names.named("Default")).to(PPSemanticLayout.class);
+
+			// configureIHiddenTokenSequencer(binder);
 		}
 
-		public Module getModule() {
-			return new TestModule();
+		public void configureIHiddenTokenSequencer(Binder binder) {
+			// bind the real HiddenTokenSequencer
+			binder.bind(IHiddenTokenSequencer.class).to(
+				com.puppetlabs.xtext.serializer.acceptor.HiddenTokenSequencer.class);
+			// advise it to not save / restore hidden state to trigger error
+			// binder.bind(IHiddenTokenSequencerAdvisor.class).to(NonSaveRestorHiddenStateAdvise.class);
+
 		}
 	}
 
@@ -161,14 +136,19 @@ public class TestPPFormattingFailing extends AbstractPuppetTests {
 	}
 
 	@Override
+	public Module getTestModule() {
+		// Produces debug output for the hidden sequencer
+		// return new TestSetupDebugOutput();
+
+		// Runs with configuration that shows problem
+		return new TestModule();
+	}
+
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		// Produces debug output for the hidden sequencer
-		// with(TestSetupDebugOutput.class);
-
-		// // Runs with configuration that shows problem
-		with(TestSpecificSetup.class);
+		with(getSetupInstance());
 	}
 
 	/**
@@ -185,7 +165,7 @@ public class TestPPFormattingFailing extends AbstractPuppetTests {
 	 * Due to issues in the formatter, this test may hit a bug that inserts whitespace
 	 * between quotes and string - no workaround found - needs to be fixed in Xtext formatter.
 	 * Also see {@link #test_Serialize_DoubleQuotedString_2()}
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

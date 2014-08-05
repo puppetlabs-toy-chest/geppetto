@@ -4,32 +4,46 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 
 /**
  * Tests specific to reported issues using Puppet 3.0 and 3.0 validation.
  * Inherits from TestIssues to also test all validations for 2.7.
  * Override methods in this class if they should be tested a different way for 3.0.
- * 
+ *
  */
 public class TestIssues3_0 extends TestIssues {
 
 	@Override
-	protected Class<? extends ISetup> getSetupClass() {
-		return PPTestSetup3_0.class;
+	protected ComplianceLevel getComplianceLevel() {
+		return ComplianceLevel.PUPPET_3_0;
+	}
+
+	@Override
+	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
+		return new DefaultPotentialProblemsAdvisor() {
+			@Override
+			public ValidationPreference assignmentToVarNamedString() {
+				return ValidationPreference.WARNING;
+			}
+			// TODO: Add more
+		};
 	}
 
 	@Override
