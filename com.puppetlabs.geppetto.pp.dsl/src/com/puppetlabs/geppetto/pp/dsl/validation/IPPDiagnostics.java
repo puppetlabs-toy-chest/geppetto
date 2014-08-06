@@ -221,4 +221,6 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__PARAM_DEFAULT_NOT_LAST = ISSUE_PREFIX + "ParamDefaultNotLast";
 
+	public static final String ISSUE__VALIDITY_ASSERTED_AT_RUNTIME = ISSUE_PREFIX + "ValidityAssertedAtRuntime";
+
 }

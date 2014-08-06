@@ -86,4 +86,9 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 		return ValidationPreference.IGNORE;
 	}
 
+	@Override
+	public ValidationPreference validityAssertedAtRuntime() {
+		return ValidationPreference.IGNORE;
+	}
+
 }

@@ -214,14 +214,14 @@ MatchingOperator : '=~' | '!~' ;
 MatchingExpression returns pp::Expression:
 	InExpression ({pp::MatchingExpression.leftExpr=current}
 		opName = MatchingOperator 
-		rightExpr = LiteralRegex
+		rightExpr = UnaryOrHigherExpression
 	)*
 	;
 
 InExpression returns pp::Expression:
 	UnaryOrHigherExpression ({pp::InExpression.leftExpr=current}
 		opName = 'in' 
-		rightExpr = UnaryOrHigherExpression
+		rightExpr = CollectExpression
 	)*
 	;
 	
