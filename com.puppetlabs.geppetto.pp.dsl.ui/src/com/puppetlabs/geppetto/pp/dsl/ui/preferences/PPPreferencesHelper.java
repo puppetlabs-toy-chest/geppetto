@@ -81,8 +81,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, //
 		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, //
 		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, //
-		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST //
-
+		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, //
+		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME //
 	);
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -231,6 +231,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		return getPuppetTarget().getComplianceLevel();
 	}
 
+	public ValidationPreference getValidityAssertedAtRuntime() {
+		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME));
+	}
+
 	@Override
 	synchronized public void initialize(IPreferenceStoreAccess access) {
 		// if already initialized
@@ -264,6 +268,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PROBLEM_ML_COMMENTS, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, ValidationPreference.IGNORE.toString());
+		store.setDefault(
+			PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, ValidationPreference.IGNORE.toString());
 
 		// save actions
 		store.setDefault(PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL, false);

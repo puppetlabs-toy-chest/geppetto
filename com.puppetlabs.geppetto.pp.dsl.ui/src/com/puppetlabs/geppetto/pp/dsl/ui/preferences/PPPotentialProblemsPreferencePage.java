@@ -22,19 +22,22 @@ public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 	@Override
 	protected void createFieldEditors() {
 
-		this.addField(new ValidationPreferenceFieldEditor(
+		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, "Interpolated hyphen without surrounding {}",
 			getFieldEditorParent()));
-		this.addField(new ValidationPreferenceFieldEditor(
+		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, "Strings containing \"false\" or \"true\"",
 			getFieldEditorParent()));
-		this.addField(new ValidationPreferenceFieldEditor(
+		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, "Missing 'default' in selector", getFieldEditorParent()));
-		this.addField(new ValidationPreferenceFieldEditor(
+		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, "Assignment to $string",
 			getFieldEditorParent()));
-		this.addField(new ValidationPreferenceFieldEditor(
+		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, "Assignment to $trusted",
+			getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, "Validity not asserted until runtime",
 			getFieldEditorParent()));
 	}
 

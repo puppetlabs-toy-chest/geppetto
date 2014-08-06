@@ -15,8 +15,8 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdv
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_0;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_2;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_4;
-import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_6;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_5;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_6;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_6_future;
 
 /**
@@ -100,6 +100,12 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	 * See geppetto Issue #400.
 	 */
 	public boolean allowExtendedDependencyTypes();
+
+	/**
+	 * If 3.5 extended match RHS expressions (string, type, or variables) should be allowed.
+	 * See issue GEP-110
+	 */
+	public boolean allowExtendedMatchRHS();
 
 	/**
 	 * Should Hash be allowed in a selector.
@@ -190,5 +196,4 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	 * How should unqualified variable references be reported (ignore, warning, error).
 	 */
 	public ValidationPreference unqualifiedVariables();
-
 }

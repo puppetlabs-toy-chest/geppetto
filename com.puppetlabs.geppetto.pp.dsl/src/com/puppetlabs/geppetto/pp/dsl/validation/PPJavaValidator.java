@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -72,10 +72,12 @@ import com.puppetlabs.geppetto.pp.IQuotedString;
 import com.puppetlabs.geppetto.pp.IfExpression;
 import com.puppetlabs.geppetto.pp.ImportExpression;
 import com.puppetlabs.geppetto.pp.InExpression;
+import com.puppetlabs.geppetto.pp.InterpolatedVariable;
 import com.puppetlabs.geppetto.pp.JavaLambda;
 import com.puppetlabs.geppetto.pp.Lambda;
 import com.puppetlabs.geppetto.pp.LiteralBoolean;
 import com.puppetlabs.geppetto.pp.LiteralDefault;
+import com.puppetlabs.geppetto.pp.LiteralExpression;
 import com.puppetlabs.geppetto.pp.LiteralHash;
 import com.puppetlabs.geppetto.pp.LiteralList;
 import com.puppetlabs.geppetto.pp.LiteralName;
@@ -215,7 +217,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		/**
 		 * Calls "collectCheck" in polymorphic fashion.
-		 * 
+		 *
 		 * @param o
 		 */
 		public void doCheck(Object... o) {
@@ -347,7 +349,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	/**
 	 * Common functionality for $x = ... and $x += ...
-	 * 
+	 *
 	 * @param o
 	 *            the binary expr where varExpr is the leftExpr
 	 * @param varExpr
@@ -406,7 +408,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	 * Checks if an AtExpression is either a valid hash access, or a resource reference.
 	 * Use isStandardAtExpression to check if an AtExpression is one or the other.
 	 * Also see {@link #isStandardAtExpression(AtExpression)})
-	 * 
+	 *
 	 * @param o
 	 */
 	@Check
@@ -467,7 +469,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	/**
 	 * Checks that an AtExpression that acts as a ResourceReference is valid.
-	 * 
+	 *
 	 * @param resourceRef
 	 * @param errorStartText
 	 */
@@ -594,7 +596,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	/**
 	 * Checks case literals that puppet will barf on:
 	 * - an unquoted text sequence that contains "."
-	 * 
+	 *
 	 * @param o
 	 */
 	@Check
@@ -1085,12 +1087,37 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkMatchingExpression(MatchingExpression o) {
-		Expression regex = o.getRightExpr();
-		if(regex == null || !(regex instanceof LiteralRegex))
-			acceptor.acceptError(
-				"Right expression must be a regular expression.", o, PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+		Expression rhs = o.getRightExpr();
+		if(rhs != null) {
+			// null already handled in checkBinaryExpression
+			if(!advisor().allowExtendedMatchRHS()) {
+				if(!(rhs instanceof LiteralRegex)) {
+					acceptor.acceptError(
+						"Right expression must be a regular expression.", o,
+						PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX,
+						IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+				}
+			}
+			else {
+				if(rhs instanceof VariableExpression) {
+					ValidationPreference var = advisor().validityAssertedAtRuntime();
+					if(var != ValidationPreference.IGNORE)
+						warningOrError(
+							acceptor, var, "Validity or right expression cannot be asserted until runtime", o,
+							PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX,
+							IPPDiagnostics.ISSUE__VALIDITY_ASSERTED_AT_RUNTIME);
 
+				}
+
+				if(!(rhs instanceof LiteralExpression || rhs instanceof StringExpression ||
+						rhs instanceof VariableExpression || rhs instanceof InterpolatedVariable)) {
+					acceptor.acceptError(
+						"Right expression must be a regular expression, string, type, or variable", o,
+						PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX,
+						IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+				}
+			}
+		}
 		checkOperator(o, "=~", "!~");
 	}
 
@@ -1226,7 +1253,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	 * - ResourceExpression (but not a ResourceOverride)
 	 * - ResourceReference
 	 * - CollectExpression
-	 * 
+	 *
 	 * That the operator name is a valid name (if defined from code).
 	 * INEDGE : MINUS GT; // '->'
 	 * OUTEDGE : LT MINUS; // '<-'
@@ -1328,7 +1355,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	/**
 	 * Checks ResourceExpression and derived VirtualResourceExpression.
-	 * 
+	 *
 	 * @param o
 	 */
 	@Check
@@ -1949,7 +1976,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.validation.AbstractInjectableValidator#isLanguageSpecific()
 	 * ISSUE: See https://bugs.eclipse.org/bugs/show_bug.cgi?id=335624
 	 * TODO: remove work around now that issue is fixed.
@@ -1970,7 +1997,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	/**
 	 * Checks acceptable expression types for SELECTOR lhs
-	 * 
+	 *
 	 * @param lhs
 	 * @return
 	 */

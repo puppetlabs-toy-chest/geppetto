@@ -89,6 +89,11 @@ public class ValidationAdvisor {
 		public ValidationPreference unquotedResourceTitles() {
 			return problemsAdvisor.unquotedResourceTitles();
 		}
+
+		@Override
+		public ValidationPreference validityAssertedAtRuntime() {
+			return problemsAdvisor.validityAssertedAtRuntime();
+		}
 	}
 
 	/**
@@ -116,6 +121,14 @@ public class ValidationAdvisor {
 		 */
 		@Override
 		public boolean allowExtendedDependencyTypes() {
+			return false;
+		}
+
+		/**
+		 * @returns false
+		 */
+		@Override
+		public boolean allowExtendedMatchRHS() {
 			return false;
 		}
 
@@ -372,6 +385,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public boolean allowExpressionLastInBlocks() {
+			return true;
+		}
+
+		@Override
+		public boolean allowExtendedMatchRHS() {
 			return true;
 		}
 

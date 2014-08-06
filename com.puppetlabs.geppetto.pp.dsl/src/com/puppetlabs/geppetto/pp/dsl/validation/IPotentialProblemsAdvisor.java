@@ -70,4 +70,10 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	 *
 	 */
 	public ValidationPreference unquotedResourceTitles();
+
+	/**
+	 * How should expression validity that cannot be asserted until runtime be reported.
+	 * See Issue GEP-110
+	 */
+	public ValidationPreference validityAssertedAtRuntime();
 }

@@ -104,4 +104,9 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 		return preferences.getUnquotedResourceTitles();
 	}
 
+	@Override
+	public ValidationPreference validityAssertedAtRuntime() {
+		return preferences.getValidityAssertedAtRuntime();
+	}
+
 }

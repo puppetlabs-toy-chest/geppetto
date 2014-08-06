@@ -75,4 +75,6 @@ public class PPPreferenceConstants {
 
 	public static final String PROBLEM_ENSURE_NOT_FIRST = "ensureNotFirst";
 
+	public static final String PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME = "validityAssertedAtRuntime";
+
 }
