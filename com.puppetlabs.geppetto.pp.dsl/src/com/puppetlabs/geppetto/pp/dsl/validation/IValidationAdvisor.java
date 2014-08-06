@@ -15,7 +15,9 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdv
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_0;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_2;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_4;
-import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_4_future;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_6;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_5;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisor_3_6_future;
 
 /**
  * An advisor to validation. Different implementations of this class capture the validation rules specific
@@ -54,10 +56,22 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 				return new ValidationAdvisor_3_4(problemsAdvisor);
 			}
 		},
+		PUPPET_3_5("3.5") {
+			@Override
+			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+				return new ValidationAdvisor_3_5(problemsAdvisor);
+			}
+		},
+		PUPPET_3_6("3.6") {
+			@Override
+			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+				return new ValidationAdvisor_3_6(problemsAdvisor);
+			}
+		},
 		PUPPET_FUTURE("Future") {
 			@Override
 			public IValidationAdvisor createValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
-				return new ValidationAdvisor_3_4_future(problemsAdvisor);
+				return new ValidationAdvisor_3_6_future(problemsAdvisor);
 			}
 		};
 

@@ -10,7 +10,6 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.validation;
 
-
 public class ValidationAdvisor {
 
 	public static class BaseValidationAdvisor implements IPotentialProblemsAdvisor, IStylisticProblemsAdvisor {
@@ -354,8 +353,20 @@ public class ValidationAdvisor {
 		}
 	}
 
-	public static class ValidationAdvisor_3_4_future extends ValidationAdvisor_3_4 implements IValidationAdvisor {
-		protected ValidationAdvisor_3_4_future(IPotentialProblemsAdvisor problemsAdvisor) {
+	public static class ValidationAdvisor_3_5 extends ValidationAdvisor_3_4 implements IValidationAdvisor {
+		protected ValidationAdvisor_3_5(IPotentialProblemsAdvisor problemsAdvisor) {
+			super(problemsAdvisor);
+		}
+	}
+
+	public static class ValidationAdvisor_3_6 extends ValidationAdvisor_3_5 implements IValidationAdvisor {
+		protected ValidationAdvisor_3_6(IPotentialProblemsAdvisor problemsAdvisor) {
+			super(problemsAdvisor);
+		}
+	}
+
+	public static class ValidationAdvisor_3_6_future extends ValidationAdvisor_3_6 implements IValidationAdvisor {
+		protected ValidationAdvisor_3_6_future(IPotentialProblemsAdvisor problemsAdvisor) {
 			super(problemsAdvisor);
 		}
 

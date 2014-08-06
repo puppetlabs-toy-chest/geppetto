@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -22,7 +22,9 @@ public enum PuppetTarget {
 	PUPPET30("3.0.2", "3.0", "puppet-3.0.2.pptp", null, ComplianceLevel.PUPPET_3_0),
 	PUPPET32("3.2.4", "3.2", "puppet-3.2.4.pptp", null, ComplianceLevel.PUPPET_3_2),
 	PUPPET34("3.4.2", "3.4", "puppet-3.4.2.pptp", null, ComplianceLevel.PUPPET_3_4),
-	PUPPET_FUTURE("3.4.2", "future", "puppet-3.4.2.pptp", null, ComplianceLevel.PUPPET_FUTURE),
+	PUPPET35("3.5.1", "3.5", "puppet-3.5.1.pptp", null, ComplianceLevel.PUPPET_3_5),
+	PUPPET36("3.6.2", "3.6", "puppet-3.6.2.pptp", null, ComplianceLevel.PUPPET_3_6),
+	PUPPET_FUTURE("3.6.2", "future", "puppet-3.6.2.pptp", null, ComplianceLevel.PUPPET_FUTURE),
 	PUPPET_ENTERPRISE20("2.7.9", "PE 2.0", "puppet-2.7.19.pptp", "2.0.2", ComplianceLevel.PUPPET_2_7),
 	PUPPET_ENTERPRISE27("2.7.19", "PE 2.7", "puppet-2.7.19.pptp", "2.7.2", ComplianceLevel.PUPPET_2_7),
 	PUPPET_ENTERPRISE28("2.7.25", "PE 2.8", "puppet-2.7.25.pptp", "2.8.1", ComplianceLevel.PUPPET_2_7),
@@ -45,7 +47,7 @@ public enum PuppetTarget {
 
 	/**
 	 * Returns the PuppetTarget with a literal equal to the argument
-	 * 
+	 *
 	 * @param literal
 	 *            The argument to match
 	 * @return The matching target
@@ -93,7 +95,7 @@ public enum PuppetTarget {
 
 	/**
 	 * Returns the Puppet Enterprise version if applicable.
-	 * 
+	 *
 	 * @return The Puppet Enterprise version or <code>null</code> if this target is not PE
 	 */
 	public Version getPEVersion() {
