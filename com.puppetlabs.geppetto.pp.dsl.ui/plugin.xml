@@ -81,7 +81,7 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-              class="org.eclipse.ui.internal.dialogs.EmptyPreferencePage"
+              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PuppetRootPreferencePage"
               id="com.puppetlabs.geppetto.puppet.ui"
               name="Puppet">
         </page>

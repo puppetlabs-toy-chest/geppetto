@@ -13,3 +13,6 @@
 /.ModuleDocumentationProvider.java._trace
 /.ModuleHover.java._trace
 /.ModuleKeywordTexts.java._trace
+/ModuleDocumentationProvider.java
+/ModuleHover.java
+/ModuleKeywordTexts.java

@@ -1,4 +1,4 @@
-package com.puppetlabs.geppetto.module.dsl;
+package com.puppetlabs.geppetto.pp.dsl.linking;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -10,12 +10,12 @@ import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
 /**
  * {@link IResourceServiceProvider} that handles 'metadata.json' URI's
  */
-public class ModuleResourceServiceProvider extends DefaultResourceServiceProvider {
+public class PPResourceServiceProvider extends DefaultResourceServiceProvider {
 	@Inject
 	private IFolderDiscriminator folderDiscriminator;
 
 	@Override
 	public boolean canHandle(URI uri) {
-		return uri != null && "metadata.json".equals(uri.lastSegment()) && !folderDiscriminator.isExcluded(uri);
+		return uri != null && !folderDiscriminator.isExcluded(uri) && super.canHandle(uri);
 	}
 }

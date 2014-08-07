@@ -33,8 +33,9 @@ import org.eclipse.core.filesystem.EFS
 class ModuleBuildParticipant extends BuilderParticipant {
 
 	public static val PUPPET_MODULE_PROBLEM_MARKER_TYPE = "com.puppetlabs.geppetto.module.dsl.ui.puppetModuleProblem"
-
-	static val log = Logger.getLogger(ModuleBuildParticipant)
+	public static val PUPPET_MODULE_PROBLEM_MARKER_CHECK_FAST = "com.puppetlabs.geppetto.module.dsl.ui.module.check.fast"
+	public static val PUPPET_MODULE_PROBLEM_MARKER_CHECK_NORMAL = "com.puppetlabs.geppetto.module.dsl.ui.module.check.normal"
+	public static val PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE = "com.puppetlabs.geppetto.module.dsl.ui.module.check.expensive"
 
 	@Inject
 	extension ModuleUtil
@@ -58,9 +59,11 @@ class ModuleBuildParticipant extends BuilderParticipant {
 
 	override build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		val subMon = SubMonitor.convert(monitor, 10)
-		super.build(context, subMon.newChild(7))
 		val proj = context.builtProject
-		proj.removeErrorMarkers
+		if(context.buildType === BuildType.CLEAN)
+			proj.removeErrorMarkers
+
+		super.build(context, subMon.newChild(7))
 		if (ModuleProjectsState.isAccessiblePuppetProject(proj)) {
 			for (delta : context.deltas) {
 				var dsc = delta.^new
@@ -190,6 +193,9 @@ class ModuleBuildParticipant extends BuilderParticipant {
 	 */
 	def private void removeErrorMarkers(IProject project) throws CoreException {
 		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_TYPE, true, IResource.DEPTH_INFINITE)
+		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_CHECK_FAST, true, IResource.DEPTH_INFINITE)
+		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_CHECK_NORMAL, true, IResource.DEPTH_INFINITE)
+		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE, true, IResource.DEPTH_INFINITE)
 	}
 
 	def private getAccessibleProject(JsonMetadata metadata) {
@@ -224,7 +230,7 @@ class ModuleBuildParticipant extends BuilderParticipant {
 
 			// not in sync, set them
 			description.dynamicReferences = wanted.toArray(newArrayOfSize(wanted.size()))
-			project.setDescription(description, subMon.newChild(1))
+			project.setDescription(description, IResource.FORCE.bitwiseOr(IResource.KEEP_HISTORY), subMon.newChild(1))
 
 			// We need a full build when dependencies change
 			//

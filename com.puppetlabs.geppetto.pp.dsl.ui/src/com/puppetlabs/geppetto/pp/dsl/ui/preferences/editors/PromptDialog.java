@@ -17,6 +17,7 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -87,6 +88,11 @@ public class PromptDialog extends Dialog {
 
 	public void prompt(String title, String text, String check, final String[] value, final int[] checkValue,
 			final int[] result) {
+		prompt(title, text, check, null, value, checkValue, result);
+	}
+
+	public void prompt(String title, String text, String check, VerifyListener verifyListener, final String[] value,
+			final int[] checkValue, final int[] result) {
 		Shell parent = getParent();
 
 		final Shell shell = new Shell(parent, SWT.SHEET | SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
@@ -122,6 +128,8 @@ public class PromptDialog extends Dialog {
 				updateStatus();
 			}
 		});
+		if(verifyListener != null)
+			valueText.addVerifyListener(verifyListener);
 
 		if(value[0] != null)
 			valueText.setText(value[0]);

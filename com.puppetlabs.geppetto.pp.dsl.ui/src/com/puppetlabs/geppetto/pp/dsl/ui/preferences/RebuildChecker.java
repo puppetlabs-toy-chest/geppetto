@@ -12,6 +12,7 @@
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -25,7 +26,7 @@ import com.puppetlabs.geppetto.pp.dsl.ui.builder.PPBuildJob;
 public class RebuildChecker extends Job {
 	private final IWorkspace workspace;
 
-	private boolean buildPending;
+	private int buildPending = 0;
 
 	/**
 	 * The purpose of the RebuildChecker is to collect/aggregate build triggering events
@@ -46,20 +47,33 @@ public class RebuildChecker extends Job {
 		if(monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 
+		int buildType = 0;
 		synchronized(this) {
-			if(!buildPending) {
+			if(buildPending == 0) {
 				schedule(500);
 				return Status.OK_STATUS;
 			}
-			buildPending = false;
+			buildType = buildPending;
+
+			// We let a clean build be followed by a full build
+			if(buildPending == IncrementalProjectBuilder.CLEAN_BUILD)
+				buildPending = IncrementalProjectBuilder.FULL_BUILD;
+			else
+				buildPending = 0;
 		}
 
 		// run a build. This job will be rescheduled once the build completes
-		new PPBuildJob(workspace, this).schedule();
+		new PPBuildJob(workspace, buildType, this).schedule();
 		return Status.OK_STATUS;
 	}
 
 	public synchronized void triggerBuild() {
-		buildPending = true;
+		// Careful so that we don't demote the CLEAN_BUILD to a FULL_BUILD
+		if(buildPending != IncrementalProjectBuilder.CLEAN_BUILD)
+			buildPending = IncrementalProjectBuilder.FULL_BUILD;
+	}
+
+	public synchronized void triggerClean() {
+		buildPending = IncrementalProjectBuilder.CLEAN_BUILD;
 	}
 }
