@@ -52,6 +52,9 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 	}
 
 	public static String PUPPET_MODULE_PROBLEM_MARKER_TYPE = "com.puppetlabs.geppetto.module.dsl.ui.puppetModuleProblem";
+	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_FAST = "com.puppetlabs.geppetto.module.dsl.ui.module.check.fast";
+	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_NORMAL = "com.puppetlabs.geppetto.module.dsl.ui.module.check.normal";
+	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE = "com.puppetlabs.geppetto.module.dsl.ui.module.check.expensive";
 
 	private final ModuleUtil moduleUtil;
 
@@ -76,9 +79,11 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 	@Override
 	public void build(IXtextBuilderParticipant.IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		SubMonitor subMon = SubMonitor.convert(monitor, 10);
-		super.build(context, subMon.newChild(7));
 		IProject proj = context.getBuiltProject();
-		removeErrorMarkers(proj);
+		if(context.getBuildType() == BuildType.CLEAN)
+			removeErrorMarkers(proj);
+
+		super.build(context, subMon.newChild(7));
 		if(ModuleProjectsState.isAccessiblePuppetProject(proj))
 			for(IResourceDescription.Delta delta : context.getDeltas()) {
 				IResourceDescription dsc = delta.getNew();
@@ -232,7 +237,10 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 	 * Deletes all puppet module problem markers set by this builder.
 	 */
 	private void removeErrorMarkers(IProject project) throws CoreException {
-		project.deleteMarkers(ModuleBuildParticipant.PUPPET_MODULE_PROBLEM_MARKER_TYPE, true, IResource.DEPTH_INFINITE);
+		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_TYPE, true, IResource.DEPTH_INFINITE);
+		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_CHECK_FAST, true, IResource.DEPTH_INFINITE);
+		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_CHECK_NORMAL, true, IResource.DEPTH_INFINITE);
+		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE, true, IResource.DEPTH_INFINITE);
 	}
 
 	private void syncProjectReferences(IProject project, List<IProject> wanted, SubMonitor subMon) throws CoreException {
@@ -244,7 +252,7 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 
 			// not in sync, set them
 			description.setDynamicReferences(wanted.toArray(new IProject[wanted.size()]));
-			project.setDescription(description, subMon.newChild(1));
+			project.setDescription(description, IResource.FORCE | IResource.KEEP_HISTORY, subMon.newChild(1));
 
 			// We need a full build when dependencies change
 			//

@@ -9,6 +9,7 @@ import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 
@@ -20,6 +21,8 @@ import com.puppetlabs.geppetto.module.dsl.generator.ModuleGenerator;
 import com.puppetlabs.geppetto.module.dsl.linking.ModuleLinkingDiagnosticMessageProvider;
 import com.puppetlabs.geppetto.module.dsl.scoping.ModuleQualifiedNameConverter;
 import com.puppetlabs.geppetto.module.dsl.scoping.ModuleQualifiedNameProvider;
+import com.puppetlabs.geppetto.pp.dsl.FolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
 
 public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 	@Override
@@ -29,6 +32,10 @@ public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 
 	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
 		return ModuleLinkingDiagnosticMessageProvider.class;
+	}
+
+	public Class<? extends IFolderDiscriminator> bindIFolderDiscriminator() {
+		return FolderDiscriminator.class;
 	}
 
 	/**
@@ -48,6 +55,11 @@ public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 
 	public Class<? extends IGenerator> bindIGenerator() {
 		return ModuleGenerator.class;
+	}
+
+
+	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
+		return ModuleResourceDescriptionManager.class;
 	}
 
 	/**

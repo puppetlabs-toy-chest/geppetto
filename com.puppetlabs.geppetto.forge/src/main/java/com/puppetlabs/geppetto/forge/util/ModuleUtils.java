@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.jrubyparser.SourcePosition;
@@ -103,19 +105,23 @@ public class ModuleUtils {
 		bld.append(".tar.gz");
 	}
 
-	private static Pattern compileExcludePattern(String[] excludes) {
-		if(excludes == null || excludes.length == 0)
-			return Pattern.compile(".*");
-
-		StringBuilder bld = new StringBuilder();
-		bld.append("^(?:");
-		appendExcludePattern(excludes[0], bld);
-		for(int idx = 1; idx < excludes.length; ++idx) {
-			bld.append('|');
-			appendExcludePattern(excludes[idx], bld);
+	public static Pattern compileExcludePattern(List<String> excludes) {
+		if(excludes != null) {
+			int top = excludes.size();
+			if(top > 0) {
+				StringBuilder bld = new StringBuilder();
+				bld.append("^(?:");
+				appendExcludePattern(excludes.get(0), bld);
+				for(int idx = 1; idx < top; ++idx) {
+					bld.append('|');
+					appendExcludePattern(excludes.get(idx), bld);
+				}
+				bld.append(")$");
+				return Pattern.compile(bld.toString());
+			}
 		}
-		bld.append(")$");
-		return Pattern.compile(bld.toString());
+		// Anything goes
+		return Pattern.compile(".*");
 	}
 
 	/**
@@ -355,7 +361,7 @@ public class ModuleUtils {
 	// @fmtOn
 
 	// Directory names that should not be checksummed or copied.
-	public static final Pattern DEFAULT_EXCLUDES_PATTERN = compileExcludePattern(DEFAULT_EXCLUDES);
+	public static final Pattern DEFAULT_EXCLUDES_PATTERN = compileExcludePattern(Arrays.asList(DEFAULT_EXCLUDES));
 
 	public static final FileFilter DEFAULT_FILE_FILTER = new DefaultFileFilter();
 

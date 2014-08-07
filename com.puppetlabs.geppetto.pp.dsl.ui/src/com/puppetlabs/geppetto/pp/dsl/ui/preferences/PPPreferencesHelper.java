@@ -19,10 +19,13 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.FolderFilterEditor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 
@@ -32,6 +35,9 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
  *
  */
 public class PPPreferencesHelper implements IPreferenceStoreInitializer, IPropertyChangeListener {
+	public interface IPreferenceListener {
+		void onChange(String key, String newValue);
+	}
 
 	private int autoInsertOverrides = 0;
 
@@ -53,11 +59,15 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	private static final String defaultProjectPath = "lib/*:environments/$environment/*:manifests/*:modules/*"; //$NON-NLS-1$
 
+	private static final String defaultFolderFilter = "pkg:spec"; //$NON-NLS-1$
+
 	private static final String defaultPuppetEnvironment = "production"; //$NON-NLS-1$
 
 	private final PptpTargetProjectHandler pptpHandler;
 
 	private final RebuildChecker backgroundRebuildChecker;
+
+	private final Multimap<String, IPropertyChangeListener> listeners = ArrayListMultimap.create();
 
 	/**
 	 * IMPORTANT:
@@ -67,6 +77,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PUPPET_TARGET_VERSION, //
 		PPPreferenceConstants.PUPPET_ENVIRONMENT, //
 		PPPreferenceConstants.PUPPET_PROJECT_PATH, //
+		PPPreferenceConstants.PUPPET_FOLDER_FILTER, //
 		PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, //
 		PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, //
 		PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, //
@@ -92,6 +103,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		this.pptpHandler = pptpHandler;
 		this.backgroundRebuildChecker = backgroundRebuildChecker;
 		configureAutoInsertOverride();
+	}
+
+	public void addPreferenceListener(String key, IPropertyChangeListener listener) {
+		listeners.put(key, listener);
 	}
 
 	private void configureAutoInsertOverride() {
@@ -121,6 +136,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST));
 	}
 
+	public List<String> getDefaultFolderFilters() {
+		return FolderFilterEditor.parseFolderFilter(defaultFolderFilter);
+	}
+
 	public ValidationPreference getDqStringNotRequired() {
 		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED));
 	}
@@ -131,6 +150,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getEnsureShouldAppearFirst() {
 		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST));
+	}
+
+	public List<String> getFolderFilters() {
+		return FolderFilterEditor.parseFolderFilter(store.getString(PPPreferenceConstants.PUPPET_FOLDER_FILTER));
 	}
 
 	public ValidationPreference getInterpolatedNonBraceEnclosedHypens() {
@@ -246,6 +269,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_COMPLETE_COMPOUND_BLOCKS, true);
 		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.getDefault().getLiteral());
 		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, defaultProjectPath);
+		store.setDefault(PPPreferenceConstants.PUPPET_FOLDER_FILTER, defaultFolderFilter);
 		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, defaultPuppetEnvironment);
 
 		store.setDefault(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, ValidationPreference.WARNING.toString());
@@ -315,18 +339,18 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		// System.err.println("Preference changed value: " + event.getProperty());
 		if(PPPreferenceConstants.AUTO_EDIT_STRATEGY.equals(event.getProperty()))
 			autoInsertOverrides = Integer.valueOf((String) event.getNewValue());
 
+		for(IPropertyChangeListener listener : listeners.get(event.getProperty()))
+			listener.propertyChange(event);
+
 		// If pptp changes, recheck the workspace
-		if(PPPreferenceConstants.PUPPET_TARGET_VERSION.equals(event.getProperty())) {
+		if(PPPreferenceConstants.PUPPET_TARGET_VERSION.equals(event.getProperty()))
 			pptpHandler.initializePuppetTargetProject();
-			// problemChanges.offer(event.getProperty());
-		}
+
 		if(requiresRebuild.contains(event.getProperty()))
 			backgroundRebuildChecker.triggerBuild();
-		// System.out.println("PPHelper gets event:" + event.getProperty());
 	}
 
 	/**
