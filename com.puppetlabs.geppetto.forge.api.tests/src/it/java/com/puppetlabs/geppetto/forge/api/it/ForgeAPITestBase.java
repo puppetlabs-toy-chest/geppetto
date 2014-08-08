@@ -37,7 +37,7 @@ public class ForgeAPITestBase {
 
 	public static final String TEST_PASSWORD = "geppetto tester";
 
-	public static final String TEST_MODULE = "testmodule";
+	public static final String TEST_MODULE_PFX = "testmodule";
 
 	public static final IPath TEST_GZIPPED_RELEASE = Path.fromPortableString("testData/geppetto-testmodule-0.1.0.tar.gz");
 

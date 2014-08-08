@@ -18,21 +18,8 @@ import java.util.Map;
 import com.puppetlabs.geppetto.forge.model.Constants;
 import com.puppetlabs.geppetto.forge.v2.model.Release;
 import com.puppetlabs.geppetto.forge.v2.service.ReleaseService;
-import com.puppetlabs.geppetto.semver.Version;
 
 public class DefaultReleaseService extends AbstractForgeService implements ReleaseService {
-	private static String getReleasePath(String owner, String name, Version version) {
-		StringBuilder bld = new StringBuilder();
-		bld.append(Constants.COMMAND_GROUP_RELEASES);
-		bld.append('/');
-		bld.append(owner);
-		bld.append('/');
-		bld.append(name);
-		bld.append('/');
-		version.toString(bld);
-		return bld.toString();
-	}
-
 	@Override
 	public Release create(String owner, String name, String notes, InputStream gzipFile, long fileSize)
 			throws IOException {
@@ -44,15 +31,5 @@ public class DefaultReleaseService extends AbstractForgeService implements Relea
 		return getClient(true).postUpload(
 			Constants.COMMAND_GROUP_RELEASES, parts, gzipFile, "application/x-compressed-tar", "tempfile.tar.gz",
 			fileSize, Release.class);
-	}
-
-	@Override
-	public void delete(String owner, String name, Version version) throws IOException {
-		getClient(true).delete(getReleasePath(owner, name, version));
-	}
-
-	@Override
-	public Release update(String owner, String name, Version version, Release release) throws IOException {
-		return getClient(true).patch(getReleasePath(owner, name, version), release, Release.class);
 	}
 }
