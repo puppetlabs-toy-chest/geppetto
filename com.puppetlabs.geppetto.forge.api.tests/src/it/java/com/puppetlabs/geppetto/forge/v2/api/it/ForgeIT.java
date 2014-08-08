@@ -20,7 +20,6 @@ import com.puppetlabs.geppetto.forge.v2.ForgeAPI;
 // @fmtOff
 @SuiteClasses({
 	ReleaseTestCreate.class,
-	ReleaseTestDelete.class,
 })
 // @fmtOn
 @RunWith(Suite.class)

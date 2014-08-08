@@ -13,7 +13,7 @@ public class PublishTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void publishOK() throws Exception {
-		MavenSession session = packageModule("test_module_c");
+		MavenSession session = packageGeneratedModule(ForgeIT.testModuleC);
 		Publish publish = (Publish) lookupConfiguredMojo(session, newMojoExecution("publish"));
 		assertNotNull(publish);
 
@@ -22,20 +22,6 @@ public class PublishTestMojo extends AbstractForgeTestMojo {
 		}
 		catch(MojoFailureException e) {
 			fail("Publishing of OK module failed: " + e.getMessage());
-		}
-	}
-
-	@Test
-	public void publishWithNoModuleAtForge() throws Exception {
-		MavenSession session = packageModule("test_module_d");
-		Publish publish = (Publish) lookupConfiguredMojo(session, newMojoExecution("publish"));
-		assertNotNull(publish);
-
-		try {
-			publish.execute();
-		}
-		catch(MojoFailureException e) {
-			fail("Publishing of OK releaase failed when there was no module: " + e.getMessage());
 		}
 	}
 

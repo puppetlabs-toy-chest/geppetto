@@ -1,8 +1,0 @@
-name 'geppetto-test_module_d'
-version '1.0.0'
-author 'geppetto'
-license 'Apache 2.0'
-project_page 'http://puppetlabs.github.io/geppetto'
-source 'https://github.com/puppetlabs/geppetto'
-summary 'A geppetto test module'
-description ''

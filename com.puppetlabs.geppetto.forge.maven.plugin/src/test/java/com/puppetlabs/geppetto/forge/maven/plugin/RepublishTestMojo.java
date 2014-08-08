@@ -12,17 +12,23 @@ import org.junit.Test;
 public class RepublishTestMojo extends AbstractForgeTestMojo {
 	@Test
 	public void republish() throws Exception {
-		MavenSession session = packageModule("test_module_c");
+		MavenSession session = packageGeneratedModule(ForgeIT.testModuleC);
 		Publish publish = (Publish) lookupConfiguredMojo(session, newMojoExecution("publish"));
 		assertNotNull(publish);
 
 		try {
 			// Publish will execute but do nothing. The result is OK.
 			final Wrapper<Boolean> msgFound = new Wrapper<Boolean>(false);
+			StringBuilder bld = new StringBuilder();
+			ForgeIT.testModuleC.getModuleName().toString(bld);
+			bld.append(':');
+			ForgeIT.testModuleC.getVersion().toString(bld);
+			bld.append(" has already been published");
+			final String expectedMessage = bld.toString();
 			publish.setLogger(new NOPLogger() {
 				@Override
 				public void warn(String message) {
-					if(message.contains("test_module_c:1.0.0 has already been published"))
+					if(message.contains(expectedMessage))
 						msgFound.set(true);
 				}
 			});
