@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.puppetlabs.geppetto.forge.v2.model.Release;
-import com.puppetlabs.geppetto.semver.Version;
 
 /**
  * A CRUD service for {@link Release} objects
@@ -34,35 +33,4 @@ public interface ReleaseService extends ForgeService {
 	 * @throws IOException
 	 */
 	Release create(String owner, String name, String notes, InputStream gzipFile, long fileSize) throws IOException;
-
-	/**
-	 * Delete the Release identified by <code>owner</code>, <code>name</code>, and <code>version.
-	 *
-	 * @param owner
-	 *            The Module owner.
-	 * @param name
-	 *            The name of the Module.
-	 * @param version
-	 *            The version of the module Release
-	 * @throws IOException
-	 */
-	void delete(String owner, String name, Version version) throws IOException;
-
-	/**
-	 * Updates the Release identified by <code>owner</code>, <code>name</code>, and <code>version with
-	 * new data.
-	 *
-	 * @param owner
-	 *            The Module owner
-	 * @param name
-	 *            The name of the Module.
-	 * @param version
-	 *            The version of the module Release
-	 * @param Release
-	 *            New data for the Release.
-	 * @return The updated Release
-	 * @throws IOException
-	 */
-	Release update(String owner, String name, Version version, Release release) throws IOException;
-
 }

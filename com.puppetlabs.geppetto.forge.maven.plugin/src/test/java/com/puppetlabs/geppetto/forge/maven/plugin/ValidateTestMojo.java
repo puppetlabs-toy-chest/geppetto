@@ -145,7 +145,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void unresolvedDependency() throws Exception {
-		setTestForgeModulesRoot("test_module_b");
+		setGeneratedTestForgeModulesRoot(ForgeIT.testModuleB);
 		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
 		assertNotNull(validate);
 
@@ -160,7 +160,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void validateOK() throws Exception {
-		setTestForgeModulesRoot("test_module_c");
+		setGeneratedTestForgeModulesRoot(ForgeIT.testModuleC);
 		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
 		assertNotNull(validate);
 

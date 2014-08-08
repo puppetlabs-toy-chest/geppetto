@@ -12,16 +12,21 @@ public class ValidateTest2Mojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithResolvedDependency() throws Exception {
-		setTestForgeModulesRoot("test_module_b");
+		setGeneratedTestForgeModulesRoot(ForgeIT.testModuleB);
 		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
 		assertNotNull(validate);
 
 		try {
+			StringBuilder bld = new StringBuilder("Installing dependent module ");
+			ForgeIT.testModuleC.getModuleName().toString(bld);
+			bld.append(':');
+			ForgeIT.testModuleC.getVersion().toString(bld);
+			final String expectedMessage = bld.toString();
 			final Wrapper<Boolean> msgFound = new Wrapper<Boolean>(false);
 			validate.setLogger(new NOPLogger() {
 				@Override
 				public void info(String message) {
-					if(message.contains("Installing dependent module geppetto-test_module_c:1.0.0"))
+					if(message.contains(expectedMessage))
 						msgFound.set(true);
 				}
 			});

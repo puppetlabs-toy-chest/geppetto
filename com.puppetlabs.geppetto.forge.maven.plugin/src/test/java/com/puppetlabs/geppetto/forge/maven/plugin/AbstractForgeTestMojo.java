@@ -62,6 +62,7 @@ import org.junit.Assert;
 import org.junit.Before;
 
 import com.puppetlabs.geppetto.common.os.FileUtils;
+import com.puppetlabs.geppetto.forge.model.VersionedName;
 
 public class AbstractForgeTestMojo {
 	File pom;
@@ -112,6 +113,20 @@ public class AbstractForgeTestMojo {
 			fail(e.getMessage());
 			return null; // keep
 		}
+	}
+
+	private MavenSession createModuleSession(String moduleName) throws Exception {
+		MavenSession session = createMavenSession();
+		Package pkg = (Package) lookupConfiguredMojo(session, newMojoExecution("package"));
+		assertNotNull(pkg);
+
+		try {
+			pkg.execute();
+		}
+		catch(MojoFailureException e) {
+			fail("Packaging of " + moduleName + " failed: " + e.getMessage());
+		}
+		return session;
 	}
 
 	private void finalizeMojoConfiguration(MojoExecution mojoExecution) {
@@ -281,21 +296,23 @@ public class AbstractForgeTestMojo {
 
 	protected MavenSession packageModule(String moduleName) throws Exception {
 		setTestForgeModulesRoot(moduleName);
-		MavenSession session = createMavenSession();
-		Package pkg = (Package) lookupConfiguredMojo(session, newMojoExecution("package"));
-		assertNotNull(pkg);
+		return createModuleSession(moduleName);
+	}
 
-		try {
-			pkg.execute();
-		}
-		catch(MojoFailureException e) {
-			fail("Packaging of " + moduleName + " failed: " + e.getMessage());
-		}
-		return session;
+	protected MavenSession packageGeneratedModule(VersionedName moduleName) throws Exception {
+		setGeneratedTestForgeModulesRoot(moduleName);
+		return createModuleSession(moduleName.getModuleName().getName());
 	}
 
 	protected void setTestForgeModulesRoot(String project) {
 		File projectFile = getTestFile("src/test/workspace/" + project);
+		String absPath = projectFile.getAbsolutePath();
+		assertTrue("Project file " + absPath + " is not a directory", projectFile.isDirectory());
+		userProps.put("testForgeModulesRoot", absPath);
+	}
+
+	protected void setGeneratedTestForgeModulesRoot(VersionedName vn) {
+		File projectFile = new File(ForgeIT.TEST_MODULES_DIR, vn.getModuleName().getName());
 		String absPath = projectFile.getAbsolutePath();
 		assertTrue("Project file " + absPath + " is not a directory", projectFile.isDirectory());
 		userProps.put("testForgeModulesRoot", absPath);
