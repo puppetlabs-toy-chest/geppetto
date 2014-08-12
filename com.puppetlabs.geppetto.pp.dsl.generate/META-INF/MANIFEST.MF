@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: com.puppetlabs.geppetto.pp.dsl.generate;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 4.2.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.log4j,
  com.puppetlabs.geppetto.pp.impl
