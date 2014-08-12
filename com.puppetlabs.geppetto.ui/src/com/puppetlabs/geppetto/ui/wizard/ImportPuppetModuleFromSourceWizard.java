@@ -68,7 +68,7 @@ import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.module.dsl.ui.internal.ModuleActivator;
+import com.puppetlabs.geppetto.module.dsl.ui.internal.Activator;
 import com.puppetlabs.geppetto.ui.UIPlugin;
 
 public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWizard implements IImportWizard {
@@ -258,7 +258,7 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 		}
 
 		private IStatus nope(String msg, Throwable e) {
-			return new Status(IStatus.ERROR, ModuleActivator.getId(), msg, e);
+			return new Status(IStatus.ERROR, Activator.getId(), msg, e);
 		}
 
 		protected void selectModuleDir() {

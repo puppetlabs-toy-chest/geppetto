@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import javax.inject.Inject;
-import org.apache.log4j.Logger;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IContainer;
@@ -53,7 +52,11 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class ModuleBuildParticipant extends BuilderParticipant {
   public final static String PUPPET_MODULE_PROBLEM_MARKER_TYPE = "com.puppetlabs.geppetto.module.dsl.ui.puppetModuleProblem";
   
-  private final static Logger log = Logger.getLogger(ModuleBuildParticipant.class);
+  public final static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_FAST = "com.puppetlabs.geppetto.module.dsl.ui.module.check.fast";
+  
+  public final static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_NORMAL = "com.puppetlabs.geppetto.module.dsl.ui.module.check.normal";
+  
+  public final static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE = "com.puppetlabs.geppetto.module.dsl.ui.module.check.expensive";
   
   @Inject
   @Extension
@@ -77,10 +80,14 @@ public class ModuleBuildParticipant extends BuilderParticipant {
   
   public void build(final IXtextBuilderParticipant.IBuildContext context, final IProgressMonitor monitor) throws CoreException {
     final SubMonitor subMon = SubMonitor.convert(monitor, 10);
+    final IProject proj = context.getBuiltProject();
+    IXtextBuilderParticipant.BuildType _buildType = context.getBuildType();
+    boolean _tripleEquals = (_buildType == IXtextBuilderParticipant.BuildType.CLEAN);
+    if (_tripleEquals) {
+      this.removeErrorMarkers(proj);
+    }
     SubMonitor _newChild = subMon.newChild(7);
     super.build(context, _newChild);
-    final IProject proj = context.getBuiltProject();
-    this.removeErrorMarkers(proj);
     boolean _isAccessiblePuppetProject = ModuleProjectsState.isAccessiblePuppetProject(proj);
     if (_isAccessiblePuppetProject) {
       List<IResourceDescription.Delta> _deltas = context.getDeltas();
@@ -294,6 +301,9 @@ public class ModuleBuildParticipant extends BuilderParticipant {
    */
   private void removeErrorMarkers(final IProject project) throws CoreException {
     project.deleteMarkers(ModuleBuildParticipant.PUPPET_MODULE_PROBLEM_MARKER_TYPE, true, IResource.DEPTH_INFINITE);
+    project.deleteMarkers(ModuleBuildParticipant.PUPPET_MODULE_PROBLEM_MARKER_CHECK_FAST, true, IResource.DEPTH_INFINITE);
+    project.deleteMarkers(ModuleBuildParticipant.PUPPET_MODULE_PROBLEM_MARKER_CHECK_NORMAL, true, IResource.DEPTH_INFINITE);
+    project.deleteMarkers(ModuleBuildParticipant.PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE, true, IResource.DEPTH_INFINITE);
   }
   
   private IProject getAccessibleProject(final JsonMetadata metadata) {
@@ -361,8 +371,9 @@ public class ModuleBuildParticipant extends BuilderParticipant {
       IProject[] _newArrayOfSize = new IProject[_size_2];
       IProject[] _array = wanted.<IProject>toArray(_newArrayOfSize);
       description.setDynamicReferences(_array);
+      int _bitwiseOr = (IResource.FORCE | IResource.KEEP_HISTORY);
       SubMonitor _newChild_1 = subMon.newChild(1);
-      project.setDescription(description, _newChild_1);
+      project.setDescription(description, _bitwiseOr, _newChild_1);
       this.rebuildChecker.triggerBuild();
     }
   }

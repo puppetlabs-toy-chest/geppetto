@@ -6,9 +6,8 @@
  *
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package com.puppetlabs.geppetto.module.dsl;
+package com.puppetlabs.geppetto.module.dsl.ui;
 
-import static com.puppetlabs.geppetto.module.dsl.ModuleResourceServiceProvider.isMetadataJsonFile;
 import static org.eclipse.emf.ecore.resource.ContentHandler.Validity.VALID;
 
 import java.io.IOException;
@@ -17,6 +16,9 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ContentHandlerImpl;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+
+import com.google.inject.Inject;
 
 /**
  * Object that provides content description for the input streams associated to URIs that refer to
@@ -25,6 +27,9 @@ import org.eclipse.emf.ecore.resource.impl.ContentHandlerImpl;
  * @author alruiz@google.com (Alex Ruiz)
  */
 public class ModuleContentHandler extends ContentHandlerImpl {
+
+	@Inject
+	private IResourceServiceProvider resourceServiceProvider;
 
 	/** Content type for "metadata.json" files. */
 	public static final String MODULE_CONTENT_TYPE = "com.puppetlabs.geppetto.module.dsl.Module";
@@ -38,7 +43,7 @@ public class ModuleContentHandler extends ContentHandlerImpl {
 	 */
 	@Override
 	public boolean canHandle(URI uri) {
-		return isMetadataJsonFile(uri);
+		return resourceServiceProvider.canHandle(uri);
 	}
 
 	/**

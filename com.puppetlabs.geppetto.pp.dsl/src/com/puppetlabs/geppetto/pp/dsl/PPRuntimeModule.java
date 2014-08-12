@@ -17,6 +17,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.validation.CompositeEValidator;
@@ -37,6 +38,7 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPQualifiedNameConverter;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPQualifiedNameProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceDescriptionManager;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceDescriptionStrategy;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceServiceProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.ppformatting.PPIndentationInformation;
@@ -74,6 +76,10 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 	 */
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		return PPResourceDescriptionStrategy.class;
+	}
+
+	public Class<? extends IFolderDiscriminator> bindIFolderDiscriminator() {
+		return FolderDiscriminator.class;
 	}
 
 	public Class<? extends IFormattingContextFactory> bindIFormattingContextFactory() {
@@ -114,6 +120,13 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 	 */
 	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
 		return PPResourceDescriptionManager.class;
+	}
+
+	/**
+	 * Binds the resource provider that filters unwanted directories
+	 */
+	public Class<? extends IResourceServiceProvider> bindIResourceServiceProvider() {
+		return PPResourceServiceProvider.class;
 	}
 
 	@Override
