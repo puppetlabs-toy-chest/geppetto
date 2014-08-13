@@ -15,8 +15,8 @@ import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
@@ -116,7 +116,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			options.setCheckReferences(true);
 			options.setFileType(FileType.PUPPET_ROOT);
 
-			options.setFileFilter(new ModuleUtils.DefaultFileFilter() {
+			options.setFileFilter(new FileUtils.DefaultFileFilter() {
 				private final IPath parent = new Path("/Users/henrik/gitrepos/stackhammer-demo/nodes/foo");
 
 				@Override

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,66 +20,60 @@ import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class FileUtils {
-	public static final Pattern DEFAULT_EXCLUDES = Pattern.compile("^[\\.~#].*$");
-
-	private static final Method Files_copy;
-
-	private static final Method Files_isSymbolicLink;
-
-	private static final Method Files_readSymbolicLink;
-
-	private static final Method File_toPath;
-
-	private static Object[] defaultCopyOptions;
-
-	static {
-		Method isSymbolicLink = null;
-		Method readSymbolicLink = null;
-		Method toPath = null;
-		Method copy = null;
-		Enum<?> option_COPY_ATTRIBUTES = null;
-		Enum<?> option_NOFOLLOW_LINKS = null;
-		Object[] dfltCopyOptions = null;
-		try {
-			Class<?> class_Files = Class.forName("java.nio.file.Files");
-			Class<?> class_Path = Class.forName("java.nio.file.Path");
-			Class<?> class_CopyOption = Class.forName("java.nio.file.CopyOption");
-			Class<?> class_LinkOption = Class.forName("java.nio.file.LinkOption");
-			Class<?> class_StandardCopyOption = Class.forName("java.nio.file.StandardCopyOption");
-			isSymbolicLink = class_Files.getMethod("isSymbolicLink", class_Path);
-			readSymbolicLink = class_Files.getMethod("readSymbolicLink", class_Path);
-			toPath = File.class.getMethod("toPath");
-
-			for(Object e : class_LinkOption.getEnumConstants()) {
-				Enum<?> en = (Enum<?>) e;
-				if("NOFOLLOW_LINKS".equals(en.name()))
-					option_NOFOLLOW_LINKS = en;
-
-			}
-
-			for(Object e : class_StandardCopyOption.getEnumConstants()) {
-				Enum<?> en = (Enum<?>) e;
-				if("COPY_ATTRIBUTES".equals(en.name()))
-					option_COPY_ATTRIBUTES = en;
-			}
-			dfltCopyOptions = (Object[]) Array.newInstance(class_CopyOption, 2);
-			dfltCopyOptions[0] = option_COPY_ATTRIBUTES;
-			dfltCopyOptions[1] = option_NOFOLLOW_LINKS;
-			copy = class_Files.getMethod("copy", class_Path, class_Path, Class.forName("[Ljava.nio.file.CopyOption;"));
+	public static class DefaultFileFilter implements FileFilter {
+		@Override
+		public boolean accept(File file) {
+			return !DEFAULT_EXCLUDES_PATTERN.matcher(file.getName()).matches();
 		}
-		catch(Exception e) {
+	}
+
+	public static void appendExcludePattern(String string, StringBuilder bld) {
+		int top = string.length();
+		for(int idx = 0; idx < top; ++idx) {
+			char c = string.charAt(idx);
+			switch(c) {
+				case '.':
+					bld.append('\\');
+					bld.append(c);
+					break;
+				case '*':
+					bld.append('.');
+					bld.append('*');
+					break;
+				case '?':
+					bld.append('.');
+					break;
+				default:
+					bld.append(c);
+			}
 		}
-		Files_isSymbolicLink = isSymbolicLink;
-		Files_readSymbolicLink = readSymbolicLink;
-		File_toPath = toPath;
-		Files_copy = copy;
-		defaultCopyOptions = dfltCopyOptions;
+	}
+
+	public static Pattern compileExcludePattern(List<String> excludes) {
+		if(excludes != null) {
+			int top = excludes.size();
+			if(top > 0) {
+				StringBuilder bld = new StringBuilder();
+				bld.append("^(?:");
+				appendExcludePattern(excludes.get(0), bld);
+				for(int idx = 1; idx < top; ++idx) {
+					bld.append('|');
+					appendExcludePattern(excludes.get(idx), bld);
+				}
+				bld.append(")$");
+				return Pattern.compile(bld.toString());
+			}
+		}
+		// Anything goes
+		return Pattern.compile(".*");
 	}
 
 	public static void cp(File source, File destDir, String fileName) throws IOException {
@@ -282,4 +276,97 @@ public class FileUtils {
 			cp(input, dest, name, entryTime);
 		}
 	}
+
+	private static final Method Files_copy;
+
+	private static final Method Files_isSymbolicLink;
+
+	private static final Method Files_readSymbolicLink;
+
+	private static final Method File_toPath;
+
+	private static Object[] defaultCopyOptions;
+
+	static {
+		Method isSymbolicLink = null;
+		Method readSymbolicLink = null;
+		Method toPath = null;
+		Method copy = null;
+		Enum<?> option_COPY_ATTRIBUTES = null;
+		Enum<?> option_NOFOLLOW_LINKS = null;
+		Object[] dfltCopyOptions = null;
+		try {
+			Class<?> class_Files = Class.forName("java.nio.file.Files");
+			Class<?> class_Path = Class.forName("java.nio.file.Path");
+			Class<?> class_CopyOption = Class.forName("java.nio.file.CopyOption");
+			Class<?> class_LinkOption = Class.forName("java.nio.file.LinkOption");
+			Class<?> class_StandardCopyOption = Class.forName("java.nio.file.StandardCopyOption");
+			isSymbolicLink = class_Files.getMethod("isSymbolicLink", class_Path);
+			readSymbolicLink = class_Files.getMethod("readSymbolicLink", class_Path);
+			toPath = File.class.getMethod("toPath");
+
+			for(Object e : class_LinkOption.getEnumConstants()) {
+				Enum<?> en = (Enum<?>) e;
+				if("NOFOLLOW_LINKS".equals(en.name()))
+					option_NOFOLLOW_LINKS = en;
+
+			}
+
+			for(Object e : class_StandardCopyOption.getEnumConstants()) {
+				Enum<?> en = (Enum<?>) e;
+				if("COPY_ATTRIBUTES".equals(en.name()))
+					option_COPY_ATTRIBUTES = en;
+			}
+			dfltCopyOptions = (Object[]) Array.newInstance(class_CopyOption, 2);
+			dfltCopyOptions[0] = option_COPY_ATTRIBUTES;
+			dfltCopyOptions[1] = option_NOFOLLOW_LINKS;
+			copy = class_Files.getMethod("copy", class_Path, class_Path, Class.forName("[Ljava.nio.file.CopyOption;"));
+		}
+		catch(Exception e) {
+		}
+		Files_isSymbolicLink = isSymbolicLink;
+		Files_readSymbolicLink = readSymbolicLink;
+		File_toPath = toPath;
+		Files_copy = copy;
+		defaultCopyOptions = dfltCopyOptions;
+	}
+
+	// @fmtOff
+	public static final String[] DEFAULT_EXCLUDES = {
+		"*~",
+		"#*#",
+		".#*",
+		"%*%",
+		"._*",
+		"CVS",
+		".cvsignore",
+		"SCCS",
+		"vssver.scc",
+		".svn",
+		".DS_Store",
+		".git",
+		".gitattributes",
+		".gitignore",
+		".gitmodules",
+		".hg",
+		".hgignore",
+		".hgsub",
+		".hgsubstate",
+		".hgtags",
+		".bzr",
+		".bzrignore",
+		".project",
+		".forge-releng",
+		".settings",
+		".classpath",
+		".bzrignore",
+		"pkg",
+		"coverage"
+	};
+	// @fmtOn
+
+	// Directory names that should not be checksummed or copied.
+	public static final Pattern DEFAULT_EXCLUDES_PATTERN = compileExcludePattern(Arrays.asList(DEFAULT_EXCLUDES));
+
+	public static final FileFilter DEFAULT_FILE_FILTER = new DefaultFileFilter();
 }

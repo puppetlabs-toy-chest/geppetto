@@ -134,7 +134,7 @@ public class ChecksumUtils {
 	public static Map<String, byte[]> loadChecksums(File moduleDir, File metadataJSON, FileFilter exclusionFilter)
 			throws IOException {
 		if(exclusionFilter == null)
-			exclusionFilter = ModuleUtils.DEFAULT_FILE_FILTER;
+			exclusionFilter = FileUtils.DEFAULT_FILE_FILTER;
 		Map<String, byte[]> checksums = new TreeMap<String, byte[]>();
 
 		MessageDigest md = getMessageDigest();

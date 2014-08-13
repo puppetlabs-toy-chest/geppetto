@@ -31,7 +31,6 @@ import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.forge.util.TarUtils;
 import com.puppetlabs.geppetto.semver.Version;
 
@@ -40,13 +39,13 @@ public class ForgeUtilTest extends AbstractForgeTest {
 	private static void assertExcludesMatch(String name) {
 		assertTrue(
 			"The name '" + name + "' does not match default excludes pattern",
-			ModuleUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
+			FileUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
 	}
 
 	private static void assertNotExcludesMatch(String name) {
 		assertFalse(
 			"The name '" + name + "' matches default excludes pattern",
-			ModuleUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
+			FileUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
 	}
 
 	private Forge fixture = null;
@@ -56,7 +55,7 @@ public class ForgeUtilTest extends AbstractForgeTest {
 		try {
 			File installFolder = getTestOutputFolder("apache-install-here", true);
 			File resultFolder = getTestOutputFolder("apache-build-result", true);
-			FileUtils.cpR(getTestData("puppetlabs-apache"), installFolder, ModuleUtils.DEFAULT_FILE_FILTER, false, true);
+			FileUtils.cpR(getTestData("puppetlabs-apache"), installFolder, FileUtils.DEFAULT_FILE_FILTER, false, true);
 			Metadata[] mdHandle = new Metadata[1];
 			fixture.build(installFolder, resultFolder, null, mdHandle, null, new Diagnostic());
 			Metadata md = mdHandle[0];
@@ -85,7 +84,7 @@ public class ForgeUtilTest extends AbstractForgeTest {
 		File installFolder = getTestOutputFolder("test-changes", true);
 		File resultFolder = getTestOutputFolder("test-changes-result", true);
 		File resultModuleRoot = new File(resultFolder, testModule);
-		FileUtils.cpR(getTestData(testModule), installFolder, ModuleUtils.DEFAULT_FILE_FILTER, false, true);
+		FileUtils.cpR(getTestData(testModule), installFolder, FileUtils.DEFAULT_FILE_FILTER, false, true);
 		fixture.build(installFolder, resultFolder, null, null, null, new Diagnostic());
 		Collection<File> changes = fixture.changes(installFolder, null);
 		assertTrue("Unexpected changes", changes.isEmpty());

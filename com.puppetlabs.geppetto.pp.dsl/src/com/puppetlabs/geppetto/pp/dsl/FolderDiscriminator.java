@@ -10,7 +10,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Singleton;
-import com.puppetlabs.geppetto.forge.util.ModuleUtils;
+import com.puppetlabs.geppetto.common.os.FileUtils;
 
 @Singleton
 public class FolderDiscriminator implements IFolderDiscriminator {
@@ -20,7 +20,7 @@ public class FolderDiscriminator implements IFolderDiscriminator {
 
 	protected synchronized Pattern getExcludePattern() {
 		if(excludePattern == null)
-			excludePattern = ModuleUtils.compileExcludePattern(Lists.newArrayList(getExcludePatterns()));
+			excludePattern = FileUtils.compileExcludePattern(Lists.newArrayList(getExcludePatterns()));
 		return excludePattern;
 	}
 
@@ -30,7 +30,7 @@ public class FolderDiscriminator implements IFolderDiscriminator {
 	 * @return Pattern used when excluding
 	 */
 	protected Set<String> getExcludePatterns() {
-		Set<String> patterns = Sets.newLinkedHashSet(Lists.newArrayList(ModuleUtils.DEFAULT_EXCLUDES));
+		Set<String> patterns = Sets.newLinkedHashSet(Lists.newArrayList(FileUtils.DEFAULT_EXCLUDES));
 		patterns.add("spec");
 		return patterns;
 	}

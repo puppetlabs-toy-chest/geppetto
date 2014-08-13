@@ -15,7 +15,7 @@ import java.io.FileFilter;
 
 import org.eclipse.emf.common.util.URI;
 
-import com.puppetlabs.geppetto.forge.util.ModuleUtils;
+import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
@@ -102,7 +102,7 @@ public class ValidationOptions {
 	 */
 	public FileFilter getFileFilter() {
 		if(fileFilter == null)
-			fileFilter = ModuleUtils.DEFAULT_FILE_FILTER;
+			fileFilter = FileUtils.DEFAULT_FILE_FILTER;
 		return fileFilter;
 	}
 

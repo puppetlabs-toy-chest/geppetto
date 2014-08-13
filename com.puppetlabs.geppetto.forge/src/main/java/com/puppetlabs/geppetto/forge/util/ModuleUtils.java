@@ -20,10 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
-import java.util.regex.Pattern;
 
 import org.jrubyparser.SourcePosition;
 import org.jrubyparser.lexer.SyntaxException;
@@ -42,13 +39,6 @@ import com.puppetlabs.geppetto.semver.VersionRange;
  * Utility class with helper methods for Forge Module related tasks.
  */
 public class ModuleUtils {
-	public static class DefaultFileFilter implements FileFilter {
-		@Override
-		public boolean accept(File file) {
-			return !DEFAULT_EXCLUDES_PATTERN.matcher(file.getName()).matches();
-		}
-	}
-
 	private static void addKeyValueNode(PrintWriter out, String key, String... strs) throws IOException {
 		if(strs.length == 0)
 			return;
@@ -72,28 +62,6 @@ public class ModuleUtils {
 		out.println();
 	}
 
-	private static void appendExcludePattern(String string, StringBuilder bld) {
-		int top = string.length();
-		for(int idx = 0; idx < top; ++idx) {
-			char c = string.charAt(idx);
-			switch(c) {
-				case '.':
-					bld.append('\\');
-					bld.append(c);
-					break;
-				case '*':
-					bld.append('.');
-					bld.append('*');
-					break;
-				case '?':
-					bld.append('.');
-					break;
-				default:
-					bld.append(c);
-			}
-		}
-	}
-
 	public static void buildFileName(ModuleName qname, Version version, StringBuilder bld) {
 		qname.toString(bld);
 		bld.append('-');
@@ -103,25 +71,6 @@ public class ModuleUtils {
 	public static void buildFileNameWithExtension(ModuleName qname, Version version, StringBuilder bld) {
 		buildFileName(qname, version, bld);
 		bld.append(".tar.gz");
-	}
-
-	public static Pattern compileExcludePattern(List<String> excludes) {
-		if(excludes != null) {
-			int top = excludes.size();
-			if(top > 0) {
-				StringBuilder bld = new StringBuilder();
-				bld.append("^(?:");
-				appendExcludePattern(excludes.get(0), bld);
-				for(int idx = 1; idx < top; ++idx) {
-					bld.append('|');
-					appendExcludePattern(excludes.get(idx), bld);
-				}
-				bld.append(")$");
-				return Pattern.compile(bld.toString());
-			}
-		}
-		// Anything goes
-		return Pattern.compile(".*");
 	}
 
 	/**
@@ -325,44 +274,5 @@ public class ModuleUtils {
 		}
 		return bld.toString();
 	}
-
-	// @fmtOff
-	public static final String[] DEFAULT_EXCLUDES = {
-		"*~",
-		"#*#",
-		".#*",
-		"%*%",
-		"._*",
-		"CVS",
-		".cvsignore",
-		"SCCS",
-		"vssver.scc",
-		".svn",
-		".DS_Store",
-		".git",
-		".gitattributes",
-		".gitignore",
-		".gitmodules",
-		".hg",
-		".hgignore",
-		".hgsub",
-		".hgsubstate",
-		".hgtags",
-		".bzr",
-		".bzrignore",
-		".project",
-		".forge-releng",
-		".settings",
-		".classpath",
-		".bzrignore",
-		"pkg",
-		"coverage"
-	};
-	// @fmtOn
-
-	// Directory names that should not be checksummed or copied.
-	public static final Pattern DEFAULT_EXCLUDES_PATTERN = compileExcludePattern(Arrays.asList(DEFAULT_EXCLUDES));
-
-	public static final FileFilter DEFAULT_FILE_FILTER = new DefaultFileFilter();
 
 }

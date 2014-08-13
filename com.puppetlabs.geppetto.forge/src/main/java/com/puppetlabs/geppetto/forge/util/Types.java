@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.forge.model.NamedTypeItem;
 import com.puppetlabs.geppetto.forge.model.Type;
 
@@ -264,7 +265,7 @@ public class Types {
 
 	public static List<Type> loadTypes(File puppetDir, FileFilter exclusionFilter) throws IOException {
 		if(exclusionFilter == null)
-			exclusionFilter = ModuleUtils.DEFAULT_FILE_FILTER;
+			exclusionFilter = FileUtils.DEFAULT_FILE_FILTER;
 		File[] typeFiles = new File(puppetDir, "type").listFiles(exclusionFilter);
 		if(typeFiles == null || typeFiles.length == 0)
 			return Collections.emptyList();
