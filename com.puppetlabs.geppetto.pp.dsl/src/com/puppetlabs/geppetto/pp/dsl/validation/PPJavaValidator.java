@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -1054,20 +1055,25 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkLiteralNameOrReference(LiteralNameOrReference o) {
-		if(isKEYWORD(o.getValue())) {
+		final String varName = o.getValue();
+		if(isKEYWORD(varName)) {
 			acceptor.acceptError(
 				"Reserved word.", o, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, INSIGNIFICANT_INDEX,
 				IPPDiagnostics.ISSUE__RESERVED_WORD);
 			return;
 		}
 
-		if(isCLASSNAME_OR_REFERENCE(o.getValue()))
+		if(EcoreUtil2.getContainerOfType(o, ExpressionTE.class) != null) {
+			// Interpolated name. Treat a literal name expression e.g. "${literalName}" as if it was "${$literalname}"
+			checkVariableName(o, '$' + varName);
 			return;
-		acceptor.acceptError(
-			"Must be a name or type (all segments must start with same case).", o,
-			PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, INSIGNIFICANT_INDEX,
-			IPPDiagnostics.ISSUE__NOT_NAME_OR_REF, o.getValue());
+		}
 
+		if(!isCLASSNAME_OR_REFERENCE(varName))
+			acceptor.acceptError(
+				"Must be a name or type (all segments must start with same case).", o,
+				PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__NOT_NAME_OR_REF, o.getValue());
 	}
 
 	@Check
@@ -1708,7 +1714,11 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkVariableExpression(VariableExpression o) {
-		if(!isVARIABLE(o.getVarName()))
+		checkVariableName(o, o.getVarName());
+	}
+
+	private void checkVariableName(EObject o, String varName) {
+		if(!isVARIABLE(varName))
 			acceptor.acceptError(
 				"Expected to comply with Variable rule", o, PPPackage.Literals.VARIABLE_EXPRESSION__VAR_NAME,
 				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_VARNAME);
