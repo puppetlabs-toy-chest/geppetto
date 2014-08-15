@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,6 +26,7 @@ import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
 import org.junit.Before;
@@ -33,7 +34,7 @@ import org.junit.Test;
 
 /**
  * Tests Literals
- * 
+ *
  */
 public class TestDoubleQuotedString extends AbstractPuppetTests {
 
@@ -169,7 +170,7 @@ public class TestDoubleQuotedString extends AbstractPuppetTests {
 	 * Due to issues in the formatter, this test may hit a bug that inserts whitespace
 	 * between quotes and string - no workaround found - needs to be fixed in Xtext formatter.
 	 * Also see {@link #test_Serialize_DoubleQuotedString_2()}
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -194,7 +195,7 @@ public class TestDoubleQuotedString extends AbstractPuppetTests {
 	 * The bug seems to not appear when expression is in an expression that has visible tokens
 	 * other than what is parsed... (In this test, the string is assigned to a variable).
 	 * Also see {@link #test_Serialize_DoubleQuotedString_1()}
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -213,7 +214,7 @@ public class TestDoubleQuotedString extends AbstractPuppetTests {
 
 	/**
 	 * Formatter seems to not switch back to non hidden state interpolation.
-	 * 
+	 *
 	 */
 	@Test
 	public void test_Serialize_DqStringInterpolation() throws Exception {
@@ -316,6 +317,13 @@ public class TestDoubleQuotedString extends AbstractPuppetTests {
 		te.setText("\\p"); // i.e. '\p'
 		tester.validator().checkVerbatimTextExpression(te);
 		tester.diagnose().assertWarning(IPPDiagnostics.ISSUE__UNRECOGNIZED_ESCAPE);
+	}
+
+	@Test
+	public void test_Validate_DqInterpolation_DollarUnderscoreVar() throws Exception {
+		String code = "$_lib = 'some/path'\n$x = \"_lib = ${_lib}\"";
+		Resource r = loadAndLinkSingleResource(code);
+		tester.validate(r.getContents().get(0)).assertOK();
 	}
 
 }
