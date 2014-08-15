@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,7 +15,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
@@ -28,24 +30,19 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 
-import com.google.common.collect.Lists;
+import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
 
-public class ToggleNatureAction implements IObjectActionDelegate {
+public class ToggleNatureAction extends AbstractHandler {
 	private static class ToggleJob extends Job {
-		final private boolean turnOn;
-
 		final private List<IProject> projectsToToggle;
 
-		public ToggleJob(boolean turnOn, List<IProject> projectsToToggle) {
+		public ToggleJob(List<IProject> projectsToToggle) {
 			super("Building Puppet Projects");
-			this.turnOn = turnOn;
 			this.projectsToToggle = projectsToToggle;
 			setPriority(Job.BUILD);
 		}
@@ -64,7 +61,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 					@Override
 					public void run(IProgressMonitor monitor) throws CoreException {
 						for(IProject projectToToggle : projectsToToggle)
-							toggleNature(projectToToggle, turnOn);
+							toggleNature(projectToToggle);
 						workspace.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
 					}
 				}, monitor);
@@ -75,8 +72,6 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 			}
 		}
 	}
-
-	private final static Logger log = Logger.getLogger(ToggleNatureAction.class);
 
 	private static void addNature(IProject project) {
 		// Also add XtextNature if not already set
@@ -101,7 +96,6 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 		catch(CoreException e) {
 			log.error("Failed adding Puppet Project Nature", e);
 		}
-
 	}
 
 	protected static boolean hasNature(IProject project) {
@@ -138,62 +132,25 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 			}
 		}
 		catch(CoreException e) {
-			log.error("Failed adding Puppet Project Nature", e);
+			log.error("Failed removing Puppet Project Nature", e);
 		}
-
 	}
 
-	protected static void toggleNature(IProject project, boolean on) {
-		if(hasNature(project)) {
-			if(!on)
-				removeNature(project);
-		}
-		else if(on)
+	protected static void toggleNature(IProject project) {
+		if(hasNature(project))
+			removeNature(project);
+		else
 			addNature(project);
-
 	}
 
-	private ISelection selection;
+	private final static Logger log = Logger.getLogger(ToggleNatureAction.class);
 
-	private boolean turnOn;
-
-	/**
-	 * Returns selected accessible projects
-	 * 
-	 * @param selection
-	 * @return
-	 */
-	@SuppressWarnings("rawtypes")
-	private List<IProject> getSelectedProjects(ISelection selection) {
-		List<IProject> projects = Lists.newArrayList();
-		if(selection instanceof IStructuredSelection) {
-			for(Iterator it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
-				Object element = it.next();
-				IProject project = null;
-				if(element instanceof IProject) {
-					project = (IProject) element;
-				}
-				else if(element instanceof IAdaptable) {
-					project = (IProject) ((IAdaptable) element).getAdapter(IProject.class);
-				}
-				if(project != null && project.isAccessible()) {
-					projects.add(project);
-				}
-			}
-		}
-		return projects;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
-	 */
-	@SuppressWarnings("rawtypes")
-	public void run(IAction action) {
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		ISelection selection = HandlerUtil.getCurrentSelection(event);
 		if(selection instanceof IStructuredSelection) {
 			List<IProject> projectsToToggle = new ArrayList<IProject>();
-			for(Iterator it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
+			for(Iterator<?> it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
 				Object element = it.next();
 				IProject project = null;
 				if(element instanceof IProject) {
@@ -207,64 +164,8 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 				}
 			}
 			if(!projectsToToggle.isEmpty())
-				new ToggleJob(turnOn, projectsToToggle).schedule();
+				new ToggleJob(projectsToToggle).schedule();
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction,
-	 * org.eclipse.jface.viewers.ISelection)
-	 */
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = selection;
-		List<IProject> projects = getSelectedProjects(selection);
-
-		// enable the action if at least one project is selected
-		action.setEnabled(projects.size() != 0);
-		if(projects.size() == 0) {
-			// Set a default text (for disabled state)
-			action.setText("Toggle Puppet Project Nature");
-		}
-		else {
-			// If one of the projects do not have the nature, then the action is a
-			// set nature on all
-			this.turnOn = false;
-			for(IProject p : projects)
-				if(!hasNature(p)) {
-					turnOn = true;
-					break;
-				}
-			if(turnOn)
-				action.setText("Add Puppet Project Nature");
-			else
-				action.setText("Remove Puppet Project Nature");
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IObjectActionDelegate#setActivePart(org.eclipse.jface.action.IAction,
-	 * org.eclipse.ui.IWorkbenchPart)
-	 */
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
-
-	/**
-	 * Toggles nature on a project
-	 * 
-	 * @param project
-	 *            to have sample nature added or removed
-	 */
-	protected void toggleNature(IProject project) {
-
-		if(hasNature(project)) {
-			if(!turnOn)
-				removeNature(project);
-		}
-		else if(turnOn)
-			addNature(project);
+		return null;
 	}
 }

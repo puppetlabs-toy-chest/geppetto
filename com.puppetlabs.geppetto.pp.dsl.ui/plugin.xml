@@ -354,6 +354,34 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.ui.projectConfigure">
+			<command commandId="com.puppetlabs.geppetto.pp.dsl.ui.addRemoveNatureAction" style="push" label="Remove Puppet Nature">
+				<visibleWhen checkEnabled="false">
+					<with variable="selection">
+						<count value="1"/>
+						<iterate>
+							<adapt type="org.eclipse.core.resources.IProject">
+								<test value="com.puppetlabs.geppetto.pp.dsl.ui.puppetNature" property="org.eclipse.core.resources.projectNature"/>
+							</adapt>
+						</iterate>
+					</with>
+				</visibleWhen>
+			</command>
+			<command commandId="com.puppetlabs.geppetto.pp.dsl.ui.addRemoveNatureAction" style="push" label="Add Puppet Nature">
+				<visibleWhen checkEnabled="false">
+					<with variable="selection">
+						<count value="1"/>
+						<iterate>
+							<adapt type="org.eclipse.core.resources.IProject">
+								<not>
+									<test value="com.puppetlabs.geppetto.pp.dsl.ui.puppetNature" property="org.eclipse.core.resources.projectNature"/>
+								</not>
+							</adapt>
+						</iterate>
+					</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
 	</extension>
    <!-- quickfix marker resolution generator -->
    <extension
@@ -402,6 +430,15 @@
           </run>
        </runtime>
     </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            name="Add/Remove Puppet Nature"
+            defaultHandler="com.puppetlabs.geppetto.pp.dsl.ui.builder.ToggleNatureAction"
+            categoryId="org.eclipse.ui.category.project"
+            id="com.puppetlabs.geppetto.pp.dsl.ui.addRemoveNatureAction">
+      </command>
+   </extension>
     <extension
           point="org.eclipse.xtext.extension_resourceServiceProvider">
        <resourceServiceProvider
