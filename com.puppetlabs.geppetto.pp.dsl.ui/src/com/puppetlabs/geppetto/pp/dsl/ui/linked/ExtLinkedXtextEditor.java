@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -13,7 +13,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.linked;
 
 import java.io.File;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.FormatterGeneralPreferences;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.filesystem.URIUtil;
@@ -54,20 +53,21 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.FormatterGeneralPreferences;
 
 /**
  * This class extends the standard XtextEditor to make it capable of
  * opening and saving external files by managing them as linked resources.
- * 
+ *
  * This implementation also supports temporary files than when saved will change to
  * a SaveAs operation (also see {@link TmpFileStoreEditorInput}).
- * 
+ *
  * An editor customizer can also be bound and it will receive calls to manage the content
  * of the context menu (see {@link IExtXtextEditorCustomizer}).
- * 
+ *
  * Also see {@link ExtLinkedXtextEditorMatchingStrategy} which is required to ensure multiple
  * editors are not opened for the same file.
- * 
+ *
  */
 public class ExtLinkedXtextEditor extends XtextEditor {
 
@@ -136,7 +136,7 @@ public class ExtLinkedXtextEditor extends XtextEditor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.XtextEditor#doSave(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
@@ -164,19 +164,19 @@ public class ExtLinkedXtextEditor extends XtextEditor {
 			}
 		}
 		rememberSelection();
-		saveActions.perform(getResource(), getDocument());
+		saveActions.perform(getSourceViewerConfiguration(), getSourceViewer(), getResource(), getDocument());
 		restoreSelection();
 		super.doSave(progressMonitor);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.XtextEditor#doSaveAs()
 	 */
 	@Override
 	public void doSaveAs() {
-		saveActions.perform(getResource(), getDocument());
+		saveActions.perform(getSourceViewerConfiguration(), getSourceViewer(), getResource(), getDocument());
 		super.doSaveAs();
 		// make sure the outline is fully refreshed
 		IContentOutlinePage outlinePage = (IContentOutlinePage) getAdapter(IContentOutlinePage.class);
@@ -186,8 +186,8 @@ public class ExtLinkedXtextEditor extends XtextEditor {
 
 	/**
 	 * Allows customization of the editor title.
-	 * 
-	 * 
+	 *
+	 *
 	 * @see org.eclipse.xtext.ui.editor.XtextEditor#doSetInput(org.eclipse.ui.IEditorInput)
 	 */
 	@Override
@@ -206,7 +206,7 @@ public class ExtLinkedXtextEditor extends XtextEditor {
 
 	/**
 	 * Overridden to allow customization of editor context menu via injected handler
-	 * 
+	 *
 	 * @see org.eclipse.ui.editors.text.TextEditor#editorContextMenuAboutToShow(org.eclipse.jface.action.IMenuManager)
 	 */
 	@Override
@@ -321,7 +321,7 @@ public class ExtLinkedXtextEditor extends XtextEditor {
 
 	/*
 	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#isTabConversionEnabled()
-	 * 
+	 *
 	 * @since 3.3
 	 */
 	@Override

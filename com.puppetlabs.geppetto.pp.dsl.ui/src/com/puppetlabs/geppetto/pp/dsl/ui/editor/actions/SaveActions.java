@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -13,31 +13,26 @@ package com.puppetlabs.geppetto.pp.dsl.ui.editor.actions;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.linked.ISaveActions;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
-import com.puppetlabs.geppetto.pp.dsl.validation.PPValidationUtils;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory.FormattingOption;
-import com.puppetlabs.xtext.resource.ResourceAccessScope;
-import com.puppetlabs.xtext.serializer.DomBasedSerializer;
-import com.puppetlabs.xtext.ui.editor.formatting.DummyReadOnly;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
+import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.ReplaceRegion;
-import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import com.puppetlabs.geppetto.pp.dsl.ui.linked.ISaveActions;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
+import com.puppetlabs.geppetto.pp.dsl.validation.PPValidationUtils;
+import com.puppetlabs.xtext.ui.editor.formatting.DummyReadOnly;
 
 /**
  * Implementation of save actions
- * 
+ *
  */
 public class SaveActions implements ISaveActions {
 
@@ -68,65 +63,33 @@ public class SaveActions implements ISaveActions {
 	private PPPreferencesHelper preferenceHelper;
 
 	@Inject
-	private ResourceAccessScope resourceScope;
+	private IContentFormatterFactory contentFormatterFactory;
 
-	@Inject
-	private Provider<IDomModelFormatter> formatterProvider;
-
-	@Inject
-	private Provider<DomBasedSerializer> serializerProvider;
-
-	@Inject
-	private Provider<IFormattingContextFactory> formattingContextProvider;
-
-	protected IDomModelFormatter getFormatter() {
-		// get via injector, as formatter is resource dependent
-		// return injector.getInstance(IDomModelFormatter.class);
-		return formatterProvider.get();
-	}
-
-	protected IFormattingContextFactory getFormattingContextFactory() {
-		// get via injector, as formatting context may be resource dependent
-		// return injector.getInstance(IFormattingContextFactory.class);
-		return formattingContextProvider.get();
-	}
-
-	protected DomBasedSerializer getSerializer() {
-		// get via injector, as formatting context as serialization uses the formatter
-		// which is resource dependent
-		// return injector.getInstance(DomBasedSerializer.class);
-		return serializerProvider.get();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.puppetlabs.geppetto.pp.dsl.ui.linked.ISaveActions#perform(org.eclipse.core.resources.IResource,
-	 * org.eclipse.xtext.ui.editor.model.IXtextDocument)
-	 */
 	@Override
-	public void perform(IResource r, final IXtextDocument document) {
+	public void perform(SourceViewerConfiguration viewerConfig, ISourceViewer viewer, IResource r,
+			final IXtextDocument document) {
 		final boolean ensureNl = preferenceHelper.getSaveActionEnsureEndsWithNewLine(r);
 		final boolean replaceFunkySpace = preferenceHelper.getSaveActionReplaceFunkySpaces(r);
-		final boolean trimLines = preferenceHelper.getSaveActionTrimLines(r);
 		final boolean fullFormat = preferenceHelper.getSaveActionFormat(r);
+		final boolean trimLines = preferenceHelper.getSaveActionTrimLines(r);
 
-		if(ensureNl || replaceFunkySpace || trimLines || fullFormat) {
-			// Xtext issue, a dummy read only is needed before all modify operations.
-			document.readOnly(DummyReadOnly.Instance);
+		if(!(ensureNl || replaceFunkySpace || trimLines || fullFormat))
+			return;
 
+		// Xtext issue, a dummy read only is needed before all modify operations.
+		document.readOnly(DummyReadOnly.Instance);
+
+		if(ensureNl || replaceFunkySpace || trimLines)
 			document.modify(new IUnitOfWork<ReplaceRegion, XtextResource>() {
-
 				@Override
 				public ReplaceRegion exec(XtextResource state) throws Exception {
 					// No action if there are hard syntax errors
 					if(!PPValidationUtils.hasSyntaxErrors(state) && process(state))
 						return new ReplaceRegion(0, document.getLength(), document.get());
 					return null;
-					// return new ReplaceRegion(0, 0, ""); // nothing changed
 				}
 
-				public boolean process(XtextResource state) throws Exception {
+				private boolean process(XtextResource state) throws Exception {
 					// Do any semantic changes here
 					boolean changed = false;
 					String content = document.get();
@@ -180,33 +143,14 @@ public class SaveActions implements ISaveActions {
 							}
 						}
 					}
-					if(fullFormat) {
-						// Most of this, and the required methods is a copy of ContentFormatterFactory - which
-						// runs this in a separate UnitOfWork. TODO: Can be combined.
-						//
-						content = document.get();
-						ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
-						try {
-							resourceScope.enter(state);
-							// EObject context = getContext(state.getContents().get(0));
-							IDomNode root = getSerializer().serializeToDom(state.getContents().get(0), false);
-							org.eclipse.xtext.util.ReplaceRegion r = getFormatter().format(
-								root, new TextRegion(0, document.getLength()), //
-								getFormattingContextFactory().create(state, FormattingOption.Format), errors);
-							if(!content.equals(r.getText())) {
-								document.replace(0, document.getLength(), r.getText());
-								changed = true;
-							}
-						}
-						finally {
-							resourceScope.exit();
-						}
-
-					}
 					return changed; // no change
 				}
 			});
-		}
 
+		if(fullFormat)
+			// Needs to be executed in a separate modify operation since it uses the state rather than
+			// the document itself. The state is modified by the document.modify operation.
+			contentFormatterFactory.createConfiguredFormatter(viewerConfig, viewer).format(
+				document, new Region(0, document.getLength()));
 	}
 }
