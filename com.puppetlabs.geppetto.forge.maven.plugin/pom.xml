@@ -196,12 +196,11 @@
 							<goal>integration-test</goal>
 							<goal>verify</goal>
 						</goals>
-						<configuration>
-							<skipTests>${skipITs}</skipTests>
-						</configuration>
 					</execution>
 				</executions>
 				<configuration>
+					<skipITs>${skipITs}</skipITs>
+					<skipTests>${skipITs}</skipTests>
 					<systemProperties>
 						<property>
 							<name>forge.login</name>
