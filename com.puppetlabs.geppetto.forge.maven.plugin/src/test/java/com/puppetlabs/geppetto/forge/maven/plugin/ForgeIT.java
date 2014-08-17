@@ -95,7 +95,9 @@ public class ForgeIT {
 
 	@BeforeClass
 	public static void init() throws IOException {
+		TEST_POM_DIR = new File(new File(System.getProperty("basedir", ".")), "target/test-projects/publisher");
 		FileUtils.rmR(new File(TEST_POM_DIR, "target"));
+
 		testModuleA = new VersionedName("geppetto", generateModuleName(), "1.0.0");
 		testModuleB = new VersionedName("geppetto", generateModuleName(), "1.0.0");
 		testModuleC = new VersionedName("geppetto", generateModuleName(), "1.0.0");
@@ -105,7 +107,6 @@ public class ForgeIT {
 		createModule(TEST_MODULES_DIR, testModuleB, testModuleC);
 		createModule(TEST_MODULES_DIR, testModuleC);
 
-		TEST_POM_DIR = new File(new File(System.getProperty("basedir", ".")), "target/test-projects/publisher");
 	}
 
 	static File TEST_POM_DIR;
