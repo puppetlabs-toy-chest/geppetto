@@ -79,13 +79,4 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.ui.net"/>
       <import plugin="org.eclipse.e4.ui.css.swt.theme"/>
    </requires>
-
-   <plugin
-         id="org.eclipse.xtext.logging"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
 </feature>

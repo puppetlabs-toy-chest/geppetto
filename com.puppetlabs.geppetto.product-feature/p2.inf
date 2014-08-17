@@ -4,6 +4,12 @@ properties.0.value=%providerName
 properties.1.name=df_LT.providerName
 properties.1.value=Puppet Labs, Inc.
 
+# We list fragment here rather than as a plugin in entry in feature.xml to avoid
+# explicit version requirement
+requires.0.namespace=org.eclipse.equinox.p2.iu
+requires.0.name=org.eclipse.xtext.logging
+requires.0.range=1.2.0
+
 instructions.configure=\
 	org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(type:0,location:http${#58}//geppetto-updates.puppetlabs.com/4.x,name:Geppetto Updates);\
 	org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(type:1,location:http${#58}//geppetto-updates.puppetlabs.com/4.x,name:Geppetto Updates);\
