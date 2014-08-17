@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,15 +14,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 import com.puppetlabs.xtext.dommodel.DomModelUtils;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-
 /**
  * A default implementation of IDomNode that has the capacity to hold AbstractDomNode children.
- * 
+ *
  */
 public class CompositeDomNode extends BaseDomNode {
 	// public class ListBidiIterator extends UnmodifiableIterator<IDomNode> implements BidiIterator<IDomNode> {
@@ -136,7 +135,7 @@ public class CompositeDomNode extends BaseDomNode {
 			if(DomModelUtils.isWhitespace(d))
 				whitespaceCount++;
 			if(DomModelUtils.isComment(d))
-				whitespaceCount++;
+				commentCount++;
 		}
 		setLength(length);
 		int childCount = children.size();
@@ -177,7 +176,7 @@ public class CompositeDomNode extends BaseDomNode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.xt.dommodel.impl.AbstractDomNode#hasChildren()
 	 */
 	@Override
@@ -187,7 +186,7 @@ public class CompositeDomNode extends BaseDomNode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.xt.dommodel.impl.AbstractDomNode#isLeaf()
 	 */
 	@Override
