@@ -32,4 +32,11 @@ public interface IFolderDiscriminator {
 	 * @return <code>true</code> if the URI path contains a folder that is excluded by the pattern
 	 */
 	boolean isExcluded(URI uri);
+
+	/**
+	 * @param segment
+	 *            The segment to check
+	 * @return <code>true</code> if the given segment is matched by the exclusion expressions
+	 */
+	boolean isSegmentExcluded(String segment);
 }

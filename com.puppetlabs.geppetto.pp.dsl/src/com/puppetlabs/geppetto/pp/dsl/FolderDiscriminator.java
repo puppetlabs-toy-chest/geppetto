@@ -59,20 +59,27 @@ public class FolderDiscriminator implements IFolderDiscriminator {
 			// We don't exclude files, just folders
 			--t;
 
+		for(int i = 0; i < t; ++i)
+			if(isMatch(segments[i]))
+				return true;
+		return false;
+	}
+
+	private boolean isMatch(String segment) {
 		// The exclude pattern may be a fairly long list of ored expressions and this method
 		// is called numerous times during a build. So instead of just matching using the
 		// pattern each time we also keep a map of known matches.
-		for(int i = 0; i < t; ++i) {
-			String segment = segments[i];
-			Boolean excluded = matchCache.get(segment);
-			if(excluded == null) {
-				excluded = Boolean.valueOf(getExcludePattern().matcher(segment).matches());
-				matchCache.put(segment, excluded);
-			}
-			if(excluded.booleanValue())
-				return true;
+		Boolean excluded = matchCache.get(segment);
+		if(excluded == null) {
+			excluded = Boolean.valueOf(getExcludePattern().matcher(segment).matches());
+			matchCache.put(segment, excluded);
 		}
-		return false;
+		return excluded.booleanValue();
+	}
+
+	@Override
+	public synchronized boolean isSegmentExcluded(String segment) {
+		return isMatch(segment);
 	}
 
 	protected synchronized void reset() {
