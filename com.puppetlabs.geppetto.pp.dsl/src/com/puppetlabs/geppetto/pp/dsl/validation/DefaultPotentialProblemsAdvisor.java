@@ -52,6 +52,11 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	}
 
 	@Override
+	public ValidationPreference importIsDeprecated() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
 	public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
 		return ValidationPreference.WARNING;
 	}

@@ -79,4 +79,6 @@ public class PPPreferenceConstants {
 
 	public static final String PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME = "validityAssertedAtRuntime";
 
+	public static final String PROBLEM_IMPORT_IS_DEPRECATED = "importIsDeprecated";
+
 }

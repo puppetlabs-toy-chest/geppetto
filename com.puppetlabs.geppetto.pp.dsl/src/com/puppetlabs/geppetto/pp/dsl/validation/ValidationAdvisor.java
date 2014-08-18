@@ -56,6 +56,11 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference importIsDeprecated() {
+			return problemsAdvisor.importIsDeprecated();
+		}
+
+		@Override
 		public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
 			return problemsAdvisor.interpolatedNonBraceEnclosedHyphens();
 		}
@@ -378,8 +383,14 @@ public class ValidationAdvisor {
 		}
 	}
 
-	public static class ValidationAdvisor_3_6_future extends ValidationAdvisor_3_6 implements IValidationAdvisor {
-		protected ValidationAdvisor_3_6_future(IPotentialProblemsAdvisor problemsAdvisor) {
+	public static class ValidationAdvisor_3_7 extends ValidationAdvisor_3_6 implements IValidationAdvisor {
+		protected ValidationAdvisor_3_7(IPotentialProblemsAdvisor problemsAdvisor) {
+			super(problemsAdvisor);
+		}
+	}
+
+	public static class ValidationAdvisor_4_0 extends ValidationAdvisor_3_7 implements IValidationAdvisor {
+		protected ValidationAdvisor_4_0(IPotentialProblemsAdvisor problemsAdvisor) {
 			super(problemsAdvisor);
 		}
 
@@ -407,5 +418,11 @@ public class ValidationAdvisor {
 		public boolean allowUnlessElse() {
 			return true;
 		}
+
+		@Override
+		public ValidationPreference importIsDeprecated() {
+			return ValidationPreference.ERROR;
+		}
+
 	}
 }

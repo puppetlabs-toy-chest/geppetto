@@ -223,4 +223,6 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__VALIDITY_ASSERTED_AT_RUNTIME = ISSUE_PREFIX + "ValidityAssertedAtRuntime";
 
+	public static final String ISSUE__IMPORT_IS_DEPRECATED = ISSUE_PREFIX + "ImportIsDeprecated";
+
 }

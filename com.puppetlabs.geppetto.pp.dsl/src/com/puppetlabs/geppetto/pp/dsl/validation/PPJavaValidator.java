@@ -1006,6 +1006,11 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkImportExpression(ImportExpression o) {
+		if(advisor().importIsDeprecated() != ValidationPreference.IGNORE)
+			warningOrError(
+				acceptor, advisor().importIsDeprecated(), "Import is deprecated in Puppet version >= 3.5.", o,
+				ISSUE__IMPORT_IS_DEPRECATED);
+
 		if(o.getValues().size() <= 0)
 			acceptor.acceptError(
 				"Empty import - should be followed by at least one string.", o,
