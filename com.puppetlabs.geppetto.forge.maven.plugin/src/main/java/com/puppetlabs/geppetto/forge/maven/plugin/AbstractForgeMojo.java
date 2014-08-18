@@ -42,10 +42,10 @@ import com.google.gson.JsonParseException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Metadata;
-import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 import com.puppetlabs.geppetto.validation.ValidationService;
 import com.puppetlabs.geppetto.validation.impl.ValidationModule;
 
@@ -200,7 +200,7 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 		return new FileFilter() {
 			@Override
 			public boolean accept(File file) {
-				return ModuleUtils.DEFAULT_FILE_FILTER.accept(file) && !isParentOrEqual(getBuildDir(), file);
+				return FileUtils.DEFAULT_FILE_FILTER.accept(file) && !isParentOrEqual(getBuildDir(), file);
 			}
 		};
 	}
