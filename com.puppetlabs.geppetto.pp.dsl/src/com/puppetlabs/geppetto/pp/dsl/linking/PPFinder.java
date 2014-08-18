@@ -45,6 +45,7 @@ import com.puppetlabs.geppetto.pp.AssignmentExpression;
 import com.puppetlabs.geppetto.pp.BinaryExpression;
 import com.puppetlabs.geppetto.pp.Definition;
 import com.puppetlabs.geppetto.pp.DefinitionArgument;
+import com.puppetlabs.geppetto.pp.DefinitionArgumentList;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.HostClassDefinition;
 import com.puppetlabs.geppetto.pp.Lambda;
@@ -294,6 +295,24 @@ public class PPFinder {
 
 	}
 
+	/**
+	 * Find an argument declaration with the given name in the list.
+	 *
+	 * @param args
+	 *            The argument list
+	 * @param name
+	 *            The name to search for
+	 * @return A description of the found variable or <code>null</code> if it could not be found.
+	 */
+	private IEObjectDescription findDefinitionArgument(DefinitionArgumentList args, String name) {
+		for(DefinitionArgument arg : args.getArguments()) {
+			String argName = arg.getArgName();
+			if(argName.regionMatches(1, name, 0, name.length()))
+				return EObjectDescription.create(argName, arg.getValue());
+		}
+		return null;
+	}
+
 	public SearchResult findDefinitions(EObject scopeDetermeningResource, PPImportedNamesAdapter importedNames) {
 		// make all segments initial char lower case (if references is to the type itself - eg. 'File' instead of
 		// 'file', or 'Aa::Bb' instead of 'aa::bb'
@@ -509,6 +528,11 @@ public class PPFinder {
 			if(container instanceof Lambda) {
 				IEObjectDescription desc = findLocalVariableInLambda(
 					(Lambda) container, name, importedNames, matchingStrategy);
+				if(desc != null)
+					return desc;
+			}
+			else if(container instanceof DefinitionArgumentList) {
+				IEObjectDescription desc = findDefinitionArgument((DefinitionArgumentList) container, name);
 				if(desc != null)
 					return desc;
 			}
