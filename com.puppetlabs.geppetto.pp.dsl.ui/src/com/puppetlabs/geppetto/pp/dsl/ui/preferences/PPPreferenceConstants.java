@@ -24,6 +24,8 @@ public class PPPreferenceConstants {
 
 	public static final String PUPPET_PROJECT_PATH = "puppetPath";
 
+	public static final String PUPPET_MANIFEST_DIR = "puppetManifestDir";
+
 	public static final String PUPPET_PROJECT_PATH__ENABLED = "puppetPathEnabled";
 
 	public static final String PUPPET_ENVIRONMENT = "puppetEnvironment";

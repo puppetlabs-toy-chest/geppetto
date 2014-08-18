@@ -1022,7 +1022,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				if(hasInterpolation(s))
 					acceptor.acceptWarning(
 						"String has interpolation expressions that will not be evaluated", s,
-						PPPackage.Literals.IMPORT_EXPRESSION__VALUES, o.getValues().indexOf(s),
+						PPPackage.Literals.DOUBLE_QUOTED_STRING__STRING_PART, o.getValues().indexOf(s),
 						IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 		}
 	}

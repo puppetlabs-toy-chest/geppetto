@@ -45,7 +45,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setFileType(FileType.MODULE_ROOT);
 
 		vs.validate(chain, options, root, SubMonitor.convert(null));
-		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE);
+		assertContainsIssue(chain, IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE);
 		assertTrue(
 			"Message text should contain a relative reference",
 			chain.getChildren().get(0).getMessage().startsWith("Ambiguous reference to: 'fluff' found in: 1 resource [") &&
@@ -295,7 +295,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setFileType(FileType.MODULE_ROOT);
 
 		vs.validate(chain, options, root, SubMonitor.convert(null));
-		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
+		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// Same but using a repository layout
 		root = TestDataProvider.getTestFile(new Path("testData/ghbindcases/asrepo/"));
@@ -308,7 +308,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setFileType(FileType.PUPPET_ROOT);
 
 		vs.validate(chain, options, root, SubMonitor.convert(null));
-		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
+		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// Use API1 call to do the same as repository layout validation above
 		vs = getValidationService();
@@ -320,7 +320,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setFileType(FileType.PUPPET_ROOT);
 
 		vs.validateRepository(chain, options, root, SubMonitor.convert(null));
-		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
+		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// just the manifest
 		root = TestDataProvider.getTestFile(new Path(
@@ -335,7 +335,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setFileType(FileType.SINGLE_SOURCE_FILE);
 
 		vs.validate(chain, options, root, SubMonitor.convert(null));
-		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
+		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// Validate single file in context of repo
 		root = TestDataProvider.getTestFile(new Path("testData/ghbindcases/asrepo/"));
@@ -356,7 +356,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		});
 
 		vs.validate(chain, options, root, SubMonitor.convert(null));
-		assertContainsErrorCode(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
+		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertErrors(
 			//

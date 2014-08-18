@@ -23,6 +23,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.FolderFilterEditor;
@@ -57,11 +58,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	private IPreferenceStore store;
 
-	private static final String defaultProjectPath = "lib/*:environments/$environment/*:manifests/*:modules/*"; //$NON-NLS-1$
-
 	private static final String defaultFolderFilter = "pkg:spec"; //$NON-NLS-1$
-
-	private static final String defaultPuppetEnvironment = "production"; //$NON-NLS-1$
 
 	private final PptpTargetProjectHandler pptpHandler;
 
@@ -77,6 +74,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PUPPET_TARGET_VERSION, //
 		PPPreferenceConstants.PUPPET_ENVIRONMENT, //
 		PPPreferenceConstants.PUPPET_PROJECT_PATH, //
+		PPPreferenceConstants.PUPPET_MANIFEST_DIR, //
 		PPPreferenceConstants.PUPPET_FOLDER_FILTER, //
 		PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, //
 		PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, //
@@ -277,9 +275,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_STRATEGY, 0);
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_COMPLETE_COMPOUND_BLOCKS, true);
 		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.getDefault().getLiteral());
-		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, defaultProjectPath);
+		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, PPSearchPath.DEFAULT_PUPPET_PROJECT_PATH);
+		store.setDefault(PPPreferenceConstants.PUPPET_MANIFEST_DIR, PPSearchPath.DEFAULT_MANIFEST_DIR);
 		store.setDefault(PPPreferenceConstants.PUPPET_FOLDER_FILTER, defaultFolderFilter);
-		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, defaultPuppetEnvironment);
+		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, PPSearchPath.DEFAULT_PUPPET_ENVIRONMENT);
 
 		store.setDefault(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, ValidationPreference.WARNING.toString());
