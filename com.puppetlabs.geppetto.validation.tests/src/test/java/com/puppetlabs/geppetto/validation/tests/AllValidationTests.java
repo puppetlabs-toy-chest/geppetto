@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * All Puppet Validation Tests.
- * 
+ *
  */
 @RunWith(Suite.class)
 @SuiteClasses({
@@ -17,6 +17,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestValidatorService.class,
 	TestValidatorServiceApi2.class,
 	TestNodeHandling.class,
+	TestSearchPath.class,
 	TestPptpOptionHandling.class,
 	// TestStackhammerDemo.class, requires stackhammer-demo repo to be present
 	TestParsing.class,

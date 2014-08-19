@@ -24,6 +24,8 @@ public class PPPreferenceConstants {
 
 	public static final String PUPPET_PROJECT_PATH = "puppetPath";
 
+	public static final String PUPPET_MANIFEST_DIR = "puppetManifestDir";
+
 	public static final String PUPPET_PROJECT_PATH__ENABLED = "puppetPathEnabled";
 
 	public static final String PUPPET_ENVIRONMENT = "puppetEnvironment";
@@ -78,5 +80,7 @@ public class PPPreferenceConstants {
 	public static final String PROBLEM_ENSURE_NOT_FIRST = "ensureNotFirst";
 
 	public static final String PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME = "validityAssertedAtRuntime";
+
+	public static final String PROBLEM_IMPORT_IS_DEPRECATED = "importIsDeprecated";
 
 }

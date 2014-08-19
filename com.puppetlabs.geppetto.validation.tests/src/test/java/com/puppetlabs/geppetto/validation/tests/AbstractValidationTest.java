@@ -10,15 +10,13 @@
  */
 package com.puppetlabs.geppetto.validation.tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -50,13 +48,18 @@ public class AbstractValidationTest {
 
 	private Injector injector;
 
-	protected final void assertContainsErrorCode(Diagnostic chain, String errorCode) {
-		List<String> issues = Lists.newArrayList();
+	protected final void assertContainsIssue(Diagnostic chain, String issue) {
 		for(Diagnostic d : chain.getChildren())
-			if(d.getIssue() != null)
-				issues.add(d.getIssue());
-		assertTrue("Should contain error: " + errorCode, issues.contains(errorCode));
+			if(issue.equals(d.getIssue()))
+				return;
+		fail("Should contain issue: " + issue);
 
+	}
+
+	protected final void assertDoesNotContainIssue(Diagnostic chain, String issue) {
+		for(Diagnostic d : chain.getChildren())
+			if(issue.equals(d.getIssue()))
+				fail("Should not contain issue: " + issue);
 	}
 
 	protected final void dumpErrors(Diagnostic chain) {

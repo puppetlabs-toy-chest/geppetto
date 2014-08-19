@@ -661,7 +661,8 @@ public class DirectoryValidator {
 
 		try {
 			ppRunner.configureEncoding(options.getEncodingProvider());
-			ppRunner.configureSearchPath(root, options.getSearchPath(), options.getEnvironment());
+			ppRunner.configureSearchPath(
+				root, options.getSearchPath(), options.getEnvironment(), options.getManifestDir());
 
 			// Load pptp
 			if(options.isCheckReferences()) {

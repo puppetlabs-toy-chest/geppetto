@@ -23,6 +23,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.FolderFilterEditor;
@@ -57,11 +58,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	private IPreferenceStore store;
 
-	private static final String defaultProjectPath = "lib/*:environments/$environment/*:manifests/*:modules/*"; //$NON-NLS-1$
-
 	private static final String defaultFolderFilter = "pkg:spec"; //$NON-NLS-1$
-
-	private static final String defaultPuppetEnvironment = "production"; //$NON-NLS-1$
 
 	private final PptpTargetProjectHandler pptpHandler;
 
@@ -77,6 +74,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PUPPET_TARGET_VERSION, //
 		PPPreferenceConstants.PUPPET_ENVIRONMENT, //
 		PPPreferenceConstants.PUPPET_PROJECT_PATH, //
+		PPPreferenceConstants.PUPPET_MANIFEST_DIR, //
 		PPPreferenceConstants.PUPPET_FOLDER_FILTER, //
 		PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, //
 		PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, //
@@ -93,7 +91,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, //
 		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, //
 		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, //
-		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME //
+		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, //
+		PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED //
 	);
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -121,19 +120,19 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	}
 
 	public ValidationPreference getAssignmentToVariableNamedString() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING));
+		return getPreference(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING);
 	}
 
 	public ValidationPreference getAssignmentToVariableNamedTrusted() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED));
+		return getPreference(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
 	}
 
 	public ValidationPreference getBooleansInStringForm() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING));
+		return getPreference(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING);
 	}
 
 	public ValidationPreference getCaseDefaultShouldAppearLast() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST));
+		return getPreference(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST);
 	}
 
 	public List<String> getDefaultFolderFilters() {
@@ -141,31 +140,39 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	}
 
 	public ValidationPreference getDqStringNotRequired() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED));
+		return getPreference(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED);
 	}
 
 	public ValidationPreference getDqStringNotRequiredVar() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR));
+		return getPreference(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR);
 	}
 
 	public ValidationPreference getEnsureShouldAppearFirst() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST));
+		return getPreference(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST);
 	}
 
 	public List<String> getFolderFilters() {
 		return FolderFilterEditor.parseFolderFilter(store.getString(PPPreferenceConstants.PUPPET_FOLDER_FILTER));
 	}
 
+	public ValidationPreference getImportIsDeprecated() {
+		return getPreference(PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED);
+	}
+
 	public ValidationPreference getInterpolatedNonBraceEnclosedHypens() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN));
+		return getPreference(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN);
 	}
 
 	public ValidationPreference getMissingDefaultInSwitch() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_MISSING_DEFAULT));
+		return getPreference(PPPreferenceConstants.PROBLEM_MISSING_DEFAULT);
 	}
 
 	public ValidationPreference getMLCommentsValidationPreference() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_ML_COMMENTS));
+		return getPreference(PPPreferenceConstants.PROBLEM_ML_COMMENTS);
+	}
+
+	private ValidationPreference getPreference(String prefId) {
+		return ValidationPreference.fromString(store.getString(prefId));
 	}
 
 	public PuppetTarget getPuppetTarget() {
@@ -191,7 +198,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	}
 
 	public ValidationPreference getRightToLeftRelationships() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP));
+		return getPreference(PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP);
 	}
 
 	public boolean getSaveActionEnsureEndsWithNewLine() {
@@ -239,15 +246,15 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	}
 
 	public ValidationPreference getSelectorDefaultShouldAppearLast() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_SELECTOR_DEFAULT_LAST));
+		return getPreference(PPPreferenceConstants.PROBLEM_SELECTOR_DEFAULT_LAST);
 	}
 
 	public ValidationPreference getUnbracedInterpolation() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION));
+		return getPreference(PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION);
 	}
 
 	public ValidationPreference getUnquotedResourceTitles() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_UNQUOTED_RESOURCE_TITLE));
+		return getPreference(PPPreferenceConstants.PROBLEM_UNQUOTED_RESOURCE_TITLE);
 	}
 
 	synchronized public IValidationAdvisor.ComplianceLevel getValidationComplianceLevel() {
@@ -255,7 +262,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	}
 
 	public ValidationPreference getValidityAssertedAtRuntime() {
-		return ValidationPreference.fromString(store.getString(PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME));
+		return getPreference(PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME);
 	}
 
 	@Override
@@ -268,9 +275,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_STRATEGY, 0);
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_COMPLETE_COMPOUND_BLOCKS, true);
 		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.getDefault().getLiteral());
-		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, defaultProjectPath);
+		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, PPSearchPath.DEFAULT_PUPPET_PROJECT_PATH);
+		store.setDefault(PPPreferenceConstants.PUPPET_MANIFEST_DIR, PPSearchPath.DEFAULT_MANIFEST_DIR);
 		store.setDefault(PPPreferenceConstants.PUPPET_FOLDER_FILTER, defaultFolderFilter);
-		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, defaultPuppetEnvironment);
+		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, PPSearchPath.DEFAULT_PUPPET_ENVIRONMENT);
 
 		store.setDefault(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, ValidationPreference.WARNING.toString());
@@ -294,6 +302,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, ValidationPreference.IGNORE.toString());
 		store.setDefault(
 			PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED, ValidationPreference.WARNING.toString());
 
 		// save actions
 		store.setDefault(PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL, false);

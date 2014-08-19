@@ -31,7 +31,7 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 public class TestFutureExpressions extends AbstractPuppetTests {
 	@Override
 	protected ComplianceLevel getComplianceLevel() {
-		return ComplianceLevel.PUPPET_FUTURE;
+		return ComplianceLevel.PUPPET_4_0;
 	}
 
 	@Override

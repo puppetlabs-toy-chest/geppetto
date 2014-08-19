@@ -49,6 +49,11 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	public ValidationPreference dqStringNotRequiredVariable();
 
 	/**
+	 * How should use of deprecated 'import' keyword be reported.
+	 */
+	public ValidationPreference importIsDeprecated();
+
+	/**
 	 * How to validate hyphens in non brace enclosed interpolations. In < 2.7 interpolation stops at a hyphen, but
 	 * not in 2.7. Thus when using 2.6 code in 2.7 or vice versa, the result is different.
 	 *

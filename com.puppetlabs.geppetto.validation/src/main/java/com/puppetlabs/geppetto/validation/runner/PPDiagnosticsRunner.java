@@ -330,10 +330,10 @@ public class PPDiagnosticsRunner {
 		this.encodingProvider = provider;
 	}
 
-	public void configureSearchPath(File root, String searchPath, String environment) {
+	public void configureSearchPath(File root, String searchPath, String environment, String manifestDir) {
 		if(searchPathProvider instanceof IConfigurableProvider)
 			((IConfigurableProvider) searchPathProvider).configure(
-				URI.createFileURI(root.getAbsolutePath()), searchPath, environment);
+				URI.createFileURI(root.getAbsolutePath()), searchPath, environment, manifestDir);
 	}
 
 	private void configureTransitiveClosure(final IPath rootModule, final Multimap<String, String> restricted,

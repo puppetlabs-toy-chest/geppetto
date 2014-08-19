@@ -126,6 +126,15 @@
         </page>
         <page
               category="com.puppetlabs.geppetto.pp.dsl.PP"
+              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPManifestDirPreferencePage"
+              id="com.puppetlabs.geppetto.pp.dsl.PP.manifestDir"
+              name="Manifest Directory">
+           <keywordReference
+                 id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP">
+           </keywordReference>
+        </page>
+        <page
+              category="com.puppetlabs.geppetto.pp.dsl.PP"
               class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPEnvironmentPreferencePage"
               id="com.puppetlabs.geppetto.pp.dsl.PP.environment"
               name="Environment">
@@ -560,6 +569,16 @@
              class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPathPreferencePage"
              id="com.puppetlabs.geppetto.pp.dsl.PP.searchPath"
              name="Puppet Search Path">
+            <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+       </page>
+       <page
+             category="com.puppetlabs.geppetto.pp.dsl.PP.properties"
+             class="com.puppetlabs.geppetto.pp.dsl.ui.PPExecutableExtensionFactory:com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPManifestDirPreferencePage"
+             id="com.puppetlabs.geppetto.pp.dsl.PP.manifestDir"
+             name="Puppet Manifest Directory">
             <keywordReference id="com.puppetlabs.geppetto.pp.dsl.ui.keyword_PP"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>

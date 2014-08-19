@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.linking;
 
+import static com.puppetlabs.geppetto.common.Strings.trimToNull;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +32,22 @@ import com.google.common.collect.Lists;
  *
  */
 public class PPSearchPath {
+
 	public interface IConfigurableProvider {
 		/**
 		 * Configure the search path provider so it knows the container of (distro) pptp, and
-		 * root for absolute files (may be null).
+		 * root for absolute files.
 		 *
 		 * @param rootDirectory
+		 *            The root for absolute files. Required.
+		 * @param path
+		 *            The search path. May be <code>null</code>.
+		 * @param environment
+		 *            The puppet $environment. May be <code>null</code>.
+		 * @param manifestDir
+		 *            The puppet $manifestdir. May be <code>null</code>.
 		 */
-		public void configure(URI rootPath, String defalutPath, String environment);
-
+		public void configure(URI rootDirectory, String path, String environment, String manifestDir);
 	}
 
 	public interface ISearchPathProvider {
@@ -46,73 +55,86 @@ public class PPSearchPath {
 		public PPSearchPath get(Resource r);
 	}
 
-	public static PPSearchPath fromString(String path, URI root) {
-		List<IPath> p = Lists.newArrayList();
+	/**
+	 * Create a new instance of a PPSearchPath
+	 *
+	 * @param rootDirectory
+	 *            The root for absolute files. Required.
+	 * @param path
+	 *            The search path. May be <code>null</code>.
+	 * @param environment
+	 *            The puppet $environment. May be <code>null</code>.
+	 * @param manifestDir
+	 *            The puppet $manifestdir. May be <code>null</code>.
+	 * @return The new instance
+	 */
+	public static PPSearchPath fromString(String path, URI rootDirectory, String environment, String manifestDir) {
+		if(rootDirectory == null)
+			throw new IllegalArgumentException("root directory must be specified");
 
-		if(path != null)
-			path = path.trim();
-		if(path == null || path.length() == 0)
-			path = "*"; // everything
+		if(!rootDirectory.hasTrailingPathSeparator())
+			rootDirectory = rootDirectory.appendSegment("");
+
+		IPath rootPath = Path.fromOSString(rootDirectory.toFileString());
+
+		environment = trimToNull(environment);
+		if(environment == null)
+			environment = DEFAULT_PUPPET_ENVIRONMENT;
+
+		manifestDir = trimToNull(manifestDir);
+		if(manifestDir == null)
+			manifestDir = DEFAULT_MANIFEST_DIR;
+		else
+			manifestDir = manifestDir.replaceAll("\\$environment", environment);
+
+		path = trimToNull(path);
+		if(path == null)
+			path = "*";
+		else
+			path = path.replaceAll("\\$environment", environment);
+
+		List<IPath> p = Lists.newArrayList();
 
 		// split the string on ':', and create a path per segment
 		String[] paths = path.split(":");
 		for(String s : paths) {
 			if(s.length() == 0)
 				continue; // skip empty segments
-			p.add(new Path(s));
-		}
-		return new PPSearchPath(p, root);
-	}
-
-	private final URI rootURI;
-
-	private List<IPath> searchPath;
-
-	private PPSearchPath(List<IPath> p, URI root) {
-		this.searchPath = p;
-		this.rootURI = root;
-	}
-
-	public PPSearchPath(URI root) {
-		searchPath = Lists.newArrayList();
-		this.rootURI = root;
-	}
-
-	/**
-	 * Evaluates the search path by replacing every occurrence of '$environment' with the
-	 * given value.
-	 *
-	 * @param environment
-	 * @return a new PPSearchPath if there were replacements.
-	 */
-	public PPSearchPath evaluate(String environment) {
-		int replacements = 0;
-		ArrayList<IPath> newSearchPath = Lists.newArrayList(searchPath);
-		for(IPath p : searchPath) {
-			String s = p.toPortableString();
-			if(s.contains("$environment")) {
-				s = s.replace("$environment", environment);
-				p = new Path(s);
-				replacements++;
+			if(s.contains("$manifestdir")) {
+				if(s.length() > 12) {
+					// Allow suffix '/*' and '\\*' but nothing else
+					char sep = s.charAt(12);
+					if(!((sep == '/' || sep == '\\') && s.length() == 14 && s.charAt(13) == '*'))
+						throw new IllegalArgumentException("$manifestdir can only exist as a separate path segment");
+				}
+				p.add(Path.fromOSString(URI.createURI(manifestDir).resolve(rootDirectory).toFileString()).makeRelativeTo(
+					rootPath).append("*"));
 			}
-			newSearchPath.add(p);
+			else
+				p.add(new Path(s));
 		}
-		if(replacements > 0)
-			return new PPSearchPath(newSearchPath, this.rootURI);
-		return this;
+		return new PPSearchPath(p, rootDirectory);
+	}
+
+	public static final String DEFAULT_MANIFEST_DIR = "manifests"; //$NON-NLS-1$
+
+	public static final String DEFAULT_PUPPET_ENVIRONMENT = "production"; //$NON-NLS-1$
+
+	public static final String DEFAULT_PUPPET_PROJECT_PATH = "lib/*:environments/$environment/*:$manifestdir/*:modules/*"; //$NON-NLS-1$
+
+	private final URI rootDirectory;
+
+	private final List<IPath> searchPath;
+
+	private PPSearchPath(List<IPath> p, URI rootDirectory) {
+		this.searchPath = p;
+		this.rootDirectory = rootDirectory;
 	}
 
 	public List<File> getResolvedPath() {
 		List<File> resolved = new ArrayList<File>();
-		for(IPath p : searchPath) {
-			String s = p.toPortableString();
-			if(s.contains("$environment"))
-				continue;
-			if(rootURI == null)
-				resolved.add(p.toFile());
-			else
-				resolved.add(new File(URI.createURI(p.toPortableString()).resolve(rootURI).toFileString()));
-		}
+		for(IPath p : searchPath)
+			resolved.add(new File(URI.createURI(p.toPortableString()).resolve(rootDirectory).toFileString()));
 		return resolved;
 	}
 
@@ -121,7 +143,6 @@ public class PPSearchPath {
 		final int pLimit = p.segmentCount();
 		for(int i = 0; i < pLimit; i++) {
 			String s = p.segment(i);
-
 			// * matches any remaining segments of candidate, including no segements
 			if("*".equals(s))
 				return true;
@@ -142,9 +163,8 @@ public class PPSearchPath {
 
 	public int searchIndexOf(IEObjectDescription d) {
 		URI uri = EcoreUtil.getURI(d.getEObjectOrProxy());
-		if(uri.isFile() && rootURI != null) {
-			uri = uri.deresolve(rootURI.appendSegment(""));
-		}
+		if(uri.isFile())
+			uri = uri.deresolve(rootDirectory);
 		return searchIndexOf(uri);
 	}
 
@@ -171,5 +191,19 @@ public class PPSearchPath {
 
 		}
 		return -1;
+	}
+
+	@Override
+	public String toString() {
+		int top = searchPath.size();
+		if(top == 0)
+			return "";
+
+		StringBuilder bld = new StringBuilder(searchPath.get(0).toPortableString());
+		for(int idx = 1; idx < top; ++idx) {
+			bld.append(':');
+			bld.append(searchPath.get(idx).toPortableString());
+		}
+		return bld.toString();
 	}
 }

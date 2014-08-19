@@ -30,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestDoubleQuotedString.class,
 	TestIssues.class,
 	TestIssues3_0.class,
+	TestIssues3_5.class,
 	TestLinking.class,
 	TestSemanticOneSpaceFormatter.class,
 	TestSemanticCssFormatter.class,

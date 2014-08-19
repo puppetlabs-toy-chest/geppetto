@@ -32,6 +32,8 @@ public class ValidationOptions {
 
 	private String environment;
 
+	private String manifestDir;
+
 	private FileType fileType;
 
 	private URI platformURI;
@@ -60,6 +62,7 @@ public class ValidationOptions {
 		complianceLevel = source.complianceLevel;
 		encodingProvider = source.encodingProvider;
 		environment = source.environment;
+		manifestDir = source.manifestDir;
 		fileType = source.fileType;
 		platformURI = source.platformURI;
 		problemsAdvisor = source.problemsAdvisor;
@@ -111,6 +114,13 @@ public class ValidationOptions {
 	 */
 	public FileType getFileType() {
 		return fileType;
+	}
+
+	/**
+	 * @return the value of the '<em>manifestDir</em>' attribute.
+	 */
+	public String getManifestDir() {
+		return manifestDir;
 	}
 
 	/**
@@ -266,6 +276,16 @@ public class ValidationOptions {
 		this.fileType = fileType == null
 				? FileType.DETECT
 				: fileType;
+	}
+
+	/**
+	 * Sets the value of the '<em>manifestDir</em>' attribute.
+	 *
+	 * @param manifestDir
+	 *            the new value of the '<em>manifestDir</em>' attribute.
+	 */
+	public void setManifestDir(String manifestDir) {
+		this.manifestDir = manifestDir;
 	}
 
 	/**

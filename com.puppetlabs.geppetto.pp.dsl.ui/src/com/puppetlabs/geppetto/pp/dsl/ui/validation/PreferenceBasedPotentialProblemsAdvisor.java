@@ -70,6 +70,11 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	}
 
 	@Override
+	public ValidationPreference importIsDeprecated() {
+		return preferences.getImportIsDeprecated();
+	}
+
+	@Override
 	public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
 		return preferences.getInterpolatedNonBraceEnclosedHypens();
 	}
