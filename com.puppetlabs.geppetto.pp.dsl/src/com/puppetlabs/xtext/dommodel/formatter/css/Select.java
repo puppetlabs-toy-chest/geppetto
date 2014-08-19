@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,25 +15,25 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 
-import com.puppetlabs.xtext.dommodel.DomModelUtils;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
+import com.puppetlabs.xtext.dommodel.DomModelUtils;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
 
 /**
  * Style Select is used to produce a configured Selector.
- * 
+ *
  */
 public class Select {
 
 	/**
 	 * A compound rule, where all rules must be satisfied.
-	 * 
+	 *
 	 */
 	public static class And extends Selector {
 		private int specificity = 0;
@@ -104,7 +104,7 @@ public class Select {
 
 		/**
 		 * Selectors for containers - the nearest container first
-		 * 
+		 *
 		 * @param selectors
 		 */
 		public Containment(Selector... selectors) {
@@ -172,7 +172,8 @@ public class Select {
 	}
 
 	/**
-	 * A selector that is useful when debugging matching (wrap a real selector and set a breakpoint in {@link #matches(IDomNode)}.
+	 * A selector that is useful when debugging matching (wrap a real selector and set a breakpoint in
+	 * {@link #matches(IDomNode)}.
 	 */
 	public static class DebugSelector extends Selector {
 		private Selector wrappedSelector;
@@ -256,7 +257,7 @@ public class Select {
 	/**
 	 * The next to most specific selector that matches anything.
 	 * Should be combined with And selector to make the and specificity very high.
-	 * 
+	 *
 	 */
 	public static class Important extends Selector {
 
@@ -286,7 +287,7 @@ public class Select {
 
 	/**
 	 * The most specific selector that matches on a instance using ==.
-	 * 
+	 *
 	 */
 	public static class Instance extends Selector {
 		private final IDomNode node;
@@ -326,7 +327,7 @@ public class Select {
 
 	/**
 	 * Matches IDomNodes on NodeType, style classifier, and id.
-	 * 
+	 *
 	 */
 	public static class NodeSelector extends Selector {
 
@@ -349,7 +350,7 @@ public class Select {
 
 		/**
 		 * Node must have all the given style classifiers.
-		 * 
+		 *
 		 * @param styleClasses
 		 */
 		public NodeSelector(Collection<Object> styleClasses) {
@@ -358,7 +359,7 @@ public class Select {
 
 		/**
 		 * Node must have all of the given style classifiers and the given id.
-		 * 
+		 *
 		 * @param styleClasses
 		 * @param id
 		 */
@@ -368,7 +369,7 @@ public class Select {
 
 		/**
 		 * Node must have the given node type
-		 * 
+		 *
 		 * @param t
 		 */
 		public NodeSelector(NodeType t) {
@@ -377,7 +378,7 @@ public class Select {
 
 		/**
 		 * Node must have the given node type and all of the given style classifiers.
-		 * 
+		 *
 		 * @param nodeType
 		 * @param styleClasses
 		 */
@@ -387,7 +388,7 @@ public class Select {
 
 		/**
 		 * Node must have the given node type, and all of the give style classifiers and the given id.
-		 * 
+		 *
 		 * @param nodeType
 		 * @param styleClasses
 		 * @param id
@@ -399,7 +400,7 @@ public class Select {
 		/**
 		 * Node must have the given node type, and the given style classifier
 		 * (may have other style classes assigned), and the given id).
-		 * 
+		 *
 		 * @param nodeType
 		 * @param styleClass
 		 * @param id
@@ -410,7 +411,7 @@ public class Select {
 
 		/**
 		 * Node must have all the given node statuses (may have other node status set).
-		 * 
+		 *
 		 * @param nodeTypes
 		 */
 		public NodeSelector(Set<NodeType> nodeTypes) {
@@ -419,7 +420,7 @@ public class Select {
 
 		/**
 		 * Node must have the given node statuses (may have other status set), and all of the given style classes.
-		 * 
+		 *
 		 * @param nodeTypes
 		 * @param styleClasses
 		 */
@@ -430,7 +431,7 @@ public class Select {
 		/**
 		 * Node must have all the given node statuses (may have other status set), and all of the given style classes
 		 * and the given id.
-		 * 
+		 *
 		 * @param nodeTypes
 		 *            - may be null (any type)
 		 * @param styleClass
@@ -457,11 +458,13 @@ public class Select {
 			if(!(selector instanceof NodeSelector))
 				return false;
 			NodeSelector e = (NodeSelector) selector;
+			if(!matchingId.equals(e.matchingId))
+				return false;
+			if(matchingClassifiers.size() != e.matchingClassifiers.size())
+				return false;
 			if(!matchingNodeTypes.equals(e.matchingNodeTypes))
 				return false;
-			if(!(matchingClassifiers.size() == e.matchingClassifiers.size() && e.matchingClassifiers.containsAll(matchingClassifiers)))
-				return false;
-			if(!matchingId.equals(e.matchingId))
+			if(!e.matchingClassifiers.containsAll(matchingClassifiers))
 				return false;
 			return true;
 		}
@@ -500,14 +503,16 @@ public class Select {
 			if(node == null)
 				return false;
 
+			if(matchingId != NoIdMatch && !matchingId.equals(node.getNodeId()))
+				return false;
+
 			if(!matchingNodeTypes.contains(node.getNodeType()))
 				return false;
 
 			// i.e styleClass && styleClass && ...
 			if(matchingClassifiers.size() > 0 && !node.getStyleClassifiers().containsAll(matchingClassifiers))
 				return false;
-			if(matchingId != NoIdMatch && !matchingId.equals(node.getNodeId()))
-				return false;
+
 			return true;
 		}
 
@@ -538,7 +543,7 @@ public class Select {
 	 * Negates a selector and increases the specificity by one.
 	 * e.g. selection of not(a) is more important than selection of just a.
 	 * Not does not select a null node.
-	 * 
+	 *
 	 */
 	public static class Not extends Selector {
 		private Selector selector;
@@ -580,7 +585,7 @@ public class Select {
 
 	/**
 	 * A NullSelector is only useful in a NullRule. It matches nothing.
-	 * 
+	 *
 	 */
 	public static class NullSelector extends Selector {
 
@@ -607,7 +612,7 @@ public class Select {
 
 	/**
 	 * Applies the delegate selector to the parent of the node being matched.
-	 * 
+	 *
 	 */
 	public static class ParentSelector extends Selector {
 		private Selector parentSelector;
@@ -713,7 +718,7 @@ public class Select {
 		/**
 		 * Returns the specificity in the same style as used in CSS:
 		 * 100 * id count + 10 * class count + 1 * other count
-		 * 
+		 *
 		 * @return
 		 */
 		public abstract int getSpecificity();
@@ -735,7 +740,7 @@ public class Select {
 
 	/**
 	 * A Selector matching on semantic information
-	 * 
+	 *
 	 */
 	public static class SemanticSelector extends Selector {
 		private EClass eClass;
@@ -798,7 +803,7 @@ public class Select {
 
 	/**
 	 * Applies the delegate selector to the successor of the matching node.
-	 * 
+	 *
 	 */
 	public static class SuccessorSelector extends Selector {
 		private Selector successorSelector;
@@ -838,7 +843,7 @@ public class Select {
 
 	/**
 	 * Selects matching text.
-	 * 
+	 *
 	 */
 	public static class Text extends Selector {
 		private final String text;
@@ -881,7 +886,7 @@ public class Select {
 	/**
 	 * Selects a node that is matched by the given nodeSelector if the node's predecessor matches
 	 * the given predecessor selector.
-	 * 
+	 *
 	 * @param nodeSelector
 	 * @param predecessor
 	 * @return
@@ -909,7 +914,7 @@ public class Select {
 	/**
 	 * Selects a node matching the given nodeSelector, if this node is before a node matching the
 	 * given successor selector.
-	 * 
+	 *
 	 * @param nodeSelector
 	 * @param successor
 	 * @return
@@ -970,7 +975,7 @@ public class Select {
 
 	/**
 	 * Select node with a nearest semantic object with given clazz, or a supertype of given clazz.
-	 * 
+	 *
 	 * @param clazz
 	 * @return
 	 */
@@ -980,7 +985,7 @@ public class Select {
 
 	/**
 	 * Select node with a nearest semantic object being an instance of the given clazz.
-	 * 
+	 *
 	 * @param clazz
 	 * @return
 	 */
@@ -1034,7 +1039,7 @@ public class Select {
 
 	/**
 	 * Select node with a direct semantic object with given clazz, or a supertype of given clazz.
-	 * 
+	 *
 	 * @param clazz
 	 * @return
 	 */
@@ -1044,7 +1049,7 @@ public class Select {
 
 	/**
 	 * Select node with a direct semantic object with given clazz.
-	 * 
+	 *
 	 * @param clazz
 	 * @return
 	 */
