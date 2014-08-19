@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -43,7 +43,7 @@ import org.junit.Test;
 
 /**
  * Tests for expressions not covered by separate test classes.
- * 
+ *
  */
 public class TestExpressions extends AbstractPuppetTests implements AbstractPuppetTests.SerializationTestControl {
 
@@ -68,7 +68,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	static final String Sample_ClassDefinition = "class testClass {\n}\n";
 
 	static final String Sample_If = //
-	"if $a == 1 {\n" + //
+			"if $a == 1 {\n" + //
 			"  true\n" + //
 			"} else {\n" + //
 			"  false\n" + //
@@ -119,7 +119,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 	/**
 	 * No matter how formatter tries to add linewrapping there is none in the formatted result.
-	 * 
+	 *
 	 * @see PPFormatter#assignmentExpressionConfiguration(FormattingConfig c)
 	 */
 	@Test
@@ -197,7 +197,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 	/**
 	 * No matter how formatter tries to add linewrapping there is none in the formatted result.
-	 * 
+	 *
 	 * @see PPFormatter#functionCallConfiguration(FormattingConfig c)
 	 */
 	@Test
@@ -232,10 +232,10 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	 * Due to issues in the (old) formatter, this test may hit a bug that inserts whitespace
 	 * between quotes and string - no workaround found - needs to be fixed in Xtext formatter.
 	 * Also see {@link #test_Serialize_DoubleQuotedString_2()}
-	 * 
+	 *
 	 * @see #test_Serialize_DoubleQuotedString_2() for a non failing tests.
-	 * 
-	 * 
+	 *
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -254,7 +254,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	/**
 	 * Formatter did not switch back to non hidden state after import "".
 	 * If changed to '' string it behaved differently.
-	 * 
+	 *
 	 */
 	@Test
 	public void test_Serialize_DqStringFollowedByDefine() throws Exception {
@@ -267,7 +267,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 	/**
 	 * Formatter seems to not switch back to non hidden state interpolation.
-	 * 
+	 *
 	 */
 	@Test
 	public void test_Serialize_DqStringInterpolation() throws Exception {
@@ -336,7 +336,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 	/**
 	 * No matter how formatter tried to add linewrapping there was none in the formatted result.
-	 * 
+	 *
 	 * @see PPFormatter#importExpressionConfiguration(FormattingConfig c)
 	 * @see #test_Serialize_ImportExpression2() - for different failing result
 	 */
@@ -352,7 +352,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	 * No matter how formatter tried to add linewrapping there was none in the formatted result.
 	 * Note that result was different than in {@link #test_Serialize_ImportExpression1()} due to issue
 	 * with the different use of hidden() for DQ string.
-	 * 
+	 *
 	 * @see PPFormatter#importExpressionConfiguration(FormattingConfig c)
 	 * @see #test_Serialize_ImportExpression1() - for different failing result
 	 */

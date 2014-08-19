@@ -15,10 +15,10 @@ import com.puppetlabs.xtext.dommodel.IDomNode;
 /**
  * A DOM style rule contains a selector {@link Select.Selector} (which can be compound), and
  * a {@link StyleSet}.
- * 
+ *
  * A DOM style rule is typically added to a {@link DomCSS}.
  * A rule can only be added to one DomCSS (at a time).
- * 
+ *
  * Note that the easiest is to use {@link Select.Selector#withStyles(IStyle...)} and related methods
  * to create Rule instances.
  */
@@ -48,7 +48,7 @@ public final class Rule implements Cloneable {
 
 	/**
 	 * Create a Rule with an empty style set.
-	 * 
+	 *
 	 * @param selector
 	 */
 	public Rule(Select.Selector selector) {
@@ -57,7 +57,7 @@ public final class Rule implements Cloneable {
 
 	/**
 	 * Create a Rule with a copy of the content of the given style set.
-	 * 
+	 *
 	 * @param selector
 	 *            - the rule selector
 	 * @param styles
@@ -74,7 +74,7 @@ public final class Rule implements Cloneable {
 
 	/**
 	 * Add given style to rule's style set.
-	 * 
+	 *
 	 * @param style
 	 *            - style to add
 	 */
@@ -95,7 +95,7 @@ public final class Rule implements Cloneable {
 
 	/**
 	 * Add all styles in this rule to the given style set and return the given set.
-	 * 
+	 *
 	 * @param result
 	 * @return
 	 */
@@ -107,7 +107,7 @@ public final class Rule implements Cloneable {
 	/**
 	 * Add all matching styles in this rule to the given style set and return the given set if the given node
 	 * matches the selector.
-	 * 
+	 *
 	 * @param result
 	 *            - where styles are added if given node matches selector
 	 * @param node
@@ -123,7 +123,7 @@ public final class Rule implements Cloneable {
 	/**
 	 * Returns true if this rule has the same selector match as the given rule. (Note for each type of selector
 	 * how the selector equality is tested).
-	 * 
+	 *
 	 * @param rule
 	 *            - the rule to test for equal selectors
 	 * @return true if they have the same selector matching
@@ -134,7 +134,7 @@ public final class Rule implements Cloneable {
 
 	/**
 	 * Return the DomCSS this rule is part of.
-	 * 
+	 *
 	 * @return
 	 */
 	public DomCSS getDomCSS() {
@@ -147,7 +147,7 @@ public final class Rule implements Cloneable {
 
 	/**
 	 * Return the specificity of the rule's selector.
-	 * 
+	 *
 	 * @return the selector specificity
 	 */
 	public int getSpecificity() {
@@ -156,7 +156,7 @@ public final class Rule implements Cloneable {
 
 	/**
 	 * Matches the given node against the rule's selector and returns the result.
-	 * 
+	 *
 	 * @param node
 	 * @return
 	 */
@@ -167,7 +167,7 @@ public final class Rule implements Cloneable {
 	/**
 	 * Sets the parent style sheet of this rule.
 	 * DON'T CALL THIS METHOD UNLESS YOU KNOW WHAT YOU ARE DOING.
-	 * 
+	 *
 	 * @param styleSheet
 	 */
 	public void setDomCSS(DomCSS styleSheet) {

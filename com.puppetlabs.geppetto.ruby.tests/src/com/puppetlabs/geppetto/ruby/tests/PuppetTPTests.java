@@ -340,8 +340,8 @@ public class PuppetTPTests {
 			boolean fragment1HasExtra1 = getProperty("extra1", fragment1) != null;
 			{
 				Property prop = getProperty("extra1", fragment1HasExtra1
-						? fragment1
-						: fragment2);
+					? fragment1
+							: fragment2);
 				assertNotNull("Should have a property 'extra1", prop);
 				assertEquals(
 					"Should have defined documentation", "<p>An extra property called extra1</p>",
@@ -349,8 +349,8 @@ public class PuppetTPTests {
 			}
 			{
 				Property prop = getProperty("extra2", fragment1HasExtra1
-						? fragment2
-						: fragment1);
+					? fragment2
+							: fragment1);
 				assertNotNull("Should have a property 'extra2", prop);
 				assertEquals(
 					"Should have defined documentation", "<p>An extra property called extra2</p>",

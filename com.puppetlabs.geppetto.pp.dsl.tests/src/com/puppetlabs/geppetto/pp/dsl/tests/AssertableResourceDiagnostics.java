@@ -17,7 +17,7 @@ import com.google.common.collect.Iterables;
 /**
  * Provides convenient predicates and assertions for testing Resource.Diganostic.
  * Use one instance of this class for {@link Resource#getErrors()}, and another for {@link Resource#getWarnings()}.
- * 
+ *
  */
 public class AssertableResourceDiagnostics {
 
@@ -36,6 +36,7 @@ public class AssertableResourceDiagnostics {
 			this.msg = msg;
 		}
 
+		@Override
 		public boolean apply(Diagnostic d) {
 			if(msg != null && d.getMessage() != null && !d.getMessage().contains(msg))
 				return false;

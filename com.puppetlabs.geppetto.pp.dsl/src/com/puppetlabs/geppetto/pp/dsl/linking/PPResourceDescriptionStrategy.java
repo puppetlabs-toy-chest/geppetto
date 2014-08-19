@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -46,7 +46,7 @@ import com.google.inject.Inject;
 /**
  * Overrides the default description strategy to provide the super class name for element
  * that implement this aspect.
- * 
+ *
  */
 public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
 	public class DefaultReferenceDescription implements IReferenceDescription {
@@ -69,22 +69,27 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 			this.containerEObjectURI = containerEObjectURI;
 		}
 
+		@Override
 		public URI getContainerEObjectURI() {
 			return containerEObjectURI;
 		}
 
+		@Override
 		public EReference getEReference() {
 			return eReference;
 		}
 
+		@Override
 		public int getIndexInList() {
 			return indexInList;
 		}
 
+		@Override
 		public URI getSourceEObjectUri() {
 			return sourceEObjectUri;
 		}
 
+		@Override
 		public URI getTargetEObjectUri() {
 			return targetEObjectUri;
 		}
@@ -98,7 +103,7 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy#createEObjectDescriptions(org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.xtext.util.IAcceptor)
 	 */
@@ -120,7 +125,7 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 
 	/**
 	 * PP specific reference descriptors.
-	 * 
+	 *
 	 * @return true if children of the from eobject should be traversed
 	 * @param source
 	 *            - the eobject with a referece
@@ -143,7 +148,7 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy#createReferenceDescriptions(org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.emf.common.util.URI, org.eclipse.xtext.util.IAcceptor)
 	 */
@@ -163,7 +168,7 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 
 	/**
 	 * Computes data to associate with an IEObjectDescription of the given EObject.
-	 * 
+	 *
 	 * @param eObject
 	 * @return
 	 */
@@ -178,7 +183,7 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 			}
 			int argCount = d.getArguments() == null
 					? 0
-					: d.getArguments().getArguments().size();
+							: d.getArguments().getArguments().size();
 			if(argCount > 0)
 				data.put(PPDSLConstants.CLASS_ARG_COUNT, Integer.toString(argCount));
 			return data;

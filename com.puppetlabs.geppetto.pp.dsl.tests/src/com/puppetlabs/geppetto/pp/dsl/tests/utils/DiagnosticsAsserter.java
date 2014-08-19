@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -27,7 +27,7 @@ import com.google.common.collect.Iterables;
 
 /**
  * Helper class making it easier to assert content of a Resource.Diagnostic
- * 
+ *
  */
 public class DiagnosticsAsserter {
 
@@ -62,6 +62,7 @@ public class DiagnosticsAsserter {
 			this.greedy = false;
 		}
 
+		@Override
 		public boolean apply(Diagnostic d) {
 			if(msg != null && d.getMessage() != null && !d.getMessage().contains(msg))
 				return false;
@@ -74,19 +75,23 @@ public class DiagnosticsAsserter {
 			return true;
 		}
 
+		@Override
 		public IssuePredicate greedy() {
 			this.greedy = true;
 			return this;
 		}
 
+		@Override
 		public boolean isGreedy() {
 			return greedy;
 		}
 
+		@Override
 		public boolean isRequired() {
 			return !optional;
 		}
 
+		@Override
 		public IssuePredicate optional() {
 			this.optional = true;
 			return this;
@@ -168,7 +173,7 @@ public class DiagnosticsAsserter {
 
 	/**
 	 * No errors or warnings accepted.
-	 * 
+	 *
 	 * @param message
 	 * @param diag
 	 */

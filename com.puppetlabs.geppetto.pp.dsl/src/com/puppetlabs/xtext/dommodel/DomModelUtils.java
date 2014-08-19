@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,13 +31,9 @@ import com.google.inject.Inject;
 
 /**
  * Utilities for a IDomModel
- * 
+ *
  */
 public class DomModelUtils {
-
-	// IMPORTANT: To use this, call binder.requestStaticInjection(DomModelUtils.class)
-	@Inject
-	private static FormattingTracer tracer;
 
 	private static void appendEffectiveStyle(Appendable result, IDomNode node, String prefix) throws IOException {
 		if(tracer == null) {
@@ -110,7 +106,7 @@ public class DomModelUtils {
 
 	/**
 	 * Creates a string representation of the given node. Useful for debugging.
-	 * 
+	 *
 	 * @return a debug string for the given node.
 	 */
 	public static String compactDump(IDomNode node, boolean showHidden) {
@@ -259,7 +255,7 @@ public class DomModelUtils {
 	/**
 	 * Returns the first node representing a textual non whitespace token. (i.e. a leaf node
 	 * that has a textual representation).
-	 * 
+	 *
 	 * @param node
 	 * @return
 	 */
@@ -272,16 +268,16 @@ public class DomModelUtils {
 
 	/**
 	 * This method converts a node to text.
-	 * 
+	 *
 	 * Leading and trailing text from hidden tokens (whitespace/comments) is removed. Text from hidden tokens that is
 	 * surrounded by text from non-hidden tokens is summarized to a single whitespace.
-	 * 
+	 *
 	 * The preferred use case of this method is to convert the {@link ICompositeNode} that has been created for a data
 	 * type rule to text.
-	 * 
+	 *
 	 * This is also the recommended way to convert a node to text if you want to invoke
 	 * {@link org.eclipse.xtext.conversion.IValueConverterService#toValue(String, String, INode)}
-	 * 
+	 *
 	 */
 	public static String getTokenText(IDomNode node) {
 		if(node.isLeaf())
@@ -305,7 +301,7 @@ public class DomModelUtils {
 
 	/**
 	 * Returns true if node holds only comment tokens - hidden or not.
-	 * 
+	 *
 	 * @return true if node holds only comment tokens
 	 */
 
@@ -315,7 +311,7 @@ public class DomModelUtils {
 
 	/**
 	 * A node that represents text that is hidden from the grammar.
-	 * 
+	 *
 	 * @return true if node holds only hidden tokens
 	 */
 	public static boolean isHidden(IDomNode node) {
@@ -324,7 +320,7 @@ public class DomModelUtils {
 
 	/**
 	 * Returns true for a node that is non whitspace and has a textual representation.
-	 * 
+	 *
 	 * @param node
 	 * @return
 	 */
@@ -340,7 +336,7 @@ public class DomModelUtils {
 
 	/**
 	 * Returns true for a node that has textual representation (even if text has zero length).
-	 * 
+	 *
 	 * @param node
 	 * @return
 	 */
@@ -354,7 +350,7 @@ public class DomModelUtils {
 
 	/**
 	 * Returns true if node holds only whitespace tokens - hidden or not.
-	 * 
+	 *
 	 * @return true if node holds only whitespace tokens
 	 */
 	public static boolean isWhitespace(IDomNode node) {
@@ -373,7 +369,7 @@ public class DomModelUtils {
 	/**
 	 * Returns the last node representing a textual non whitespace token. (i.e. a leaf node
 	 * that has a textual representation).
-	 * 
+	 *
 	 * @param node
 	 * @return
 	 */
@@ -427,7 +423,7 @@ public class DomModelUtils {
 	/**
 	 * The position on the line for the IDomNode searches backwards in the total text from the start position
 	 * of the text in the given node.
-	 * 
+	 *
 	 * @param node
 	 * @param lineDelimiter
 	 * @return
@@ -478,4 +474,8 @@ public class DomModelUtils {
 			return "-";
 		return o.eClass().getName();
 	}
+
+	// IMPORTANT: To use this, call binder.requestStaticInjection(DomModelUtils.class)
+	@Inject
+	private static FormattingTracer tracer;
 }

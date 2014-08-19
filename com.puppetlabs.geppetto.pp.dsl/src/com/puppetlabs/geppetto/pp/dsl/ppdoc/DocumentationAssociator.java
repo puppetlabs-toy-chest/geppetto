@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -37,13 +37,14 @@ import com.google.inject.Inject;
 
 /**
  * Provides handling of documentation comments.
- * 
+ *
  */
 public class DocumentationAssociator {
 	private final PPGrammarAccess ga;
 
 	/**
-	 * Expression that may have associated documentation. (TODO: Puppetdoc also lists Nodes global variables, custom facts, and
+	 * Expression that may have associated documentation. (TODO: Puppetdoc also lists Nodes global variables, custom
+	 * facts, and
 	 * Puppet plugins located in modules - but don't know which of those are applicable).
 	 */
 	private static final Class<?>[] documentable = { HostClassDefinition.class, Definition.class, NodeDefinition.class, };
@@ -90,7 +91,7 @@ public class DocumentationAssociator {
 		ResourceDocumentationAdapter adapter = ResourceDocumentationAdapterFactory.eINSTANCE.adapt(r);
 		return adapter != null
 				? adapter.get(semantic)
-				: null;
+						: null;
 
 	}
 
@@ -119,7 +120,7 @@ public class DocumentationAssociator {
 	/**
 	 * Links comment nodes to classes listed in {@link #documentable} by collecting them in an
 	 * adapter (for later processing by formatter/styler).
-	 * 
+	 *
 	 */
 	public void linkDocumentation(EObject model) {
 		// clear stored tasks
@@ -233,8 +234,8 @@ public class DocumentationAssociator {
 			// msg is text to end, or up to (but not including) the newline.
 			int endIndex = commentText.indexOf("\n", firstTagIndex);
 			String msg = commentText.substring(firstTagIndex, endIndex < 0
-					? commentText.length()
-					: endIndex);
+				? commentText.length()
+						: endIndex);
 
 			// trim ending */ from message if ML comment?
 			msg = msg.trim(); // remove trailing spaces (there can be to leading)
@@ -256,43 +257,43 @@ public class DocumentationAssociator {
 			boolean isImportant = msg.contains("!");
 			String checkForBang = isImportant
 					? msg.replace('!', ' ').trim()
-					: msg;
-			if(checkForBang.length() <= firstTagLength) {
-				// System.out.println("EMPTY TODO MSG");
-				// scan backwards from tag start
-				String allText = node.getRootNode().getText();
-				int offset = node.getOffset() + firstTagIndex + firstTagLength - 1;
-				StringBuilder builder = new StringBuilder();
-				for(int o = offset; o >= 0; o--) {
-					char c = allText.charAt(o);
-					if(c == '\n')
-						break;
-					builder.append(c);
-				}
-				builder.reverse();
-				taskMsg = builder.toString();
-				taskMsg = taskMsg.trim();
-			}
-			// increase lines seen by those that were passed between previous found and this.
-			for(int i = previousTagIndex; i < firstTagIndex; i++)
-				if(commentText.charAt(i) == '\n')
-					line++;
+							: msg;
+					if(checkForBang.length() <= firstTagLength) {
+						// System.out.println("EMPTY TODO MSG");
+						// scan backwards from tag start
+						String allText = node.getRootNode().getText();
+						int offset = node.getOffset() + firstTagIndex + firstTagLength - 1;
+						StringBuilder builder = new StringBuilder();
+						for(int o = offset; o >= 0; o--) {
+							char c = allText.charAt(o);
+							if(c == '\n')
+								break;
+							builder.append(c);
+						}
+						builder.reverse();
+						taskMsg = builder.toString();
+						taskMsg = taskMsg.trim();
+					}
+					// increase lines seen by those that were passed between previous found and this.
+					for(int i = previousTagIndex; i < firstTagIndex; i++)
+						if(commentText.charAt(i) == '\n')
+							line++;
 
-			PPTask task = new PPTask(taskMsg, line, node.getOffset() + firstTagIndex, msg.length(), isImportant);
-			taskList.add(task);
+					PPTask task = new PPTask(taskMsg, line, node.getOffset() + firstTagIndex, msg.length(), isImportant);
+					taskList.add(task);
 
-			if(endIndex < 0)
-				return; // done, no more tags could be found
+					if(endIndex < 0)
+						return; // done, no more tags could be found
 
-			startPos = endIndex + 1;
-			previousTagIndex = firstTagIndex;
+					startPos = endIndex + 1;
+					previousTagIndex = firstTagIndex;
 		}
 	}
 
 	/**
 	 * Validate the state of documentation in model.
 	 * TODO: Implement this (currently does nothing).
-	 * 
+	 *
 	 * @param model
 	 * @param acceptor
 	 */

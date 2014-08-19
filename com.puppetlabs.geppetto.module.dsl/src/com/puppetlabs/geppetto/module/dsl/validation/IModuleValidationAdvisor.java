@@ -45,6 +45,11 @@ public interface IModuleValidationAdvisor {
 	ValidationPreference getModuleRedefinition();
 
 	/**
+	 * How should submodule directories be handled
+	 */
+	ValidationPreference getUnexpectedSubmodule();
+
+	/**
 	 * How should unrecognized keys be handled
 	 */
 	ValidationPreference getUnrecognizedKey();
@@ -53,11 +58,6 @@ public interface IModuleValidationAdvisor {
 	 * How should unresolved references be handled
 	 */
 	ValidationPreference getUnresolvedReference();
-
-	/**
-	 * How should submodule directories be handled
-	 */
-	ValidationPreference getUnexpectedSubmodule();
 
 	/**
 	 * How should tags containing whitespace characters be handled

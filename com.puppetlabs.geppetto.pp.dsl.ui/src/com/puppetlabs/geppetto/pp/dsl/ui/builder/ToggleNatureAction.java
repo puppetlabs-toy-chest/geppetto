@@ -83,7 +83,7 @@ public class ToggleNatureAction extends AbstractHandler {
 
 			final int newCount = 1 + (addXtextNature
 					? 1
-					: 0);
+							: 0);
 			// Add the nature
 			String[] newNatures = new String[natures.length + newCount];
 			System.arraycopy(natures, 0, newNatures, newCount, natures.length);

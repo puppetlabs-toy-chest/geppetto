@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -67,6 +67,52 @@ public class CatalogJsonSerializer {
 		}
 	}
 
+	public static Gson getGSon() {
+		return gsonBuilder.create();
+	}
+
+	/**
+	 * Loads a Catalog model from a catalog JSON file.
+	 *
+	 */
+	public static Catalog load(File jsonFile) throws IOException {
+		Reader reader = new BufferedReader(new FileReader(jsonFile));
+		try {
+			Gson gson = getGSon();
+			CatalogImpl md = gson.fromJson(reader, CatalogImpl.class);
+			return md;
+		}
+		finally {
+			StreamUtil.close(reader);
+		}
+	}
+
+	/**
+	 * Loads a Catalog model from a catalog JSON input stream.
+	 *
+	 */
+	public static Catalog load(InputStream jsonStream) throws IOException {
+		Reader reader = new BufferedReader(new InputStreamReader(jsonStream));
+		try {
+			Gson gson = getGSon();
+			CatalogImpl md = gson.fromJson(reader, CatalogImpl.class);
+			return md;
+		}
+		finally {
+			StreamUtil.close(reader);
+		}
+	}
+
+	/**
+	 * Loads a Catalog model from a catalog JSON string.
+	 *
+	 */
+	public static Catalog load(String jsonString) throws IOException {
+		Gson gson = getGSon();
+		CatalogImpl md = gson.fromJson(jsonString, CatalogImpl.class);
+		return md;
+	}
+
 	private static final GsonBuilder gsonBuilder;
 
 	static {
@@ -105,51 +151,5 @@ public class CatalogJsonSerializer {
 		}.getType(), new EListSerializer<CatalogResourceParameter>());
 
 		gsonBuilder = bld;
-	}
-
-	public static Gson getGSon() {
-		return gsonBuilder.create();
-	}
-
-	/**
-	 * Loads a Catalog model from a catalog JSON file.
-	 * 
-	 */
-	public static Catalog load(File jsonFile) throws IOException {
-		Reader reader = new BufferedReader(new FileReader(jsonFile));
-		try {
-			Gson gson = getGSon();
-			CatalogImpl md = gson.fromJson(reader, CatalogImpl.class);
-			return md;
-		}
-		finally {
-			StreamUtil.close(reader);
-		}
-	}
-
-	/**
-	 * Loads a Catalog model from a catalog JSON input stream.
-	 * 
-	 */
-	public static Catalog load(InputStream jsonStream) throws IOException {
-		Reader reader = new BufferedReader(new InputStreamReader(jsonStream));
-		try {
-			Gson gson = getGSon();
-			CatalogImpl md = gson.fromJson(reader, CatalogImpl.class);
-			return md;
-		}
-		finally {
-			StreamUtil.close(reader);
-		}
-	}
-
-	/**
-	 * Loads a Catalog model from a catalog JSON string.
-	 * 
-	 */
-	public static Catalog load(String jsonString) throws IOException {
-		Gson gson = getGSon();
-		CatalogImpl md = gson.fromJson(jsonString, CatalogImpl.class);
-		return md;
 	}
 }

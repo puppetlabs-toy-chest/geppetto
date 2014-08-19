@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,9 +19,10 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * Attempts to sort found references based on resource name, and on location of the source in the file
- * so order appears natural for user (i.e. as close to from top to bottom in file it is possible to get without access to actual
+ * so order appears natural for user (i.e. as close to from top to bottom in file it is possible to get without access
+ * to actual
  * offsets in text).
- * 
+ *
  */
 public class ReferenceSearchViewSorter extends ViewerSorter {
 
@@ -62,10 +63,10 @@ public class ReferenceSearchViewSorter extends ViewerSorter {
 			return diff;
 		f0 = f0 == null
 				? ""
-				: f0;
+						: f0;
 		f1 = f1 == null
 				? ""
-				: f1;
+						: f1;
 		return f0.compareTo(f1);
 
 	}
@@ -75,6 +76,6 @@ public class ReferenceSearchViewSorter extends ViewerSorter {
 		Integer result = comparator.invoke(e1, e2);
 		return result == null
 				? super.compare(viewer, e1, e2)
-				: result;
+						: result;
 	}
 }

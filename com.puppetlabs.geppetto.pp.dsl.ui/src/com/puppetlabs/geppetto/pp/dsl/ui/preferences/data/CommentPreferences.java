@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -18,7 +18,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * Manages the Comment related formatter preferences.
- * 
+ *
  */
 public class CommentPreferences extends AbstractPreferenceData {
 	public static final String FORMATTER_COMMENTS_ID = "com.puppetlabs.geppetto.pp.dsl.PP.formatter.comments";
@@ -52,7 +52,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns how <i>homogeneous</i> special lines (other than banners) should be aligned.
-	 * 
+	 *
 	 * @return true, if line should be flush left
 	 */
 	public boolean getAlignSpecialLinesLeft() {
@@ -60,8 +60,9 @@ public class CommentPreferences extends AbstractPreferenceData {
 	}
 
 	/**
-	 * Returns how <i>homogeneous</i> special lines (other than banners) should be aligned in the context of the given {@code IResource}.
-	 * 
+	 * Returns how <i>homogeneous</i> special lines (other than banners) should be aligned in the context of the given
+	 * {@code IResource}.
+	 *
 	 * @return true, if line should be flush left
 	 */
 	public boolean getAlignSpecialLinesLeft(IResource r) {
@@ -70,7 +71,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns how <i>banner lines</li> should be formatted.
-	 * 
+	 *
 	 * @see BannerAdvice
 	 * @return how banner lines should be formatted
 	 */
@@ -80,7 +81,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns how <i>banner lines</li> should be formatted in the context of the given {@code IResource}.
-	 * 
+	 *
 	 * @see BannerAdvice
 	 * @return how banner lines should be formatted
 	 */
@@ -90,7 +91,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns how <i>comment text lines</li> should be formatted.
-	 * 
+	 *
 	 * @see CommentTextAdvice
 	 * @return how comment text lines should be formatted
 	 */
@@ -101,7 +102,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns how <i>comment text lines</li> should be formatted in the context of the given {@code IResource}.
-	 * 
+	 *
 	 * @see CommentTextAdvice
 	 * @return how comment text lines should be formatted
 	 */
@@ -117,7 +118,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns if embedded sequences of $ ... $ should be verbatim or not
-	 * 
+	 *
 	 * @return true if text between $ should be verbatim
 	 */
 	public boolean isDoubleDollarVerbatim() {
@@ -125,8 +126,9 @@ public class CommentPreferences extends AbstractPreferenceData {
 	}
 
 	/**
-	 * Returns if embedded sequences of $ ... $ should be verbatim or not in the context of the given resource {@code IResource}.
-	 * 
+	 * Returns if embedded sequences of $ ... $ should be verbatim or not in the context of the given resource
+	 * {@code IResource}.
+	 *
 	 * @return true if text between $ should be verbatim
 	 */
 	public boolean isDoubleDollarVerbatim(IResource r) {
@@ -136,7 +138,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 	/**
 	 * If the advice is enabled for ML comment, the more detailed advice should be used. If not, the comment should
 	 * be formatted in verbatim/"preserve whitespace" mode.
-	 * 
+	 *
 	 * @return true if the advice is enabled
 	 */
 	public boolean isMLCommentEnabled() {
@@ -147,7 +149,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 	/**
 	 * If the advice is enabled for ML comment, the more detailed advice should be used. If not, the comment should
 	 * be formatted in verbatim/"preserve whitespace" mode.
-	 * 
+	 *
 	 * @return true if the advice is enabled
 	 */
 	public boolean isMLCommentEnabled(IResource r) {
@@ -157,7 +159,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 	/**
 	 * If the advice is enabled for SL comment, the more detailed advice should be used. If not, the comment should
 	 * be formatted in verbatim/"preserve whitespace" mode.
-	 * 
+	 *
 	 * @return true if the advice is enabled
 	 */
 	public boolean isSLCommentEnabled() {
@@ -168,7 +170,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 	/**
 	 * If the advice is enabled for SL comment, the more detailed advice should be used. If not, the comment should
 	 * be formatted in verbatim/"preserve whitespace" mode.
-	 * 
+	 *
 	 * @return true if the advice is enabled
 	 */
 	public boolean isSLCommentEnabled(IResource r) {

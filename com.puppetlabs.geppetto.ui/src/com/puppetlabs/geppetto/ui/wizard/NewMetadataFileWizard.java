@@ -156,9 +156,9 @@ public class NewMetadataFileWizard extends BasicNewResourceWizard implements INe
 							if(page != null)
 								IDE.openEditor(page, file, true);
 						}
-						catch(Exception e) {
-							throw new InvocationTargetException(e);
-						}
+					catch(Exception e) {
+						throw new InvocationTargetException(e);
+					}
 				}
 			});
 

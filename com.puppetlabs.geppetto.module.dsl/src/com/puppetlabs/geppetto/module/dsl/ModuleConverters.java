@@ -68,8 +68,23 @@ public class ModuleConverters extends DefaultTerminalConverters {
 		}
 	};
 
+	@ValueConverter(rule = "DOUBLE")
+	public IValueConverter<Double> DOUBLE() {
+		return DOUBLE_CONVERTER;
+	}
+
 	private boolean isQuoted(String rule) {
 		return rule.length() >= 2 && (rule.charAt(0) == '"' && rule.charAt(rule.length() - 1) == '"' || rule.startsWith("Q_"));
+	}
+
+	@ValueConverter(rule = "LONG")
+	public IValueConverter<Long> LONG() {
+		return LONG_CONVERTER;
+	}
+
+	@ValueConverter(rule = "NULL")
+	public IValueConverter<Object> NULL() {
+		return NULL_CONVERTER;
 	}
 
 	@Override
@@ -79,28 +94,13 @@ public class ModuleConverters extends DefaultTerminalConverters {
 
 		return isQuoted(lexerRule)
 				? '"' + Strings.convertToJavaString((String) value, false) + '"'
-				: super.toString(value, lexerRule);
+						: super.toString(value, lexerRule);
 	}
 
 	@Override
 	public Object toValue(String string, String lexerRule, INode node) throws ValueConverterException {
 		return isQuoted(lexerRule)
 				? STRING().toValue(string, node)
-				: super.toValue(string, lexerRule, node);
-	}
-
-	@ValueConverter(rule = "DOUBLE")
-	public IValueConverter<Double> DOUBLE() {
-		return DOUBLE_CONVERTER;
-	}
-
-	@ValueConverter(rule = "NULL")
-	public IValueConverter<Object> NULL() {
-		return NULL_CONVERTER;
-	}
-
-	@ValueConverter(rule = "LONG")
-	public IValueConverter<Long> LONG() {
-		return LONG_CONVERTER;
+						: super.toValue(string, lexerRule, node);
 	}
 }

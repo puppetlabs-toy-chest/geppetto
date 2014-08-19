@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -48,7 +48,7 @@ public class JRubyServices implements IRubyServices {
 
 	/**
 	 * Holds the JRuby parser result (the AST and any reported issues/errors).
-	 * 
+	 *
 	 */
 	public static class Result implements IRubyParseResult {
 		private List<IRubyIssue> issues;
@@ -70,7 +70,7 @@ public class JRubyServices implements IRubyServices {
 		/**
 		 * Returns a list of issues. Will return an empty list if there were no
 		 * issues.
-		 * 
+		 *
 		 * @return
 		 */
 		@Override
@@ -95,6 +95,7 @@ public class JRubyServices implements IRubyServices {
 	}
 
 	public static IRubyServicesFactory FACTORY = new IRubyServicesFactory() {
+		@Override
 		public IRubyServices create() {
 			return new JRubyServices();
 		}
@@ -162,7 +163,7 @@ public class JRubyServices implements IRubyServices {
 		Object doc = ((Map<?, ?>) hash).get("doc");
 		String docString = doc == null
 				? ""
-				: doc.toString();
+						: doc.toString();
 
 		functions.add(new PPFunctionInfo((String) name, rValue, docString));
 		return functions;
@@ -298,14 +299,14 @@ public class JRubyServices implements IRubyServices {
 
 	@Override
 	public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException,
-			RubySyntaxException {
+	RubySyntaxException {
 		return getTypePropertiesInfo(internalParse(fileName, reader));
 	}
 
 	/**
 	 * Implementation that exposes the Result impl class. Don't want callers of
 	 * the JRubyService to see this.
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 */
@@ -337,7 +338,7 @@ public class JRubyServices implements IRubyServices {
 	 * Where the parsing "magic" takes place. This impl is used instead of a
 	 * similar in the Parser util class since that impl uses a Null warning
 	 * collector.
-	 * 
+	 *
 	 * @param file
 	 * @param content
 	 * @param configuration
@@ -391,7 +392,7 @@ public class JRubyServices implements IRubyServices {
 
 	/**
 	 * IOExceptions thrown FileNotFound, and while reading
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -409,10 +410,12 @@ public class JRubyServices implements IRubyServices {
 	/**
 	 * Configure the ruby environment... (very little is needed in this impl).
 	 */
+	@Override
 	public void setUp() {
 		parserConfiguration = new ParserConfiguration(startLine, rubyVersion);
 	}
 
+	@Override
 	public void tearDown() {
 		parserConfiguration = null;
 	}

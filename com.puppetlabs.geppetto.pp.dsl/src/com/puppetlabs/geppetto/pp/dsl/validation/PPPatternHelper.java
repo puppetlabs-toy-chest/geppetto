@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -18,7 +18,7 @@ import com.google.inject.Singleton;
 /**
  * Helper patterns for puppet
  * (hint: http://www.regexplanet.com/simple/index.html for interactive testing of java regex).
- * 
+ *
  */
 // terminal NAME : ('0'..'9' | 'a'..'z') EXT_WORD_CHAR* ;
 // terminal CLASS_NAME : (('a'..'z') EXT_WORD_CHAR*)? ('::' ('a'..'z') EXT_WORD_CHAR*)+;
@@ -97,7 +97,7 @@ public class PPPatternHelper {
 
 	/**
 	 * For DQ string
-	 * 
+	 *
 	 * @return
 	 */
 	public Pattern getRecognizedDQEscapePattern() {
@@ -106,7 +106,7 @@ public class PPPatternHelper {
 
 	/**
 	 * For SQ string
-	 * 
+	 *
 	 * @return
 	 */
 	public Pattern getRecognizedSQEscapePattern() {
@@ -116,7 +116,7 @@ public class PPPatternHelper {
 	/**
 	 * Finds unrecognized escapes if recognized escapes have been removed from the input first.
 	 * For DQ string.
-	 * 
+	 *
 	 * @return
 	 */
 	public Pattern getUnrecognizedDQEscapesPattern() {
@@ -126,7 +126,7 @@ public class PPPatternHelper {
 	/**
 	 * Finds unrecognized escapes if recognized escapes have been removed from the input first.
 	 * For SQ string.
-	 * 
+	 *
 	 * @return
 	 */
 	public Pattern getUnrecognizedSQEscapesPattern() {
@@ -165,7 +165,7 @@ public class PPPatternHelper {
 
 	/**
 	 * Checks the content *between* ' ' (i.e. do not include the quotes in the given input).
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */

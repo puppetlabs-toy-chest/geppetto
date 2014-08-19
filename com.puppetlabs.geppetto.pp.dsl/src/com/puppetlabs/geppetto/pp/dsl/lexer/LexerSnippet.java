@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,7 +15,7 @@ import java.util.Arrays;
 /**
  * Not used separately, this code is copied to PPLexer.g
  * (except the methods that reference KEYWORD constants which are only in PPLexer.g)
- * 
+ *
  */
 @SuppressWarnings("unused")
 public class LexerSnippet {

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,7 +15,7 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 
 /**
  * Preference Page for Save Actions
- * 
+ *
  */
 public class PPSaveActionsPreferencePage extends AbstractPreferencePage {
 
@@ -33,7 +33,7 @@ public class PPSaveActionsPreferencePage extends AbstractPreferencePage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.preferences.AbstractPreferencePage#qualifiedName()
 	 */
 	@Override

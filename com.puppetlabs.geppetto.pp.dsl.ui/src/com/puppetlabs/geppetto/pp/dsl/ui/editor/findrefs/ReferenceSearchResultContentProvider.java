@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   itemis AG - intial API and implementation
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
@@ -47,7 +47,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceSearchResultContentProvider implements ITreeContentProvider, ISearchResultListener,
-		IResourceDescription.Event.Listener {
+IResourceDescription.Event.Listener {
 
 	private class UIUpdater extends UIJob {
 
@@ -116,26 +116,28 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 
 		final URI eObjectURI = (containerEObjectURI == null)
 				? referenceDescription.getSourceEObjectUri()
-				: containerEObjectURI;
-		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI.trimFragment());
-		if(resourceDescription != null) {
-			ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription, isUpdateViewer);
-			ReferenceSearchViewTreeNode referenceNode = null;
-			for(IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
-				if(eObjectDescription.getEObjectURI().equals(eObjectURI)) {
-					referenceNode = new ReferenceSearchViewTreeNode(
-						resourceNode, referenceDescription, eObjectDescription);
-					break;
+						: containerEObjectURI;
+				IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI.trimFragment());
+				if(resourceDescription != null) {
+					ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription, isUpdateViewer);
+					ReferenceSearchViewTreeNode referenceNode = null;
+					for(IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
+						if(eObjectDescription.getEObjectURI().equals(eObjectURI)) {
+							referenceNode = new ReferenceSearchViewTreeNode(
+								resourceNode, referenceDescription, eObjectDescription);
+							break;
+						}
+					}
+					if(referenceNode == null)
+						referenceNode = new ReferenceSearchViewTreeNode(
+							resourceNode, referenceDescription, referenceDescription);
 				}
-			}
-			if(referenceNode == null)
-				referenceNode = new ReferenceSearchViewTreeNode(
-					resourceNode, referenceDescription, referenceDescription);
-		}
 	}
 
+	@Override
 	public void descriptionsChanged(final Event event) {
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if(rootNodes != null) {
 					for(Delta delta : event.getDeltas()) {
@@ -156,6 +158,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 										final URI referenceTargetURI = refDesc.getTargetEObjectUri();
 										if(Iterables.isEmpty(Iterables.filter(
 											newReferenceDescriptions, new Predicate<IReferenceDescription>() {
+												@Override
 												public boolean apply(IReferenceDescription input) {
 													return input.getSourceEObjectUri().equals(referenceSourceURI) &&
 															input.getTargetEObjectUri().equals(referenceTargetURI);
@@ -184,10 +187,12 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		});
 	}
 
+	@Override
 	public void dispose() {
 		rootNodes = null;
 	}
 
+	@Override
 	public Object[] getChildren(Object parentElement) {
 		if(parentElement instanceof ReferenceSearchViewTreeNode) {
 			return Iterables.toArray(
@@ -196,6 +201,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return null;
 	}
 
+	@Override
 	public Object[] getElements(Object inputElement) {
 		if(rootNodes == null || rootNodes.isEmpty()) {
 			return new Object[0];
@@ -203,6 +209,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return Iterables.toArray(rootNodes, ReferenceSearchViewTreeNode.class);
 	}
 
+	@Override
 	public Object getParent(Object element) {
 		if(element instanceof ReferenceSearchViewTreeNode) {
 			return ((ReferenceSearchViewTreeNode) element).getParent();
@@ -210,6 +217,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return null;
 	}
 
+	@Override
 	public boolean hasChildren(Object element) {
 		if(element instanceof ReferenceSearchViewTreeNode) {
 			return !((ReferenceSearchViewTreeNode) element).getChildren().isEmpty();
@@ -217,6 +225,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return false;
 	}
 
+	@Override
 	public void inputChanged(final Viewer viewer, Object oldInput, Object newInput) {
 		synchronized(viewer) {
 			if(rootNodes != null) {
@@ -256,6 +265,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return node;
 	}
 
+	@Override
 	public void searchResultChanged(final SearchResultEvent e) {
 		synchronized(batchedSearchResultEvents) {
 			batchedSearchResultEvents.add(e);

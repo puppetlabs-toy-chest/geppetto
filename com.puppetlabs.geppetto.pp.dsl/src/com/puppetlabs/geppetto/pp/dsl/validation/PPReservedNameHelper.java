@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,13 +16,13 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * Helps with reserved names.
- * 
+ *
  */
 public class PPReservedNameHelper {
-
-	public static final List<String> reservedClassNames = ImmutableList.of("main", "settings");
 
 	public static boolean isReservedClassName(String s) {
 		return reservedClassNames.contains(s);
 	}
+
+	public static final List<String> reservedClassNames = ImmutableList.of("main", "settings");
 }

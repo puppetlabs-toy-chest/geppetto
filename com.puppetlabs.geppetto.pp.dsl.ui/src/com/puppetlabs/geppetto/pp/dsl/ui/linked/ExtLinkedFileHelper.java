@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,12 +32,6 @@ import org.eclipse.ui.PlatformUI;
  * use of UTF-8), but is otherwise generic.
  */
 public class ExtLinkedFileHelper {
-	// TODO: Should be configurable
-	public static final String AUTOLINK_PROJECT_NAME = "Geppetto.AutoFileSystemLinked";
-
-	// TODO: Should be configurable
-	public static final String ENCODING_UTF8 = "utf-8";
-
 	private static void createLink(IProject project, IFile linkFile, java.net.URI uri) throws CoreException {
 		IPath path = linkFile.getFullPath();
 
@@ -62,7 +56,7 @@ public class ExtLinkedFileHelper {
 		IResource[] resources = untitledFolder.members();
 		int result = resources.length > 0
 				? 1
-				: 0;
+						: 0;
 		for(IResource r : resources) {
 			// tied to format "untitled-n"
 			int dash = r.getName().indexOf("-");
@@ -71,14 +65,14 @@ public class ExtLinkedFileHelper {
 			int sequence = Integer.valueOf(r.getName().substring(dash + 1, r.getName().length() - 3));
 			result = sequence > result
 					? sequence
-					: result;
+							: result;
 		}
 		return result + 1;
 	}
 
 	/**
 	 * Throws WrappedException - the URI must refer to an existing file!
-	 * 
+	 *
 	 * @param uri
 	 * @return
 	 */
@@ -107,7 +101,7 @@ public class ExtLinkedFileHelper {
 				IFolder untitledFolder = project.getFolder("untitled");
 				String fileName = "untitled" + (firstFree > 1
 						? "-" + Integer.toString(firstFree)
-						: "") + ".b3";
+								: "") + ".b3";
 				linkFile = untitledFolder.getFile(fileName);
 			}
 			else {
@@ -145,4 +139,10 @@ public class ExtLinkedFileHelper {
 			}
 		}
 	}
+
+	// TODO: Should be configurable
+	public static final String AUTOLINK_PROJECT_NAME = "Geppetto.AutoFileSystemLinked";
+
+	// TODO: Should be configurable
+	public static final String ENCODING_UTF8 = "utf-8";
 }

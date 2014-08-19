@@ -154,11 +154,11 @@ public class GsonModule extends AbstractModule {
 		private static void addProperty(JsonObject obj, String key, String value) {
 			obj.addProperty(key, value == null
 					? ""
-					: value);
+							: value);
 		}
 
 		private static List<SupportedOS> deserializeSupportedOs(JsonElement supportedOS,
-				JsonDeserializationContext context) {
+			JsonDeserializationContext context) {
 			if(supportedOS == null || !supportedOS.isJsonArray())
 				return Collections.emptyList();
 
@@ -274,7 +274,7 @@ public class GsonModule extends AbstractModule {
 			addProperty(json, "license", src.getLicense());
 			json.addProperty("name", src.getName() == null
 					? ""
-					: src.getName().toString());
+							: src.getName().toString());
 			json.add("operatingsystem_support", context.serialize(src.getOperatingSystemSupport(), SUPPORTEDOS_TYPE));
 			addProperty(json, "project_page", src.getProjectPage());
 			json.add("requirements", context.serialize(src.getRequirements(), REQUIREMENTS_TYPE));
@@ -284,7 +284,7 @@ public class GsonModule extends AbstractModule {
 
 			json.addProperty("version", src.getVersion() == null
 					? ""
-					: src.getVersion().toString());
+							: src.getVersion().toString());
 			for(Map.Entry<String, Object> dynAttr : src.getDynamicAttributes().entrySet())
 				json.add(dynAttr.getKey(), context.serialize(dynAttr.getValue()));
 			return json;
@@ -371,37 +371,37 @@ public class GsonModule extends AbstractModule {
 	public static Boolean getBoolean(JsonElement json) {
 		return json.isJsonNull()
 				? null
-				: json.getAsBoolean();
+						: json.getAsBoolean();
 	}
 
 	public static Date getDate(JsonElement json) {
 		return json.isJsonNull()
 				? null
-				: DateJsonAdapter.stringToDate(json.getAsString());
+						: DateJsonAdapter.stringToDate(json.getAsString());
 	}
 
 	public static Integer getInteger(JsonElement json) {
 		return json.isJsonNull()
 				? null
-				: json.getAsInt();
+						: json.getAsInt();
 	}
 
 	public static Long getLong(JsonElement json) {
 		return json.isJsonNull()
 				? null
-				: json.getAsLong();
+						: json.getAsLong();
 	}
 
 	public static String getString(JsonElement json) {
 		return json.isJsonNull()
 				? null
-				: json.getAsString();
+						: json.getAsString();
 	}
 
 	private static int hexToByte(char c) {
 		return c >= 'a'
 				? c - ('a' - 10)
-				: c - '0';
+						: c - '0';
 	}
 
 	private static JsonElement serializeChecksums(Map<String, byte[]> src) {

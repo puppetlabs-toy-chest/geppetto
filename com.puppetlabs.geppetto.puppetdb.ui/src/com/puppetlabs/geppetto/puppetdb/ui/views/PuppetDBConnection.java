@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,6 +34,8 @@ public class PuppetDBConnection extends TreeNode<PuppetDBConnections, PuppetDBQu
 
 	private PuppetDBClient client;
 
+	private boolean dialogUp = false;
+
 	PuppetDBConnection(PuppetDBConnections parent, PuppetDBConnectionPreferences dbAccess) {
 		super(parent);
 		this.dbAccess = dbAccess;
@@ -46,7 +48,7 @@ public class PuppetDBConnection extends TreeNode<PuppetDBConnections, PuppetDBQu
 
 	/**
 	 * Returns the client that represent the PuppetDB instance
-	 * 
+	 *
 	 * @return The client
 	 * @throws BackingStoreException
 	 */
@@ -60,17 +62,28 @@ public class PuppetDBConnection extends TreeNode<PuppetDBConnections, PuppetDBQu
 	public String getColumnText(int colIdx) {
 		return colIdx == 0
 				? dbAccess.getIdentifier()
-				: "";
+						: "";
 	}
 
 	@Override
 	public Image getImage(int colIdx) {
 		return colIdx == 0
 				? DB_IMAGE
-				: null;
+						: null;
 	}
 
-	private boolean dialogUp = false;
+	/**
+	 * Returns the preferences used when connecting to the PuppetDB instance
+	 *
+	 * @return The preferences
+	 */
+	public PuppetDBConnectionPreferences getPreferences() {
+		return dbAccess;
+	}
+
+	public TreeViewer getViewer() {
+		return getParent().getViewer();
+	}
 
 	public void showException(Exception e) {
 		synchronized(this) {
@@ -89,18 +102,5 @@ public class PuppetDBConnection extends TreeNode<PuppetDBConnections, PuppetDBQu
 		synchronized(this) {
 			dialogUp = false;
 		}
-	}
-
-	/**
-	 * Returns the preferences used when connecting to the PuppetDB instance
-	 * 
-	 * @return The preferences
-	 */
-	public PuppetDBConnectionPreferences getPreferences() {
-		return dbAccess;
-	}
-
-	public TreeViewer getViewer() {
-		return getParent().getViewer();
 	}
 }

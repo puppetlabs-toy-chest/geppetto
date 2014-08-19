@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,18 +33,20 @@ import com.google.inject.Inject;
  * A Move-then-Fold Comment Formatting Strategy.
  * </p>
  * <p>
- * A comment that fits at the current position (after internal formatting by the {@link CommentProcessor} is appended to the given {@link ITextFlow}
- * output at its original position. If the comment does not fit, it is moved to the next line. If, on the next line, it fits at the effective indent
- * (the indent of future output) the effective indent will be used, else if the comment fits at the same indent as its original line, this position is
- * used. Finally, if the comment does not fit after having been moved, it is folded to fit and it is positioned at the effective indent.
+ * A comment that fits at the current position (after internal formatting by the {@link CommentProcessor} is appended to
+ * the given {@link ITextFlow} output at its original position. If the comment does not fit, it is moved to the next
+ * line. If, on the next line, it fits at the effective indent (the indent of future output) the effective indent will
+ * be used, else if the comment fits at the same indent as its original line, this position is used. Finally, if the
+ * comment does not fit after having been moved, it is folded to fit and it is positioned at the effective indent.
  * </p>
- * 
+ *
  * <p>
  * Folding only takes place if there is a space to the left of the preferred max width position.
  * </p>
  * <p>
- * Comment formatting is performed in accordance with the configuration's {@link ICommentConfiguration}, and it is expected that the implementation is
- * {@code ICommentConfiguration<{@link CommentType}>}. If not, an error message is logged, and comments are output without any formatting.
+ * Comment formatting is performed in accordance with the configuration's {@link ICommentConfiguration}, and it is
+ * expected that the implementation is {@code ICommentConfiguration<{@link CommentType}>}. If not, an error message is
+ * logged, and comments are output without any formatting.
  * </p>
  */
 public class MoveThenFoldCommentLayout extends AbstractLayout {
@@ -53,7 +55,7 @@ public class MoveThenFoldCommentLayout extends AbstractLayout {
 	protected ICommentConfiguration<CommentType> commentConfiguration;
 
 	protected List<IDomNode> collectCommentSequence(IDomNode dom, ILayoutContext context,
-			ICommentContainerInformation commentConfiguration) {
+		ICommentContainerInformation commentConfiguration) {
 		List<IDomNode> result = Lists.newArrayList();
 		result.add(dom);
 		if(!commentConfiguration.isSLStyle()) {
@@ -123,7 +125,7 @@ public class MoveThenFoldCommentLayout extends AbstractLayout {
 
 	/**
 	 * Formats the given comment passed in {@code node} and appends the result to the given {@code output}.
-	 * 
+	 *
 	 * @param styleSet
 	 *            the effective styles for the comment as determined by the CSS
 	 * @param node
@@ -154,7 +156,7 @@ public class MoveThenFoldCommentLayout extends AbstractLayout {
 		// number of wanted empty trailing lines in output (min and max)
 		final int trailing = commentContext.isSLStyle()
 				? 0
-				: 1;
+						: 1;
 		final int maxTrailing = 1;
 
 		// set up extraction context (use 0 if there was no INode model)

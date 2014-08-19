@@ -36,7 +36,7 @@ public class IntegerFieldEditor extends StringFieldEditor {
 
 	/**
 	 * Creates an integer field editor.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the preference this field editor works on
 	 * @param labelText
@@ -50,7 +50,7 @@ public class IntegerFieldEditor extends StringFieldEditor {
 
 	/**
 	 * Creates an integer field editor.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the preference this field editor works on
 	 * @param labelText
@@ -71,7 +71,7 @@ public class IntegerFieldEditor extends StringFieldEditor {
 
 	/**
 	 * Creates an integer field editor.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the preference this field editor works on
 	 * @param labelText
@@ -169,7 +169,7 @@ public class IntegerFieldEditor extends StringFieldEditor {
 
 	/**
 	 * Returns this field editor's current value as an integer.
-	 * 
+	 *
 	 * @return the value
 	 * @exception NumberFormatException
 	 *                if the <code>String</code> does not
@@ -181,7 +181,7 @@ public class IntegerFieldEditor extends StringFieldEditor {
 
 	/**
 	 * Sets the range of valid values for this field.
-	 * 
+	 *
 	 * @param min
 	 *            the minimum allowed value (inclusive)
 	 * @param max

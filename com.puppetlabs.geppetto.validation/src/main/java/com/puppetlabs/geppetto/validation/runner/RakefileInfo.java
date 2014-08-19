@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
 
 /**
  * Describes information about Rakefiles.
- * 
+ *
  */
 public class RakefileInfo {
 	public static class Rakefile {
@@ -29,7 +29,7 @@ public class RakefileInfo {
 		private List<Raketask> tasks;
 
 		/**
-		 * 
+		 *
 		 * @param path
 		 *            - relative path from "root"
 		 */
@@ -48,7 +48,7 @@ public class RakefileInfo {
 
 		/**
 		 * The path relative to the root used when dicovering rakefiles.
-		 * 
+		 *
 		 * @return
 		 */
 		public IPath getPath() {
@@ -59,7 +59,7 @@ public class RakefileInfo {
 		 * A list of tasks discovered in the rakefile. May be empty, and not
 		 * contain all tasks, if tasks are constructed via general purpose ruby
 		 * logic.
-		 * 
+		 *
 		 * @return
 		 */
 		public List<Raketask> getTasks() {
@@ -69,7 +69,7 @@ public class RakefileInfo {
 
 	/**
 	 * Describes one rake task.
-	 * 
+	 *
 	 */
 	public static class Raketask {
 		private String name;
@@ -95,7 +95,7 @@ public class RakefileInfo {
 		/**
 		 * An optional description of the task (if it was discovered), or an
 		 * empty string. Is never null.
-		 * 
+		 *
 		 * @return
 		 */
 		public String getDescription() {
@@ -104,7 +104,7 @@ public class RakefileInfo {
 
 		/**
 		 * The name of the task. Is never an empty string.
-		 * 
+		 *
 		 * @return
 		 */
 		public String getName() {
@@ -120,7 +120,7 @@ public class RakefileInfo {
 
 	/**
 	 * Adds a Rakfile, ignores null rakefiles.
-	 * 
+	 *
 	 * @param rakefile
 	 */
 	public void addRakefile(Rakefile rakefile) {

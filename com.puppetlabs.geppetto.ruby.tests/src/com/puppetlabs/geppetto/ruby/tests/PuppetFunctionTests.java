@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -27,7 +27,7 @@ public class PuppetFunctionTests {
 	@Test
 	public void testParseFunctionInNestedModules() throws Exception {
 		File aRubyFile = TestDataProvider.getTestFile(new Path(
-			"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest.rb"));
+				"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {
@@ -45,7 +45,7 @@ public class PuppetFunctionTests {
 	@Test
 	public void testParseFunctionInQualifiedNamedModule() throws Exception {
 		File aRubyFile = TestDataProvider.getTestFile(new Path(
-			"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest2.rb"));
+				"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest2.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {
@@ -64,7 +64,7 @@ public class PuppetFunctionTests {
 	@Test
 	public void testParseFunctionWithFullyQualifiedName() throws Exception {
 		File aRubyFile = TestDataProvider.getTestFile(new Path(
-			"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest3.rb"));
+				"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest3.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {
@@ -83,7 +83,7 @@ public class PuppetFunctionTests {
 	@Test
 	public void testParseFunctionWithoutRtypeOrDoc() throws Exception {
 		File aRubyFile = TestDataProvider.getTestFile(new Path(
-			"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/nodoc-nortype-function.rb"));
+				"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/nodoc-nortype-function.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {

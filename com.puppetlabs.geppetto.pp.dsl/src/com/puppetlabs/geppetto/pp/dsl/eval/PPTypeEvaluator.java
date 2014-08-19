@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -43,7 +43,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * Evaluates Type of an expression.
- * 
+ *
  */
 public class PPTypeEvaluator {
 	public enum PPType {
@@ -87,7 +87,7 @@ public class PPTypeEvaluator {
 	}
 
 	private PolymorphicDispatcher<PPType> typeDispatcher = new PolymorphicDispatcher<PPType>(
-		"_type", 1, 1, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<PPType> get()) {
+			"_type", 1, 1, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<PPType> get()) {
 		@Override
 		protected PPType handleNoSuchMethod(Object... params) {
 			return PPType.VOID;
@@ -118,7 +118,7 @@ public class PPTypeEvaluator {
 			if(parts.size() == 1) {
 				return isNumericString(((VerbatimTE) parts.get(0)).getText())
 						? PPType.NUMERIC
-						: PPType.STRING;
+								: PPType.STRING;
 			}
 			throw new IllegalStateException("hasInterpolation() returned false, but there was interpolation");
 		}
@@ -138,7 +138,7 @@ public class PPTypeEvaluator {
 		// i.e. either dynamic string that *may* be a number, or a non numeric string otherwise
 		return isNumericString(builder.toString())
 				? PPType.DYNAMIC_STRING
-				: PPType.STRING;
+						: PPType.STRING;
 	}
 
 	protected PPType _type(EqualityExpression o) {
@@ -164,13 +164,13 @@ public class PPTypeEvaluator {
 	protected PPType _type(LiteralName o) {
 		return isNumericString(o.getValue())
 				? PPType.NUMERIC
-				: PPType.STRING;
+						: PPType.STRING;
 	}
 
 	protected PPType _type(LiteralNameOrReference o) {
 		return isNumericString(o.getValue())
 				? PPType.NUMERIC
-				: PPType.STRING;
+						: PPType.STRING;
 	}
 
 	protected PPType _type(LiteralUndef o) {
@@ -208,7 +208,7 @@ public class PPTypeEvaluator {
 	protected PPType _type(SingleQuotedString o) {
 		return isNumericString(o.getText())
 				? PPType.NUMERIC
-				: PPType.STRING;
+						: PPType.STRING;
 	}
 
 	protected PPType _type(UnaryMinusExpression o) {

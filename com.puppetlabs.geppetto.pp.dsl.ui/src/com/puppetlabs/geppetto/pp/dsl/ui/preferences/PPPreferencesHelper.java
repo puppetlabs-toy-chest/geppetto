@@ -93,7 +93,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, //
 		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, //
 		PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED //
-	);
+			);
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
@@ -209,7 +209,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		boolean projectSpecific = getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTIONS_USE_PROJECT_SETTINGS);
 		return projectSpecific
 				? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL)
-				: getSaveActionEnsureEndsWithNewLine();
+						: getSaveActionEnsureEndsWithNewLine();
 	}
 
 	public boolean getSaveActionFormat() {
@@ -220,7 +220,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		boolean projectSpecific = getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTIONS_USE_PROJECT_SETTINGS);
 		return projectSpecific
 				? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_FORMAT)
-				: getSaveActionFormat();
+						: getSaveActionFormat();
 	}
 
 	public boolean getSaveActionReplaceFunkySpaces() {
@@ -231,7 +231,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		boolean projectSpecific = getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTIONS_USE_PROJECT_SETTINGS);
 		return projectSpecific
 				? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_REPLACE_FUNKY_SPACES)
-				: getSaveActionReplaceFunkySpaces();
+						: getSaveActionReplaceFunkySpaces();
 	}
 
 	public boolean getSaveActionTrimLines() {
@@ -242,7 +242,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		boolean projectSpecific = getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTIONS_USE_PROJECT_SETTINGS);
 		return projectSpecific
 				? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_TRIM_LINES)
-				: getSaveActionTrimLines();
+						: getSaveActionTrimLines();
 	}
 
 	public ValidationPreference getSelectorDefaultShouldAppearLast() {

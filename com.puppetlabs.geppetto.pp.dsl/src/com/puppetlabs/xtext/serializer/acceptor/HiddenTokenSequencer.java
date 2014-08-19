@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   itemis AG (http://www.itemis.eu) - initial API and implementation
  *   Puppet Labs - adaption to DomModel and Contextual formatter
- * 
+ *
  */
 package com.puppetlabs.xtext.serializer.acceptor;
 
@@ -48,7 +48,7 @@ import com.google.inject.Inject;
 /**
  * This is an adapted version of HiddenTokenSequencer that emits implicit white space where it is allowed.
  * Implicit WS is emitted also when an INode model is not present.
- * 
+ *
  */
 public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticSequenceAcceptor {
 
@@ -188,8 +188,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 				if(lastNonWhitespace) {
 					String wsString = commentReconcilement != null
 							? commentReconcilement.getWhitespaceBetween(prevCommentNode, node)
-							: "";
-					delegate.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, wsString), wsString, null);
+									: "";
+							delegate.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, wsString), wsString, null);
 				}
 				delegate.acceptComment((AbstractRule) node.getGrammarElement(), node.getText(), (ILeafNode) node);
 				lastNonWhitespace = true;
@@ -221,20 +221,24 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 		}
 	}
 
+	@Override
 	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
 		return delegate.enterAssignedAction(action, semanticChild, node);
 	}
 
+	@Override
 	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject semanticChild, ICompositeNode node) {
 		push(rc);
 		return delegate.enterAssignedParserRuleCall(rc, semanticChild, node);
 	}
 
+	@Override
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 		push(rc);
 		delegate.enterUnassignedParserRuleCall(rc);
 	}
 
+	@Override
 	public void finish() {
 		if(rootNode != null && rootNode == rootNode.getRootNode()) {
 			List<INode> hidden = getRemainingHiddenNodesInContainer(lastNode, rootNode);
@@ -278,7 +282,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 			int sz = stack.size();
 			implied = isImpliedWhitespace(implied, sz == 0
 					? null
-					: stack.get(sz - 1), from, to);
+							: stack.get(sz - 1), from, to);
 			if(implied) {
 				delegate.acceptWhitespace(ws, IDomNode.IMPLIED_EMPTY_WHITESPACE, null);
 			}
@@ -341,6 +345,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 		return out;
 	}
 
+	@Override
 	public void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		init(context, semanticObject, sequenceAcceptor, errorAcceptor, null);
 	}
@@ -378,7 +383,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 	/**
 	 * This method should be overridden in an implementation where certain visible whitespace
 	 * rules should be subject to formatting.
-	 * 
+	 *
 	 * @param defaultResult
 	 *            - the result to return if the already made decision is ok
 	 * @param rc
@@ -393,15 +398,18 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 		return defaultResult;
 	}
 
+	@Override
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
 		delegate.leaveAssignedAction(action, semanticChild);
 	}
 
+	@Override
 	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 		delegate.leaveAssignedParserRuleCall(rc, semanticChild);
 		pop();
 	}
 
+	@Override
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		delegate.leaveUnssignedParserRuleCall(rc);
 		pop();
@@ -467,7 +475,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 
 	/**
 	 * Remembers the last leaf of given node unless it is null.
-	 * 
+	 *
 	 * @param nodeToRemember
 	 */
 	private void rememberLastLeaf(INode node) {
@@ -481,7 +489,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 
 	/**
 	 * Remembers the given node unless it is null.
-	 * 
+	 *
 	 * @param nodeToRemember
 	 */
 	private void rememberNode(INode nodeToRemember) {

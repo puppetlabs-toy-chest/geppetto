@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,7 +29,7 @@ public interface ForgeClient {
 
 	/**
 	 * Authenticate, i.e. ask the server for the OAuth credentials unless we already have them
-	 * 
+	 *
 	 * @throws IOException
 	 *             if the authentication was unsuccessful
 	 */
@@ -42,7 +42,7 @@ public interface ForgeClient {
 
 	/**
 	 * Performs a GET command and and returns a stream from where the output can be read.
-	 * 
+	 *
 	 * @param uri
 	 * @param params
 	 * @return A stream from which the input can be read.
@@ -52,7 +52,7 @@ public interface ForgeClient {
 
 	/**
 	 * Performs a GET command and writes the response to <code>output</code>.
-	 * 
+	 *
 	 * @param uri
 	 * @param params
 	 * @param output
@@ -62,7 +62,7 @@ public interface ForgeClient {
 
 	/**
 	 * Performs a GET command using the legacy v2 API and writes the response to <code>output</code>.
-	 * 
+	 *
 	 * @param uri
 	 * @param params
 	 * @param output
@@ -71,10 +71,26 @@ public interface ForgeClient {
 	void downloadV2(String uri, Map<String, String> params, OutputStream output) throws IOException;
 
 	/**
+	 * Executes a HTTP GET request using the v3 API. The http response is expected to be a JSON representation of
+	 * an object of the specified <code>type</code>. The object is parsed and returned.
+	 *
+	 * @param urlStr
+	 *            The URL of the request
+	 * @param params
+	 *            Parameters to include in the URL
+	 * @param type
+	 *            The expected type of the result
+	 * @return An object of the expected type
+	 * @throws IOException
+	 *             if the request could not be completed
+	 */
+	<V> V get(String urlStr, Map<String, String> params, Type type) throws IOException;
+
+	/**
 	 * Executes a HTTP GET request using an URI that is relative to the version less base URI. The http response is
 	 * expected to be a JSON representation of an object of the specified <code>type</code>. The object is parsed and
 	 * returned.
-	 * 
+	 *
 	 * @param urlStr
 	 *            The URL of the request
 	 * @param params
@@ -90,7 +106,7 @@ public interface ForgeClient {
 	/**
 	 * Executes a HTTP GET request using the legacy v1 API. The http response is expected to be a JSON representation of
 	 * an object of the specified <code>type</code>. The object is parsed and returned.
-	 * 
+	 *
 	 * @param urlStr
 	 *            The URL of the request
 	 * @param params
@@ -106,7 +122,7 @@ public interface ForgeClient {
 	/**
 	 * Executes a HTTP GET request using the legacy v2 API. The http response is expected to be a JSON representation of
 	 * an object of the specified <code>type</code>. The object is parsed and returned.
-	 * 
+	 *
 	 * @param urlStr
 	 *            The URL of the request
 	 * @param params
@@ -120,24 +136,8 @@ public interface ForgeClient {
 	<V> V getV2(String urlStr, Map<String, String> params, Type type) throws IOException;
 
 	/**
-	 * Executes a HTTP GET request using the v3 API. The http response is expected to be a JSON representation of
-	 * an object of the specified <code>type</code>. The object is parsed and returned.
-	 * 
-	 * @param urlStr
-	 *            The URL of the request
-	 * @param params
-	 *            Parameters to include in the URL
-	 * @param type
-	 *            The expected type of the result
-	 * @return An object of the expected type
-	 * @throws IOException
-	 *             if the request could not be completed
-	 */
-	<V> V get(String urlStr, Map<String, String> params, Type type) throws IOException;
-
-	/**
 	 * Patch data to URI
-	 * 
+	 *
 	 * @param userPath
 	 * @param params
 	 * @param class1
@@ -147,7 +147,7 @@ public interface ForgeClient {
 
 	/**
 	 * Post to URI
-	 * 
+	 *
 	 * @param uri
 	 * @throws IOException
 	 */
@@ -155,7 +155,7 @@ public interface ForgeClient {
 
 	/**
 	 * Post data to URI
-	 * 
+	 *
 	 * @param <V>
 	 * @param uri
 	 * @param params
@@ -167,7 +167,7 @@ public interface ForgeClient {
 
 	/**
 	 * Post using a MultiPart entity
-	 * 
+	 *
 	 * @param uri
 	 *            The URI to post the data to (relative to the client base URI)
 	 * @param stringParts
@@ -190,7 +190,7 @@ public interface ForgeClient {
 
 	/**
 	 * Put to URI
-	 * 
+	 *
 	 * @param uri
 	 * @throws IOException
 	 */
@@ -198,7 +198,7 @@ public interface ForgeClient {
 
 	/**
 	 * Put data to URI
-	 * 
+	 *
 	 * @param <V>
 	 * @param uri
 	 * @param params
@@ -210,7 +210,7 @@ public interface ForgeClient {
 
 	/**
 	 * Set the user agent to use for all subsequent requests performed by this client.
-	 * 
+	 *
 	 * @param agent
 	 *            The agent or <code>null</code> to use the default agent.
 	 * @return this client

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,9 +17,9 @@ import com.google.common.base.Predicate;
 
 /**
  * A Predicate that checks a monitor for cancellation and reports one unit worked per comparison.
- * 
+ *
  * @param <T>
- * 
+ *
  */
 public abstract class CancelablePredicate<T> implements Predicate<T> {
 	private final IProgressMonitor monitor;
@@ -30,7 +30,7 @@ public abstract class CancelablePredicate<T> implements Predicate<T> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.google.common.base.Predicate#apply(java.lang.Object)
 	 */
 	@Override
@@ -47,8 +47,9 @@ public abstract class CancelablePredicate<T> implements Predicate<T> {
 	}
 
 	/**
-	 * Should be implemented to do what {@link Predicate#apply(Object)} normally does. Is called from {@link #apply(Object)}.
-	 * 
+	 * Should be implemented to do what {@link Predicate#apply(Object)} normally does. Is called from
+	 * {@link #apply(Object)}.
+	 *
 	 * @param input
 	 * @return
 	 */

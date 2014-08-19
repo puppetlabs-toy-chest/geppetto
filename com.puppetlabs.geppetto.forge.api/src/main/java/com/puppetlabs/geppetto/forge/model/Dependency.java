@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -102,7 +102,7 @@ public class Dependency extends Entity {
 
 	/**
 	 * Checks if this dependency is matched by the name and version
-	 * 
+	 *
 	 * @param name
 	 *            The name to match
 	 * @param version
@@ -115,7 +115,7 @@ public class Dependency extends Entity {
 
 	/**
 	 * Checks if this dependency is matched by the given release.
-	 * 
+	 *
 	 * @param release
 	 *            The release to match
 	 * @return The result of the match

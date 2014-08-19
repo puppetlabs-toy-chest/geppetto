@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import com.google.inject.Inject;
 /**
  * A PP specific hyperlink helper, that can find references using CrossReferenceAdapter instead of / in addition to
  * eReferences.
- * 
+ *
  */
 public class PPHyperlinkHelper extends HyperlinkHelper {
 
@@ -42,7 +42,7 @@ public class PPHyperlinkHelper extends HyperlinkHelper {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper#createHyperlinksByOffset(org.eclipse.xtext.resource.XtextResource, int,
 	 * org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor)
 	 */

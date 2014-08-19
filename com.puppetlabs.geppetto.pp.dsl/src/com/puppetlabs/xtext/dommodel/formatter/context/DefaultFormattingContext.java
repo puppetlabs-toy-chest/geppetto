@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,31 +21,31 @@ import com.google.inject.Provider;
 
 /**
  * <p>
- * This is a default implementation of IFormattingContext. Instances are created without consideration to the resource being formatted
- * ("one-size-fits-all"). Use more specialized contexts for resource and container based creation of IFormattingContext (e.g. to format code in
- * different "projects"/"containers" differently).
+ * This is a default implementation of IFormattingContext. Instances are created without consideration to the resource
+ * being formatted ("one-size-fits-all"). Use more specialized contexts for resource and container based creation of
+ * IFormattingContext (e.g. to format code in different "projects"/"containers" differently).
  * </p>
  * <p>
- * The returned IFormattingContext has a fixed max width of 132 characters, and picks up indentation and line separator information from the bindings
- * of {@link ILineSeparatorInformation}, and {@link IIndentationInformation}
+ * The returned IFormattingContext has a fixed max width of 132 characters, and picks up indentation and line separator
+ * information from the bindings of {@link ILineSeparatorInformation}, and {@link IIndentationInformation}
  * <p>
  * The DefaultFormattingContext can be used without injection,or via a guice binding of:
- * 
+ *
  * <pre>
  * bind(IFormattingContextFactory.class).to(DefaultFormattingContext.Factory.class);
  * </pre>
- * 
+ *
  * </p>
  * <p>
- * It is also possible to bind this class via a simple binding to the <code>IFormattingContext.class</code>, but this assumes a very simple
- * configuration.
+ * It is also possible to bind this class via a simple binding to the <code>IFormattingContext.class</code>, but this
+ * assumes a very simple configuration.
  * </p>
  */
 public class DefaultFormattingContext implements IFormattingContext {
 
 	/**
 	 * This factory ignores the given semantic object, and returns the same result for all.
-	 * 
+	 *
 	 */
 	public static class Factory implements IFormattingContextFactory {
 		@Inject
@@ -57,10 +57,12 @@ public class DefaultFormattingContext implements IFormattingContext {
 		@Inject
 		private Provider<IPreferredMaxWidthInformation> maxWidthProvider;
 
+		@Override
 		public IFormattingContext create(EObject semantic) {
 			return create(semantic, FormattingOption.Format);
 		}
 
+		@Override
 		public IFormattingContext create(EObject semantic, FormattingOption option) {
 			return new DefaultFormattingContext(lineInfoProvider.get(), //
 				identInfoProvider.get(), //

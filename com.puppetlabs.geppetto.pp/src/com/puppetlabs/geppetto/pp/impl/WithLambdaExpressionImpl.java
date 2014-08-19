@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.WithLambdaExpressionImpl#getLambda <em>Lambda</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implements WithLambdaExpression {
@@ -37,7 +37,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	 * The cached value of the '{@link #getLambda() <em>Lambda</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getLambda()
 	 * @generated
 	 * @ordered
@@ -47,7 +47,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected WithLambdaExpressionImpl() {
@@ -57,7 +57,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetLambda(Lambda newLambda, NotificationChain msgs) {
@@ -77,7 +77,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -107,7 +107,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -122,7 +122,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -138,7 +138,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -149,7 +149,7 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -165,9 +165,10 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Lambda getLambda() {
 		return lambda;
 	}
@@ -175,18 +176,19 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setLambda(Lambda newLambda) {
 		if(newLambda != lambda) {
 			NotificationChain msgs = null;
 			if(lambda != null)
 				msgs = ((InternalEObject) lambda).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, null, msgs);
+					PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, null, msgs);
 			if(newLambda != null)
 				msgs = ((InternalEObject) newLambda).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, null, msgs);
+					PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, null, msgs);
 			msgs = basicSetLambda(newLambda, msgs);
 			if(msgs != null)
 				msgs.dispatch();

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,7 +28,7 @@ public class TreeNodeContentProvider implements ILazyTreePathContentProvider {
 
 	/**
 	 * Creates a new instance for the given <code>viewer</code>.
-	 * 
+	 *
 	 * @param viewer
 	 *            The viewer that will receive updates from the new instance
 	 */
@@ -54,8 +54,8 @@ public class TreeNodeContentProvider implements ILazyTreePathContentProvider {
 	private TreeNode<?, ?> getNode(TreePath treePath) {
 		Object node = treePath.getSegmentCount() > 0
 				? treePath.getLastSegment()
-				: viewer.getInput();
-		return (TreeNode<?, ?>) node;
+						: viewer.getInput();
+				return (TreeNode<?, ?>) node;
 	}
 
 	/**

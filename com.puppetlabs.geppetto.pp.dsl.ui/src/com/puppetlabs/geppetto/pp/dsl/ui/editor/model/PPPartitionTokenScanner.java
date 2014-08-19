@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
 /**
  * A Paritioning token scanner that merges String partitions (since they are represented by a sequence of tokens in PP
  * and the default implementation only merges tokens in the default partition).
- * 
+ *
  */
 public class PPPartitionTokenScanner extends PartitionTokenScanner {
 

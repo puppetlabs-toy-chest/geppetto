@@ -36,16 +36,6 @@ public class DefaultModuleValidationAdvisor implements IModuleValidationAdvisor 
 	}
 
 	@Override
-	public ValidationPreference getModuleNameNotStrict() {
-		return ValidationPreference.WARNING;
-	}
-
-	@Override
-	public ValidationPreference getModuleRedefinition() {
-		return ValidationPreference.ERROR;
-	}
-
-	@Override
 	public ValidationPreference getModulefileExists() {
 		return ValidationPreference.WARNING;
 	}
@@ -53,6 +43,16 @@ public class DefaultModuleValidationAdvisor implements IModuleValidationAdvisor 
 	@Override
 	public ValidationPreference getModulefileExistsAndIsUsed() {
 		return ValidationPreference.WARNING;
+	}
+
+	@Override
+	public ValidationPreference getModuleNameNotStrict() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
+	public ValidationPreference getModuleRedefinition() {
+		return ValidationPreference.ERROR;
 	}
 
 	@Override

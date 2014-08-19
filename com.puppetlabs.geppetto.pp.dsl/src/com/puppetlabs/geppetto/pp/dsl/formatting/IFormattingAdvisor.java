@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,7 +15,7 @@ import com.google.inject.Singleton;
 
 /**
  * The Formatting Advisor provides answers to the formatter when there are options.
- * 
+ *
  */
 @ImplementedBy(IFormattingAdvisor.Default.class)
 public interface IFormattingAdvisor {
@@ -28,14 +28,14 @@ public interface IFormattingAdvisor {
 
 		/**
 		 * Note: if formatting for ML comment is off, then no left alignment of '*' etc. is performed.
-		 * 
+		 *
 		 * @return if formatting is turned on or not
 		 */
 		public boolean enabled();
 
 		/**
 		 * Note: If wrapping is off, a comment may still be left-aligned etc.
-		 * 
+		 *
 		 * @return if formatting should wrap the comment (at all)
 		 */
 		public boolean wrapping();

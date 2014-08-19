@@ -27,4 +27,12 @@
       </package>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated PPTP -->
+      <package
+            uri="http://www.puppetlabs.com/geppetto/1.0.0/PPTP"
+            class="com.puppetlabs.geppetto.pp.pptp.PPTPPackage"
+            genModel="model/PPTP.genmodel"/>
+   </extension>
+
 </plugin>

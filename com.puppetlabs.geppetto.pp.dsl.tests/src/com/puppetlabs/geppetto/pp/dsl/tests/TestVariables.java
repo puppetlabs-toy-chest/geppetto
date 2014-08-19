@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,7 +28,7 @@ import com.puppetlabs.geppetto.pp.dsl.validation.PPPatternHelper;
 
 /**
  * Test validation/linking of variables.
- * 
+ *
  */
 public class TestVariables extends AbstractPuppetTests implements AbstractPuppetTests.SerializationTestControl {
 
@@ -58,7 +58,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.junit.AbstractXtextTests#tearDown()
 	 */
 	@Override
@@ -249,7 +249,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	/**
 	 * An qualified reference to a global variable should produce no warning/error
 	 * (the existence of all global variables can not be computed for a given runtime).
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -258,7 +258,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 		initializeResourceSet(Lists.newArrayList(uri));
 		String code = "$y = 10\n" + //
 				"$ref = $::x\n" //
-		;
+				;
 		Resource r = loadResource(code, uri);
 		resolveCrossReferences(r);
 		tester.validate(r.getContents().get(0)).assertOK();
@@ -268,7 +268,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 	/**
 	 * An qualified reference to a global variable should produce no errors or warnings.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -285,14 +285,14 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 	/**
 	 * Reference to existing global variable should work, no errors or warnings.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
 	public void test_variable_Gx_Gx() throws Exception {
 		String code = "$x = 10\n" + //
 				"$ref = $x\n" //
-		;
+				;
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertOK();
@@ -302,14 +302,14 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	/**
 	 * An unqualified reference to a global variable should produce warning/error.
 	 * (In 2.7 (the default), it should be a warning).
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
 	public void test_variable_Gx_Gy() throws Exception {
 		String code = "$y = 10\n" + //
 				"$ref = $x\n" //
-		;
+				;
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertDiagnostic(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE);
@@ -318,7 +318,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 	/**
 	 * An unqualified reference to an inherited class parameter variable should produce no errors or warnings.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -339,7 +339,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 	/**
 	 * An unqualified reference to an inherited variable should produce no errors or warnings.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -362,7 +362,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 	/**
 	 * An unqualified reference to an inherited class parameter variable should produce no errors or warnings.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -382,7 +382,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 	/**
 	 * An unqualified reference to an inherited variable should produce no errors or warnings.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -403,7 +403,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 	/**
 	 * An unqualified reference to a local variable should produce no errors or warnings.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -422,7 +422,7 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	/**
 	 * An unqualified reference to a variable in outer scope should produce warning/error.
 	 * (Warning in 2.7 (default)).
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

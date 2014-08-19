@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -27,7 +27,7 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * Tests specific to reported issues.
- * 
+ *
  */
 public class TestIssues extends AbstractPuppetTests {
 
@@ -73,7 +73,7 @@ public class TestIssues extends AbstractPuppetTests {
 	/**
 	 * [11] Geppetto does not yet know about parameterized classes
 	 * https://github.com/puppetlabs/geppetto/issues#issue/11
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -88,7 +88,7 @@ public class TestIssues extends AbstractPuppetTests {
 	/**
 	 * [4] Parser does not understand realize on multiple lines
 	 * https://github.com/puppetlabs/geppetto/issues#issue/4
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -106,7 +106,7 @@ public class TestIssues extends AbstractPuppetTests {
 	/**
 	 * [206] single char class name and inheritance results in things not being found
 	 * An unqualified reference to an inherited variable should produce no errors or warnings.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -145,7 +145,7 @@ public class TestIssues extends AbstractPuppetTests {
 			"} ~> 'x' ? {", //
 			"  'y'     => Notify[b],", //
 			"  default => Notify[c]", //
-			"}\n");
+				"}\n");
 		String code = Joiner.on("\n").join(source).toString();
 		Resource r = loadAndLinkSingleResource(code);
 		AssertableDiagnostics asserter = tester.validate(r.getContents().get(0));
@@ -197,7 +197,7 @@ public class TestIssues extends AbstractPuppetTests {
 		ImmutableList<String> formatted = ImmutableList.of("$a = true ? {", //
 			"  \"something\" => 'dba',",//
 			"  default     => ''", //
-			"}\n");
+				"}\n");
 
 		String fmt = Joiner.on("\n").join(formatted).toString();
 

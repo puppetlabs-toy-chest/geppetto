@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.VariableTEImpl#getVarName <em>Var Name</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
@@ -34,7 +34,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	 * The default value of the '{@link #getVarName() <em>Var Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getVarName()
 	 * @generated
 	 * @ordered
@@ -45,7 +45,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	 * The cached value of the '{@link #getVarName() <em>Var Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getVarName()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected VariableTEImpl() {
@@ -65,7 +65,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -80,7 +80,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -88,8 +88,8 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 		switch(featureID) {
 			case PPPackage.VARIABLE_TE__VAR_NAME:
 				return VAR_NAME_EDEFAULT == null
-						? varName != null
-						: !VAR_NAME_EDEFAULT.equals(varName);
+				? varName != null
+				: !VAR_NAME_EDEFAULT.equals(varName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -97,7 +97,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -113,7 +113,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -140,9 +140,10 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getVarName() {
 		return varName;
 	}
@@ -150,9 +151,10 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setVarName(String newVarName) {
 		String oldVarName = varName;
 		varName = newVarName;
@@ -163,7 +165,7 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,7 +31,7 @@ import com.google.gson.annotations.Expose;
 
 /**
  * A response handler that expects JSON content.
- * 
+ *
  * @param <V>
  */
 public class JSonResponseHandler<V> implements ResponseHandler<V> {
@@ -99,7 +99,7 @@ public class JSonResponseHandler<V> implements ResponseHandler<V> {
 
 	/**
 	 * Create exception from response
-	 * 
+	 *
 	 * @param response
 	 * @param code
 	 * @param status
@@ -147,7 +147,7 @@ public class JSonResponseHandler<V> implements ResponseHandler<V> {
 
 	/**
 	 * Does status code denote a non-error response?
-	 * 
+	 *
 	 * @param code
 	 * @return true if okay, false otherwise
 	 */
@@ -165,7 +165,7 @@ public class JSonResponseHandler<V> implements ResponseHandler<V> {
 
 	/**
 	 * Parse JSON to specified type
-	 * 
+	 *
 	 * @param <V>
 	 * @param stream
 	 * @param type

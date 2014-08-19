@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   itemis AG - initial API and implementation
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
@@ -47,22 +47,27 @@ public class PPReferenceQueryData implements IPPQueryData {
 		this.label = label;
 	}
 
+	@Override
 	public String getLabel() {
 		return label;
 	}
 
+	@Override
 	public URI getLeadElementURI() {
 		return leadElementURI;
 	}
 
+	@Override
 	public URI getLocalContextResourceURI() {
 		return localContextResourceURI.trimFragment();
 	}
 
+	@Override
 	public Predicate<IReferenceDescription> getResultFilter() {
 		return resultFilter;
 	}
 
+	@Override
 	public Set<URI> getTargetURIs() {
 		return targetURIs;
 	}

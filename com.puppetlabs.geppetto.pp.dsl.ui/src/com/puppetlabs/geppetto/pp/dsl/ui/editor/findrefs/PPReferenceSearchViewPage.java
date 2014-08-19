@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   2010 itemis AG (http://www.itemis.eu) - initial API and implementation
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
@@ -151,18 +151,22 @@ public class PPReferenceSearchViewPage extends Page implements ISearchResultPage
 	protected IQueryListener createQueryListener() {
 		return new IQueryListener() {
 
+			@Override
 			public void queryAdded(ISearchQuery query) {
 				showBusyLabel(false);
 			}
 
+			@Override
 			public void queryFinished(ISearchQuery query) {
 				showBusyLabel(false);
 			}
 
+			@Override
 			public void queryRemoved(ISearchQuery query) {
 				showBusyLabel(false);
 			}
 
+			@Override
 			public void queryStarting(ISearchQuery query) {
 				showBusyLabel(true);
 			}
@@ -192,16 +196,19 @@ public class PPReferenceSearchViewPage extends Page implements ISearchResultPage
 		return pagebook;
 	}
 
+	@Override
 	public String getID() {
 		return id;
 	}
 
+	@Override
 	public String getLabel() {
 		return searchResult == null
 				? ""
-				: searchResult.getLabel();
+						: searchResult.getLabel();
 	}
 
+	@Override
 	public Object getUIState() {
 		return viewer.getSelection();
 	}
@@ -246,9 +253,11 @@ public class PPReferenceSearchViewPage extends Page implements ISearchResultPage
 		super.init(pageSite);
 	}
 
+	@Override
 	public void restoreState(IMemento memento) {
 	}
 
+	@Override
 	public void saveState(IMemento memento) {
 	}
 
@@ -259,10 +268,12 @@ public class PPReferenceSearchViewPage extends Page implements ISearchResultPage
 			control.setFocus();
 	}
 
+	@Override
 	public void setID(String id) {
 		this.id = id;
 	}
 
+	@Override
 	public void setInput(ISearchResult newSearchResult, Object uiState) {
 		synchronized(viewer) {
 			this.searchResult = newSearchResult;
@@ -276,6 +287,7 @@ public class PPReferenceSearchViewPage extends Page implements ISearchResultPage
 		}
 	}
 
+	@Override
 	public void setViewPart(ISearchResultViewPart part) {
 		this.part = part;
 	}
@@ -283,6 +295,7 @@ public class PPReferenceSearchViewPage extends Page implements ISearchResultPage
 	protected void showBusyLabel(final boolean shouldShowBusy) {
 		if(shouldShowBusy != isBusyShowing) {
 			Display.getDefault().asyncExec(new Runnable() {
+				@Override
 				public void run() {
 					if(shouldShowBusy)
 						pagebook.showPage(busyLabel);

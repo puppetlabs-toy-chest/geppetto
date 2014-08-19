@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,14 +21,14 @@ import com.google.common.io.Files;
 
 /**
  * Utils for JRubyparser
- * 
+ *
  */
 public class JRubyparserUtils {
 
 	/**
 	 * Finds position on line for a node.
 	 * This is a very expensive operation as it needs to open the file, read it and scan!
-	 * 
+	 *
 	 * @param n
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public class JRubyparserUtils {
 	/**
 	 * Reads the root content of the Node's source file and returns it as a string.
 	 * Returns null on failure to read the content.
-	 * 
+	 *
 	 * @param n
 	 * @return
 	 */

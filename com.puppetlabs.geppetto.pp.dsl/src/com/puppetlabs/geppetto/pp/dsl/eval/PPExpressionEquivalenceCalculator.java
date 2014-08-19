@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -38,12 +38,12 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * @author henrik
- * 
+ *
  */
 public class PPExpressionEquivalenceCalculator {
 
 	private PolymorphicDispatcher<Boolean> eqDispatcher = new PolymorphicDispatcher<Boolean>(
-		"_eq", 2, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
+			"_eq", 2, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
 		@Override
 		protected Boolean handleNoSuchMethod(Object... params) {
 			return null;
@@ -366,17 +366,17 @@ public class PPExpressionEquivalenceCalculator {
 
 		Boolean isEq = eqPriority(e1) > eqPriority(e2)
 				? doEq(e2, e1)
-				: doEq(e1, e2);
-		if(isEq == null && e1 instanceof EObject && e2 instanceof EObject) {
-			// no eq possible, compare source text if available
-			INode n1 = NodeModelUtils.getNode((EObject) e1);
-			INode n2 = NodeModelUtils.getNode((EObject) e2);
-			if(n1 == null || n2 == null)
-				return Boolean.FALSE;
+						: doEq(e1, e2);
+				if(isEq == null && e1 instanceof EObject && e2 instanceof EObject) {
+					// no eq possible, compare source text if available
+					INode n1 = NodeModelUtils.getNode((EObject) e1);
+					INode n2 = NodeModelUtils.getNode((EObject) e2);
+					if(n1 == null || n2 == null)
+						return Boolean.FALSE;
 
-			// compare source text, but skip hidden nodes
-			isEq = NodeModelUtils.getTokenText(n1).equals(NodeModelUtils.getTokenText(n2));
-		}
-		return isEq;
+					// compare source text, but skip hidden nodes
+					isEq = NodeModelUtils.getTokenText(n1).equals(NodeModelUtils.getTokenText(n2));
+				}
+				return isEq;
 	}
 }

@@ -26,24 +26,20 @@ import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
 
 public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 	@Override
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-		return ModuleConverters.class;
-	}
-
-	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
-		return ModuleLinkingDiagnosticMessageProvider.class;
+	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+		return StateBasedContainerManager.class;
 	}
 
 	public Class<? extends IFolderDiscriminator> bindIFolderDiscriminator() {
 		return FolderDiscriminator.class;
 	}
 
-	/**
-	 * Binds the resource provide that reacts to "metadata.json" files rather than
-	 * just the filename extension
-	 */
-	public Class<? extends IResourceServiceProvider> bindIResourceServiceProvider() {
-		return ModuleResourceServiceProvider.class;
+	public Class<? extends IGenerator> bindIGenerator() {
+		return ModuleGenerator.class;
+	}
+
+	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
+		return ModuleLinkingDiagnosticMessageProvider.class;
 	}
 
 	/**
@@ -51,15 +47,6 @@ public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 	 */
 	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
 		return ModuleQualifiedNameConverter.class;
-	}
-
-	public Class<? extends IGenerator> bindIGenerator() {
-		return ModuleGenerator.class;
-	}
-
-
-	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
-		return ModuleResourceDescriptionManager.class;
 	}
 
 	/**
@@ -70,9 +57,21 @@ public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 		return ModuleQualifiedNameProvider.class;
 	}
 
+	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
+		return ModuleResourceDescriptionManager.class;
+	}
+
+	/**
+	 * Binds the resource provide that reacts to "metadata.json" files rather than
+	 * just the filename extension
+	 */
+	public Class<? extends IResourceServiceProvider> bindIResourceServiceProvider() {
+		return ModuleResourceServiceProvider.class;
+	}
+
 	@Override
-	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
-		return StateBasedContainerManager.class;
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return ModuleConverters.class;
 	}
 
 	public void configureForge(Binder binder) {

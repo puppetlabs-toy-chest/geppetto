@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,18 +29,19 @@ import com.google.inject.name.Named;
  * A DomNodeLayoutFeeder feeds {@link IDomNode} instances to an {@link ILayoutManager}.
  * </p>
  * <p>
- * This feeder obtains the layout manager to use by looking up the style of the respective node. If a node does not specify how to be formatted, a
- * {@link FlowLayout} will be used.
+ * This feeder obtains the layout manager to use by looking up the style of the respective node. If a node does not
+ * specify how to be formatted, a {@link FlowLayout} will be used.
  * </p>
  * <p>
- * This class is useful in specialized layout managers that want to control certain aspects of formatting, but allows children to be formatted as per
- * their specified formatting styles. Simply calling {@link #sequence(IDomNode, ITextFlow, ILayoutContext)} on a node will invoke an
+ * This class is useful in specialized layout managers that want to control certain aspects of formatting, but allows
+ * children to be formatted as per their specified formatting styles. Simply calling
+ * {@link #sequence(IDomNode, ITextFlow, ILayoutContext)} on a node will invoke an
  * {@link ILayoutManager#format(StyleSet, IDomNode, ITextFlow, ILayoutContext)} for the given node (and all sub nodes).
  * </p>
  * <p>
  * The feeder prunes children by returning if the layout manager returns true from one of its format methods.
  * </p>
- * 
+ *
  */
 public class DomNodeLayoutFeeder {
 
@@ -53,8 +54,9 @@ public class DomNodeLayoutFeeder {
 
 	/**
 	 * Sequences a collection of IDomNode in depth first order. Each node is passed to an
-	 * {@link ILayoutManager#format(StyleSet, IDomNode, ITextFlow, ILayoutContext)} where the layout manager is obtained via style collection.
-	 * 
+	 * {@link ILayoutManager#format(StyleSet, IDomNode, ITextFlow, ILayoutContext)} where the layout manager is obtained
+	 * via style collection.
+	 *
 	 * @param dom
 	 * @param output
 	 * @param context
@@ -76,8 +78,9 @@ public class DomNodeLayoutFeeder {
 
 	/**
 	 * Sequences the IDomNode in depth first order. Each node is passed to an
-	 * {@link ILayoutManager#format(StyleSet, IDomNode, ITextFlow, ILayoutContext)} where the layout manager is obtained via style collection.
-	 * 
+	 * {@link ILayoutManager#format(StyleSet, IDomNode, ITextFlow, ILayoutContext)} where the layout manager is obtained
+	 * via style collection.
+	 *
 	 * @param dom
 	 * @param output
 	 * @param context

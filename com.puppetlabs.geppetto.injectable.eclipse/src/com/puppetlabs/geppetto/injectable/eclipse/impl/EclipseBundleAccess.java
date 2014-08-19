@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs - initial API and implementation
  */
@@ -37,7 +37,7 @@ public class EclipseBundleAccess implements BundleAccess {
 			URL resourceURL = FileLocator.find(bundle, new Path(bundleRelativeResourcePath), null);
 			return resourceURL == null
 					? null
-					: getResourceAsFile(resourceURL);
+							: getResourceAsFile(resourceURL);
 		}
 		catch(Exception e) {
 			throw new IllegalStateException("Failed to convert resource URL to URI", e);

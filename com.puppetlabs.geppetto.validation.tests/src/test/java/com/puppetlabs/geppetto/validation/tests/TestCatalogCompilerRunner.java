@@ -18,7 +18,7 @@ public class TestCatalogCompilerRunner {
 	/**
 	 * Note, requires the mock-output.sh file under /testData to produce the
 	 * output
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -35,8 +35,8 @@ public class TestCatalogCompilerRunner {
 		for(CatalogDiagnostic d : diagnostics) {
 			String s = d.getFile().getName();
 			assertEquals("File should end with .pp", ".pp", s.substring(s.length() > 3
-					? s.length() - 3
-					: 0));
+				? s.length() - 3
+						: 0));
 			assertEquals("Should have 10*diag# as line", 10 * i, d.getLineNumber());
 			if(d.getMessage().startsWith("Could not parse")) {
 				assertEquals("Should have parse diagnostic code", ValidationService.CATALOG_PARSER, d.getType());

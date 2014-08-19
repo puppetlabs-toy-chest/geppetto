@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -51,8 +51,8 @@ import com.google.inject.Inject;
 /**
  * This is a to a large part a copy of the ReferenceFinder in the corresponding package in Xtext, modified to search
  * for references the Geppetto way.
- * 
- * 
+ *
+ *
  */
 public class PPReferenceFinder {
 
@@ -163,7 +163,7 @@ public class PPReferenceFinder {
 
 	/**
 	 * Returns the length of a containing URI's fragment or 0 if the candidate is not a container.
-	 * 
+	 *
 	 * @param contained
 	 * @param containerCandidate
 	 * @return
@@ -216,6 +216,7 @@ public class PPReferenceFinder {
 
 		// use only resource path of targets to disqualify references from within the targets
 		Set<URI> targetResourceURIs = newHashSet(transform(targetURIs, new Function<URI, URI>() {
+			@Override
 			public URI apply(URI from) {
 				return from.trimFragment();
 			}
@@ -262,6 +263,7 @@ public class PPReferenceFinder {
 			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, "Find references", 1);
 		localResourceAccess.readOnly(queryData.getLocalContextResourceURI(), new IUnitOfWork<Boolean, ResourceSet>() {
+			@Override
 			public Boolean exec(ResourceSet localContext) throws Exception {
 				Set<EObject> targets = newHashSet();
 				for(URI targetURI : queryData.getTargetURIs()) {

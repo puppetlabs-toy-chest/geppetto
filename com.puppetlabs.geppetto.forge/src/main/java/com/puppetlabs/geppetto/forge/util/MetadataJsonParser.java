@@ -91,7 +91,7 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 	protected String getBadNameMessage(IllegalArgumentException e, boolean dependency) {
 		String pfx = dependency
 				? "A dependency "
-				: "A module ";
+						: "A module ";
 		return pfx + e.getMessage();
 	}
 

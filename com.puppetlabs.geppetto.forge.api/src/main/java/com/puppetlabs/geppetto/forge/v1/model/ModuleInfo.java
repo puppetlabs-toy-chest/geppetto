@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -51,7 +51,7 @@ public class ModuleInfo extends Entity {
 		this.full_name = moduleName;
 		this.name = moduleName == null
 				? null
-				: moduleName.getName();
+						: moduleName.getName();
 		this.version = version;
 	}
 
@@ -78,13 +78,13 @@ public class ModuleInfo extends Entity {
 	public List<Release> getReleases() {
 		return releases == null
 				? Collections.<Release> emptyList()
-				: releases;
+						: releases;
 	}
 
 	public List<String> getTagList() {
 		return tag_list == null
 				? Collections.<String> emptyList()
-				: tag_list;
+						: tag_list;
 	}
 
 	public Version getVersion() {

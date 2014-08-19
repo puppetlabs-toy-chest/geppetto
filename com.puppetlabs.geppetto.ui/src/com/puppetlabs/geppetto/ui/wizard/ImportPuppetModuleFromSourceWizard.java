@@ -102,10 +102,10 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 					return isModule(curr)
 							? (isProject(curr)
 									? IMG_MODULE_PROJECT
-									: IMG_MODULE)
-							: (isProject(curr)
-									? IMG_OBJ_PROJECT
-									: IMG_FOLDER);
+											: IMG_MODULE)
+											: (isProject(curr)
+													? IMG_OBJ_PROJECT
+															: IMG_FOLDER);
 				}
 				return IMG_FILE;
 			}
@@ -131,6 +131,7 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 
 		public FolderContentProvider() {
 			fileFilter = new IFileStoreFilter() {
+				@Override
 				public boolean accept(IFileStore fs) {
 					if(fs.getName().startsWith("."))
 						return false;
@@ -159,30 +160,36 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 			};
 		}
 
+		@Override
 		public void dispose() {
 		}
 
+		@Override
 		public Object[] getChildren(Object parentElement) {
 			return parentElement instanceof IFileStore
 					? IDEResourceInfoUtils.listFileStores(
 						(IFileStore) parentElement, fileFilter, new NullProgressMonitor())
-					: EMPTY;
+						: EMPTY;
 		}
 
+		@Override
 		public Object[] getElements(Object element) {
 			return getChildren(element);
 		}
 
+		@Override
 		public Object getParent(Object element) {
 			return element instanceof IFileStore
 					? ((IFileStore) element).getParent()
-					: null;
+							: null;
 		}
 
+		@Override
 		public boolean hasChildren(Object element) {
 			return getChildren(element).length > 0;
 		}
 
+		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		}
 	}
@@ -345,10 +352,10 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 
 			projectNameField.setText(proposedName == null
 					? ""
-					: proposedName);
+							: proposedName);
 			projectNameInfoField.setText(isProject
-					? "(derived from existing .project file)"
-					: "");
+				? "(derived from existing .project file)"
+						: "");
 			validatePage();
 		}
 
@@ -388,7 +395,7 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 			IPath modulePath = Path.fromOSString(moduleRoot.getAbsolutePath());
 			projectLocation = Platform.getLocation().equals(modulePath.removeLastSegments(1))
 					? null
-					: modulePath;
+							: modulePath;
 			projectContainer = Path.fromOSString(projectName);
 			setPageComplete(true);
 		}

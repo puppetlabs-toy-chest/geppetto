@@ -21,7 +21,7 @@ import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
  *
  */
 public class PreferenceBasedValidationAdvisorProvider<T extends IValidationAdvisor> implements
-		Provider<IValidationAdvisor> {
+Provider<IValidationAdvisor> {
 	public static <T extends IValidationAdvisor> PreferenceBasedValidationAdvisorProvider<T> create() {
 		return new PreferenceBasedValidationAdvisorProvider<T>();
 	}

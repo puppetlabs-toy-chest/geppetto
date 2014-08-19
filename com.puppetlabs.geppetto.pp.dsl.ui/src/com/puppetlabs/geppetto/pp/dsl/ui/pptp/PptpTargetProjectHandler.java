@@ -104,9 +104,9 @@ public class PptpTargetProjectHandler {
 			try {
 				oldTargetProject.delete(true, monitor);
 			}
-			catch(CoreException e) {
-				// ignore
-			}
+		catch(CoreException e) {
+			// ignore
+		}
 
 		IProject targetProject = workspace.getRoot().getProject(PPUiConstants.PPTP_TARGET_PROJECT_NAME);
 
@@ -194,13 +194,13 @@ public class PptpTargetProjectHandler {
 		// get a handle to the wanted target platform (.pptp) file from preferences
 		//
 		try {
-			targetProject.refreshLocal(IFile.DEPTH_INFINITE, monitor);
+			targetProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 			File pptpFile = bundleAccess.getResourceAsFile(new URL(uri.toString()));
 			IFile targetFile = targetProject.getFile(pptpFile.getName());
 			if(targetFile.exists()) {
 				if(pptpFile.lastModified() > targetFile.getLocalTimeStamp()) {
-					targetFile.delete(IFile.FORCE | IFile.ALWAYS_DELETE_PROJECT_CONTENT, monitor);
-					targetFile.refreshLocal(IFile.DEPTH_ZERO, monitor);
+					targetFile.delete(IResource.FORCE | IResource.ALWAYS_DELETE_PROJECT_CONTENT, monitor);
+					targetFile.refreshLocal(IResource.DEPTH_ZERO, monitor);
 					targetFile.create(new FileInputStream(pptpFile), true, monitor);
 				}
 			}
@@ -209,7 +209,7 @@ public class PptpTargetProjectHandler {
 				// this makes it possible to keep several that are not managed
 				for(IResource r : targetProject.members()) {
 					if(r.getName().startsWith(prefix))
-						r.delete(IFile.FORCE | IFile.ALWAYS_DELETE_PROJECT_CONTENT, monitor);
+						r.delete(IResource.FORCE | IResource.ALWAYS_DELETE_PROJECT_CONTENT, monitor);
 				}
 				InputStream inputStream = new FileInputStream(pptpFile);
 				targetFile.create(inputStream, true, monitor);

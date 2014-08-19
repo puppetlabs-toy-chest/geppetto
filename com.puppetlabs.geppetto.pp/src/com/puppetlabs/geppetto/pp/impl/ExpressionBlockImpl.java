@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.ExpressionBlockImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class ExpressionBlockImpl extends ExpressionImpl implements ExpressionBlock {
@@ -40,7 +40,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getStatements()
 	 * @generated
 	 * @ordered
@@ -50,7 +50,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ExpressionBlockImpl() {
@@ -60,7 +60,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -75,7 +75,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -90,7 +90,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -105,7 +105,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -123,7 +123,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -134,7 +134,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -150,13 +150,14 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getStatements() {
 		if(statements == null) {
 			statements = new EObjectContainmentEList<Expression>(
-				Expression.class, this, PPPackage.EXPRESSION_BLOCK__STATEMENTS);
+					Expression.class, this, PPPackage.EXPRESSION_BLOCK__STATEMENTS);
 		}
 		return statements;
 	}

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,9 +30,10 @@ public interface ICommentReconcilement {
 	List<INode> commentNodesFor(INode preceding, INode last, INode current);
 
 	/**
-	 * Return a string with the whitespace content that should appear between the two given nodes. The prevCommentNode is null
+	 * Return a string with the whitespace content that should appear between the two given nodes. The prevCommentNode
+	 * is null
 	 * for the first node of a sequence.
-	 * 
+	 *
 	 * @param prevCommentNode
 	 * @param node
 	 * @return
@@ -41,8 +42,9 @@ public interface ICommentReconcilement {
 
 	/**
 	 * Return true, if the given (comment) node is a node that will be reconciled (and thus not included in its
-	 * "non reconciled" position unless this reconcilement says so by returning it in {@link #commentNodesFor(INode, INode, INode)}).
-	 * 
+	 * "non reconciled" position unless this reconcilement says so by returning it in
+	 * {@link #commentNodesFor(INode, INode, INode)}).
+	 *
 	 * @param node
 	 *            - the node to check if it is reconciled or not
 	 * @return - true if reconciled

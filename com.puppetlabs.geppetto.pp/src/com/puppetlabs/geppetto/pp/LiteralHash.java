@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,14 +16,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Literal Hash</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
  * <li>{@link com.puppetlabs.geppetto.pp.LiteralHash#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getLiteralHash()
  * @model
  * @generated
@@ -34,10 +34,11 @@ public interface LiteralHash extends LiteralExpression {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.HashEntry}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Elements</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Elements</em>' containment reference list isn't clear, there really should be more of
+	 * a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Elements</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getLiteralHash_Elements()
 	 * @model containment="true"

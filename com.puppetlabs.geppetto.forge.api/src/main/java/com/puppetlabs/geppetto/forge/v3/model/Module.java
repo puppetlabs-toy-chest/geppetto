@@ -66,7 +66,7 @@ public class Module extends AbbrevModule {
 	public List<AbbrevRelease> getReleases() {
 		return releases == null
 				? Collections.<AbbrevRelease> emptyList()
-				: Collections.unmodifiableList(releases);
+						: Collections.unmodifiableList(releases);
 	}
 
 	/**

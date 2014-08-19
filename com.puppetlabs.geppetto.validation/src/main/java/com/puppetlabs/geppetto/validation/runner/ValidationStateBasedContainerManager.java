@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 
 /**
  * A container manager that allows visible containers to be obtained from a container handle.
- * 
+ *
  */
 public class ValidationStateBasedContainerManager extends StateBasedContainerManager {
 	@Inject
@@ -31,7 +31,7 @@ public class ValidationStateBasedContainerManager extends StateBasedContainerMan
 	/**
 	 * Returns the container handle - (normally an internal handle, but in PP validation, this handle is known to be the
 	 * module path).
-	 * 
+	 *
 	 * @param desc
 	 * @param resourceIndex
 	 * @return
@@ -45,9 +45,9 @@ public class ValidationStateBasedContainerManager extends StateBasedContainerMan
 	 * min requirement on Xtext 2.3, the implementation of this class can be simplified by removing this method and
 	 * instead calling the public getState(IResourceDescription) on the superclass, and also removing the extra injected
 	 * private {@link #stateProvider} in this class.
-	 * 
+	 *
 	 * TODO: See https://am0.cloudsmith.com/bugzilla/show_bug.cgi?id=2614 and comment above.
-	 * 
+	 *
 	 * @param resourceDescriptions
 	 * @return
 	 */

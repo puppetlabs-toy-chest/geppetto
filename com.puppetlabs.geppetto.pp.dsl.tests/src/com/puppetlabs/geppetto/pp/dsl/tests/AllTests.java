@@ -18,7 +18,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * All Puppet Tests.
  */
 @SuiteClasses({
-// @fmtOff
+	// @fmtOff
 	TestVariables.class,
 	TestWsAndComments.class,
 	TestPuppetResourceExpr.class,
@@ -38,7 +38,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestPPFormattingFailing.class,
 	TestFormatterUtils.class,
 	TestPptpResourceAsFile.class
-// @fmtOn
+	// @fmtOn
 })
 @RunWith(Suite.class)
 public class AllTests {

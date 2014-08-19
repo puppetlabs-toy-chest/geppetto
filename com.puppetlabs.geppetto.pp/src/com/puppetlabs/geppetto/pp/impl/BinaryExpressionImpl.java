@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.BinaryExpressionImpl#getRightExpr <em>Right Expr</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class BinaryExpressionImpl extends ExpressionImpl implements BinaryExpression {
@@ -38,7 +38,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * The cached value of the '{@link #getLeftExpr() <em>Left Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getLeftExpr()
 	 * @generated
 	 * @ordered
@@ -49,7 +49,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * The cached value of the '{@link #getRightExpr() <em>Right Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getRightExpr()
 	 * @generated
 	 * @ordered
@@ -59,7 +59,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected BinaryExpressionImpl() {
@@ -69,7 +69,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetLeftExpr(Expression newLeftExpr, NotificationChain msgs) {
@@ -89,7 +89,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetRightExpr(Expression newRightExpr, NotificationChain msgs) {
@@ -109,7 +109,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -126,7 +126,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -143,7 +143,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -160,7 +160,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -179,7 +179,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -190,7 +190,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -209,9 +209,10 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getLeftExpr() {
 		return leftExpr;
 	}
@@ -219,9 +220,10 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getRightExpr() {
 		return rightExpr;
 	}
@@ -229,18 +231,19 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setLeftExpr(Expression newLeftExpr) {
 		if(newLeftExpr != leftExpr) {
 			NotificationChain msgs = null;
 			if(leftExpr != null)
 				msgs = ((InternalEObject) leftExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.BINARY_EXPRESSION__LEFT_EXPR, null, msgs);
+					PPPackage.BINARY_EXPRESSION__LEFT_EXPR, null, msgs);
 			if(newLeftExpr != null)
 				msgs = ((InternalEObject) newLeftExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.BINARY_EXPRESSION__LEFT_EXPR, null, msgs);
+					PPPackage.BINARY_EXPRESSION__LEFT_EXPR, null, msgs);
 			msgs = basicSetLeftExpr(newLeftExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -253,18 +256,19 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setRightExpr(Expression newRightExpr) {
 		if(newRightExpr != rightExpr) {
 			NotificationChain msgs = null;
 			if(rightExpr != null)
 				msgs = ((InternalEObject) rightExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, null, msgs);
+					PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, null, msgs);
 			if(newRightExpr != null)
 				msgs = ((InternalEObject) newRightExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, null, msgs);
+					PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, null, msgs);
 			msgs = basicSetRightExpr(newRightExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();

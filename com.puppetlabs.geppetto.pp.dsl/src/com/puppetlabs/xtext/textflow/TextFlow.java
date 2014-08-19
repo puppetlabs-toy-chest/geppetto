@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -22,11 +22,11 @@ import com.google.inject.Inject;
  * An implementation of {@link ITextFlow.WithText} that appends its content to an {@link Appendable} (by default an
  * internal {@link StringBuilder} instance).
  * </p>
- * 
+ *
  * <p>
  * An {@link IOException} thrown by an {@link Appendable} is rethrown as a runtime {@link WrappedException}.
  * </p>
- * 
+ *
  */
 public class TextFlow extends MeasuredTextFlow implements ITextFlow.WithText {
 
@@ -60,7 +60,7 @@ public class TextFlow extends MeasuredTextFlow implements ITextFlow.WithText {
 			return this;
 		internal_append(count == 1
 				? getLineSeparator()
-				: new CharSequences.RepeatingString(getLineSeparator(), count));
+						: new CharSequences.RepeatingString(getLineSeparator(), count));
 		lastWasBreak = true;
 		return this;
 	}
@@ -72,7 +72,7 @@ public class TextFlow extends MeasuredTextFlow implements ITextFlow.WithText {
 			return this;
 		emit(count == 1
 				? oneSpace
-				: new CharSequences.Spaces(count));
+						: new CharSequences.Spaces(count));
 
 		return this;
 	}
@@ -94,7 +94,7 @@ public class TextFlow extends MeasuredTextFlow implements ITextFlow.WithText {
 			lastWasBreak = false;
 			internal_append(getPendingIndent() == 0
 					? ""
-					: new CharSequences.Fixed(indentChar, getPendingIndent()));
+							: new CharSequences.Fixed(indentChar, getPendingIndent()));
 		}
 		internal_append(s);
 	}
@@ -103,12 +103,12 @@ public class TextFlow extends MeasuredTextFlow implements ITextFlow.WithText {
 	public CharSequence getText() {
 		CharSequence a = (builder instanceof CharSequence)
 				? (CharSequence) builder
-				: builder.toString();
-		// include the not yet fully processed text by adding indent and current run
-		CharSequence b = getCurrentRun();
-		if(lastWasBreak && b.length() > 0)
-			a = CharSequences.concatenate(a, new CharSequences.Fixed(indentChar, getPendingIndent()));
-		return CharSequences.concatenate(a, getCurrentRun());
+						: builder.toString();
+				// include the not yet fully processed text by adding indent and current run
+				CharSequence b = getCurrentRun();
+				if(lastWasBreak && b.length() > 0)
+					a = CharSequences.concatenate(a, new CharSequences.Fixed(indentChar, getPendingIndent()));
+				return CharSequences.concatenate(a, getCurrentRun());
 	}
 
 	private void internal_append(CharSequence s) {

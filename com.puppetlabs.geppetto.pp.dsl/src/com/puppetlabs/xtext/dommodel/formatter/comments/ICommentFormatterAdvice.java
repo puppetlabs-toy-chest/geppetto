@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,19 +17,20 @@ import com.google.inject.Provider;
  * Describes advice/preferences to a comment formatter.
  * </p>
  * <p>
- * Note that parts of the advice may be needed by a "comment extractor" that separates the comment text from its comment container. This happens when
- * there is an ambiguity if whitespace is part of the container/the language it is embedded in, or if it is part of the comment.
+ * Note that parts of the advice may be needed by a "comment extractor" that separates the comment text from its comment
+ * container. This happens when there is an ambiguity if whitespace is part of the container/the language it is embedded
+ * in, or if it is part of the comment.
  * </p>
  * <p>
- * The formatting advice described by this interface is considered to be a useful set of "preferences" for comment formatting in a generic sense.
- * Naturally, if the default textual comment processor is overridden with a more advanced parser, such a processor may use only parts of this advice,
- * and may use an extended interface to provide additional implementation specific advice. When doing so, the implementation should naturally also use
- * custom preference pages.
+ * The formatting advice described by this interface is considered to be a useful set of "preferences" for comment
+ * formatting in a generic sense. Naturally, if the default textual comment processor is overridden with a more advanced
+ * parser, such a processor may use only parts of this advice, and may use an extended interface to provide additional
+ * implementation specific advice. When doing so, the implementation should naturally also use custom preference pages.
  * </p>
  * <p>
- * <b>TODO</b>: This construct is a bit of a crutch. The best way to handle comment formatting is to parse the comment into a Dom, and then apply
- * styling with CSS. The "comment formatter advice" would then simply be a CSS. The current implementation is basically one single complex "style",
- * with a special mechanism to apply it.
+ * <b>TODO</b>: This construct is a bit of a crutch. The best way to handle comment formatting is to parse the comment
+ * into a Dom, and then apply styling with CSS. The "comment formatter advice" would then simply be a CSS. The current
+ * implementation is basically one single complex "style", with a special mechanism to apply it.
  * </p>
  */
 public interface ICommentFormatterAdvice {
@@ -165,21 +166,21 @@ public interface ICommentFormatterAdvice {
 	/**
 	 * If the advice is enabled, the more detailed advice should be used. If not, the comment should
 	 * be formatted in verbatim/"preserve whitespace" mode.
-	 * 
+	 *
 	 * @return true if the advice is enabled
 	 */
 	public boolean enabled();
 
 	/**
 	 * Returns how <i>homogeneous</i> lines (other than banners) should be aligned.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean getAlignSpecialLinesLeft();
 
 	/**
 	 * Returns how <i>banner lines</li> should be formatted.
-	 * 
+	 *
 	 * @see BannerAdvice
 	 * @return how banner lines should be formatted
 	 */
@@ -187,7 +188,7 @@ public interface ICommentFormatterAdvice {
 
 	/**
 	 * Returns how <i>comment text lines</li> should be formatted.
-	 * 
+	 *
 	 * @see CommentTextAdvice
 	 * @return how comment text lines should be formatted
 	 */
@@ -195,7 +196,7 @@ public interface ICommentFormatterAdvice {
 
 	/**
 	 * Returns if embedded sequences of $ ... $ should be verbatim or not
-	 * 
+	 *
 	 * @return true if text between $ should be verbatim
 	 */
 	boolean isDoubleDollarVerbatim();

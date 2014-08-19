@@ -25,7 +25,7 @@ import com.google.inject.Inject;
  * This class is a copy that implements the package private interface in ReferenceFinder. Since PPReferenceFinder needed
  * to be different than the ReferenceFinder it became difficult to deal with the package private interface.
  * Maybe this can be revised in Geppetto.
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class LoadingResourceAccess implements PPReferenceFinder.ILocalResourceAccess {
@@ -36,6 +36,7 @@ public class LoadingResourceAccess implements PPReferenceFinder.ILocalResourceAc
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
 
+	@Override
 	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(targetURI.trimFragment());
 		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
@@ -48,9 +49,9 @@ public class LoadingResourceAccess implements PPReferenceFinder.ILocalResourceAc
 					try {
 						return work.exec(resourceSet);
 					}
-					catch(Exception e) {
-						throw new WrappedException(e);
-					}
+				catch(Exception e) {
+					throw new WrappedException(e);
+				}
 			}
 		}
 		return null;

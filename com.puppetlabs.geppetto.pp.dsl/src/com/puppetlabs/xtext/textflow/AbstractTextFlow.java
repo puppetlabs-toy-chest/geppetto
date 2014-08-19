@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 
 /**
  * An abstract implementation of an ITextFlow.
- * 
+ *
  */
 public abstract class AbstractTextFlow implements ITextFlow {
 
@@ -37,7 +37,7 @@ public abstract class AbstractTextFlow implements ITextFlow {
 
 	/**
 	 * Copy constructor
-	 * 
+	 *
 	 * @param original
 	 */
 	protected AbstractTextFlow(AbstractTextFlow original) {
@@ -59,7 +59,7 @@ public abstract class AbstractTextFlow implements ITextFlow {
 		indentSize = indentationString.length();
 		indentChar = indentSize == 0
 				? ' '
-				: indentationString.charAt(0);
+						: indentationString.charAt(0);
 		if(indentSize > 0) {
 			for(int i = 0; i < indentSize; i++)
 				if(indentationString.charAt(i) != indentChar)
@@ -107,7 +107,8 @@ public abstract class AbstractTextFlow implements ITextFlow {
 
 	/**
 	 * Breaks lines into separate lines and calls a sequence of {@link #doText(String)} and {@link #oneBreak(int)}.
-	 * A derived class should not override this method, and instead override {@link #doText(String)} to perform the emit of
+	 * A derived class should not override this method, and instead override {@link #doText(String)} to perform the emit
+	 * of
 	 * the actual text, or {@link #processTextSequence(CharSequence)} to do processing before emit (wrapping, etc).
 	 */
 	@Override
@@ -164,7 +165,7 @@ public abstract class AbstractTextFlow implements ITextFlow {
 	 * Process (and output) given sequence for embedded line breaks (must be counted and subject to indentation).
 	 * Results in a series of calls to {@link #processTextSequence(CharSequence)} and (if there are
 	 * any embedded breaks) {@link #appendBreaks(1)}.
-	 * 
+	 *
 	 * @param s
 	 */
 	protected void processEmbeddedLinebreaks(CharSequence s, boolean verbatim) {
@@ -187,7 +188,7 @@ public abstract class AbstractTextFlow implements ITextFlow {
 	/**
 	 * This default implementation does nothing but call {@link #doText(CharSequence)} - a derived implementation
 	 * may buffer, perform auto line wrapping etc.
-	 * 
+	 *
 	 * @param s
 	 */
 	protected void processTextSequence(CharSequence s, boolean verbatim) {
@@ -206,6 +207,7 @@ public abstract class AbstractTextFlow implements ITextFlow {
 		this.preferredMaxWidth = preferredMaxWidth;
 	};
 
+	@Override
 	public void setWrapIndentation(int count) {
 		wrapIndentSize = count;
 	}

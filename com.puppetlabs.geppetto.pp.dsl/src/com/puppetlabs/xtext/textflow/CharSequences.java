@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,13 +19,13 @@ import com.google.common.collect.Lists;
  * or specified character, a repeating sequence, concatenation, sub sequence and replacement methods for
  * String methods {@link #endsWith(CharSequence, String)}, {@link #indexOf(CharSequence, String, int)}, and a method
  * that splits a CharSequence into a List.
- * 
+ *
  */
 public class CharSequences {
 
 	/**
 	 * A CharSequence consisting of a concatenation of two sequences
-	 * 
+	 *
 	 */
 	public static class Concatenation implements CharSequence {
 		private CharSequence b;
@@ -65,7 +65,7 @@ public class CharSequences {
 
 	/**
 	 * An CharSequence consisting of a sequence of the same character.
-	 * 
+	 *
 	 */
 	public static class Fixed implements CharSequence {
 
@@ -104,7 +104,7 @@ public class CharSequences {
 
 	/**
 	 * An CharSequence consisting of a sequence of the same character.
-	 * 
+	 *
 	 */
 	public static class RepeatingString implements CharSequence {
 
@@ -152,7 +152,7 @@ public class CharSequences {
 
 	/**
 	 * An CharSequence consisting of only space
-	 * 
+	 *
 	 */
 	public static class Spaces implements CharSequence {
 		private static String space16 = "                ";
@@ -229,16 +229,12 @@ public class CharSequences {
 
 	}
 
-	private static final Spaces oneSpace = new Spaces(1);
-
-	private static final Spaces zeroSpace = new Spaces(0);
-
 	/**
 	 * Produces an efficient concatenation of two CharSequences in a safe way (they may be null).
 	 * No copies are being made (thus for excessive iteration of the result it is better to
 	 * make a copy of the result).
 	 * If a concatenation is not really needed (one is null or empty) the other sequence is returned.
-	 * 
+	 *
 	 * @param a
 	 * @param b
 	 * @return a CharSequence being a concatenation
@@ -298,7 +294,7 @@ public class CharSequences {
 
 	/**
 	 * Returns true if the comment consists of a repeated single character, or is empty.
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */
@@ -351,7 +347,7 @@ public class CharSequences {
 
 	/**
 	 * Split sequence on delimiter
-	 * 
+	 *
 	 * @param value
 	 * @param delimiter
 	 * @return
@@ -379,7 +375,7 @@ public class CharSequences {
 	/**
 	 * Trims both left and right whitespace up to given limits. The maxLeftCount is only enforced if
 	 * right trimming stops before the maxLeftCountPosition.
-	 * 
+	 *
 	 * @param s
 	 * @param maxLeftCount
 	 * @param maxRightCount
@@ -404,4 +400,8 @@ public class CharSequences {
 	public static CharSequence trimRight(CharSequence s) {
 		return s.subSequence(0, lastIndexOfNonWhitepace(s, s.length() - 1));
 	}
+
+	private static final Spaces oneSpace = new Spaces(1);
+
+	private static final Spaces zeroSpace = new Spaces(0);
 }

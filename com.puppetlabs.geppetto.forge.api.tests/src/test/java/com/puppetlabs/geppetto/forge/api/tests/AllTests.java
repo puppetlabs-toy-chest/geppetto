@@ -10,7 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 // @fmtOff
 	DependencyTest.class
-// @fmtOn
+	// @fmtOn
 })
 @RunWith(Suite.class)
 public class AllTests {

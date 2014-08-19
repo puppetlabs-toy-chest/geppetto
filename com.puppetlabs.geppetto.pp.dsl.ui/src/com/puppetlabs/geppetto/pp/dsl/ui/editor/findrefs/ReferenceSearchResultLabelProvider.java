@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   itemis AG (http://www.itemis.eu) - initial API and implementation
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
@@ -23,10 +23,10 @@ import com.google.inject.Inject;
 /**
  * A ReferenceSearchResultLabelProvider that provides styled text and uses an explicit PPDescriptionLabelProvider rather
  * than the global label provider (requires registration).
- * 
+ *
  * TODO: Consider registering the label provider.
  * TODO: Contribute the styled string extension back to Xtext
- * 
+ *
  */
 public class ReferenceSearchResultLabelProvider extends StyledCellLabelProvider {
 
@@ -42,7 +42,7 @@ public class ReferenceSearchResultLabelProvider extends StyledCellLabelProvider 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider#getStyledText(java.lang.Object)
 	 */
 	public StyledString getStyledText(Object element) {
@@ -61,7 +61,7 @@ public class ReferenceSearchResultLabelProvider extends StyledCellLabelProvider 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.jface.viewers.StyledCellLabelProvider#update(org.eclipse.jface.viewers.ViewerCell)
 	 */
 	@Override

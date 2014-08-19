@@ -52,7 +52,7 @@ public class ResourceUtil {
 			progressMonitor.beginTask("", 10); //$NON-NLS-1$
 			progressMonitor.subTask(UIPlugin.getLocalString("_UI_CreatingPuppetProject_message", //$NON-NLS-1$
 				new Object[] { projectName, projectLocationURI != null
-						? projectLocationURI.toString()
+				? projectLocationURI.toString()
 						: projectName }));
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			project = workspace.getRoot().getProject(projectName);
@@ -149,8 +149,8 @@ public class ResourceUtil {
 
 	public static void openEditor(IFile file) throws PartInitException {
 		openEditor(file, isMetadata(file)
-				? "com.puppetlabs.geppetto.module.dsl.Module" //$NON-NLS-1$
-				: "com.puppetlabs.geppetto.pp.dsl.Puppet"); //$NON-NLS-1$
+			? "com.puppetlabs.geppetto.module.dsl.Module" //$NON-NLS-1$
+					: "com.puppetlabs.geppetto.pp.dsl.Puppet"); //$NON-NLS-1$
 	}
 
 	public static void openEditor(IFile file, String editorId) throws PartInitException {
@@ -159,7 +159,7 @@ public class ResourceUtil {
 		IEditorDescriptor defaultEditor = workbench.getEditorRegistry().getDefaultEditor(file.getFullPath().toString());
 		page.openEditor(new FileEditorInput(file), defaultEditor == null
 				? editorId
-				: defaultEditor.getId());
+						: defaultEditor.getId());
 	}
 
 	public static void selectFile(IResource file) {

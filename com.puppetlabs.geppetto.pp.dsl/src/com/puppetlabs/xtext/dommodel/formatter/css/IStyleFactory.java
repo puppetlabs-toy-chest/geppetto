@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,7 +28,7 @@ import com.google.inject.ImplementedBy;
 
 /**
  * A Factory for basic DOM styling - see {@link IStyle}.
- * 
+ *
  * Note to implementors: To extend formatting, simply created wanted {@link IStyle} implementations
  * that are supported by an extended formatter. Do not extend this interface.
  */
@@ -51,7 +51,7 @@ public interface IStyleFactory {
 
 	/**
 	 * Dedent 1.
-	 * 
+	 *
 	 * @return style with dedent count 1 (number of indents to reverse)
 	 */
 	public DedentStyle dedent();
@@ -71,7 +71,7 @@ public interface IStyleFactory {
 
 	/**
 	 * Indent 1.
-	 * 
+	 *
 	 * @param containerNames
 	 * @return style with one literal indent
 	 */

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -41,12 +41,12 @@ public class PomMetadataExtractor extends AbstractMetadataExtractor {
 	public boolean canExtractFrom(File moduleDirectory, FileFilter filter) {
 		// @fmtOff
 		return mavenProject != null
-			&& mavenProject.getFile() != null
-			&& filter.accept(mavenProject.getFile())
-			&& "puppet-module".equals(mavenProject.getPackaging())
-			&& moduleDirectory != null
-			&& filter.accept(moduleDirectory)
-			&& moduleDirectory.equals(mavenProject.getFile().getParentFile());
+				&& mavenProject.getFile() != null
+				&& filter.accept(mavenProject.getFile())
+				&& "puppet-module".equals(mavenProject.getPackaging())
+				&& moduleDirectory != null
+				&& filter.accept(moduleDirectory)
+				&& moduleDirectory.equals(mavenProject.getFile().getParentFile());
 		// @fmtOn
 	}
 
@@ -87,10 +87,10 @@ public class PomMetadataExtractor extends AbstractMetadataExtractor {
 					Restriction r = restrictions.get(0);
 					Version lower = r.getLowerBound() == null
 							? Version.MIN
-							: Version.create(r.getLowerBound().toString());
+									: Version.create(r.getLowerBound().toString());
 					Version upper = r.getUpperBound() == null
 							? Version.MAX
-							: Version.create(r.getUpperBound().toString());
+									: Version.create(r.getUpperBound().toString());
 
 					Dependency forgeDep = new Dependency();
 					String dgid = mavenProject.getGroupId();

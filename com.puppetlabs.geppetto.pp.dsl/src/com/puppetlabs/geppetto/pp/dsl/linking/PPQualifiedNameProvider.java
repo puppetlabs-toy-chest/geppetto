@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,14 +26,14 @@ import com.google.inject.Inject;
 
 /**
  * A Puppet Qualified Name provider.
- * 
+ *
  */
 public class PPQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
 	public static QualifiedName splice(QualifiedName a, QualifiedName b) {
 		return a == null
 				? b
-				: a.append(b);
+						: a.append(b);
 	}
 
 	@Inject
@@ -41,7 +41,7 @@ public class PPQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProv
 
 	/**
 	 * The fully qualified name of the closest named parent.
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */

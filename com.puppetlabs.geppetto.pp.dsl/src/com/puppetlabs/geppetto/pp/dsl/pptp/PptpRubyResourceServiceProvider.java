@@ -6,14 +6,15 @@ import org.eclipse.xtext.resource.generic.GenericResourceServiceProvider;
 
 /**
  * An IResourceServiceProvider for PPTP Ruby.
- * This implementation optimizes which .rb instances which will be visited by restricing {@link #canHandle(URI)} to only operate on the paths where
+ * This implementation optimizes which .rb instances which will be visited by restricing {@link #canHandle(URI)} to only
+ * operate on the paths where
  * PPTP contributions can be made.
  */
 public class PptpRubyResourceServiceProvider extends GenericResourceServiceProvider {
 
 	/**
 	 * Returns true for .rb files that make a contribution to PPTP.
-	 * 
+	 *
 	 * This is the only difference from the default...
 	 */
 	@Override

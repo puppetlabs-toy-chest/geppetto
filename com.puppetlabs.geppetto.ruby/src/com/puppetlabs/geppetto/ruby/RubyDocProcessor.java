@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 
 /**
  * A better Ruby Doc parser
- * 
+ *
  */
 public class RubyDocProcessor {
 	public static class RubyDocLexer {
@@ -297,7 +297,7 @@ public class RubyDocProcessor {
 		 * Returns true, if the first char after natural margin is a list start char, and is followed by
 		 * a whitespace. (This to not get a false positive on *bold*). Check starts at natural margin
 		 * to enable * * sublist starts here
-		 * 
+		 *
 		 * @param i
 		 * @return
 		 */
@@ -346,7 +346,7 @@ public class RubyDocProcessor {
 	}
 
 	private PolymorphicDispatcher<String> htmlDispatcher = new PolymorphicDispatcher<String>(
-		"_html", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
+			"_html", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
 		@Override
 		protected String handleNoSuchMethod(Object... params) {
 			return "<pre>INTERNAL ERROR, missing _html method for token: " + params[0].getClass().getName() + "</pre>";
@@ -363,7 +363,7 @@ public class RubyDocProcessor {
 
 	/**
 	 * Join with ""
-	 * 
+	 *
 	 * @param o1
 	 * @param o2
 	 * @return
@@ -404,7 +404,7 @@ public class RubyDocProcessor {
 
 	/**
 	 * Join with " "
-	 * 
+	 *
 	 * @param o1
 	 * @param o2
 	 * @return

@@ -78,11 +78,9 @@ public class StreamUtil {
 		public String toString(Charset charset) {
 			return count == 0
 					? ""
-					: new String(buf, 0, count, charset);
+							: new String(buf, 0, count, charset);
 		}
 	}
-
-	public static final Charset ASCII = Charset.forName("ASCII");
 
 	public static Thread backgroundCopy(final InputStream source, final OutputStream target) {
 		Thread copier = new Thread() {
@@ -126,4 +124,6 @@ public class StreamUtil {
 	public static OutputStream forkOutput(OutputStream out1, OutputStream out2) {
 		return new ForkedOutputStream(out1, out2);
 	}
+
+	public static final Charset ASCII = Charset.forName("ASCII");
 }

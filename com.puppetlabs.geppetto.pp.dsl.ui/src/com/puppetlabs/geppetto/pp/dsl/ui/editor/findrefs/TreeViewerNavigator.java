@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    itemis AG - implementation
  *    Puppet Labs - adaption to Geppetto/PP
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.TreeItem;
 
 /**
  * Mostly copied from {@link org.eclipse.search2.internal.ui.basic.views.TreeViewerNavigator}.
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class TreeViewerNavigator {
@@ -30,9 +30,10 @@ public class TreeViewerNavigator {
 	private PPReferenceSearchViewPage page;
 
 	/**
-	 * Same as the class with the same name in the corresponding Xtext pacakge except the Geppetto specific SearchViewPage
+	 * Same as the class with the same name in the corresponding Xtext pacakge except the Geppetto specific
+	 * SearchViewPage
 	 * required (as the implementation is not free from implementation concerns, and package private things).
-	 * 
+	 *
 	 * @param page
 	 */
 	public TreeViewerNavigator(PPReferenceSearchViewPage page) {
@@ -56,7 +57,7 @@ public class TreeViewerNavigator {
 		if(selection.length > 0) {
 			nextItem = forward
 					? selection[0]
-					: selection[selection.length - 1];
+							: selection[selection.length - 1];
 		}
 		return nextItem;
 	}
@@ -164,7 +165,7 @@ public class TreeViewerNavigator {
 		}
 		return forward
 				? siblings[index + 1]
-				: siblings[index - 1];
+						: siblings[index - 1];
 	}
 
 	private TreeItem[] getSiblings(TreeItem currentItem) {

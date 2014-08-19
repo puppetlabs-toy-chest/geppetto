@@ -117,7 +117,7 @@ public class TestRakefileScanning extends AbstractValidationTest {
 		assertTask(rakefile.getTasks().get(4), "test:integration", "Run the full integration test suite (slow!)");
 		assertTask(
 			rakefile.getTasks().get(5), "test:check",
-			"Make sure some of the rspec-puppet directories/files are in place");
+				"Make sure some of the rspec-puppet directories/files are in place");
 		assertTask(rakefile.getTasks().get(6), "test:cucumber", "");
 		assertTask(rakefile.getTasks().get(7), "test:spec", "");
 

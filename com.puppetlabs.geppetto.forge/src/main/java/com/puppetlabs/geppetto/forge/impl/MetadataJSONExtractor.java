@@ -25,6 +25,7 @@ import com.puppetlabs.geppetto.forge.util.StrictMetadataJsonParser;
 
 @Singleton
 public class MetadataJSONExtractor extends AbstractMetadataExtractor {
+	@Override
 	public int getCardinal() {
 		return 10;
 	}

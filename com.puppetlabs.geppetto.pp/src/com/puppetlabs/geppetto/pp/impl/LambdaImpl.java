@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.LambdaImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
@@ -37,7 +37,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getArguments()
 	 * @generated
 	 * @ordered
@@ -47,7 +47,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected LambdaImpl() {
@@ -57,7 +57,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetArguments(DefinitionArgumentList newArguments, NotificationChain msgs) {
@@ -77,7 +77,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -92,7 +92,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -107,7 +107,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -122,7 +122,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -138,7 +138,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -149,7 +149,7 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -165,9 +165,10 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public DefinitionArgumentList getArguments() {
 		return arguments;
 	}
@@ -175,18 +176,19 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setArguments(DefinitionArgumentList newArguments) {
 		if(newArguments != arguments) {
 			NotificationChain msgs = null;
 			if(arguments != null)
 				msgs = ((InternalEObject) arguments).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.LAMBDA__ARGUMENTS, null, msgs);
+					PPPackage.LAMBDA__ARGUMENTS, null, msgs);
 			if(newArguments != null)
 				msgs = ((InternalEObject) newArguments).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.LAMBDA__ARGUMENTS, null, msgs);
+					PPPackage.LAMBDA__ARGUMENTS, null, msgs);
 			msgs = basicSetArguments(newArguments, msgs);
 			if(msgs != null)
 				msgs.dispatch();

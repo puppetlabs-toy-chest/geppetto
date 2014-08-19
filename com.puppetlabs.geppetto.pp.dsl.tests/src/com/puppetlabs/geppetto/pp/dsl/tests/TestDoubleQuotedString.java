@@ -277,7 +277,7 @@ public class TestDoubleQuotedString extends AbstractPuppetTests {
 		// Should not produce an error or warning for sq string
 
 		// -- unicode escape \\u [hexdigit]{4,4}
-		te.setText("\\u1a2b");
+te.setText("\\u1a2b");
 		tester.validator().checkVerbatimTextExpression(te);
 		tester.diagnose().assertWarning(IPPDiagnostics.ISSUE__UNRECOGNIZED_ESCAPE);
 

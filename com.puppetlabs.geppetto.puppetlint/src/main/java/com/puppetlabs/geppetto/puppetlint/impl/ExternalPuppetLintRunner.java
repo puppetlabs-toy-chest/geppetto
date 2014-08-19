@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,17 +26,17 @@ import com.puppetlabs.geppetto.puppetlint.PuppetLintRunner;
  * A PuppetLintRunner implementation that uses an external command. This runner will require that Ruby is installed
  */
 public class ExternalPuppetLintRunner implements PuppetLintRunner {
-	private static final Pattern issuePattern = Pattern.compile(
-		"^(ERROR|WARNING)\\s+([a-zA-Z0-9_-]+)\\s+#([^#]+)#:(\\d+)\\s+(.*)$", Pattern.MULTILINE);
-
-	private static final Pattern versionPattern = Pattern.compile("^[A-Za-z0-9_.-]+\\s+(\\S+)\\s*$", Pattern.MULTILINE);
-
 	private static String getPuppetLintExecutable() {
 		String puppetLint = System.getenv("PUPPET_LINT_EXECUTABLE");
 		if(puppetLint == null)
 			puppetLint = "puppet-lint";
 		return puppetLint;
 	}
+
+	private static final Pattern issuePattern = Pattern.compile(
+		"^(ERROR|WARNING)\\s+([a-zA-Z0-9_-]+)\\s+#([^#]+)#:(\\d+)\\s+(.*)$", Pattern.MULTILINE);
+
+	private static final Pattern versionPattern = Pattern.compile("^[A-Za-z0-9_.-]+\\s+(\\S+)\\s*$", Pattern.MULTILINE);
 
 	@Override
 	public String getVersion() throws IOException {

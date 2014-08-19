@@ -24,6 +24,7 @@ import com.puppetlabs.geppetto.module.dsl.ui.labeling.ModuleHoverProvider;
 import com.puppetlabs.geppetto.module.dsl.ui.preferences.PreferencedBasedValidationAdvisor;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
 import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 import com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz.ImagesOnFileSystemRegistry;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.RebuildChecker;
@@ -72,6 +73,7 @@ public class ModuleUiModule extends AbstractModuleUiModule {
 		return PreferencedBasedValidationAdvisor.class;
 	}
 
+	@Override
 	public Class<? extends IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
 		return ModuleBuildParticipant.class;
 	}
@@ -87,7 +89,7 @@ public class ModuleUiModule extends AbstractModuleUiModule {
 	}
 
 	private Injector getPPInjector() {
-		return ((PPDSLActivator) PPDSLActivator.getInstance()).getPPInjector();
+		return ((PPDSLActivator) PPActivator.getInstance()).getPPInjector();
 	}
 
 	@Provides

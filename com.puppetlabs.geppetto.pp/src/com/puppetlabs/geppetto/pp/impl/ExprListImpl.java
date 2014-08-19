@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.ExprListImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ExprListImpl extends ExpressionImpl implements ExprList {
@@ -40,7 +40,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getExpressions()
 	 * @generated
 	 * @ordered
@@ -50,7 +50,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ExprListImpl() {
@@ -60,7 +60,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -75,7 +75,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -90,7 +90,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -105,7 +105,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -123,7 +123,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -134,7 +134,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -150,13 +150,14 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getExpressions() {
 		if(expressions == null) {
 			expressions = new EObjectContainmentEList<Expression>(
-				Expression.class, this, PPPackage.EXPR_LIST__EXPRESSIONS);
+					Expression.class, this, PPPackage.EXPR_LIST__EXPRESSIONS);
 		}
 		return expressions;
 	}

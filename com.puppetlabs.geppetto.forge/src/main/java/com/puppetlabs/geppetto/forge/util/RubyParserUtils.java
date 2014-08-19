@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -53,7 +53,7 @@ public abstract class RubyParserUtils {
 
 	/**
 	 * Perform best-effort evaluation of interpolated string
-	 * 
+	 *
 	 * @param node
 	 * @return
 	 */
@@ -66,7 +66,7 @@ public abstract class RubyParserUtils {
 
 	/**
 	 * Perform best-effort evaluation of expression in interpolated string
-	 * 
+	 *
 	 * @param node
 	 *            The #{} expression
 	 * @return The string that the expression evaluates to
@@ -86,7 +86,7 @@ public abstract class RubyParserUtils {
 	/**
 	 * Find a list of nodes that correspond to a specific path of node types extending
 	 * from a root node. The type of the root node is not included in the path.
-	 * 
+	 *
 	 * @param root
 	 *            The root node
 	 * @param path
@@ -121,7 +121,7 @@ public abstract class RubyParserUtils {
 
 	/**
 	 * Return the value of well known String constants such as File::PATH_SEPARATOR
-	 * 
+	 *
 	 * @param qual
 	 *            The qualifier, e.g. &quot;File&quot;
 	 * @param name
@@ -147,7 +147,7 @@ public abstract class RubyParserUtils {
 
 	/**
 	 * Parse a File containing Ruby syntax and return the root node of the AST.
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException

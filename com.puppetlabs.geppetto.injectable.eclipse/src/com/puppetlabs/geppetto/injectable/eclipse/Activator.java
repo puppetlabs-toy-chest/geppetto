@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs - initial API and implementation
  */
@@ -35,8 +35,6 @@ import org.osgi.framework.ServiceReference;
  * @author thhal
  */
 public class Activator implements BundleActivator {
-
-	private static Activator instance;
 
 	public static Activator getInstance() {
 		Activator a = instance;
@@ -80,20 +78,6 @@ public class Activator implements BundleActivator {
 		}
 		return changed;
 	}
-
-	private BundleContext context;
-
-	private ServiceReference<IProxyService> proxyServiceReference;
-
-	private IProxyService proxyService;
-
-	private static final String ORG_CLOUDSMITH = "org.cloudsmith.";
-
-	private static final String WWW_CLOUDSMITH_ORG = "www.cloudsmith.org";
-
-	private static final String COM_PUPPETLABS = "com.puppetlabs.";
-
-	private static final String WWW_PUPPETLABS_COM = "www.puppetlabs.com";
 
 	// This is a hack to preserve workspaces created with a Geppetto that used the 'org.cloudsmith.'
 	// package and bundle naming. It ensures that the bundle states and workspace preferences are
@@ -185,6 +169,22 @@ public class Activator implements BundleActivator {
 		}
 		return changed;
 	}
+
+	private static Activator instance;
+
+	private BundleContext context;
+
+	private ServiceReference<IProxyService> proxyServiceReference;
+
+	private IProxyService proxyService;
+
+	private static final String ORG_CLOUDSMITH = "org.cloudsmith.";
+
+	private static final String WWW_CLOUDSMITH_ORG = "www.cloudsmith.org";
+
+	private static final String COM_PUPPETLABS = "com.puppetlabs.";
+
+	private static final String WWW_PUPPETLABS_COM = "www.puppetlabs.com";
 
 	public synchronized IProxyService getProxyService() {
 		if(proxyServiceReference == null) {

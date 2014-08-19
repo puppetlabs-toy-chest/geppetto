@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 /**
  * An {@link ISerializer} using a handwritten formatter for PP.
  * TODO: This was experimental, and will be superseded by the new DomFormatter.
- * 
+ *
  */
 public class PPSerializer implements ISerializer {
 
@@ -49,7 +49,7 @@ public class PPSerializer implements ISerializer {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.serializer.ISerializer#serialize(org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
@@ -65,7 +65,7 @@ public class PPSerializer implements ISerializer {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.serializer.ISerializer#serialize(org.eclipse.emf.ecore.EObject, org.eclipse.xtext.resource.SaveOptions)
 	 */
 	@Override
@@ -82,7 +82,7 @@ public class PPSerializer implements ISerializer {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.serializer.ISerializer#serialize(org.eclipse.emf.ecore.EObject, java.io.Writer, org.eclipse.xtext.resource.SaveOptions)
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class PPSerializer implements ISerializer {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.serializer.ISerializer#serializeReplacement(org.eclipse.emf.ecore.EObject, org.eclipse.xtext.resource.SaveOptions)
 	 */
 	@Override

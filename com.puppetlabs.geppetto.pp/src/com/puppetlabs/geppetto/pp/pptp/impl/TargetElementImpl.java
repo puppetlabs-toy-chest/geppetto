@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetElementImpl#isDeprecated <em>Deprecated</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class TargetElementImpl extends EObjectImpl implements TargetElement {
@@ -38,7 +38,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -49,7 +49,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -60,7 +60,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	 * The default value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getDocumentation()
 	 * @generated
 	 * @ordered
@@ -71,7 +71,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getDocumentation()
 	 * @generated
 	 * @ordered
@@ -82,7 +82,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	 * The default value of the '{@link #isDeprecated() <em>Deprecated</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isDeprecated()
 	 * @generated
 	 * @ordered
@@ -93,7 +93,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	 * The cached value of the '{@link #isDeprecated() <em>Deprecated</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isDeprecated()
 	 * @generated
 	 * @ordered
@@ -103,7 +103,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected TargetElementImpl() {
@@ -113,7 +113,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -132,7 +132,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -151,7 +151,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -170,7 +170,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -193,7 +193,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -215,7 +215,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -226,7 +226,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -257,9 +257,10 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getDocumentation() {
 		return documentation;
 	}
@@ -267,9 +268,10 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -277,9 +279,10 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isDeprecated() {
 		return deprecated;
 	}
@@ -287,9 +290,10 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setDeprecated(boolean newDeprecated) {
 		boolean oldDeprecated = deprecated;
 		deprecated = newDeprecated;
@@ -301,12 +305,13 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setDocumentation(String newDocumentation) {
 		String oldDocumentation = documentation;
-		documentation = fixUnformattedDoc(newDocumentation);
+		documentation = newDocumentation;
 		if(eNotificationRequired())
 			eNotify(new ENotificationImpl(
 				this, Notification.SET, PPTPPackage.TARGET_ELEMENT__DOCUMENTATION, oldDocumentation, documentation));
@@ -315,9 +320,10 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -328,7 +334,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

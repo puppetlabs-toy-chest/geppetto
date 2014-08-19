@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,73 +30,18 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass catalogEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass catalogResourceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass catalogMetadataEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass catalogEdgeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass catalogResourceParameterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass taggableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private static boolean isInited = false;
-
-	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>
-	 * This method is used to initialize {@link CatalogPackage#eINSTANCE} when that field is accessed. Clients should not invoke it directly. Instead,
-	 * they should simply access that field to obtain the package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This method is used to initialize {@link CatalogPackage#eINSTANCE} when that field is accessed. Clients should
+	 * not invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 *
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
@@ -109,7 +54,7 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 		// Obtain or create and register package
 		CatalogPackageImpl theCatalogPackage = (CatalogPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CatalogPackageImpl
 				? EPackage.Registry.INSTANCE.get(eNS_URI)
-				: new CatalogPackageImpl());
+						: new CatalogPackageImpl());
 
 		isInited = true;
 
@@ -130,7 +75,63 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
+	 * @generated
+	 */
+	private EClass catalogEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass catalogResourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass catalogMetadataEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass catalogEdgeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass catalogResourceParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass taggableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private static boolean isInited = false;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
 	 * @generated
 	 */
 	private boolean isCreated = false;
@@ -138,19 +139,21 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	private boolean isInitialized = false;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
+	 * EPackage.Registry} by the
 	 * package
 	 * package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also performs initialization of the
-	 * package, or returns the registered package, if one already exists. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
+	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#eNS_URI
 	 * @see #init()
@@ -165,7 +168,7 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -209,9 +212,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getCatalog() {
 		return catalogEClass;
 	}
@@ -219,9 +223,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalog_Classes() {
 		return (EAttribute) catalogEClass.getEStructuralFeatures().get(3);
 	}
@@ -229,9 +234,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCatalog_Edges() {
 		return (EReference) catalogEClass.getEStructuralFeatures().get(5);
 	}
@@ -239,9 +245,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCatalog_Metadata() {
 		return (EReference) catalogEClass.getEStructuralFeatures().get(4);
 	}
@@ -249,9 +256,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalog_Name() {
 		return (EAttribute) catalogEClass.getEStructuralFeatures().get(0);
 	}
@@ -259,9 +267,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCatalog_Resources() {
 		return (EReference) catalogEClass.getEStructuralFeatures().get(2);
 	}
@@ -269,9 +278,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalog_Version() {
 		return (EAttribute) catalogEClass.getEStructuralFeatures().get(1);
 	}
@@ -279,9 +289,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getCatalogEdge() {
 		return catalogEdgeEClass;
 	}
@@ -289,9 +300,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogEdge_Source() {
 		return (EAttribute) catalogEdgeEClass.getEStructuralFeatures().get(1);
 	}
@@ -299,9 +311,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogEdge_Target() {
 		return (EAttribute) catalogEdgeEClass.getEStructuralFeatures().get(0);
 	}
@@ -309,9 +322,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CatalogFactory getCatalogFactory() {
 		return (CatalogFactory) getEFactoryInstance();
 	}
@@ -319,9 +333,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getCatalogMetadata() {
 		return catalogMetadataEClass;
 	}
@@ -329,9 +344,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogMetadata_Api_version() {
 		return (EAttribute) catalogMetadataEClass.getEStructuralFeatures().get(0);
 	}
@@ -339,9 +355,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getCatalogResource() {
 		return catalogResourceEClass;
 	}
@@ -349,9 +366,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogResource_Exported() {
 		return (EAttribute) catalogResourceEClass.getEStructuralFeatures().get(6);
 	}
@@ -359,9 +377,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogResource_File() {
 		return (EAttribute) catalogResourceEClass.getEStructuralFeatures().get(0);
 	}
@@ -369,9 +388,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogResource_Line() {
 		return (EAttribute) catalogResourceEClass.getEStructuralFeatures().get(1);
 	}
@@ -379,9 +399,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCatalogResource_Parameters() {
 		return (EReference) catalogResourceEClass.getEStructuralFeatures().get(4);
 	}
@@ -389,9 +410,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogResource_Title() {
 		return (EAttribute) catalogResourceEClass.getEStructuralFeatures().get(3);
 	}
@@ -399,9 +421,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogResource_Type() {
 		return (EAttribute) catalogResourceEClass.getEStructuralFeatures().get(2);
 	}
@@ -409,9 +432,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogResource_Virtual() {
 		return (EAttribute) catalogResourceEClass.getEStructuralFeatures().get(5);
 	}
@@ -419,9 +443,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getCatalogResourceParameter() {
 		return catalogResourceParameterEClass;
 	}
@@ -429,9 +454,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogResourceParameter_Name() {
 		return (EAttribute) catalogResourceParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -439,9 +465,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCatalogResourceParameter_Value() {
 		return (EAttribute) catalogResourceParameterEClass.getEStructuralFeatures().get(1);
 	}
@@ -449,9 +476,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getTaggable() {
 		return taggableEClass;
 	}
@@ -459,9 +487,10 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTaggable_Tags() {
 		return (EAttribute) taggableEClass.getEStructuralFeatures().get(0);
 	}
@@ -471,7 +500,7 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	 * method is guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void initializePackageContents() {

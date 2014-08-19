@@ -275,7 +275,7 @@ public class ValidationOptions {
 	public void setFileType(FileType fileType) {
 		this.fileType = fileType == null
 				? FileType.DETECT
-				: fileType;
+						: fileType;
 	}
 
 	/**

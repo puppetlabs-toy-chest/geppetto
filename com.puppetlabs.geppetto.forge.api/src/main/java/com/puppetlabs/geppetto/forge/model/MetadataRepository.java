@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -23,7 +23,7 @@ public interface MetadataRepository {
 	/**
 	 * Perform a deep resolution to get all modules in the transitive scope that
 	 * extends from the given <code>depenency</code>.
-	 * 
+	 *
 	 * @param dependency
 	 *            The root of the transitive scope to resolve
 	 * @param unresolvedCollector
@@ -34,7 +34,7 @@ public interface MetadataRepository {
 
 	/**
 	 * Return the best candidate for the given dependency
-	 * 
+	 *
 	 * @param dependency
 	 * @return The release that is the best match for the dependency or <code>null</code> if no match was found
 	 */
@@ -42,7 +42,7 @@ public interface MetadataRepository {
 
 	/**
 	 * Resolve an exact version of a module.
-	 * 
+	 *
 	 * @param name
 	 *            The name of the module
 	 * @param version

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationsImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class AttributeOperationsImpl extends EObjectImpl implements AttributeOperations {
@@ -41,7 +41,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getAttributes()
 	 * @generated
 	 * @ordered
@@ -51,7 +51,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected AttributeOperationsImpl() {
@@ -61,7 +61,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -76,7 +76,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -91,7 +91,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -106,7 +106,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -124,7 +124,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -135,7 +135,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -151,13 +151,14 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<AttributeOperation> getAttributes() {
 		if(attributes == null) {
 			attributes = new EObjectContainmentEList<AttributeOperation>(
-				AttributeOperation.class, this, PPPackage.ATTRIBUTE_OPERATIONS__ATTRIBUTES);
+					AttributeOperation.class, this, PPPackage.ATTRIBUTE_OPERATIONS__ATTRIBUTES);
 		}
 		return attributes;
 	}

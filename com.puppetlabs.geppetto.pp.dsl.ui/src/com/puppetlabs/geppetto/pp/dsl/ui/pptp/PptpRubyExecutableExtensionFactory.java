@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -12,6 +12,8 @@ package com.puppetlabs.geppetto.pp.dsl.ui.pptp;
 
 import com.puppetlabs.geppetto.injectable.eclipse.AbstractGuiceAwareExecutableExtensionFactory;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
+
 import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
@@ -23,22 +25,22 @@ public class PptpRubyExecutableExtensionFactory extends AbstractGuiceAwareExecut
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory#getBundle()
 	 */
 	@Override
 	protected Bundle getBundle() {
-		return com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator.getInstance().getBundle();
+		return PPActivator.getInstance().getBundle();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory#getInjector()
 	 */
 	@Override
 	protected Injector getInjector() {
-		return com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator.getInstance().getInjector(
+		return PPActivator.getInstance().getInjector(
 			PPDSLConstants.PPTP_RUBY_LANGUAGE_NAME);
 	}
 

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,7 +31,7 @@ public interface BundleAccess {
 	/**
 	 * Uses the Eclipse OSGi platform to find a bundle and then find a resource in that bundle. The method will
 	 * return <code>null</code> when the Eclipse Platform is unavailable
-	 * 
+	 *
 	 * @param clazz
 	 *            The class that determines what bundle to use
 	 * @param bundleRelativeResourcePath
@@ -46,7 +46,7 @@ public interface BundleAccess {
 	 * Resolves the given URL to a file. If the Eclipse platform is available then URLs using the scheme
 	 * &quot;bundleresource&quot; can be resolved. If not, only &quot;file&quot; scheme URLs will be
 	 * resolved.
-	 * 
+	 *
 	 * @param resourceURL
 	 *            The URL to convert
 	 * @return The given URL as a File or <code>null</code> if the URL cannot be represented as a file.

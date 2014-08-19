@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.JavaLambdaImpl#isFarrow <em>Farrow</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
@@ -34,7 +34,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	 * The default value of the '{@link #isFarrow() <em>Farrow</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isFarrow()
 	 * @generated
 	 * @ordered
@@ -45,7 +45,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	 * The cached value of the '{@link #isFarrow() <em>Farrow</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isFarrow()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected JavaLambdaImpl() {
@@ -65,7 +65,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -80,7 +80,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -95,7 +95,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -111,7 +111,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -122,7 +122,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -138,9 +138,10 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isFarrow() {
 		return farrow;
 	}
@@ -148,9 +149,10 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setFarrow(boolean newFarrow) {
 		boolean oldFarrow = farrow;
 		farrow = newFarrow;
@@ -161,7 +163,7 @@ public class JavaLambdaImpl extends LambdaImpl implements JavaLambda {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

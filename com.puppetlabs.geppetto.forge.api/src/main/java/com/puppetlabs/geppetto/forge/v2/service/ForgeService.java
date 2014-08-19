@@ -11,7 +11,6 @@
  */
 package com.puppetlabs.geppetto.forge.v2.service;
 
-
 /**
  * Interface implemented by all v2 services
  */

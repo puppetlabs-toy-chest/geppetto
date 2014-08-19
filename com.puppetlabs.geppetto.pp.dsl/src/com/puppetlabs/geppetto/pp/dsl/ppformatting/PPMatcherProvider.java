@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,12 +21,12 @@ import org.eclipse.xtext.formatting.impl.MatcherState;
 
 /**
  * Unused, but useful as a replacement when debugging (change to public and include in module).
- * 
+ *
  */
 class PPMatcherProvider extends ElementMatcherProvider {
 
 	protected static class PPTransitionMatcher<T extends IElementPattern> extends TransitionMatcher<T> implements
-			IElementMatcher<T> {
+	IElementMatcher<T> {
 		public PPTransitionMatcher(IGrammarAccess grammar, MatcherNFAProvider nfaProvider, Iterable<T> patterns) {
 			super(grammar, nfaProvider, patterns);
 		}

@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Itemis - initial API
  *   Puppet Labs - initial API and implementation
- * 
+ *
  */
 package com.puppetlabs.xtext.dommodel.formatter;
 
@@ -30,9 +30,10 @@ import org.eclipse.xtext.util.ReplaceRegion;
 public interface IDomModelFormatter {
 
 	/**
-	 * Same as {@link #format(IDomNode, ITextRegion, IFormattingContext, org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor)}
+	 * Same as
+	 * {@link #format(IDomNode, ITextRegion, IFormattingContext, org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor)}
 	 * but uses an exception throwing error acceptor.
-	 * 
+	 *
 	 * @param dom
 	 * @param regionToFormat
 	 * @param formattingContext
@@ -45,7 +46,7 @@ public interface IDomModelFormatter {
 	 * Formats the given dom node (and its children) and produces a ReplaceRegion with the formatted text.
 	 * The returned region has the offset and length given by the regionToFormat, or if this region is null,
 	 * offset 0, and the length of the produced formatted text.
-	 * 
+	 *
 	 * @param dom
 	 *            - the dom to format
 	 * @param regionToFormat

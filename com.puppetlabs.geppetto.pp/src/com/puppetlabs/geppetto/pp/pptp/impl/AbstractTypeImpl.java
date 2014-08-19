@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -43,7 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.pptp.impl.AbstractTypeImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class AbstractTypeImpl extends TargetElementImpl implements AbstractType {
@@ -51,7 +51,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	 * The cached value of the '{@link #getEReference0() <em>EReference0</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getEReference0()
 	 * @generated
 	 * @ordered
@@ -62,7 +62,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getProperties()
 	 * @generated
 	 * @ordered
@@ -73,7 +73,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getParameters()
 	 * @generated
 	 * @ordered
@@ -83,7 +83,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected AbstractTypeImpl() {
@@ -93,7 +93,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public IDocumented basicGetEReference0() {
@@ -103,7 +103,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -124,7 +124,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -141,7 +141,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -160,7 +160,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -185,7 +185,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -196,7 +196,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -218,9 +218,10 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public IDocumented getEReference0() {
 		if(eReference0 != null && eReference0.eIsProxy()) {
 			InternalEObject oldEReference0 = (InternalEObject) eReference0;
@@ -237,9 +238,10 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Parameter> getParameters() {
 		if(parameters == null) {
 			parameters = new EObjectContainmentEList<Parameter>(
@@ -251,9 +253,10 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Property> getProperties() {
 		if(properties == null) {
 			properties = new EObjectContainmentEList<Property>(
@@ -265,9 +268,10 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setEReference0(IDocumented newEReference0) {
 		IDocumented oldEReference0 = eReference0;
 		eReference0 = newEReference0;

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -36,12 +36,12 @@ import com.google.inject.Inject;
 
 /**
  * Generator of proposals
- * 
+ *
  */
 public class PPProposalsGenerator {
 	/**
 	 * compares the pronunciation difference between given reference and candidates
-	 * 
+	 *
 	 */
 	public static class PronunciationComparator implements Comparator<String> {
 
@@ -64,7 +64,7 @@ public class PPProposalsGenerator {
 				return 0;
 			return al < bl
 					? -1
-					: 1;
+							: 1;
 		}
 
 	}
@@ -76,14 +76,14 @@ public class PPProposalsGenerator {
 	IQualifiedNameConverter converter;
 
 	protected final static EClass[] DEF_AND_TYPE_ARGUMENTS = {
-			PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
+		PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
 
 	protected final static EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
 
 	/**
 	 * Computes attribute proposals where the class/definition name must match exactly, but where
 	 * parameters are processed with fuzzy logic.
-	 * 
+	 *
 	 * @param currentName
 	 * @param descs
 	 * @param searchPath
@@ -115,7 +115,7 @@ public class PPProposalsGenerator {
 	/**
 	 * Attempts to produce a list of more distinct names than the given name by making
 	 * name absolute.
-	 * 
+	 *
 	 * @param currentName
 	 *            the name for which proposals are wanted
 	 * @param descs
@@ -142,7 +142,7 @@ public class PPProposalsGenerator {
 		Arrays.sort(props);
 		return upperCaseProposals
 				? toUpperCaseProposals(props)
-				: props;
+						: props;
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class PPProposalsGenerator {
 	 * obtained by taking the Levenshtein distance between the Double Monophone encodings of
 	 * candidate and given name. Candidates are selected as the names with shortest Levenshtein distance
 	 * and names that are Monophonically equal, or starts or ends monophonically.
-	 * 
+	 *
 	 * @param currentName
 	 *            the name for which proposals are to be generated
 	 * @param descs
@@ -194,7 +194,7 @@ public class PPProposalsGenerator {
 					||
 					candidateMetaphone.startsWith(metaphoneName) //
 					|| candidateMetaphone.endsWith(metaphoneName) //
-			)
+					)
 				tracker.addScore(StringUtils.getLevenshteinDistance(metaphoneName, candidateMetaphone), d);
 			// System.err.printf("Metaphone alike: %s == %s\n", currentName, candidateName);
 		}
@@ -218,7 +218,7 @@ public class PPProposalsGenerator {
 		// System.err.println();
 		return upperCaseProposals
 				? toUpperCaseProposals(proposals)
-				: proposals;
+						: proposals;
 	}
 
 	public String[] computeProposals(final String currentName, Collection<IEObjectDescription> descs,
@@ -227,7 +227,7 @@ public class PPProposalsGenerator {
 	}
 
 	public Collection<String> generateAttributeCandidates(final QualifiedName currentName,
-			Collection<IEObjectDescription> descs, PPSearchPath searchPath) {
+		Collection<IEObjectDescription> descs, PPSearchPath searchPath) {
 		// find candidate names
 		if(currentName.getSegmentCount() < 2)
 			return Collections.emptySet();

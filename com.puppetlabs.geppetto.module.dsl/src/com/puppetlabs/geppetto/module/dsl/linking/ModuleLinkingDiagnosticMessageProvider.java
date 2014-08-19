@@ -14,6 +14,17 @@ public class ModuleLinkingDiagnosticMessageProvider extends LinkingDiagnosticMes
 	@Inject
 	private IModuleValidationAdvisor validationAdvisor;
 
+	private Severity getSeverity(final ValidationPreference pref) {
+		switch(pref) {
+			case ERROR:
+				return Severity.ERROR;
+			case WARNING:
+				return Severity.WARNING;
+			default:
+				return Severity.IGNORE;
+		}
+	}
+
 	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
 		DiagnosticMessage msg = null;
@@ -28,16 +39,5 @@ public class ModuleLinkingDiagnosticMessageProvider extends LinkingDiagnosticMes
 
 	private String mangledMessage(final DiagnosticMessage msg) {
 		return msg.getMessage().replace("JsonMetadata", "Module");
-	}
-
-	private Severity getSeverity(final ValidationPreference pref) {
-		switch(pref) {
-			case ERROR:
-				return Severity.ERROR;
-			case WARNING:
-				return Severity.WARNING;
-			default:
-				return Severity.IGNORE;
-		}
 	}
 }

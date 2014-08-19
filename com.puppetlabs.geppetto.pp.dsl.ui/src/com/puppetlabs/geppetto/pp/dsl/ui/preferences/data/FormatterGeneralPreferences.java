@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,7 +19,7 @@ import com.google.inject.Singleton;
 
 /**
  * Manages the Formatter General preferences.
- * 
+ *
  */
 @Singleton
 public class FormatterGeneralPreferences extends AbstractPreferenceData {
@@ -47,7 +47,7 @@ public class FormatterGeneralPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Get the global preference (or the default) for "indentation size" preference.
-	 * 
+	 *
 	 * @return size of indent (spaces) measured in number of characters
 	 */
 	public int getIndentSize() {
@@ -56,7 +56,7 @@ public class FormatterGeneralPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Get the effective preference (or the default) for "indentation size" preference.
-	 * 
+	 *
 	 * @return size of indent (spaces) measured in number of characters
 	 */
 	public int getIndentSize(IResource r) {
@@ -65,7 +65,7 @@ public class FormatterGeneralPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Get the global preference (or the default) for "indentation size" preference.
-	 * 
+	 *
 	 * @return size of indent (spaces) measured in number of characters
 	 */
 	public int getPreferredMaxWidth() {
@@ -74,7 +74,7 @@ public class FormatterGeneralPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Get the effective preference (or the default) for "indentation size" preference.
-	 * 
+	 *
 	 * @return size of indent (spaces) measured in number of characters
 	 */
 	public int getPreferredMaxWidth(IResource r) {
@@ -83,7 +83,7 @@ public class FormatterGeneralPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Get the global (or the default) for "replace tab input with spaces" preference.
-	 * 
+	 *
 	 * @return boolean true if tabs should be expanded to spaces
 	 */
 	public boolean getSpacesForTabs() {
@@ -92,7 +92,7 @@ public class FormatterGeneralPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Get the effective preference (or the default) for "replace tab input with spaces" preference.
-	 * 
+	 *
 	 * @return boolean true if tabs should be expanded to spaces
 	 */
 	public boolean getSpacesForTabs(IResource r) {

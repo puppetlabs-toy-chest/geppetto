@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -35,10 +35,12 @@ public class OAuthModule extends AbstractModule implements Authenticator {
 		@Expose
 		private String access_token;
 
+		@Override
 		public String getScopes() {
 			return scope;
 		}
 
+		@Override
 		public String getToken() {
 			return access_token;
 		}

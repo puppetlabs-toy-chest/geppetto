@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,7 +33,7 @@ public interface ERB {
 	/**
 	 * Generate a new file to <tt>result</tt> using the <tt>template</tt> file as input
 	 * and <tt>context</tt> as the source for variable substitution.
-	 * 
+	 *
 	 * @param context
 	 * @param template
 	 * @param result
@@ -47,7 +47,7 @@ public interface ERB {
 	/**
 	 * Generate a new file to <tt>result</tt> using the <tt>template</tt> file as input
 	 * and <tt>context</tt> as the source for variable substitution.
-	 * 
+	 *
 	 * @param context
 	 * @param template
 	 * @param result

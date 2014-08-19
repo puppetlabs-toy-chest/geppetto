@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -110,6 +110,7 @@ public abstract class ModuleExportOperation implements IRunnableWithProgress {
 			DataTransferMessages.FileSystemExportOperation_problemsExporting, null);
 	}
 
+	@Override
 	public void run(IProgressMonitor monitor) throws InterruptedException {
 		monitor.beginTask(null, 100);
 		try {

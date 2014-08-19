@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -78,7 +78,7 @@ public class RubyModuleFinder {
 		/**
 		 * Visits all nodes in graph, and if visitor returns non-null, the
 		 * iteration stops and the returned non-null value is returned.
-		 * 
+		 *
 		 * @param root
 		 * @return
 		 */
@@ -176,7 +176,7 @@ public class RubyModuleFinder {
 			if(nameStack.size() == qualifiedName.size())
 				return qualifiedName.equals(nameStack)
 						? iVisited
-						: DO_NOT_VISIT_CHILDREN;
+								: DO_NOT_VISIT_CHILDREN;
 
 			// the module's name is shorter than wanted, does it match so far?
 			// i.e. we find module a::b when we are looking for a::b::c
@@ -186,7 +186,7 @@ public class RubyModuleFinder {
 			try {
 				return qualifiedName.subList(sizeX - sizeY, sizeX).equals(nameStack)
 						? null
-						: DO_NOT_VISIT_CHILDREN;
+								: DO_NOT_VISIT_CHILDREN;
 			}
 			catch(IndexOutOfBoundsException e) {
 				return DO_NOT_VISIT_CHILDREN;
@@ -198,7 +198,7 @@ public class RubyModuleFinder {
 	 * Returns the first found module with the given qualified name, or null if
 	 * no such module was found. The qualified name should be specified in
 	 * natural order e.g. new String[] { "Puppet", "Parser", "Functions" }.
-	 * 
+	 *
 	 * @param root
 	 * @param qualifiedName
 	 * @return found module or null

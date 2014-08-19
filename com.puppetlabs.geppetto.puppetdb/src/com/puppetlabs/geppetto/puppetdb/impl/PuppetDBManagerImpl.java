@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,8 +26,6 @@ import com.puppetlabs.geppetto.puppetdb.PuppetDBManager;
 @Singleton
 public class PuppetDBManagerImpl implements PuppetDBManager {
 
-	private static final String PUPPETDB_NODE = "PuppetDB";
-
 	static Preferences getPuppetDBNode() {
 		return instanceNode().node(PUPPETDB_NODE);
 	}
@@ -40,9 +38,11 @@ public class PuppetDBManagerImpl implements PuppetDBManager {
 		return Platform.getPreferencesService().getRootNode().node(InstanceScope.SCOPE);
 	}
 
+	private static final String PUPPETDB_NODE = "PuppetDB";
+
 	/**
 	 * Adds a new node to the storage.
-	 * 
+	 *
 	 * @param hostname
 	 *            The hostname of the new instance
 	 * @param port
@@ -71,7 +71,7 @@ public class PuppetDBManagerImpl implements PuppetDBManager {
 	/**
 	 * Returns the instance identified by <code>hostname</code> and <code>port</code> or <code>null</code> if no such instance has been
 	 * added to the storage.
-	 * 
+	 *
 	 * @param hostname
 	 *            The hostname of the wanted instance
 	 * @param port
@@ -90,7 +90,7 @@ public class PuppetDBManagerImpl implements PuppetDBManager {
 
 	/**
 	 * Returns a list of known instances.
-	 * 
+	 *
 	 * @return A list, potentially empty but never <code>null</code>.
 	 */
 	@Override

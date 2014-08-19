@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,15 +16,16 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 /**
  * A runtime module for PPTP RUBY model.
- * 
+ *
  */
 public class PptpRubyRuntimeModule extends PptpRuntimeModule {
 	/**
 	 * Note: Ruby < 1.9 does not handle encoding at all (it expects single byte UsAscii). Ruby 1.9 has
 	 * a comment line e.g. '# encoding : utf-8'. This declaration is not really used as the ruby parser is
-	 * simply given an input stream without any encoding, but an encoding provider must still be provided (to prevent the
+	 * simply given an input stream without any encoding, but an encoding provider must still be provided (to prevent
+	 * the
 	 * default XMLEncodingProvider from opening the file and not finding any XML (and hence no encoding specification)).
-	 * 
+	 *
 	 * A provider returning the default charset for the platform is used here.
 	 */
 	@Override
@@ -34,7 +35,7 @@ public class PptpRubyRuntimeModule extends PptpRuntimeModule {
 
 	/**
 	 * Binds a provider that skips .rb files that are on "uninteresting" paths.
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule#bindIResourceServiceProvider()
 	 */
 	@Override
@@ -44,7 +45,7 @@ public class PptpRubyRuntimeModule extends PptpRuntimeModule {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule#getFileExtensions()
 	 */
 	@Override
@@ -54,7 +55,7 @@ public class PptpRubyRuntimeModule extends PptpRuntimeModule {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule#getLanguageName()
 	 */
 	@Override

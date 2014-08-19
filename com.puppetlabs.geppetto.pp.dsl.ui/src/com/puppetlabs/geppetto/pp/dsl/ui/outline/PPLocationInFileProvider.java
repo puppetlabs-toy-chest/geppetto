@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,10 +19,10 @@ import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 /**
  * Used to define the significant "short" locations for outline relevant elements.
  * (The defaults do not understand which nodes are "names").
- * 
+ *
  * Also used to determine if a hover should appear or not; a significant region must be returned
  * for a hover to be considered.
- * 
+ *
  */
 public class PPLocationInFileProvider extends DefaultLocationInFileProvider {
 

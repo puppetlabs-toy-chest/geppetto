@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -22,14 +22,14 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * @author henrik
- * 
+ *
  */
 public class TestRubyDocProcessor {
 	public static final List<String> content1 = ImmutableList.of( //
 		"This is an example:\n", //
 		"  verbatim\n", //
 		"  verbatim\n", //
-		"Non verbatim\n");
+			"Non verbatim\n");
 
 	public static final List<String> content1Expected = ImmutableList.of( //
 		"<p>This is an example:\n", //
@@ -39,7 +39,7 @@ public class TestRubyDocProcessor {
 		"  verbatim\n", //
 		"</pre>\n", //
 		"<p>Non verbatim\n", //
-		"</p>");
+			"</p>");
 
 	@Test
 	public void testRubyDocprocessor() {

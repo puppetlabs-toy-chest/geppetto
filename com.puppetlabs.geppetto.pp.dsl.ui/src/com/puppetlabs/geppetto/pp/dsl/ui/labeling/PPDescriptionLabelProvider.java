@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
- * 
+ *
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class PPDescriptionLabelProvider extends DeclarativeLabelProvider implements IIconNames {
@@ -94,7 +94,7 @@ public class PPDescriptionLabelProvider extends DeclarativeLabelProvider impleme
 	/**
 	 * This method is only invoked if the containerEObjectURI of the {@link IReferenceDescription} is null, i.e. the
 	 * reference is owned by an element without any indexed container.
-	 * 
+	 *
 	 * @since 2.1
 	 */
 	public Object image(IReferenceDescription element) {

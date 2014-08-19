@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,7 +29,7 @@ public interface PuppetDBConnectionPreferences {
 	/**
 	 * Generates the certificate for the Certificate Authority using the given <code>factory</code>. This
 	 * method may return <code>null</code> if no such certificate has been set.
-	 * 
+	 *
 	 * @param factory
 	 *            The factory to use for the generation
 	 * @return The generated certificate or <code>null</code> if no certificat has been assigned.

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,7 +21,7 @@ import org.eclipse.xtext.nodemodel.INode;
 /**
  * A message acceptor using an instance of an {@link IDiagnosticConsumer} as the recipient of
  * the message.
- * 
+ *
  */
 public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAcceptor {
 	private LinkingDiagnosticProducer producer;
@@ -34,7 +34,7 @@ public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAccep
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#accept(org.eclipse.xtext.diagnostics.Severity, java.lang.String,
 	 * org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
@@ -51,8 +51,8 @@ public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAccep
 
 		if(source.eClass().getEStructuralFeature(feature.getName()) != feature) {
 			throw new IllegalArgumentException("EClass '" + source.eClass().getName() +
-					"' does not expose a feature '" + feature.getName() + //
-					"' (id: " + feature.getFeatureID() + ")");
+				"' does not expose a feature '" + feature.getName() + //
+				"' (id: " + feature.getFeatureID() + ")");
 		}
 
 		producer.setNode(getNode(source, feature, index));
@@ -63,7 +63,7 @@ public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAccep
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#accept(org.eclipse.xtext.diagnostics.Severity, java.lang.String,
 	 * org.eclipse.emf.ecore.EObject, int, int, java.lang.String, java.lang.String[])
 	 */
@@ -75,7 +75,7 @@ public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAccep
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#accept(org.eclipse.xtext.diagnostics.Severity, java.lang.String,
 	 * org.eclipse.xtext.nodemodel.INode, java.lang.String, java.lang.String)
 	 */

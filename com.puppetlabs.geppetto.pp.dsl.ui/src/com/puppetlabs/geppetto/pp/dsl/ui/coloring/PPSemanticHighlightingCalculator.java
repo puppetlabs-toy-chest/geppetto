@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -56,7 +56,7 @@ import com.google.inject.Inject;
 
 /**
  * Highlighting for puppet.
- * 
+ *
  */
 public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 	private static class ZeroLengthFilteredAcceptorWrapper implements IHighlightedPositionAcceptor {
@@ -67,6 +67,7 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 		}
 
 		// @Override
+		@Override
 		public void addPosition(int offset, int length, String... id) {
 			// FOR DEBUGGING
 			// StringBuffer buf = new StringBuffer();
@@ -104,12 +105,13 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 	private AbstractRule ruleUnionNameOrReference;
 
 	private final PolymorphicDispatcher<Void> highlightDispatcher = new PolymorphicDispatcher<Void>(
-		"highlight", 2, 2, Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<Void>() {
-			public Void handle(Object[] params, Throwable e) {
-				handleError(params, e);
-				return null;
-			}
-		});
+			"highlight", 2, 2, Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<Void>() {
+				@Override
+				public Void handle(Object[] params, Throwable e) {
+					handleError(params, e);
+					return null;
+				}
+			});
 
 	@Inject
 	public PPSemanticHighlightingCalculator(IGrammarAccess grammarAccess) {
@@ -132,7 +134,8 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 			if(n instanceof ICompositeNode) {
 				for(INode n2 : ((ICompositeNode) n).getLeafNodes()) {
 					if(n2.getGrammarElement() instanceof Keyword)
-						acceptor.addPosition(n2.getOffset(), n2.getLength(), PPHighlightConfiguration.DEFAULT_ID);
+						acceptor.addPosition(
+							n2.getOffset(), n2.getLength(), DefaultHighlightingConfiguration.DEFAULT_ID);
 				}
 			}
 		}
@@ -296,6 +299,7 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 		return false;
 	}
 
+	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if(resource == null)
 			return;
@@ -314,7 +318,7 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 
 	/**
 	 * Iterate over parser nodes and provide highlighting based on rule calls.
-	 * 
+	 *
 	 * @param resource
 	 * @param acceptor
 	 */
@@ -356,7 +360,7 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 
 	/**
 	 * Iterate over the generated model and provide highlighting
-	 * 
+	 *
 	 * @param resource
 	 * @param acceptor
 	 */

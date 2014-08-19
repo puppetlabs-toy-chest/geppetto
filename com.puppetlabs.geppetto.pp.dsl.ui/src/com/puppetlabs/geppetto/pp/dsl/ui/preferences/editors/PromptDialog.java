@@ -151,15 +151,16 @@ public class PromptDialog extends Dialog {
 		buttons = new Button[3];
 
 		Listener listener = new Listener() {
+			@Override
 			public void handleEvent(Event event) {
 				if(buttons[0] != null)
 					checkValue[0] = buttons[0].getSelection()
-							? 1
+					? 1
 							: 0;
 				value[0] = valueText.getText();
 				result[0] = event.widget == buttons[1]
 						? 1
-						: 0;
+								: 0;
 				shell.close();
 			}
 		};

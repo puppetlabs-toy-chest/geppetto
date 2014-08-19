@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,14 +15,14 @@ import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * Puppet Qualified Name Converter defines the separator '::'
- * 
+ *
  */
 public class PPQualifiedNameConverter extends IQualifiedNameConverter.DefaultImpl {
 	private static final String separator = "::";
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl#getDelimiter()
 	 */
 	@Override
@@ -32,7 +32,7 @@ public class PPQualifiedNameConverter extends IQualifiedNameConverter.DefaultImp
 
 	/**
 	 * Removes leading '$' before converting to qualified name.
-	 * 
+	 *
 	 * @see org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl#toQualifiedName(java.lang.String)
 	 */
 	@Override
@@ -40,7 +40,7 @@ public class PPQualifiedNameConverter extends IQualifiedNameConverter.DefaultImp
 		if(qualifiedNameAsString == null || qualifiedNameAsString.length() < 1 || qualifiedNameAsString.equals("$"))
 			return QualifiedName.EMPTY;
 		return super.toQualifiedName(qualifiedNameAsString.startsWith("$")
-				? qualifiedNameAsString.substring(1)
-				: qualifiedNameAsString);
+			? qualifiedNameAsString.substring(1)
+					: qualifiedNameAsString);
 	}
 }

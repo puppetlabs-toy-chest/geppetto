@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   itemis AG http://www.itemis.eu - initial API and implementation.
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
@@ -68,12 +68,14 @@ public class FindReferencesHandler extends AbstractHandler {
 		return null;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if(editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				IPPQueryData context = editor.getDocument().readOnly(new IUnitOfWork<IPPQueryData, XtextResource>() {
+					@Override
 					public IPPQueryData exec(XtextResource localResource) throws Exception {
 						return createQueryData(localResource, selection);
 					}

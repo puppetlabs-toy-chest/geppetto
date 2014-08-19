@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,8 +19,9 @@ import com.google.inject.Singleton;
 
 /**
  * <p>
- * A {@code ResourceAccessScope} acts as a provider of {@link ResourceAccess} returning an instance that has been bound to the current {@link Thread},
- * or a default "unspecific" ResourceAccess if the ResourceAccessScope has not been entered.
+ * A {@code ResourceAccessScope} acts as a provider of {@link ResourceAccess} returning an instance that has been bound
+ * to the current {@link Thread}, or a default "unspecific" ResourceAccess if the ResourceAccessScope has not been
+ * entered.
  * </p>
  * <p>
  * This works similar to how a Guice Scope works, but this implementation is NOT a guice scope.
@@ -28,7 +29,7 @@ import com.google.inject.Singleton;
  * <p>
  * When entering, care must be taken to exit the scope in a finally-clause or the result may be memory leaks
  * </p>
- * 
+ *
  */
 @Singleton
 public class ResourceAccessScope implements Provider<ResourceAccess> {
@@ -44,7 +45,7 @@ public class ResourceAccessScope implements Provider<ResourceAccess> {
 	/**
 	 * Enters a resource specific scope. The given {@code} resource may not be null, and the resource
 	 * must have an URI set.
-	 * 
+	 *
 	 * @param resource
 	 *            the Resource to enter
 	 */
@@ -57,7 +58,7 @@ public class ResourceAccessScope implements Provider<ResourceAccess> {
 
 	/**
 	 * Enters a resource specific scope.
-	 * 
+	 *
 	 * @throws IllegalStateException
 	 *             if the scope is already entered.
 	 * @param uri
@@ -80,7 +81,7 @@ public class ResourceAccessScope implements Provider<ResourceAccess> {
 		ResourceAccess ra = context.get();
 		return ra == null
 				? unspecific
-				: ra;
+						: ra;
 	}
 
 }

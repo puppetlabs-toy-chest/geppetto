@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Itemis AB - (http://www.itemis.eu)
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
@@ -45,12 +45,12 @@ import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceFinder.ILoca
  * This is a repackaing of the class from the xtext findrefs package - it implements a package private interface in a
  * class
  * that needed a different implementation.
- * 
+ *
  * TODO: Contribute change to Xtext, make the ILocalResourceAccess a public interface. (The implementation is public).
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
- * 
- * 
+ *
+ *
  */
 public class EditorResourceAccess implements ILocalResourceAccess {
 
@@ -72,6 +72,7 @@ public class EditorResourceAccess implements ILocalResourceAccess {
 		Iterable<Pair<IStorage, IProject>> storagesToProject = storage2UriMapper.getStorages(targetURI.trimFragment());
 		final Iterable<IStorage> storages = Iterables.transform(
 			storagesToProject, new Function<Pair<IStorage, IProject>, IStorage>() {
+				@Override
 				public IStorage apply(Pair<IStorage, IProject> from) {
 					return from.getFirst();
 				}
@@ -106,11 +107,13 @@ public class EditorResourceAccess implements ILocalResourceAccess {
 		return null;
 	}
 
+	@Override
 	public <R> R readOnly(final URI targetURI, final IUnitOfWork<R, ResourceSet> work) {
 		R result = null;
 		IXtextDocument document = getOpenDocument(targetURI.trimFragment());
 		if(document != null) {
 			result = document.readOnly(new IUnitOfWork<R, XtextResource>() {
+				@Override
 				public R exec(XtextResource state) throws Exception {
 					ResourceSet localContext = state.getResourceSet();
 					if(localContext != null)
@@ -121,6 +124,6 @@ public class EditorResourceAccess implements ILocalResourceAccess {
 		}
 		return result != null
 				? result
-				: delegate.readOnly(targetURI, work);
+						: delegate.readOnly(targetURI, work);
 	}
 }

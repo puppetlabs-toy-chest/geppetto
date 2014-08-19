@@ -17,7 +17,7 @@ public class TestCatalogCompilation {
 	 * Note, requires puppet (and hence ruby) installed on the machine executing
 	 * the test. in addition to that it requires the inputs to the catalog
 	 * compiler under /testData to produce the output.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	@Test

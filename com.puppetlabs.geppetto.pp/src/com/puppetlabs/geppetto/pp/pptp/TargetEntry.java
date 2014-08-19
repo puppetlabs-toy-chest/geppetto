@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Target Entry</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  * <li>{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaVariables <em>Meta Variables</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry()
  * @model abstract="true"
  * @generated
@@ -40,10 +40,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Description</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Description</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry_Description()
@@ -57,10 +58,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.pptp.Function}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Functions</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Functions</em>' containment reference list isn't clear, there really should be more of
+	 * a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Functions</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry_Functions()
 	 * @model containment="true"
@@ -72,10 +74,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * Returns the value of the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Label</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Label</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Label</em>' attribute.
 	 * @see #setLabel(String)
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry_Label()
@@ -91,7 +94,7 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * <!-- begin-model-doc -->
 	 * A meta type is a definition that applies to all defined types.
 	 * <!-- end-model-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Meta Type</em>' containment reference.
 	 * @see #setMetaType(MetaType)
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry_MetaType()
@@ -105,10 +108,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.pptp.MetaVariable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Meta Variables</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Meta Variables</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Meta Variables</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry_MetaVariables()
 	 * @model containment="true"
@@ -121,10 +125,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.pptp.TypeFragment}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type Fragments</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Type Fragments</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Type Fragments</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry_TypeFragments()
 	 * @model containment="true"
@@ -137,10 +142,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.pptp.Type}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Types</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Types</em>' containment reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Types</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry_Types()
 	 * @model containment="true"
@@ -152,10 +158,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * Returns the value of the '<em><b>Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Version</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Version</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetEntry_Version()
@@ -165,10 +172,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	String getVersion();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getDescription <em>Description</em>}' attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getDescription <em>Description</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Description</em>' attribute.
 	 * @see #getDescription()
@@ -180,7 +188,7 @@ public interface TargetEntry extends ITargetElementContainer {
 	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getLabel <em>Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Label</em>' attribute.
 	 * @see #getLabel()
@@ -189,10 +197,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	void setLabel(String value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaType <em>Meta Type</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaType <em>Meta Type</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Meta Type</em>' containment reference.
 	 * @see #getMetaType()
@@ -201,10 +210,11 @@ public interface TargetEntry extends ITargetElementContainer {
 	void setMetaType(MetaType value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getVersion <em>Version</em>}' attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getVersion <em>Version</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Version</em>' attribute.
 	 * @see #getVersion()

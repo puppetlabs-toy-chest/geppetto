@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.DefinitionArgumentImpl#getOp <em>Op</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArgument {
@@ -40,7 +40,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	 * The default value of the '{@link #getArgName() <em>Arg Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getArgName()
 	 * @generated
 	 * @ordered
@@ -51,7 +51,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	 * The cached value of the '{@link #getArgName() <em>Arg Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getArgName()
 	 * @generated
 	 * @ordered
@@ -62,7 +62,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -73,7 +73,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	 * The default value of the '{@link #getOp() <em>Op</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getOp()
 	 * @generated
 	 * @ordered
@@ -84,7 +84,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	 * The cached value of the '{@link #getOp() <em>Op</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getOp()
 	 * @generated
 	 * @ordered
@@ -94,7 +94,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected DefinitionArgumentImpl() {
@@ -104,7 +104,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs) {
@@ -124,7 +124,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -143,7 +143,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -158,7 +158,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -166,14 +166,14 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 		switch(featureID) {
 			case PPPackage.DEFINITION_ARGUMENT__ARG_NAME:
 				return ARG_NAME_EDEFAULT == null
-						? argName != null
-						: !ARG_NAME_EDEFAULT.equals(argName);
+				? argName != null
+				: !ARG_NAME_EDEFAULT.equals(argName);
 			case PPPackage.DEFINITION_ARGUMENT__VALUE:
 				return value != null;
 			case PPPackage.DEFINITION_ARGUMENT__OP:
 				return OP_EDEFAULT == null
-						? op != null
-						: !OP_EDEFAULT.equals(op);
+				? op != null
+				: !OP_EDEFAULT.equals(op);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -181,7 +181,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -203,7 +203,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -214,7 +214,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -236,9 +236,10 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getArgName() {
 		return argName;
 	}
@@ -246,9 +247,10 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getOp() {
 		return op;
 	}
@@ -256,9 +258,10 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getValue() {
 		return value;
 	}
@@ -266,9 +269,10 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setArgName(String newArgName) {
 		String oldArgName = argName;
 		argName = newArgName;
@@ -280,9 +284,10 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setOp(String newOp) {
 		String oldOp = op;
 		op = newOp;
@@ -293,18 +298,19 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setValue(Expression newValue) {
 		if(newValue != value) {
 			NotificationChain msgs = null;
 			if(value != null)
 				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.DEFINITION_ARGUMENT__VALUE, null, msgs);
+					PPPackage.DEFINITION_ARGUMENT__VALUE, null, msgs);
 			if(newValue != null)
 				msgs = ((InternalEObject) newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.DEFINITION_ARGUMENT__VALUE, null, msgs);
+					PPPackage.DEFINITION_ARGUMENT__VALUE, null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -317,7 +323,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

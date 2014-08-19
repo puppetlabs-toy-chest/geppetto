@@ -157,7 +157,7 @@ public class Select {
 			// match if all containment rules where satisfied
 			return (matchCount == selectors.length)
 					? true
-					: false;
+							: false;
 		}
 
 		@Override
@@ -450,7 +450,7 @@ public class Select {
 				this.matchingClassifiers.addAll(styleClass);
 			this.matchingId = id != null
 					? id
-					: NoIdMatch;
+							: NoIdMatch;
 		}
 
 		@Override
@@ -775,12 +775,12 @@ public class Select {
 				return false;
 			EObject semantic = nearest
 					? node.getNearestSemanticObject()
-					: node.getSemanticObject();
-			if(semantic == null)
-				return false;
-			if(instance)
-				return eClass.isInstance(semantic);
-			return eClass.isSuperTypeOf(semantic.eClass());
+							: node.getSemanticObject();
+					if(semantic == null)
+						return false;
+					if(instance)
+						return eClass.isInstance(semantic);
+					return eClass.isSuperTypeOf(semantic.eClass());
 		}
 
 		@Override
@@ -790,12 +790,12 @@ public class Select {
 			builder.append(eClass.getName());
 			builder.append(", ");
 			builder.append(nearest
-					? "nearest"
-					: "assigned");
+				? "nearest"
+						: "assigned");
 			builder.append(", ");
 			builder.append(instance
-					? "instance"
-					: "typeof");
+				? "instance"
+						: "typeof");
 			builder.append(")");
 			return builder.toString();
 		}

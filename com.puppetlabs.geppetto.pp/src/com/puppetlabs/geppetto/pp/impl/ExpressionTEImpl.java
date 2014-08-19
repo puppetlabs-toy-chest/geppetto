@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.ExpressionTEImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE {
@@ -37,7 +37,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getExpression()
 	 * @generated
 	 * @ordered
@@ -47,7 +47,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ExpressionTEImpl() {
@@ -57,7 +57,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
@@ -77,7 +77,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -107,7 +107,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -122,7 +122,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -138,7 +138,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -149,7 +149,7 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -165,9 +165,10 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getExpression() {
 		return expression;
 	}
@@ -175,18 +176,19 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setExpression(Expression newExpression) {
 		if(newExpression != expression) {
 			NotificationChain msgs = null;
 			if(expression != null)
 				msgs = ((InternalEObject) expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.EXPRESSION_TE__EXPRESSION, null, msgs);
+					PPPackage.EXPRESSION_TE__EXPRESSION, null, msgs);
 			if(newExpression != null)
 				msgs = ((InternalEObject) newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.EXPRESSION_TE__EXPRESSION, null, msgs);
+					PPPackage.EXPRESSION_TE__EXPRESSION, null, msgs);
 			msgs = basicSetExpression(newExpression, msgs);
 			if(msgs != null)
 				msgs.dispatch();

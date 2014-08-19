@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -40,7 +40,7 @@ import com.google.inject.Provider;
 
 /**
  * A sub layout handler for AssignmentExpression that optionally cluster-aligns a sequence of assignments.
- * 
+ *
  */
 public class AssignmentLayout {
 
@@ -169,7 +169,7 @@ public class AssignmentLayout {
 
 	/**
 	 * assign widths and alignment to the equal sign nodes
-	 * 
+	 *
 	 * @param equalSignNodes
 	 * @param widths
 	 * @param availableWidth
@@ -182,16 +182,16 @@ public class AssignmentLayout {
 		// assign widths and alignment to the fat comma nodes
 		int opW = containsAppend
 				? 2
-				: 1;
+						: 1;
 		for(int i = 0; i < equalSignNodes.size(); i++) {
 			IDomNode c = equalSignNodes.get(i);
 			int w = widths.get(i);
 			int mw = doAlignment
 					? clusters.clusterMax(w)
-					: w;
-			if(doAlignment)
-				c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
-					styles.width(opW + mw - w)));
+							: w;
+					if(doAlignment)
+						c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
+							styles.width(opW + mw - w)));
 		}
 	}
 }

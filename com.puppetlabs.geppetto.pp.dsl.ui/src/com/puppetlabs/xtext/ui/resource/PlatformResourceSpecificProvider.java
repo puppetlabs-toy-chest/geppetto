@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import com.google.inject.Provider;
 /**
  * An Eclipse Platform based {@link Provider} implementation making use of the {@link ResourceContext} to provide
  * a {@link Resource} specific instance of {@code T} (or "global" if the context is not resource specific).
- * 
+ *
  */
 public abstract class PlatformResourceSpecificProvider<T> implements Provider<T> {
 
@@ -40,9 +40,10 @@ public abstract class PlatformResourceSpecificProvider<T> implements Provider<T>
 	private IStorage2UriMapper storage2UriMapper;
 
 	/**
-	 * A concrete implementation should lookup specific data of type {@code T} for the given IResource. If the given {@code resource} is null, the
+	 * A concrete implementation should lookup specific data of type {@code T} for the given IResource. If the given
+	 * {@code resource} is null, the
 	 * implementation should return a "global"/default {@code T}.
-	 * 
+	 *
 	 * @param resource
 	 *            the Eclipse platform resource, or null if {@link #getResourceURI()} is not a platform URI
 	 * @return data of type T
@@ -52,7 +53,7 @@ public abstract class PlatformResourceSpecificProvider<T> implements Provider<T>
 	/**
 	 * Finds the closest Platform {@link IResource} given an URI that is a platform {@link URI}, or an URI that
 	 * an {@link IStorage2UriMapper} can map to an {@link IProject}.
-	 * 
+	 *
 	 * @param uri
 	 * @return IResource, or null, if the given uri can not be mapped to IResource.
 	 */

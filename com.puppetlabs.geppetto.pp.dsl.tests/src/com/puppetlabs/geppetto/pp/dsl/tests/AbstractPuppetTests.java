@@ -169,8 +169,8 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		for(int i = 0; i < keyValPairs.length; i++) {
 			AttributeOperation ao = pf.createAttributeOperation();
 			ao.setOp(additive
-					? "+>"
-					: "=>");
+				? "+>"
+						: "=>");
 			if(!(keyValPairs[i] instanceof String))
 				throw new IllegalArgumentException("Bad test spec, key not a String");
 			ao.setKey((String) (keyValPairs[i++]));

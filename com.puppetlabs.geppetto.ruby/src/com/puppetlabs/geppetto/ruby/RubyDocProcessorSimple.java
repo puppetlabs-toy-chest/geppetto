@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -13,9 +13,10 @@ package com.puppetlabs.geppetto.ruby;
 import com.puppetlabs.geppetto.common.CharSequences;
 
 /**
- * Processes documentation text found in ruby code. The main problem is determining the "natural margin" as it is ambiguous.
- * 
- * 
+ * Processes documentation text found in ruby code. The main problem is determining the "natural margin" as it is
+ * ambiguous.
+ *
+ *
  */
 public class RubyDocProcessorSimple {
 
@@ -26,7 +27,7 @@ public class RubyDocProcessorSimple {
 	/**
 	 * Substitutes '*text*' with '&lt;b>text&lt;/b>', and '`text`' with '&lt;tt>text&lt;/tt>', and
 	 * appends the text and a new line.
-	 * 
+	 *
 	 * @param s
 	 * @param builder
 	 */

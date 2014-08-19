@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,13 +28,6 @@ import com.puppetlabs.geppetto.forge.model.ModuleName;
  * Stores information about a release that cannot be contained in a POM
  */
 public class PuppetModuleReleaseInfo extends Entity {
-	private static final String[] readmeFiles = {
-			"README.markdown", "README.md", "README.txt", "README", "README.mkdn", "README.mkd" };
-
-	private static final String[] changeLogFiles = { "Changes", "Changes.md", "Changelog", "Changelog.md" };
-
-	private static final String[] licenseFiles = { "LICENSE", "COPYING" };
-
 	private static File findOneOf(File[] children, String[] fileNames) {
 		for(File file : children)
 			if(isFile(file.getName(), fileNames))
@@ -69,6 +62,13 @@ public class PuppetModuleReleaseInfo extends Entity {
 			writer.write(new String(buf, 0, cnt, Charsets.UTF_8));
 		return writer.toString();
 	}
+
+	private static final String[] readmeFiles = {
+		"README.markdown", "README.md", "README.txt", "README", "README.mkdn", "README.mkd" };
+
+	private static final String[] changeLogFiles = { "Changes", "Changes.md", "Changelog", "Changelog.md" };
+
+	private static final String[] licenseFiles = { "LICENSE", "COPYING" };
 
 	@Expose
 	private ModuleName moduleName;
@@ -110,7 +110,7 @@ public class PuppetModuleReleaseInfo extends Entity {
 	/**
 	 * We need an extra module name since the one in the metadata cannot be trusted
 	 * and the maven coordinates are lower cased
-	 * 
+	 *
 	 * @return The name of the module
 	 */
 	public ModuleName getModuleName() {
@@ -124,13 +124,13 @@ public class PuppetModuleReleaseInfo extends Entity {
 	public List<String> getTags() {
 		return tags == null
 				? Collections.<String> emptyList()
-				: Collections.unmodifiableList(tags);
+						: Collections.unmodifiableList(tags);
 	}
 
 	/**
 	 * Reads the changelog, license, and readme from the module directory. All files
 	 * are optional and empty files will result in corresponding <code>null</code> entries.
-	 * 
+	 *
 	 * @param moduleDir
 	 *            The module directory
 	 * @throws IOException

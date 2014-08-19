@@ -227,7 +227,7 @@ public class AbstractForgeTestMojo {
 					pluginDescriptor = new PluginDescriptorBuilder().build(interpolationFilterReader);
 					Artifact artifact = pc.lookup(RepositorySystem.class).createArtifact(
 						pluginDescriptor.getGroupId(), pluginDescriptor.getArtifactId(), pluginDescriptor.getVersion(),
-						".jar");
+							".jar");
 					artifact.setFile(getBasedir());
 					pluginDescriptor.setClassRealm(pc.getContainerRealm());
 					pluginDescriptor.setPluginArtifact(artifact);
@@ -264,7 +264,7 @@ public class AbstractForgeTestMojo {
 	}
 
 	protected Mojo lookupConfiguredMojo(MavenSession session, MojoExecution execution) throws Exception,
-			ComponentConfigurationException {
+	ComponentConfigurationException {
 
 		Mojo mojo = getPluginManager().getConfiguredMojo(Mojo.class, session, execution);
 		if(mojo instanceof AbstractForgeMojo)
@@ -294,25 +294,25 @@ public class AbstractForgeTestMojo {
 		return execution;
 	}
 
-	protected MavenSession packageModule(String moduleName) throws Exception {
-		setTestForgeModulesRoot(moduleName);
-		return createModuleSession(moduleName);
-	}
-
 	protected MavenSession packageGeneratedModule(VersionedName moduleName) throws Exception {
 		setGeneratedTestForgeModulesRoot(moduleName);
 		return createModuleSession(moduleName.getModuleName().getName());
 	}
 
-	protected void setTestForgeModulesRoot(String project) {
-		File projectFile = getTestFile("src/test/workspace/" + project);
+	protected MavenSession packageModule(String moduleName) throws Exception {
+		setTestForgeModulesRoot(moduleName);
+		return createModuleSession(moduleName);
+	}
+
+	protected void setGeneratedTestForgeModulesRoot(VersionedName vn) {
+		File projectFile = new File(ForgeIT.TEST_MODULES_DIR, vn.getModuleName().getName());
 		String absPath = projectFile.getAbsolutePath();
 		assertTrue("Project file " + absPath + " is not a directory", projectFile.isDirectory());
 		userProps.put("testForgeModulesRoot", absPath);
 	}
 
-	protected void setGeneratedTestForgeModulesRoot(VersionedName vn) {
-		File projectFile = new File(ForgeIT.TEST_MODULES_DIR, vn.getModuleName().getName());
+	protected void setTestForgeModulesRoot(String project) {
+		File projectFile = getTestFile("src/test/workspace/" + project);
 		String absPath = projectFile.getAbsolutePath();
 		assertTrue("Project file " + absPath + " is not a directory", projectFile.isDirectory());
 		userProps.put("testForgeModulesRoot", absPath);

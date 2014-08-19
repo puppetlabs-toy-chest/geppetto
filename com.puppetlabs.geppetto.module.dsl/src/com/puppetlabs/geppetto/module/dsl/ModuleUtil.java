@@ -36,88 +36,22 @@ public class ModuleUtil {
 		this.lazyURIEncoder = lazyURIEncoder;
 	}
 
-	public Map<String, Value> getAttributes(JsonObject object) {
-		if(object == null)
-			return Collections.emptyMap();
-
-		Map<String, Value> attrs = new HashMap<String, Value>();
-		for(Pair pair : object.getPairs())
-			attrs.put(pair.getName(), pair.getValue());
-		return attrs;
-	}
-
-	public String getString(Value value) {
-		if(value instanceof JsonValue) {
-			Object v = ((JsonValue) value).getValue();
-			if(v instanceof String)
-				return (String) v;
+	public List<Dependency> getApiDependencies(JsonMetadata metadata) {
+		Value depsVal = getValue(metadata, "dependencies");
+		if(depsVal instanceof JsonArray) {
+			List<Dependency> apiDeps = Lists.newArrayList();
+			for(Value dep : ((JsonArray) depsVal).getValue())
+				apiDeps.add(getApiDependency(((JsonDependency) dep)));
+			return apiDeps;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
-	public String getString(JsonObject object, String name) {
-		return getString(getValue(object, name));
-	}
-
-	public Value getValue(JsonObject object, String name) {
-		if(object != null && name != null)
-			for(Pair pair : object.getPairs())
-				if(name.equals(pair.getName()))
-					return pair.getValue();
-		return null;
-	}
-
-	public JsonMetadata getOwnerMetadata(JsonDependency dependency) {
-		return (JsonMetadata) dependency.eContainer().eContainer().eContainer();
-	}
-
-	public JsonMetadata getReferencedModule(JsonDependency dependency) {
-		if(dependency != null)
-			for(Pair pair : dependency.getPairs())
-				if(pair instanceof MetadataRefPair)
-					return ((MetadataRefPair) pair).getRef();
-		return null;
-	}
-
-	public boolean isResolved(EObject obj) {
-		return !(obj == null || obj.eIsProxy());
-	}
-
-	public boolean isDeprecatedKey(JsonObject obj, String key) {
-		if(obj instanceof JsonMetadata)
-			return MetadataUtil.isDeprecatedMetadataKey(key);
-		if(obj instanceof JsonDependency)
-			return MetadataUtil.isDeprecatedDependencyKey(key);
-		if(obj instanceof JsonOS)
-			return MetadataUtil.isDeprecatedOSKey(key);
-		if(obj instanceof JsonRequirement)
-			return MetadataUtil.isDeprecatedRequirementKey(key);
-		return false;
-	}
-
-	public boolean isKnownKey(JsonObject obj, String key) {
-		if(obj instanceof JsonMetadata)
-			return MetadataUtil.isMetadataKey(key);
-		if(obj instanceof JsonDependency)
-			return MetadataUtil.isDependencyKey(key);
-		if(obj instanceof JsonOS)
-			return MetadataUtil.isOSKey(key);
-		if(obj instanceof JsonRequirement)
-			return MetadataUtil.isRequirementKey(key);
-		return false;
-	}
-
-	public ModuleName getName(JsonMetadata metadata) {
-		try {
-			return ModuleName.create(getString(metadata, "name"), false);
-		}
-		catch(IllegalArgumentException e) {
-			return null;
-		}
-	}
-
-	public String getName(JsonRequirement requirement) {
-		return getString(requirement, "name");
+	public Dependency getApiDependency(JsonDependency dependency) {
+		Dependency apiDep = new Dependency();
+		apiDep.setName(ModuleName.create(getRawName(dependency), false));
+		apiDep.setVersionRequirement(getRange(dependency));
+		return apiDep;
 	}
 
 	public Metadata getApiMetadata(JsonMetadata metadata) {
@@ -180,6 +114,13 @@ public class ModuleUtil {
 		return Collections.emptyList();
 	}
 
+	public Requirement getApiRequirement(JsonRequirement requirement) {
+		Requirement apiReq = new Requirement();
+		apiReq.setName(getName(requirement));
+		apiReq.setVersionRequirement(getRange(requirement));
+		return apiReq;
+	}
+
 	public List<Requirement> getApiRequirements(JsonMetadata metadata) {
 		Value reqsVal = getValue(metadata, "requirements");
 		if(reqsVal instanceof JsonArray) {
@@ -195,7 +136,7 @@ public class ModuleUtil {
 		Value tags = getValue(metadata, "tags");
 		return tags instanceof JsonArray
 				? getStrings((JsonArray) tags)
-						: Collections.<String> emptyList();
+				: Collections.<String> emptyList();
 	}
 
 	public Object getApiValue(Value value) {
@@ -208,11 +149,14 @@ public class ModuleUtil {
 		return null;
 	}
 
-	public List<String> getStrings(JsonArray array) {
-		List<String> list = Lists.newArrayList();
-		for(Value value : array.getValue())
-			list.add(getString(value));
-		return list;
+	public Map<String, Value> getAttributes(JsonObject object) {
+		if(object == null)
+			return Collections.emptyMap();
+
+		Map<String, Value> attrs = new HashMap<String, Value>();
+		for(Pair pair : object.getPairs())
+			attrs.put(pair.getName(), pair.getValue());
+		return attrs;
 	}
 
 	public List<Object> getList(JsonArray array) {
@@ -229,34 +173,44 @@ public class ModuleUtil {
 		return map;
 	}
 
-	public Dependency getApiDependency(JsonDependency dependency) {
-		Dependency apiDep = new Dependency();
-		apiDep.setName(ModuleName.create(getRawName(dependency), false));
-		apiDep.setVersionRequirement(getRange(dependency));
-		return apiDep;
-	}
-
-	public Requirement getApiRequirement(JsonRequirement requirement) {
-		Requirement apiReq = new Requirement();
-		apiReq.setName(getName(requirement));
-		apiReq.setVersionRequirement(getRange(requirement));
-		return apiReq;
-	}
-
-	public List<Dependency> getApiDependencies(JsonMetadata metadata) {
-		Value depsVal = getValue(metadata, "dependencies");
-		if(depsVal instanceof JsonArray) {
-			List<Dependency> apiDeps = Lists.newArrayList();
-			for(Value dep : ((JsonArray) depsVal).getValue())
-				apiDeps.add(getApiDependency(((JsonDependency) dep)));
-			return apiDeps;
-		}
-		return Collections.emptyList();
-	}
-
-	public Version getVersion(JsonMetadata metadata) {
+	public ModuleName getName(JsonDependency dependency) {
 		try {
-			return Version.create(getString(metadata, "version"));
+			return ModuleName.create(getRawName(dependency), false);
+		}
+		catch(IllegalArgumentException e) {
+			return null;
+		}
+	}
+
+	public ModuleName getName(JsonMetadata metadata) {
+		try {
+			return ModuleName.create(getString(metadata, "name"), false);
+		}
+		catch(IllegalArgumentException e) {
+			return null;
+		}
+	}
+
+	public String getName(JsonRequirement requirement) {
+		return getString(requirement, "name");
+	}
+
+	public JsonMetadata getOwnerMetadata(JsonDependency dependency) {
+		return (JsonMetadata) dependency.eContainer().eContainer().eContainer();
+	}
+
+	public VersionRange getRange(JsonDependency dependency) {
+		try {
+			return VersionRange.create(getString(dependency, "version_requirement"));
+		}
+		catch(IllegalArgumentException e) {
+			return null;
+		}
+	}
+
+	public VersionRange getRange(JsonRequirement requirement) {
+		try {
+			return VersionRange.create(getString(requirement, "version_requirement"));
 		}
 		catch(IllegalArgumentException e) {
 			return null;
@@ -284,31 +238,12 @@ public class ModuleUtil {
 		return null;
 	}
 
-	public ModuleName getName(JsonDependency dependency) {
-		try {
-			return ModuleName.create(getRawName(dependency), false);
-		}
-		catch(IllegalArgumentException e) {
-			return null;
-		}
-	}
-
-	public VersionRange getRange(JsonDependency dependency) {
-		try {
-			return VersionRange.create(getString(dependency, "version_requirement"));
-		}
-		catch(IllegalArgumentException e) {
-			return null;
-		}
-	}
-
-	public VersionRange getRange(JsonRequirement requirement) {
-		try {
-			return VersionRange.create(getString(requirement, "version_requirement"));
-		}
-		catch(IllegalArgumentException e) {
-			return null;
-		}
+	public JsonMetadata getReferencedModule(JsonDependency dependency) {
+		if(dependency != null)
+			for(Pair pair : dependency.getPairs())
+				if(pair instanceof MetadataRefPair)
+					return ((MetadataRefPair) pair).getRef();
+		return null;
 	}
 
 	public List<JsonMetadata> getResolvedDependencies(JsonMetadata metadata) {
@@ -323,5 +258,70 @@ public class ModuleUtil {
 			return resolved;
 		}
 		return Collections.emptyList();
+	}
+
+	public String getString(JsonObject object, String name) {
+		return getString(getValue(object, name));
+	}
+
+	public String getString(Value value) {
+		if(value instanceof JsonValue) {
+			Object v = ((JsonValue) value).getValue();
+			if(v instanceof String)
+				return (String) v;
+		}
+		return null;
+	}
+
+	public List<String> getStrings(JsonArray array) {
+		List<String> list = Lists.newArrayList();
+		for(Value value : array.getValue())
+			list.add(getString(value));
+		return list;
+	}
+
+	public Value getValue(JsonObject object, String name) {
+		if(object != null && name != null)
+			for(Pair pair : object.getPairs())
+				if(name.equals(pair.getName()))
+					return pair.getValue();
+		return null;
+	}
+
+	public Version getVersion(JsonMetadata metadata) {
+		try {
+			return Version.create(getString(metadata, "version"));
+		}
+		catch(IllegalArgumentException e) {
+			return null;
+		}
+	}
+
+	public boolean isDeprecatedKey(JsonObject obj, String key) {
+		if(obj instanceof JsonMetadata)
+			return MetadataUtil.isDeprecatedMetadataKey(key);
+		if(obj instanceof JsonDependency)
+			return MetadataUtil.isDeprecatedDependencyKey(key);
+		if(obj instanceof JsonOS)
+			return MetadataUtil.isDeprecatedOSKey(key);
+		if(obj instanceof JsonRequirement)
+			return MetadataUtil.isDeprecatedRequirementKey(key);
+		return false;
+	}
+
+	public boolean isKnownKey(JsonObject obj, String key) {
+		if(obj instanceof JsonMetadata)
+			return MetadataUtil.isMetadataKey(key);
+		if(obj instanceof JsonDependency)
+			return MetadataUtil.isDependencyKey(key);
+		if(obj instanceof JsonOS)
+			return MetadataUtil.isOSKey(key);
+		if(obj instanceof JsonRequirement)
+			return MetadataUtil.isRequirementKey(key);
+		return false;
+	}
+
+	public boolean isResolved(EObject obj) {
+		return !(obj == null || obj.eIsProxy());
 	}
 }

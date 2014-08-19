@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,20 +28,20 @@ import com.google.inject.Inject;
 
 /**
  * Layout Utility functions
- * 
+ *
  */
 public class LayoutUtils {
 
 	/**
 	 * <p>
-	 * Unifies the width of the nodes matching the given grammar element in the subtree rooted at the given node. The resulting width is set as the
-	 * width style of the corresponding nodes.
+	 * Unifies the width of the nodes matching the given grammar element in the subtree rooted at the given node. The
+	 * resulting width is set as the width style of the corresponding nodes.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * The width is calculated using the unformatted text in the dom nodes with matching grammar elements.
 	 * </p>
-	 * 
+	 *
 	 * @param dom
 	 *            - the subtree root to scan
 	 * @param grammarElement
@@ -105,7 +105,7 @@ public class LayoutUtils {
 	/**
 	 * Returns true if the node, when formatted and written to the given flow will fit on what remains
 	 * on the line. The flow and contexts are not affected by this operation.
-	 * 
+	 *
 	 * @param node
 	 *            - the node to measure
 	 * @param untilGrammarElement
@@ -124,7 +124,7 @@ public class LayoutUtils {
 	/**
 	 * Returns true if the node, when formatted and written to the given flow will fit on what remains
 	 * on the line. The flow and contexts are not affected by this operation.
-	 * 
+	 *
 	 * @param node
 	 *            - the node to measure
 	 * @param flow

@@ -43,18 +43,18 @@ public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 	public IPreferenceStore getContextPreferenceStore(Object context) {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] { //
-			getReadableAndWritablePreferenceStore(context), //
-					plugin.getPreferenceStore(), //
-					EditorsUI.getPreferenceStore() });
+				getReadableAndWritablePreferenceStore(context), //
+				plugin.getPreferenceStore(), //
+				EditorsUI.getPreferenceStore() });
 	}
 
 	@Override
 	public IPreferenceStore getPreferenceStore() {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] { //
-			getWritablePreferenceStore(), //
-					plugin.getPreferenceStore(), //
-					EditorsUI.getPreferenceStore() });
+				getWritablePreferenceStore(), //
+				plugin.getPreferenceStore(), //
+				EditorsUI.getPreferenceStore() });
 	}
 
 	/**

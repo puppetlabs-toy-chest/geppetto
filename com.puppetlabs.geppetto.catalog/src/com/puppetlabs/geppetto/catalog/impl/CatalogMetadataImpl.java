@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -36,12 +36,12 @@ import com.google.gson.JsonSerializer;
  * <li>{@link com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl#getApi_version <em>Api version</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata {
 	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogMetadata> implements
-			JsonSerializer<CatalogMetadata> {
+	JsonSerializer<CatalogMetadata> {
 
 		private static String getString(JsonObject jsonObj, String key) {
 			JsonElement json = jsonObj.get(key);
@@ -52,7 +52,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 			// unset values are null, not empty strings
 			return value.length() == 0
 					? null
-					: value;
+							: value;
 		}
 
 		private static void putString(JsonObject jsonObj, String key, String value) {
@@ -87,7 +87,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	 * The default value of the '{@link #getApi_version() <em>Api version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getApi_version()
 	 * @generated
 	 * @ordered
@@ -98,7 +98,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	 * The cached value of the '{@link #getApi_version() <em>Api version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getApi_version()
 	 * @generated
 	 * @ordered
@@ -108,7 +108,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CatalogMetadataImpl() {
@@ -118,7 +118,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -133,7 +133,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -141,8 +141,8 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 		switch(featureID) {
 			case CatalogPackage.CATALOG_METADATA__API_VERSION:
 				return API_VERSION_EDEFAULT == null
-						? api_version != null
-						: !API_VERSION_EDEFAULT.equals(api_version);
+				? api_version != null
+				: !API_VERSION_EDEFAULT.equals(api_version);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -150,7 +150,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -166,7 +166,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -177,7 +177,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -193,9 +193,10 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getApi_version() {
 		return api_version;
 	}
@@ -203,9 +204,10 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setApi_version(String newApi_version) {
 		String oldApi_version = api_version;
 		api_version = newApi_version;
@@ -217,7 +219,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

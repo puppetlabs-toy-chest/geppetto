@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.junit.Test;
 
-
 public class TestCatalogGraph {
 
 	@Test
@@ -133,7 +132,7 @@ public class TestCatalogGraph {
 
 	/**
 	 * In which it is tested what happens when a required resource missing in old is added in new.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -163,7 +162,7 @@ public class TestCatalogGraph {
 
 	/**
 	 * In which it is tested what happens when a resource that is required is missing in new.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

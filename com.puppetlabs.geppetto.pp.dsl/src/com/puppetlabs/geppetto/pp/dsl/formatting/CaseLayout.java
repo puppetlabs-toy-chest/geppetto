@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -37,7 +37,7 @@ import com.google.inject.Provider;
 
 /**
  * A sub layout handler for CaseExpression and Case
- * 
+ *
  */
 public class CaseLayout {
 
@@ -199,7 +199,7 @@ public class CaseLayout {
 	/**
 	 * assign widths and alignment to the colon nodes
 	 * compute available width for remainder if all cases are compactable
-	 * 
+	 *
 	 * @param colonNodes
 	 * @param widths
 	 * @param availableWidth
@@ -208,24 +208,24 @@ public class CaseLayout {
 	 * @return
 	 */
 	private List<Integer> markupWidths(List<IDomNode> colonNodes, List<Integer> widths, int availableWidth,
-			IntegerCluster clusters, boolean doCompaction, boolean doAlignment) {
+		IntegerCluster clusters, boolean doCompaction, boolean doAlignment) {
 		// assign widths and alignment to the colon nodes
 		// compute available width for remainder if all cases are compactable
 		List<Integer> remainingWidths = doCompaction
 				? Lists.<Integer> newArrayList()
-				: null;
-		for(int i = 0; i < colonNodes.size(); i++) {
-			IDomNode c = colonNodes.get(i);
-			int w = widths.get(i);
-			int mw = doAlignment
-					? clusters.clusterMax(w)
-					: w;
-			if(doAlignment)
-				c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
-					styles.width(1 + mw - w)));
-			if(doCompaction)
-				remainingWidths.add(availableWidth - mw - 6); // 6 = ": { " +" }"
-		}
-		return remainingWidths;
+						: null;
+				for(int i = 0; i < colonNodes.size(); i++) {
+					IDomNode c = colonNodes.get(i);
+					int w = widths.get(i);
+					int mw = doAlignment
+							? clusters.clusterMax(w)
+									: w;
+							if(doAlignment)
+								c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
+									styles.width(1 + mw - w)));
+							if(doCompaction)
+								remainingWidths.add(availableWidth - mw - 6); // 6 = ": { " +" }"
+				}
+				return remainingWidths;
 	}
 }

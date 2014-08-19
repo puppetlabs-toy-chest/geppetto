@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -27,57 +27,9 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
  * Helper for some of the icons.
- * 
+ *
  */
 public class PPPluginImages {
-
-	private static ImageRegistry PLUGIN_REGISTRY;
-
-	public final static String ICONS_PATH = "icons/"; //$NON-NLS-1$
-
-	/**
-	 * Set of predefined Image Descriptors.
-	 */
-
-	private static final String PATH_LCL = ICONS_PATH + "elcl16/"; //$NON-NLS-1$
-
-	private static final String PATH_LCL_DISABLED = ICONS_PATH + "dlcl16/"; //$NON-NLS-1$
-
-	/**
-	 * LCL
-	 */
-	public static final ImageDescriptor DESC_LINK_WITH_EDITOR = create(PATH_LCL, "synced.gif"); //$NON-NLS-1$
-
-	public static final ImageDescriptor DESC_ALPHAB_SORT_CO = create(PATH_LCL, "alphab_sort_co.gif"); //$NON-NLS-1$
-
-	public static final ImageDescriptor DESC_LINK_WITH_EDITOR_DISABLED = create(PATH_LCL_DISABLED, "synced.gif"); //$NON-NLS-1$
-
-	public static final ImageDescriptor DESC_ALPHAB_SORT_CO_DISABLED = create(PATH_LCL_DISABLED, "alphab_sort_co.gif"); //$NON-NLS-1$
-
-	public static final ImageDescriptor DESC_SEARCH_PREVIOUS = create(PATH_LCL, "prev_nav.gif");
-
-	public static final ImageDescriptor DESC_SEARCH_NEXT = create(PATH_LCL, "next_nav.gif");
-
-	public static final ImageDescriptor DESC_EXPAND_ALL = create(PATH_LCL, "expandall.gif");
-
-	public static final ImageDescriptor DESC_COLLAPSE_ALL = create(PATH_LCL, "collapseall.gif");
-
-	public static final ImageDescriptor DESC_OPEN_DECLARATION = create(PATH_LCL, "goto_input.gif");
-
-	public static final ImageDescriptor DESC_OPEN_DECLARATION_DISABLED = create(PATH_LCL_DISABLED, "goto_input.gif");
-
-	public static final ImageDescriptor DESC_MARK_OCCURRENCES = create(PATH_LCL, "mark_occurrences.gif");
-
-	public static final ImageDescriptor DESC_MARK_OCCURRENCES_DISABLED = create(
-		PATH_LCL_DISABLED, "mark_occurrences.gif");
-
-	private static boolean imagesInitialized;
-
-	private static final Map<String, Image> annotationImagesFixable = new HashMap<String, Image>();
-
-	private static final Map<String, Image> annotationImagesNonFixable = new HashMap<String, Image>();
-
-	private static final Map<String, Image> annotationImagesDeleted = new HashMap<String, Image>();
 
 	private static ImageDescriptor create(String prefix, String name) {
 		return ImageDescriptor.createFromURL(makeImageURL(prefix, name));
@@ -132,7 +84,7 @@ public class PPPluginImages {
 
 	private static URL makeImageURL(String prefix, String name) {
 		String path = "$nl$/" + prefix + name; //$NON-NLS-1$
-		return FileLocator.find(PPDSLActivator.getInstance().getBundle(), new Path(path), null);
+		return FileLocator.find(PPActivator.getInstance().getBundle(), new Path(path), null);
 	}
 
 	public static Image manage(String key, ImageDescriptor desc) {
@@ -140,5 +92,53 @@ public class PPPluginImages {
 		PLUGIN_REGISTRY.put(key, image);
 		return image;
 	}
+
+	private static ImageRegistry PLUGIN_REGISTRY;
+
+	public final static String ICONS_PATH = "icons/"; //$NON-NLS-1$
+
+	/**
+	 * Set of predefined Image Descriptors.
+	 */
+
+	private static final String PATH_LCL = ICONS_PATH + "elcl16/"; //$NON-NLS-1$
+
+	private static final String PATH_LCL_DISABLED = ICONS_PATH + "dlcl16/"; //$NON-NLS-1$
+
+	/**
+	 * LCL
+	 */
+	public static final ImageDescriptor DESC_LINK_WITH_EDITOR = create(PATH_LCL, "synced.gif"); //$NON-NLS-1$
+
+	public static final ImageDescriptor DESC_ALPHAB_SORT_CO = create(PATH_LCL, "alphab_sort_co.gif"); //$NON-NLS-1$
+
+	public static final ImageDescriptor DESC_LINK_WITH_EDITOR_DISABLED = create(PATH_LCL_DISABLED, "synced.gif"); //$NON-NLS-1$
+
+	public static final ImageDescriptor DESC_ALPHAB_SORT_CO_DISABLED = create(PATH_LCL_DISABLED, "alphab_sort_co.gif"); //$NON-NLS-1$
+
+	public static final ImageDescriptor DESC_SEARCH_PREVIOUS = create(PATH_LCL, "prev_nav.gif");
+
+	public static final ImageDescriptor DESC_SEARCH_NEXT = create(PATH_LCL, "next_nav.gif");
+
+	public static final ImageDescriptor DESC_EXPAND_ALL = create(PATH_LCL, "expandall.gif");
+
+	public static final ImageDescriptor DESC_COLLAPSE_ALL = create(PATH_LCL, "collapseall.gif");
+
+	public static final ImageDescriptor DESC_OPEN_DECLARATION = create(PATH_LCL, "goto_input.gif");
+
+	public static final ImageDescriptor DESC_OPEN_DECLARATION_DISABLED = create(PATH_LCL_DISABLED, "goto_input.gif");
+
+	public static final ImageDescriptor DESC_MARK_OCCURRENCES = create(PATH_LCL, "mark_occurrences.gif");
+
+	public static final ImageDescriptor DESC_MARK_OCCURRENCES_DISABLED = create(
+		PATH_LCL_DISABLED, "mark_occurrences.gif");
+
+	private static boolean imagesInitialized;
+
+	private static final Map<String, Image> annotationImagesFixable = new HashMap<String, Image>();
+
+	private static final Map<String, Image> annotationImagesNonFixable = new HashMap<String, Image>();
+
+	private static final Map<String, Image> annotationImagesDeleted = new HashMap<String, Image>();
 
 }

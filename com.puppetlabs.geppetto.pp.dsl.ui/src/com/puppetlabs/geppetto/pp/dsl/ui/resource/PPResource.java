@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import com.google.inject.Inject;
  * when the parse result is updated.
  * Note that this is UI specific, in headless runtime, the same functionality is triggered by the @link {@link PPLinker}
  * .
- * 
+ *
  */
 public class PPResource extends LazyLinkingResource {
 	@Inject
@@ -94,7 +94,7 @@ public class PPResource extends LazyLinkingResource {
 
 	/**
 	 * Performs PP linking, and processes documentation
-	 * 
+	 *
 	 * @param mon
 	 */
 	protected void performPPLinking(CancelIndicator mon) {

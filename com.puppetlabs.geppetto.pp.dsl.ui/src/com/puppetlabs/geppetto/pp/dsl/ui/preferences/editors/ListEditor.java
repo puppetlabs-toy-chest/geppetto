@@ -36,7 +36,8 @@ import org.eclipse.swt.widgets.Widget;
  * adding and removing values, and Up and Down buttons to adjust
  * the order of elements in the list.
  * <p>
- * Subclasses must implement the <code>parseString</code>, <code>createList</code>, and <code>getNewInputObject</code> framework methods.
+ * Subclasses must implement the <code>parseString</code>, <code>createList</code>, and <code>getNewInputObject</code>
+ * framework methods.
  * </p>
  */
 public abstract class ListEditor extends FieldEditor {
@@ -48,7 +49,8 @@ public abstract class ListEditor extends FieldEditor {
 	private List list;
 
 	/**
-	 * The button box containing the Add, Remove, Up, and Down buttons; <code>null</code> if none (before creation or after disposal).
+	 * The button box containing the Add, Remove, Up, and Down buttons; <code>null</code> if none (before creation or
+	 * after disposal).
 	 */
 	private Composite buttonBox;
 
@@ -90,7 +92,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Creates a list field editor.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the preference this field editor works on
 	 * @param labelText
@@ -135,7 +137,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Creates the Add, Remove, Up, and Down button in the given button box.
-	 * 
+	 *
 	 * @param box
 	 *            the box for the buttons
 	 */
@@ -154,7 +156,7 @@ public abstract class ListEditor extends FieldEditor {
 	 * <p>
 	 * Subclasses must implement this method.
 	 * </p>
-	 * 
+	 *
 	 * @param items
 	 *            the list of items
 	 * @return the combined string
@@ -164,7 +166,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Helper method to create a push button.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent control
 	 * @param key
@@ -310,7 +312,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Return the Add button.
-	 * 
+	 *
 	 * @return the button
 	 * @since 3.5
 	 */
@@ -321,7 +323,7 @@ public abstract class ListEditor extends FieldEditor {
 	/**
 	 * Returns this field editor's button box containing the Add, Remove,
 	 * Up, and Down button.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent control
 	 * @return the button box
@@ -334,6 +336,7 @@ public abstract class ListEditor extends FieldEditor {
 			buttonBox.setLayout(layout);
 			createButtons(buttonBox);
 			buttonBox.addDisposeListener(new DisposeListener() {
+				@Override
 				public void widgetDisposed(DisposeEvent event) {
 					addButton = null;
 					editButton = null;
@@ -355,7 +358,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Return the Down button.
-	 * 
+	 *
 	 * @return the button
 	 * @since 3.5
 	 */
@@ -365,7 +368,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Returns an (possibly) edited (or empty) version of the input string.
-	 * 
+	 *
 	 * @param input
 	 * @return an edited version, or empty or null if it should be removed.
 	 */
@@ -373,7 +376,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Return the List.
-	 * 
+	 *
 	 * @return the list
 	 * @since 3.5
 	 */
@@ -383,7 +386,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Returns this field editor's list control.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent control
 	 * @return the list control
@@ -394,6 +397,7 @@ public abstract class ListEditor extends FieldEditor {
 			list.setFont(parent.getFont());
 			list.addSelectionListener(getSelectionListener());
 			list.addDisposeListener(new DisposeListener() {
+				@Override
 				public void widgetDisposed(DisposeEvent event) {
 					list = null;
 				}
@@ -410,7 +414,7 @@ public abstract class ListEditor extends FieldEditor {
 	 * <p>
 	 * Subclasses must implement this method.
 	 * </p>
-	 * 
+	 *
 	 * @return a new item
 	 */
 	protected abstract String getNewInputObject();
@@ -426,7 +430,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Return the Remove button.
-	 * 
+	 *
 	 * @return the button
 	 * @since 3.5
 	 */
@@ -437,7 +441,7 @@ public abstract class ListEditor extends FieldEditor {
 	/**
 	 * Returns this field editor's selection listener.
 	 * The listener is created if nessessary.
-	 * 
+	 *
 	 * @return the selection listener
 	 */
 	private SelectionListener getSelectionListener() {
@@ -452,7 +456,7 @@ public abstract class ListEditor extends FieldEditor {
 	 * <p>
 	 * This method is internal to the framework; subclassers should not call this method.
 	 * </p>
-	 * 
+	 *
 	 * @return the shell
 	 */
 	protected Shell getShell() {
@@ -464,7 +468,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Return the Up button.
-	 * 
+	 *
 	 * @return the button
 	 * @since 3.5
 	 */
@@ -478,7 +482,7 @@ public abstract class ListEditor extends FieldEditor {
 	 * <p>
 	 * Subclasses must implement this method.
 	 * </p>
-	 * 
+	 *
 	 * @param stringList
 	 *            the string
 	 * @return an array of <code>String</code>
@@ -500,16 +504,16 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Invoked when the selection in the list has changed.
-	 * 
+	 *
 	 * <p>
-	 * The default implementation of this method utilizes the selection index and the size of the list to toggle the enablement of the up, down and
-	 * remove buttons.
+	 * The default implementation of this method utilizes the selection index and the size of the list to toggle the
+	 * enablement of the up, down and remove buttons.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Sublcasses may override.
 	 * </p>
-	 * 
+	 *
 	 * @since 3.5
 	 */
 	protected void selectionChanged() {
@@ -549,7 +553,7 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Moves the currently selected item up or down.
-	 * 
+	 *
 	 * @param up
 	 *            <code>true</code> if the item should move up,
 	 *            and <code>false</code> if it should move down
@@ -559,7 +563,7 @@ public abstract class ListEditor extends FieldEditor {
 		int index = list.getSelectionIndex();
 		int target = up
 				? index - 1
-				: index + 1;
+						: index + 1;
 
 		if(index >= 0) {
 			String[] selection = list.getSelection();

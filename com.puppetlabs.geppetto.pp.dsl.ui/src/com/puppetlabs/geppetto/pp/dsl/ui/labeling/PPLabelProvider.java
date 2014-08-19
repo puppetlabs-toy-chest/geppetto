@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -56,7 +56,7 @@ import com.google.inject.Inject;
 
 /**
  * Provides labels for a EObjects.
- * 
+ *
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIconNames {
@@ -208,7 +208,7 @@ public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIco
 	private String nullSafeString(String s) {
 		return s == null
 				? ""
-				: s;
+						: s;
 	}
 
 	StyledString text(AtExpression o) {
@@ -275,7 +275,7 @@ public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIco
 
 	/**
 	 * Literal lists can be used where names can appear - i.e. something has "a list of names" as name.
-	 * 
+	 *
 	 * @param ele
 	 * @return
 	 */
@@ -306,7 +306,7 @@ public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIco
 		String s = ele.eResource().getURI().lastSegment();
 		return Strings.isEmpty(s)
 				? "<unnamed>"
-				: URI.decode(s);
+						: URI.decode(s);
 	}
 
 	StyledString text(ResourceBody ele) {
@@ -359,7 +359,7 @@ public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIco
 			case ClassifierAdapter.RESOURCE_IS_REGULAR:
 				typeLabel.append(" : Resource" + (bodyListSize > 1
 						? "s"
-						: ""), StyledString.DECORATIONS_STYLER);
+								: ""), StyledString.DECORATIONS_STYLER);
 				break;
 		}
 		label.append(typeLabel);

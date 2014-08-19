@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,11 +20,6 @@ import com.google.inject.Injector;
  * A service that enables files and folders to be examined by <a href="http://http://puppet-lint.com/">puppet-lint</a>.
  */
 public class PuppetLintService {
-	public static final DiagnosticType PUPPET_LINT = new DiagnosticType(
-		"PUPPET_LINT", PuppetLintService.class.getName());
-
-	private static PuppetLintService instance;
-
 	/**
 	 * @return The singleton instance of this service
 	 */
@@ -33,6 +28,11 @@ public class PuppetLintService {
 			instance = new PuppetLintService(Guice.createInjector(new ExternalModule()));
 		return instance;
 	}
+
+	public static final DiagnosticType PUPPET_LINT = new DiagnosticType(
+		"PUPPET_LINT", PuppetLintService.class.getName());
+
+	private static PuppetLintService instance;
 
 	private final Injector injector;
 

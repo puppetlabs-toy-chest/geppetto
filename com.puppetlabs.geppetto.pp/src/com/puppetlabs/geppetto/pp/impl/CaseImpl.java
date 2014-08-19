@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.CaseImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CaseImpl extends EObjectImpl implements Case {
@@ -42,7 +42,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getStatements()
 	 * @generated
 	 * @ordered
@@ -53,7 +53,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValues()
 	 * @generated
 	 * @ordered
@@ -63,7 +63,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CaseImpl() {
@@ -73,7 +73,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -90,7 +90,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -107,7 +107,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -146,7 +146,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -157,7 +157,7 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -176,9 +176,10 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getStatements() {
 		if(statements == null) {
 			statements = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.CASE__STATEMENTS);
@@ -189,9 +190,10 @@ public class CaseImpl extends EObjectImpl implements Case {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getValues() {
 		if(values == null) {
 			values = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.CASE__VALUES);

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -24,7 +24,7 @@ public class FileDiagnostic extends Diagnostic {
 	public FileDiagnostic(int severity, DiagnosticType type, String message, File file) {
 		super(severity, type, message == null
 				? null
-				: message.trim());
+						: message.trim());
 		this.file = file;
 	}
 
@@ -41,16 +41,16 @@ public class FileDiagnostic extends Diagnostic {
 	/**
 	 * File is a reference to a relative or absolute file, or is empty/null if
 	 * the diagnostic is not file related.
-	 * 
+	 *
 	 * All diagnostic relating to files given (directly or contained) in the
 	 * calls to the ValidationService will be reported with path's relative to
 	 * the given root, or in the case of a single file, the leaf part of the
 	 * path (the file name). Diagnostics relating to absolute files may appear -
 	 * these may refer to files that are used by a particular diagnostician
 	 * (e.g. system libraries or general configuration files).
-	 * 
+	 *
 	 * @return the value of the '<em>file</em>' attribute.
-	 * 
+	 *
 	 *         Also see #node.
 	 */
 	@Override
@@ -63,7 +63,7 @@ public class FileDiagnostic extends Diagnostic {
 	 * diagnostic, or -1 if linenumber is irrelevant (or if file is null or
 	 * empty). Note that some diagnosticians may return a DetailedFileDiagnostic
 	 * with further information.
-	 * 
+	 *
 	 * @return the value of the '<em>lineNumber</em>' attribute.
 	 */
 	@Override
@@ -79,7 +79,7 @@ public class FileDiagnostic extends Diagnostic {
 	 * not indicate that the problem relates only to this node, only that it was
 	 * detected during processing of the given node). The special node "SERVER"
 	 * indicates if the problem was diagnosed as pertaining to the server side.
-	 * 
+	 *
 	 * @return the value of the '<em>node</em>' attribute.
 	 */
 	public String getNode() {

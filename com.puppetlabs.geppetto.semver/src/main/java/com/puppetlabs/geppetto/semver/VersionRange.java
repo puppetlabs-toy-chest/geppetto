@@ -56,15 +56,6 @@ public class VersionRange implements Serializable {
 		LESS, LESS_EQUAL, GREATER, GREATER_EQUAL, EQUAL, EQUAL_WITHOUT_OP, DASH, TILDE, MATCH_ALL
 	}
 
-	private static final long serialVersionUID = 1L;
-
-	private static final Pattern TILDE_PATTERN = Pattern.compile("^(\\d+)(?:(?:\\.(\\d+))(?:\\.(\\d+))?)?$");
-
-	private static final Pattern X_PATTERN = Pattern.compile("^(\\d+)(?:(?:\\.(x|\\d+))(?:\\.x)?)?$");
-
-	public static final VersionRange ALL_INCLUSIVE = new VersionRange(
-		">=" + Version.MIN, Version.MIN, true, Version.MAX, true);
-
 	/**
 	 * Same as {@link #fromString(String)}
 	 *
@@ -109,7 +100,7 @@ public class VersionRange implements Serializable {
 	public static VersionRange exact(Version version) {
 		return version == null
 				? null
-				: new VersionRange(null, version, true, version, true);
+						: new VersionRange(null, version, true, version, true);
 	}
 
 	/**
@@ -234,7 +225,7 @@ public class VersionRange implements Serializable {
 				case DASH:
 					if(compareType != CompareType.EQUAL_WITHOUT_OP)
 						throw new IllegalArgumentException(
-							"Can't create a dash range unless both sides are without operator");
+								"Can't create a dash range unless both sides are without operator");
 					max = createVersion(version, versionRequirement);
 					maxInclude = true;
 					break;
@@ -276,7 +267,7 @@ public class VersionRange implements Serializable {
 	public static VersionRange greater(Version version) {
 		return version == null
 				? null
-				: new VersionRange(null, version, false, Version.MAX, true);
+						: new VersionRange(null, version, false, Version.MAX, true);
 	}
 
 	/**
@@ -289,7 +280,7 @@ public class VersionRange implements Serializable {
 	public static VersionRange greaterOrEqual(Version version) {
 		return version == null
 				? null
-				: new VersionRange(null, version, true, Version.MAX, true);
+						: new VersionRange(null, version, true, Version.MAX, true);
 	}
 
 	private static boolean hasMore(String s, int[] posHandle) {
@@ -306,7 +297,7 @@ public class VersionRange implements Serializable {
 	public static VersionRange less(Version version) {
 		return version == null
 				? null
-				: new VersionRange(null, Version.MIN, true, version, false);
+						: new VersionRange(null, Version.MIN, true, version, false);
 	}
 
 	/**
@@ -319,7 +310,7 @@ public class VersionRange implements Serializable {
 	public static VersionRange lessOrEqual(Version version) {
 		return version == null
 				? null
-				: new VersionRange(null, Version.MIN, true, version, true);
+						: new VersionRange(null, Version.MIN, true, version, true);
 	}
 
 	private static CompareType nextCompareType(String s, int[] posHandle) {
@@ -402,6 +393,15 @@ public class VersionRange implements Serializable {
 		return new IllegalArgumentException(reason + " in range '" + range + '\'');
 	}
 
+	private static final long serialVersionUID = 1L;
+
+	private static final Pattern TILDE_PATTERN = Pattern.compile("^(\\d+)(?:(?:\\.(\\d+))(?:\\.(\\d+))?)?$");
+
+	private static final Pattern X_PATTERN = Pattern.compile("^(\\d+)(?:(?:\\.(x|\\d+))(?:\\.x)?)?$");
+
+	public static final VersionRange ALL_INCLUSIVE = new VersionRange(
+		">=" + Version.MIN, Version.MIN, true, Version.MAX, true);
+
 	private final Version minVersion;
 
 	private final boolean includeMin;
@@ -477,10 +477,10 @@ public class VersionRange implements Serializable {
 		result = prime * result + minVersion.hashCode();
 		result = prime * result + (includeMax
 				? 1231
-				: 1237);
+						: 1237);
 		result = prime * result + (includeMin
 				? 1231
-				: 1237);
+						: 1237);
 		return result;
 	}
 
@@ -567,10 +567,10 @@ public class VersionRange implements Serializable {
 
 		int minCheck = includeMin
 				? 0
-				: -1;
+						: -1;
 		int maxCheck = includeMax
 				? 0
-				: 1;
+						: 1;
 		return minVersion.compareTo(version) <= minCheck && maxVersion.compareTo(version) >= maxCheck;
 	}
 

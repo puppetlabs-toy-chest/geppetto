@@ -3,7 +3,6 @@
  */
 package com.puppetlabs.geppetto.module.dsl;
 
-
 /**
  * Initialization support for running Xtext languages
  * without equinox extension registry

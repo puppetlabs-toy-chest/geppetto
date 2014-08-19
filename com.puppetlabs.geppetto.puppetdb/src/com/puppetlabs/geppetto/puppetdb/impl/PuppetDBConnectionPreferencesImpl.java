@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -70,7 +70,7 @@ public class PuppetDBConnectionPreferencesImpl implements PuppetDBConnectionPref
 			String certString = getPreference(prefName);
 			return certString == null
 					? null
-					: factory.generateCertificate(new ByteArrayInputStream(certString.getBytes(ASCII)));
+							: factory.generateCertificate(new ByteArrayInputStream(certString.getBytes(ASCII)));
 		}
 		catch(BackingStoreException e) {
 			throw new IOException(e);

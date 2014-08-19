@@ -176,7 +176,7 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 	public void configureEObjectValidator(com.google.inject.Binder binder) {
 		binder.bindConstant().annotatedWith( //
 			com.google.inject.name.Names.named(//
-			CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
+				CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
 	}
 
 	public void configureFormatting(com.google.inject.Binder binder) {
@@ -229,7 +229,7 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 	public void configureRuntimeLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(
 			com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(
-			PPOverridingLexer.class);
+				PPOverridingLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment

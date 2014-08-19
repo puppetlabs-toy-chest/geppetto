@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -70,7 +70,8 @@ public class ModuleNameTest extends AbstractForgeTest {
 	@Test
 	public void equalsSeparatorInsensitive() {
 		ModuleName name = ModuleName.fromString("some-name");
-		assertEquals("ModuleName should not consider separator when comparing", ModuleName.fromString("some/name"), name);
+		assertEquals(
+			"ModuleName should not consider separator when comparing", ModuleName.fromString("some/name"), name);
 	}
 
 	@Test

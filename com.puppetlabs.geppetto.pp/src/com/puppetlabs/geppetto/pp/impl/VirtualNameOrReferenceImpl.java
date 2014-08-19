@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.VirtualNameOrReferenceImpl#isExported <em>Exported</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements VirtualNameOrReference {
@@ -35,7 +35,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -46,7 +46,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -57,7 +57,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	 * The default value of the '{@link #isExported() <em>Exported</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isExported()
 	 * @generated
 	 * @ordered
@@ -68,7 +68,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	 * The cached value of the '{@link #isExported() <em>Exported</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isExported()
 	 * @generated
 	 * @ordered
@@ -78,7 +78,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected VirtualNameOrReferenceImpl() {
@@ -88,7 +88,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -105,7 +105,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -113,8 +113,8 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 		switch(featureID) {
 			case PPPackage.VIRTUAL_NAME_OR_REFERENCE__VALUE:
 				return VALUE_EDEFAULT == null
-						? value != null
-						: !VALUE_EDEFAULT.equals(value);
+				? value != null
+				: !VALUE_EDEFAULT.equals(value);
 			case PPPackage.VIRTUAL_NAME_OR_REFERENCE__EXPORTED:
 				return exported != EXPORTED_EDEFAULT;
 		}
@@ -124,7 +124,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -143,7 +143,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -154,7 +154,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -173,9 +173,10 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
@@ -183,9 +184,10 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isExported() {
 		return exported;
 	}
@@ -193,9 +195,10 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setExported(boolean newExported) {
 		boolean oldExported = exported;
 		exported = newExported;
@@ -207,9 +210,10 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
@@ -221,7 +225,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

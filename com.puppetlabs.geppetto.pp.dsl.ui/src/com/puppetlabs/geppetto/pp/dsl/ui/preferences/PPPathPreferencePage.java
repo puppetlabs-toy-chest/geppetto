@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Composite;
 
 /**
  * A simple preference page for search path and environment
- * 
+ *
  */
 public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 	private static class PPPathEditor extends PathEditor {
@@ -61,7 +61,7 @@ public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.ListEditor#getEditedInput(java.lang.String)
 		 */
 		@Override
@@ -84,7 +84,7 @@ public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 			String[] value = new String[] { input };
 			int[] allSubdirs = new int[] { input.endsWith("/*")
 					? 1
-					: 0 };
+							: 0 };
 			int[] okCancel = new int[] { 1 };
 
 			dialog.prompt(
@@ -137,7 +137,7 @@ public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see org.eclipse.jface.preference.FieldEditor#load()
 		 */
 		@Override
@@ -174,7 +174,7 @@ public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.ui.preferences.AbstractRebuildingPreferencePage#getPreferenceId()
 	 */
 	@Override
@@ -184,7 +184,7 @@ public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.preferences.AbstractPreferencePage#qualifiedName()
 	 */
 	@Override

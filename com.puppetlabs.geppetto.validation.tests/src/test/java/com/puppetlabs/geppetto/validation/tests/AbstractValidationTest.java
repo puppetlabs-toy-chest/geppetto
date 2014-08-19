@@ -107,6 +107,7 @@ public class AbstractValidationTest {
 		ValidationOptions options = new ValidationOptions();
 		options.setPlatformURI(PuppetTarget.forComplianceLevel(complianceLevel, false).getPlatformURI());
 		options.setEncodingProvider(new IEncodingProvider() {
+			@Override
 			public String getEncoding(URI file) {
 				return "UTF-8";
 			}

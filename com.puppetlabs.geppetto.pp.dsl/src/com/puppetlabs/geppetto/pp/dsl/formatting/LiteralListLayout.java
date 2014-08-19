@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,11 +31,13 @@ import com.google.inject.Inject;
  * Performs semantic layout on a LiteralList in combination with text-fit check.
  * </p>
  * <p>
- * if the LiteralList list does not fit on the same line, line breaks are added to the whitespace after all commas except the optional end comma.
+ * if the LiteralList list does not fit on the same line, line breaks are added to the whitespace after all commas
+ * except the optional end comma.
  * </p>
- * 
+ *
  * <p>
- * The styling is assigned to the nodes directly to override all other rule based styling. Indentation is expected to be handled by default rules.
+ * The styling is assigned to the nodes directly to override all other rule based styling. Indentation is expected to be
+ * handled by default rules.
  * </p>
  */
 public class LiteralListLayout extends AbstractListLayout {

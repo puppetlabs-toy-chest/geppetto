@@ -71,7 +71,7 @@ public abstract class ModulefileParser {
 	}
 
 	private static final String[] validProperties = new String[] {
-			"name", "author", "description", "license", "project_page", "source", "summary", "version", "dependency" };
+		"name", "author", "description", "license", "project_page", "source", "summary", "version", "dependency" };
 
 	private Diagnostic diagnostics;
 
@@ -109,9 +109,9 @@ public abstract class ModulefileParser {
 			try {
 				dep.setVersionRequirement(VersionRange.create(versionRequirement));
 			}
-			catch(IllegalArgumentException e) {
-				addError(pos, getBadVersionRangeMessage(e));
-			}
+		catch(IllegalArgumentException e) {
+			addError(pos, getBadVersionRangeMessage(e));
+		}
 		return dep;
 	}
 
@@ -152,7 +152,7 @@ public abstract class ModulefileParser {
 	protected String getBadNameMessage(IllegalArgumentException e, boolean dependency) {
 		String pfx = dependency
 				? "A dependency "
-				: "A module ";
+						: "A module ";
 		return pfx + e.getMessage();
 	}
 
@@ -182,7 +182,7 @@ public abstract class ModulefileParser {
 					break;
 				default:
 					addError(argNode.getPosition(), "Unexpected ruby code. Node type was: " + (argNode == null
-							? "null"
+					? "null"
 							: argNode.getClass().getSimpleName()));
 			}
 		}

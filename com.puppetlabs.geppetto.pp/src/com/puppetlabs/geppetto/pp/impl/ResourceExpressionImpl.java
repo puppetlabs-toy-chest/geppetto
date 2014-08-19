@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.ResourceExpressionImpl#getResourceData <em>Resource Data</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ResourceExpressionImpl extends ExpressionImpl implements ResourceExpression {
@@ -44,7 +44,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	 * The cached value of the '{@link #getResourceExpr() <em>Resource Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getResourceExpr()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	 * The cached value of the '{@link #getResourceData() <em>Resource Data</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getResourceData()
 	 * @generated
 	 * @ordered
@@ -65,7 +65,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ResourceExpressionImpl() {
@@ -75,7 +75,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetResourceExpr(Expression newResourceExpr, NotificationChain msgs) {
@@ -95,7 +95,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -112,7 +112,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -129,7 +129,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -146,7 +146,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -167,7 +167,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -178,7 +178,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -197,13 +197,14 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<ResourceBody> getResourceData() {
 		if(resourceData == null) {
 			resourceData = new EObjectContainmentEList<ResourceBody>(
-				ResourceBody.class, this, PPPackage.RESOURCE_EXPRESSION__RESOURCE_DATA);
+					ResourceBody.class, this, PPPackage.RESOURCE_EXPRESSION__RESOURCE_DATA);
 		}
 		return resourceData;
 	}
@@ -211,9 +212,10 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getResourceExpr() {
 		return resourceExpr;
 	}
@@ -221,18 +223,19 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setResourceExpr(Expression newResourceExpr) {
 		if(newResourceExpr != resourceExpr) {
 			NotificationChain msgs = null;
 			if(resourceExpr != null)
 				msgs = ((InternalEObject) resourceExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.RESOURCE_EXPRESSION__RESOURCE_EXPR, null, msgs);
+					PPPackage.RESOURCE_EXPRESSION__RESOURCE_EXPR, null, msgs);
 			if(newResourceExpr != null)
 				msgs = ((InternalEObject) newResourceExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.RESOURCE_EXPRESSION__RESOURCE_EXPR, null, msgs);
+					PPPackage.RESOURCE_EXPRESSION__RESOURCE_EXPR, null, msgs);
 			msgs = basicSetResourceExpr(newResourceExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();

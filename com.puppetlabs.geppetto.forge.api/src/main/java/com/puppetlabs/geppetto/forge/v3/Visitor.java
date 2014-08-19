@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.forge.v3;
 
@@ -20,13 +20,13 @@ import com.puppetlabs.geppetto.forge.v3.impl.AbstractForgeService;
 
 /**
  * Visitor used by the {@link AbstractForgeService#accept(Compare, SortBy, boolean, Visitor)} method.
- * 
+ *
  * @param <T>
  */
 public interface Visitor<T extends Entity> {
 	/**
 	 * Visit the given entity.
-	 * 
+	 *
 	 * @param entity
 	 *            The entity to visit
 	 * @throws IOException

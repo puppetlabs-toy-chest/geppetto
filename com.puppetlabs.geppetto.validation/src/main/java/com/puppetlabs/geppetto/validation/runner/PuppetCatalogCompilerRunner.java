@@ -28,11 +28,9 @@ public class PuppetCatalogCompilerRunner {
 	/**
 	 * Returns message as message, filename and line are available as Data[0]
 	 * and Data[1] (or via the more specific CatalogDiagnostic methods).
-	 * 
+	 *
 	 */
 	public static class CatalogDiagnostic extends FileDiagnostic {
-		private static final long serialVersionUID = 1L;
-
 		public static CatalogDiagnostic create(String message, String fileName, String line, String nodeName) {
 			int severity = Diagnostic.ERROR;
 			if(message.startsWith("err:")) {
@@ -52,7 +50,7 @@ public class PuppetCatalogCompilerRunner {
 			}
 			DiagnosticType type = message.startsWith("Could not parse")
 					? ValidationService.CATALOG_PARSER
-					: ValidationService.CATALOG;
+							: ValidationService.CATALOG;
 			CatalogDiagnostic diag = new CatalogDiagnostic(severity, type, message, new File(fileName));
 			try {
 				diag.setLineNumber(Integer.parseInt(line));
@@ -63,6 +61,8 @@ public class PuppetCatalogCompilerRunner {
 			diag.setNode(nodeName);
 			return diag;
 		}
+
+		private static final long serialVersionUID = 1L;
 
 		public CatalogDiagnostic(int severity, DiagnosticType type, String message, File file) {
 			super(severity, type, message, file);
@@ -134,7 +134,7 @@ public class PuppetCatalogCompilerRunner {
 		args[offset++] = manifest.getAbsolutePath();
 		args[offset++] = moduleDirectory == null
 				? ""
-				: moduleDirectory.getAbsolutePath();
+						: moduleDirectory.getAbsolutePath();
 		if(nodeName == null)
 			throw new IllegalArgumentException("Node name to compile the catalog for must be specified");
 		args[offset++] = nodeName;
@@ -165,7 +165,7 @@ public class PuppetCatalogCompilerRunner {
 
 	/**
 	 * Output buffer as just a message
-	 * 
+	 *
 	 * @param buf
 	 */
 	private void outputBuffer(StringBuffer buf) {
@@ -190,7 +190,7 @@ public class PuppetCatalogCompilerRunner {
 				// else, this may be a continuation of the previous line
 				if(buf.length() > 0)
 					buf.append("\\n"); // if joining lines insert a visible new
-										// line
+				// line
 
 				buf.append(line);
 

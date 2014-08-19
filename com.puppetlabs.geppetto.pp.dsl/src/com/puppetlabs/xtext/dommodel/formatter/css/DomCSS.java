@@ -20,7 +20,7 @@ import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * A DOM CSS consists of a set of {@link Rule} describing the styling of an {@link IDomNode}.
- * 
+ *
  */
 public class DomCSS {
 	ArrayList<Rule> cssRules;
@@ -30,6 +30,7 @@ public class DomCSS {
 	 * lower index is considered to be 'before'.
 	 */
 	public static final Comparator<Rule> RULE_COMPARATOR = new Comparator<Rule>() {
+		@Override
 		public int compare(Rule r1, Rule r2) {
 			int r1s = r1.getSpecificity();
 			int r2s = r2.getSpecificity();
@@ -56,7 +57,7 @@ public class DomCSS {
 
 	/**
 	 * Adds all rules from another style sheet.
-	 * 
+	 *
 	 * @param ruleSet
 	 */
 	public void addAll(DomCSS ruleSet) {
@@ -75,7 +76,7 @@ public class DomCSS {
 	/**
 	 * Adds a rule to this rule set. If the rule is already in another style sheet, the rule is cloned before
 	 * being added. The added rule's domCSS property is set to this style sheet.
-	 * 
+	 *
 	 * @param rule
 	 */
 	public void addRule(Rule rule) {
@@ -84,9 +85,9 @@ public class DomCSS {
 
 		rule = rule.getDomCSS() != null
 				? (Rule) rule.clone()
-				: rule;
-		rule.setDomCSS(this);
-		cssRules.add(rule);
+						: rule;
+				rule.setDomCSS(this);
+				cssRules.add(rule);
 	}
 
 	/**
@@ -103,7 +104,7 @@ public class DomCSS {
 	/**
 	 * Adds rules to this style sheet if they have a selector that is not equal to a selector already
 	 * in the style sheet.
-	 * 
+	 *
 	 * @param rules
 	 */
 	public void addUnique(Collection<Rule> rules) {
@@ -127,7 +128,7 @@ public class DomCSS {
 	/**
 	 * Adds all unique rules from the given style sheet to this style sheet. A rule is considered unique if it has a
 	 * different selector pattern than existing rules
-	 * 
+	 *
 	 * @param domCSS
 	 */
 	public void addUnique(DomCSS domCSS) {
@@ -138,7 +139,7 @@ public class DomCSS {
 	 * Collects an (ordered) list of rules in order of specificity (lowest first) that matches the given node.
 	 * The node's instance style is taken into consideration with 'instance' specificity.
 	 * If two rules have the same specificity, the one added first to the rule set will have a lower index.
-	 * 
+	 *
 	 * @return - a list of matching Rules for the given node
 	 */
 	public List<Rule> collectRules(IDomNode node) {
@@ -157,7 +158,7 @@ public class DomCSS {
 	/**
 	 * Collects the style applicable to the given node. (The styles from all matching rules are reduced to a
 	 * resulting style set).
-	 * 
+	 *
 	 * @param context
 	 * @param element
 	 * @return a style set with all collected styles
@@ -174,7 +175,7 @@ public class DomCSS {
 
 	/**
 	 * Collects the style applicable to the element by calling a visitor.
-	 * 
+	 *
 	 * @param node
 	 * @param collector
 	 */
@@ -186,7 +187,7 @@ public class DomCSS {
 
 	/**
 	 * Returns the style sheet index of the given rule.
-	 * 
+	 *
 	 * @param rule
 	 * @return
 	 */

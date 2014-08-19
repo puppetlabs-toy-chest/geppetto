@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 /**
  * The ResourcePropertiesAdapter associates an {@link IEObjectDescription} to an EObject.
  * A list is maintained to help when a resolution is ambiguous.
- * 
+ *
  */
 public class CrossReferenceAdapter extends AdapterImpl {
 
@@ -38,7 +38,7 @@ public class CrossReferenceAdapter extends AdapterImpl {
 
 	/**
 	 * Convenience method to adapt and set the value in the adapter.
-	 * 
+	 *
 	 * @param o
 	 * @param description
 	 */

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Case</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * <li>{@link com.puppetlabs.geppetto.pp.Case#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getCase()
  * @model
  * @generated
@@ -36,10 +36,11 @@ public interface Case extends EObject {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Statements</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Statements</em>' containment reference list isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Statements</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getCase_Statements()
 	 * @model containment="true"
@@ -52,10 +53,11 @@ public interface Case extends EObject {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Values</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getCase_Values()
 	 * @model containment="true"

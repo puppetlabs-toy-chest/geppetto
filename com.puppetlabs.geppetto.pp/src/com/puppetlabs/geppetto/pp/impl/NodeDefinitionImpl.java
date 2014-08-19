@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.NodeDefinitionImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition {
@@ -44,7 +44,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	 * The cached value of the '{@link #getHostNames() <em>Host Names</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getHostNames()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	 * The cached value of the '{@link #getParentName() <em>Parent Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getParentName()
 	 * @generated
 	 * @ordered
@@ -66,7 +66,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getStatements()
 	 * @generated
 	 * @ordered
@@ -76,7 +76,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected NodeDefinitionImpl() {
@@ -86,7 +86,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetParentName(Expression newParentName, NotificationChain msgs) {
@@ -106,7 +106,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -125,7 +125,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -144,7 +144,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -163,7 +163,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -188,7 +188,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -199,7 +199,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -221,13 +221,14 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getHostNames() {
 		if(hostNames == null) {
 			hostNames = new EObjectContainmentEList<Expression>(
-				Expression.class, this, PPPackage.NODE_DEFINITION__HOST_NAMES);
+					Expression.class, this, PPPackage.NODE_DEFINITION__HOST_NAMES);
 		}
 		return hostNames;
 	}
@@ -235,9 +236,10 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getParentName() {
 		return parentName;
 	}
@@ -245,13 +247,14 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getStatements() {
 		if(statements == null) {
 			statements = new EObjectContainmentEList<Expression>(
-				Expression.class, this, PPPackage.NODE_DEFINITION__STATEMENTS);
+					Expression.class, this, PPPackage.NODE_DEFINITION__STATEMENTS);
 		}
 		return statements;
 	}
@@ -259,18 +262,19 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setParentName(Expression newParentName) {
 		if(newParentName != parentName) {
 			NotificationChain msgs = null;
 			if(parentName != null)
 				msgs = ((InternalEObject) parentName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.NODE_DEFINITION__PARENT_NAME, null, msgs);
+					PPPackage.NODE_DEFINITION__PARENT_NAME, null, msgs);
 			if(newParentName != null)
 				msgs = ((InternalEObject) newParentName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.NODE_DEFINITION__PARENT_NAME, null, msgs);
+					PPPackage.NODE_DEFINITION__PARENT_NAME, null, msgs);
 			msgs = basicSetParentName(newParentName, msgs);
 			if(msgs != null)
 				msgs.dispatch();

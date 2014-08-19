@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,7 +29,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * Simple decorator for error and warning (right now hacking/testing).
- * 
+ *
  */
 public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator {
 
@@ -65,7 +65,7 @@ public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
 	 */
 	@Override
@@ -75,7 +75,7 @@ public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.jface.viewers.ILightweightLabelDecorator#decorate(java.lang.Object, org.eclipse.jface.viewers.IDecoration)
 	 */
 	@Override
@@ -118,7 +118,7 @@ public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
 	 */
 	@Override
@@ -134,7 +134,7 @@ public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator 
 		// TODO: remove workaround see https://bugs.eclipse.org/bugs/show_bug.cgi?id=304397
 		return result != null
 				? result
-				: JFaceResources.getImageRegistry().getDescriptor("org.eclipse.jface.fieldassist.IMG_DEC_FIELD_ERROR");
+						: JFaceResources.getImageRegistry().getDescriptor("org.eclipse.jface.fieldassist.IMG_DEC_FIELD_ERROR");
 	}
 
 	private ImageDescriptor getWarningImageDescriptor() {
@@ -143,12 +143,12 @@ public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator 
 		// TODO: remove workaround see https://bugs.eclipse.org/bugs/show_bug.cgi?id=304397
 		return result != null
 				? result
-				: JFaceResources.getImageRegistry().getDescriptor("org.eclipse.jface.fieldassist.IMG_DEC_FIELD_WARNING");
+						: JFaceResources.getImageRegistry().getDescriptor("org.eclipse.jface.fieldassist.IMG_DEC_FIELD_WARNING");
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
 	 */
 	@Override
@@ -158,7 +158,7 @@ public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
 	 */
 	@Override

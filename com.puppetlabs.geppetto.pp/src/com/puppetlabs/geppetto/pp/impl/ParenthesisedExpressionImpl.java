@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.ParenthesisedExpressionImpl#getExpr <em>Expr</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ParenthesisedExpressionImpl extends ExpressionImpl implements ParenthesisedExpression {
@@ -37,7 +37,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getExpr()
 	 * @generated
 	 * @ordered
@@ -47,7 +47,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ParenthesisedExpressionImpl() {
@@ -57,7 +57,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetExpr(Expression newExpr, NotificationChain msgs) {
@@ -77,7 +77,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -107,7 +107,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -122,7 +122,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -138,7 +138,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -149,7 +149,7 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -165,9 +165,10 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getExpr() {
 		return expr;
 	}
@@ -175,18 +176,19 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setExpr(Expression newExpr) {
 		if(newExpr != expr) {
 			NotificationChain msgs = null;
 			if(expr != null)
 				msgs = ((InternalEObject) expr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.PARENTHESISED_EXPRESSION__EXPR, null, msgs);
+					PPPackage.PARENTHESISED_EXPRESSION__EXPR, null, msgs);
 			if(newExpr != null)
 				msgs = ((InternalEObject) newExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.PARENTHESISED_EXPRESSION__EXPR, null, msgs);
+					PPPackage.PARENTHESISED_EXPRESSION__EXPR, null, msgs);
 			msgs = basicSetExpr(newExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();

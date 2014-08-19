@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.HashEntryImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class HashEntryImpl extends EObjectImpl implements HashEntry {
@@ -39,7 +39,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	 * The cached value of the '{@link #getKey() <em>Key</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getKey()
 	 * @generated
 	 * @ordered
@@ -50,7 +50,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -60,7 +60,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected HashEntryImpl() {
@@ -70,7 +70,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetKey(Expression newKey, NotificationChain msgs) {
@@ -90,7 +90,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs) {
@@ -110,7 +110,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -127,7 +127,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -144,7 +144,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -161,7 +161,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -180,7 +180,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -191,7 +191,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -210,9 +210,10 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getKey() {
 		return key;
 	}
@@ -220,9 +221,10 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getValue() {
 		return value;
 	}
@@ -230,9 +232,10 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setKey(Expression newKey) {
 		if(newKey != key) {
 			NotificationChain msgs = null;
@@ -253,18 +256,19 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setValue(Expression newValue) {
 		if(newValue != value) {
 			NotificationChain msgs = null;
 			if(value != null)
 				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.HASH_ENTRY__VALUE, null, msgs);
+					PPPackage.HASH_ENTRY__VALUE, null, msgs);
 			if(newValue != null)
 				msgs = ((InternalEObject) newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.HASH_ENTRY__VALUE, null, msgs);
+					PPPackage.HASH_ENTRY__VALUE, null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if(msgs != null)
 				msgs.dispatch();

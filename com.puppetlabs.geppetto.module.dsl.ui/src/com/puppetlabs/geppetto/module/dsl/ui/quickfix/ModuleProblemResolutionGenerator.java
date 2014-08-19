@@ -13,7 +13,7 @@ public class ModuleProblemResolutionGenerator implements IMarkerResolutionGenera
 	public IMarkerResolution[] getResolutions(final IMarker marker) {
 		return Forge.MODULEFILE_NAME.equals(marker.getResource().getName())
 				? new IMarkerResolution[] { new RemoveModuleFileQuickFix() }
-				: ModuleProblemResolutionGenerator.NO_RESOLUTIONS;
+		: ModuleProblemResolutionGenerator.NO_RESOLUTIONS;
 	}
 
 	@Override

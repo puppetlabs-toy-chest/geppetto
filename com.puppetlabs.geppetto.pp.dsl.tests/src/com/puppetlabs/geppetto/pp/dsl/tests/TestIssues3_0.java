@@ -69,7 +69,7 @@ public class TestIssues3_0 extends TestIssues {
 			"} ~> 'x' ? {", //
 			"  'y'     => Notify[b],", //
 			"  default => Notify[c]", //
-			"}\n");
+				"}\n");
 		String code = Joiner.on("\n").join(source).toString();
 		Resource r = loadAndLinkSingleResource(code);
 		tester.validate(r.getContents().get(0)).assertOK();

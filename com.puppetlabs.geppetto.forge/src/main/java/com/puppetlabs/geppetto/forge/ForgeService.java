@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,7 +28,7 @@ import com.puppetlabs.geppetto.semver.VersionRange;
 public interface ForgeService {
 	/**
 	 * Downloads and installs all dependencies extending from the modules described by <tt>metadatas</tt>.
-	 * 
+	 *
 	 * @param metadatas
 	 *            The dependencies to resolve
 	 * @param importedModulesDir
@@ -46,7 +46,7 @@ public interface ForgeService {
 	 * desirable to skip this folder and instead expand everything beneath
 	 * it into the given <code>destination</code>. This behavior can be
 	 * enforced by setting the <code>destinationIncludesTopFolder</code> to <code>true</code>.
-	 * 
+	 *
 	 * @param release
 	 *            The module release
 	 * @param destination
@@ -71,7 +71,7 @@ public interface ForgeService {
 	 * desirable to skip this folder and instead expand everything beneath
 	 * it into the given <code>destination</code>. This behavior can be
 	 * enforced by setting the <code>destinationIncludesTopFolder</code> to <code>true</code>.
-	 * 
+	 *
 	 * @param fullName
 	 *            The name of the module
 	 * @param range
@@ -96,7 +96,7 @@ public interface ForgeService {
 	/**
 	 * Publish a gzipped module tarball to the Forge. The provided diagnostic is used for informational messages
 	 * only. Any errors will yield an exception.
-	 * 
+	 *
 	 * @param moduleTarball
 	 *            The gzipped tarball
 	 *            Set to <tt>true</tt> if all but the final step of sending to the Forge should be made
@@ -114,7 +114,7 @@ public interface ForgeService {
 	 * Publish all gzipped module tarballs found under <tt>builtModulesDir</tt>. Report progress on the
 	 * provided <tt>result</tt> diagnostic. The caller must check the severity of the <tt>result</tt> after this call
 	 * has completed.
-	 * 
+	 *
 	 * @param moduleTarballs
 	 *            Module tarballs to be published.
 	 * @param dryRun
@@ -126,7 +126,7 @@ public interface ForgeService {
 
 	/**
 	 * Resolves all dependencies extending from the modules described by <tt>metadatas</tt>.
-	 * 
+	 *
 	 * @param metadatas
 	 *            The dependencies to resolve
 	 * @param unresolvedCollector

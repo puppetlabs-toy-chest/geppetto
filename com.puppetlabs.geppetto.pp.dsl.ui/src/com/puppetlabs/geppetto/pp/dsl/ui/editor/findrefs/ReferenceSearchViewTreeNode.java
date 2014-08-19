@@ -16,9 +16,9 @@ import com.google.common.collect.Lists;
  * This is a verbatim copy of the class with the same name in the corresponding Xtext package.
  * But it is bound to implementations that makes it difficult to reuse. This variant simply imports classes
  * from the Geppetto specific package.
- * 
+ *
  * TODO: This copy may not be needed
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceSearchViewTreeNode {

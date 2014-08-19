@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,7 +14,7 @@ package com.puppetlabs.geppetto.pp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Binary Expression</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -22,7 +22,7 @@ package com.puppetlabs.geppetto.pp;
  * <li>{@link com.puppetlabs.geppetto.pp.BinaryExpression#getRightExpr <em>Right Expr</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getBinaryExpression()
  * @model abstract="true"
  * @generated
@@ -32,10 +32,11 @@ public interface BinaryExpression extends Expression {
 	 * Returns the value of the '<em><b>Left Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Left Expr</em>' containment reference isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Left Expr</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Left Expr</em>' containment reference.
 	 * @see #setLeftExpr(Expression)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getBinaryExpression_LeftExpr()
@@ -48,10 +49,11 @@ public interface BinaryExpression extends Expression {
 	 * Returns the value of the '<em><b>Right Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Right Expr</em>' containment reference isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Right Expr</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Right Expr</em>' containment reference.
 	 * @see #setRightExpr(Expression)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getBinaryExpression_RightExpr()
@@ -61,10 +63,11 @@ public interface BinaryExpression extends Expression {
 	Expression getRightExpr();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getLeftExpr <em>Left Expr</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getLeftExpr <em>Left Expr</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Left Expr</em>' containment reference.
 	 * @see #getLeftExpr()
@@ -73,10 +76,11 @@ public interface BinaryExpression extends Expression {
 	void setLeftExpr(Expression value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getRightExpr <em>Right Expr</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getRightExpr <em>Right Expr</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Right Expr</em>' containment reference.
 	 * @see #getRightExpr()

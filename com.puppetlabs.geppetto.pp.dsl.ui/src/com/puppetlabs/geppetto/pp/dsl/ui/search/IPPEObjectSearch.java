@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Itemis AG http://www.itemis.eu - initial API and implementation
  *   Puppet Labs - specialization to puppet
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.search;
 
@@ -40,8 +40,9 @@ public interface IPPEObjectSearch {
 		@Inject
 		private IQualifiedNameConverter qualifiedNameConverter;
 
+		@Override
 		public Iterable<IEObjectDescription> findMatches(final String searchPattern,
-				final Collection<EClass> acceptedClasses) {
+			final Collection<EClass> acceptedClasses) {
 			return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern, acceptedClasses));
 		}
 
@@ -50,11 +51,12 @@ public interface IPPEObjectSearch {
 		}
 
 		protected Predicate<IEObjectDescription> getSearchPredicate(final String stringPattern,
-				final Collection<EClass> acceptedClasses) {
+			final Collection<EClass> acceptedClasses) {
 			final SearchPattern searchPattern = new SearchPattern();
 			searchPattern.setPattern(stringPattern);
 
 			return new Predicate<IEObjectDescription>() {
+				@Override
 				public boolean apply(IEObjectDescription input) {
 					if(isNameMatches(searchPattern, input) && isClassAccepted(input, acceptedClasses)) {
 						return true;
@@ -68,6 +70,7 @@ public interface IPPEObjectSearch {
 			return Iterables.concat(Iterables.transform(
 				getResourceDescriptions().getAllResourceDescriptions(),
 				new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+					@Override
 					public Iterable<IEObjectDescription> apply(IResourceDescription from) {
 						return from.getExportedObjects();
 					}

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -22,7 +22,7 @@ import com.puppetlabs.geppetto.pp.dsl.lexer.PPOverridingLexer;
  * This is required as the content assist lexer is injected with a provider that requires it to be
  * an instance of the "contentassist.antlr.internal.Lexer" class - hence it is impossible to use the
  * PPOverridingLexer directly.
- * 
+ *
  */
 public class PPContentAssistLexer extends org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer {
 
@@ -59,7 +59,7 @@ public class PPContentAssistLexer extends org.eclipse.xtext.ui.editor.contentass
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.antlr.runtime.Lexer#mTokens()
 	 */
 	@Override
@@ -78,7 +78,7 @@ public class PPContentAssistLexer extends org.eclipse.xtext.ui.editor.contentass
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.antlr.runtime.Lexer#setCharStream(org.antlr.runtime.CharStream)
 	 */
 	@Override

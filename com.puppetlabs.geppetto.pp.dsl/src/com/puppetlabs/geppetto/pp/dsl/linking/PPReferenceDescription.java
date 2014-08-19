@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,13 +17,13 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 
 /**
  * Describes a reference from a source in a container to a target.
- * 
+ *
  */
 public class PPReferenceDescription implements IReferenceDescription {
 
 	/**
 	 * Produces a PPReferenceDescription
-	 * 
+	 *
 	 * @param sourceReference
 	 *            - URI to the soure
 	 * @param sourceContainer
@@ -61,7 +61,7 @@ public class PPReferenceDescription implements IReferenceDescription {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getContainerEObjectURI()
 	 */
 	@Override
@@ -73,7 +73,7 @@ public class PPReferenceDescription implements IReferenceDescription {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getEReference()
 	 */
 	@Override
@@ -84,7 +84,7 @@ public class PPReferenceDescription implements IReferenceDescription {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getIndexInList()
 	 */
 	@Override
@@ -102,7 +102,7 @@ public class PPReferenceDescription implements IReferenceDescription {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getSourceEObjectUri()
 	 */
 	@Override
@@ -119,7 +119,7 @@ public class PPReferenceDescription implements IReferenceDescription {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.IReferenceDescription#getTargetEObjectUri()
 	 */
 	@Override

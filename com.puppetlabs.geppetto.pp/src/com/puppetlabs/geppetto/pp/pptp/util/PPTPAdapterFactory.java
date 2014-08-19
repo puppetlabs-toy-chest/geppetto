@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage
  * @generated
  */
@@ -33,7 +33,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected static PPTPPackage modelPackage;
@@ -42,7 +42,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected PPTPSwitch<Adapter> modelSwitch = new PPTPSwitch<Adapter>() {
@@ -141,7 +141,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	 * Creates an instance of the adapter factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public PPTPAdapterFactory() {
@@ -151,12 +151,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.AbstractType <em>Abstract Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.AbstractType
+	 * <em>Abstract Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.AbstractType
 	 * @generated
@@ -169,7 +170,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	 * Creates an adapter for the <code>target</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param target
 	 *            the object to adapt.
 	 * @return the adapter for the <code>target</code>.
@@ -185,7 +186,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @generated
 	 */
@@ -194,12 +195,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Function <em>Function</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Function <em>Function</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.Function
 	 * @generated
@@ -209,12 +211,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.IDocumented <em>IDocumented</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.IDocumented
+	 * <em>IDocumented</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.IDocumented
 	 * @generated
@@ -229,7 +232,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.INamed
 	 * @generated
@@ -245,7 +248,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.ITargetElementContainer
 	 * @generated
@@ -255,12 +258,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.MetaType <em>Meta Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.MetaType <em>Meta Type</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.MetaType
 	 * @generated
@@ -270,12 +274,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.MetaVariable <em>Meta Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.MetaVariable
+	 * <em>Meta Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.MetaVariable
 	 * @generated
@@ -285,12 +290,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.NameSpace <em>Name Space</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.NameSpace
+	 * <em>Name Space</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.NameSpace
 	 * @generated
@@ -300,12 +306,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Parameter <em>Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Parameter
+	 * <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.Parameter
 	 * @generated
@@ -315,12 +322,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Property <em>Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Property <em>Property</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.Property
 	 * @generated
@@ -330,12 +338,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.PuppetDistribution <em>Puppet Distribution</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.PuppetDistribution
+	 * <em>Puppet Distribution</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.PuppetDistribution
 	 * @generated
@@ -345,12 +354,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement <em>Target Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement
+	 * <em>Target Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.TargetElement
 	 * @generated
@@ -360,12 +370,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry <em>Target Entry</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry
+	 * <em>Target Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.TargetEntry
 	 * @generated
@@ -375,12 +386,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TPVariable <em>TP Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TPVariable
+	 * <em>TP Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.TPVariable
 	 * @generated
@@ -395,7 +407,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.Type
 	 * @generated
@@ -405,12 +417,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument <em>Type Argument</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument
+	 * <em>Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.TypeArgument
 	 * @generated
@@ -420,12 +433,13 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TypeFragment <em>Type Fragment</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.TypeFragment
+	 * <em>Type Fragment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.pp.pptp.TypeFragment
 	 * @generated
@@ -437,9 +451,10 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance
+	 * object of the model.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */

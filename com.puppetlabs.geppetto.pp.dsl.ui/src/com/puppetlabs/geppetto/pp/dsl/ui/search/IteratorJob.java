@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   itemis AG (http://www.itemis.eu) 
+ *   itemis AG (http://www.itemis.eu)
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.search;
 
@@ -71,6 +71,7 @@ public class IteratorJob extends Job {
 	private Collection<IEObjectDescription> sortedCopy(Iterable<IEObjectDescription> list) {
 		List<IEObjectDescription> result = Lists.newArrayList(matches);
 		Collections.sort(result, new Comparator<IEObjectDescription>() {
+			@Override
 			public int compare(IEObjectDescription o1, IEObjectDescription o2) {
 				int diff = o1.getQualifiedName().compareToIgnoreCase(o2.getQualifiedName());
 				if(diff == 0) {
@@ -78,11 +79,11 @@ public class IteratorJob extends Job {
 					String className2 = o2.getEClass().getName();
 					if(className1 == null)
 						diff = className2 == null
-								? 0
+						? 0
 								: -1;
 					else
 						diff = className2 == null
-								? 1
+						? 1
 								: className1.compareToIgnoreCase(className2);
 					if(diff == 0) {
 						diff = o1.getEObjectURI().toString().compareTo(o2.getEObjectURI().toString());

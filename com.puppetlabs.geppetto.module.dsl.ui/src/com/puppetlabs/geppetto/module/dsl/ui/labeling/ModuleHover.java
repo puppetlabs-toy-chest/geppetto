@@ -25,7 +25,7 @@ public class ModuleHover extends DispatchingEObjectTextHover {
 			lastCreatorProvider = hoverProvider.getHoverInfo(first, textViewer, hoverRegion);
 			return lastCreatorProvider == null
 					? null
-					: lastCreatorProvider.getInfo();
+							: lastCreatorProvider.getInfo();
 		}
 		return super.getHoverInfo(first, textViewer, hoverRegion);
 	}
@@ -36,6 +36,6 @@ public class ModuleHover extends DispatchingEObjectTextHover {
 		EObject ge = node.getGrammarElement();
 		return ge instanceof Keyword
 				? Tuples.<EObject, IRegion> create(ge, new Region(node.getOffset(), node.getLength()))
-				: super.getXtextElementAt(resource, offset);
+						: super.getXtextElementAt(resource, offset);
 	}
 }

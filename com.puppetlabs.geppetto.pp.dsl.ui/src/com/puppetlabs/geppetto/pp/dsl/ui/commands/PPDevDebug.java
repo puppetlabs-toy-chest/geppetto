@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -62,7 +62,7 @@ import com.google.inject.name.Named;
  * A command to use for development debugging purposes.
  * The intent is to install this using the com.puppetlabs.geppetto.pp.dsl.ui.devdebug
  * fragment which makes it visible in the outline menu.
- * 
+ *
  */
 public class PPDevDebug extends AbstractHandler {
 	public static String compactDump(INode node, boolean showHidden) {
@@ -212,7 +212,7 @@ public class PPDevDebug extends AbstractHandler {
 			System.out.println("eq test complete passed[" + ok + "] failed[" + failed + "]");
 			return Status.OK_STATUS;
 		}
-	*/
+	 */
 	private IStatus doDebug(XtextResource resource) {
 		return formattedDomDump(resource);
 		// return visibleResourcesDump(resource);
@@ -227,7 +227,7 @@ public class PPDevDebug extends AbstractHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
 	 */
 	@Override
@@ -263,7 +263,7 @@ public class PPDevDebug extends AbstractHandler {
 
 	/**
 	 * Performs a format and then dumps the result to stdout.
-	 * 
+	 *
 	 * @param resource
 	 * @return
 	 */
@@ -337,5 +337,5 @@ public class PPDevDebug extends AbstractHandler {
 			}
 			return Status.OK_STATUS;
 		}
-	*/
+	 */
 }

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -99,641 +99,18 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass puppetManifestEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass expressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass resourceBodyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass attributeOperationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass attributeOperationsEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass iCollectQueryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass virtualCollectQueryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass exportedCollectQueryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass hostClassDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass definitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass definitionArgumentListEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass definitionArgumentEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass caseExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass caseEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass ifExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalNameOrReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass resourceExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass importExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalListEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalHashEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass hashEntryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalBooleanEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalUndefEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalDefaultEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalRegexEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalNameEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass variableExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass relationshipExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass assignmentExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass appendExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass orExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass andExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass relationalExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass equalityExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass shiftExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass additiveExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass multiplicativeExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass matchingExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass inExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass atExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass collectExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass selectorExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass selectorEntryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass functionCallEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass binaryOpExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass binaryExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass parameterizedExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass nodeDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass unaryExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass unaryMinusExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass unaryNotExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass expressionBlockEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass elseExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass elseIfExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass virtualNameOrReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass parenthesisedExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass exprListEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass doubleQuotedStringEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass singleQuotedStringEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass stringExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass unquotedStringEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass iQuotedStringEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass interpolatedVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass textExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass verbatimTEEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass expressionTEEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass variableTEEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass literalClassEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass unlessExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass lambdaEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass namedAccessExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass methodCallEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass withLambdaExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass javaLambdaEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass rubyLambdaEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass separatorExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private static boolean isInited = false;
-
-	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>
-	 * This method is used to initialize {@link PPPackage#eINSTANCE} when that field is accessed. Clients should not invoke it directly. Instead, they
-	 * should simply access that field to obtain the package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This method is used to initialize {@link PPPackage#eINSTANCE} when that field is accessed. Clients should not
+	 * invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
@@ -746,7 +123,7 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 		// Obtain or create and register package
 		PPPackageImpl thePPPackage = (PPPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PPPackageImpl
 				? EPackage.Registry.INSTANCE.get(eNS_URI)
-				: new PPPackageImpl());
+						: new PPPackageImpl());
 
 		isInited = true;
 
@@ -767,7 +144,631 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
+	 * @generated
+	 */
+	private EClass puppetManifestEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass expressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass resourceBodyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass attributeOperationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass attributeOperationsEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass iCollectQueryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass virtualCollectQueryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass exportedCollectQueryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass hostClassDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass definitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass definitionArgumentListEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass definitionArgumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass caseExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass caseEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass ifExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalNameOrReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass resourceExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass importExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalListEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalHashEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass hashEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalBooleanEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalUndefEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalDefaultEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalRegexEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalNameEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass variableExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass relationshipExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass assignmentExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass appendExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass orExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass andExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass relationalExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass equalityExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass shiftExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass additiveExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass multiplicativeExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass matchingExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass inExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass atExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass collectExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass selectorExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass selectorEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass functionCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass binaryOpExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass binaryExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass parameterizedExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass nodeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass unaryExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass unaryMinusExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass unaryNotExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass expressionBlockEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass elseExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass elseIfExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass virtualNameOrReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass parenthesisedExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass exprListEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass doubleQuotedStringEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass singleQuotedStringEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass stringExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass unquotedStringEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass iQuotedStringEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass interpolatedVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass textExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass verbatimTEEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass expressionTEEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass variableTEEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass literalClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass unlessExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass lambdaEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass namedAccessExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass methodCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass withLambdaExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass javaLambdaEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass rubyLambdaEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass separatorExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private static boolean isInited = false;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
 	 * @generated
 	 */
 	private boolean isCreated = false;
@@ -775,19 +776,21 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	private boolean isInitialized = false;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
+	 * EPackage.Registry} by the
 	 * package
 	 * package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also performs initialization of the
-	 * package, or returns the registered package, if one already exists. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
+	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#eNS_URI
 	 * @see #init()
@@ -802,7 +805,7 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -1034,9 +1037,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getAdditiveExpression() {
 		return additiveExpressionEClass;
 	}
@@ -1044,9 +1048,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getAndExpression() {
 		return andExpressionEClass;
 	}
@@ -1054,9 +1059,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getAppendExpression() {
 		return appendExpressionEClass;
 	}
@@ -1064,9 +1070,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getAssignmentExpression() {
 		return assignmentExpressionEClass;
 	}
@@ -1074,9 +1081,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getAtExpression() {
 		return atExpressionEClass;
 	}
@@ -1084,9 +1092,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getAttributeOperation() {
 		return attributeOperationEClass;
 	}
@@ -1094,9 +1103,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttributeOperation_Key() {
 		return (EAttribute) attributeOperationEClass.getEStructuralFeatures().get(1);
 	}
@@ -1104,9 +1114,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttributeOperation_Op() {
 		return (EAttribute) attributeOperationEClass.getEStructuralFeatures().get(2);
 	}
@@ -1114,9 +1125,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getAttributeOperation_Value() {
 		return (EReference) attributeOperationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1124,9 +1136,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getAttributeOperations() {
 		return attributeOperationsEClass;
 	}
@@ -1134,9 +1147,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getAttributeOperations_Attributes() {
 		return (EReference) attributeOperationsEClass.getEStructuralFeatures().get(0);
 	}
@@ -1144,9 +1158,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getBinaryExpression() {
 		return binaryExpressionEClass;
 	}
@@ -1154,9 +1169,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getBinaryExpression_LeftExpr() {
 		return (EReference) binaryExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1164,9 +1180,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getBinaryExpression_RightExpr() {
 		return (EReference) binaryExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1174,9 +1191,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getBinaryOpExpression() {
 		return binaryOpExpressionEClass;
 	}
@@ -1184,9 +1202,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBinaryOpExpression_OpName() {
 		return (EAttribute) binaryOpExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1194,9 +1213,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getCase() {
 		return caseEClass;
 	}
@@ -1204,9 +1224,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCase_Statements() {
 		return (EReference) caseEClass.getEStructuralFeatures().get(0);
 	}
@@ -1214,9 +1235,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCase_Values() {
 		return (EReference) caseEClass.getEStructuralFeatures().get(1);
 	}
@@ -1224,9 +1246,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getCaseExpression() {
 		return caseExpressionEClass;
 	}
@@ -1234,9 +1257,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCaseExpression_Cases() {
 		return (EReference) caseExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1244,9 +1268,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCaseExpression_SwitchExpr() {
 		return (EReference) caseExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1254,9 +1279,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getCollectExpression() {
 		return collectExpressionEClass;
 	}
@@ -1264,9 +1290,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCollectExpression_Attributes() {
 		return (EReference) collectExpressionEClass.getEStructuralFeatures().get(2);
 	}
@@ -1274,9 +1301,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCollectExpression_ClassReference() {
 		return (EReference) collectExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1284,9 +1312,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getCollectExpression_Query() {
 		return (EReference) collectExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1294,9 +1323,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getDefinition() {
 		return definitionEClass;
 	}
@@ -1304,9 +1334,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getDefinition_Arguments() {
 		return (EReference) definitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1314,9 +1345,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDefinition_ClassName() {
 		return (EAttribute) definitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1324,9 +1356,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getDefinition_Statements() {
 		return (EReference) definitionEClass.getEStructuralFeatures().get(2);
 	}
@@ -1334,9 +1367,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getDefinitionArgument() {
 		return definitionArgumentEClass;
 	}
@@ -1344,9 +1378,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDefinitionArgument_ArgName() {
 		return (EAttribute) definitionArgumentEClass.getEStructuralFeatures().get(0);
 	}
@@ -1354,9 +1389,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDefinitionArgument_Op() {
 		return (EAttribute) definitionArgumentEClass.getEStructuralFeatures().get(2);
 	}
@@ -1364,9 +1400,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getDefinitionArgument_Value() {
 		return (EReference) definitionArgumentEClass.getEStructuralFeatures().get(1);
 	}
@@ -1374,9 +1411,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getDefinitionArgumentList() {
 		return definitionArgumentListEClass;
 	}
@@ -1384,9 +1422,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getDefinitionArgumentList_Arguments() {
 		return (EReference) definitionArgumentListEClass.getEStructuralFeatures().get(0);
 	}
@@ -1394,9 +1433,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getDoubleQuotedString() {
 		return doubleQuotedStringEClass;
 	}
@@ -1404,9 +1444,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getDoubleQuotedString_StringPart() {
 		return (EReference) doubleQuotedStringEClass.getEStructuralFeatures().get(0);
 	}
@@ -1414,9 +1455,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getElseExpression() {
 		return elseExpressionEClass;
 	}
@@ -1424,9 +1466,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getElseIfExpression() {
 		return elseIfExpressionEClass;
 	}
@@ -1434,9 +1477,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getEqualityExpression() {
 		return equalityExpressionEClass;
 	}
@@ -1444,9 +1488,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getExportedCollectQuery() {
 		return exportedCollectQueryEClass;
 	}
@@ -1454,9 +1499,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getExpression() {
 		return expressionEClass;
 	}
@@ -1464,9 +1510,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getExpressionBlock() {
 		return expressionBlockEClass;
 	}
@@ -1474,9 +1521,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getExpressionBlock_Statements() {
 		return (EReference) expressionBlockEClass.getEStructuralFeatures().get(0);
 	}
@@ -1484,9 +1532,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getExpressionTE() {
 		return expressionTEEClass;
 	}
@@ -1494,9 +1543,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getExpressionTE_Expression() {
 		return (EReference) expressionTEEClass.getEStructuralFeatures().get(0);
 	}
@@ -1504,9 +1554,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getExprList() {
 		return exprListEClass;
 	}
@@ -1514,9 +1565,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getExprList_Expressions() {
 		return (EReference) exprListEClass.getEStructuralFeatures().get(0);
 	}
@@ -1524,9 +1576,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionCall() {
 		return functionCallEClass;
 	}
@@ -1534,9 +1587,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getHashEntry() {
 		return hashEntryEClass;
 	}
@@ -1544,9 +1598,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getHashEntry_Key() {
 		return (EReference) hashEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -1554,9 +1609,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getHashEntry_Value() {
 		return (EReference) hashEntryEClass.getEStructuralFeatures().get(1);
 	}
@@ -1564,9 +1620,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getHostClassDefinition() {
 		return hostClassDefinitionEClass;
 	}
@@ -1574,9 +1631,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getHostClassDefinition_Parent() {
 		return (EReference) hostClassDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1584,9 +1642,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getICollectQuery() {
 		return iCollectQueryEClass;
 	}
@@ -1594,9 +1653,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getIfExpression() {
 		return ifExpressionEClass;
 	}
@@ -1604,9 +1664,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getIfExpression_CondExpr() {
 		return (EReference) ifExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1614,9 +1675,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getIfExpression_ElseStatement() {
 		return (EReference) ifExpressionEClass.getEStructuralFeatures().get(2);
 	}
@@ -1624,9 +1686,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getIfExpression_ThenStatements() {
 		return (EReference) ifExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1634,9 +1697,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getImportExpression() {
 		return importExpressionEClass;
 	}
@@ -1644,9 +1708,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getImportExpression_Values() {
 		return (EReference) importExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1654,9 +1719,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getInExpression() {
 		return inExpressionEClass;
 	}
@@ -1664,9 +1730,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getInterpolatedVariable() {
 		return interpolatedVariableEClass;
 	}
@@ -1674,9 +1741,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInterpolatedVariable_VarName() {
 		return (EAttribute) interpolatedVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -1684,9 +1752,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getIQuotedString() {
 		return iQuotedStringEClass;
 	}
@@ -1694,9 +1763,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getJavaLambda() {
 		return javaLambdaEClass;
 	}
@@ -1704,9 +1774,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJavaLambda_Farrow() {
 		return (EAttribute) javaLambdaEClass.getEStructuralFeatures().get(0);
 	}
@@ -1714,9 +1785,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLambda() {
 		return lambdaEClass;
 	}
@@ -1724,9 +1796,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getLambda_Arguments() {
 		return (EReference) lambdaEClass.getEStructuralFeatures().get(0);
 	}
@@ -1734,9 +1807,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralBoolean() {
 		return literalBooleanEClass;
 	}
@@ -1744,9 +1818,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLiteralBoolean_Value() {
 		return (EAttribute) literalBooleanEClass.getEStructuralFeatures().get(0);
 	}
@@ -1754,9 +1829,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralClass() {
 		return literalClassEClass;
 	}
@@ -1764,9 +1840,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralDefault() {
 		return literalDefaultEClass;
 	}
@@ -1774,9 +1851,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralExpression() {
 		return literalExpressionEClass;
 	}
@@ -1784,9 +1862,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralHash() {
 		return literalHashEClass;
 	}
@@ -1794,9 +1873,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getLiteralHash_Elements() {
 		return (EReference) literalHashEClass.getEStructuralFeatures().get(0);
 	}
@@ -1804,9 +1884,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralList() {
 		return literalListEClass;
 	}
@@ -1814,9 +1895,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getLiteralList_Elements() {
 		return (EReference) literalListEClass.getEStructuralFeatures().get(0);
 	}
@@ -1824,9 +1906,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralName() {
 		return literalNameEClass;
 	}
@@ -1834,9 +1917,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLiteralName_Value() {
 		return (EAttribute) literalNameEClass.getEStructuralFeatures().get(0);
 	}
@@ -1844,9 +1928,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralNameOrReference() {
 		return literalNameOrReferenceEClass;
 	}
@@ -1854,9 +1939,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLiteralNameOrReference_Value() {
 		return (EAttribute) literalNameOrReferenceEClass.getEStructuralFeatures().get(0);
 	}
@@ -1864,9 +1950,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralRegex() {
 		return literalRegexEClass;
 	}
@@ -1874,9 +1961,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLiteralRegex_Value() {
 		return (EAttribute) literalRegexEClass.getEStructuralFeatures().get(0);
 	}
@@ -1884,9 +1972,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteralUndef() {
 		return literalUndefEClass;
 	}
@@ -1894,9 +1983,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getMatchingExpression() {
 		return matchingExpressionEClass;
 	}
@@ -1904,9 +1994,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getMethodCall() {
 		return methodCallEClass;
 	}
@@ -1914,9 +2005,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getMethodCall_MethodExpr() {
 		return (EReference) methodCallEClass.getEStructuralFeatures().get(1);
 	}
@@ -1924,9 +2016,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMethodCall_Parenthesized() {
 		return (EAttribute) methodCallEClass.getEStructuralFeatures().get(0);
 	}
@@ -1934,9 +2027,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getMultiplicativeExpression() {
 		return multiplicativeExpressionEClass;
 	}
@@ -1944,9 +2038,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getNamedAccessExpression() {
 		return namedAccessExpressionEClass;
 	}
@@ -1954,9 +2049,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getNodeDefinition() {
 		return nodeDefinitionEClass;
 	}
@@ -1964,9 +2060,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getNodeDefinition_HostNames() {
 		return (EReference) nodeDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1974,9 +2071,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getNodeDefinition_ParentName() {
 		return (EReference) nodeDefinitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1984,9 +2082,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getNodeDefinition_Statements() {
 		return (EReference) nodeDefinitionEClass.getEStructuralFeatures().get(2);
 	}
@@ -1994,9 +2093,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getOrExpression() {
 		return orExpressionEClass;
 	}
@@ -2004,9 +2104,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getParameterizedExpression() {
 		return parameterizedExpressionEClass;
 	}
@@ -2014,9 +2115,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getParameterizedExpression_LeftExpr() {
 		return (EReference) parameterizedExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -2024,9 +2126,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getParameterizedExpression_Parameters() {
 		return (EReference) parameterizedExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -2034,9 +2137,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getParenthesisedExpression() {
 		return parenthesisedExpressionEClass;
 	}
@@ -2044,9 +2148,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getParenthesisedExpression_Expr() {
 		return (EReference) parenthesisedExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -2054,9 +2159,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public PPFactory getPPFactory() {
 		return (PPFactory) getEFactoryInstance();
 	}
@@ -2064,9 +2170,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getPuppetManifest() {
 		return puppetManifestEClass;
 	}
@@ -2074,9 +2181,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationalExpression() {
 		return relationalExpressionEClass;
 	}
@@ -2084,9 +2192,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationshipExpression() {
 		return relationshipExpressionEClass;
 	}
@@ -2094,9 +2203,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getResourceBody() {
 		return resourceBodyEClass;
 	}
@@ -2104,9 +2214,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getResourceBody_Attributes() {
 		return (EReference) resourceBodyEClass.getEStructuralFeatures().get(0);
 	}
@@ -2114,9 +2225,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getResourceBody_NameExpr() {
 		return (EReference) resourceBodyEClass.getEStructuralFeatures().get(1);
 	}
@@ -2124,9 +2236,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getResourceExpression() {
 		return resourceExpressionEClass;
 	}
@@ -2134,9 +2247,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getResourceExpression_ResourceData() {
 		return (EReference) resourceExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -2144,9 +2258,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getResourceExpression_ResourceExpr() {
 		return (EReference) resourceExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -2154,9 +2269,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getRubyLambda() {
 		return rubyLambdaEClass;
 	}
@@ -2164,9 +2280,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getSelectorEntry() {
 		return selectorEntryEClass;
 	}
@@ -2174,9 +2291,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getSelectorExpression() {
 		return selectorExpressionEClass;
 	}
@@ -2184,9 +2302,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getSeparatorExpression() {
 		return separatorExpressionEClass;
 	}
@@ -2194,9 +2313,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getShiftExpression() {
 		return shiftExpressionEClass;
 	}
@@ -2204,9 +2324,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getSingleQuotedString() {
 		return singleQuotedStringEClass;
 	}
@@ -2214,9 +2335,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSingleQuotedString_Text() {
 		return (EAttribute) singleQuotedStringEClass.getEStructuralFeatures().get(0);
 	}
@@ -2224,9 +2346,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getStringExpression() {
 		return stringExpressionEClass;
 	}
@@ -2234,9 +2357,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getTextExpression() {
 		return textExpressionEClass;
 	}
@@ -2244,9 +2368,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getUnaryExpression() {
 		return unaryExpressionEClass;
 	}
@@ -2254,9 +2379,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getUnaryExpression_Expr() {
 		return (EReference) unaryExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -2264,9 +2390,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getUnaryMinusExpression() {
 		return unaryMinusExpressionEClass;
 	}
@@ -2274,9 +2401,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getUnaryNotExpression() {
 		return unaryNotExpressionEClass;
 	}
@@ -2284,9 +2412,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getUnlessExpression() {
 		return unlessExpressionEClass;
 	}
@@ -2294,9 +2423,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getUnlessExpression_CondExpr() {
 		return (EReference) unlessExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -2304,9 +2434,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getUnlessExpression_ElseStatement() {
 		return (EReference) unlessExpressionEClass.getEStructuralFeatures().get(2);
 	}
@@ -2314,9 +2445,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getUnlessExpression_ThenStatements() {
 		return (EReference) unlessExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -2324,9 +2456,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getUnquotedString() {
 		return unquotedStringEClass;
 	}
@@ -2334,9 +2467,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getUnquotedString_Expression() {
 		return (EReference) unquotedStringEClass.getEStructuralFeatures().get(0);
 	}
@@ -2344,9 +2478,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getVariableExpression() {
 		return variableExpressionEClass;
 	}
@@ -2354,9 +2489,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getVariableExpression_VarName() {
 		return (EAttribute) variableExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -2364,9 +2500,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getVariableTE() {
 		return variableTEEClass;
 	}
@@ -2374,9 +2511,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getVariableTE_VarName() {
 		return (EAttribute) variableTEEClass.getEStructuralFeatures().get(0);
 	}
@@ -2384,9 +2522,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getVerbatimTE() {
 		return verbatimTEEClass;
 	}
@@ -2394,9 +2533,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getVerbatimTE_Text() {
 		return (EAttribute) verbatimTEEClass.getEStructuralFeatures().get(0);
 	}
@@ -2404,9 +2544,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getVirtualCollectQuery() {
 		return virtualCollectQueryEClass;
 	}
@@ -2414,9 +2555,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getVirtualNameOrReference() {
 		return virtualNameOrReferenceEClass;
 	}
@@ -2424,9 +2566,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getVirtualNameOrReference_Exported() {
 		return (EAttribute) virtualNameOrReferenceEClass.getEStructuralFeatures().get(1);
 	}
@@ -2434,9 +2577,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getVirtualNameOrReference_Value() {
 		return (EAttribute) virtualNameOrReferenceEClass.getEStructuralFeatures().get(0);
 	}
@@ -2444,9 +2588,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getWithLambdaExpression() {
 		return withLambdaExpressionEClass;
 	}
@@ -2454,9 +2599,10 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getWithLambdaExpression_Lambda() {
 		return (EReference) withLambdaExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -2466,7 +2612,7 @@ public class PPPackageImpl extends EPackageImpl implements PPPackage {
 	 * method is guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void initializePackageContents() {

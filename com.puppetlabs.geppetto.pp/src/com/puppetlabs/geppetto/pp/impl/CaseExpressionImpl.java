@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.CaseExpressionImpl#getCases <em>Cases</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression {
@@ -44,7 +44,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	 * The cached value of the '{@link #getSwitchExpr() <em>Switch Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getSwitchExpr()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	 * The cached value of the '{@link #getCases() <em>Cases</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getCases()
 	 * @generated
 	 * @ordered
@@ -65,7 +65,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CaseExpressionImpl() {
@@ -75,7 +75,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetSwitchExpr(Expression newSwitchExpr, NotificationChain msgs) {
@@ -95,7 +95,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -112,7 +112,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -129,7 +129,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -146,7 +146,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -167,7 +167,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -178,7 +178,7 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -197,9 +197,10 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Case> getCases() {
 		if(cases == null) {
 			cases = new EObjectContainmentEList<Case>(Case.class, this, PPPackage.CASE_EXPRESSION__CASES);
@@ -210,9 +211,10 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getSwitchExpr() {
 		return switchExpr;
 	}
@@ -220,18 +222,19 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setSwitchExpr(Expression newSwitchExpr) {
 		if(newSwitchExpr != switchExpr) {
 			NotificationChain msgs = null;
 			if(switchExpr != null)
 				msgs = ((InternalEObject) switchExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.CASE_EXPRESSION__SWITCH_EXPR, null, msgs);
+					PPPackage.CASE_EXPRESSION__SWITCH_EXPR, null, msgs);
 			if(newSwitchExpr != null)
 				msgs = ((InternalEObject) newSwitchExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.CASE_EXPRESSION__SWITCH_EXPR, null, msgs);
+					PPPackage.CASE_EXPRESSION__SWITCH_EXPR, null, msgs);
 			msgs = basicSetSwitchExpr(newSwitchExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,7 +31,7 @@ import com.google.common.collect.Sets;
  * <li>a set of resolutions (i.e. IEObjectDescriptions) that have been used to resolve an x-reference</li>
  * <li>a set of unresolved names</li>
  * </ul>
- * 
+ *
  * @TODO: consider changing the name of this class as it handls more that just "imported names".
  */
 public class PPImportedNamesAdapter extends AdapterImpl {
@@ -89,7 +89,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 
 	/**
 	 * Adds the given name to the set of searched names (names that influence the resolution).
-	 * 
+	 *
 	 * @param name
 	 */
 	public void add(QualifiedName name) {
@@ -102,7 +102,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 
 	/**
 	 * Adds a collection of ambiguous references to the set of x-references found to be ambiguous.
-	 * 
+	 *
 	 * @param ambiguities
 	 */
 	public void addAmbiguous(Collection<IEObjectDescription> ambiguities) {
@@ -115,7 +115,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 
 	/**
 	 * Adds a single ambiguity to the set of x-references found to be ambiguous.
-	 * 
+	 *
 	 * @param ambiguities
 	 */
 	public void addAmbiguous(IEObjectDescription ambiguity) {
@@ -124,7 +124,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 
 	/**
 	 * Adds a collection of resolutions to the set of resolved x-references.
-	 * 
+	 *
 	 * @param resolved
 	 */
 	public void addResolved(Collection<IEObjectDescription> resolved) {
@@ -137,7 +137,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 
 	/**
 	 * Adds a single resolution to the set of resolved x-references.
-	 * 
+	 *
 	 * @param desc
 	 */
 	public void addResolved(IEObjectDescription desc) {
@@ -146,7 +146,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 
 	/**
 	 * Adds a single name to the set of unresolved names.
-	 * 
+	 *
 	 * @param name
 	 */
 	public void addUnresolved(QualifiedName name, int line, int offset, int length) {
@@ -184,7 +184,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	public Collection<IEObjectDescription> getAmbiguousDescriptions() {
 		return Collections.unmodifiableSet(ambigousDescriptions != null
 				? ambigousDescriptions
-				: EMPTY_DESCSET);
+						: EMPTY_DESCSET);
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	public List<QualifiedName> getNames() {
 		return Collections.unmodifiableList(importedNames != null
 				? importedNames
-				: EMPTY);
+						: EMPTY);
 	}
 
 	/**
@@ -202,20 +202,20 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	public Collection<IEObjectDescription> getResolvedDescriptions() {
 		return Collections.unmodifiableSet(resolvedDescriptions != null
 				? resolvedDescriptions
-				: EMPTY_DESCSET);
+						: EMPTY_DESCSET);
 	}
 
 	/**
 	 * Returns all unresolved information in an unmodifiable map. The keys are the qualified name
 	 * of an unresolved element, and there is one or more Locations describing where the qualified name
 	 * is found in the resource.
-	 * 
+	 *
 	 * @return
 	 */
 	public Map<QualifiedName, List<Location>> getUnresolved() {
 		return unresolvedNames == null
 				? EMPTY_UNRESOLVED
-				: Collections.unmodifiableMap(unresolvedNames);
+						: Collections.unmodifiableMap(unresolvedNames);
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	public Collection<QualifiedName> getUnresolvedNames() {
 		return Collections.unmodifiableSet(unresolvedNames != null
 				? unresolvedNames.keySet()
-				: EMPTY_NAMESET);
+						: EMPTY_NAMESET);
 	}
 
 	@Override

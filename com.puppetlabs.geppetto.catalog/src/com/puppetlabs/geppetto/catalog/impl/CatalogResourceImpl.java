@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -52,18 +52,12 @@ import com.google.gson.reflect.TypeToken;
  * <li>{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl#isExported <em>Exported</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CatalogResourceImpl extends TaggableImpl implements CatalogResource {
 	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogResource> implements
-			JsonSerializer<CatalogResource> {
-
-		private static java.lang.reflect.Type listOfTagsType = new TypeToken<EList<String>>() {
-		}.getType();
-
-		private static java.lang.reflect.Type listOfStringType = new TypeToken<EList<String>>() {
-		}.getType();
+	JsonSerializer<CatalogResource> {
 
 		private static boolean getBoolean(JsonObject jsonObj, String key) {
 			JsonElement json = jsonObj.get(key);
@@ -81,7 +75,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 			// unset values are null, not empty strings
 			return value.length() == 0
 					? null
-					: value;
+							: value;
 		}
 
 		private static void putBoolean(JsonObject jsonObj, String key, boolean value) {
@@ -93,6 +87,12 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 				value = "";
 			jsonObj.addProperty(key, value);
 		}
+
+		private static java.lang.reflect.Type listOfTagsType = new TypeToken<EList<String>>() {
+		}.getType();
+
+		private static java.lang.reflect.Type listOfStringType = new TypeToken<EList<String>>() {
+		}.getType();
 
 		@Override
 		public CatalogResource deserialize(JsonElement json, java.lang.reflect.Type typeOfT,
@@ -184,7 +184,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The default value of the '{@link #getFile() <em>File</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getFile()
 	 * @generated
 	 * @ordered
@@ -195,7 +195,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The cached value of the '{@link #getFile() <em>File</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getFile()
 	 * @generated
 	 * @ordered
@@ -206,7 +206,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The default value of the '{@link #getLine() <em>Line</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getLine()
 	 * @generated
 	 * @ordered
@@ -217,7 +217,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The cached value of the '{@link #getLine() <em>Line</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getLine()
 	 * @generated
 	 * @ordered
@@ -228,7 +228,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -239,7 +239,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -250,7 +250,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getTitle()
 	 * @generated
 	 * @ordered
@@ -261,7 +261,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getTitle()
 	 * @generated
 	 * @ordered
@@ -272,7 +272,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getParameters()
 	 * @generated
 	 * @ordered
@@ -283,7 +283,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The default value of the '{@link #isVirtual() <em>Virtual</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isVirtual()
 	 * @generated
 	 * @ordered
@@ -294,7 +294,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The cached value of the '{@link #isVirtual() <em>Virtual</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isVirtual()
 	 * @generated
 	 * @ordered
@@ -305,7 +305,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The default value of the '{@link #isExported() <em>Exported</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isExported()
 	 * @generated
 	 * @ordered
@@ -316,7 +316,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	 * The cached value of the '{@link #isExported() <em>Exported</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isExported()
 	 * @generated
 	 * @ordered
@@ -326,7 +326,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CatalogResourceImpl() {
@@ -336,7 +336,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -363,7 +363,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -378,7 +378,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -386,20 +386,20 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 		switch(featureID) {
 			case CatalogPackage.CATALOG_RESOURCE__FILE:
 				return FILE_EDEFAULT == null
-						? file != null
-						: !FILE_EDEFAULT.equals(file);
+				? file != null
+				: !FILE_EDEFAULT.equals(file);
 			case CatalogPackage.CATALOG_RESOURCE__LINE:
 				return LINE_EDEFAULT == null
-						? line != null
-						: !LINE_EDEFAULT.equals(line);
+				? line != null
+				: !LINE_EDEFAULT.equals(line);
 			case CatalogPackage.CATALOG_RESOURCE__TYPE:
 				return TYPE_EDEFAULT == null
-						? type != null
-						: !TYPE_EDEFAULT.equals(type);
+				? type != null
+				: !TYPE_EDEFAULT.equals(type);
 			case CatalogPackage.CATALOG_RESOURCE__TITLE:
 				return TITLE_EDEFAULT == null
-						? title != null
-						: !TITLE_EDEFAULT.equals(title);
+				? title != null
+				: !TITLE_EDEFAULT.equals(title);
 			case CatalogPackage.CATALOG_RESOURCE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 			case CatalogPackage.CATALOG_RESOURCE__VIRTUAL:
@@ -413,7 +413,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -449,7 +449,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -460,7 +460,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -494,9 +494,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getFile() {
 		return file;
 	}
@@ -504,9 +505,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getLine() {
 		return line;
 	}
@@ -514,13 +516,14 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<CatalogResourceParameter> getParameters() {
 		if(parameters == null) {
 			parameters = new EObjectContainmentEList<CatalogResourceParameter>(
-				CatalogResourceParameter.class, this, CatalogPackage.CATALOG_RESOURCE__PARAMETERS);
+					CatalogResourceParameter.class, this, CatalogPackage.CATALOG_RESOURCE__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -528,9 +531,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getTitle() {
 		return title;
 	}
@@ -538,9 +542,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -548,9 +553,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isExported() {
 		return exported;
 	}
@@ -558,9 +564,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isVirtual() {
 		return virtual;
 	}
@@ -568,9 +575,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setExported(boolean newExported) {
 		boolean oldExported = exported;
 		exported = newExported;
@@ -582,9 +590,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setFile(String newFile) {
 		String oldFile = file;
 		file = newFile;
@@ -595,9 +604,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setLine(String newLine) {
 		String oldLine = line;
 		line = newLine;
@@ -608,9 +618,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setTitle(String newTitle) {
 		String oldTitle = title;
 		title = newTitle;
@@ -622,9 +633,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setType(String newType) {
 		String oldType = type;
 		type = newType;
@@ -635,9 +647,10 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setVirtual(boolean newVirtual) {
 		boolean oldVirtual = virtual;
 		virtual = newVirtual;
@@ -649,7 +662,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

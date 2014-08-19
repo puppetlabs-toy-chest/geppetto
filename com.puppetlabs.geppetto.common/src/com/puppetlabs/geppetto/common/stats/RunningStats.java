@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -63,7 +63,7 @@ public class RunningStats {
 	/**
 	 * Obtains the standard deviation of the sample, where mean is the mean of the samples (not the actual mean of
 	 * the population).
-	 * 
+	 *
 	 * @return
 	 */
 	public double getSampleStandardDeviation() {
@@ -72,9 +72,10 @@ public class RunningStats {
 	}
 
 	/**
-	 * Obtains the standard deviation of the population (where the mean is the mean when every individual in the population
+	 * Obtains the standard deviation of the population (where the mean is the mean when every individual in the
+	 * population
 	 * have been sampled).
-	 * 
+	 *
 	 * @return
 	 */
 	public double getStandardDeviation() {
@@ -84,7 +85,7 @@ public class RunningStats {
 
 	/**
 	 * Return the variation coefficient (standardDeviation / count)
-	 * 
+	 *
 	 * @return variation coefficient in %
 	 */
 	public double getVariationCoefficient() {

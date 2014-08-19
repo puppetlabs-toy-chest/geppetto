@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.URI;
 /**
  * A ResourceContext contains the instances created in a Guice scope as well as a reference
  * to a Resource URI.
- * 
+ *
  */
 public final class ResourceAccess {
 
@@ -28,7 +28,7 @@ public final class ResourceAccess {
 
 	/**
 	 * Returns null for a "global", non resource specific context.
-	 * 
+	 *
 	 * @return
 	 */
 	public URI getResourceURI() {

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -92,6 +92,32 @@ public class IntegerCluster {
 
 	}
 
+	/**
+	 * Calls Ranges.closed() or Range.closed depending on which Guava version
+	 * we're using.
+	 *
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static <C extends Comparable<?>> Range<C> closed(C min, C max) {
+		try {
+			return (Range<C>) RNG_CLOSED.invoke(null, min, max);
+		}
+		catch(IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+		catch(IllegalArgumentException e) {
+			throw e;
+		}
+		catch(InvocationTargetException e) {
+			if(e.getTargetException() instanceof RuntimeException)
+				throw ((RuntimeException) e.getTargetException());
+			throw new RuntimeException(e.getTargetException());
+		}
+	}
+
 	private final static ClusterNodeComparator comparator = new ClusterNodeComparator();
 
 	private List<ClusterNode> clusterList = Lists.newArrayList();
@@ -119,32 +145,6 @@ public class IntegerCluster {
 			}
 		}
 		RNG_CLOSED = rngClosed;
-	}
-
-	/**
-	 * Calls Ranges.closed() or Range.closed depending on which Guava version
-	 * we're using.
-	 * 
-	 * @param min
-	 * @param max
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public static <C extends Comparable<?>> Range<C> closed(C min, C max) {
-		try {
-			return (Range<C>) RNG_CLOSED.invoke(null, min, max);
-		}
-		catch(IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
-		catch(IllegalArgumentException e) {
-			throw e;
-		}
-		catch(InvocationTargetException e) {
-			if(e.getTargetException() instanceof RuntimeException)
-				throw ((RuntimeException) e.getTargetException());
-			throw new RuntimeException(e.getTargetException());
-		}
 	}
 
 	public IntegerCluster(int maxDistance) {
@@ -211,7 +211,7 @@ public class IntegerCluster {
 
 	/**
 	 * Returns the max value for the cluster x is a member of.
-	 * 
+	 *
 	 * @param x
 	 * @return
 	 */
@@ -221,7 +221,7 @@ public class IntegerCluster {
 
 	/**
 	 * Returns the min value for the cluster x is a member of.
-	 * 
+	 *
 	 * @param x
 	 * @return
 	 */
@@ -237,7 +237,7 @@ public class IntegerCluster {
 
 	/**
 	 * Return the number of clusters.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getClusterCount() {

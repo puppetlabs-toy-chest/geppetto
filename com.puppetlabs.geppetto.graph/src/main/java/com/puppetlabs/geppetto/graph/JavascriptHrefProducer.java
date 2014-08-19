@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,7 +15,7 @@ import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 
 /**
  * Produces HREFs in the form of javascript function calls.
- * 
+ *
  */
 public class JavascriptHrefProducer extends RelativeFileHrefProducer {
 
@@ -88,7 +88,7 @@ public class JavascriptHrefProducer extends RelativeFileHrefProducer {
 	}
 
 	/* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.graph.AbstractHrefProducer#hrefToFileLocation(java.lang.String, int, int,
 	 * int) */
 	@Override
@@ -109,7 +109,7 @@ public class JavascriptHrefProducer extends RelativeFileHrefProducer {
 	}
 
 	/* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.graph.AbstractHrefProducer#hrefToModule(java.lang.String) */
 	@Override
 	protected String hrefToModule(String path) {
@@ -124,7 +124,7 @@ public class JavascriptHrefProducer extends RelativeFileHrefProducer {
 	}
 
 	/* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.graph.AbstractHrefProducer#hrefToModule(java.lang.String) */
 	@Override
 	protected String hrefToNode(String path) {
@@ -139,7 +139,7 @@ public class JavascriptHrefProducer extends RelativeFileHrefProducer {
 	}
 
 	/* (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.puppetlabs.geppetto.graph.AbstractHrefProducer#hrefToPPTP(com.puppetlabs.hammer.puppet.validation.runner
 	 * .AllModuleReferences

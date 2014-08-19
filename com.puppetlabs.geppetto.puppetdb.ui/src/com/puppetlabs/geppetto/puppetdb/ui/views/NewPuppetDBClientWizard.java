@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -54,16 +54,16 @@ public class NewPuppetDBClientWizard extends Wizard implements INewWizard {
 		@Override
 		public void verifyText(VerifyEvent e) {
 			// @fmtOff
-			e.doit = 
-				   e.character == 0
-				|| e.keyCode == SWT.BS
-				|| e.keyCode == SWT.DEL
-				|| e.character == '-'
-				|| e.character == '.'
-				|| e.character >= '0' && e.character <= '9'
-				|| e.character >= 'A' && e.character <= 'Z'
-				|| e.character >= 'a' && e.character <= 'z';
-			// @fmtOn
+			e.doit =
+					e.character == 0
+					|| e.keyCode == SWT.BS
+					|| e.keyCode == SWT.DEL
+					|| e.character == '-'
+					|| e.character == '.'
+					|| e.character >= '0' && e.character <= '9'
+					|| e.character >= 'A' && e.character <= 'Z'
+					|| e.character >= 'a' && e.character <= 'z';
+					// @fmtOn
 		}
 	}
 
@@ -121,7 +121,7 @@ public class NewPuppetDBClientWizard extends Wizard implements INewWizard {
 			String getMessage() {
 				return badFile
 						? UIPlugin.getLocalString("_UI_InvalidFileName", getValue().getAbsolutePath())
-						: super.getMessage();
+								: super.getMessage();
 			}
 
 			@Override
@@ -400,7 +400,7 @@ public class NewPuppetDBClientWizard extends Wizard implements INewWizard {
 			setSSLFiles();
 			// @fmtOff
 			setPageComplete(
-				   dns.validate()
+				dns.validate()
 				&& port.validate()
 				&& validateUnique()
 				&& caCert.validate()
@@ -435,7 +435,7 @@ public class NewPuppetDBClientWizard extends Wizard implements INewWizard {
 
 	/**
 	 * Constructor used when started from {@link PuppetResourceEventsView}
-	 * 
+	 *
 	 * @param puppetDBManager
 	 */
 	NewPuppetDBClientWizard(PuppetDBManager puppetDBManager) {

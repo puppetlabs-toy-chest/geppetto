@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -24,11 +24,11 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * Evaluates constant string expressions. Returns null if expression was not a constant string.
- * 
+ *
  */
 public class PPStringConstantEvaluator {
 	private PolymorphicDispatcher<String> stringDispatcher = new PolymorphicDispatcher<String>(
-		"_string", 1, 1, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
+			"_string", 1, 1, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
 		@Override
 		protected String handleNoSuchMethod(Object... params) {
 			return null;

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -42,169 +42,18 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass targetEntryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass puppetDistributionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass functionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass abstractTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass typeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass metaTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass typeArgumentEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass nameSpaceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass tpVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass iTargetElementContainerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass metaVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass iDocumentedEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass iNamedEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass targetElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass propertyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass parameterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass typeFragmentEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EDataType fileEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private static boolean isInited = false;
-
-	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>
-	 * This method is used to initialize {@link PPTPPackage#eINSTANCE} when that field is accessed. Clients should not invoke it directly. Instead,
-	 * they should simply access that field to obtain the package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This method is used to initialize {@link PPTPPackage#eINSTANCE} when that field is accessed. Clients should not
+	 * invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
@@ -238,7 +87,159 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
+	 * @generated
+	 */
+	private EClass targetEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass puppetDistributionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass functionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass abstractTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass typeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass metaTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass typeArgumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass nameSpaceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass tpVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass iTargetElementContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass metaVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass iDocumentedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass iNamedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass targetElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass propertyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass parameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EClass typeFragmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private EDataType fileEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	private static boolean isInited = false;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 *
 	 * @generated
 	 */
 	private boolean isCreated = false;
@@ -246,19 +247,21 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	private boolean isInitialized = false;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
+	 * EPackage.Registry} by the
 	 * package
 	 * package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also performs initialization of the
-	 * package, or returns the registered package, if one already exists. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
+	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#eNS_URI
 	 * @see #init()
@@ -273,7 +276,7 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -345,9 +348,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getAbstractType() {
 		return abstractTypeEClass;
 	}
@@ -355,9 +359,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractType_EReference0() {
 		return (EReference) abstractTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -365,9 +370,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractType_Parameters() {
 		return (EReference) abstractTypeEClass.getEStructuralFeatures().get(2);
 	}
@@ -375,9 +381,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractType_Properties() {
 		return (EReference) abstractTypeEClass.getEStructuralFeatures().get(1);
 	}
@@ -385,9 +392,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EDataType getFile() {
 		return fileEDataType;
 	}
@@ -395,9 +403,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getFunction() {
 		return functionEClass;
 	}
@@ -405,9 +414,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFunction_RValue() {
 		return (EAttribute) functionEClass.getEStructuralFeatures().get(0);
 	}
@@ -415,9 +425,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getIDocumented() {
 		return iDocumentedEClass;
 	}
@@ -425,9 +436,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIDocumented_Documentation() {
 		return (EAttribute) iDocumentedEClass.getEStructuralFeatures().get(0);
 	}
@@ -435,9 +447,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getINamed() {
 		return iNamedEClass;
 	}
@@ -445,9 +458,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getINamed_Name() {
 		return (EAttribute) iNamedEClass.getEStructuralFeatures().get(0);
 	}
@@ -455,9 +469,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getITargetElementContainer() {
 		return iTargetElementContainerEClass;
 	}
@@ -465,9 +480,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getITargetElementContainer_Contents() {
 		return (EReference) iTargetElementContainerEClass.getEStructuralFeatures().get(0);
 	}
@@ -475,9 +491,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getMetaType() {
 		return metaTypeEClass;
 	}
@@ -485,9 +502,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getMetaVariable() {
 		return metaVariableEClass;
 	}
@@ -495,9 +513,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getNameSpace() {
 		return nameSpaceEClass;
 	}
@@ -505,9 +524,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNameSpace_Reserved() {
 		return (EAttribute) nameSpaceEClass.getEStructuralFeatures().get(0);
 	}
@@ -515,9 +535,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getParameter() {
 		return parameterEClass;
 	}
@@ -525,9 +546,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public PPTPFactory getPPTPFactory() {
 		return (PPTPFactory) getEFactoryInstance();
 	}
@@ -535,9 +557,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getProperty() {
 		return propertyEClass;
 	}
@@ -545,9 +568,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getPuppetDistribution() {
 		return puppetDistributionEClass;
 	}
@@ -555,9 +579,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getTargetElement() {
 		return targetElementEClass;
 	}
@@ -565,9 +590,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTargetElement_Deprecated() {
 		return (EAttribute) targetElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -575,9 +601,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getTargetEntry() {
 		return targetEntryEClass;
 	}
@@ -585,9 +612,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTargetEntry_Description() {
 		return (EAttribute) targetEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -595,9 +623,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getTargetEntry_Functions() {
 		return (EReference) targetEntryEClass.getEStructuralFeatures().get(1);
 	}
@@ -605,9 +634,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTargetEntry_Label() {
 		return (EAttribute) targetEntryEClass.getEStructuralFeatures().get(6);
 	}
@@ -615,9 +645,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getTargetEntry_MetaType() {
 		return (EReference) targetEntryEClass.getEStructuralFeatures().get(5);
 	}
@@ -625,9 +656,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getTargetEntry_MetaVariables() {
 		return (EReference) targetEntryEClass.getEStructuralFeatures().get(7);
 	}
@@ -635,9 +667,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getTargetEntry_TypeFragments() {
 		return (EReference) targetEntryEClass.getEStructuralFeatures().get(4);
 	}
@@ -645,9 +678,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EReference getTargetEntry_Types() {
 		return (EReference) targetEntryEClass.getEStructuralFeatures().get(2);
 	}
@@ -655,9 +689,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTargetEntry_Version() {
 		return (EAttribute) targetEntryEClass.getEStructuralFeatures().get(3);
 	}
@@ -665,9 +700,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getTPVariable() {
 		return tpVariableEClass;
 	}
@@ -675,9 +711,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTPVariable_Assignable() {
 		return (EAttribute) tpVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -685,9 +722,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTPVariable_Pattern() {
 		return (EAttribute) tpVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -695,9 +733,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getType() {
 		return typeEClass;
 	}
@@ -705,9 +744,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getType_SuperType() {
 		return (EAttribute) typeEClass.getEStructuralFeatures().get(0);
 	}
@@ -715,9 +755,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeArgument() {
 		return typeArgumentEClass;
 	}
@@ -725,9 +766,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTypeArgument_Namevar() {
 		return (EAttribute) typeArgumentEClass.getEStructuralFeatures().get(1);
 	}
@@ -735,9 +777,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTypeArgument_Required() {
 		return (EAttribute) typeArgumentEClass.getEStructuralFeatures().get(0);
 	}
@@ -745,9 +788,10 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeFragment() {
 		return typeFragmentEClass;
 	}
@@ -757,7 +801,7 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	 * method is guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void initializePackageContents() {

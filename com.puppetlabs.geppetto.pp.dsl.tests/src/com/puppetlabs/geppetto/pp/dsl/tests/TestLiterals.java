@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,12 +26,12 @@ import org.junit.Test;
 
 /**
  * Tests Literals
- * 
+ *
  */
 public class TestLiterals extends AbstractPuppetTests {
 
 	public final static String[] validNames = {
-			"file", "File", "::File", "A::B::C", "class", "::or", "a::or", "::or-or" };
+		"file", "File", "::File", "A::B::C", "class", "::or", "a::or", "::or-or" };
 
 	public final static String[] invalidNames = { "if", "else", "%#", "define:" };
 
@@ -218,7 +218,7 @@ public class TestLiterals extends AbstractPuppetTests {
 		// Should not produce an error or warning for sq string
 
 		// -- unicode escape \\u [hexdigit]{4,4}
-		ls.setText("\\u1a2b");
+ls.setText("\\u1a2b");
 		tester.validator().checkSingleQuotedString(ls);
 		tester.diagnose().assertOK();
 

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -22,13 +22,13 @@ import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 
 /**
  * A runtime module for PPTP generic model.
- * 
+ *
  */
 public class PptpRuntimeModule extends AbstractGenericResourceRuntimeModule {
 
 	/**
 	 * Binds resource description strategy that adds pptp data to descriptions.
-	 * 
+	 *
 	 * @return
 	 */
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
@@ -57,7 +57,7 @@ public class PptpRuntimeModule extends AbstractGenericResourceRuntimeModule {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule#getFileExtensions()
 	 */
 	@Override
@@ -67,7 +67,7 @@ public class PptpRuntimeModule extends AbstractGenericResourceRuntimeModule {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule#getLanguageName()
 	 */
 	@Override

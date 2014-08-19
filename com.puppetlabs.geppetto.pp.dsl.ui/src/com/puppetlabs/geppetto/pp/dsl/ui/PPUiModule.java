@@ -271,7 +271,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(
 			com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(
-			PPContentAssistLexer.class);
+				PPContentAssistLexer.class);
 		// This is the default generated one:
 		// com.puppetlabs.geppetto.pp.dsl.ui.contentassist.antlr.lexer.InternalPPLexer.class);
 	}
@@ -332,7 +332,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	public void configureHighlightingLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(
 			com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(
-			PPOverridingLexer.class);
+				PPOverridingLexer.class);
 	}
 
 	public void configureIIndentationInformationProvider(Binder binder) {

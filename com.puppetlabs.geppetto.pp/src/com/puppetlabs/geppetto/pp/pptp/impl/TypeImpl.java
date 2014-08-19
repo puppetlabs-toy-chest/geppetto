@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeImpl#getSuperType <em>Super Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TypeImpl extends AbstractTypeImpl implements Type {
@@ -35,7 +35,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	 * The default value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getSuperType()
 	 * @generated
 	 * @ordered
@@ -46,7 +46,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getSuperType()
 	 * @generated
 	 * @ordered
@@ -56,7 +56,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected TypeImpl() {
@@ -66,7 +66,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -81,7 +81,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -98,7 +98,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -114,7 +114,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -125,7 +125,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -141,9 +141,10 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getSuperType() {
 		return superType;
 	}
@@ -151,9 +152,10 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setSuperType(String newSuperType) {
 		String oldSuperType = superType;
 		superType = newSuperType;
@@ -164,7 +166,7 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

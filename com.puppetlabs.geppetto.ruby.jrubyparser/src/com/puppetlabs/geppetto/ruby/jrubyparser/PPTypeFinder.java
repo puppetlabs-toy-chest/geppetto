@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,7 +34,7 @@ import com.google.common.collect.Maps;
 
 /**
  * Find puppet resource type definition(s) in a ruby file.
- * 
+ *
  */
 public class PPTypeFinder {
 	private static class OpCallVisitor extends AbstractJRubyVisitor {
@@ -54,7 +54,7 @@ public class PPTypeFinder {
 		/**
 		 * Visits all nodes in graph, and if visitor returns non-null, the
 		 * iteration stops and the returned non-null value is returned.
-		 * 
+		 *
 		 * @param root
 		 * @return
 		 */
@@ -210,7 +210,7 @@ public class PPTypeFinder {
 
 	/**
 	 * Loads 'newmetaparam' from the ruby class 'Type'
-	 * 
+	 *
 	 * @param root
 	 * @return
 	 */
@@ -259,7 +259,7 @@ public class PPTypeFinder {
 					// type
 					String typeName = getFirstArg(newTypeCall);
 					if(typeName != null) { // just in case there is something
-											// really wrong in parsing
+						// really wrong in parsing
 						PPTypeInfo typeInfo = createNagiosTypeInfo(safeGetBodyNode(newTypeCall), "nagios_" + typeName);
 						if(typeInfo != null)
 							result.add(typeInfo);
@@ -274,7 +274,7 @@ public class PPTypeFinder {
 	/**
 	 * Finds type info in one of the two forms:<br/>
 	 * <code>module Puppet
-	 *     newtype(:typename) 
+	 *     newtype(:typename)
 	 *     ...
 	 * </code><br/>
 	 * or<br/>
@@ -283,7 +283,7 @@ public class PPTypeFinder {
 	 * </code><br/>
 	 * where the call may (but is not required to) take place in the Puppet
 	 * module.
-	 * 
+	 *
 	 * @param root
 	 * @return
 	 */
@@ -310,12 +310,12 @@ public class PPTypeFinder {
 	/**
 	 * Finds a property addition to a type. Returns a partially filled
 	 * PPTypeInfo (name, and a single property).
-	 * 
+	 *
 	 * TODO: Could be simplified and reuse the RubyCallFinder (if it is made
 	 * capable of handling calls to Puppet::Type.type(:name) inside a module
 	 * Puppet (currently, it will think this is a call to
 	 * Puppet::Puppet::Type.type(:name).
-	 * 
+	 *
 	 * @param root
 	 * @return PPTypeInfo partially filled, or null, if there were no property
 	 *         addition found.
@@ -328,82 +328,82 @@ public class PPTypeFinder {
 		// Some property additions are in "Puppet" modules, some are not
 		if(module == null)
 			module = root.getNodeType() == NodeType.ROOTNODE
-					? ((RootNode) root).getBody()
+			? ((RootNode) root).getBody()
 					: root;
-		OpCallVisitor opCallVisitor = new OpCallVisitor();
-		for(Node n1 : module.childNodes()) {
-			if(n1.getNodeType() == NodeType.NEWLINENODE)
-				n1 = ((NewlineNode) n1).getNextNode();
-			Iterable<Node> nodeIterable = null;
-			if(n1.getNodeType() == NodeType.BLOCKNODE)
-				nodeIterable = ((BlockNode) n1).childNodes();
-			else
-				nodeIterable = Lists.newArrayList(n1);
-			for(Node n : nodeIterable) {
-				if(n.getNodeType() == NodeType.NEWLINENODE)
-					n = ((NewlineNode) n).getNextNode();
+			OpCallVisitor opCallVisitor = new OpCallVisitor();
+			for(Node n1 : module.childNodes()) {
+				if(n1.getNodeType() == NodeType.NEWLINENODE)
+					n1 = ((NewlineNode) n1).getNextNode();
+				Iterable<Node> nodeIterable = null;
+				if(n1.getNodeType() == NodeType.BLOCKNODE)
+					nodeIterable = ((BlockNode) n1).childNodes();
+				else
+					nodeIterable = Lists.newArrayList(n1);
+				for(Node n : nodeIterable) {
+					if(n.getNodeType() == NodeType.NEWLINENODE)
+						n = ((NewlineNode) n).getNextNode();
 
-				if(n.getNodeType() == NodeType.CALLNODE) {
-					CallNode callNode = (CallNode) n;
-					if(NEWPROPERTY.equals(callNode.getName())) {
-						CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
-						if(typeCall == null)
+					if(n.getNodeType() == NodeType.CALLNODE) {
+						CallNode callNode = (CallNode) n;
+						if(NEWPROPERTY.equals(callNode.getName())) {
+							CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
+							if(typeCall == null)
+								continue;
+							String typeName = getFirstArg(typeCall);
+							if(typeName == null)
+								continue;
+							Map<String, PPTypeInfo.Entry> propertyMap = Maps.newHashMap();
+							propertyMap.put(getFirstArg(callNode), getEntry(callNode));
+							result.add(new PPTypeInfo(typeName, "", propertyMap, null));
 							continue;
-						String typeName = getFirstArg(typeCall);
-						if(typeName == null)
+						}
+						if(NEWPARAM.equals(callNode.getName())) {
+							CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
+							if(typeCall == null)
+								continue;
+							String typeName = getFirstArg(typeCall);
+							if(typeName == null)
+								continue;
+							Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
+							parameterMap.put(getFirstArg(callNode), getEntry(callNode));
+							result.add(new PPTypeInfo(typeName, "", null, parameterMap));
 							continue;
-						Map<String, PPTypeInfo.Entry> propertyMap = Maps.newHashMap();
-						propertyMap.put(getFirstArg(callNode), getEntry(callNode));
-						result.add(new PPTypeInfo(typeName, "", propertyMap, null));
-						continue;
-					}
-					if(NEWPARAM.equals(callNode.getName())) {
-						CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
-						if(typeCall == null)
-							continue;
-						String typeName = getFirstArg(typeCall);
-						if(typeName == null)
-							continue;
-						Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
-						parameterMap.put(getFirstArg(callNode), getEntry(callNode));
-						result.add(new PPTypeInfo(typeName, "", null, parameterMap));
-						continue;
-					}
-					if(NEWCHECK.equals(callNode.getName())) {
-						CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
-						if(typeCall == null)
-							continue;
-						String typeName = getFirstArg(typeCall);
-						if(typeName == null)
-							continue;
-						Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
-						parameterMap.put(getFirstArg(callNode), getEntry(callNode));
-						result.add(new PPTypeInfo(typeName, "", null, parameterMap));
-					}
-					// NOTE: this does probably never occur
-					if(ENSURABLE.equals(callNode.getName())) {
-						CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
-						if(typeCall == null)
-							continue;
-						String typeName = getFirstArg(typeCall);
-						if(typeName == null)
-							continue;
-						Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
-						parameterMap.put("ensure", getEntry(callNode));
-						result.add(new PPTypeInfo(typeName, "", parameterMap, null));
+						}
+						if(NEWCHECK.equals(callNode.getName())) {
+							CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
+							if(typeCall == null)
+								continue;
+							String typeName = getFirstArg(typeCall);
+							if(typeName == null)
+								continue;
+							Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
+							parameterMap.put(getFirstArg(callNode), getEntry(callNode));
+							result.add(new PPTypeInfo(typeName, "", null, parameterMap));
+						}
+						// NOTE: this does probably never occur
+						if(ENSURABLE.equals(callNode.getName())) {
+							CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
+							if(typeCall == null)
+								continue;
+							String typeName = getFirstArg(typeCall);
+							if(typeName == null)
+								continue;
+							Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
+							parameterMap.put("ensure", getEntry(callNode));
+							result.add(new PPTypeInfo(typeName, "", parameterMap, null));
 
+						}
 					}
 				}
 			}
-		}
-		return result;
+			return result;
 
 	}
 
 	/**
 	 * Returns the first String argument from a node with arguments, or null if
 	 * there are no arguments or the argument list was not a list.
-	 * 
+	 *
 	 * @param callNode
 	 * @return
 	 */
@@ -451,7 +451,7 @@ public class PPTypeFinder {
 	/**
 	 * Returns the first String argument from a node with arguments, or null if
 	 * there are no arguments or the argument list was not a list.
-	 * 
+	 *
 	 * @param callNode
 	 * @return
 	 */
@@ -473,7 +473,7 @@ public class PPTypeFinder {
 		String x = getFirstArg(callNode);
 		return x == null
 				? defaultValue
-				: x;
+						: x;
 	}
 
 	private String getStringArg(Node n) {
@@ -487,7 +487,7 @@ public class PPTypeFinder {
 		String x = getStringArg(n);
 		return x == null
 				? defaultValue
-				: x;
+						: x;
 	}
 
 	private Node safeGetBodyNode(BlockAcceptingNode node) {

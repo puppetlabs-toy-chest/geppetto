@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * Abstract implementation of ILayoutManaager
- * 
+ *
  */
 public abstract class AbstractLayoutManager extends AbstractLayout implements ILayoutManager {
 
@@ -41,7 +41,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 		// This looks a bit odd, but protects against the pathological case where a style
 		// has both indents and dedents. If both indent and dedent are 0, indentation is unchanged.
 		output.changeIndentation(styleSet.getStyleValue(DedentStyle.class, node, DEFAULT_0) -
-				styleSet.getStyleValue(IndentStyle.class, node, DEFAULT_0));
+			styleSet.getStyleValue(IndentStyle.class, node, DEFAULT_0));
 	}
 
 	/**
@@ -51,14 +51,14 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 	 * Called when it has been decided that a whitespace should be processed (it is included in the region to format).
 	 * </p>
 	 * <p>
-	 * If the given {@link LineBreaks} has a <i>normal</i> {@link LineBreaks#getNormal()} or <i>max</i> {@link LineBreaks#getMax()} greater than 0 the
-	 * line break specification wins, and no spaces are produced.
+	 * If the given {@link LineBreaks} has a <i>normal</i> {@link LineBreaks#getNormal()} or <i>max</i>
+	 * {@link LineBreaks#getMax()} greater than 0 the line break specification wins, and no spaces are produced.
 	 * </p>
 	 * <p>
-	 * A missing quantity will produce the <i>normal</i> quantity, a quantity less than <i>min</i> will produce a <i>min</i> quantity, and a quantity
-	 * greater than <i>max</i> will produce a <i>max</i> quantity.
+	 * A missing quantity will produce the <i>normal</i> quantity, a quantity less than <i>min</i> will produce a
+	 * <i>min</i> quantity, and a quantity greater than <i>max</i> will produce a <i>max</i> quantity.
 	 * </p>
-	 * 
+	 *
 	 * @param context
 	 *            - provides line separator information
 	 * @param text
@@ -74,7 +74,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 			LineBreaks linebreaks, ITextFlow output) {
 		text = text == null
 				? ""
-				: text;
+						: text;
 		final String lineSep = context.getLineSeparatorInformation().getLineSeparator();
 		final int existingLinebreaks = Strings.countLines(text, lineSep.toCharArray());
 		// if line break is wanted, it wins
@@ -128,7 +128,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 		// This looks a bit odd, but protects against the pathological case where a style
 		// has both indents and dedents. If both indent and dedent are 0, indentation is unchanged.
 		output.changeIndentation(styleSet.getStyleValue(IndentStyle.class, node, DEFAULT_0) -
-				styleSet.getStyleValue(DedentStyle.class, node, DEFAULT_0));
+			styleSet.getStyleValue(DedentStyle.class, node, DEFAULT_0));
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 
 	/**
 	 * Derived class should implement this method to format a leaf containing a comment.
-	 * 
+	 *
 	 * @param styleSet
 	 * @param node
 	 * @param output
@@ -165,10 +165,10 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 	 * This implementation does nothing, and returns <code>false</code>.
 	 * </p>
 	 * <p>
-	 * A derived class may want to decorate children of the composite node and return <code>false</code>, or process and provide all output for
-	 * children and return <code>true</code>
+	 * A derived class may want to decorate children of the composite node and return <code>false</code>, or process and
+	 * provide all output for children and return <code>true</code>
 	 * </p>
-	 * 
+	 *
 	 * @param styleSet
 	 * @param node
 	 * @param flow
@@ -187,7 +187,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 	 * <li>{@link #formatWhitespace(StyleSet, IDomNode, ITextFlow, ILayoutContext)}</li>
 	 * </ul>
 	 * These should be implemented by a subclass.
-	 * 
+	 *
 	 * @param styleSet
 	 * @param node
 	 * @param output
@@ -199,7 +199,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 		// This looks a bit odd, but protects against the pathological case where a style
 		// has both indents and dedents. If both indent and dedent are 0, indentation is unchanged.
 		output.changeIndentation(styleSet.getStyleValue(IndentStyle.class, node, DEFAULT_0) -
-				styleSet.getStyleValue(DedentStyle.class, node, DEFAULT_0));
+			styleSet.getStyleValue(DedentStyle.class, node, DEFAULT_0));
 
 		switch(node.getNodeType()) {
 			case WHITESPACE:
@@ -215,7 +215,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 
 	/**
 	 * Derived class should implement this method and format a token (a leaf that is not whitespace, and not comment).
-	 * 
+	 *
 	 * @param styleSet
 	 * @param node
 	 * @param output
@@ -225,7 +225,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 
 	/**
 	 * Derived class should implement this method and format whitespace.
-	 * 
+	 *
 	 * @param styleSet
 	 * @param node
 	 * @param output

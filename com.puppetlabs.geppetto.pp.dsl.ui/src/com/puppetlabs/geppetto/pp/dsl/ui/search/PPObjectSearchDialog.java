@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Initial implementation - itemis AG (http://www.itemis.eu
  *   Puppet Labs - specialized for puppet
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.search;
 
@@ -91,13 +91,16 @@ public class PPObjectSearchDialog extends ListDialog {
 		// super class needs an IStructuredContentProvider so we register this dummy and
 		// register the lazy one later
 		setContentProvider(new IStructuredContentProvider() {
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				return null;
 			}
 
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			}
 		});
@@ -114,7 +117,7 @@ public class PPObjectSearchDialog extends ListDialog {
 	 * Called when the dialog is initially opened and whenever the input text changes. Applies the search filter as
 	 * specified by {@link #searchControl} and {@link #typeSearchControl} using {@link #getSearchEngine()} and updates
 	 * the result using {@link #startSizeCalculation(Iterable)}.
-	 * 
+	 *
 	 * @since 2.0
 	 */
 	protected void applyFilter() {
@@ -137,6 +140,7 @@ public class PPObjectSearchDialog extends ListDialog {
 			final IStyledLabelProvider styledLabelProvider = (IStyledLabelProvider) labelProvider;
 			TableOwnerDrawSupport.install(table);
 			Listener listener = new Listener() {
+				@Override
 				public void handleEvent(Event event) {
 					handleSetData(event);
 				}
@@ -148,10 +152,10 @@ public class PPObjectSearchDialog extends ListDialog {
 						StyledString styledString = styledLabelProvider.getStyledText(description);
 						String displayString = styledString == null
 								? description.toString()
-								: styledString.toString();
-						StyleRange[] styleRanges = styledString.getStyleRanges();
-						item.setText(displayString);
-						TableOwnerDrawSupport.storeStyleRanges(item, 0, styleRanges);
+										: styledString.toString();
+								StyleRange[] styleRanges = styledString.getStyleRanges();
+								item.setText(displayString);
+								TableOwnerDrawSupport.storeStyleRanges(item, 0, styleRanges);
 					}
 				}
 			};
@@ -162,6 +166,7 @@ public class PPObjectSearchDialog extends ListDialog {
 		EObjectDescriptionContentProvider contentProvider = new EObjectDescriptionContentProvider();
 		getTableViewer().setContentProvider(contentProvider);
 		getTableViewer().addSelectionChangedListener(new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				ISelection selection = event.getSelection();
 				if(selection instanceof IStructuredSelection) {
@@ -220,6 +225,7 @@ public class PPObjectSearchDialog extends ListDialog {
 		searchStatusLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
 		ModifyListener textModifyListener = new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				applyFilter();
 			}
@@ -320,7 +326,7 @@ public class PPObjectSearchDialog extends ListDialog {
 	/**
 	 * Called by {@link #applyFilter()} and is responsible for calling {@link #updateMatches(Collection, boolean)} with
 	 * an appropriately sorted list of matches.
-	 * 
+	 *
 	 * @since 2.0
 	 */
 	protected void startSizeCalculation(Iterable<IEObjectDescription> matches) {
@@ -344,6 +350,7 @@ public class PPObjectSearchDialog extends ListDialog {
 
 	public void updateMatches(final Collection<IEObjectDescription> matches, final boolean isFinished) {
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if(getShell() != null) {
 					if(getTableViewer() != null) {
@@ -351,7 +358,7 @@ public class PPObjectSearchDialog extends ListDialog {
 						getTableViewer().setInput(matches);
 					}
 					searchStatusLabel.setText((isFinished)
-							? "" : "Searching..."); //$NON-NLS-1$
+						? "" : "Searching..."); //$NON-NLS-1$
 					matchingElementsLabel.setText("Matching items:" + " (" + matches.size() + " matches)"); //$NON-NLS-1$
 				}
 			}

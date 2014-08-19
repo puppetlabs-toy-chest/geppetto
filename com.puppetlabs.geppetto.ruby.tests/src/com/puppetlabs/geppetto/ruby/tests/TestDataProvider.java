@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -23,12 +23,10 @@ import com.puppetlabs.geppetto.common.util.BundleAccess;
 
 public class TestDataProvider {
 
-	private static File basedir;
-
 	/**
 	 * Return the project root so that we can get testData in a way that works for both
 	 * PDE and Maven test launchers
-	 * 
+	 *
 	 * @return absolute path of the project.
 	 */
 	public static File getBasedir() {
@@ -61,4 +59,6 @@ public class TestDataProvider {
 		testOutputDir.mkdirs();
 		return testOutputDir;
 	}
+
+	private static File basedir;
 }

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import com.puppetlabs.geppetto.validation.runner.BuildResult;
  * and LINE is either a line number (starting with 1) or '-' if line number is
  * not available, and where OFFSET (character count from start of file), and
  * LENGTH are included if set.
- * 
+ *
  */
 public class TextualValidationResultFormatter implements IValidationResultFormatter {
 
@@ -38,14 +38,14 @@ public class TextualValidationResultFormatter implements IValidationResultFormat
 	public void format(BuildResult buildResult, BasicDiagnostic diagnostics, OutputStream out) {
 		PrintStream p = out instanceof PrintStream
 				? (PrintStream) out
-				: new PrintStream(out);
-		formatDignostics(diagnostics, p);
-		p.flush();
+						: new PrintStream(out);
+				formatDignostics(diagnostics, p);
+				p.flush();
 	}
 
 	/**
 	 * SOURCE:SEVERITY:RESOURCEPATH:LOCATION:CODE:MESSAGE
-	 * 
+	 *
 	 * @param d
 	 * @param detail
 	 * @param p
@@ -78,13 +78,13 @@ public class TextualValidationResultFormatter implements IValidationResultFormat
 
 	/**
 	 * Outputs
-	 * 
+	 *
 	 * <pre>
 	 * SOURCE:SEVERITY:MESSAGE
 	 * STACK TRACE
 	 * ---
 	 * </pre>
-	 * 
+	 *
 	 * @param d
 	 * @param p
 	 */
@@ -110,7 +110,7 @@ public class TextualValidationResultFormatter implements IValidationResultFormat
 	 * Formats location as LINE(OFFSET,LENGTH), or if LINE is -1 using '-'. If
 	 * offset is >= 0 the () section is included, the ", length" part is only
 	 * produced if length >= 0.
-	 * 
+	 *
 	 * @param detail
 	 * @return
 	 */

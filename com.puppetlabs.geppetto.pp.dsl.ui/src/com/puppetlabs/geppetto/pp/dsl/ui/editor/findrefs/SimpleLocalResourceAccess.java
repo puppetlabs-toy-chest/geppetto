@@ -16,7 +16,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 /**
  * This is a verbatim copy of the class with the same name in the corresponding Xtext package.
  * TODO: it may not be needed.
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class SimpleLocalResourceAccess implements ILocalResourceAccess {
@@ -27,6 +27,7 @@ public class SimpleLocalResourceAccess implements ILocalResourceAccess {
 		this.resourceSet = resourceSet;
 	}
 
+	@Override
 	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		try {
 			return work.exec(resourceSet);

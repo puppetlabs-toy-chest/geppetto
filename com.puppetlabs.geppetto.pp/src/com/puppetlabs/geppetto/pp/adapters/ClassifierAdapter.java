@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -50,7 +50,7 @@ public class ClassifierAdapter extends AdapterImpl {
 	/**
 	 * Gets a Type set in the adapter for the given key, or null if no type have been
 	 * set.
-	 * 
+	 *
 	 * @param key
 	 * @return
 	 */
@@ -94,7 +94,7 @@ public class ClassifierAdapter extends AdapterImpl {
 
 	/**
 	 * Stores a Type in the adapter for given key.
-	 * 
+	 *
 	 * @param key
 	 * @param t
 	 */

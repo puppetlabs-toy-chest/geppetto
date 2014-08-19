@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -61,7 +61,7 @@ import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 
 /**
  * Utility class for finding references.
- * 
+ *
  */
 public class PPFinder {
 	public static class SearchResult {
@@ -99,13 +99,13 @@ public class PPFinder {
 	}
 
 	private final static EClass[] CLASSES_FOR_VARIABLES = { //
-	PPPackage.Literals.DEFINITION_ARGUMENT, //
-			PPTPPackage.Literals.TP_VARIABLE, //
-			// PPTPPackage.Literals.TYPE_ARGUMENT, //
-			PPPackage.Literals.VARIABLE_EXPRESSION };
+		PPPackage.Literals.DEFINITION_ARGUMENT, //
+		PPTPPackage.Literals.TP_VARIABLE, //
+		// PPTPPackage.Literals.TYPE_ARGUMENT, //
+		PPPackage.Literals.VARIABLE_EXPRESSION };
 
 	private final static EClass[] DEF_AND_TYPE_ARGUMENTS = {
-			PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
+		PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
 
 	// Note that order is important
 	private final static EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
@@ -113,7 +113,7 @@ public class PPFinder {
 	private static final EClass[] FUNC = { PPTPPackage.Literals.FUNCTION };
 
 	private final static EClass[] CLASS_AND_TYPE = { PPPackage.Literals.HOST_CLASS_DEFINITION,
-	// PPTPPackage.Literals.TYPE
+		// PPTPPackage.Literals.TYPE
 	};
 
 	private Resource resource;
@@ -245,7 +245,7 @@ public class PPFinder {
 	/**
 	 * Find an attribute being a DefinitionArgument, Property, or Parameter for the given type, or a
 	 * meta Property or Parameter defined for the type 'Type'.
-	 * 
+	 *
 	 * @param scopeDetermeningObject
 	 * @param fqn
 	 * @return
@@ -347,8 +347,8 @@ public class PPFinder {
 		final boolean absoluteFQN = fqn.getSegmentCount() > 0 && "".equals(fqn.getSegment(0));
 		if(importedNames != null)
 			importedNames.add(absoluteFQN
-					? fqn.skipFirst(1)
-					: fqn);
+				? fqn.skipFirst(1)
+						: fqn);
 
 		if(scopeDetermeningResource != resource) {
 			// This is a lookup in the perspective of some other resource
@@ -368,8 +368,8 @@ public class PPFinder {
 			// for(EClass aClass : eClasses)
 			for(IEObjectDescription objDesc : new NameInScopeFilter(matchingStrategy, getExportedObjects(
 				descr, descriptionIndex),
-			// visibleContainer.getExportedObjects(),
-			fqn, nameOfScope, eClasses))
+				// visibleContainer.getExportedObjects(),
+				fqn, nameOfScope, eClasses))
 				targets.add(objDesc);
 		}
 		else {
@@ -377,9 +377,9 @@ public class PPFinder {
 			QualifiedName nameOfScope = getNameOfScope(scopeDetermeningObject);
 			for(IEObjectDescription objDesc : new NameInScopeFilter(matchingStrategy, //
 				matchingStrategy.matchStartsWith()
-						? exportedPerLastSegment.values()
+				? exportedPerLastSegment.values()
 						: exportedPerLastSegment.get(fqn.getLastSegment()), //
-				fqn, nameOfScope, eClasses))
+						fqn, nameOfScope, eClasses))
 				targets.add(objDesc);
 
 			if(targets.size() == 0) {
@@ -525,7 +525,7 @@ public class PPFinder {
 	/**
 	 * Finds a parameter or variable with the given name. More than one may be returned if the definition
 	 * is ambiguous.
-	 * 
+	 *
 	 * @param scopeDetermeningResource
 	 * @param name
 	 * @param importedNames
@@ -541,7 +541,7 @@ public class PPFinder {
 	/**
 	 * Finds a parameter or variable with the given name. More than one may be returned if the definition
 	 * is ambiguous.
-	 * 
+	 *
 	 * @param scopeDetermeningResource
 	 * @param name
 	 * @param importedNames
@@ -556,7 +556,7 @@ public class PPFinder {
 
 	/**
 	 * Finds all matching variables in current and inherited scopes.
-	 * 
+	 *
 	 * @param scopeDetermeningResource
 	 * @param name
 	 * @param importedNames
@@ -571,7 +571,7 @@ public class PPFinder {
 
 	/**
 	 * Fins parameters and/or variables with matching name using the given matching/search strategy.
-	 * 
+	 *
 	 * @param scopeDetermeningObject
 	 * @param fqn
 	 * @param importedNames
@@ -618,7 +618,7 @@ public class PPFinder {
 
 	/**
 	 * Finds all matching variables in current and inherited scopes.
-	 * 
+	 *
 	 * @param scopeDetermeningResource
 	 * @param name
 	 * @param importedNames
@@ -639,7 +639,7 @@ public class PPFinder {
 
 	/**
 	 * Produces an unmodifiable list of everything visible to the resource.
-	 * 
+	 *
 	 * @return
 	 */
 	public Collection<IEObjectDescription> getExportedDescriptions() {
@@ -648,13 +648,13 @@ public class PPFinder {
 
 	/**
 	 * Produces iterable over all visible exports from all visible containers.
-	 * 
+	 *
 	 * @param descr
 	 * @param descriptionIndex
 	 * @return
 	 */
 	private Iterable<IEObjectDescription> getExportedObjects(IResourceDescription descr,
-			IResourceDescriptions descriptionIndex) {
+		IResourceDescriptions descriptionIndex) {
 		return Iterables.concat(Iterables.transform(
 			manager.getVisibleContainers(descr, descriptionIndex),
 			new Function<IContainer, Iterable<IEObjectDescription>>() {
@@ -674,7 +674,7 @@ public class PPFinder {
 	/**
 	 * Produces an unmodifiable Multimap mapping from last segment to list of visible exports
 	 * ending with that value.
-	 * 
+	 *
 	 * @return
 	 */
 	public Multimap<String, IEObjectDescription> getExportedPerLastSegement() {
@@ -683,7 +683,7 @@ public class PPFinder {
 
 	/**
 	 * Produces the name of the scope where the given object 'o' is contained.
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */
@@ -708,7 +708,7 @@ public class PPFinder {
 	 * Adjusts the list of found targets in accordance with the search path for the resource being
 	 * linked. This potentially resolves ambiguities (if found result is further away on the path).
 	 * May return more than one result, if more than one resolution exist with the same path index.
-	 * 
+	 *
 	 * @param targets
 	 * @return list of descriptions with lowest index.
 	 */

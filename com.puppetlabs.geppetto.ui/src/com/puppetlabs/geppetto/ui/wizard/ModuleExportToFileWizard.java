@@ -114,7 +114,7 @@ public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 			String dest = Strings.trimToNull(getDestinationValue());
 			return dest == null
 					? null
-					: new File(dest);
+							: new File(dest);
 		}
 	}
 
@@ -222,6 +222,7 @@ public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 		return forge;
 	}
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection currentSelection) {
 		this.selection = currentSelection;
 		List<?> selectedResources = IDE.computeSelectedResources(currentSelection);

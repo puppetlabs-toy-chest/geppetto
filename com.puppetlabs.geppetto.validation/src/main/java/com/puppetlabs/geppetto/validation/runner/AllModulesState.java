@@ -227,7 +227,7 @@ public class AllModulesState implements Serializable {
 	}
 
 	private Map<String, Export> _collectParameters(Set<String> processed, Map<String, Export> result, String className,
-			Map<String, Export> classes, Multimap<String, Export> parameters) {
+		Map<String, Export> classes, Multimap<String, Export> parameters) {
 		// if there was no parent
 		if(className == null || className.length() < 1)
 			return result;
@@ -330,7 +330,7 @@ public class AllModulesState implements Serializable {
 	}
 
 	private Map<String, Export> collectParameters(String className, Map<String, Export> classes,
-			Multimap<String, Export> parameters) {
+		Multimap<String, Export> parameters) {
 		Map<String, Export> result = Maps.newHashMap();
 		Set<String> processed = Sets.newHashSet();
 		return _collectParameters(processed, result, className, classes, parameters);
@@ -385,7 +385,7 @@ public class AllModulesState implements Serializable {
 	public Map<File, Multimap<File, Export>> getAmbiguityMap() {
 		return Collections.unmodifiableMap(ambiguityMap != null
 				? ambiguityMap
-				: EmptyImports); // reuse "EmptyImports"
+						: EmptyImports); // reuse "EmptyImports"
 
 	}
 
@@ -441,7 +441,7 @@ public class AllModulesState implements Serializable {
 	private Multimap<File, Export> getExportMap() {
 		return Multimaps.unmodifiableMultimap(exportMap != null
 				? exportMap
-				: EmptyExports);
+						: EmptyExports);
 	}
 
 	/**
@@ -467,7 +467,7 @@ public class AllModulesState implements Serializable {
 	public Map<File, Multimap<File, Export>> getImportMap() {
 		return Collections.unmodifiableMap(importMap != null
 				? importMap
-				: EmptyImports);
+						: EmptyImports);
 
 	}
 

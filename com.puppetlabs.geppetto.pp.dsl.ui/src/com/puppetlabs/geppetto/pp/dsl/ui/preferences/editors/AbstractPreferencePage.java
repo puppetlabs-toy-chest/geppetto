@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   itemis AG - initial API and implementation
  *   Puppet Labs Inc - changes to store 'use project settings' in project
@@ -49,16 +49,16 @@ import com.google.inject.name.Named;
  * This is a reworked implementation the class with the same name in org.eclipse.xtext.ui.editor.preferences.
  * This implementation works with a {@link ProjectAwareScopedPreferenceStore} as oppoes to the
  * ScopedPreferenceStore used by Xtext < 2.3, and FixedScopedPreferenceStore used in Xtext > 2.3.
- * 
+ *
  * <p>
  * The following changes have been made:
  * <ul>
- * <li>'useProjectSettings' is now stored in the project preference store as opposed to the project meta-data stored in the workspace. This is done so
- * that import of a project automatically gets the intended 'useProjectSettings'.</li>
+ * <li>'useProjectSettings' is now stored in the project preference store as opposed to the project meta-data stored in
+ * the workspace. This is done so that import of a project automatically gets the intended 'useProjectSettings'.</li>
  * </ul>
  */
 public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
-		IWorkbenchPropertyPage {
+IWorkbenchPropertyPage {
 
 	private static final Logger log = Logger.getLogger(AbstractPreferencePage.class);
 
@@ -161,6 +161,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		return preferenceStoreAccess.getWritablePreferenceStore();
 	}
 
+	@Override
 	public IAdaptable getElement() {
 		return project;
 	}
@@ -171,7 +172,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	/**
 	 * Gets the 'useProjectSettings' flag in the project preferences.
-	 * 
+	 *
 	 * @return true if the settings on this page are project specific
 	 */
 	private Boolean getUseProjectSettings() {
@@ -181,7 +182,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	/**
 	 * Produces the preference key to use for the 'use project settings' flag when this preference page
 	 * is is used as a properties page.
-	 * 
+	 *
 	 * @return the concatenation of {@link #qualifiedName()}, "." and {@link #USE_PROJECT_SETTINGS}.
 	 */
 	protected String getUseProjectSettingsName() {
@@ -210,12 +211,13 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		else {
 			// copy instance values to project specific values
 			setSearchContexts(getPreferenceStore(), new IScopeContext[] {
-					new ProjectScope(currentProject()), new InstanceScope(), new ConfigurationScope() });
+				new ProjectScope(currentProject()), new InstanceScope(), new ConfigurationScope() });
 			setProjectSpecificValues();
 		}
 		updateFieldEditors(isUseProjectSettings);
 	}
 
+	@Override
 	public void init(IWorkbench workbench) {
 		this.workbench = workbench;
 	}
@@ -268,6 +270,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		store.save();
 	}
 
+	@Override
 	public void setElement(IAdaptable element) {
 		this.project = (IProject) element.getAdapter(IProject.class);
 	}
@@ -287,9 +290,10 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	/**
 	 * Sets the given search scopes in the preference store.
-	 * This implementation requires use of {@link ProjectAwareScopedPreferenceStore} - see {@link PPPreferenceStoreAccess} and its binding in the UI
+	 * This implementation requires use of {@link ProjectAwareScopedPreferenceStore} - see
+	 * {@link PPPreferenceStoreAccess} and its binding in the UI
 	 * module.
-	 * 
+	 *
 	 * @param store
 	 * @param scopes
 	 */
@@ -302,7 +306,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	 * Loads values of all field editors using current search scopes in the preference store.
 	 * Also updates fields enabled status. (The effect is that fields show project specific values
 	 * when enabled, and instance scoped/default values when disabled).
-	 * 
+	 *
 	 * @param enabled
 	 */
 	protected void updateFieldEditors(boolean enabled) {

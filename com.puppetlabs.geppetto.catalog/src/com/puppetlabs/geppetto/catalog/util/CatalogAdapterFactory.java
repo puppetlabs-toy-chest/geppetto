@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * 
+ *
  * @see com.puppetlabs.geppetto.catalog.CatalogPackage
  * @generated
  */
@@ -33,7 +33,7 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected static CatalogPackage modelPackage;
@@ -42,7 +42,7 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CatalogSwitch<Adapter> modelSwitch = new CatalogSwitch<Adapter>() {
@@ -86,7 +86,7 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	 * Creates an instance of the adapter factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public CatalogAdapterFactory() {
@@ -99,7 +99,7 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	 * Creates an adapter for the <code>target</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param target
 	 *            the object to adapt.
 	 * @return the adapter for the <code>target</code>.
@@ -116,7 +116,7 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.catalog.Catalog
 	 * @generated
@@ -131,7 +131,7 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogEdge
 	 * @generated
@@ -141,12 +141,13 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.catalog.CatalogMetadata <em>Metadata</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.catalog.CatalogMetadata
+	 * <em>Metadata</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogMetadata
 	 * @generated
@@ -156,12 +157,13 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.catalog.CatalogResource <em>Resource</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.catalog.CatalogResource
+	 * <em>Resource</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource
 	 * @generated
@@ -171,12 +173,13 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter <em>Resource Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter
+	 * <em>Resource Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResourceParameter
 	 * @generated
@@ -190,7 +193,7 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @generated
 	 */
@@ -199,12 +202,13 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.catalog.Taggable <em>Taggable</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.catalog.Taggable <em>Taggable</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the new adapter.
 	 * @see com.puppetlabs.geppetto.catalog.Taggable
 	 * @generated
@@ -216,9 +220,10 @@ public class CatalogAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance
+	 * object of the model.
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */

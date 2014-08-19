@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,14 +14,14 @@ package com.puppetlabs.geppetto.pp.pptp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Target Element</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
  * <li>{@link com.puppetlabs.geppetto.pp.pptp.TargetElement#isDeprecated <em>Deprecated</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetElement()
  * @model abstract="true"
  * @generated
@@ -32,10 +32,11 @@ public interface TargetElement extends INamed, IDocumented {
 	 * Returns the value of the '<em><b>Deprecated</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Deprecated</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Deprecated</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Deprecated</em>' attribute.
 	 * @see #setDeprecated(boolean)
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTargetElement_Deprecated()
@@ -45,10 +46,11 @@ public interface TargetElement extends INamed, IDocumented {
 	boolean isDeprecated();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement#isDeprecated <em>Deprecated</em>}' attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement#isDeprecated <em>Deprecated</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Deprecated</em>' attribute.
 	 * @see #isDeprecated()

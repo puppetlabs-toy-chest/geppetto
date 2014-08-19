@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.pptp.impl.FunctionImpl#isRValue <em>RValue</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class FunctionImpl extends EObjectImpl implements Function {
@@ -43,7 +43,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * The default value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getDocumentation()
 	 * @generated
 	 * @ordered
@@ -54,7 +54,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getDocumentation()
 	 * @generated
 	 * @ordered
@@ -65,7 +65,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -76,7 +76,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -87,7 +87,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * The default value of the '{@link #isDeprecated() <em>Deprecated</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isDeprecated()
 	 * @generated
 	 * @ordered
@@ -98,7 +98,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * The cached value of the '{@link #isDeprecated() <em>Deprecated</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isDeprecated()
 	 * @generated
 	 * @ordered
@@ -109,7 +109,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * The default value of the '{@link #isRValue() <em>RValue</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isRValue()
 	 * @generated
 	 * @ordered
@@ -120,7 +120,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * The cached value of the '{@link #isRValue() <em>RValue</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isRValue()
 	 * @generated
 	 * @ordered
@@ -130,7 +130,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected FunctionImpl() {
@@ -140,7 +140,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -167,7 +167,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -194,7 +194,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -215,7 +215,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -240,7 +240,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -265,7 +265,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -276,7 +276,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -301,9 +301,10 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getDocumentation() {
 		return documentation;
 	}
@@ -311,9 +312,10 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -321,9 +323,10 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isDeprecated() {
 		return deprecated;
 	}
@@ -331,9 +334,10 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isRValue() {
 		return rValue;
 	}
@@ -341,9 +345,10 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setDeprecated(boolean newDeprecated) {
 		boolean oldDeprecated = deprecated;
 		deprecated = newDeprecated;
@@ -355,9 +360,10 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setDocumentation(String newDocumentation) {
 		String oldDocumentation = documentation;
 		documentation = newDocumentation;
@@ -369,9 +375,10 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -382,9 +389,10 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setRValue(boolean newRValue) {
 		boolean oldRValue = rValue;
 		rValue = newRValue;
@@ -395,7 +403,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

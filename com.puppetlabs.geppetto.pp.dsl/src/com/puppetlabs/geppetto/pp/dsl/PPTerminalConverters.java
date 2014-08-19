@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,12 +31,14 @@ public class PPTerminalConverters extends AbstractDeclarativeValueConverterServi
 		 */
 		return new IValueConverter<Boolean>() {
 
+			@Override
 			public String toString(Boolean value) {
 				return value.booleanValue()
 						? "@"
-						: "";
+								: "";
 			}
 
+			@Override
 			public Boolean toValue(String string, INode node) {
 				if(Strings.isEmpty(string))
 					return false;
@@ -51,16 +53,18 @@ public class PPTerminalConverters extends AbstractDeclarativeValueConverterServi
 	public IValueConverter<Boolean> BooleanValue() {
 		return new IValueConverter<Boolean>() {
 
+			@Override
 			public String toString(Boolean value) {
 				return value.toString();
 			}
 
+			@Override
 			public Boolean toValue(String string, INode node) {
 				if(Strings.isEmpty(string))
 					throw new ValueConverterException("Could not convert empty string to boolean", node, null);
 				return new Boolean(string).equals(Boolean.TRUE)
 						? Boolean.TRUE
-						: Boolean.FALSE;
+								: Boolean.FALSE;
 			}
 
 		};
@@ -74,12 +78,14 @@ public class PPTerminalConverters extends AbstractDeclarativeValueConverterServi
 		 */
 		return new IValueConverter<Boolean>() {
 
+			@Override
 			public String toString(Boolean value) {
 				return value.booleanValue()
 						? "("
-						: "";
+								: "";
 			}
 
+			@Override
 			public Boolean toValue(String string, INode node) {
 				if(Strings.isEmpty(string))
 					return false;
@@ -92,7 +98,7 @@ public class PPTerminalConverters extends AbstractDeclarativeValueConverterServi
 
 	/**
 	 * Hack to see what happens with formatting.
-	 * 
+	 *
 	 * @return
 	 */
 	@ValueConverter(rule = "SpecialDoubleQuote")

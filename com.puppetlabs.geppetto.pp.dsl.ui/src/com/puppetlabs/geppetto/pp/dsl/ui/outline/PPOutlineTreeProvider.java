@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,7 +34,7 @@ import com.google.common.collect.Lists;
 
 /**
  * customization of the default outline structure
- * 
+ *
  */
 public class PPOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	// @Inject
@@ -49,8 +49,8 @@ public class PPOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	// private IImageHelper imageHelper;
 
 	private static final Class<?>[] structuralClasses = {
-			HostClassDefinition.class, Definition.class, NodeDefinition.class, ResourceExpression.class,
-			AppendExpression.class, ImportExpression.class };
+		HostClassDefinition.class, Definition.class, NodeDefinition.class, ResourceExpression.class,
+		AppendExpression.class, ImportExpression.class };
 
 	protected void _createChildren(IOutlineNode parentNode, Definition modelElement) {
 		for(EObject childElement : getRelevantChildren(modelElement.getStatements()))

@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.forge.v3;
 
@@ -25,7 +25,7 @@ import com.puppetlabs.geppetto.forge.v3.model.PaginatedResult;
 /**
  * Basic service for v3 endpoints. Entries can be retrived individually, as paginated results, or using an entry
  * visitor.
- * 
+ *
  * @param <T>
  * @param <I>
  */
@@ -51,6 +51,7 @@ public interface ForgeService<T extends Entity, I> {
 			add(c);
 		}
 
+		@Override
 		public void append(Map<String, String> collector) {
 			for(Query<T> query : this)
 				query.append(collector);
@@ -100,7 +101,7 @@ public interface ForgeService<T extends Entity, I> {
 	 * {@link NullProgressMonitor} will be created. Hence, the visitor can rely on that the monitor will never be
 	 * <code>null</code> and that it can always be used for cancellation
 	 * </p>
-	 * 
+	 *
 	 * @param query
 	 *            The query or <code>null</code> for all elements.
 	 * @param sortBy
@@ -118,22 +119,22 @@ public interface ForgeService<T extends Entity, I> {
 
 	/**
 	 * Retrieve the entity that corresponds to the given <code>id</code>.
-	 * 
+	 *
 	 * @param id
 	 *            The id of the wanted entity
 	 * @return The entity that matches the <code>id</code> or <code>null</code> if no such entry could be found.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	T get(I id) throws IOException;
 
 	/**
 	 * Retrieve the entity that corresponds to the given relative <code>uri</code>.
-	 * 
+	 *
 	 * @param uri
 	 *            The uri of the wanted entity
 	 * @return The entity that matches the <code>id</code> or <code>null</code> if no such entry could be found.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	T get(URI uri) throws IOException;
@@ -142,7 +143,7 @@ public interface ForgeService<T extends Entity, I> {
 	 * Returns a paginated result that corresponds to the given <code>query</code>, <code>sortBy</code>, and
 	 * <code>paginationInfo</code>. New pagination info for the next and previous page can be obtained from
 	 * the returned result.
-	 * 
+	 *
 	 * @param query
 	 *            The query or <code>null</code> for all elements.
 	 * @param sortBy
@@ -159,7 +160,7 @@ public interface ForgeService<T extends Entity, I> {
 
 	/**
 	 * Returns result that corresponds to the given <code>query</code> and <code>sortBy</code>.
-	 * 
+	 *
 	 * @param query
 	 *            The query or <code>null</code> for all elements.
 	 * @param sortBy

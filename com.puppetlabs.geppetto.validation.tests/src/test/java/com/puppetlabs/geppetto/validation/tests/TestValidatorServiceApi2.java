@@ -49,7 +49,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		assertTrue(
 			"Message text should contain a relative reference",
 			chain.getChildren().get(0).getMessage().startsWith("Ambiguous reference to: 'fluff' found in: 1 resource [") &&
-					chain.getChildren().get(0).getMessage().contains("manifests/ambigA.pp"));
+			chain.getChildren().get(0).getMessage().contains("manifests/ambigA.pp"));
 
 	}
 
@@ -324,7 +324,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 
 		// just the manifest
 		root = TestDataProvider.getTestFile(new Path(
-			"testData/ghbindcases/asmodule/ghoneycutt-bind-1.0.0/manifests/master.pp"));
+				"testData/ghbindcases/asmodule/ghoneycutt-bind-1.0.0/manifests/master.pp"));
 
 		vs = getValidationService();
 		chain = new Diagnostic();

@@ -8,13 +8,13 @@
  * Contributors:
  *   AT&T - initial API
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.xtext.dommodel.formatter.css;
 
 /**
  * Describes Horizontal Alignment
- * 
+ *
  */
 public enum Alignment {
 	center, left, right,

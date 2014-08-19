@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import com.google.inject.name.Names;
  * Note that this configuration is (more or less) useless when using the generated DOT to provide anything but SVG
  * output as empty strings will contain the magic text which may be rendered to a non post-processable format
  * (e.g. removing text rendered into a JPEG).
- * 
+ *
  */
 public class FixedSVGGraphModule extends DefaultGraphModule {
 	private final Class<? extends IHrefProducer> hrefProducerClass;

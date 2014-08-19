@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,7 +14,7 @@ package com.puppetlabs.geppetto.pp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Method Call</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -22,7 +22,7 @@ package com.puppetlabs.geppetto.pp;
  * <li>{@link com.puppetlabs.geppetto.pp.MethodCall#getMethodExpr <em>Method Expr</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getMethodCall()
  * @model
  * @generated
@@ -33,10 +33,11 @@ public interface MethodCall extends WithLambdaExpression {
 	 * Returns the value of the '<em><b>Method Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Method Expr</em>' containment reference isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Method Expr</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Method Expr</em>' containment reference.
 	 * @see #setMethodExpr(Expression)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getMethodCall_MethodExpr()
@@ -49,10 +50,11 @@ public interface MethodCall extends WithLambdaExpression {
 	 * Returns the value of the '<em><b>Parenthesized</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parenthesized</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Parenthesized</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Parenthesized</em>' attribute.
 	 * @see #setParenthesized(boolean)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getMethodCall_Parenthesized()
@@ -62,10 +64,11 @@ public interface MethodCall extends WithLambdaExpression {
 	boolean isParenthesized();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.MethodCall#getMethodExpr <em>Method Expr</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.MethodCall#getMethodExpr <em>Method Expr</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Method Expr</em>' containment reference.
 	 * @see #getMethodExpr()
@@ -74,10 +77,11 @@ public interface MethodCall extends WithLambdaExpression {
 	void setMethodExpr(Expression value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.MethodCall#isParenthesized <em>Parenthesized</em>}' attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.MethodCall#isParenthesized <em>Parenthesized</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Parenthesized</em>' attribute.
 	 * @see #isParenthesized()

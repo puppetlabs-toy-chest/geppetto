@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -25,11 +25,11 @@ import org.antlr.runtime.Token;
  * The lexer starts with token 4 (<4 are special token numbers), and thus the first token
  * is KW_INHERITS, which from time to time is given some KEYWORD_nn name (it was KEYWORD_66 for a long time),
  * which is then mapped to the token number 4.
- * 
+ *
  * When new keywords are introduced in the grammar, a check is required to ensure that that
  * the set of tokens is the same, and if "inherits" is the first (have number 4). If a terminal/keyword
  * is missing (or one added) this simple transposition will fail miserably, so it is important to check.
- * 
+ *
  */
 public class PPOverridingLexer extends PPLexer {
 
@@ -47,7 +47,7 @@ public class PPOverridingLexer extends PPLexer {
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 */
 	@Override
 	public void mTokens() throws RecognitionException {
@@ -60,8 +60,9 @@ public class PPOverridingLexer extends PPLexer {
 	/**
 	 * {@inheritDoc}
 	 * <p>
-	 * This override keeps track of 'last significant token' as this is required as a predicate for other token rules. The remembered token is
-	 * remembered in the token range used by the external lexer (i.e. unmapped from KW_ range to KEYWORD_ range).
+	 * This override keeps track of 'last significant token' as this is required as a predicate for other token rules.
+	 * The remembered token is remembered in the token range used by the external lexer (i.e. unmapped from KW_ range to
+	 * KEYWORD_ range).
 	 * </p>
 	 */
 	@Override

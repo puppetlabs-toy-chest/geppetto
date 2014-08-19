@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 
 /**
  * Overrides the default to make auto matching/insert configurable.
- * 
+ *
  */
 public class PPEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 
@@ -44,7 +44,7 @@ public class PPEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see org.eclipse.jface.text.IAutoEditStrategy#customizeDocumentCommand(org.eclipse.jface.text.IDocument,
 		 * org.eclipse.jface.text.DocumentCommand)
 		 */
@@ -170,7 +170,7 @@ public class PPEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider#configureStringLiteral(org.eclipse.xtext.ui.editor.autoedit.
 	 * AbstractEditStrategyProvider.IEditStrategyAcceptor)
 	 */
@@ -186,7 +186,7 @@ public class PPEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 	 * Overrides the default, checking if strategy is wrapped and if so applies the view/key listener
 	 * on the wrapped strategy.
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider#getStrategies(org.eclipse.jface.text.source.ISourceViewer,
 	 * java.lang.String)
 	 */
@@ -194,6 +194,7 @@ public class PPEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 	public List<IAutoEditStrategy> getStrategies(final ISourceViewer sourceViewer, final String contentType) {
 		final List<IAutoEditStrategy> strategies = Lists.newArrayList();
 		configure(new IEditStrategyAcceptor() {
+			@Override
 			public void accept(IAutoEditStrategy strategy, String type) {
 				if(type == null || contentType.equals(type)) {
 					IAutoEditStrategy original = strategy;

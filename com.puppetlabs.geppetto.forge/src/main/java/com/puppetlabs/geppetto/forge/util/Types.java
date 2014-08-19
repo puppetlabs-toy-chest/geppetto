@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -37,7 +37,7 @@ import org.jrubyparser.ast.SymbolNode;
 
 /**
  * @author thhal
- * 
+ *
  */
 public class Types {
 	public static void loadProvider(Type type, File providerDir) throws IOException {
@@ -93,7 +93,7 @@ public class Types {
 				providers.add(provider);
 
 				List<Node> calls = RubyParserUtils.findNodes(call.getIter(), new NodeType[] {
-						NodeType.BLOCKNODE, NodeType.FCALLNODE });
+					NodeType.BLOCKNODE, NodeType.FCALLNODE });
 				if(calls.isEmpty())
 					calls = RubyParserUtils.findNodes(call.getIter(), new NodeType[] { NodeType.FCALLNODE });
 				if(!calls.isEmpty()) {

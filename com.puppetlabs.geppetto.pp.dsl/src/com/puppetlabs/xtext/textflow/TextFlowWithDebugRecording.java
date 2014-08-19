@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 
 /**
  * An implementation of ITextFlow that records and measures the appended content.
- * 
+ *
  */
 public class TextFlowWithDebugRecording extends TextFlow {
 
@@ -33,6 +33,7 @@ public class TextFlowWithDebugRecording extends TextFlow {
 			this.verbatim = verbatim;
 		}
 
+		@Override
 		public void visit(StringBuilder stream) {
 			stream.append("Break(").append(count).append(", ").append(verbatim).append(")\n");
 		}
@@ -45,6 +46,7 @@ public class TextFlowWithDebugRecording extends TextFlow {
 			this.change = change;
 		}
 
+		@Override
 		public void visit(StringBuilder stream) {
 			stream.append("ChangeIndentation(").append(change).append(")\n");
 		}
@@ -57,6 +59,7 @@ public class TextFlowWithDebugRecording extends TextFlow {
 			this.count = count;
 		}
 
+		@Override
 		public void visit(StringBuilder stream) {
 			stream.append("Indent(").append(count).append(")\n");
 		}
@@ -69,6 +72,7 @@ public class TextFlowWithDebugRecording extends TextFlow {
 			this.count = count;
 		}
 
+		@Override
 		public void visit(StringBuilder stream) {
 			stream.append("Spaces(").append(count).append(")\n");
 		}
@@ -85,6 +89,7 @@ public class TextFlowWithDebugRecording extends TextFlow {
 			this.verbatim = verbatim;
 		}
 
+		@Override
 		public void visit(StringBuilder stream) {
 			stream.append("Text('").append(text).append("', ").append(verbatim).append(")\n");
 		}

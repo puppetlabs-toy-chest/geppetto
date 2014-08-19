@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   itemis AG, initial API and implementation (Jan Koehnlein)
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
@@ -27,7 +27,7 @@ import com.google.common.collect.Lists;
 /**
  * Adaption of class with similar name in xtext. This implementation deals with IEObjectDescription instead of
  * IEReferenceDescription as PP linking is not based on EReferences.
- * 
+ *
  */
 public class PPReferenceSearchResult implements ISearchResult, IAcceptor<IReferenceDescription> {
 
@@ -43,11 +43,13 @@ public class PPReferenceSearchResult implements ISearchResult, IAcceptor<IRefere
 		listeners = Lists.newArrayList();
 	}
 
+	@Override
 	public void accept(IReferenceDescription referenceDescription) {
 		matchingReferences.add(referenceDescription);
 		fireEvent(new PPReferenceSearchResultEvents.Added(this, referenceDescription));
 	}
 
+	@Override
 	public void addListener(ISearchResultListener l) {
 		synchronized(listeners) {
 			listeners.add(l);
@@ -66,10 +68,12 @@ public class PPReferenceSearchResult implements ISearchResult, IAcceptor<IRefere
 		}
 	}
 
+	@Override
 	public ImageDescriptor getImageDescriptor() {
 		return null;
 	}
 
+	@Override
 	public String getLabel() {
 		return query.getLabel();
 	}
@@ -78,14 +82,17 @@ public class PPReferenceSearchResult implements ISearchResult, IAcceptor<IRefere
 		return matchingReferences;
 	}
 
+	@Override
 	public ISearchQuery getQuery() {
 		return query;
 	}
 
+	@Override
 	public String getTooltip() {
 		return getLabel();
 	}
 
+	@Override
 	public void removeListener(ISearchResultListener l) {
 		synchronized(listeners) {
 			listeners.remove(l);

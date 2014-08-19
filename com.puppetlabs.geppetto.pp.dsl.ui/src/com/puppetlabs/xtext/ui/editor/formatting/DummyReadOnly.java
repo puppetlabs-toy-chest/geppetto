@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,7 +17,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
  * A dummy read only unit of work that can be used to perform
  * a readOnly on a document. Typically used to force a document to be updated
  * before a modify operation on the same document (due to an Xtext issue).
- * 
+ *
  */
 public class DummyReadOnly implements IUnitOfWork<Object, XtextResource> {
 

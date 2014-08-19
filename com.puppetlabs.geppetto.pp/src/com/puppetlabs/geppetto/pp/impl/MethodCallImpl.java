@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.MethodCallImpl#getMethodExpr <em>Method Expr</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCall {
@@ -38,7 +38,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	 * The default value of the '{@link #isParenthesized() <em>Parenthesized</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isParenthesized()
 	 * @generated
 	 * @ordered
@@ -49,7 +49,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	 * The cached value of the '{@link #isParenthesized() <em>Parenthesized</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isParenthesized()
 	 * @generated
 	 * @ordered
@@ -60,7 +60,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	 * The cached value of the '{@link #getMethodExpr() <em>Method Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getMethodExpr()
 	 * @generated
 	 * @ordered
@@ -70,7 +70,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected MethodCallImpl() {
@@ -80,7 +80,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetMethodExpr(Expression newMethodExpr, NotificationChain msgs) {
@@ -100,7 +100,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -117,7 +117,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -132,7 +132,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -149,7 +149,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -168,7 +168,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -179,7 +179,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -198,9 +198,10 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getMethodExpr() {
 		return methodExpr;
 	}
@@ -208,9 +209,10 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isParenthesized() {
 		return parenthesized;
 	}
@@ -218,18 +220,19 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setMethodExpr(Expression newMethodExpr) {
 		if(newMethodExpr != methodExpr) {
 			NotificationChain msgs = null;
 			if(methodExpr != null)
 				msgs = ((InternalEObject) methodExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.METHOD_CALL__METHOD_EXPR, null, msgs);
+					PPPackage.METHOD_CALL__METHOD_EXPR, null, msgs);
 			if(newMethodExpr != null)
 				msgs = ((InternalEObject) newMethodExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.METHOD_CALL__METHOD_EXPR, null, msgs);
+					PPPackage.METHOD_CALL__METHOD_EXPR, null, msgs);
 			msgs = basicSetMethodExpr(newMethodExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -242,9 +245,10 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setParenthesized(boolean newParenthesized) {
 		boolean oldParenthesized = parenthesized;
 		parenthesized = newParenthesized;
@@ -256,7 +260,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

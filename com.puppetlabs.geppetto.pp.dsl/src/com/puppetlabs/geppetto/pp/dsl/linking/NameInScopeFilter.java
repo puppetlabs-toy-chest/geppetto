@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -22,7 +22,7 @@ import com.google.common.collect.Iterators;
 
 /**
  * Iterable filter for searching for a name up the scope chain.
- * 
+ *
  */
 public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 	public static interface Match {
@@ -63,7 +63,7 @@ public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 			this.absolute = absolute;
 			this.scopeName = scopeName == null
 					? QualifiedName.EMPTY
-					: scopeName;
+							: scopeName;
 			this.name = name;
 			this.eclasses = eclasses;
 			this.matchStrategy = matchingStrategy;
@@ -214,14 +214,15 @@ public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 	final private NameInScopePredicate filter;
 
 	NameInScopeFilter(SearchStrategy matchingStrategy, Iterable<IEObjectDescription> unfiltered, QualifiedName name,
-			QualifiedName scope, EClass[] eclasses) {
+		QualifiedName scope, EClass[] eclasses) {
 		boolean absolute = name.getSegmentCount() > 0 && "".equals(name.getSegment(0));
 		this.unfiltered = unfiltered;
 		filter = new NameInScopePredicate(absolute, matchingStrategy, absolute
-				? name.skipFirst(1)
-				: name, scope, eclasses);
+			? name.skipFirst(1)
+					: name, scope, eclasses);
 	}
 
+	@Override
 	public Iterator<IEObjectDescription> iterator() {
 		return Iterators.filter(unfiltered.iterator(), filter);
 	}

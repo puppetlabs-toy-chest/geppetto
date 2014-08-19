@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 
 /**
  * A folding RegionProvider that provides folding of sequence of SL Comment
- * 
+ *
  */
 public class PPFoldingRegionProvider extends DefaultFoldingRegionProvider {
 	private static final Logger log = Logger.getLogger(PPFoldingRegionProvider.class);

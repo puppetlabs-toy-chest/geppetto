@@ -18,12 +18,12 @@ import com.google.inject.Provider;
  */
 public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements Provider<IValidationAdvisor> {
 	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(
-			IValidationAdvisor.ComplianceLevel level) {
+		IValidationAdvisor.ComplianceLevel level) {
 		return new ValidationAdvisorProvider<T>(level, null);
 	}
 
 	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(
-			IValidationAdvisor.ComplianceLevel level, IPotentialProblemsAdvisor problemsAdvisor) {
+		IValidationAdvisor.ComplianceLevel level, IPotentialProblemsAdvisor problemsAdvisor) {
 		return new ValidationAdvisorProvider<T>(level, problemsAdvisor);
 	}
 
@@ -45,7 +45,7 @@ public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements 
 	public IValidationAdvisor get() {
 		return level.createValidationAdvisor(problemsAdvisor != null
 				? problemsAdvisor
-				: new DefaultPotentialProblemsAdvisor());
+						: new DefaultPotentialProblemsAdvisor());
 	}
 
 }

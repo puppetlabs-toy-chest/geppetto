@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * Helps with TextExpressions in interpolated Strings.
- * 
+ *
  */
 public class TextExpressionHelper {
 
@@ -56,9 +56,10 @@ public class TextExpressionHelper {
 	}
 
 	/**
-	 * Returns a list of trivially interpolated variables; i.e. ${name}, $name, or ${$name}but not variables embedded in more
+	 * Returns a list of trivially interpolated variables; i.e. ${name}, $name, or ${$name}but not variables embedded in
+	 * more
 	 * complex expression e.g. ${$a + $b}.
-	 * 
+	 *
 	 * @param dqString
 	 * @return
 	 */

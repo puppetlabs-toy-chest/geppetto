@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,7 +33,7 @@ public class OKResourceEvents extends ResourceEvents {
 
 	/**
 	 * Creates a new node with the given <code>parent</code>.
-	 * 
+	 *
 	 * @param parent
 	 *            The parent of this node
 	 */
@@ -45,7 +45,7 @@ public class OKResourceEvents extends ResourceEvents {
 	public String getColumnText(int colIdx) {
 		return colIdx == 0
 				? CHANGES_TEXT
-				: "";
+						: "";
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class OKResourceEvents extends ResourceEvents {
 	public Image getImage(int colIdx) {
 		return colIdx == 0
 				? CHANGE_LIST_IMAGE
-				: null;
+						: null;
 	}
 
 	@Override

@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   itemis AG - initial API and implementation
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
@@ -40,10 +40,12 @@ public class PPReferenceQuery implements ISearchQuery {
 	public PPReferenceQuery() {
 	}
 
+	@Override
 	public boolean canRerun() {
 		return true;
 	}
 
+	@Override
 	public boolean canRunInBackground() {
 		return true;
 	}
@@ -52,10 +54,12 @@ public class PPReferenceQuery implements ISearchQuery {
 		return new PPReferenceSearchResult(this);
 	}
 
+	@Override
 	public String getLabel() {
 		return queryData.getLabel();
 	}
 
+	@Override
 	public ISearchResult getSearchResult() {
 		return searchResult;
 	}
@@ -65,12 +69,13 @@ public class PPReferenceQuery implements ISearchQuery {
 		this.searchResult = createSearchResult();
 	}
 
+	@Override
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
 		finder.findAllReferences(queryData, localContextProvider, searchResult, monitor);
 		searchResult.finish();
 		return (monitor.isCanceled())
 				? Status.CANCEL_STATUS
-				: Status.OK_STATUS;
+						: Status.OK_STATUS;
 	}
 }

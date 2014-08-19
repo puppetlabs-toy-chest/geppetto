@@ -87,11 +87,11 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
 		if(m.find()) {
 			final String key = m.group(1);
 			acceptor.accept(issue, "Import " + key + " from Puppet Forge", "Import the missing " + key +
-				" module from the Puppet Forge repository", null, new ISemanticModification() {
+					" module from the Puppet Forge repository", null, new ISemanticModification() {
 				@Override
 				public void apply(EObject element, IModificationContext context) throws Exception {
 					IWizardDescriptor descriptor = workbench.getImportWizardRegistry().findWizard(
-							"com.puppetlabs.geppetto.ui.ImportPuppetModuleFromForgeWizard");
+						"com.puppetlabs.geppetto.ui.ImportPuppetModuleFromForgeWizard");
 					IWorkbenchWizard wizard = descriptor.createWizard();
 					WizardDialog wd = new WizardDialog(workbench.getActiveWorkbenchWindow().getShell(), wizard);
 					((NewWithKeyword) wizard).startWithKeyword(key);
@@ -105,7 +105,7 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
 					@Override
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						IWizardDescriptor descriptor = workbench.getImportWizardRegistry().findWizard(
-								"com.puppetlabs.geppetto.ui.ImportPuppetModuleFromSourceWizard");
+							"com.puppetlabs.geppetto.ui.ImportPuppetModuleFromSourceWizard");
 						IWorkbenchWizard wizard = descriptor.createWizard();
 						WizardDialog wd = new WizardDialog(workbench.getActiveWorkbenchWindow().getShell(), wizard);
 						wd.setTitle(wizard.getWindowTitle());

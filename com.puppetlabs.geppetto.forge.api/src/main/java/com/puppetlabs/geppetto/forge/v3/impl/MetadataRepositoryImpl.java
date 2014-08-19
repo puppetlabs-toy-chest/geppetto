@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -133,7 +133,7 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 			Collection<Metadata> releases = relMap.values();
 			return releases.isEmpty()
 					? null
-					: new Resolution(allRequirements, relMap.values());
+							: new Resolution(allRequirements, relMap.values());
 		}
 	}
 
@@ -146,6 +146,7 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 	@Inject
 	private Releases releases;
 
+	@Override
 	public Collection<Metadata> deepResolve(Dependency dependency, Set<Dependency> unresolvedCollector)
 			throws IOException {
 		Map<ModuleName, Resolution> resolutionCollector = new HashMap<ModuleName, Resolution>();
@@ -163,7 +164,7 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 	/**
 	 * Prunes the collection <code>releases</code> so that it only contains releases that
 	 * can be reached from the transitive scope rooted by <code>dependency</code>.
-	 * 
+	 *
 	 * @param dependency
 	 *            The root of the dependency scope
 	 * @param releases
@@ -207,11 +208,12 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 		int sz = rlist.size();
 		Metadata[] releaseArray = sz == 0
 				? emptyReleaseArray
-				: rlist.toArray(new Metadata[sz]);
+						: rlist.toArray(new Metadata[sz]);
 		releasesPerModule.put(fullName, releaseArray);
 		return releaseArray;
 	}
 
+	@Override
 	public Metadata resolve(Dependency dependency) throws IOException {
 		VersionRange vReq = dependency.getVersionRequirement();
 		Metadata[] candidates = releasesPerModule.get(dependency.getName());

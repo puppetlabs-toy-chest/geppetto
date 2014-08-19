@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Resource</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -29,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * <li>{@link com.puppetlabs.geppetto.catalog.CatalogResource#isExported <em>Exported</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.catalog.CatalogPackage#getCatalogResource()
  * @model
  * @generated
@@ -42,7 +42,7 @@ public interface CatalogResource extends Taggable {
 	 * If the meaning of the '<em>File</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>File</em>' attribute.
 	 * @see #setFile(String)
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#getCatalogResource_File()
@@ -58,7 +58,7 @@ public interface CatalogResource extends Taggable {
 	 * If the meaning of the '<em>Line</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Line</em>' attribute.
 	 * @see #setLine(String)
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#getCatalogResource_Line()
@@ -72,10 +72,11 @@ public interface CatalogResource extends Taggable {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#getCatalogResource_Parameters()
 	 * @model containment="true"
@@ -87,10 +88,11 @@ public interface CatalogResource extends Taggable {
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Title</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Title</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Title</em>' attribute.
 	 * @see #setTitle(String)
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#getCatalogResource_Title()
@@ -106,7 +108,7 @@ public interface CatalogResource extends Taggable {
 	 * If the meaning of the '<em>Type</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#getCatalogResource_Type()
@@ -119,10 +121,11 @@ public interface CatalogResource extends Taggable {
 	 * Returns the value of the '<em><b>Exported</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Exported</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Exported</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Exported</em>' attribute.
 	 * @see #setExported(boolean)
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#getCatalogResource_Exported()
@@ -135,10 +138,11 @@ public interface CatalogResource extends Taggable {
 	 * Returns the value of the '<em><b>Virtual</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Virtual</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Virtual</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Virtual</em>' attribute.
 	 * @see #setVirtual(boolean)
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#getCatalogResource_Virtual()
@@ -148,10 +152,11 @@ public interface CatalogResource extends Taggable {
 	boolean isVirtual();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#isExported <em>Exported</em>}' attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#isExported <em>Exported</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Exported</em>' attribute.
 	 * @see #isExported()
@@ -163,7 +168,7 @@ public interface CatalogResource extends Taggable {
 	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getFile <em>File</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>File</em>' attribute.
 	 * @see #getFile()
@@ -175,7 +180,7 @@ public interface CatalogResource extends Taggable {
 	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getLine <em>Line</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Line</em>' attribute.
 	 * @see #getLine()
@@ -184,10 +189,11 @@ public interface CatalogResource extends Taggable {
 	void setLine(String value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getTitle <em>Title</em>}' attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getTitle <em>Title</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Title</em>' attribute.
 	 * @see #getTitle()
@@ -199,7 +205,7 @@ public interface CatalogResource extends Taggable {
 	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Type</em>' attribute.
 	 * @see #getType()
@@ -208,10 +214,11 @@ public interface CatalogResource extends Taggable {
 	void setType(String value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#isVirtual <em>Virtual</em>}' attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.catalog.CatalogResource#isVirtual <em>Virtual</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Virtual</em>' attribute.
 	 * @see #isVirtual()

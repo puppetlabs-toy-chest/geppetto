@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.HostClassDefinitionImpl#getParent <em>Parent</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class HostClassDefinitionImpl extends DefinitionImpl implements HostClassDefinition {
@@ -37,7 +37,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	 * The cached value of the '{@link #getParent() <em>Parent</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getParent()
 	 * @generated
 	 * @ordered
@@ -47,7 +47,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected HostClassDefinitionImpl() {
@@ -57,7 +57,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(LiteralExpression newParent, NotificationChain msgs) {
@@ -77,7 +77,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -107,7 +107,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -122,7 +122,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -138,7 +138,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -149,7 +149,7 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -165,9 +165,10 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralExpression getParent() {
 		return parent;
 	}
@@ -175,18 +176,19 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setParent(LiteralExpression newParent) {
 		if(newParent != parent) {
 			NotificationChain msgs = null;
 			if(parent != null)
 				msgs = ((InternalEObject) parent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.HOST_CLASS_DEFINITION__PARENT, null, msgs);
+					PPPackage.HOST_CLASS_DEFINITION__PARENT, null, msgs);
 			if(newParent != null)
 				msgs = ((InternalEObject) newParent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.HOST_CLASS_DEFINITION__PARENT, null, msgs);
+					PPPackage.HOST_CLASS_DEFINITION__PARENT, null, msgs);
 			msgs = basicSetParent(newParent, msgs);
 			if(msgs != null)
 				msgs.dispatch();

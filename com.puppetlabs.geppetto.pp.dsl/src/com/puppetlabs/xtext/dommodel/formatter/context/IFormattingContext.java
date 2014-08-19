@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -18,7 +18,7 @@ import com.google.inject.ImplementedBy;
 /**
  * IFormattingContext provides basic formatting information to the formatter; the indent string, the line
  * separator to use, and if the formatter should preserve whitespace or not.
- * 
+ *
  */
 @ImplementedBy(DefaultFormattingContext.class)
 public interface IFormattingContext {

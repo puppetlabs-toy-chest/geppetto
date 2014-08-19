@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,12 +16,11 @@ import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 
-public class PptpRubyResourceServiceProvider implements
-		IResourceServiceProvider {
+public class PptpRubyResourceServiceProvider implements IResourceServiceProvider {
 
 	/**
 	 * Returns true for .rb files that make a contribution to PPTP.
-	 * 
+	 *
 	 * This is the only difference from the default...
 	 */
 	@Override

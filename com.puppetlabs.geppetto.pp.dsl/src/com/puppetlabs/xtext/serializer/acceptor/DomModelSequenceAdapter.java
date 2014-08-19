@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -51,7 +51,7 @@ import com.google.inject.Inject;
  * - Calls that pass a data object and an index
  * - Initialization (the Serializer calls init depending on implementation class).
  * Suggest adding init(EObject context, EObject semantic) to ISequenceAcceptor.
- * 
+ *
  */
 public class DomModelSequenceAdapter implements ISequenceAcceptor {
 
@@ -101,8 +101,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedCrossRefEnum(org.eclipse.xtext.RuleCall, java.lang.String,
-	 *      org.eclipse.emf.ecore.EObject, int, org.eclipse.xtext.nodemodel.ICompositeNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedCrossRefEnum(org.eclipse.xtext.RuleCall,
+	 *      java.lang.String, org.eclipse.emf.ecore.EObject, int, org.eclipse.xtext.nodemodel.ICompositeNode)
 	 */
 	@Override
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
@@ -111,8 +111,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedCrossRefKeyword(org.eclipse.xtext.Keyword, java.lang.String,
-	 *      org.eclipse.emf.ecore.EObject, int, org.eclipse.xtext.nodemodel.ILeafNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedCrossRefKeyword(org.eclipse.xtext.Keyword,
+	 *      java.lang.String, org.eclipse.emf.ecore.EObject, int, org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
 	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
@@ -133,8 +133,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedDatatype(org.eclipse.xtext.RuleCall, java.lang.String,
-	 *      java.lang.Object, int, org.eclipse.xtext.nodemodel.ICompositeNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedDatatype(org.eclipse.xtext.RuleCall,
+	 *      java.lang.String, java.lang.Object, int, org.eclipse.xtext.nodemodel.ICompositeNode)
 	 */
 	@Override
 	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
@@ -143,8 +143,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedEnum(org.eclipse.xtext.RuleCall, java.lang.String,
-	 *      java.lang.Object, int, org.eclipse.xtext.nodemodel.ICompositeNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedEnum(org.eclipse.xtext.RuleCall,
+	 *      java.lang.String, java.lang.Object, int, org.eclipse.xtext.nodemodel.ICompositeNode)
 	 */
 	@Override
 	public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
@@ -160,8 +160,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedTerminal(org.eclipse.xtext.RuleCall, java.lang.String,
-	 *      java.lang.Object, int, org.eclipse.xtext.nodemodel.ILeafNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedTerminal(org.eclipse.xtext.RuleCall,
+	 *      java.lang.String, java.lang.Object, int, org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
 	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
@@ -170,8 +170,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor#acceptComment(org.eclipse.xtext.AbstractRule, java.lang.String,
-	 *      org.eclipse.xtext.nodemodel.ILeafNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor#acceptComment(org.eclipse.xtext.AbstractRule,
+	 *      java.lang.String, org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
 	public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
@@ -196,7 +196,7 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	 * An unassigned rule call is not meaningful to keep in the DOM tree. It is basically information
 	 * about the rule path taken to something concrete like a terminal.
 	 * This implementation simply does nothing.
-	 * 
+	 *
 	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedAction(org.eclipse.xtext.Action)
 	 */
 	@Override
@@ -207,8 +207,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedDatatype(org.eclipse.xtext.RuleCall, java.lang.String,
-	 *      org.eclipse.xtext.nodemodel.ICompositeNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedDatatype(org.eclipse.xtext.RuleCall,
+	 *      java.lang.String, org.eclipse.xtext.nodemodel.ICompositeNode)
 	 */
 	@Override
 	public void acceptUnassignedDatatype(RuleCall datatypeRC, String token, ICompositeNode node) {
@@ -217,8 +217,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedEnum(org.eclipse.xtext.RuleCall, java.lang.String,
-	 *      org.eclipse.xtext.nodemodel.ICompositeNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedEnum(org.eclipse.xtext.RuleCall,
+	 *      java.lang.String, org.eclipse.xtext.nodemodel.ICompositeNode)
 	 */
 	@Override
 	public void acceptUnassignedEnum(RuleCall enumRC, String token, ICompositeNode node) {
@@ -227,8 +227,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedKeyword(org.eclipse.xtext.Keyword, java.lang.String,
-	 *      org.eclipse.xtext.nodemodel.ILeafNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedKeyword(org.eclipse.xtext.Keyword,
+	 *      java.lang.String, org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
 	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
@@ -237,8 +237,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedTerminal(org.eclipse.xtext.RuleCall, java.lang.String,
-	 *      org.eclipse.xtext.nodemodel.ILeafNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#acceptUnassignedTerminal(org.eclipse.xtext.RuleCall,
+	 *      java.lang.String, org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
@@ -249,9 +249,9 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	/**
 	 * TODO: When the ILeafNode is null, it is not possible to know if this is HIDDEN or not.
 	 * Currently, HIDDEN is set if node is null, else this is controlled by node.isHidden().
-	 * 
-	 * @see org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor#acceptWhitespace(org.eclipse.xtext.AbstractRule, java.lang.String,
-	 *      org.eclipse.xtext.nodemodel.ILeafNode)
+	 *
+	 * @see org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor#acceptWhitespace(org.eclipse.xtext.AbstractRule,
+	 *      java.lang.String, org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
 	public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
@@ -329,7 +329,7 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	 * This information is not terribly useful in the DOM as it says that the grammar has performed
 	 * a rule call and is now in a particular rule. Eventually the rule will result is something.
 	 * This implementation simply does nothing.
-	 * 
+	 *
 	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#enterUnassignedParserRuleCall(org.eclipse.xtext.RuleCall)
 	 */
 	@Override
@@ -384,7 +384,7 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 
 	/**
 	 * Returns the constructed Dom model. The returned IDomNode is always a composite node
-	 * 
+	 *
 	 * @return the constructed dom model root
 	 */
 	public IDomNode getDomModel() {
@@ -422,7 +422,7 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	 * Since the information about entry to a RuleCall is not recorded, neither is leaving it.
 	 * This implementation does nothing.
 	 * TODO: Method name is misspelled in the interface - report issue
-	 * 
+	 *
 	 * @see org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor#leaveUnssignedParserRuleCall(org.eclipse.xtext.RuleCall)
 	 */
 	@Override
@@ -434,7 +434,7 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	/**
 	 * Current is added as a child to the top of the stack, and the top of the stack is made current.
 	 * The stack is popped.
-	 * 
+	 *
 	 * @throws IndexOutOfBoundsException
 	 *             - if the calls to push/pop are not balanced and the stack is empty.
 	 */

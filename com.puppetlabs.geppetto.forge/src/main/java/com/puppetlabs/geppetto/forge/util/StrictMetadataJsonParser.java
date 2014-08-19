@@ -46,7 +46,7 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 	private static int hexToByte(char c) {
 		return c >= 'a'
 				? c - ('a' - 10)
-				: c - '0';
+						: c - '0';
 	}
 
 	private final Metadata md;

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -122,7 +122,7 @@ public class CSSDomFormatter implements IDomModelFormatter {
 
 		return new ReplaceRegion(regionToFormat == null
 				? new TextRegion(0, text.length())
-				: regionToFormat, textString);
+		: regionToFormat, textString);
 	}
 
 	protected ITextFlow.WithText getTextFlow(IFormattingContext context) {

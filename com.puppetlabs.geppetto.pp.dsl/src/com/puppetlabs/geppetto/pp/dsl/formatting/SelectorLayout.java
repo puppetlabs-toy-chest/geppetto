@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 
 /**
  * A sub layout handler for SelectorExpression and SelctorEntry
- * 
+ *
  */
 public class SelectorLayout {
 
@@ -134,7 +134,7 @@ public class SelectorLayout {
 	/**
 	 * assign widths and alignment to the fat comma nodes
 	 * compute available width for remainder if all cases are compactable
-	 * 
+	 *
 	 * @param fatCommaNodes
 	 * @param widths
 	 * @param availableWidth
@@ -150,10 +150,10 @@ public class SelectorLayout {
 			int w = widths.get(i);
 			int mw = doAlignment
 					? clusters.clusterMax(w)
-					: w;
-			if(doAlignment)
-				c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
-					styles.width(2 + mw - w)));
+							: w;
+					if(doAlignment)
+						c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
+							styles.width(2 + mw - w)));
 		}
 	}
 }

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,10 +19,11 @@ import org.eclipse.xtext.util.ReplaceRegion;
 
 /**
  * Suggested as API for formatter -
- * 
+ *
  * @see IDomModelFormatter with extended api (to emit serialization/formatter errors)
- * 
+ *
  */
 public interface IFormatter {
-	ReplaceRegion format(/* @NotNull */IDomNode root, /* @Nullable */ITextRegion regionToFormat, IFormattingContext ctx);
+	ReplaceRegion format(/* @NotNull */IDomNode root, /* @Nullable */ITextRegion regionToFormat,
+			IFormattingContext ctx);
 }

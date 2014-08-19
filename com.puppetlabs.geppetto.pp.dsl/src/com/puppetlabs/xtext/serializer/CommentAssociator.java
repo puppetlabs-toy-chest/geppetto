@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -45,10 +45,10 @@ import com.google.inject.Provider;
  * <li>Scans the given input INode for semantic positions and comment sequences</li>
  * <li>Makes lexical default associations based on comment type, position and linebreaks</li>
  * <li>Refines the decisions based on association with grammar punctuation.</li>
- * <li>Decodes left / right associations, as well as associations to left -1 position (for element before punctuation). Supporting right + 1 is left
- * as an exercise.</li>
- * <li>Transforms the decisions into a series of {@code Predicate<INode, INode, INode> } that expects to be applied with the nodes 'preceding',
- * 'from', 'to' as described by {@link ICommentReconcilement}.</li>
+ * <li>Decodes left / right associations, as well as associations to left -1 position (for element before punctuation).
+ * Supporting right + 1 is left as an exercise.</li>
+ * <li>Transforms the decisions into a series of {@code Predicate<INode, INode, INode> } that expects to be applied with
+ * the nodes 'preceding', 'from', 'to' as described by {@link ICommentReconcilement}.</li>
  * <li>Produces an {@link ICommentReconcilement} based on the predicates</li>
  * </ul>
  * </p>
@@ -56,7 +56,8 @@ import com.google.inject.Provider;
  * The left/right associations of a comment sequence CS is done with these rules:
  * <ul>
  * <li>A CS that ends with a SL comment associates to the left, unless the CS only has whitespace on its left.</li>
- * <li>A CS that ends with a NL (for grammars where comment terminal contains trailing WS/NL) is handled as a CS ending with SL.</li>
+ * <li>A CS that ends with a NL (for grammars where comment terminal contains trailing WS/NL) is handled as a CS ending
+ * with SL.</li>
  * <li>All other CS associate to the right</li>
  * <li>A left association to a <i>list separator</i> associates to the element preceding the separator</li>
  * <li>A right association to a <i>right punctuation</i> is changed to a left association</li>
@@ -65,13 +66,14 @@ import com.google.inject.Provider;
  * <p>
  * The implementation is generic, but makes assumptions about the grammar:
  * <ul>
- * <li>All comma keywords are interpreted as <i>list separators</i> and cause left association to skip to the preceding element.</li>
+ * <li>All comma keywords are interpreted as <i>list separators</i> and cause left association to skip to the preceding
+ * element.</li>
  * <li>A set of right punctuation keywords <code>,;:)}]</code> cause a right association to be changed to left.</li>
  * </ul>
  * <p>
- * A specialized implementation can easily override these. Customization can also easily be made by overriding the method
- * {@link #computeLanguageSpecificAssociations(CommentSemanticSequence)} is which is called last, thus allowing any association already made to be
- * changed.
+ * A specialized implementation can easily override these. Customization can also easily be made by overriding the
+ * method {@link #computeLanguageSpecificAssociations(CommentSemanticSequence)} is which is called last, thus allowing
+ * any association already made to be changed.
  * </p>
  */
 public class CommentAssociator {
@@ -90,7 +92,8 @@ public class CommentAssociator {
 	/**
 	 * Describes a sequence of comments and their association (left/right, and a possible "skip" of 1 to the left.
 	 * TODO: Can be simplified and made to check allowed invariants as left(0), left(1), right(0) are the only allowed.
-	 * Note that supporting bigger skip counts, or right skip means that the hidden token sequencer needs to maintain a larger
+	 * Note that supporting bigger skip counts, or right skip means that the hidden token sequencer needs to maintain a
+	 * larger
 	 * peep hole.
 	 */
 	public static class Comments extends CommentAssociationEntry {
@@ -157,7 +160,7 @@ public class CommentAssociator {
 
 	/**
 	 * Describes a sequence of CommentAssociationEntry, with housekeeping/lookup logic.
-	 * 
+	 *
 	 */
 	public static class CommentSemanticSequence implements Iterable<CommentAssociationEntry> {
 		private List<CommentAssociationEntry> sequence = Lists.newArrayList();
@@ -226,7 +229,7 @@ public class CommentAssociator {
 	/**
 	 * Describes a "semantic position" based on a semantic object (a "token owner") and
 	 * the two leaf nodes "first" / "last" (identical for leaf positions).
-	 * 
+	 *
 	 */
 	public static class Semantic extends CommentAssociationEntry {
 		private EObject semantic;
@@ -262,7 +265,7 @@ public class CommentAssociator {
 
 	/**
 	 * A useful method for debugging - detail printer.
-	 * 
+	 *
 	 * @param sequence
 	 */
 	public static void dumpCommentAssociations(CommentSemanticSequence sequence) {
@@ -271,8 +274,8 @@ public class CommentAssociator {
 			if(e.isComments()) {
 				Comments c = (Comments) e;
 				builder.append("Comments(").append(c.isRight()
-						? "->"
-						: "<-").append(" ").append(c.getSkipCount());
+					? "->"
+							: "<-").append(" ").append(c.getSkipCount());
 				if(c.isFirstOnLine())
 					builder.append(" <fol>");
 				builder.append("): ");
@@ -319,7 +322,7 @@ public class CommentAssociator {
 	/**
 	 * An instance of CommentAssociator uses TokenUtil to answer questions about nodes/tokens, and
 	 * needs an ICommentConfiguration to get more detailed information about comments.
-	 * 
+	 *
 	 * @param tokenUtil
 	 * @param commentConfigurationProvider
 	 */
@@ -332,7 +335,7 @@ public class CommentAssociator {
 
 	/**
 	 * Associates comments in the given {@link ICompositeNode} with positions in a serialization sequence.
-	 * 
+	 *
 	 * @param node
 	 *            the node for which a reconcilement is wanted
 	 * @return an ICommentReconcilement that can be used to reconcile comments in a serialization sequence.
@@ -388,7 +391,7 @@ public class CommentAssociator {
 	 * This implementation does nothing. It is intended that a language specific implementation
 	 * further refines the result. This call is given a sequence that already has been processed for lexical
 	 * association and punctuation.
-	 * 
+	 *
 	 * @param sequence
 	 */
 	protected void computeLanguageSpecificAssociations(CommentSemanticSequence sequence) {
@@ -396,9 +399,10 @@ public class CommentAssociator {
 	}
 
 	/**
-	 * Comments are by default associated with what follows (right association). This method finds and assigns Left association to
+	 * Comments are by default associated with what follows (right association). This method finds and assigns Left
+	 * association to
 	 * those comment sequences that are last on line and not also first on line.
-	 * 
+	 *
 	 * @param sequence
 	 *            - the sequence to modify
 	 */
@@ -425,20 +429,21 @@ public class CommentAssociator {
 
 	/**
 	 * <p>
-	 * This implementation associates comment sequences that are left associative with the +1 preceding semantic element if the immediately preceding
-	 * semantic element is a <i>list separator</i> (see {@link #isListSeparator(Semantic)}, and modifies a right associative sequence to left, if the
-	 * immediately following semantic element is a right punctuation as determined by {@link #isRightPunctuation(Semantic)}.
+	 * This implementation associates comment sequences that are left associative with the +1 preceding semantic element
+	 * if the immediately preceding semantic element is a <i>list separator</i> (see {@link #isListSeparator(Semantic)},
+	 * and modifies a right associative sequence to left, if the immediately following semantic element is a right
+	 * punctuation as determined by {@link #isRightPunctuation(Semantic)}.
 	 * </p>
 	 * <p>
 	 * This means that given:
-	 * 
+	 *
 	 * <pre>
 	 * foo(a, b /* 1 &#42;/)
 	 * </pre>
-	 * 
+	 *
 	 * will get an association between the comment 1 and 'b' (as opposed to 1 and the closing ')').
 	 * </p>
-	 * 
+	 *
 	 * @param sequence
 	 */
 	protected void computePunctuationAssociations(CommentSemanticSequence sequence) {
@@ -563,13 +568,14 @@ public class CommentAssociator {
 
 	/**
 	 * Produces a predicate for reconciliation of left associated comment sequence.
-	 * 
+	 *
 	 * @param semantic
 	 * @return
 	 */
 	protected Predicate<Triple<INode, INode, INode>> getPredicateLeft(final Semantic semantic) {
 
 		return new Predicate<Triple<INode, INode, INode>>() {
+			@Override
 			public boolean apply(Triple<INode, INode, INode> o) {
 				INode from = o.getSecond();
 				// to (third), and preceding (first) are ignored
@@ -584,15 +590,16 @@ public class CommentAssociator {
 
 	/**
 	 * Produces a predicate for reconciliation of left-skip-one associated comment sequence.
-	 * 
+	 *
 	 * @param semantic
 	 * @return
 	 */
 	protected Predicate<Triple<INode, INode, INode>> getPredicateLeftSkipOne(final Semantic semantic,
-			final Semantic punctuation) {
+		final Semantic punctuation) {
 		// This if for: <semantic> (preceding/first), <punctuation> (from/second), <comment> <unknown> (to/third)
 
 		return new Predicate<Triple<INode, INode, INode>>() {
+			@Override
 			public boolean apply(Triple<INode, INode, INode> o) {
 				INode preceding = o.getFirst();
 				INode from = o.getSecond();
@@ -613,13 +620,14 @@ public class CommentAssociator {
 
 	/**
 	 * Produces a predicate for reconciliation of right associated comment sequence.
-	 * 
+	 *
 	 * @param semantic
 	 * @return
 	 */
 	protected Predicate<Triple<INode, INode, INode>> getPredicateRight(final Semantic semantic) {
 
 		return new Predicate<Triple<INode, INode, INode>>() {
+			@Override
 			public boolean apply(Triple<INode, INode, INode> o) {
 				INode to = o.getThird();
 				Semantic sem = semantic;
@@ -634,8 +642,9 @@ public class CommentAssociator {
 	}
 
 	/**
-	 * This implementation returns true for a Keyword being a ','. A specialized implementation may do more elaborate checks.
-	 * 
+	 * This implementation returns true for a Keyword being a ','. A specialized implementation may do more elaborate
+	 * checks.
+	 *
 	 * @param semantic
 	 * @return
 	 */
@@ -649,8 +658,9 @@ public class CommentAssociator {
 	}
 
 	/**
-	 * This implementation returns true for a Keyword being a ','. A specialized implementation may do more elaborate checks.
-	 * 
+	 * This implementation returns true for a Keyword being a ','. A specialized implementation may do more elaborate
+	 * checks.
+	 *
 	 * @param semantic
 	 * @return
 	 */
@@ -663,7 +673,7 @@ public class CommentAssociator {
 	/**
 	 * This implementation returns true for a Keyword being one of the characters ',' ';' '}' ']' ')'. A specialized
 	 * implementation may do mor elaborate checks.
-	 * 
+	 *
 	 * @param semantic
 	 * @return
 	 */
@@ -680,7 +690,7 @@ public class CommentAssociator {
 	}
 
 	protected List<Pair<Predicate<Triple<INode, INode, INode>>, List<INode>>> toPredicates(
-			CommentSemanticSequence sequence) {
+		CommentSemanticSequence sequence) {
 		List<CommentAssociationEntry> entries = sequence.getEntryList();
 		List<Pair<Predicate<Triple<INode, INode, INode>>, List<INode>>> result = Lists.newArrayList();
 		for(int i = 0; i < entries.size(); i++) {
@@ -699,10 +709,10 @@ public class CommentAssociator {
 						result.add(Tuples.create(
 							getPredicateLeftSkipOne(
 								sequence.getPrecedingSemantic(i, 1), sequence.getPrecedingSemantic(i, 0)),
-							c.getComments()));
+								c.getComments()));
 					else
 						throw new UnsupportedOperationException(
-							"left associated comment and skip count > 1 not supported");
+								"left associated comment and skip count > 1 not supported");
 				}
 			}
 		}

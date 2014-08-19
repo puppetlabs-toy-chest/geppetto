@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.DefinitionImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class DefinitionImpl extends ExpressionImpl implements Definition {
@@ -45,7 +45,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	 * The default value of the '{@link #getClassName() <em>Class Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getClassName()
 	 * @generated
 	 * @ordered
@@ -56,7 +56,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	 * The cached value of the '{@link #getClassName() <em>Class Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getClassName()
 	 * @generated
 	 * @ordered
@@ -67,7 +67,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getArguments()
 	 * @generated
 	 * @ordered
@@ -78,7 +78,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getStatements()
 	 * @generated
 	 * @ordered
@@ -88,7 +88,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected DefinitionImpl() {
@@ -98,7 +98,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetArguments(DefinitionArgumentList newArguments, NotificationChain msgs) {
@@ -118,7 +118,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -137,7 +137,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -154,7 +154,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -162,8 +162,8 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 		switch(featureID) {
 			case PPPackage.DEFINITION__CLASS_NAME:
 				return CLASS_NAME_EDEFAULT == null
-						? className != null
-						: !CLASS_NAME_EDEFAULT.equals(className);
+				? className != null
+				: !CLASS_NAME_EDEFAULT.equals(className);
 			case PPPackage.DEFINITION__ARGUMENTS:
 				return arguments != null;
 			case PPPackage.DEFINITION__STATEMENTS:
@@ -175,7 +175,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -199,7 +199,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -210,7 +210,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -232,9 +232,10 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public DefinitionArgumentList getArguments() {
 		return arguments;
 	}
@@ -242,9 +243,10 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getClassName() {
 		return className;
 	}
@@ -252,13 +254,14 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getStatements() {
 		if(statements == null) {
 			statements = new EObjectContainmentEList<Expression>(
-				Expression.class, this, PPPackage.DEFINITION__STATEMENTS);
+					Expression.class, this, PPPackage.DEFINITION__STATEMENTS);
 		}
 		return statements;
 	}
@@ -266,18 +269,19 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setArguments(DefinitionArgumentList newArguments) {
 		if(newArguments != arguments) {
 			NotificationChain msgs = null;
 			if(arguments != null)
 				msgs = ((InternalEObject) arguments).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.DEFINITION__ARGUMENTS, null, msgs);
+					PPPackage.DEFINITION__ARGUMENTS, null, msgs);
 			if(newArguments != null)
 				msgs = ((InternalEObject) newArguments).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.DEFINITION__ARGUMENTS, null, msgs);
+					PPPackage.DEFINITION__ARGUMENTS, null, msgs);
 			msgs = basicSetArguments(newArguments, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -290,9 +294,10 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setClassName(String newClassName) {
 		String oldClassName = className;
 		className = newClassName;
@@ -304,7 +309,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

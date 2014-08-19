@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,7 +16,7 @@ import com.google.inject.Inject;
 
 /**
  * A text flow that measures the appended content but that does not contain the actual text.
- * 
+ *
  */
 public class MeasuredTextFlow extends AbstractTextFlow {
 
@@ -57,7 +57,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 
 	/**
 	 * Copy constructor
-	 * 
+	 *
 	 * @param original
 	 */
 	public MeasuredTextFlow(MeasuredTextFlow original) {
@@ -88,13 +88,13 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 		maxWidth = Math.max(maxWidth, currentLineWidth);
 		lastLineWidth = currentLineWidth == 0
 				? lastLineWidth
-				: currentLineWidth;
+						: currentLineWidth;
 		currentLineWidth = 0;
 
 		// verbatim break simply means, no indentation
 		pendingIndent = verbatim
 				? 0
-				: indent;
+						: indent;
 		return this;
 	}
 
@@ -113,7 +113,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 
 	/**
 	 * Must be called from a derived method since this method performs measuring.
-	 * 
+	 *
 	 * @param s
 	 *            the text that will be emitted.
 	 */
@@ -158,7 +158,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	public int getAppendLinePosition() {
 		if(lastWasBreak > 0)
 			return pendingIndent + (currentRun == null
-					? 0
+			? 0
 					: currentRun.length());
 		return currentLineWidth + getRunWidth();
 	}
@@ -166,7 +166,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	protected CharSequence getCurrentRun() {
 		return currentRun == null
 				? ""
-				: currentRun;
+						: currentRun;
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 		// report as 0
 		return currentRun != null
 				? 0
-				: lastWasBreak;
+						: lastWasBreak;
 	}
 
 	@Override
@@ -199,7 +199,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	private int getRunWidth() {
 		return currentRun == null
 				? 0
-				: currentRun.length();
+						: currentRun.length();
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 		// break only, or break + unprocessed
 		if(lastWasBreak > 0)
 			return Math.max(maxWidth, currentRun == null
-					? 0
+			? 0
 					: currentRun.length() + pendingIndent);
 
 		// something else than break processed, but there can be unprocessed
@@ -218,7 +218,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	public int getWidthOfLastLine() {
 		if(lastWasBreak > 0)
 			return currentRun == null
-					? lastLineWidth
+			? lastLineWidth
 					: pendingIndent + currentRun.length();
 		return currentLineWidth + getRunWidth();
 	}
@@ -234,7 +234,8 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	}
 
 	/**
-	 * This implementation buffers non-breakable sequences and performs auto line wrapping if <code>verbatim</code> is <code>false</code>.
+	 * This implementation buffers non-breakable sequences and performs auto line wrapping if <code>verbatim</code> is
+	 * <code>false</code>.
 	 * When output is <i>verbatim</i> pending output is flushed, and new output is immediately processed, and no
 	 * automatic line wrapping will take place.
 	 */
@@ -290,7 +291,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	 * Returns true if the text would cause text to be wider that the preferred max width, and placing
 	 * it on the next line with the current indent would either make it fit or cause less overrun.
 	 * Otherwise false is returned.
-	 * 
+	 *
 	 * @param s
 	 * @return true if the given characters should be placed on the next line
 	 */
@@ -298,7 +299,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 		final int textLength = s.length();
 		final int pos = lastWasBreak > 0
 				? pendingIndent // indent for preceding break
-				: currentLineWidth;
+						: currentLineWidth;
 		int unwrappedWidth = textLength + pos;
 		if(unwrappedWidth > getPreferredMaxWidth()) {
 			if(!(lastWasBreak > 0 || lastWasSpace))

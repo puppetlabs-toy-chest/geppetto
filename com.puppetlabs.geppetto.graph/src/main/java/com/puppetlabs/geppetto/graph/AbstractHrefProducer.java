@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,11 +21,9 @@ import org.eclipse.core.runtime.Path;
 
 /**
  * Base functionality for producing href for Exports and DefaultModules.
- * 
+ *
  */
 public abstract class AbstractHrefProducer implements IHrefProducer {
-
-	public static final String URL_PREFIX_NAME = "href.producer.url.prefix";
 
 	protected static IPath relativePathToFile(IPath filePath, IPath rootPath) {
 		if(rootPath == null)
@@ -36,10 +34,10 @@ public abstract class AbstractHrefProducer implements IHrefProducer {
 	/**
 	 * Translate a file path to a file relative to rootFolder (if under this root, else return
 	 * an absolute File).
-	 * 
+	 *
 	 * @param filePath
 	 * @param rootFolder
-	 *        - root directory/folder or a file name
+	 *            - root directory/folder or a file name
 	 * @return
 	 */
 	protected static File relativePathToFile(String filePath, File rootFolder) {
@@ -49,6 +47,8 @@ public abstract class AbstractHrefProducer implements IHrefProducer {
 		// IPath relativePath = problemPath.makeRelativeTo(rootPath);
 		// return relativePath.toFile();
 	}
+
+	public static final String URL_PREFIX_NAME = "href.producer.url.prefix";
 
 	protected abstract String file2HrefPath(File f, File root);
 
@@ -66,6 +66,7 @@ public abstract class AbstractHrefProducer implements IHrefProducer {
 		return hrefToFileLocation(file2HrefPath(f, root), e.getLine(), e.getStart(), e.getLength());
 	}
 
+	@Override
 	public String href(MetadataInfo mi, File root) {
 		File f = mi.getFile();
 		if(f == null)
@@ -109,7 +110,7 @@ public abstract class AbstractHrefProducer implements IHrefProducer {
 
 	/**
 	 * This implementation returns a relative url with line= offset= lenght= url parameters.
-	 * 
+	 *
 	 * @param path
 	 * @param line
 	 * @param start
@@ -148,7 +149,7 @@ public abstract class AbstractHrefProducer implements IHrefProducer {
 
 	/**
 	 * This implementation returns the path
-	 * 
+	 *
 	 * @param path
 	 * @return
 	 */
@@ -158,7 +159,7 @@ public abstract class AbstractHrefProducer implements IHrefProducer {
 
 	/**
 	 * This implementation returns the path
-	 * 
+	 *
 	 * @param path
 	 * @return
 	 */
@@ -168,7 +169,7 @@ public abstract class AbstractHrefProducer implements IHrefProducer {
 
 	/**
 	 * This default implementation returns an empty string.
-	 * 
+	 *
 	 * @param e
 	 * @return
 	 */

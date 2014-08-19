@@ -8,22 +8,6 @@ import java.util.regex.Pattern;
  * A class that implements a <a href="http://semver.org/spec/v1.0.0.html">Semantic Versioning 1.0.0</a>.
  */
 public class Version implements Comparable<Version>, Serializable {
-	private static final long serialVersionUID = 1L;
-
-	private static final WeakCache<Version> instanceCache = new WeakCache<Version>();
-
-	public static final String SNAPSHOT_SUFFIX = "-SNAPSHOT";
-
-	public static final Pattern VERSION_PATTERN = Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9a-zA-Z-]*))?$");
-
-	public static final Pattern PRE_RELEASE_PATTERN = Pattern.compile("^[0-9a-zA-Z-]*$");
-
-	public static final Version MAX = new Version(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, null);
-
-	public static final String MIN_PRE_RELEASE = "";
-
-	public static final Version MIN = new Version(0, 0, 0, MIN_PRE_RELEASE);
-
 	public static int comparePreReleases(String p1, String p2) {
 		int cmp = 0;
 		if(p1 == null) {
@@ -101,7 +85,7 @@ public class Version implements Comparable<Version>, Serializable {
 		Matcher m = VERSION_PATTERN.matcher(version);
 		return m.matches()
 				? fromMatch(m)
-				: null;
+						: null;
 	}
 
 	/**
@@ -127,6 +111,22 @@ public class Version implements Comparable<Version>, Serializable {
 			val = val * 10 + (g.charAt(idx) - '0');
 		return val;
 	}
+
+	private static final long serialVersionUID = 1L;
+
+	private static final WeakCache<Version> instanceCache = new WeakCache<Version>();
+
+	public static final String SNAPSHOT_SUFFIX = "-SNAPSHOT";
+
+	public static final Pattern VERSION_PATTERN = Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9a-zA-Z-]*))?$");
+
+	public static final Pattern PRE_RELEASE_PATTERN = Pattern.compile("^[0-9a-zA-Z-]*$");
+
+	public static final Version MAX = new Version(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, null);
+
+	public static final String MIN_PRE_RELEASE = "";
+
+	public static final Version MIN = new Version(0, 0, 0, MIN_PRE_RELEASE);
 
 	private final int major;
 

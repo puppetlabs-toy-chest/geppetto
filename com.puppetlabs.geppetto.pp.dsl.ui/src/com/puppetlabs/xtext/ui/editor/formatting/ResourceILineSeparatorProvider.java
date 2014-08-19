@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -34,7 +34,7 @@ public class ResourceILineSeparatorProvider extends PlatformResourceSpecificProv
 
 	/**
 	 * Returns the system default line separator.
-	 * 
+	 *
 	 * @return The line separator to use.
 	 */
 	private static String getLineSeparator() {
@@ -45,7 +45,7 @@ public class ResourceILineSeparatorProvider extends PlatformResourceSpecificProv
 	 * Returns the line separator defined in preference {@link org.eclipse.core.runtime.Platform#PREF_LINE_SEPARATOR} on
 	 * the project or workspace of the given resource.
 	 * If this is null, returns the platform separator.
-	 * 
+	 *
 	 * @return The line separator to use.
 	 */
 	private static String getLineSeparator(IResource r) {

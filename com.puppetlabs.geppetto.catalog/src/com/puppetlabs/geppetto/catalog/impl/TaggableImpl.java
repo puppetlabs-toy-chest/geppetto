@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * <li>{@link com.puppetlabs.geppetto.catalog.impl.TaggableImpl#getTags <em>Tags</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class TaggableImpl extends EObjectImpl implements Taggable {
@@ -41,7 +41,7 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
@@ -51,7 +51,7 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected TaggableImpl() {
@@ -61,7 +61,7 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -76,7 +76,7 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -91,7 +91,7 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -109,7 +109,7 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -120,7 +120,7 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -136,9 +136,10 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<String> getTags() {
 		if(tags == null) {
 			tags = new EDataTypeUniqueEList<String>(String.class, this, CatalogPackage.TAGGABLE__TAGS);
@@ -149,7 +150,7 @@ public abstract class TaggableImpl extends EObjectImpl implements Taggable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

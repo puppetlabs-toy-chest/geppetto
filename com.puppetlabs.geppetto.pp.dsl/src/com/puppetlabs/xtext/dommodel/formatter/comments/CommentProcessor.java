@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -23,21 +23,21 @@ import com.google.common.collect.Lists;
 
 /**
  * <p>
- * This comment processor is used to parse and format comments spanning multiple lines. It is a low-level class that can be used to implement higher
- * order comment formatting strategies.
+ * This comment processor is used to parse and format comments spanning multiple lines. It is a low-level class that can
+ * be used to implement higher order comment formatting strategies.
  * </p>
  * <p>
- * Comments may be a sequence of single line comments, or a multi line comment. When processing a sequence of single line comments, everything in the
- * passed region to format must be comment text or whitespace - input in this example:
- * 
+ * Comments may be a sequence of single line comments, or a multi line comment. When processing a sequence of single
+ * line comments, everything in the passed region to format must be comment text or whitespace - input in this example:
+ *
  * <pre>
  *  # comment
  *  a = 10 # comment
  *  b = 20 # comment
  * </pre>
- * 
+ *
  * will result in something like:
- * 
+ *
  * <pre>
  *  # comment
  *  # a = 10 # comment
@@ -45,11 +45,11 @@ import com.google.common.collect.Lists;
  *  # comment
  * </pre>
  * <p>
- * <b>Usage:</b> An instance of the class is created with an ICommentContext that describes how the comment should be parsed. This context includes
- * the relative starting position of the comment sequence. One of the classes implementing this interface may be used as a convenience. As an example,
- * given the text:
+ * <b>Usage:</b> An instance of the class is created with an ICommentContext that describes how the comment should be
+ * parsed. This context includes the relative starting position of the comment sequence. One of the classes implementing
+ * this interface may be used as a convenience. As an example, given the text:
  * </p>
- * 
+ *
  * <pre>
  * {@code
  * a = 10 /*
@@ -60,9 +60,9 @@ import com.google.common.collect.Lists;
  *  ∗/
  * }
  * </pre>
- * 
+ *
  * Is processed by providing the starting line offset 7. When formatting with the same context, the result is:
- * 
+ *
  * <pre>
  * {@code
  * a = 10 /*
@@ -70,13 +70,14 @@ import com.google.common.collect.Lists;
  *         * and continues here
  *         * but is not aligned ok
  *         * and some lines do not start with the repeating character
- *         ∗/ 
+ *         ∗/
  * }
  * </pre>
- * 
- * To relocate the comment, or output it in a different style, use a second {@link ICommentContainerInformation} in the format call.
+ *
+ * To relocate the comment, or output it in a different style, use a second {@link ICommentContainerInformation} in the
+ * format call.
  * The same input example as before can be output to look like this:
- * 
+ *
  * <pre>
  * {@code
  * a = 10 #
@@ -84,19 +85,21 @@ import com.google.common.collect.Lists;
  *        # and continues here
  *        # but is not aligned ok
  *        # and some lines do not start with the repeating character
- *        # 
+ *        #
  * }
  * </pre>
  * <p>
- * The comment processor has special processing of comment lines that consists of the same repeated character. All such lines are formatted without a
- * left margin, and such lines longer than 5 characters are truncated instead of folded/wrapped when not fitting within the max constraints.
+ * The comment processor has special processing of comment lines that consists of the same repeated character. All such
+ * lines are formatted without a left margin, and such lines longer than 5 characters are truncated instead of
+ * folded/wrapped when not fitting within the max constraints.
  * </p>
  * <p>
  * It is possible to constrain trailing empty lines min/max.
  * </p>
  * <p>
- * Note that the result will contain leading whitespace up to the position passed as the starting position. When appending the text to an existing
- * flow already at this position, the method {@link CharSequences#trimLeft(CharSequence)} can be used to adjust the text to this position.
+ * Note that the result will contain leading whitespace up to the position passed as the starting position. When
+ * appending the text to an existing flow already at this position, the method
+ * {@link CharSequences#trimLeft(CharSequence)} can be used to adjust the text to this position.
  * </p>
  * TODO: Needs to know about the ICommentFormatterAdvice !
  */
@@ -270,7 +273,7 @@ public class CommentProcessor {
 
 	/**
 	 * Surgically modify given list to conform to min/max trailing empty lines.
-	 * 
+	 *
 	 * @param lines
 	 */
 	private void ensureTrailingLines(List<CharSequence> lines, CommentFormattingOptions options) {
@@ -398,10 +401,11 @@ public class CommentProcessor {
 	 * of characters is not a letter or digit. This is intended
 	 * to answer true for lines that can be truncated instead of wrapped when they exceed the width.
 	 * It also enables extending such lines to the max allowed width.
-	 * 
-	 * The number 5 is selected since certain comment processors (RDoc is one) use '---' and '+++' and similar instructions
+	 *
+	 * The number 5 is selected since certain comment processors (RDoc is one) use '---' and '+++' and similar
+	 * instructions
 	 * to indicate processing instructions - and such should never be extended.
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */
@@ -448,7 +452,7 @@ public class CommentProcessor {
 	 * Separates the comment text from its surrounding container. The result is a sequence of trimmed text lines.
 	 * The text does not contain any of the comment start/repeat/end tokens, and the text is relative to
 	 * the comment's natural margin.
-	 * 
+	 *
 	 * @return {@link CommentText} with trimmed lines and any trailing text after endToken
 	 */
 	public CommentText separateCommentFromContainer(CharSequence s, ICommentContainerInformation in,
@@ -497,7 +501,7 @@ public class CommentProcessor {
 	 * <li><code>"_______*a " -> "a "</code></li>
 	 * </ul>
 	 * </p>
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */

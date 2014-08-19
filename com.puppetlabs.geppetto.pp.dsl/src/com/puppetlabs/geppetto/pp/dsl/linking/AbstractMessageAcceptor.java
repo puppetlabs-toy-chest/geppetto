@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,14 +20,14 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
- * 
+ *
  *
  */
 public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#accept(org.eclipse.xtext.diagnostics.Severity, java.lang.String,
 	 * org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String[])
 	 */
@@ -44,7 +44,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#accept(org.eclipse.xtext.diagnostics.Severity, java.lang.String,
 	 * org.eclipse.xtext.nodemodel.INode, java.lang.String, java.lang.String[])
 	 */
@@ -53,7 +53,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptError(java.lang.String, org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
@@ -65,7 +65,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptError(java.lang.String, org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.emf.ecore.EStructuralFeature, java.lang.String, java.lang.String)
 	 */
@@ -77,7 +77,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptError(java.lang.String, org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
@@ -89,7 +89,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptError(java.lang.String, org.eclipse.emf.ecore.EObject, int,
 	 * java.lang.String, java.lang.String)
 	 */
@@ -100,7 +100,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptError(java.lang.String, org.eclipse.emf.ecore.EObject, java.lang.String,
 	 * java.lang.String)
 	 */
@@ -113,7 +113,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptError(java.lang.String, org.eclipse.xtext.nodemodel.INode, java.lang.String,
 	 * java.lang.String)
 	 */
@@ -124,7 +124,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptWarning(java.lang.String, org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String[])
 	 */
@@ -136,7 +136,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptWarning(java.lang.String, org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.emf.ecore.EStructuralFeature, java.lang.String, java.lang.String[])
 	 */
@@ -149,7 +149,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptError(java.lang.String, org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
@@ -161,7 +161,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptWarning(java.lang.String, org.eclipse.emf.ecore.EObject, int,
 	 * java.lang.String, java.lang.String[])
 	 */
@@ -172,7 +172,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptWarning(java.lang.String, org.eclipse.emf.ecore.EObject, java.lang.String,
 	 * java.lang.String[])
 	 */
@@ -185,7 +185,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#acceptWarning(java.lang.String, org.eclipse.xtext.nodemodel.INode,
 	 * java.lang.String, java.lang.String[])
 	 */
@@ -213,7 +213,8 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	}
 
 	/**
-	 * @return the index of source in its containing feature, or {@link #INSIGNIFICANT_INDEX} if containing feature is not indexed.
+	 * @return the index of source in its containing feature, or {@link #INSIGNIFICANT_INDEX} if containing feature is
+	 *         not indexed.
 	 */
 	private int indexOfSourceInParent(EObject source) {
 		EObject container = source.eContainer();

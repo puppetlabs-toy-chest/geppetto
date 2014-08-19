@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.DoubleQuotedStringImpl#getStringPart <em>String Part</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class DoubleQuotedStringImpl extends StringExpressionImpl implements DoubleQuotedString {
@@ -39,7 +39,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	 * The cached value of the '{@link #getStringPart() <em>String Part</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getStringPart()
 	 * @generated
 	 * @ordered
@@ -49,7 +49,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected DoubleQuotedStringImpl() {
@@ -59,7 +59,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -74,7 +74,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -89,7 +89,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -104,7 +104,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -122,7 +122,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -133,7 +133,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -149,13 +149,14 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<TextExpression> getStringPart() {
 		if(stringPart == null) {
 			stringPart = new EObjectContainmentEList<TextExpression>(
-				TextExpression.class, this, PPPackage.DOUBLE_QUOTED_STRING__STRING_PART);
+					TextExpression.class, this, PPPackage.DOUBLE_QUOTED_STRING__STRING_PART);
 		}
 		return stringPart;
 	}

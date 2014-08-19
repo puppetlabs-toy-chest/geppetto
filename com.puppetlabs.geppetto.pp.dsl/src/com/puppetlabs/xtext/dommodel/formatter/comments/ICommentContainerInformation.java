@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,8 +15,9 @@ import com.puppetlabs.xtext.dommodel.formatter.css.Alignment;
 /**
  * An ICommentContainerInformation describes a "comment container", comment start/end, and repeating tokens, as well
  * as its start offset on the line (since this affects parsing of certain types of comments).
- * 
- * Also see the concrete implementations {@link JavaSLCommentContainer}, {@link JavaLikeMLCommentContainer}, {@link JavaDocLikeCommentContainer},
+ *
+ * Also see the concrete implementations {@link JavaSLCommentContainer}, {@link JavaLikeMLCommentContainer},
+ * {@link JavaDocLikeCommentContainer},
  * and {@link HashSLCommentContainer}.
  */
 public interface ICommentContainerInformation {
@@ -125,7 +126,7 @@ public interface ICommentContainerInformation {
 	}
 
 	public static class JavaLikeMLCommentContainer extends
-			ICommentContainerInformation.AbstractCommentContainerInformation {
+	ICommentContainerInformation.AbstractCommentContainerInformation {
 
 		public JavaLikeMLCommentContainer() {
 
@@ -166,6 +167,7 @@ public interface ICommentContainerInformation {
 		/**
 		 * @return the repeatingToken
 		 */
+		@Override
 		public String getRepeatingToken() {
 			return "*";
 		}
@@ -173,6 +175,7 @@ public interface ICommentContainerInformation {
 		/**
 		 * @return the startToken
 		 */
+		@Override
 		public String getStartToken() {
 			return "/*";
 		}
@@ -203,6 +206,7 @@ public interface ICommentContainerInformation {
 			return 2;
 		}
 
+		@Override
 		public String getStartToken() {
 			return "//";
 		}
@@ -210,14 +214,15 @@ public interface ICommentContainerInformation {
 
 	/**
 	 * <p>
-	 * Marker interface for an ICommentContainerInformation that is Opaque - i.e. it is unknown how to extract the comment text from its surrounding
-	 * container. The only possible "formatting" is to output the verbatim comment container and text.
+	 * Marker interface for an ICommentContainerInformation that is Opaque - i.e. it is unknown how to extract the
+	 * comment text from its surrounding container. The only possible "formatting" is to output the verbatim comment
+	 * container and text.
 	 * </p>
 	 * <p>
-	 * Calling any of the informational methods on a class implementing this interface will result in an a {@code UnsupportedOperationException}. It
-	 * is legal to create instances with {@code new} or via the factory {@link #create(int)} method. It is also possible to obtain the
-	 * {@link #getLeftPosition()}.
-	 * 
+	 * Calling any of the informational methods on a class implementing this interface will result in an a
+	 * {@code UnsupportedOperationException}. It is legal to create instances with {@code new} or via the factory
+	 * {@link #create(int)} method. It is also possible to obtain the {@link #getLeftPosition()}.
+	 *
 	 */
 	public interface Unknown {
 	}
@@ -258,14 +263,14 @@ public interface ICommentContainerInformation {
 		@Override
 		public boolean isSLStyle() {
 			throw new UnsupportedOperationException(
-				"An Unknown comment container does not know if it is SL style or not.");
+					"An Unknown comment container does not know if it is SL style or not.");
 		}
 
 	}
 
 	/**
 	 * Factory method that creates a new instance of the same class but for a different position.
-	 * 
+	 *
 	 * @param leftPosition
 	 *            the wanted leftmost position
 	 * @return a new ICommentConext configured the same way as this context but for a different leftPosition

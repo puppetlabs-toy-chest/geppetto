@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -41,7 +41,7 @@ public class TarUtils {
 		/**
 		 * Implementors should return <tt>true</tt> or <tt>false</tt> to indicate if this
 		 * file is of interest or not.
-		 * 
+		 *
 		 * @param fileName
 		 *            The name of the file as it occurs in the archive.
 		 * @return a flag indicating if the file is accepted
@@ -50,7 +50,7 @@ public class TarUtils {
 
 		/**
 		 * This method will be called for files that accepted
-		 * 
+		 *
 		 * @param fileName
 		 *            The name of the accepted file
 		 * @param fileData
@@ -61,8 +61,6 @@ public class TarUtils {
 		 */
 		boolean catchData(String fileName, InputStream fileData) throws IOException;
 	}
-
-	private static final int MAX_FILES_PER_COMMAND = 20;
 
 	private static void append(File file, FileFilter filter, int baseNameLen, String addedTopFolder,
 			TarArchiveOutputStream tarOut) throws IOException {
@@ -171,7 +169,7 @@ public class TarUtils {
 	 * <i>skipTopFolder</i> is set, then don't assume that the archive contains one
 	 * single folder and unpack the content of that folder, not including the folder
 	 * itself.
-	 * 
+	 *
 	 * @param source
 	 *            The input source. Must be in <i>TAR</i> format.
 	 * @param targetFolder
@@ -259,4 +257,6 @@ public class TarUtils {
 		}
 		chmod(chmodMap);
 	}
+
+	private static final int MAX_FILES_PER_COMMAND = 20;
 }

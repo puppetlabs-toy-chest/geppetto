@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,7 +21,7 @@ import java.util.TreeSet;
  * threshold. If equal data is eligible with different score only the best score is kept thus giving room to
  * a different data element with worse score. (This avoids monopolizing the top scores with a single item
  * when using multiple scoring methods).
- * 
+ *
  */
 public class ScoreKeeper<T> {
 
@@ -54,11 +54,11 @@ public class ScoreKeeper<T> {
 					return 0;
 				return a.getData().hashCode() < b.getData().hashCode()
 						? -1
-						: 1;
+								: 1;
 			}
 			return a.score < b.score
 					? -1
-					: 1;
+							: 1;
 		}
 	}
 
@@ -74,7 +74,7 @@ public class ScoreKeeper<T> {
 	 * Creates a score keeper that keeps at most highScoreCount scores. The highest scores
 	 * are either the highest integer value scores if higherIsBetter is true, or the lowest integer value
 	 * scores if higherIsBetter is false.
-	 * 
+	 *
 	 * @param bestScoreCount
 	 * @param higherIsBetter
 	 * @param cap

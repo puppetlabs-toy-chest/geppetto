@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EReference;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * 
+ *
  * @see com.puppetlabs.geppetto.catalog.CatalogFactory
  * @model kind="package"
  * @generated
@@ -42,15 +42,16 @@ public interface CatalogPackage extends EPackage {
 	 * <li>and each data type</li>
 	 * </ul>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogImpl <em>Catalog</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogImpl <em>Catalog</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogImpl
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalog()
 		 * @generated
@@ -61,7 +62,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG__NAME = eINSTANCE.getCatalog_Name();
@@ -70,7 +71,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG__VERSION = eINSTANCE.getCatalog_Version();
@@ -79,7 +80,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Resources</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EReference CATALOG__RESOURCES = eINSTANCE.getCatalog_Resources();
@@ -88,7 +89,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Classes</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG__CLASSES = eINSTANCE.getCatalog_Classes();
@@ -97,7 +98,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Metadata</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EReference CATALOG__METADATA = eINSTANCE.getCatalog_Metadata();
@@ -106,16 +107,17 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Edges</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EReference CATALOG__EDGES = eINSTANCE.getCatalog_Edges();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl <em>Resource</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl
+		 * <em>Resource</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalogResource()
 		 * @generated
@@ -126,7 +128,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>File</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_RESOURCE__FILE = eINSTANCE.getCatalogResource_File();
@@ -135,7 +137,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Line</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_RESOURCE__LINE = eINSTANCE.getCatalogResource_Line();
@@ -144,7 +146,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_RESOURCE__TYPE = eINSTANCE.getCatalogResource_Type();
@@ -153,7 +155,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_RESOURCE__TITLE = eINSTANCE.getCatalogResource_Title();
@@ -162,7 +164,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EReference CATALOG_RESOURCE__PARAMETERS = eINSTANCE.getCatalogResource_Parameters();
@@ -171,7 +173,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Virtual</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_RESOURCE__VIRTUAL = eINSTANCE.getCatalogResource_Virtual();
@@ -180,16 +182,17 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Exported</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_RESOURCE__EXPORTED = eINSTANCE.getCatalogResource_Exported();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl <em>Metadata</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl
+		 * <em>Metadata</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalogMetadata()
 		 * @generated
@@ -200,16 +203,17 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Api version</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_METADATA__API_VERSION = eINSTANCE.getCatalogMetadata_Api_version();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogEdgeImpl <em>Edge</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogEdgeImpl <em>Edge</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogEdgeImpl
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalogEdge()
 		 * @generated
@@ -220,7 +224,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Target</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_EDGE__TARGET = eINSTANCE.getCatalogEdge_Target();
@@ -229,17 +233,18 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_EDGE__SOURCE = eINSTANCE.getCatalogEdge_Source();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl <em>Resource Parameter</em>}'
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl
+		 * <em>Resource Parameter</em>}'
 		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalogResourceParameter()
 		 * @generated
@@ -250,7 +255,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_RESOURCE_PARAMETER__NAME = eINSTANCE.getCatalogResourceParameter_Name();
@@ -259,16 +264,17 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute CATALOG_RESOURCE_PARAMETER__VALUE = eINSTANCE.getCatalogResourceParameter_Value();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.TaggableImpl <em>Taggable</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.catalog.impl.TaggableImpl <em>Taggable</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @see com.puppetlabs.geppetto.catalog.impl.TaggableImpl
 		 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getTaggable()
 		 * @generated
@@ -279,7 +285,7 @@ public interface CatalogPackage extends EPackage {
 		 * The meta object literal for the '<em><b>Tags</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 *
 		 * @generated
 		 */
 		EAttribute TAGGABLE__TAGS = eINSTANCE.getTaggable_Tags();
@@ -290,7 +296,7 @@ public interface CatalogPackage extends EPackage {
 	 * The package name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	String eNAME = "catalog";
@@ -299,7 +305,7 @@ public interface CatalogPackage extends EPackage {
 	 * The package namespace URI.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	String eNS_URI = "http://www.puppetlabs.com/geppetto/1.0.0/Catalog";
@@ -308,7 +314,7 @@ public interface CatalogPackage extends EPackage {
 	 * The package namespace name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	String eNS_PREFIX = "catalog";
@@ -317,7 +323,7 @@ public interface CatalogPackage extends EPackage {
 	 * The singleton instance of the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	CatalogPackage eINSTANCE = com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl.init();
@@ -326,7 +332,7 @@ public interface CatalogPackage extends EPackage {
 	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.TaggableImpl <em>Taggable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.catalog.impl.TaggableImpl
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getTaggable()
 	 * @generated
@@ -337,7 +343,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -347,7 +353,7 @@ public interface CatalogPackage extends EPackage {
 	 * The number of structural features of the '<em>Taggable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -357,7 +363,7 @@ public interface CatalogPackage extends EPackage {
 	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogImpl <em>Catalog</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogImpl
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalog()
 	 * @generated
@@ -368,7 +374,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -378,7 +384,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -388,7 +394,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -398,7 +404,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Resources</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -408,7 +414,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Classes</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -418,7 +424,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Metadata</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -428,7 +434,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -438,17 +444,18 @@ public interface CatalogPackage extends EPackage {
 	 * The number of structural features of the '<em>Catalog</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
 	int CATALOG_FEATURE_COUNT = TAGGABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl <em>Resource</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl <em>Resource</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalogResource()
 	 * @generated
@@ -459,7 +466,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -469,7 +476,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -479,7 +486,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Line</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -489,7 +496,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -499,7 +506,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -509,7 +516,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -519,7 +526,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Virtual</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -529,7 +536,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Exported</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -539,17 +546,18 @@ public interface CatalogPackage extends EPackage {
 	 * The number of structural features of the '<em>Resource</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
 	int CATALOG_RESOURCE_FEATURE_COUNT = TAGGABLE_FEATURE_COUNT + 7;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl <em>Metadata</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl <em>Metadata</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalogMetadata()
 	 * @generated
@@ -560,7 +568,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Api version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -570,7 +578,7 @@ public interface CatalogPackage extends EPackage {
 	 * The number of structural features of the '<em>Metadata</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -580,7 +588,7 @@ public interface CatalogPackage extends EPackage {
 	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogEdgeImpl <em>Edge</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogEdgeImpl
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalogEdge()
 	 * @generated
@@ -591,7 +599,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Target</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -601,7 +609,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Source</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -611,17 +619,18 @@ public interface CatalogPackage extends EPackage {
 	 * The number of structural features of the '<em>Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
 	int CATALOG_EDGE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl <em>Resource Parameter</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl
+	 * <em>Resource Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl
 	 * @see com.puppetlabs.geppetto.catalog.impl.CatalogPackageImpl#getCatalogResourceParameter()
 	 * @generated
@@ -632,7 +641,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -642,7 +651,7 @@ public interface CatalogPackage extends EPackage {
 	 * The feature id for the '<em><b>Value</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -652,7 +661,7 @@ public interface CatalogPackage extends EPackage {
 	 * The number of structural features of the '<em>Resource Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 * @ordered
 	 */
@@ -662,7 +671,7 @@ public interface CatalogPackage extends EPackage {
 	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.catalog.Catalog <em>Catalog</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for class '<em>Catalog</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Catalog
 	 * @generated
@@ -670,10 +679,11 @@ public interface CatalogPackage extends EPackage {
 	EClass getCatalog();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link com.puppetlabs.geppetto.catalog.Catalog#getClasses <em>Classes</em>}'.
+	 * Returns the meta object for the attribute list '{@link com.puppetlabs.geppetto.catalog.Catalog#getClasses
+	 * <em>Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute list '<em>Classes</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Catalog#getClasses()
 	 * @see #getCatalog()
@@ -682,10 +692,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalog_Classes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.catalog.Catalog#getEdges <em>Edges</em>}'.
+	 * Returns the meta object for the containment reference list '
+	 * {@link com.puppetlabs.geppetto.catalog.Catalog#getEdges <em>Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the containment reference list '<em>Edges</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Catalog#getEdges()
 	 * @see #getCatalog()
@@ -694,10 +705,11 @@ public interface CatalogPackage extends EPackage {
 	EReference getCatalog_Edges();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.catalog.Catalog#getMetadata <em>Metadata</em>}'.
+	 * Returns the meta object for the containment reference '
+	 * {@link com.puppetlabs.geppetto.catalog.Catalog#getMetadata <em>Metadata</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the containment reference '<em>Metadata</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Catalog#getMetadata()
 	 * @see #getCatalog()
@@ -706,10 +718,11 @@ public interface CatalogPackage extends EPackage {
 	EReference getCatalog_Metadata();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.Catalog#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.Catalog#getName <em>Name</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Catalog#getName()
 	 * @see #getCatalog()
@@ -718,10 +731,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalog_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.catalog.Catalog#getResources <em>Resources</em>}'.
+	 * Returns the meta object for the containment reference list '
+	 * {@link com.puppetlabs.geppetto.catalog.Catalog#getResources <em>Resources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the containment reference list '<em>Resources</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Catalog#getResources()
 	 * @see #getCatalog()
@@ -730,10 +744,11 @@ public interface CatalogPackage extends EPackage {
 	EReference getCatalog_Resources();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.Catalog#getVersion <em>Version</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.Catalog#getVersion
+	 * <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Version</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Catalog#getVersion()
 	 * @see #getCatalog()
@@ -745,7 +760,7 @@ public interface CatalogPackage extends EPackage {
 	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.catalog.CatalogEdge <em>Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for class '<em>Edge</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogEdge
 	 * @generated
@@ -753,10 +768,11 @@ public interface CatalogPackage extends EPackage {
 	EClass getCatalogEdge();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogEdge#getSource <em>Source</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogEdge#getSource
+	 * <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Source</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogEdge#getSource()
 	 * @see #getCatalogEdge()
@@ -765,10 +781,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogEdge_Source();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogEdge#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogEdge#getTarget
+	 * <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Target</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogEdge#getTarget()
 	 * @see #getCatalogEdge()
@@ -780,7 +797,7 @@ public interface CatalogPackage extends EPackage {
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
@@ -790,7 +807,7 @@ public interface CatalogPackage extends EPackage {
 	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.catalog.CatalogMetadata <em>Metadata</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for class '<em>Metadata</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogMetadata
 	 * @generated
@@ -798,10 +815,11 @@ public interface CatalogPackage extends EPackage {
 	EClass getCatalogMetadata();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogMetadata#getApi_version <em>Api version</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogMetadata#getApi_version
+	 * <em>Api version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Api version</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogMetadata#getApi_version()
 	 * @see #getCatalogMetadata()
@@ -813,7 +831,7 @@ public interface CatalogPackage extends EPackage {
 	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.catalog.CatalogResource <em>Resource</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for class '<em>Resource</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource
 	 * @generated
@@ -821,10 +839,11 @@ public interface CatalogPackage extends EPackage {
 	EClass getCatalogResource();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#isExported <em>Exported</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#isExported
+	 * <em>Exported</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Exported</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource#isExported()
 	 * @see #getCatalogResource()
@@ -833,10 +852,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResource_Exported();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getFile <em>File</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getFile
+	 * <em>File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>File</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource#getFile()
 	 * @see #getCatalogResource()
@@ -845,10 +865,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResource_File();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getLine <em>Line</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getLine
+	 * <em>Line</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Line</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource#getLine()
 	 * @see #getCatalogResource()
@@ -857,11 +878,12 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResource_Line();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getParameters
+	 * Returns the meta object for the containment reference list '
+	 * {@link com.puppetlabs.geppetto.catalog.CatalogResource#getParameters
 	 * <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource#getParameters()
 	 * @see #getCatalogResource()
@@ -870,10 +892,11 @@ public interface CatalogPackage extends EPackage {
 	EReference getCatalogResource_Parameters();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getTitle <em>Title</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getTitle
+	 * <em>Title</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Title</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource#getTitle()
 	 * @see #getCatalogResource()
@@ -882,10 +905,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResource_Title();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getType <em>Type</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#getType
+	 * <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Type</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource#getType()
 	 * @see #getCatalogResource()
@@ -894,10 +918,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResource_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#isVirtual <em>Virtual</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResource#isVirtual
+	 * <em>Virtual</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Virtual</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResource#isVirtual()
 	 * @see #getCatalogResource()
@@ -906,10 +931,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResource_Virtual();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter <em>Resource Parameter</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter
+	 * <em>Resource Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for class '<em>Resource Parameter</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResourceParameter
 	 * @generated
@@ -917,10 +943,11 @@ public interface CatalogPackage extends EPackage {
 	EClass getCatalogResourceParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '
+	 * {@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getName()
 	 * @see #getCatalogResourceParameter()
@@ -929,10 +956,11 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResourceParameter_Name();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute list '
+	 * {@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute list '<em>Value</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getValue()
 	 * @see #getCatalogResourceParameter()
@@ -944,7 +972,7 @@ public interface CatalogPackage extends EPackage {
 	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.catalog.Taggable <em>Taggable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for class '<em>Taggable</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Taggable
 	 * @generated
@@ -952,10 +980,11 @@ public interface CatalogPackage extends EPackage {
 	EClass getTaggable();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link com.puppetlabs.geppetto.catalog.Taggable#getTags <em>Tags</em>}'.
+	 * Returns the meta object for the attribute list '{@link com.puppetlabs.geppetto.catalog.Taggable#getTags
+	 * <em>Tags</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the meta object for the attribute list '<em>Tags</em>'.
 	 * @see com.puppetlabs.geppetto.catalog.Taggable#getTags()
 	 * @see #getTaggable()

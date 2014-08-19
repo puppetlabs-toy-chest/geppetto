@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.ImportExpressionImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ImportExpressionImpl extends ExpressionImpl implements ImportExpression {
@@ -40,7 +40,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValues()
 	 * @generated
 	 * @ordered
@@ -50,7 +50,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ImportExpressionImpl() {
@@ -60,7 +60,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -75,7 +75,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -90,7 +90,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -105,7 +105,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -123,7 +123,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -134,7 +134,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -150,13 +150,14 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<IQuotedString> getValues() {
 		if(values == null) {
 			values = new EObjectContainmentEList<IQuotedString>(
-				IQuotedString.class, this, PPPackage.IMPORT_EXPRESSION__VALUES);
+					IQuotedString.class, this, PPPackage.IMPORT_EXPRESSION__VALUES);
 		}
 		return values;
 	}

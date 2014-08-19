@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.LiteralBooleanImpl#isValue <em>Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class LiteralBooleanImpl extends LiteralExpressionImpl implements LiteralBoolean {
@@ -34,7 +34,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	 * The default value of the '{@link #isValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isValue()
 	 * @generated
 	 * @ordered
@@ -45,7 +45,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	 * The cached value of the '{@link #isValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isValue()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected LiteralBooleanImpl() {
@@ -65,7 +65,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -80,7 +80,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -95,7 +95,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -111,7 +111,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -122,7 +122,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -138,9 +138,10 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isValue() {
 		return value;
 	}
@@ -148,9 +149,10 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setValue(boolean newValue) {
 		boolean oldValue = value;
 		value = newValue;
@@ -161,7 +163,7 @@ public class LiteralBooleanImpl extends LiteralExpressionImpl implements Literal
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

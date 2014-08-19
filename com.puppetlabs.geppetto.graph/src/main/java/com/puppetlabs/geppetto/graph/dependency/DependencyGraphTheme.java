@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import com.google.inject.Singleton;
 
 /**
  * Extends the default style theme with dependency graph specifics.
- * 
+ *
  */
 @Singleton
 public class DependencyGraphTheme extends DefaultStyleTheme implements DependencyGraphStyles {
@@ -45,7 +45,7 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 	public static final String COLOR__ORANGE = "#ffa144";
 
 	/* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.graph.style.themes.DefaultStyleTheme#getInstanceRules() */
 	@Override
 	public Collection<Rule> getInstanceRules() {
@@ -87,7 +87,7 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 			styles.tooltip("Stack"), //
 			styles.id(functions.idClassReplacer()), //
 			styles.href("") //
-		));
+				));
 
 		// Unresolved DefaultModules (i.e. one that does not exist)
 		Collections.addAll(rules, Select.vertex(STYLE_CLASS_UNRESOLVED_MODULE).withStyles(//
@@ -98,14 +98,14 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 			styles.id(functions.idClassReplacer()), //
 			styles.tooltip("Unresolved Module") //
 
-		));
+				));
 
 		// vertex representing a list of imports
 		Collections.addAll(rules, Select.vertex(STYLE_CLASS_IMPORTS).withStyles(//
 			styles.fontSize(7), //
 			styles.shape(NodeShape.rectangle), //
 			styles.id(functions.idClassReplacer()) //
-		));
+				));
 
 		// vertex representing a list of unresolved imports
 		Collections.addAll(rules, Select.vertex(STYLE_CLASS_UNRESOLVED_IMPORTS).withStyles(//
@@ -115,12 +115,12 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 			styles.shapeBrush(LineType.dotted, 1.0, true, true), //
 			styles.id(functions.idClassReplacer()), //
 			styles.shape(NodeShape.rectangle) //
-		));
+				));
 
 		// -- LABEL STYLES
 		Collections.addAll(rules, Select.table(STYLE__IMPORT_TABLE).withStyles(//
 			styles.rendered(true) // import tables always render the table (it is by definition not empty).
-		));
+				));
 
 		// cells in import tables should be left adjusted
 		Collections.addAll(rules, //
@@ -130,10 +130,10 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 		Collections.addAll(rules, Select.cell(STYLE__IMPORT_AMBIGUOUS_NAME_CELL).withStyles(//
 			styles.tooltip("Found in more than one module (possibly in the module itself)"), //
 			styles.color(COLOR__ORANGE) // same as edge label text
-		));
+				));
 		Collections.addAll(rules, Select.cell(STYLE__IMPORT_TYPE_CELL).withStyles(//
 			styles.color(COLOR__DARK_GREY) // same as edge label text
-		));
+				));
 
 		// ---EDGE STYLES
 
@@ -142,7 +142,7 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 			styles.arrowHead(Arrow.none), //
 			styles.weight(3.0), // Bring it close to module
 			styles.id(functions.idClassReplacer()) //
-		));
+				));
 
 		// Edge between module and unresolved imported list
 		Collections.addAll(rules, Select.edge(STYLE_EDGE__UIMPORT).withStyles(//
@@ -151,13 +151,13 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 			styles.lineColor(ERROR_COLOR), //
 			styles.weight(3.0), // Bring it close to module
 			styles.id(functions.idClassReplacer()) //
-		));
+				));
 
 		// Edge between list or module and resolved module
 		Collections.addAll(rules, Select.edge(STYLE_EDGE__RESOLVED_DEP).withStyles(//
 			styles.arrowHead(Arrow.vee), //
 			styles.id(functions.idClassReplacer()) //
-		));
+				));
 
 		// Edge between list or module and resolved module
 		Collections.addAll(rules, Select.edge(STYLE_EDGE__UNRESOLVED_DEP).withStyles(//
@@ -165,7 +165,7 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 			styles.arrowHead(Arrow.vee), //
 			styles.lineColor(ERROR_COLOR), //
 			styles.id(functions.idClassReplacer()) //
-		));
+				));
 
 		// Edge between list or module and resolved module
 		Collections.addAll(rules, Select.edge(STYLE_EDGE__UNRESOLVED_IMPLIED_DEP).withStyles(//
@@ -174,14 +174,14 @@ public class DependencyGraphTheme extends DefaultStyleTheme implements Dependenc
 			styles.lineColor(ERROR_COLOR), //
 			styles.lineBrush(LineType.dotted, 1.0), //
 			styles.id(functions.idClassReplacer()) //
-		));
+				));
 
 		// Edge between list or module and resolved module
 		Collections.addAll(rules, Select.edge(STYLE_EDGE__IMPLIED_DEP).withStyles(//
 			styles.arrowHead(Arrow.vee), //
 			styles.lineBrush(LineType.dotted, 1.0), //
 			styles.id(functions.idClassReplacer()) //
-		));
+				));
 
 		return rules;
 	}

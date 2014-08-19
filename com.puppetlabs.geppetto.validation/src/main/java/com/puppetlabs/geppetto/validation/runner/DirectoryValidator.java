@@ -111,7 +111,7 @@ public class DirectoryValidator {
 				if(!(length == 8 //
 						||
 						(length == 11 && lcname.endsWith(".rb")) //
-				|| (length == 13 && lcname.endsWith(".rake"))))
+						|| (length == 13 && lcname.endsWith(".rake"))))
 					return false;
 			}
 			else if(!lcname.endsWith(".rake")) {
@@ -318,8 +318,8 @@ public class DirectoryValidator {
 			if(filesOnPath.add(f)) {
 				nonRootsOnPath.add(f);
 				resourcesOnPath.add(URI.createFileURI(Forge.MODULEFILE_NAME.equals(f.getName())
-						? new File(f.getParentFile(), Forge.METADATA_JSON_NAME).getPath()
-						: f.getPath()));
+					? new File(f.getParentFile(), Forge.METADATA_JSON_NAME).getPath()
+							: f.getPath()));
 			}
 		}
 
@@ -334,6 +334,7 @@ public class DirectoryValidator {
 
 			if(options.isCheckModuleSemantics()) {
 				CancelIndicator cancelMonitor = new CancelIndicator() {
+					@Override
 					public boolean isCanceled() {
 						return ticker.isCanceled();
 					}
@@ -549,7 +550,7 @@ public class DirectoryValidator {
 			URI platformURI = options.getPlatformURI();
 			ppRunner.loadResource(platformURI != null
 					? platformURI
-					: PuppetTarget.getDefault().getPlatformURI());
+							: PuppetTarget.getDefault().getPlatformURI());
 		}
 		catch(IOException e) {
 			addExceptionDiagnostic("Internal Error: Could not load pptp.", e);
@@ -636,7 +637,7 @@ public class DirectoryValidator {
 				+ rakeFiles.size() * 2 //
 				+ 1 // load pptp
 				+ 1 // "for the pot" (to make sure there is a final tick to report)
-		;
+				;
 
 		final SubMonitor ticker = SubMonitor.convert(monitor, workload); // TODO: scaling
 
@@ -718,6 +719,7 @@ public class DirectoryValidator {
 		// File slowCandidate = new File("/Users/henrik/gitrepos/forge-modules/jeffmccune-mockbuild/manifests/init.pp");
 
 		final CancelIndicator cancelMonitor = new CancelIndicator() {
+			@Override
 			public boolean isCanceled() {
 				return ticker.isCanceled();
 			}
@@ -726,7 +728,7 @@ public class DirectoryValidator {
 			File f = r.getKey();
 			long beforeTime = System.currentTimeMillis();
 			boolean profileThis = false; // /* for debugging slow file */
-											// f.equals(slowCandidate);
+			// f.equals(slowCandidate);
 			if(options.isCheckReferences())
 				ppRunner.resolveCrossReferences(r.getValue(), profileThis, ticker);
 			long afterTime = System.currentTimeMillis();

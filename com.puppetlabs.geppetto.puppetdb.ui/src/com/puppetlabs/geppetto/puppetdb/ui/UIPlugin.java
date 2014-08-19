@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,12 +29,6 @@ import org.osgi.framework.BundleContext;
  */
 public final class UIPlugin extends EMFPlugin implements BundleActivator {
 
-	private BundleContext context;
-
-	private EclipseUIPlugin plugin;
-
-	private static UIPlugin INSTANCE;
-
 	public static Image createdImage(String file) {
 		return ExtendedImageRegistry.INSTANCE.getImageDescriptor(getInstance().getImage(file)).createImage();
 	}
@@ -50,7 +44,7 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 		String msg = getInstance().getString(key);
 		return params.length == 0
 				? msg
-				: MessageFormat.format(msg, params);
+						: MessageFormat.format(msg, params);
 	}
 
 	public static void logException(String message, Exception e) {
@@ -62,6 +56,12 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 		Bundle bundle = instance.getContext().getBundle();
 		Platform.getLog(bundle).log(new Status(IStatus.ERROR, bundle.getSymbolicName(), message, e));
 	}
+
+	private BundleContext context;
+
+	private EclipseUIPlugin plugin;
+
+	private static UIPlugin INSTANCE;
 
 	public UIPlugin() {
 		super(new ResourceLocator[] {});

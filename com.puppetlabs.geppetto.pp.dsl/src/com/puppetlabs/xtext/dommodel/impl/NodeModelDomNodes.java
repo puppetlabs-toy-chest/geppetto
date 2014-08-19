@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,7 +15,7 @@ import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * Adapts INode to IDomNode
- * 
+ *
  */
 public class NodeModelDomNodes {
 	// public class NodeModelCompositeNode extends NodeModelNode {
@@ -175,7 +175,7 @@ public class NodeModelDomNodes {
 	 * Static method that adapts an INode (being either an ICompositeNode or ILeafNode) to an IDomNode
 	 * TODO: Implement this - the first implementation above creates lots of new isntances, and have
 	 * issues with part of the contract.
-	 * 
+	 *
 	 * @param node
 	 * @param parent
 	 * @return

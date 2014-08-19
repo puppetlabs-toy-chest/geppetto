@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -54,7 +54,7 @@ import com.google.inject.Inject;
  * Extends Serializer and modifies the API (ITokenStream based formatting/output not supported).
  * Use Serializer methods that does not take ITokenStream as an argument.
  * TODO: This is a temporary solution.
- * 
+ *
  */
 public class DomBasedSerializer extends Serializer {
 
@@ -148,14 +148,14 @@ public class DomBasedSerializer extends Serializer {
 	private FormattingOption formatting(SaveOptions options) {
 		return options.isFormatting()
 				? FormattingOption.Format
-				: FormattingOption.PreserveWhitespace;
+						: FormattingOption.PreserveWhitespace;
 	}
 
 	/**
 	 * NOTE: This overridden method is required to initialize the DomModelSequences.
 	 * The base implementation checks if the tokens parameter is a specific adapter, and
 	 * then initializes it. This method does the same but for DomModelSequenceAdapter.
-	 * 
+	 *
 	 */
 	@Override
 	protected void serialize(EObject semanticObject, EObject context, ISequenceAcceptor tokens,
@@ -279,9 +279,10 @@ public class DomBasedSerializer extends Serializer {
 	}
 
 	/**
-	 * Serialize and return the resulting DOM. This is the same as calling {@link #serializeToDom(EObject, boolean, ICommentReconcilement)} with a
+	 * Serialize and return the resulting DOM. This is the same as calling
+	 * {@link #serializeToDom(EObject, boolean, ICommentReconcilement)} with a
 	 * null ICommentReconciliator.
-	 * 
+	 *
 	 * @param obj
 	 * @param preserveWhitespace
 	 * @return
@@ -292,7 +293,7 @@ public class DomBasedSerializer extends Serializer {
 
 	/**
 	 * Serialize and return the resulting DOM.
-	 * 
+	 *
 	 * @param obj
 	 * @param preserveWhitespace
 	 * @return

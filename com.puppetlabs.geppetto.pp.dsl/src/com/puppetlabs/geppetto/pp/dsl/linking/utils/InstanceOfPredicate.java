@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,7 +17,7 @@ import com.google.common.base.Predicate;
 
 /**
  * Predicate that tests if a given IEObjectDescription's type is an instance of a set of given classes.
- * 
+ *
  */
 public class InstanceOfPredicate implements Predicate<IEObjectDescription> {
 
@@ -29,7 +29,7 @@ public class InstanceOfPredicate implements Predicate<IEObjectDescription> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.google.common.base.Predicate#apply(java.lang.Object)
 	 */
 	@Override

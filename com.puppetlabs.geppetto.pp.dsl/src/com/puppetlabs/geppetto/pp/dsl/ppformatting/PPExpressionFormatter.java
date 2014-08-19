@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -86,7 +86,7 @@ import com.google.inject.Inject;
 
 /**
  * @author henrik
- * 
+ *
  */
 public class PPExpressionFormatter {
 
@@ -101,7 +101,7 @@ public class PPExpressionFormatter {
 	IFormattingContext formattingContext;
 
 	private PolymorphicDispatcher<Void> formatDispatcher = new PolymorphicDispatcher<Void>(
-		"_format", 2, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Void> get()) {
+			"_format", 2, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Void> get()) {
 		@Override
 		protected Void handleNoSuchMethod(Object... params) {
 			return null;
@@ -487,7 +487,7 @@ public class PPExpressionFormatter {
 
 	/**
 	 * TODO: Column collections
-	 * 
+	 *
 	 * @param o
 	 * @param stream
 	 */
@@ -515,8 +515,8 @@ public class PPExpressionFormatter {
 			MeasuredTextFlow inner = new MeasuredTextFlow(formattingContext);
 			// if e is not a SelectorEntry, it is really a syntax error, but do something reasonable
 			doFormat(e instanceof SelectorEntry
-					? ((SelectorEntry) e).getLeftExpr()
-					: e, inner);
+				? ((SelectorEntry) e).getLeftExpr()
+						: e, inner);
 			width = inner.getWidth();
 		}
 		for(Expression e : o.getParameters()) {

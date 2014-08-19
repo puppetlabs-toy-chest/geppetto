@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -93,7 +93,7 @@ public class FlowLayout extends AbstractLayoutManager implements ILayoutManager 
 
 	/**
 	 * Formats the node without any checks for whitespace preservation or matching the contexts formatting region.
-	 * 
+	 *
 	 * @param styleSet
 	 * @param node
 	 * @param output
@@ -111,7 +111,7 @@ public class FlowLayout extends AbstractLayoutManager implements ILayoutManager 
 		final Integer widthObject = styleSet.getStyleValue(WidthStyle.class, node);
 		final int width = widthObject == null
 				? textLength
-				: widthObject.intValue();
+						: widthObject.intValue();
 		final int diff = width - textLength;
 
 		switch(alignment) {

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -24,7 +24,7 @@ import com.puppetlabs.geppetto.ruby.RubySyntaxException;
  * The interface for a ruby service that provides parsing (to produce syntax
  * errors and warnings), and puppet specific parsing services such as finding
  * custom functions and types.
- * 
+ *
  */
 public interface IRubyServices {
 
@@ -35,7 +35,7 @@ public interface IRubyServices {
 	/**
 	 * Turns the array called "@levels" in class Puppet::Utils::Log into
 	 * functions (one per level defined in the array).
-	 * 
+	 *
 	 * @param file
 	 *            - the "Log.rb" file in a puppet distro
 	 * @return
@@ -46,7 +46,7 @@ public interface IRubyServices {
 
 	/**
 	 * Loads a PPTypeInfo describing metaparameters.
-	 * 
+	 *
 	 * @param file
 	 *            - should typically reference 'Type.rb' in a puppet
 	 *            distribution.
@@ -61,7 +61,7 @@ public interface IRubyServices {
 	/**
 	 * Produce a Map of taks to description mapping. For tasks without a description, the description
 	 * should be set ot an empty string.
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -77,7 +77,7 @@ public interface IRubyServices {
 	 * Parses and returns additional properties from a ruby file - such "extra"
 	 * properties are returned as a PPTypeInfo that is partially filled with
 	 * information.
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -86,11 +86,11 @@ public interface IRubyServices {
 	public List<PPTypeInfo> getTypePropertiesInfo(File file) throws IOException, RubySyntaxException;
 
 	public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException,
-			RubySyntaxException;
+	RubySyntaxException;
 
 	/**
 	 * Indicates if this is a real service or one that produces no results.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isMockService();

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -21,6 +21,19 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Diagnostic implements Serializable, Iterable<Diagnostic> {
+	/**
+	 * Return the severity as a string. The string &quot;UNKNOWN(&lt;severity&gt;)&quot; will be returned if the
+	 * argument represents an unknown severity.
+	 *
+	 * @param severity
+	 * @return A string representing the severity
+	 */
+	public static String getSeverityString(int severity) {
+		return severity >= 0 && severity < severityStrings.length
+				? severityStrings[severity]
+						: format("UNKNOWN(%d)", severity);
+	}
+
 	public static final DiagnosticType CHAIN = new DiagnosticType("CHAIN", Diagnostic.class.getName());
 
 	private static final long serialVersionUID = 1L;
@@ -38,19 +51,6 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	public static final int OK = 0;
 
 	private static final String[] severityStrings = new String[] { "OK", "DEBUG", "INFO", "WARNING", "ERROR", "FATAL" };
-
-	/**
-	 * Return the severity as a string. The string &quot;UNKNOWN(&lt;severity&gt;)&quot; will be returned if the
-	 * argument represents an unknown severity.
-	 * 
-	 * @param severity
-	 * @return A string representing the severity
-	 */
-	public static String getSeverityString(int severity) {
-		return severity >= 0 && severity < severityStrings.length
-				? severityStrings[severity]
-				: format("UNKNOWN(%d)", severity);
-	}
 
 	private long timestamp;
 
@@ -73,7 +73,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 	/**
 	 * Creates a new Diagnostic instance
-	 * 
+	 *
 	 * @param severity
 	 *            Severity (see constants in {@link MessageWithSeverity})
 	 * @param type
@@ -111,7 +111,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 	/**
 	 * Implementors may want to override this method for direct logging purposes
-	 * 
+	 *
 	 * @param child
 	 *            The child that was added to this instance
 	 */
@@ -122,7 +122,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	public List<Diagnostic> getChildren() {
 		return children == null
 				? Collections.<Diagnostic> emptyList()
-				: children;
+						: children;
 	}
 
 	public String getErrorText() {
@@ -134,7 +134,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	/**
 	 * Scans the children, depth first, until an ExceptionDiagnostic is found. The exception held by that diagnostic is
 	 * return.
-	 * 
+	 *
 	 * @return The first exception found or <code>null</code> if no exception exists.
 	 */
 	public Exception getException() {
@@ -149,7 +149,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 	/**
 	 * Returns <tt>null</tt> unless subclassed
-	 * 
+	 *
 	 * @return <tt>null</tt>
 	 * @see FileDiagnostic
 	 */
@@ -161,7 +161,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	 * The issue is a String naming a particular issue that makes it possible to have a more detailed understanding of
 	 * an error and what could be done to repair it. (As opposed to parsing the error message to gain an understanding).
 	 * Error messages may
-	 * 
+	 *
 	 * @return the value of the '<em>issue</em>' attribute.
 	 */
 	public String getIssue() {
@@ -172,7 +172,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	 * The issue data is optional data associated with a particular issue - it is typically used to pass values
 	 * calculated during validation and that may be meaningful to code that tries to repair or analyze a particular
 	 * problem and where it may be expensive to recompute these values.
-	 * 
+	 *
 	 * @return the value of the '<em>issueData</em>' attribute.
 	 */
 	public String[] getIssueData() {
@@ -181,7 +181,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 	/**
 	 * Returns <tt>-1</tt> unless subclassed
-	 * 
+	 *
 	 * @return <tt>-1</tt>
 	 * @see FileDiagnostic
 	 */
@@ -192,7 +192,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	/**
 	 * Returns the result of calling {{@link #appendLocationLabel(StringBuilder, boolean)} on a StringBuilder or
 	 * <tt>null</tt> if no location label is present.
-	 * 
+	 *
 	 * @param withOffsets
 	 *            Flag that indicates if offsets from the beginning of file are of interest (can be used for
 	 *            highlighting in editors).
@@ -203,7 +203,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 		StringBuilder bld = new StringBuilder();
 		return appendLocationLabel(bld, withOffsets)
 				? bld.toString()
-				: null;
+						: null;
 	}
 
 	/**
@@ -249,7 +249,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 	/**
 	 * This method is needed by net.sf.json but should not otherwise be used.
-	 * 
+	 *
 	 * @param children
 	 *            The new children to set
 	 * @see #addChild(Diagnostic)
@@ -270,7 +270,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 	/**
 	 * Ensures that the severity of the diagnostic and all its children is equal to or below the given <code>max</code>.
-	 * 
+	 *
 	 * @param max
 	 *            The max severity
 	 */
@@ -328,7 +328,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 		String resourcePath = getFile() == null
 				? null
-				: getFile().getPath();
+						: getFile().getPath();
 
 		if(getMessage() == null && resourcePath == null) {
 			if(children == null) {

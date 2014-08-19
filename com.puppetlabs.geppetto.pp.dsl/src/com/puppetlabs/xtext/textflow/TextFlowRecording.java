@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 
 /**
  * An implementation of ITextFlow that records and measures the appended content.
- * 
+ *
  */
 public class TextFlowRecording extends MeasuredTextFlow implements ITextFlow.Recording {
 
@@ -30,6 +30,7 @@ public class TextFlowRecording extends MeasuredTextFlow implements ITextFlow.Rec
 			this.count = count;
 		}
 
+		@Override
 		public void visit(ITextFlow stream) {
 			stream.appendBreaks(count);
 		}
@@ -42,6 +43,7 @@ public class TextFlowRecording extends MeasuredTextFlow implements ITextFlow.Rec
 			this.change = change;
 		}
 
+		@Override
 		public void visit(ITextFlow stream) {
 			stream.changeIndentation(change);
 		}
@@ -54,6 +56,7 @@ public class TextFlowRecording extends MeasuredTextFlow implements ITextFlow.Rec
 			this.count = count;
 		}
 
+		@Override
 		public void visit(ITextFlow stream) {
 			stream.setIndentation(count);
 		}
@@ -66,6 +69,7 @@ public class TextFlowRecording extends MeasuredTextFlow implements ITextFlow.Rec
 			this.count = count;
 		}
 
+		@Override
 		public void visit(ITextFlow stream) {
 			stream.appendSpaces(count);
 		}
@@ -78,6 +82,7 @@ public class TextFlowRecording extends MeasuredTextFlow implements ITextFlow.Rec
 			this.text = s;
 		}
 
+		@Override
 		public void visit(ITextFlow stream) {
 			stream.appendText(text);
 		}

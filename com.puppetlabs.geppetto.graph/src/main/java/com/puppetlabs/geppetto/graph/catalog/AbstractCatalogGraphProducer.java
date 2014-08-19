@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 
 /**
  * Functionality common to Catalog Graph producers.
- * 
+ *
  */
 public class AbstractCatalogGraphProducer implements CatalogGraphStyles {
 
@@ -87,7 +87,7 @@ public class AbstractCatalogGraphProducer implements CatalogGraphStyles {
 
 	/**
 	 * Adds "exported" and "virtual" as pseudo parameters if they are set to true.
-	 * 
+	 *
 	 * @param r
 	 * @return
 	 */
@@ -116,7 +116,7 @@ public class AbstractCatalogGraphProducer implements CatalogGraphStyles {
 
 	/**
 	 * Convenience method to get a SVGProducer loaded with the same injector.
-	 * 
+	 *
 	 * @return
 	 */
 	public SVGProducer getSVGProducer() {

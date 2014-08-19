@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -23,14 +23,14 @@ import com.puppetlabs.geppetto.semver.Version;
 public interface Cache {
 	/**
 	 * Delete all cached files.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	void clean() throws IOException;
 
 	/**
 	 * Returns the location of this cache.
-	 * 
+	 *
 	 * @return The directory where all files are cached.
 	 */
 	File getLocation();
@@ -39,7 +39,7 @@ public interface Cache {
 	 * Retrieve the file for the given version of a module. If the file
 	 * is found locally then that file is return. Otherwise an attempt
 	 * is made to download the file from the remote Forge service.
-	 * 
+	 *
 	 * @param qname
 	 * @param version
 	 * @return

@@ -33,16 +33,6 @@ public class PreferencedBasedValidationAdvisor implements IModuleValidationAdvis
 	}
 
 	@Override
-	public ValidationPreference getModuleNameNotStrict() {
-		return preferenceHelper.getModuleNameNotStrictPreference();
-	}
-
-	@Override
-	public ValidationPreference getModuleRedefinition() {
-		return preferenceHelper.getModuleRedefinitionPreference();
-	}
-
-	@Override
 	public ValidationPreference getModulefileExists() {
 		return preferenceHelper.getModulefileExistsPreference();
 	}
@@ -50,6 +40,16 @@ public class PreferencedBasedValidationAdvisor implements IModuleValidationAdvis
 	@Override
 	public ValidationPreference getModulefileExistsAndIsUsed() {
 		return preferenceHelper.getModulfileExistsAndIsUsedPreference();
+	}
+
+	@Override
+	public ValidationPreference getModuleNameNotStrict() {
+		return preferenceHelper.getModuleNameNotStrictPreference();
+	}
+
+	@Override
+	public ValidationPreference getModuleRedefinition() {
+		return preferenceHelper.getModuleRedefinitionPreference();
 	}
 
 	@Override

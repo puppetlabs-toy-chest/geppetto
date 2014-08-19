@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -45,11 +45,13 @@ import com.google.inject.Provider;
 public class ContentFormatterFactory implements IContentFormatterFactory {
 
 	public class ContentFormatter implements IContentFormatter {
+		@Override
 		public void format(IDocument document, IRegion region) {
 			IXtextDocument doc = (IXtextDocument) document;
 			doc.modify(new FormattingUnitOfWork(doc, region));
 		}
 
+		@Override
 		public IFormattingStrategy getFormattingStrategy(String contentType) {
 			return null;
 		}
@@ -69,6 +71,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 			doc.readOnly(DummyReadOnly.Instance);
 		}
 
+		@Override
 		public ReplaceRegion exec(XtextResource state) throws Exception {
 
 			// Do not format if there are syntax errors
@@ -143,6 +146,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 	@Inject
 	IHiddenTokenHelper hiddenTokenHelper;
 
+	@Override
 	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
 		// TODO: pick up important information about viewer and pass on

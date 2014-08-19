@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -27,14 +27,14 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @deprecated
 	 * @generated
 	 */
@@ -47,12 +47,12 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public static PPTPFactory init() {
 		try {
-			PPTPFactory thePPTPFactory = (PPTPFactory) EPackage.Registry.INSTANCE.getEFactory("http://www.puppetlabs.com/geppetto/1.0.0/PPTP");
+			PPTPFactory thePPTPFactory = (PPTPFactory) EPackage.Registry.INSTANCE.getEFactory(PPTPPackage.eNS_URI);
 			if(thePPTPFactory != null) {
 				return thePPTPFactory;
 			}
@@ -67,7 +67,7 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public PPTPFactoryImpl() {
@@ -77,7 +77,7 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public String convertFileToString(EDataType eDataType, Object instanceValue) {
@@ -87,7 +87,7 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -104,7 +104,7 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -138,7 +138,7 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public File createFileFromString(EDataType eDataType, String initialValue) {
@@ -148,7 +148,7 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -165,9 +165,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Function createFunction() {
 		FunctionImpl function = new FunctionImpl();
 		return function;
@@ -176,9 +177,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public MetaType createMetaType() {
 		MetaTypeImpl metaType = new MetaTypeImpl();
 		return metaType;
@@ -187,9 +189,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public MetaVariable createMetaVariable() {
 		MetaVariableImpl metaVariable = new MetaVariableImpl();
 		return metaVariable;
@@ -198,9 +201,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public NameSpace createNameSpace() {
 		NameSpaceImpl nameSpace = new NameSpaceImpl();
 		return nameSpace;
@@ -209,9 +213,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
@@ -220,9 +225,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
 		return property;
@@ -231,9 +237,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public PuppetDistribution createPuppetDistribution() {
 		PuppetDistributionImpl puppetDistribution = new PuppetDistributionImpl();
 		return puppetDistribution;
@@ -242,9 +249,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public TPVariable createTPVariable() {
 		TPVariableImpl tpVariable = new TPVariableImpl();
 		return tpVariable;
@@ -253,9 +261,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Type createType() {
 		TypeImpl type = new TypeImpl();
 		return type;
@@ -264,9 +273,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public TypeFragment createTypeFragment() {
 		TypeFragmentImpl typeFragment = new TypeFragmentImpl();
 		return typeFragment;
@@ -275,9 +285,10 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public PPTPPackage getPPTPPackage() {
 		return (PPTPPackage) getEPackage();
 	}

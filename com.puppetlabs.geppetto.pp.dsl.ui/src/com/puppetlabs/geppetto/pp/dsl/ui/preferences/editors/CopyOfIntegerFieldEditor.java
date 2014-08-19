@@ -25,7 +25,7 @@ public class CopyOfIntegerFieldEditor extends StringFieldEditor {
 
 	/**
 	 * Creates an integer field editor.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the preference this field editor works on
 	 * @param labelText
@@ -40,7 +40,7 @@ public class CopyOfIntegerFieldEditor extends StringFieldEditor {
 	/**
 	 * Creates an integer field editor.
 	 * To set the number of allowed characters use {@link #setTextLimit(int)}.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the preference this field editor works on
 	 * @param labelText
@@ -106,7 +106,7 @@ public class CopyOfIntegerFieldEditor extends StringFieldEditor {
 			controlDecoration.setImage(fieldDecoration.getImage());
 			return controlDecoration;
 		}
-	*/
+	 */
 
 	/*
 	 * (non-Javadoc)
@@ -117,7 +117,7 @@ public class CopyOfIntegerFieldEditor extends StringFieldEditor {
 		Text text = getTextControl();
 		if(text != null) {
 			int value = getPreferenceStore().getInt(getPreferenceName());
-			text.setText(String.valueOf(value));//$NON-NLS-1$
+			text.setText(String.valueOf(value));
 			oldValue = "" + value; //$NON-NLS-1$
 		}
 
@@ -152,7 +152,7 @@ public class CopyOfIntegerFieldEditor extends StringFieldEditor {
 
 	/**
 	 * Returns this field editor's current value as an integer.
-	 * 
+	 *
 	 * @return the value
 	 * @exception NumberFormatException
 	 *                if the <code>String</code> does not
@@ -181,7 +181,7 @@ public class CopyOfIntegerFieldEditor extends StringFieldEditor {
 
 	/**
 	 * Sets the range of valid values for this field.
-	 * 
+	 *
 	 * @param min
 	 *            the minimum allowed value (inclusive)
 	 * @param max

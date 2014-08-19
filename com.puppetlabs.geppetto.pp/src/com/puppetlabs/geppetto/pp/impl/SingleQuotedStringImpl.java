@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.SingleQuotedStringImpl#getText <em>Text</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class SingleQuotedStringImpl extends StringExpressionImpl implements SingleQuotedString {
@@ -34,7 +34,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	 * The default value of the '{@link #getText() <em>Text</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getText()
 	 * @generated
 	 * @ordered
@@ -45,7 +45,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	 * The cached value of the '{@link #getText() <em>Text</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getText()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected SingleQuotedStringImpl() {
@@ -65,7 +65,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -80,7 +80,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -88,8 +88,8 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 		switch(featureID) {
 			case PPPackage.SINGLE_QUOTED_STRING__TEXT:
 				return TEXT_EDEFAULT == null
-						? text != null
-						: !TEXT_EDEFAULT.equals(text);
+				? text != null
+				: !TEXT_EDEFAULT.equals(text);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -97,7 +97,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -113,7 +113,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -140,9 +140,10 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getText() {
 		return text;
 	}
@@ -150,9 +151,10 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setText(String newText) {
 		String oldText = text;
 		text = newText;
@@ -163,7 +165,7 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

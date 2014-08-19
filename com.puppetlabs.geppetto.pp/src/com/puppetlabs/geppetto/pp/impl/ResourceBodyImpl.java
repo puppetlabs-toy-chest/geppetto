@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.ResourceBodyImpl#getNameExpr <em>Name Expr</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
@@ -40,7 +40,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getAttributes()
 	 * @generated
 	 * @ordered
@@ -51,7 +51,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	 * The cached value of the '{@link #getNameExpr() <em>Name Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getNameExpr()
 	 * @generated
 	 * @ordered
@@ -61,7 +61,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected ResourceBodyImpl() {
@@ -71,7 +71,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetAttributes(AttributeOperations newAttributes, NotificationChain msgs) {
@@ -91,7 +91,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetNameExpr(Expression newNameExpr, NotificationChain msgs) {
@@ -111,7 +111,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -128,7 +128,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -145,7 +145,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -162,7 +162,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -181,7 +181,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -192,7 +192,7 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -211,9 +211,10 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AttributeOperations getAttributes() {
 		return attributes;
 	}
@@ -221,9 +222,10 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getNameExpr() {
 		return nameExpr;
 	}
@@ -231,18 +233,19 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setAttributes(AttributeOperations newAttributes) {
 		if(newAttributes != attributes) {
 			NotificationChain msgs = null;
 			if(attributes != null)
 				msgs = ((InternalEObject) attributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.RESOURCE_BODY__ATTRIBUTES, null, msgs);
+					PPPackage.RESOURCE_BODY__ATTRIBUTES, null, msgs);
 			if(newAttributes != null)
 				msgs = ((InternalEObject) newAttributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.RESOURCE_BODY__ATTRIBUTES, null, msgs);
+					PPPackage.RESOURCE_BODY__ATTRIBUTES, null, msgs);
 			msgs = basicSetAttributes(newAttributes, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -255,18 +258,19 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setNameExpr(Expression newNameExpr) {
 		if(newNameExpr != nameExpr) {
 			NotificationChain msgs = null;
 			if(nameExpr != null)
 				msgs = ((InternalEObject) nameExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.RESOURCE_BODY__NAME_EXPR, null, msgs);
+					PPPackage.RESOURCE_BODY__NAME_EXPR, null, msgs);
 			if(newNameExpr != null)
 				msgs = ((InternalEObject) newNameExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.RESOURCE_BODY__NAME_EXPR, null, msgs);
+					PPPackage.RESOURCE_BODY__NAME_EXPR, null, msgs);
 			msgs = basicSetNameExpr(newNameExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();

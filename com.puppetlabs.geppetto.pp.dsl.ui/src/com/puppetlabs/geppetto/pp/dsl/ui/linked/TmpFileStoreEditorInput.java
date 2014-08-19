@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -18,7 +18,7 @@ import org.eclipse.ui.ide.FileStoreEditorInput;
 /**
  * An implementation of filestore that indicates that the file is a temporary
  * "untitled" file.
- * 
+ *
  */
 public class TmpFileStoreEditorInput extends FileStoreEditorInput {
 	/**

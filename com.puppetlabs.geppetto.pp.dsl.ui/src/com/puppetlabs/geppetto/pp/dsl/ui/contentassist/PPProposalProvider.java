@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -253,7 +253,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.ui.contentassist.AbstractPPProposalProvider#completeAttributeOperation_Op(org.eclipse.emf.ecore.EObject,
 	 * org.eclipse.xtext.Assignment, org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext,
 	 * org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor)
@@ -443,8 +443,8 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 
 				// get the fqn (skip the '$') of the name to complete
 				QualifiedName fqn = converter.toQualifiedName(prefix.substring(bracedInput
-						? 0
-						: 1));
+					? 0
+							: 1));
 
 				// turn global references '::x' into non global
 				if(fqn.getSegmentCount() > 1 && fqn.getSegment(0).length() == 0)
@@ -511,8 +511,8 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 
 					// since $ is in icon, not needed in description (just makes it more difficult to read).
 					StyledString styledDescription = new StyledString(b.substring(bracedInput
-							? 0
-							: 1));
+						? 0
+								: 1));
 					styledDescription.append(typeSuffix(d));
 					ConfigurableCompletionProposal proposal = doCreateProposal(
 						b.toString(), styledDescription, image, getPriorityHelper().getDefaultPriority(), context);
@@ -532,10 +532,11 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 	/**
 	 * Remove variables/entries that are not yet initialized. These are the values
 	 * defined in the same name and type if the variable is contained in a definition argument
-	 * 
+	 *
 	 * <p>
-	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or x are disqualified.
-	 * 
+	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or
+	 * x are disqualified.
+	 *
 	 * @param descs
 	 * @param o
 	 * @return the number of disqualified variables removed from the list
@@ -571,10 +572,11 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 	/**
 	 * Remove variables/entries that are not yet initialized. These are the values
 	 * defined in the same name and type if the variable is contained in a definition argument
-	 * 
+	 *
 	 * <p>
-	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or x are disqualified.
-	 * 
+	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or
+	 * x are disqualified.
+	 *
 	 * @param descs
 	 * @param o
 	 * @return the number of disqualified variables removed from the list

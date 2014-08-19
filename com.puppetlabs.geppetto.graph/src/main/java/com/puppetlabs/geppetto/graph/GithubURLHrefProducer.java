@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,7 +17,7 @@ import com.puppetlabs.geppetto.common.annotations.Nullable;
 /**
  * Producer of HREF attribute suitable for github (e.g. https://github.com/owner/proj/branch/<file>#Lnn).
  * The prefix "https://github.com/<ownder>/<repo>/<branch>/" should be set as the Configurable prefix.
- * 
+ *
  */
 public class GithubURLHrefProducer extends RelativeFileHrefProducer {
 	@Inject(optional = true)
@@ -28,7 +28,7 @@ public class GithubURLHrefProducer extends RelativeFileHrefProducer {
 	/**
 	 * This implementation returns and URL to the file at github at a specific line.
 	 * This requires that the prefix has been set correctly.
-	 * 
+	 *
 	 * @param path
 	 * @param line
 	 * @param start

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
  * A Resource that loads .rb files containing Puppet "target platform"
  * information. Ruby source on particular paths are transformed into PPTP model
  * contents.
- * 
+ *
  */
 public class PptpRubyResource extends ResourceImpl {
 
@@ -115,7 +115,7 @@ public class PptpRubyResource extends ResourceImpl {
 	 * (SOMEROOT/lib/puppet/) parser/functions/F.rb (SOMEROOT/lib/puppet/)
 	 * type/T.rb (SOMEROOT/lib/puppet/) type/FRAGMENTDIR/TypeFragment.rb
 	 * (SOMEROOT/lib/puppet/) type.rb - META TYPE (typically in a distro)
-	 * 
+	 *
 	 * @return
 	 */
 	public static LoadType detectLoadType(URI uri) {
@@ -165,7 +165,7 @@ public class PptpRubyResource extends ResourceImpl {
 
 	/**
 	 * Create an instance with a reference to a resource in Ruby text format.
-	 * 
+	 *
 	 * @param uri
 	 */
 	public PptpRubyResource(URI uri) {
@@ -186,7 +186,7 @@ public class PptpRubyResource extends ResourceImpl {
 	 * Loads one (or more) PPTP Type, PPTP Function, PPTP Meta, or PPTP Fragment
 	 * depending on the type of load (determined by looking at the path to the
 	 * parsed .rb file).
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	protected void internalLoadRuby(InputStream inputStream) throws IOException {
@@ -223,7 +223,7 @@ public class PptpRubyResource extends ResourceImpl {
 						getContents().add(type);
 					}
 				}
-					break;
+				break;
 
 				case FUNCTION: {
 					List<PPFunctionInfo> functions = helper.getFunctionInfo(uri.path(), new InputStreamReader(
@@ -237,7 +237,7 @@ public class PptpRubyResource extends ResourceImpl {
 						getContents().add(pptpFunc);
 					}
 				}
-					break;
+				break;
 
 				case META: {
 					PPTypeInfo info = helper.getMetaTypeInfo(uri.path(), new InputStreamReader(inputStream));
@@ -317,9 +317,10 @@ public class PptpRubyResource extends ResourceImpl {
 	}
 
 	/**
-	 * Translates ruby issues to diagnostics using instances of {@link RubyIssueDiagnostic}. All syntax issues are reported as errors,
+	 * Translates ruby issues to diagnostics using instances of {@link RubyIssueDiagnostic}. All syntax issues are
+	 * reported as errors,
 	 * all others as warnings.
-	 * 
+	 *
 	 * @param parseResult
 	 */
 	protected void rubyIssuesToDiagnostics(IRubyParseResult parseResult) {

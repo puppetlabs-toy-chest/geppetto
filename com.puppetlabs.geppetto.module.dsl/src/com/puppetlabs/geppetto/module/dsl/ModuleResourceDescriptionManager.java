@@ -19,13 +19,13 @@ public class ModuleResourceDescriptionManager extends DefaultResourceDescription
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
 		return folderDiscriminator.isExcluded(candidate.getURI())
 				? false
-				: super.isAffected(deltas, candidate, context);
+						: super.isAffected(deltas, candidate, context);
 	}
 
 	@Override
 	protected boolean isAffected(Collection<QualifiedName> importedNames, IResourceDescription description) {
 		return description == null || folderDiscriminator.isExcluded(description.getURI())
 				? false
-				: super.isAffected(importedNames, description);
+						: super.isAffected(importedNames, description);
 	}
 }

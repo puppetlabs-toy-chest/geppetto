@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -23,7 +23,7 @@ public class TreeNodeLabelProvider extends ColumnLabelProvider {
 
 	/**
 	 * Creates a new instance that represents the column at the given <code>colIdx</code>.
-	 * 
+	 *
 	 * @param colIdx
 	 *            The index of the column represented by this provider
 	 */

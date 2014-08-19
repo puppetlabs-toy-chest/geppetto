@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,7 +28,7 @@ import com.google.common.collect.ImmutableSet;
 
 /**
  * An interface for Facter.
- * 
+ *
  */
 public interface Facter {
 
@@ -69,7 +69,7 @@ public interface Facter {
 
 		/**
 		 * Immutable map of factname to documentation of that fact.
-		 * 
+		 *
 		 * @return
 		 */
 		@Override
@@ -83,7 +83,7 @@ public interface Facter {
 
 		/**
 		 * Immutable map of factname to documentation of that fact.
-		 * 
+		 *
 		 * @return
 		 */
 		@Override
@@ -149,7 +149,7 @@ public interface Facter {
 			"netmask_", "The netmask for a specific network interface (from the list in the $interfaces fact).",// {NETWORK INTERFACE}
 			"network_", "The network for a specific network interface (from the list in the $interfaces fact).",// {NETWORK INTERFACE}
 			"processor", "One fact for each processor, with processor info." // {NUMBER}
-		);
+				);
 
 		private static String EC2DOC = "See EC2 documentation";
 
@@ -328,7 +328,7 @@ public interface Facter {
 
 	/**
 	 * Produce a PPTP instance describing the facts.
-	 * 
+	 *
 	 * @return
 	 */
 	public TargetEntry asPPTP();
@@ -346,14 +346,14 @@ public interface Facter {
 
 	/**
 	 * Information about the fact set.
-	 * 
+	 *
 	 * @return
 	 */
 	public String getVersionString();
 
 	/**
 	 * Check if the given name is a fact.
-	 * 
+	 *
 	 * @return true, if the name is a fact described by this facter.
 	 */
 	public boolean isFactName(String name);

@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.semver;
 
@@ -18,7 +18,7 @@ import java.util.WeakHashMap;
 /**
  * Generic weak key, weak value cache that ensures that all current entries of T are
  * that are equal also are the exact same instance
- * 
+ *
  * @param <T>
  */
 public class WeakCache<T> {
@@ -27,7 +27,7 @@ public class WeakCache<T> {
 	/**
 	 * Return the cached instance of the given value. Cache it if its not in the cache yet.
 	 * The method returns <code>null</code> on <code>null</code> input.
-	 * 
+	 *
 	 * @param value
 	 *            The value to lookup, and perhaps also store, in the cache
 	 * @return The cached value.

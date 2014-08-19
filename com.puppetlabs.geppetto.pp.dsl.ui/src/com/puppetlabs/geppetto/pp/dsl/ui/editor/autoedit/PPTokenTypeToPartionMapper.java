@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -28,12 +28,12 @@ public class PPTokenTypeToPartionMapper extends TokenTypeToStringMapper implemen
 	public final static String SL_COMMENT_PARTITION = "__sl_comment";
 
 	protected static final String[] SUPPORTED_PARTITIONS = new String[] {
-			COMMENT_PARTITION, SL_COMMENT_PARTITION, STRING_LITERAL_PARTITION, REGEX_LITERAL_PARTITION,
-			IDocument.DEFAULT_CONTENT_TYPE };
+		COMMENT_PARTITION, SL_COMMENT_PARTITION, STRING_LITERAL_PARTITION, REGEX_LITERAL_PARTITION,
+		IDocument.DEFAULT_CONTENT_TYPE };
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.model.TokenTypeToStringMapper#calculateId(java.lang.String, int)
 	 */
 	@Override
@@ -83,7 +83,7 @@ public class PPTokenTypeToPartionMapper extends TokenTypeToStringMapper implemen
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper#getPartitionType(int)
 	 */
 	@Override
@@ -93,7 +93,7 @@ public class PPTokenTypeToPartionMapper extends TokenTypeToStringMapper implemen
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper#getSupportedPartitionTypes()
 	 */
 	@Override

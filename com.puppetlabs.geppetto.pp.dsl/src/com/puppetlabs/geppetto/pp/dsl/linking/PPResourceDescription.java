@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -39,7 +39,7 @@ import com.google.inject.Provider;
 
 /**
  * A ResourceDescription for PP that adds specially imported names via resource adapter.
- * 
+ *
  */
 public class PPResourceDescription extends DefaultResourceDescription {
 	private IResourceScopeCache cache;
@@ -61,10 +61,11 @@ public class PPResourceDescription extends DefaultResourceDescription {
 	protected List<PPReferenceDescription> computePPReferenceDescriptions() {
 		if(strategy == null)
 			throw new IllegalStateException(
-				"Configuration not correct. PPResourceDescription requires a PPResourceDescriptionStrategy");
+					"Configuration not correct. PPResourceDescription requires a PPResourceDescriptionStrategy");
 
 		final List<PPReferenceDescription> referenceDescriptions = Lists.newArrayList();
 		IAcceptor<PPReferenceDescription> acceptor = new IAcceptor<PPReferenceDescription>() {
+			@Override
 			public void accept(PPReferenceDescription referenceDescription) {
 				referenceDescriptions.add(referenceDescription);
 			}
@@ -91,7 +92,7 @@ public class PPResourceDescription extends DefaultResourceDescription {
 
 	/**
 	 * Returns the length of a containing URI's fragment or 0 if the candidate is not a container.
-	 * 
+	 *
 	 * @param contained
 	 * @param containerCandidate
 	 * @return
@@ -123,7 +124,7 @@ public class PPResourceDescription extends DefaultResourceDescription {
 
 	/**
 	 * Override that adds the specially imported names to the default.
-	 * 
+	 *
 	 * @see org.eclipse.xtext.resource.impl.DefaultResourceDescription#getImportedNames()
 	 */
 	@Override
@@ -146,6 +147,7 @@ public class PPResourceDescription extends DefaultResourceDescription {
 	public Iterable<PPReferenceDescription> getPPReferenceDescriptions() {
 		return cache.get(
 			PPREFERENCE_DESCRIPTIONS_CACHE_KEY, getResource(), new Provider<List<PPReferenceDescription>>() {
+				@Override
 				public List<PPReferenceDescription> get() {
 					return computePPReferenceDescriptions();
 				}

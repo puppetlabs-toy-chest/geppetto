@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,7 +16,7 @@ import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * A BaseDomNode is parented by an CompositeNode (or <code>null</node>).
- * 
+ *
  */
 public abstract class BaseDomNode extends AbstractDomNode {
 
@@ -43,7 +43,7 @@ public abstract class BaseDomNode extends AbstractDomNode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.xt.dommodel.impl.AbstractDomNode#getGrammarElement()
 	 */
 	@Override
@@ -76,7 +76,7 @@ public abstract class BaseDomNode extends AbstractDomNode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.xt.dommodel.impl.AbstractDomNode#getNode()
 	 */
 	@Override
@@ -86,7 +86,7 @@ public abstract class BaseDomNode extends AbstractDomNode {
 
 	/**
 	 * Returns a child node at the given index, or null if there is no such child.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -129,7 +129,7 @@ public abstract class BaseDomNode extends AbstractDomNode {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.xt.dommodel.impl.AbstractDomNode#getText()
 	 */
 	@Override

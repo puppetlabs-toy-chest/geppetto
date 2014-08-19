@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,11 +15,11 @@ import org.eclipse.swt.widgets.Composite;
 
 /**
  * A field editor for a ValidationPreference
- * 
+ *
  */
 public class ValidationPreferenceFieldEditor extends ComboFieldEditor {
 	private static final String[][] entryNamesAndValues = new String[][] {
-			{ "Ignore", "Ignore" }, { "Warning", "Warning" }, { "Error", "Error" } };
+		{ "Ignore", "Ignore" }, { "Warning", "Warning" }, { "Error", "Error" } };
 
 	public ValidationPreferenceFieldEditor(String name, String labelText, Composite parent) {
 		super(name, labelText, entryNamesAndValues, parent);

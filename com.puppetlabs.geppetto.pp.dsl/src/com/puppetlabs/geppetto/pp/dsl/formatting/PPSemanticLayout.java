@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -69,7 +69,7 @@ import com.google.inject.Singleton;
 
 /**
  * Semantic layouts for PP
- * 
+ *
  */
 @Singleton
 public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
@@ -156,14 +156,15 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	LayoutUtils layoutUtils;
 
 	/**
-	 * array of classifiers that represent {@code com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout.StatementStyle.BLOCK} - used for fast
+	 * array of classifiers that represent
+	 * {@code com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout.StatementStyle.BLOCK} - used for fast
 	 * lookup (faster
 	 * that Xtext polymorph and EMF Switch)
 	 */
 	protected final static int[] blockClassIds = new int[] {
-			PPPackage.CASE_EXPRESSION, PPPackage.DEFINITION, PPPackage.HOST_CLASS_DEFINITION, PPPackage.IF_EXPRESSION,
-			PPPackage.UNLESS_EXPRESSION, PPPackage.NODE_DEFINITION, PPPackage.RESOURCE_EXPRESSION,
-			PPPackage.SELECTOR_EXPRESSION };
+		PPPackage.CASE_EXPRESSION, PPPackage.DEFINITION, PPPackage.HOST_CLASS_DEFINITION, PPPackage.IF_EXPRESSION,
+		PPPackage.UNLESS_EXPRESSION, PPPackage.NODE_DEFINITION, PPPackage.RESOURCE_EXPRESSION,
+		PPPackage.SELECTOR_EXPRESSION };
 
 	private static final int ATTRIBUTE_OPERATIONS_CLUSTER_SIZE = 20;
 
@@ -303,7 +304,7 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 				break;
 			case 1:
 				styles.add(o.getResourceData().get(0).getNameExpr() != null
-						? ResourceStyle.SINGLEBODY_TITLE
+				? ResourceStyle.SINGLEBODY_TITLE
 						: ResourceStyle.SINGLEBODY_NO_TITLE);
 				// if there is more than 1 attribute operation, the resource can't be compacted
 				AttributeOperations attributes = o.getResourceData().get(0).getAttributes();
@@ -392,8 +393,9 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	}
 
 	/**
-	 * Returns true if there is source text and this source contains a line break (before formatting) before a closing '}'
-	 * 
+	 * Returns true if there is source text and this source contains a line break (before formatting) before a closing
+	 * '}'
+	 *
 	 * @param node
 	 * @return true if the node contains a line break anywhere it its complete text.
 	 */
@@ -410,7 +412,7 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	 * Returns the first significant IDomNode in a Statement - this is either the first
 	 * token that represents documentation of the statement, or the first non documentation token
 	 * (for non documentable, and documentable without documentation).
-	 * 
+	 *
 	 * @param node
 	 * @return
 	 */
@@ -460,7 +462,7 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 
 	/**
 	 * Assigns style classifiers for FIRST, STATEMENT, and BLOCK to the immediate children of the given node.
-	 * 
+	 *
 	 * @param node
 	 * @param grammarElement
 	 * @return count of statements
@@ -507,7 +509,7 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	/**
 	 * Returns true if the semantic object represents a block statement (one that should be
 	 * marked with {@link com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout.StatementStyle.BLOCK}.)
-	 * 
+	 *
 	 * @param semantic
 	 * @return
 	 */

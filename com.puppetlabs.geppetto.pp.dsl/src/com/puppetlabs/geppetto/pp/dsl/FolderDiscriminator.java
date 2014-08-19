@@ -49,6 +49,7 @@ public class FolderDiscriminator implements IFolderDiscriminator {
 	 *            The URI to check.
 	 * @return <code>true</code> if the URI path contains a folder that is excluded by the pattern
 	 */
+	@Override
 	public synchronized boolean isExcluded(URI uri) {
 		if(uri == null)
 			return true;

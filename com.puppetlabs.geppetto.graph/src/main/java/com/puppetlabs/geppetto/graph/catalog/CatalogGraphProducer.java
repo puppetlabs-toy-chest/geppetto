@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -38,7 +38,7 @@ import com.google.common.collect.Maps;
 
 /**
  * Produces a Catalog graph in DOT format.
- * 
+ *
  */
 public class CatalogGraphProducer extends AbstractCatalogGraphProducer implements CatalogGraphStyles {
 
@@ -98,24 +98,24 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 			// output file contents as "DATA" as we can't fit the entire contents into a cell.
 			List<String> values = "content".equals(aName)
 					? Lists.newArrayList("DATA")
-					: a.getValue();
-			builder = new StringBuilder();
-			for(String v : values) {
-				builder.append(v);
-				builder.append(" ");
-			}
-			// remove trailing space
-			builder.deleteCharAt(builder.length() - 1);
-			String value = builder.toString();
+							: a.getValue();
+					builder = new StringBuilder();
+					for(String v : values) {
+						builder.append(v);
+						builder.append(" ");
+					}
+					// remove trailing space
+					builder.deleteCharAt(builder.length() - 1);
+					String value = builder.toString();
 
-			labelRows.add(getStyles().labelRow(STYLE_ResourcePropertyRow, //
-				getStyles().labelCell(STYLE_ResourcePropertyName, a.getName()), //
-				getStyles().labelCell(STYLE_ResourcePropertyValue, DOUBLE_RIGHT_ARROW + value, Span.colSpan(2)) //
-			));
+					labelRows.add(getStyles().labelRow(STYLE_ResourcePropertyRow, //
+						getStyles().labelCell(STYLE_ResourcePropertyName, a.getName()), //
+						getStyles().labelCell(STYLE_ResourcePropertyValue, DOUBLE_RIGHT_ARROW + value, Span.colSpan(2)) //
+							));
 
-			int tmpWidth = a.getName().length() + value.length() + 2;
-			if(tmpWidth > width)
-				width = tmpWidth;
+					int tmpWidth = a.getName().length() + value.length() + 2;
+					if(tmpWidth > width)
+						width = tmpWidth;
 		}
 
 		// A footer with filename[line]
@@ -153,8 +153,8 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 				getStyles().labelCell(STYLE_ResourceFileInfoCell, builder.toString(), Span.colSpan(3)).withStyles(//
 					getStyles().tooltip(tooltip), //
 					getStyles().href(getHrefProducer().hrefToManifest(new Path(r.getFile()), root, line)) //
-				)) //
-			);
+						)) //
+					);
 		}
 		else if(hasParameters) {
 			// add a bit of padding at the bottom if there is no footer
@@ -163,25 +163,25 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 		}
 
 		return StyleSet.withStyle(//
-		getStyles().labelFormat(//
-			getStyles().labelTable(STYLE_ResourceTable, //
-				labelRows.toArray(new LabelRow[labelRows.size()]))));
+			getStyles().labelFormat(//
+				getStyles().labelTable(STYLE_ResourceTable, //
+					labelRows.toArray(new LabelRow[labelRows.size()]))));
 
 	}
 
 	/**
 	 * Produces a graph in DOT format for the given catalog on the given output stream.
-	 * 
+	 *
 	 * @param cancel
-	 *        enables cancellation of long running job
+	 *            enables cancellation of long running job
 	 * @param catalog
-	 *        the catalog for which a graph is produced
+	 *            the catalog for which a graph is produced
 	 * @param out
-	 *        where output in DOT format should be written
+	 *            where output in DOT format should be written
 	 * @param root
-	 *        the path to the root of file references in catalogs
+	 *            the path to the root of file references in catalogs
 	 * @param moduleData
-	 *        Name -> 0* MetadataInfo representing one version of a module with given name
+	 *            Name -> 0* MetadataInfo representing one version of a module with given name
 	 */
 	public void produceGraph(ICancel cancel, Catalog catalog, String catalogName, OutputStream out, IPath root) {
 		if(cancel == null || catalog == null || out == null)
@@ -195,7 +195,7 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 
 	/**
 	 * Produces the graph data structure (RootGraph, Vertexes, Edges).
-	 * 
+	 *
 	 */
 	private RootGraph produceRootGraph(ICancel cancel, Catalog catalog, String catalogName, final IPath root) {
 

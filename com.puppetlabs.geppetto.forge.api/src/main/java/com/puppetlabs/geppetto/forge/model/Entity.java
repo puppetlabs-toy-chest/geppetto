@@ -25,7 +25,7 @@ public class Entity {
 	protected static <T> List<T> asUnmodifiableList(List<T> list) {
 		int sz = list == null
 				? 0
-				: list.size();
+						: list.size();
 		switch(sz) {
 			case 0:
 				return Collections.emptyList();
@@ -39,7 +39,7 @@ public class Entity {
 	protected static <K, V> Map<K, V> asUnmodifiableMap(Map<K, V> map) {
 		int sz = map == null
 				? 0
-				: map.size();
+						: map.size();
 		switch(sz) {
 			case 0:
 				return Collections.emptyMap();
@@ -58,7 +58,7 @@ public class Entity {
 	protected static int safeHash(Object a) {
 		return a == null
 				? 773
-				: a.hashCode();
+						: a.hashCode();
 	}
 
 	protected static String trimToNull(String s) {

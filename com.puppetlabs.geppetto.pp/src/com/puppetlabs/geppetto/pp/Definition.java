@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Definition</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * <li>{@link com.puppetlabs.geppetto.pp.Definition#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getDefinition()
  * @model
  * @generated
@@ -35,10 +35,11 @@ public interface Definition extends Expression {
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Arguments</em>' containment reference isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Arguments</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Arguments</em>' containment reference.
 	 * @see #setArguments(DefinitionArgumentList)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getDefinition_Arguments()
@@ -51,10 +52,11 @@ public interface Definition extends Expression {
 	 * Returns the value of the '<em><b>Class Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Class Name</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Class Name</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Class Name</em>' attribute.
 	 * @see #setClassName(String)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getDefinition_ClassName()
@@ -68,10 +70,11 @@ public interface Definition extends Expression {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Statements</em>' containment reference list isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Statements</em>' containment reference list isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Statements</em>' containment reference list.
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getDefinition_Statements()
 	 * @model containment="true"
@@ -80,10 +83,11 @@ public interface Definition extends Expression {
 	EList<Expression> getStatements();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.Definition#getArguments <em>Arguments</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.Definition#getArguments <em>Arguments</em>}' containment
+	 * reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Arguments</em>' containment reference.
 	 * @see #getArguments()
@@ -95,7 +99,7 @@ public interface Definition extends Expression {
 	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.Definition#getClassName <em>Class Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Class Name</em>' attribute.
 	 * @see #getClassName()

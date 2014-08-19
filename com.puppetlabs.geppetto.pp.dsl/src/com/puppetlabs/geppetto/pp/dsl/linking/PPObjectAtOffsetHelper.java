@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,7 +33,7 @@ public class PPObjectAtOffsetHelper {
 
 	/**
 	 * TOOO: USE THIS
-	 * 
+	 *
 	 * @param a
 	 *            node (possibly null)
 	 * @return if the given node is part of a cross reference this method returns the node pointing to the
@@ -67,7 +67,7 @@ public class PPObjectAtOffsetHelper {
 
 	/**
 	 * TODO: USE THIS
-	 * 
+	 *
 	 * @param node
 	 *            a node with an associated {@link CrossReference} grammar element.
 	 * @return the {@link EObject} referenced by this node
@@ -86,7 +86,7 @@ public class PPObjectAtOffsetHelper {
 
 	/**
 	 * TODO: Use this
-	 * 
+	 *
 	 * @since 2.1
 	 */
 	public INode getCrossReferenceNode(XtextResource resource, ITextRegion region) {
@@ -127,7 +127,7 @@ public class PPObjectAtOffsetHelper {
 
 	/**
 	 * USE THIS
-	 * 
+	 *
 	 * @since 2.1
 	 */
 	protected boolean isElementOfDatatypeRule(final EObject grammarElement) {
@@ -137,7 +137,7 @@ public class PPObjectAtOffsetHelper {
 
 	/**
 	 * TODO: USE THIS
-	 * 
+	 *
 	 * @param node
 	 * @return
 	 */
@@ -168,7 +168,7 @@ public class PPObjectAtOffsetHelper {
 
 	/**
 	 * TODO: USE THIS
-	 * 
+	 *
 	 * @return the cross referenced EObject under, right or left to the cursor (in that order) or <code>null</code> if
 	 *         there is no cross referenced
 	 *         object next to the offset.

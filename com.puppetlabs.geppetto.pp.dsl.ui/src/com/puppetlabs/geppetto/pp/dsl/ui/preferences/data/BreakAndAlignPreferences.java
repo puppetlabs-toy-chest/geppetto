@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -18,7 +18,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * Manages the Break and Align related formatter preferences.
- * 
+ *
  */
 public class BreakAndAlignPreferences extends AbstractPreferenceData {
 	public static final String FORMATTER_ALIGN_ID = "com.puppetlabs.geppetto.pp.dsl.PP.formatter.align";
@@ -56,7 +56,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns max cluster width
-	 * 
+	 *
 	 * @return max alignment padding (cluster width)
 	 */
 	public int getClusterSize() {
@@ -65,7 +65,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns max cluster width
-	 * 
+	 *
 	 * @return max alignment padding (cluster width)
 	 */
 	public int getClusterSize(IResource r) {
@@ -74,7 +74,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns when definition parameter lists should be aligned
-	 * 
+	 *
 	 * @see WhenToApplyForDefinition
 	 * @return when definition parameter lists should be aligned
 	 */
@@ -85,7 +85,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns when definition parameter lists should be aligned
-	 * 
+	 *
 	 * @see WhenToApplyForDefinition
 	 * @return when definition parameter lists should be aligned
 	 */
@@ -96,7 +96,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns when hashes should be aligned
-	 * 
+	 *
 	 * @see WhenToApply
 	 * @return when hashes should be aligned
 	 */
@@ -106,7 +106,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns when hashes should be aligned
-	 * 
+	 *
 	 * @see WhenToApply
 	 * @return when hashes should be aligned
 	 */
@@ -116,7 +116,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns when lists should be aligned
-	 * 
+	 *
 	 * @see WhenToApply
 	 * @return when lists should be aligned
 	 */
@@ -126,7 +126,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns when lists should be aligned
-	 * 
+	 *
 	 * @see WhenToApply
 	 * @return when lists should be aligned
 	 */
@@ -161,7 +161,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns if compactable cases should be rendered in compact form
-	 * 
+	 *
 	 * @return true if compactable cases should be rendered in compact form
 	 */
 	public boolean isCompactCases() {
@@ -170,7 +170,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns if compactable cases should be rendered in compact form
-	 * 
+	 *
 	 * @return true if compactable cases should be rendered in compact form
 	 */
 	public boolean isCompactCases(IResource r) {
@@ -179,7 +179,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns if compactable cases should be rendered in compact form
-	 * 
+	 *
 	 * @return true if compactable cases should be rendered in compact form
 	 */
 	public boolean isCompactResources() {
@@ -188,7 +188,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 
 	/**
 	 * Returns if compactable resources should be rendered in compact form
-	 * 
+	 *
 	 * @return true if compactable resources should be rendered in compact form
 	 */
 	public boolean isCompactResources(IResource r) {

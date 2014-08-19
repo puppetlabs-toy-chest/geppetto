@@ -65,18 +65,22 @@ public class JsonPositionalParser {
 			this.length = pos[2];
 		}
 
+		@Override
 		public File getFile() {
 			return file;
 		}
 
+		@Override
 		public int getLength() {
 			return length;
 		}
 
+		@Override
 		public int getLine() {
 			return line;
 		}
 
+		@Override
 		public int getOffset() {
 			return offset;
 		}
@@ -111,7 +115,7 @@ public class JsonPositionalParser {
 		public Object getValue() {
 			return value == null
 					? null
-					: value.getValue();
+							: value.getValue();
 		}
 	}
 
@@ -156,7 +160,7 @@ public class JsonPositionalParser {
 		public String toStringOrNull() {
 			return value instanceof String
 					? (String) value
-					: null;
+							: null;
 		}
 	}
 

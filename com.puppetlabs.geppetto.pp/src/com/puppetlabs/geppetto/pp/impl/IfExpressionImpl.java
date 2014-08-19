@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.IfExpressionImpl#getElseStatement <em>Else Statement</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
@@ -44,7 +44,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	 * The cached value of the '{@link #getCondExpr() <em>Cond Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getCondExpr()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	 * The cached value of the '{@link #getThenStatements() <em>Then Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getThenStatements()
 	 * @generated
 	 * @ordered
@@ -66,7 +66,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	 * The cached value of the '{@link #getElseStatement() <em>Else Statement</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getElseStatement()
 	 * @generated
 	 * @ordered
@@ -76,7 +76,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected IfExpressionImpl() {
@@ -86,7 +86,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetCondExpr(Expression newCondExpr, NotificationChain msgs) {
@@ -106,7 +106,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetElseStatement(Expression newElseStatement, NotificationChain msgs) {
@@ -126,7 +126,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -145,7 +145,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -164,7 +164,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -183,7 +183,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -207,7 +207,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -218,7 +218,7 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -240,9 +240,10 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getCondExpr() {
 		return condExpr;
 	}
@@ -250,9 +251,10 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getElseStatement() {
 		return elseStatement;
 	}
@@ -260,13 +262,14 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getThenStatements() {
 		if(thenStatements == null) {
 			thenStatements = new EObjectContainmentEList<Expression>(
-				Expression.class, this, PPPackage.IF_EXPRESSION__THEN_STATEMENTS);
+					Expression.class, this, PPPackage.IF_EXPRESSION__THEN_STATEMENTS);
 		}
 		return thenStatements;
 	}
@@ -274,18 +277,19 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setCondExpr(Expression newCondExpr) {
 		if(newCondExpr != condExpr) {
 			NotificationChain msgs = null;
 			if(condExpr != null)
 				msgs = ((InternalEObject) condExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.IF_EXPRESSION__COND_EXPR, null, msgs);
+					PPPackage.IF_EXPRESSION__COND_EXPR, null, msgs);
 			if(newCondExpr != null)
 				msgs = ((InternalEObject) newCondExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.IF_EXPRESSION__COND_EXPR, null, msgs);
+					PPPackage.IF_EXPRESSION__COND_EXPR, null, msgs);
 			msgs = basicSetCondExpr(newCondExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -298,18 +302,19 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setElseStatement(Expression newElseStatement) {
 		if(newElseStatement != elseStatement) {
 			NotificationChain msgs = null;
 			if(elseStatement != null)
 				msgs = ((InternalEObject) elseStatement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.IF_EXPRESSION__ELSE_STATEMENT, null, msgs);
+					PPPackage.IF_EXPRESSION__ELSE_STATEMENT, null, msgs);
 			if(newElseStatement != null)
 				msgs = ((InternalEObject) newElseStatement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.IF_EXPRESSION__ELSE_STATEMENT, null, msgs);
+					PPPackage.IF_EXPRESSION__ELSE_STATEMENT, null, msgs);
 			msgs = basicSetElseStatement(newElseStatement, msgs);
 			if(msgs != null)
 				msgs.dispatch();

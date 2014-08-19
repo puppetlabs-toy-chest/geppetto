@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -23,7 +23,7 @@ import com.google.common.collect.ImmutableMap;
 /**
  * A set of styles.
  * This implementation is not thread safe.
- * 
+ *
  */
 public class StyleSet {
 	public static class ImmutableStyleSet extends StyleSet {
@@ -48,7 +48,7 @@ public class StyleSet {
 
 	/**
 	 * Factory method.
-	 * 
+	 *
 	 * @param styles
 	 * @return
 	 */
@@ -67,7 +67,7 @@ public class StyleSet {
 
 	/**
 	 * Add all style settings from map into this map - overwrite existing values.
-	 * 
+	 *
 	 * @param map
 	 * @return this map
 	 */
@@ -83,7 +83,7 @@ public class StyleSet {
 
 	/**
 	 * Returns the style of the given class, or null of this style is not included in the the set.
-	 * 
+	 *
 	 * @param x
 	 * @param node
 	 * @return
@@ -103,9 +103,9 @@ public class StyleSet {
 	/**
 	 * Gets the value of a particular style, or null if not set. See the respective style type (doc) for
 	 * information about returned type.
-	 * 
+	 *
 	 * @param <T>
-	 * 
+	 *
 	 * @param x
 	 * @return
 	 */
@@ -123,9 +123,9 @@ public class StyleSet {
 	 * Gets the value of a particular style, or the result of the function applied to the node if the
 	 * style is not set.
 	 * See the respective style type (doc) for information about returned type.
-	 * 
+	 *
 	 * @param <T>
-	 * 
+	 *
 	 * @param styleClass
 	 *            - the class of the wanted style
 	 * @param node
@@ -138,15 +138,15 @@ public class StyleSet {
 		T style = getStyleValue(styleClass, node);
 		return style == null
 				? defaultFunc.apply(node)
-				: style;
+						: style;
 	}
 
 	/**
 	 * Gets the value of a particular style, or the given default value if not set.
 	 * See the respective style type (doc) for information about returned type.
-	 * 
+	 *
 	 * @param <T>
-	 * 
+	 *
 	 * @param x
 	 * @return
 	 */
@@ -154,12 +154,12 @@ public class StyleSet {
 		T style = getStyleValue(x, node);
 		return style == null
 				? defaultValue
-				: style;
+						: style;
 	}
 
 	/**
 	 * Put a style in the map - overwrite any existing entry for this style.
-	 * 
+	 *
 	 * @param style
 	 */
 	public void put(IStyle<?> style) {

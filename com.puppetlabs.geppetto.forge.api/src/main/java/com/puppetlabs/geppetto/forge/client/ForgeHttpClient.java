@@ -1,8 +1,8 @@
 /**
  * This code was initially copied from the egit-github project
- * 
+ *
  *  http://git.eclipse.org/c/egit/egit-github.git/
- * 
+ *
  * and then adjusted for this API. The original contained this copyright:
  *
  *  Copyright (c) 2011 GitHub Inc.
@@ -10,7 +10,7 @@
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
  *  http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Kevin Sawicki (GitHub Inc.) - initial API and implementation
  *   Thomas Hallgren (Puppet Labs, Inc.) - Stackhammer changes
@@ -61,14 +61,14 @@ import com.puppetlabs.geppetto.forge.model.Constants;
  * Class responsible for all request and response processing
  */
 public class ForgeHttpClient implements Constants, ForgeClient {
-	public static final Charset UTF_8 = Charset.forName("UTF-8");
-
 	static InputStream getStream(HttpEntity entity) throws IOException {
 		if(entity == null)
 			return null;
 
 		return entity.getContent();
 	}
+
+	public static final Charset UTF_8 = Charset.forName("UTF-8");
 
 	@Inject
 	@Named(Constants.BASE_URL_NAME)
@@ -102,6 +102,7 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 
 	private transient HttpRequestBase currentRequest;
 
+	@Override
 	public synchronized void abortCurrentRequest() {
 		if(currentRequest != null) {
 			currentRequest.abort();
@@ -123,6 +124,7 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 		}
 	}
 
+	@Override
 	public void authenticate() throws IOException {
 		if(credentials == null && authenticator != null) {
 			AuthResponse auth = authenticator.authenticate(httpClient);
@@ -151,7 +153,7 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 
 	/**
 	 * Create full v1 URI from path
-	 * 
+	 *
 	 * @param path
 	 * @return uri
 	 */
@@ -161,7 +163,7 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 
 	/**
 	 * Create full v2 URI from path
-	 * 
+	 *
 	 * @param path
 	 * @return uri
 	 */
@@ -206,6 +208,7 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 		return executeRequest(request, type);
 	}
 
+	@Override
 	public InputStream download(String urlStr, Map<String, String> params) throws IOException {
 		HttpGet request = createGetRequest(v3URL + urlStr, params);
 		configureRequest(request);
@@ -350,7 +353,7 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 
 	/**
 	 * Convert object to a JSON string
-	 * 
+	 *
 	 * @param object
 	 * @return JSON string
 	 * @throws IOException

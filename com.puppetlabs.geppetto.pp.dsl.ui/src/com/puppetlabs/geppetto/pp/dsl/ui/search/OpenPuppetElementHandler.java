@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Jan Koehnlein Itemis AG - initial API and implementation
  *   Puppet Labs - specialization for Puppet
- * 
+ *
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.search;
 
@@ -55,6 +55,7 @@ public class OpenPuppetElementHandler extends AbstractHandler {
 			activeShell, searchEngine, /* globalDescriptionLabelProvider */labelProvider, isEnableStyledLabels());
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell activeShell = HandlerUtil.getActiveShell(event);
 		ListDialog searchDialog = createSearchDialog(event, activeShell, searchEngine);

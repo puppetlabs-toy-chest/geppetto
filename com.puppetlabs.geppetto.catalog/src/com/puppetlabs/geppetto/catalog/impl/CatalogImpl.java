@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -52,24 +52,12 @@ import com.google.gson.reflect.TypeToken;
  * <li>{@link com.puppetlabs.geppetto.catalog.impl.CatalogImpl#getEdges <em>Edges</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CatalogImpl extends TaggableImpl implements Catalog {
 	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<Catalog> implements
-			JsonSerializer<Catalog> {
-
-		private static java.lang.reflect.Type listOfClassesType = new TypeToken<EList<String>>() {
-		}.getType();
-
-		private static java.lang.reflect.Type listOfTagsType = new TypeToken<EList<String>>() {
-		}.getType();
-
-		private static java.lang.reflect.Type listOfResourcesType = new TypeToken<EList<CatalogResource>>() {
-		}.getType();
-
-		private static java.lang.reflect.Type listOfEdgesType = new TypeToken<EList<CatalogEdge>>() {
-		}.getType();
+	JsonSerializer<Catalog> {
 
 		private static CatalogMetadata getMetadata(JsonObject jsonObj, String key, JsonDeserializationContext context) {
 			JsonElement json = jsonObj.get(key);
@@ -89,7 +77,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 			// unset values are null, not empty strings
 			return value.length() == 0
 					? null
-					: value;
+							: value;
 		}
 
 		private static void putString(JsonObject jsonObj, String key, String value) {
@@ -97,6 +85,18 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 				value = "";
 			jsonObj.addProperty(key, value);
 		}
+
+		private static java.lang.reflect.Type listOfClassesType = new TypeToken<EList<String>>() {
+		}.getType();
+
+		private static java.lang.reflect.Type listOfTagsType = new TypeToken<EList<String>>() {
+		}.getType();
+
+		private static java.lang.reflect.Type listOfResourcesType = new TypeToken<EList<CatalogResource>>() {
+		}.getType();
+
+		private static java.lang.reflect.Type listOfEdgesType = new TypeToken<EList<CatalogEdge>>() {
+		}.getType();
 
 		@Override
 		public Catalog deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context)
@@ -178,7 +178,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -189,7 +189,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -200,7 +200,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -211,7 +211,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -222,7 +222,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	 * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getResources()
 	 * @generated
 	 * @ordered
@@ -233,7 +233,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	 * The cached value of the '{@link #getClasses() <em>Classes</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getClasses()
 	 * @generated
 	 * @ordered
@@ -244,7 +244,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	 * The cached value of the '{@link #getMetadata() <em>Metadata</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getMetadata()
 	 * @generated
 	 * @ordered
@@ -255,7 +255,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getEdges()
 	 * @generated
 	 * @ordered
@@ -265,7 +265,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CatalogImpl() {
@@ -275,7 +275,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetMetadata(CatalogMetadata newMetadata, NotificationChain msgs) {
@@ -295,7 +295,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -320,7 +320,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -339,7 +339,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -347,12 +347,12 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 		switch(featureID) {
 			case CatalogPackage.CATALOG__NAME:
 				return NAME_EDEFAULT == null
-						? name != null
-						: !NAME_EDEFAULT.equals(name);
+				? name != null
+				: !NAME_EDEFAULT.equals(name);
 			case CatalogPackage.CATALOG__VERSION:
 				return VERSION_EDEFAULT == null
-						? version != null
-						: !VERSION_EDEFAULT.equals(version);
+				? version != null
+				: !VERSION_EDEFAULT.equals(version);
 			case CatalogPackage.CATALOG__RESOURCES:
 				return resources != null && !resources.isEmpty();
 			case CatalogPackage.CATALOG__CLASSES:
@@ -368,7 +368,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -403,7 +403,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -414,7 +414,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -445,9 +445,10 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<String> getClasses() {
 		if(classes == null) {
 			classes = new EDataTypeUniqueEList<String>(String.class, this, CatalogPackage.CATALOG__CLASSES);
@@ -458,9 +459,10 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<CatalogEdge> getEdges() {
 		if(edges == null) {
 			edges = new EObjectContainmentEList<CatalogEdge>(CatalogEdge.class, this, CatalogPackage.CATALOG__EDGES);
@@ -471,9 +473,10 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CatalogMetadata getMetadata() {
 		return metadata;
 	}
@@ -481,9 +484,10 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -491,13 +495,14 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<CatalogResource> getResources() {
 		if(resources == null) {
 			resources = new EObjectContainmentEList<CatalogResource>(
-				CatalogResource.class, this, CatalogPackage.CATALOG__RESOURCES);
+					CatalogResource.class, this, CatalogPackage.CATALOG__RESOURCES);
 		}
 		return resources;
 	}
@@ -505,9 +510,10 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getVersion() {
 		return version;
 	}
@@ -515,18 +521,19 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setMetadata(CatalogMetadata newMetadata) {
 		if(newMetadata != metadata) {
 			NotificationChain msgs = null;
 			if(metadata != null)
 				msgs = ((InternalEObject) metadata).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						CatalogPackage.CATALOG__METADATA, null, msgs);
+					CatalogPackage.CATALOG__METADATA, null, msgs);
 			if(newMetadata != null)
 				msgs = ((InternalEObject) newMetadata).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						CatalogPackage.CATALOG__METADATA, null, msgs);
+					CatalogPackage.CATALOG__METADATA, null, msgs);
 			msgs = basicSetMetadata(newMetadata, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -539,9 +546,10 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -552,9 +560,10 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setVersion(String newVersion) {
 		String oldVersion = version;
 		version = newVersion;
@@ -565,7 +574,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

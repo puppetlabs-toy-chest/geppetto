@@ -297,10 +297,10 @@ public class TestPPFormatting extends AbstractPuppetTests {
 	public void test_Resource_MultipleBodies() throws Exception {
 		String code = "file { 'title': owner => 777, ensure => present; 'title2': owner=>777,ensure=>present }";
 		String fmt = //
-		"file {\n  'title':\n    owner  => 777,\n    ensure => present;\n\n" + //
+				"file {\n  'title':\n    owner  => 777,\n    ensure => present;\n\n" + //
 				"  'title2':\n    owner  => 777,\n    ensure => present\n}\n";
 		String fmt2 = //
-		"file {\n  'title':\n    owner  => 777,\n    ensure => present;\n\n" + //
+				"file {\n  'title':\n    owner  => 777,\n    ensure => present;\n\n" + //
 				"  'title2':\n    owner  => 777,\n    ensure => present;\n}\n";
 
 		XtextResource r = getResourceFromString(code);
@@ -343,14 +343,14 @@ public class TestPPFormatting extends AbstractPuppetTests {
 	@Test
 	public void test_selectiveFormatting1() throws Exception {
 		String code1 /*
-						*/= "class x {\n";
+		 */= "class x {\n";
 		//
 		String code2 /*
-						*/= "  exec { 'x':\n" //
-				+ "    command => 'echo gotcha',\n" //
-				+ "  }"; //
+		 */= "  exec { 'x':\n" //
+		 + "    command => 'echo gotcha',\n" //
+		 + "  }"; //
 		String code3 = /*
-						*/"\n}\n";
+		 */"\n}\n";
 
 		String code = code1 + code2 + code3;
 		XtextResource r = getResourceFromString(code);

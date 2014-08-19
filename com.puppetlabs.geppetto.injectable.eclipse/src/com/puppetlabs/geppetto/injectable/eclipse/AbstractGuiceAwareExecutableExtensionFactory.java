@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Itemis AG - initial API and implementation
  *   Puppet Labs - moved to non ui package
- * 
+ *
  */
 package com.puppetlabs.geppetto.injectable.eclipse;
 
@@ -28,8 +28,7 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IExecutableExtensionFactory,
-		IExecutableExtension {
+public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IExecutableExtensionFactory, IExecutableExtension {
 	public static final String GUICEKEY = "guicekey";
 
 	protected Logger log = Logger.getLogger(getClass());
@@ -38,6 +37,7 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 
 	protected IConfigurationElement config;
 
+	@Override
 	public Object create() throws CoreException {
 		try {
 			final Class<?> clazz = getBundle().loadClass(clazzName);
@@ -49,8 +49,8 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 		}
 		catch(Exception e) {
 			log.error(e);
-			throw new CoreException(new Status(IStatus.ERROR, getBundle().getSymbolicName(), e.getMessage() +
-					" ExtensionFactory: " + getClass().getName(), e));
+			throw new CoreException(new Status(IStatus.ERROR, getBundle().getSymbolicName(), e.getMessage() + " ExtensionFactory: " +
+					getClass().getName(), e));
 		}
 	}
 
@@ -58,9 +58,9 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 
 	protected abstract Injector getInjector();
 
+	@Override
 	@SuppressWarnings({ "unchecked" })
-	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
-			throws CoreException {
+	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) throws CoreException {
 		if(data instanceof String) {
 			clazzName = (String) data;
 		}

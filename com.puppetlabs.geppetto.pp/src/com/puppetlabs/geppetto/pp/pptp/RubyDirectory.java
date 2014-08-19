@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,8 +14,8 @@ package com.puppetlabs.geppetto.pp.pptp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Ruby Directory</b></em>'.
  * <!-- end-user-doc -->
- * 
- * 
+ *
+ *
  * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getRubyDirectory()
  * @model
  * @generated

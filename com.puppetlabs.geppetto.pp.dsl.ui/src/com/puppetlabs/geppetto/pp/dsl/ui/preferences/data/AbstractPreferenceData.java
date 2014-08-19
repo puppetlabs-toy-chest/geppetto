@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 
 /**
  * @author henrik
- * 
+ *
  */
 public abstract class AbstractPreferenceData implements IPreferenceStoreInitializer {
 
@@ -84,7 +84,7 @@ public abstract class AbstractPreferenceData implements IPreferenceStoreInitiali
 	protected int getInt(IResource resource, String property) {
 		return resource == null || isProjectSpecific(resource)
 				? getInt(property)
-				: getContextualInt(resource, property);
+						: getContextualInt(resource, property);
 	}
 
 	protected int getInt(String property) {
@@ -105,7 +105,7 @@ public abstract class AbstractPreferenceData implements IPreferenceStoreInitiali
 	 * Return the ID of the Boolean preference to use to indicate that the preferences managed by the concrete class
 	 * are project specific. This boolean is set to true when they are, and is false, or not set at all when the
 	 * general defaults should be used.
-	 * 
+	 *
 	 * @return the name of a the Boolean preference indicating that the preferences are project specific
 	 */
 	protected abstract String getUseProjectSettingsID();

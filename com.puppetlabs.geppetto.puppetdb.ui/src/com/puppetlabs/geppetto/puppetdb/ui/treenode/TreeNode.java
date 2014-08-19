@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,7 +17,7 @@ import org.eclipse.swt.graphics.Image;
 /**
  * Represents a node in a TreeViewer that uses {@link SWT#VIRTUAL} style,
  * a {@link TreeNodeContentProvider}, and a {@link TreeNodeLabelProvider}.
- * 
+ *
  * @param <P>
  *            The type of the parent node
  * @param <C>
@@ -32,14 +32,14 @@ public abstract class TreeNode<P extends TreeNode<?, ?>, C extends TreeNode<?, ?
 
 	/**
 	 * Returns the children of this node
-	 * 
+	 *
 	 * @return the children
 	 */
 	protected abstract C[] getChildren();
 
 	/**
 	 * Returns the text for the column at the given <code>colIdx</code>.
-	 * 
+	 *
 	 * @param colIdx
 	 *            The index of the column.
 	 * @return The text for the column at <code>colIdx</code> or an empty string if not applicable
@@ -50,7 +50,7 @@ public abstract class TreeNode<P extends TreeNode<?, ?>, C extends TreeNode<?, ?
 
 	/**
 	 * Returns the tooltip for the column at the given <code>colIdx</code>.
-	 * 
+	 *
 	 * @param colIdx
 	 *            The index of the column.
 	 * @return The tooltip for the column at <code>colIdx</code> or <code>null</code> if not applicable
@@ -70,7 +70,7 @@ public abstract class TreeNode<P extends TreeNode<?, ?>, C extends TreeNode<?, ?
 
 	/**
 	 * Returns the parent node.
-	 * 
+	 *
 	 * @return The parent node or <code>null</code> if this is the top node
 	 */
 	public final P getParent() {
@@ -80,7 +80,7 @@ public abstract class TreeNode<P extends TreeNode<?, ?>, C extends TreeNode<?, ?
 	/**
 	 * Updates the child count for this node in the given <code>viewer</code> using the method {@link TreeViewer#setChildCount(Object, int)}
 	 * unless is equal to the <code>currentChildCount</code>.
-	 * 
+	 *
 	 * @param viewer
 	 *            The viewer that will receive the call
 	 * @param currentChildCount
@@ -98,7 +98,7 @@ public abstract class TreeNode<P extends TreeNode<?, ?>, C extends TreeNode<?, ?
 	 * <code>index</code> using the method {@link TreeViewer#replace(Object, int, Object)} and also calls
 	 * {@link #updateChildCount(TreeViewer, int)} on that child.
 	 * </p>
-	 * 
+	 *
 	 * @param viewer
 	 *            The viewer that will receive the call
 	 * @param index
@@ -115,7 +115,7 @@ public abstract class TreeNode<P extends TreeNode<?, ?>, C extends TreeNode<?, ?
 
 	/**
 	 * Updates the <code>viewer</code> with information if this node has children or not
-	 * 
+	 *
 	 * @param viewer
 	 *            The viewer that will receive the call
 	 */

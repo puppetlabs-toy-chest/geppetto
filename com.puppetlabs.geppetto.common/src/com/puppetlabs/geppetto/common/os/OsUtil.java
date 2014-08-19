@@ -33,7 +33,7 @@ public class OsUtil {
 		int result = runProcess(dir, concat("chgrp", group, filenames));
 		if(result != 0)
 			throw new IOException("Unable to change group of " + enumerateToString(filenames) + " to " + group +
-					" in " + dir.getAbsolutePath());
+				" in " + dir.getAbsolutePath());
 		return true;
 	}
 
@@ -47,7 +47,7 @@ public class OsUtil {
 		int result = runProcess(dir, concat("chmod", modeStr, filenames));
 		if(result != 0)
 			throw new IOException("Unable to change mode of " + enumerateToString(filenames) + " to " + modeStr +
-					" in " + dir.getAbsolutePath());
+				" in " + dir.getAbsolutePath());
 
 		return true;
 	}
@@ -58,7 +58,7 @@ public class OsUtil {
 		int result = runProcess(dir, concat("chown", owner, filenames));
 		if(result != 0)
 			throw new IOException("Unable to change owner of " + enumerateToString(filenames) + " to " + owner +
-					" in " + dir.getAbsolutePath());
+				" in " + dir.getAbsolutePath());
 
 		return true;
 	}
@@ -308,7 +308,7 @@ public class OsUtil {
 	/**
 	 * Copy a file or directory to a target directory. All attributes are
 	 * preserved and no links are dereferenced.
-	 * 
+	 *
 	 * @param source
 	 *            The source of the copy.
 	 * @param targetDirectory

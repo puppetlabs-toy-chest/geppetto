@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.PPPackage
  * @generated
  */
@@ -26,7 +26,7 @@ public interface PPFactory extends EFactory {
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	PPFactory eINSTANCE = com.puppetlabs.geppetto.pp.impl.PPFactoryImpl.init();
@@ -35,7 +35,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Additive Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Additive Expression</em>'.
 	 * @generated
 	 */
@@ -45,7 +45,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>And Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>And Expression</em>'.
 	 * @generated
 	 */
@@ -55,7 +55,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Append Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Append Expression</em>'.
 	 * @generated
 	 */
@@ -65,7 +65,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Assignment Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Assignment Expression</em>'.
 	 * @generated
 	 */
@@ -75,7 +75,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>At Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>At Expression</em>'.
 	 * @generated
 	 */
@@ -85,7 +85,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Attribute Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Attribute Operation</em>'.
 	 * @generated
 	 */
@@ -95,7 +95,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Attribute Operations</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Attribute Operations</em>'.
 	 * @generated
 	 */
@@ -105,7 +105,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Case</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Case</em>'.
 	 * @generated
 	 */
@@ -115,7 +115,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Case Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Case Expression</em>'.
 	 * @generated
 	 */
@@ -125,7 +125,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Collect Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Collect Expression</em>'.
 	 * @generated
 	 */
@@ -135,7 +135,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Definition</em>'.
 	 * @generated
 	 */
@@ -145,7 +145,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Definition Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Definition Argument</em>'.
 	 * @generated
 	 */
@@ -155,7 +155,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Definition Argument List</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Definition Argument List</em>'.
 	 * @generated
 	 */
@@ -165,7 +165,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Double Quoted String</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Double Quoted String</em>'.
 	 * @generated
 	 */
@@ -175,7 +175,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Else Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Else Expression</em>'.
 	 * @generated
 	 */
@@ -185,7 +185,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Else If Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Else If Expression</em>'.
 	 * @generated
 	 */
@@ -195,7 +195,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Equality Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Equality Expression</em>'.
 	 * @generated
 	 */
@@ -205,7 +205,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Exported Collect Query</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Exported Collect Query</em>'.
 	 * @generated
 	 */
@@ -215,7 +215,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Expression</em>'.
 	 * @generated
 	 */
@@ -225,7 +225,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Expression TE</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Expression TE</em>'.
 	 * @generated
 	 */
@@ -235,7 +235,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Expr List</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Expr List</em>'.
 	 * @generated
 	 */
@@ -245,7 +245,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Function Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Function Call</em>'.
 	 * @generated
 	 */
@@ -255,7 +255,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Hash Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Hash Entry</em>'.
 	 * @generated
 	 */
@@ -265,7 +265,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Host Class Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Host Class Definition</em>'.
 	 * @generated
 	 */
@@ -275,7 +275,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>If Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>If Expression</em>'.
 	 * @generated
 	 */
@@ -285,7 +285,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Import Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Import Expression</em>'.
 	 * @generated
 	 */
@@ -295,7 +295,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>In Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>In Expression</em>'.
 	 * @generated
 	 */
@@ -305,7 +305,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Interpolated Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Interpolated Variable</em>'.
 	 * @generated
 	 */
@@ -315,7 +315,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Java Lambda</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Java Lambda</em>'.
 	 * @generated
 	 */
@@ -325,7 +325,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal Boolean</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal Boolean</em>'.
 	 * @generated
 	 */
@@ -335,7 +335,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal Class</em>'.
 	 * @generated
 	 */
@@ -345,7 +345,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal Default</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal Default</em>'.
 	 * @generated
 	 */
@@ -355,7 +355,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal Hash</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal Hash</em>'.
 	 * @generated
 	 */
@@ -365,7 +365,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal List</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal List</em>'.
 	 * @generated
 	 */
@@ -375,7 +375,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal Name</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal Name</em>'.
 	 * @generated
 	 */
@@ -385,7 +385,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal Name Or Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal Name Or Reference</em>'.
 	 * @generated
 	 */
@@ -395,7 +395,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal Regex</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal Regex</em>'.
 	 * @generated
 	 */
@@ -405,7 +405,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Literal Undef</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Literal Undef</em>'.
 	 * @generated
 	 */
@@ -415,7 +415,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Matching Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Matching Expression</em>'.
 	 * @generated
 	 */
@@ -425,7 +425,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Method Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Method Call</em>'.
 	 * @generated
 	 */
@@ -435,7 +435,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Multiplicative Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Multiplicative Expression</em>'.
 	 * @generated
 	 */
@@ -445,7 +445,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Named Access Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Named Access Expression</em>'.
 	 * @generated
 	 */
@@ -455,7 +455,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Node Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Node Definition</em>'.
 	 * @generated
 	 */
@@ -465,7 +465,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Or Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Or Expression</em>'.
 	 * @generated
 	 */
@@ -475,7 +475,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Parenthesised Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Parenthesised Expression</em>'.
 	 * @generated
 	 */
@@ -485,7 +485,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Puppet Manifest</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Puppet Manifest</em>'.
 	 * @generated
 	 */
@@ -495,7 +495,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Relational Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Relational Expression</em>'.
 	 * @generated
 	 */
@@ -505,7 +505,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Relationship Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Relationship Expression</em>'.
 	 * @generated
 	 */
@@ -515,7 +515,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Resource Body</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Resource Body</em>'.
 	 * @generated
 	 */
@@ -525,7 +525,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Resource Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Resource Expression</em>'.
 	 * @generated
 	 */
@@ -535,7 +535,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Ruby Lambda</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Ruby Lambda</em>'.
 	 * @generated
 	 */
@@ -545,7 +545,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Selector Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Selector Entry</em>'.
 	 * @generated
 	 */
@@ -555,7 +555,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Selector Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Selector Expression</em>'.
 	 * @generated
 	 */
@@ -565,7 +565,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Separator Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Separator Expression</em>'.
 	 * @generated
 	 */
@@ -575,7 +575,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Shift Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Shift Expression</em>'.
 	 * @generated
 	 */
@@ -585,7 +585,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Single Quoted String</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Single Quoted String</em>'.
 	 * @generated
 	 */
@@ -595,7 +595,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Unary Minus Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Unary Minus Expression</em>'.
 	 * @generated
 	 */
@@ -605,7 +605,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Unary Not Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Unary Not Expression</em>'.
 	 * @generated
 	 */
@@ -615,7 +615,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Unless Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Unless Expression</em>'.
 	 * @generated
 	 */
@@ -625,7 +625,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Unquoted String</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Unquoted String</em>'.
 	 * @generated
 	 */
@@ -635,7 +635,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Variable Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Variable Expression</em>'.
 	 * @generated
 	 */
@@ -645,7 +645,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Variable TE</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Variable TE</em>'.
 	 * @generated
 	 */
@@ -655,7 +655,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Verbatim TE</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Verbatim TE</em>'.
 	 * @generated
 	 */
@@ -665,7 +665,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Virtual Collect Query</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Virtual Collect Query</em>'.
 	 * @generated
 	 */
@@ -675,7 +675,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>Virtual Name Or Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>Virtual Name Or Reference</em>'.
 	 * @generated
 	 */
@@ -685,7 +685,7 @@ public interface PPFactory extends EFactory {
 	 * Returns a new object of class '<em>With Lambda Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return a new object of class '<em>With Lambda Expression</em>'.
 	 * @generated
 	 */
@@ -695,7 +695,7 @@ public interface PPFactory extends EFactory {
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the package supported by this factory.
 	 * @generated
 	 */

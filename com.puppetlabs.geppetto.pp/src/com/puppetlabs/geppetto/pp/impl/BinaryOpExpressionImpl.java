@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.BinaryOpExpressionImpl#getOpName <em>Op Name</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implements BinaryOpExpression {
@@ -34,7 +34,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	 * The default value of the '{@link #getOpName() <em>Op Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getOpName()
 	 * @generated
 	 * @ordered
@@ -45,7 +45,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	 * The cached value of the '{@link #getOpName() <em>Op Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getOpName()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected BinaryOpExpressionImpl() {
@@ -65,7 +65,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -80,7 +80,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -88,8 +88,8 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 		switch(featureID) {
 			case PPPackage.BINARY_OP_EXPRESSION__OP_NAME:
 				return OP_NAME_EDEFAULT == null
-						? opName != null
-						: !OP_NAME_EDEFAULT.equals(opName);
+				? opName != null
+				: !OP_NAME_EDEFAULT.equals(opName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -97,7 +97,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -113,7 +113,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -124,7 +124,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -140,9 +140,10 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getOpName() {
 		return opName;
 	}
@@ -150,9 +151,10 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setOpName(String newOpName) {
 		String oldOpName = opName;
 		opName = newOpName;
@@ -164,7 +166,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

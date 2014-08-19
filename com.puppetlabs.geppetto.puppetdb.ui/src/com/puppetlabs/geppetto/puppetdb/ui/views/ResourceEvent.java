@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -61,7 +61,7 @@ public class ResourceEvent extends LeafNode<ResourceEvents> {
 		}
 		return txt == null
 				? ""
-				: txt.trim();
+						: txt.trim();
 	}
 
 	public Event getEvent() {
@@ -72,7 +72,7 @@ public class ResourceEvent extends LeafNode<ResourceEvents> {
 	public Image getImage(int colIdx) {
 		return colIdx == 0
 				? image
-				: null;
+						: null;
 	}
 
 	public Resource getResource() {

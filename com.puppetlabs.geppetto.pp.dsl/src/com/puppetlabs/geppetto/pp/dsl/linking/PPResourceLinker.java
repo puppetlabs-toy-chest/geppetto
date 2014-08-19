@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -96,6 +96,12 @@ import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
  */
 public class PPResourceLinker implements IPPDiagnostics {
 
+	private static String proposalIssue(String issue, String[] proposals) {
+		if(proposals == null || proposals.length == 0)
+			return issue;
+		return issue + IPPDiagnostics.ISSUE_PROPOSAL_SUFFIX;
+	}
+
 	/**
 	 * Access to runtime configurable debug trace.
 	 */
@@ -144,13 +150,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 	private static final EClass[] FUNC = { PPTPPackage.Literals.FUNCTION };
 
 	private final static EClass[] CLASS_AND_TYPE = {
-			PPPackage.Literals.HOST_CLASS_DEFINITION, PPTPPackage.Literals.TYPE };
-
-	private static String proposalIssue(String issue, String[] proposals) {
-		if(proposals == null || proposals.length == 0)
-			return issue;
-		return issue + IPPDiagnostics.ISSUE_PROPOSAL_SUFFIX;
-	}
+		PPPackage.Literals.HOST_CLASS_DEFINITION, PPTPPackage.Literals.TYPE };
 
 	private Resource resource;
 
@@ -182,7 +182,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 	 * Links an arbitrary interpolation expression. Handles the special case of a literal name expression e.g.
 	 * "${literalName}" as
 	 * if it was "${$literalname}"
-	 * 
+	 *
 	 * @param o
 	 * @param importedNames
 	 * @param acceptor
@@ -251,9 +251,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 				acceptor.acceptWarning(
 					"Ambiguous reference to: '" + parentString + "' found in: " +
 							visibleResourceList(o.eResource(), descs), o,
-					PPPackage.Literals.HOST_CLASS_DEFINITION__PARENT,
-					IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
-					proposer.computeDistinctProposals(parentString, descs));
+							PPPackage.Literals.HOST_CLASS_DEFINITION__PARENT,
+							IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
+							proposer.computeDistinctProposals(parentString, descs));
 			}
 			// must check for circularity
 			List<QualifiedName> visited = Lists.newArrayList();
@@ -292,7 +292,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 		if(!advisor().allowInheritanceFromParameterizedClass()) {
 			List<IEObjectDescription> targets = descs.size() > 0
 					? descs
-					: searchResult.getRaw();
+							: searchResult.getRaw();
 			if(targets.size() > 0) {
 				IEObjectDescription target = targets.get(0);
 				if(target.getUserData(PPDSLConstants.CLASS_ARG_COUNT) != null)
@@ -335,7 +335,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 					acceptor.acceptWarning(
 						"Can not determine until runtime if this is a valid class reference (parameters not validated).", //
 						o, // Flag entire body
-							// PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, //
+						// PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, //
 						IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE);
 				}
 				else {
@@ -389,9 +389,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 					acceptor.acceptWarning(
 						"Ambiguous reference to: '" + className + "' found in: " +
 								visibleResourceList(o.eResource(), descs), o,
-						PPPackage.Literals.RESOURCE_BODY__NAME_EXPR,
-						IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
-						proposer.computeDistinctProposals(className, descs));
+								PPPackage.Literals.RESOURCE_BODY__NAME_EXPR,
+								IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
+								proposer.computeDistinctProposals(className, descs));
 				}
 				// use the first description found to find attributes
 				internalLinkAttributeOperations(o.getAttributes(), descs.get(0), importedNames, acceptor);
@@ -470,9 +470,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 	/**
 	 * Returns false if it is impossible that the given expression can result in a valid class
 	 * reference at runtime.
-	 * 
+	 *
 	 * TODO: this is a really stupid way of doing "type inference", but better than nothing.
-	 * 
+	 *
 	 * @param e
 	 * @return
 	 */
@@ -540,7 +540,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	/**
 	 * Returns the first type description. If none is found, the first description is returned.
-	 * 
+	 *
 	 * @param descriptions
 	 * @return
 	 */
@@ -637,19 +637,19 @@ public class PPResourceLinker implements IPPDiagnostics {
 							acceptor.acceptWarning(
 								"Ambiguous reference to: '" + className + "' found in: " +
 										visibleResourceList(s.eResource(), foundClasses), //
-								param, //
-								PPPackage.Literals.EXPR_LIST__EXPRESSIONS,
-								parameterIndex, //
-								IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
-								proposer.computeDistinctProposals(className, foundClasses));
+										param, //
+										PPPackage.Literals.EXPR_LIST__EXPRESSIONS,
+										parameterIndex, //
+										IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
+										proposer.computeDistinctProposals(className, foundClasses));
 						else
 							acceptor.acceptWarning(
 								"Ambiguous reference to: '" + className + "' found in: " +
 										visibleResourceList(s.eResource(), foundClasses), //
-								param.eContainer(), param.eContainingFeature(),
-								idx, //
-								IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
-								proposer.computeDistinctProposals(className, foundClasses));
+										param.eContainer(), param.eContainingFeature(),
+										idx, //
+										IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
+										proposer.computeDistinctProposals(className, foundClasses));
 
 					}
 					else if(foundClasses.size() < 1) {
@@ -715,18 +715,18 @@ public class PPResourceLinker implements IPPDiagnostics {
 					}
 					if(param instanceof ExprList)
 						acceptor.accept(error
-								? Severity.ERROR
-								: Severity.WARNING, msg, //
-							param, //
-							PPPackage.Literals.EXPR_LIST__EXPRESSIONS, parameterIndex, //
-							IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE);
+							? Severity.ERROR
+									: Severity.WARNING, msg, //
+									param, //
+									PPPackage.Literals.EXPR_LIST__EXPRESSIONS, parameterIndex, //
+									IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE);
 
 					else
 						acceptor.accept(error
-								? Severity.ERROR
-								: Severity.WARNING, msg, //
-							param.eContainer(), param.eContainingFeature(), idx, //
-							IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE);
+							? Severity.ERROR
+									: Severity.WARNING, msg, //
+									param.eContainer(), param.eContainingFeature(), idx, //
+									IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE);
 				}
 			}
 		}
@@ -734,7 +734,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	/**
 	 * Link well known functions that must have references to defined things.
-	 * 
+	 *
 	 * @param o
 	 * @param importedNames
 	 * @param acceptor
@@ -756,9 +756,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 						acceptor.acceptWarning(
 							"Ambiguous reference to: '" + className + "' found in: " +
 									visibleResourceList(o.eResource(), foundClasses), o,
-							PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, parameterIndex,
-							IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
-							proposer.computeDistinctProposals(className, foundClasses));
+									PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, parameterIndex,
+									IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
+									proposer.computeDistinctProposals(className, foundClasses));
 					}
 					else if(foundClasses.size() < 1) {
 						if(searchResult.getRaw().size() > 0) {
@@ -842,7 +842,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 			internalLinkFunctionArguments(name, o, importedNames, acceptor);
 			acceptor.acceptWarning("Found outside current path: '" + name + "'", nameExpr, //
 				IPPDiagnostics.ISSUE__NOT_ON_PATH //
-			);
+					);
 			return; // sort of ok
 		}
 		String[] proposals = proposer.computeProposals(name, ppFinder.getExportedDescriptions(), searchPath, FUNC);
@@ -858,9 +858,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 	 * Produces an error if the given EObject o is not contained (nested) in an expression that injects
 	 * the result of a regular expression evaluation (i.e. $0 - $n).
 	 * The injecting expressions are unless, if, elseif, case (entry), case expression, and selector entry.
-	 * 
+	 *
 	 * TODO: Check if there are (less obvious) expressions
-	 * 
+	 *
 	 * @param o
 	 * @param varName
 	 * @param attr
@@ -893,11 +893,11 @@ public class PPResourceLinker implements IPPDiagnostics {
 					if(containsRegularExpression(((SelectorEntry) p).getLeftExpr()))
 						return;
 					break;
-				// TODO: CHECK IF THIS ISOTHERIC CASE IS SUPPORTED
-				// case PPPackage.SELECTOR_EXPRESSION:
-				// if(containsRegularExpression(((SelectorExpression)p).get))
-				// return;
-				// break;
+					// TODO: CHECK IF THIS ISOTHERIC CASE IS SUPPORTED
+					// case PPPackage.SELECTOR_EXPRESSION:
+					// if(containsRegularExpression(((SelectorExpression)p).get))
+					// return;
+					// break;
 				case PPPackage.CASE:
 					// i.e. case expr { v0, v1, v2 : statements }
 					for(EObject v : ((Case) p).getValues())
@@ -914,7 +914,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 		}
 		acceptor.acceptWarning(
 			"Corresponding regular expression not found. Value of '" + varName +
-					"' can only be undefined at this point: '" + varName + "'", o, attr,
+			"' can only be undefined at this point: '" + varName + "'", o, attr,
 			IPPDiagnostics.ISSUE__UNKNOWN_REGEXP);
 
 	}
@@ -951,8 +951,8 @@ public class PPResourceLinker implements IPPDiagnostics {
 				acceptor.acceptWarning(
 					"Ambiguous reference to: '" + resourceTypeName + "' found in: " +
 							visibleResourceList(o.eResource(), descs), reference,
-					IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
-					proposer.computeDistinctProposals(resourceTypeName, descs, upperCaseProposals));
+							IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE,
+							proposer.computeDistinctProposals(resourceTypeName, descs, upperCaseProposals));
 			}
 			// Add resolved information at resource level
 			if(usedResolution != null)
@@ -981,8 +981,8 @@ public class PPResourceLinker implements IPPDiagnostics {
 				String[] proposals = proposer.computeProposals(
 					resourceTypeName, ppFinder.getExportedDescriptions(), upperCaseProposals, searchPath, DEF_AND_TYPE);
 				acceptor.acceptError("Unknown resource type: '" + resourceTypeName + "'", reference,
-				// PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_EXPR, //
-				proposalIssue(IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE, proposals), //
+					// PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_EXPR, //
+					proposalIssue(IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE, proposals), //
 					proposals);
 			}
 		}
@@ -990,7 +990,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	/**
 	 * Links/validates unparenthesized function calls.
-	 * 
+	 *
 	 * @param statements
 	 * @param acceptor
 	 */
@@ -1072,7 +1072,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 			existsAdjusted = searchResult.getAdjusted().size() > 0;
 			existsOutside = existsAdjusted
 					? false // we are not interested in that it may be both adjusted and raw
-					: searchResult.getRaw().size() > 0;
+							: searchResult.getRaw().size() > 0;
 		}
 		catch(IllegalArgumentException iae) {
 			// Can happen if there is something seriously wrong with the qualified name, should be caught by
@@ -1103,14 +1103,14 @@ public class PPResourceLinker implements IPPDiagnostics {
 						message.append("Reference to not yet initialized variable: '");
 					else
 						message.append(qualified
-								? "Unknown variable: '"
-								: "Unqualified and Unknown variable: '");
+							? "Unknown variable: '"
+									: "Unqualified and Unknown variable: '");
 					message.append(varName);
 					message.append("'");
 
 					String issue = disqualified
 							? IPPDiagnostics.ISSUE__UNINITIALIZED_VARIABLE
-							: IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE;
+									: IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE;
 					if(disqualified || advisor.unqualifiedVariables() == ValidationPreference.ERROR)
 						acceptor.acceptError(message.toString(), o, attr, issue);
 					else
@@ -1131,11 +1131,11 @@ public class PPResourceLinker implements IPPDiagnostics {
 	/**
 	 * Returns true if the descriptions resource path is the same as for the given object and
 	 * the fragment path of the given object starts with the fragment path of the description.
-	 * 
+	 *
 	 * (An alternative impl would be to first check if they are from the same resource - if so,
 	 * it is know that this resource is loaded (since we have the given o) and it should
 	 * be possible to search up the containment chain.
-	 * 
+	 *
 	 * @param desc
 	 * @param o
 	 * @return
@@ -1152,7 +1152,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	/**
 	 * Link all resources in the model
-	 * 
+	 *
 	 * @param model
 	 * @param acceptor
 	 */
@@ -1212,7 +1212,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 					_link((FunctionCall) o, importedNames, acceptor);
 					break;
 
-				// these are needed to link un-parenthesised function calls
+					// these are needed to link un-parenthesised function calls
 				case PPPackage.PUPPET_MANIFEST:
 					internalLinkUnparenthesisedCall(((PuppetManifest) o).getStatements(), importedNames, acceptor);
 					break;
@@ -1292,7 +1292,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	/**
 	 * Record facts about resolution of qName at model and resource level
-	 * 
+	 *
 	 * @param qName
 	 *            - the name being resolved
 	 * @param searchResult
@@ -1334,7 +1334,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 	/**
 	 * Surgically remove all disqualified descriptions (those that are HostClass and a container
 	 * of the given object 'o'.
-	 * 
+	 *
 	 * @param descs
 	 * @param o
 	 */
@@ -1356,7 +1356,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	/**
 	 * Disqualifies variables that appear on the lhs of an assignment
-	 * 
+	 *
 	 * @param descs
 	 * @param o
 	 * @return
@@ -1399,11 +1399,11 @@ public class PPResourceLinker implements IPPDiagnostics {
 	/**
 	 * Remove variables/entries that are not yet initialized. These are the values
 	 * defined in the same name and type if the variable is contained in a definition argument
-	 * 
+	 *
 	 * <p>
 	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or
 	 * x are disqualified.
-	 * 
+	 *
 	 * @param descs
 	 * @param o
 	 * @return the number of disqualified variables removed from the list
@@ -1441,7 +1441,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	/**
 	 * Collects the (unique) set of resource paths and returns a message with <=5 (+ ... and x others).
-	 * 
+	 *
 	 * @param descriptors
 	 * @return
 	 */
@@ -1459,23 +1459,23 @@ public class PPResourceLinker implements IPPDiagnostics {
 			boolean isPptpResource = "pptp".equals(uri.fileExtension());
 			String path = isPptpResource
 					? uri.lastSegment().replace(".pptp", "")
-					: uri.devicePath();
-			if(!resources.contains(path))
-				resources.add(path);
+							: uri.devicePath();
+					if(!resources.contains(path))
+						resources.add(path);
 		}
 		StringBuffer buf = new StringBuffer();
 		buf.append(resources.size());
 		buf.append(" resource");
 		buf.append(resources.size() > 1
-				? "s ["
-				: " [");
+			? "s ["
+					: " [");
 
 		int count = 0;
 
 		// if there are 4 include all, else limit to 3 - typically 2 (fresh user mistake) or is *many*
 		final int countCap = resources.size() == 4
 				? 4
-				: 3;
+						: 3;
 		for(String s : resources) {
 			if(count > 0)
 				buf.append(", ");

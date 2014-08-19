@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -47,7 +47,7 @@ import com.google.common.collect.Sets.SetView;
 
 /**
  * Produces a Catalog graph in DOT format.
- * 
+ *
  */
 public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer implements CatalogGraphStyles {
 
@@ -161,10 +161,10 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 					createResourcePropertyMarker(LT, STYLE_Removed, renderMarkerColumnFunc), //
 					getStyles().labelCell(
 						Sets.newHashSet(STYLE_ResourcePropertyName, STYLE_Removed), propertyName, Span.rowSpan(1)), //
-					getStyles().labelCell(
-						Sets.newHashSet(STYLE_ResourcePropertyValue, STYLE_Removed), DOUBLE_RIGHT_ARROW + //
-								valueOld, Span.colSpan(1))//
-				));
+						getStyles().labelCell(
+							Sets.newHashSet(STYLE_ResourcePropertyValue, STYLE_Removed), DOUBLE_RIGHT_ARROW + //
+							valueOld, Span.colSpan(1))//
+						));
 
 				String valueNew = newProperties.get(propertyName);
 				labelRows.add(getStyles().labelRow(
@@ -172,10 +172,10 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 					createResourcePropertyMarker(GT, STYLE_Added, renderMarkerColumnFunc), //
 					getStyles().labelCell(
 						Sets.newHashSet(STYLE_ResourcePropertyName, STYLE_Added), propertyName, Span.rowSpan(1)), //
-					getStyles().labelCell(
-						Sets.newHashSet(STYLE_ResourcePropertyValue, STYLE_Added), DOUBLE_RIGHT_ARROW + //
-								valueNew, Span.colSpan(1)) //
-				));
+						getStyles().labelCell(
+							Sets.newHashSet(STYLE_ResourcePropertyValue, STYLE_Added), DOUBLE_RIGHT_ARROW + //
+							valueNew, Span.colSpan(1)) //
+						));
 				result.width = Math.max(
 					result.width, propertyName.length() + Math.max(valueOld.length(), valueNew.length()) + 2);
 			}
@@ -215,8 +215,8 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 					createResourcePropertyMarker(marker, styleClass, renderMarkerColumnFunc), //
 					getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyName, styleClass), propertyName), //
 					getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyValue, styleClass), DOUBLE_RIGHT_ARROW + //
-							value, Span.colSpan(1)) //
-				));
+						value, Span.colSpan(1)) //
+						));
 
 				result.width = Math.max(result.width, propertyName.length() + value.length() + 2);
 			}
@@ -227,10 +227,10 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 	private LabelCell createResourcePropertyMarker(String marker, String styleName,
 			Function<IGraphElement, Boolean> renderedFunc) {
 		return getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyMarker, styleName), marker)//
-		.withStyles(// getStyles().fixedSize(true),
-			getStyles().fixedSize(true), getStyles().width(8), getStyles().height(8), getStyles().cellSpacing(0), //
-			getStyles().cellPadding(0), getStyles().rendered(renderedFunc) //
-		);
+				.withStyles(// getStyles().fixedSize(true),
+					getStyles().fixedSize(true), getStyles().width(8), getStyles().height(8), getStyles().cellSpacing(0), //
+					getStyles().cellPadding(0), getStyles().rendered(renderedFunc) //
+						);
 	}
 
 	private void createVertexesFor(Iterable<CatalogResource> resources, //
@@ -349,10 +349,10 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 			throw new IllegalArgumentException("resulting style must be String[1]");
 		final CatalogResource singleResource = newR == null
 				? oldR
-				: newR;
+						: newR;
 		final IPath singleRoot = newR == null
 				? oldRoot
-				: newRoot;
+						: newRoot;
 
 		if(singleResource == null)
 			throw new IllegalArgumentException("At least one catalog must be specified");
@@ -373,7 +373,7 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 			resultingStyle[0] = propertyInfo.singleResourceStyle;
 		else
 			resultingStyle[0] = propertyInfo.modifiedCount == 0
-					? STYLE_UnModified
+			? STYLE_UnModified
 					: STYLE_Modified;
 
 		// The title can never differ as that means different resources - it is either a single catalog
@@ -464,8 +464,8 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 					getStyles().tooltip(tooltip), //
 					getStyles().href(
 						getHrefProducer().hrefToManifest(new Path(singleResource.getFile()), singleRoot, line)) //
-				)) //
-			);
+						)) //
+					);
 		}
 		else if(hasParameters) {
 			// add a bit of padding at the bottom if there is no footer
@@ -474,23 +474,23 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 		}
 
 		return StyleSet.withStyle(//
-		getStyles().labelFormat(//
-			getStyles().labelTable(STYLE_ResourceTable, //
-				labelRows.toArray(new LabelRow[labelRows.size()]))));
+			getStyles().labelFormat(//
+				getStyles().labelTable(STYLE_ResourceTable, //
+					labelRows.toArray(new LabelRow[labelRows.size()]))));
 
 	}
 
 	/**
 	 * Produces a graph in DOT format for the given catalog on the given output stream.
-	 * 
+	 *
 	 * @param cancel
-	 *        enables cancellation of long running job
+	 *            enables cancellation of long running job
 	 * @param catalog
-	 *        the catalog for which a graph is produced
+	 *            the catalog for which a graph is produced
 	 * @param out
-	 *        where output in DOT format should be written
+	 *            where output in DOT format should be written
 	 * @param moduleData
-	 *        Name -> 0* MetadataInfo representing one version of a module with given name
+	 *            Name -> 0* MetadataInfo representing one version of a module with given name
 	 */
 	public void produceGraph(ICancel cancel, String title, Catalog oldCatalog, IPath oldRoot, Catalog newCatalog,
 			IPath newRoot, OutputStream out) {
@@ -504,7 +504,7 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 
 	/**
 	 * Produces the graph data structure (RootGraph, Vertexes, Edges).
-	 * 
+	 *
 	 */
 	private RootGraph produceRootGraph(ICancel cancel, String title, Catalog oldCatalog, IPath oldRoot,
 			Catalog newCatalog, IPath newRoot) {

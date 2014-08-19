@@ -11,7 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
 // @fmtOff
 	VersionTest.class,
 	VersionRangeTest.class
-// @fmtOn
+	// @fmtOn
 })
 @RunWith(Suite.class)
 public class AllTests {

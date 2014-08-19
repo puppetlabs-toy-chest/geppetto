@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
- * 
+ *
  */
 package com.puppetlabs.geppetto.forge.model;
 
@@ -19,13 +19,11 @@ import com.puppetlabs.geppetto.semver.Version;
  * A Module name with a version.
  */
 public class VersionedName implements Serializable, Comparable<VersionedName> {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Find the first dash or a slash that is followed by a digit. That position
 	 * must denote the separator between the name and the version since the version
 	 * must start with a digit and the name must start with a letter.
-	 * 
+	 *
 	 * @param slug
 	 *            The string to parse
 	 * @return The position of the separator or -1 if it cannot be found
@@ -46,6 +44,8 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 		return -1;
 	}
 
+	private static final long serialVersionUID = 1L;
+
 	private final ModuleName moduleName;
 
 	private final Version version;
@@ -53,7 +53,7 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	/**
 	 * @param moduleName
 	 * @param version
-	 * 
+	 *
 	 * @return The created name
 	 * @throws IllegalArgumentException
 	 */
@@ -66,7 +66,7 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	 * Create a versioned name based on a slug. The slug consists of three parts that are separated
 	 * by either '/' or '-'. The method {@link #getVersionSeparatorPosition(String)} is used when
 	 * determining the position of the version separator.
-	 * 
+	 *
 	 * @param slug
 	 *            The string to create the owner/name/version from
 	 * @return The created name
@@ -75,7 +75,7 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 		int sep = getVersionSeparatorPosition(slug);
 		if(sep <= 0)
 			throw new IllegalArgumentException(
-				"Must be a full module name (owner [-/] name) and a version separated by a dash or slash");
+					"Must be a full module name (owner [-/] name) and a version separated by a dash or slash");
 
 		moduleName = ModuleName.fromString(slug.substring(0, sep));
 		version = Version.fromString(slug.substring(sep + 1));
@@ -158,7 +158,7 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	/**
 	 * Append a string representation of this versioned name using the given version separator character
 	 * onto the given builder.
-	 * 
+	 *
 	 * @param bld
 	 *            The builder that will receive the string representation
 	 * @versionSep the separator that will be inserted between the module name and the version

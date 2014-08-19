@@ -23,6 +23,7 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 
 import com.google.inject.Singleton;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
 import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 
 //import org.eclipse.jdt.core.IJavaElement;
@@ -115,7 +116,7 @@ public class ImagesOnFileSystemRegistry {
 
 	private File getTempDir() {
 		try {
-			File imageDir = PPDSLActivator.getInstance().getStateLocation().append(IMAGE_DIR).toFile();
+			File imageDir = PPActivator.getInstance().getStateLocation().append(IMAGE_DIR).toFile();
 			if(imageDir.exists()) {
 				// has not been deleted on previous shutdown
 				delete(imageDir);

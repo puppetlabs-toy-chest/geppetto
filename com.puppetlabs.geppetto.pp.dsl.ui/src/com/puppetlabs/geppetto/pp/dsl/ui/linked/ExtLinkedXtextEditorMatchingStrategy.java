@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,15 +20,16 @@ import org.eclipse.ui.part.FileEditorInput;
 
 /**
  * Matches unlinked and linked files.
- * 
+ *
  */
 public class ExtLinkedXtextEditorMatchingStrategy implements IEditorMatchingStrategy {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.ui.IEditorMatchingStrategy#matches(org.eclipse.ui.IEditorReference, org.eclipse.ui.IEditorInput)
 	 */
+	@Override
 	public boolean matches(IEditorReference editor, IEditorInput input) {
 		IEditorPart part = (IEditorPart) editor.getPart(false);
 		if(part == null)

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -14,7 +14,7 @@ package com.puppetlabs.geppetto.pp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Collect Expression</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -23,7 +23,7 @@ package com.puppetlabs.geppetto.pp;
  * <li>{@link com.puppetlabs.geppetto.pp.CollectExpression#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getCollectExpression()
  * @model
  * @generated
@@ -33,10 +33,11 @@ public interface CollectExpression extends Expression {
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Attributes</em>' containment reference isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Attributes</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Attributes</em>' containment reference.
 	 * @see #setAttributes(AttributeOperations)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getCollectExpression_Attributes()
@@ -49,10 +50,11 @@ public interface CollectExpression extends Expression {
 	 * Returns the value of the '<em><b>Class Reference</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Class Reference</em>' containment reference isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Class Reference</em>' containment reference isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Class Reference</em>' containment reference.
 	 * @see #setClassReference(Expression)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getCollectExpression_ClassReference()
@@ -65,10 +67,11 @@ public interface CollectExpression extends Expression {
 	 * Returns the value of the '<em><b>Query</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Query</em>' containment reference isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Query</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Query</em>' containment reference.
 	 * @see #setQuery(ICollectQuery)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getCollectExpression_Query()
@@ -78,10 +81,11 @@ public interface CollectExpression extends Expression {
 	ICollectQuery getQuery();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getAttributes <em>Attributes</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getAttributes <em>Attributes</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Attributes</em>' containment reference.
 	 * @see #getAttributes()
@@ -90,10 +94,11 @@ public interface CollectExpression extends Expression {
 	void setAttributes(AttributeOperations value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getClassReference <em>Class Reference</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getClassReference
+	 * <em>Class Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Class Reference</em>' containment reference.
 	 * @see #getClassReference()
@@ -102,10 +107,11 @@ public interface CollectExpression extends Expression {
 	void setClassReference(Expression value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getQuery <em>Query</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getQuery <em>Query</em>}' containment
+	 * reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Query</em>' containment reference.
 	 * @see #getQuery()

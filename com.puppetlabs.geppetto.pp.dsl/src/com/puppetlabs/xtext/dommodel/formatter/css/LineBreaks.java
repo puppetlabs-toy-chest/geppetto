@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -17,7 +17,7 @@ import com.google.common.base.Joiner;
  * already emitted line breaks ({@link #isExistingAcceptable()} in which case the number of new line breaks
  * is reduced by the number of existing line breaks (down to 0), and if a successor comment that is terminated
  * by a line break is accepted as a line break or not ({@link #isCommentEndingWithBreakAcceptable()}.
- * 
+ *
  */
 public class LineBreaks extends FlexibleQuantity {
 	private boolean acceptComment;
@@ -32,14 +32,16 @@ public class LineBreaks extends FlexibleQuantity {
 	}
 
 	/**
-	 * This is the same as calling {@link #LineBreaks(int, int, int, boolean, boolean)} with normal, normal, normal, true, true.
+	 * This is the same as calling {@link #LineBreaks(int, int, int, boolean, boolean)} with normal, normal, normal,
+	 * true, true.
 	 */
 	public LineBreaks(int normal) {
 		this(normal, normal, normal, true, true);
 	}
 
 	/**
-	 * This is the same as calling {@link #LineBreaks(int, int, int, boolean, boolean)} with min, normal, max, true, true.
+	 * This is the same as calling {@link #LineBreaks(int, int, int, boolean, boolean)} with min, normal, max, true,
+	 * true.
 	 */
 	public LineBreaks(int min, int normal, int max) {
 		this(min, normal, max, true, true);
@@ -49,7 +51,7 @@ public class LineBreaks extends FlexibleQuantity {
 	 * Sets the flexible quantity from the given min, normal and max parameters and if comments
 	 * ending with line break should be accepted as a line break, and if existing already emitted line breaks
 	 * should be included in the count or not.
-	 * 
+	 *
 	 * @param min
 	 * @param normal
 	 * @param max
@@ -66,7 +68,7 @@ public class LineBreaks extends FlexibleQuantity {
 	 * Returns <code>true</code> if this line break spec accepts a following line break terminated
 	 * comment as a line break (of count 1). If <code>false</code> is returned a line break is wanted
 	 * before the comment.
-	 * 
+	 *
 	 * @return <code>true</code> if a line break terminated comment counts as a line break
 	 */
 	public boolean isCommentEndingWithBreakAcceptable() {
@@ -74,9 +76,10 @@ public class LineBreaks extends FlexibleQuantity {
 	}
 
 	/**
-	 * Returns true if this line break spec accepts an existing emitted sequence as part of the count (<code>true</code>),
+	 * Returns true if this line break spec accepts an existing emitted sequence as part of the count (<code>true</code>
+	 * ),
 	 * or if a new count should be emitted (<code>false</code>).
-	 * 
+	 *
 	 * @return <code>true</code> if existing already emitted line breaks are included in the count
 	 */
 	public boolean isExistingAcceptable() {

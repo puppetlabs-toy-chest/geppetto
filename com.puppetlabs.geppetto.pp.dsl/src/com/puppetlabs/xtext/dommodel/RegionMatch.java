@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -18,13 +18,14 @@ import com.google.common.base.Preconditions;
 
 /**
  * <p>
- * An instance of RegionMatch matches a given {@link IDomNode} or (more detailed) a {@link CharSequence} and a <code>startOffset</code> with an
- * {@link ITextRegion} to compute the match/relationship between the given text and the region.
+ * An instance of RegionMatch matches a given {@link IDomNode} or (more detailed) a {@link CharSequence} and a
+ * <code>startOffset</code> with an {@link ITextRegion} to compute the match/relationship between the given text and the
+ * region.
  * </p>
  * <p>
- * The matcher is then used to answer question about the relationship {@link #isOutside()}, or {@link #getIntersectionType()}, and can also apply a split based on
- * the relationship using {@link #apply()}.
- * 
+ * The matcher is then used to answer question about the relationship {@link #isOutside()}, or
+ * {@link #getIntersectionType()}, and can also apply a split based on the relationship using {@link #apply()}.
+ *
  */
 public class RegionMatch {
 	public static enum IntersectionType {
@@ -50,7 +51,7 @@ public class RegionMatch {
 
 		text = s == null
 				? ""
-				: s;
+						: s;
 		this.textOffset = startOffset;
 		textLength = text.length();
 
@@ -95,7 +96,7 @@ public class RegionMatch {
 	 * Applies the region match to the text captured from the node when the match was made.
 	 * The return {@link Triple} returns first = part inside region, second = part before region, third = part after
 	 * region. All three elements are always set - non existant parts are represented by empty sequences.
-	 * 
+	 *
 	 * @return a Triple with parts(before, inside, after)
 	 */
 	public Triple<CharSequence, CharSequence, CharSequence> apply() {

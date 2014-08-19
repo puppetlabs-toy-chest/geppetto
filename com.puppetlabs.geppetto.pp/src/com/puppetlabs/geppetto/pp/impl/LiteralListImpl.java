@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.LiteralListImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class LiteralListImpl extends LiteralExpressionImpl implements LiteralList {
@@ -40,7 +40,7 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getElements()
 	 * @generated
 	 * @ordered
@@ -50,7 +50,7 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected LiteralListImpl() {
@@ -60,7 +60,7 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -75,7 +75,7 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -90,7 +90,7 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -105,7 +105,7 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -123,7 +123,7 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -134,7 +134,7 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -150,9 +150,10 @@ public class LiteralListImpl extends LiteralExpressionImpl implements LiteralLis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getElements() {
 		if(elements == null) {
 			elements = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.LITERAL_LIST__ELEMENTS);

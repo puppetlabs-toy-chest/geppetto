@@ -295,9 +295,9 @@ public class ExtLinkedXtextEditor extends XtextEditor {
 						linkedFile = ExtLinkedFileHelper.obtainLink(uri, true);
 						linkedFile.setPersistentProperty(TmpFileStoreEditorInput.UNTITLED_PROPERTY, "true");
 					}
-					catch(CoreException e) {
-						throw new PartInitException(e.getStatus());
-					}
+				catch(CoreException e) {
+					throw new PartInitException(e.getStatus());
+				}
 				else {
 					linkedFile = ExtLinkedFileHelper.obtainLink(uri, false);
 				}
@@ -371,23 +371,23 @@ public class ExtLinkedXtextEditor extends XtextEditor {
 				// TODO: input.getName() is probably always correct
 				suggestedName = isUntitled
 						? input.getName()
-						: oldPath.lastSegment();
+								: oldPath.lastSegment();
 
-				// suggested path
-				try {
-					suggestedPath = isUntitled
-							? ((IFileEditorInput) input).getFile().getWorkspace().getRoot().getPersistentProperty(
-								LAST_SAVEAS_LOCATION)
-							: oldPath.toOSString();
-				}
-				catch(CoreException e) {
-					// ignore, suggestedPath will be null
-				}
+						// suggested path
+						try {
+							suggestedPath = isUntitled
+									? ((IFileEditorInput) input).getFile().getWorkspace().getRoot().getPersistentProperty(
+										LAST_SAVEAS_LOCATION)
+										: oldPath.toOSString();
+						}
+						catch(CoreException e) {
+							// ignore, suggestedPath will be null
+						}
 
-				if(suggestedPath == null) {
-					// get user.home
-					suggestedPath = System.getProperty("user.home");
-				}
+						if(suggestedPath == null) {
+							// get user.home
+							suggestedPath = System.getProperty("user.home");
+						}
 			}
 			FileDialog dialog = new FileDialog(shell, SWT.SAVE);
 			if(suggestedName != null)
@@ -407,7 +407,7 @@ public class ExtLinkedXtextEditor extends XtextEditor {
 			final File localFile = new File(path);
 			if(localFile.exists()) {
 				MessageDialog overwriteDialog = new MessageDialog(shell, "Save As", null, path +
-						" already exists.\nDo you want to replace it?", MessageDialog.WARNING, new String[] {
+					" already exists.\nDo you want to replace it?", MessageDialog.WARNING, new String[] {
 						IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL }, 1); // 'No' is the default
 				if(overwriteDialog.open() != Window.OK) {
 					if(progressMonitor != null) {

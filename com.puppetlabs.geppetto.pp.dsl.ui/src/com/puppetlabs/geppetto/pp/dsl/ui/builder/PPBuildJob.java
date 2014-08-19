@@ -69,9 +69,9 @@ public class PPBuildJob extends Job {
 				if(p.getNature(PPUiConstants.PUPPET_NATURE_ID) != null)
 					projects.add(p);
 			}
-			catch(CoreException e) {
-				log.error("Failed to get puppet nature information from project", e);
-			}
+		catch(CoreException e) {
+			log.error("Failed to get puppet nature information from project", e);
+		}
 		setPriority(Job.BUILD);
 		setRule(workspace.getRoot());
 	}
@@ -89,7 +89,7 @@ public class PPBuildJob extends Job {
 			final SubMonitor ticker = SubMonitor.convert(monitor, projects.size() * 100 * 2);
 
 			MultiStatus status = new MultiStatus(
-				PPActivator.getInstance().getBundle().getSymbolicName(), Status.OK, "Build failures", null);
+				PPActivator.getInstance().getBundle().getSymbolicName(), IStatus.OK, "Build failures", null);
 
 			// Rebuild the given projects in the order stipulated by the workspace
 			for(IBuildConfiguration buildConfig : ((Workspace) workspace).getBuildOrder()) {
@@ -106,7 +106,7 @@ public class PPBuildJob extends Job {
 			}
 			return status.isOK()
 					? Status.OK_STATUS
-					: status;
+							: status;
 
 		}
 		finally {

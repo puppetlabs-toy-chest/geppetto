@@ -7,7 +7,7 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 
 	/**
 	 * Visits all node in graph.
-	 * 
+	 *
 	 * @param root
 	 */
 	public void all(Node root) {
@@ -19,7 +19,7 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 	/**
 	 * Visits all nodes in graph, and if visitor returns non-null, the iteration
 	 * stops and the returned non-null value is returned.,
-	 * 
+	 *
 	 * @param root
 	 * @return
 	 */

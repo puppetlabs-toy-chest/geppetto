@@ -43,7 +43,7 @@ public class PathEditor extends ListEditor {
 
 	/**
 	 * Creates a path field editor.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the preference this field editor works on
 	 * @param labelText
@@ -78,7 +78,7 @@ public class PathEditor extends ListEditor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.ListEditor#getEditedInput(java.lang.String)
 	 */
 	@Override
@@ -87,7 +87,7 @@ public class PathEditor extends ListEditor {
 		String[] value = new String[] { input };
 		int[] allSubdirs = new int[] { input.endsWith("/*")
 				? 1
-				: 0 };
+						: 0 };
 		int[] okCancel = new int[] { 1 };
 
 		dialog.prompt(

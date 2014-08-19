@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,7 +19,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
  * <ul>
  * <li>Puppet specific tab-size. (Note that the editor configuration always has convert tab to spaces turned on).</li>
  * </ul>
- * 
+ *
  */
 public class PPSourceViewerConfiguration extends XtextSourceViewerConfiguration {
 

@@ -58,10 +58,11 @@ import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog.Elem;
 
 public class ImportPuppetModuleFromForgeWizard extends AbstractPuppetModuleWizard implements NewWithKeyword,
-		IImportWizard {
+IImportWizard {
 
 	protected class PuppetProjectFromForgeCreationPage extends AbstractPuppetProjectWizard.PuppetProjectCreationPage {
 		private Listener keywordModifyListener = new Listener() {
+			@Override
 			public void handleEvent(Event e) {
 				selectButton.setEnabled(validateKeyword());
 			}
@@ -352,7 +353,7 @@ public class ImportPuppetModuleFromForgeWizard extends AbstractPuppetModuleWizar
 			Version v = release.getVersion();
 			VersionRange vr = v == null
 					? null
-					: VersionRange.exact(v);
+							: VersionRange.exact(v);
 
 			File projectDir = project.getLocation().toFile();
 			forgeService.install(release.getModuleName(), vr, projectDir, true, true);
@@ -374,6 +375,7 @@ public class ImportPuppetModuleFromForgeWizard extends AbstractPuppetModuleWizar
 		return new PuppetProjectFromForgeCreationPage(pageName);
 	}
 
+	@Override
 	public void startWithKeyword(String keyword) {
 		initialKeyword = keyword;
 	}

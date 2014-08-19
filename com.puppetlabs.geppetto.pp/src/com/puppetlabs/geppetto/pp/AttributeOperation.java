@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Attribute Operation</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * <li>{@link com.puppetlabs.geppetto.pp.AttributeOperation#getOp <em>Op</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getAttributeOperation()
  * @model
  * @generated
@@ -38,7 +38,7 @@ public interface AttributeOperation extends EObject {
 	 * If the meaning of the '<em>Key</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Key</em>' attribute.
 	 * @see #setKey(String)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getAttributeOperation_Key()
@@ -54,7 +54,7 @@ public interface AttributeOperation extends EObject {
 	 * If the meaning of the '<em>Op</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Op</em>' attribute.
 	 * @see #setOp(String)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getAttributeOperation_Op()
@@ -67,10 +67,11 @@ public interface AttributeOperation extends EObject {
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Value</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(Expression)
 	 * @see com.puppetlabs.geppetto.pp.PPPackage#getAttributeOperation_Value()
@@ -83,7 +84,7 @@ public interface AttributeOperation extends EObject {
 	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getKey <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Key</em>' attribute.
 	 * @see #getKey()
@@ -95,7 +96,7 @@ public interface AttributeOperation extends EObject {
 	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getOp <em>Op</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Op</em>' attribute.
 	 * @see #getOp()
@@ -104,10 +105,11 @@ public interface AttributeOperation extends EObject {
 	void setOp(String value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getValue <em>Value</em>}' containment
+	 * reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param value
 	 *            the new value of the '<em>Value</em>' containment reference.
 	 * @see #getValue()

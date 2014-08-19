@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -42,19 +42,16 @@ import com.google.gson.reflect.TypeToken;
  * <li>{@link com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CatalogResourceParameterImpl extends EObjectImpl implements CatalogResourceParameter {
 	/**
 	 * TODO: This serializer/deserializer is broken (and unused).
-	 * 
+	 *
 	 */
 	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogResourceParameter>
-			implements JsonSerializer<CatalogResourceParameter> {
-		private static java.lang.reflect.Type listOfStringType = new TypeToken<EList<String>>() {
-		}.getType();
-
+	implements JsonSerializer<CatalogResourceParameter> {
 		private static String getString(JsonObject jsonObj, String key) {
 			JsonElement json = jsonObj.get(key);
 			if(json == null)
@@ -64,7 +61,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 			// unset values are null, not empty strings
 			return value.length() == 0
 					? null
-					: value;
+							: value;
 		}
 
 		private static void putString(JsonObject jsonObj, String key, String value) {
@@ -72,6 +69,9 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 				value = "";
 			jsonObj.addProperty(key, value);
 		}
+
+		private static java.lang.reflect.Type listOfStringType = new TypeToken<EList<String>>() {
+		}.getType();
 
 		@Override
 		public CatalogResourceParameter deserialize(JsonElement json, java.lang.reflect.Type typeOfT,
@@ -109,7 +109,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -120,7 +120,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -131,7 +131,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -141,7 +141,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CatalogResourceParameterImpl() {
@@ -151,7 +151,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -168,7 +168,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -176,8 +176,8 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 		switch(featureID) {
 			case CatalogPackage.CATALOG_RESOURCE_PARAMETER__NAME:
 				return NAME_EDEFAULT == null
-						? name != null
-						: !NAME_EDEFAULT.equals(name);
+				? name != null
+				: !NAME_EDEFAULT.equals(name);
 			case CatalogPackage.CATALOG_RESOURCE_PARAMETER__VALUE:
 				return value != null && !value.isEmpty();
 		}
@@ -187,7 +187,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -208,7 +208,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -219,7 +219,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -238,9 +238,10 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -248,13 +249,14 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<String> getValue() {
 		if(value == null) {
 			value = new EDataTypeUniqueEList<String>(
-				String.class, this, CatalogPackage.CATALOG_RESOURCE_PARAMETER__VALUE);
+					String.class, this, CatalogPackage.CATALOG_RESOURCE_PARAMETER__VALUE);
 		}
 		return value;
 	}
@@ -262,9 +264,10 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -276,7 +279,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

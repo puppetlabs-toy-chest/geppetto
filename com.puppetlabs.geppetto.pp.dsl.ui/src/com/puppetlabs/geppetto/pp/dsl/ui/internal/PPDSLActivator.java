@@ -203,7 +203,7 @@ public class PPDSLActivator extends PPActivator {
 							// Rebuild if a project was added, removed, or changed its open status
 							if(delta.getResource() instanceof IProject &&
 									((delta.getKind() & (ADDED | REMOVED)) != 0 || (delta.getKind() & IResourceDelta.CHANGED) != 0 &&
-											(delta.getFlags() & IResourceDelta.OPEN) != 0)) {
+									(delta.getFlags() & IResourceDelta.OPEN) != 0)) {
 								done = true;
 								getPPInjector().getInstance(RebuildChecker.class).triggerBuild();
 								return false;

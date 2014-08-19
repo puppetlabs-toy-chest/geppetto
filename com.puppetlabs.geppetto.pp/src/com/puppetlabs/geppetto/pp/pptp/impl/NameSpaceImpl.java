@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -41,7 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <li>{@link com.puppetlabs.geppetto.pp.pptp.impl.NameSpaceImpl#isReserved <em>Reserved</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
@@ -49,7 +49,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	 * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getContents()
 	 * @generated
 	 * @ordered
@@ -60,7 +60,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	 * The default value of the '{@link #isReserved() <em>Reserved</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isReserved()
 	 * @generated
 	 * @ordered
@@ -71,7 +71,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	 * The cached value of the '{@link #isReserved() <em>Reserved</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isReserved()
 	 * @generated
 	 * @ordered
@@ -81,7 +81,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected NameSpaceImpl() {
@@ -91,7 +91,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -110,7 +110,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -129,7 +129,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -146,7 +146,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -161,7 +161,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -178,7 +178,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -199,7 +199,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -210,7 +210,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -229,9 +229,10 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EList<TargetElement> getContents() {
 		if(contents == null) {
 			contents = new EObjectContainmentEList<TargetElement>(
@@ -243,9 +244,10 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isReserved() {
 		return reserved;
 	}
@@ -253,9 +255,10 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setReserved(boolean newReserved) {
 		boolean oldReserved = reserved;
 		reserved = newReserved;
@@ -267,7 +270,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

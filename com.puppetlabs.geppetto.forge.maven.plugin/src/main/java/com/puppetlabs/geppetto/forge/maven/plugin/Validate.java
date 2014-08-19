@@ -492,6 +492,7 @@ public class Validate extends AbstractForgeServiceMojo {
 		options.setFileFilter(getFileFilter());
 		options.setPlatformURI(PuppetTarget.forComplianceLevel(complianceLevel, false).getPlatformURI());
 		options.setEncodingProvider(new IEncodingProvider() {
+			@Override
 			public String getEncoding(URI file) {
 				return UTF_8.name();
 			}

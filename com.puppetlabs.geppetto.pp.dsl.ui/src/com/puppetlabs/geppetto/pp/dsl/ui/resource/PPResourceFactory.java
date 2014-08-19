@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,7 +20,7 @@ import com.google.inject.Provider;
 
 /**
  * A Provider of a PP specific Resource
- * 
+ *
  */
 public class PPResourceFactory implements IResourceFactory {
 	private Provider<PPResource> provider;
@@ -30,6 +30,7 @@ public class PPResourceFactory implements IResourceFactory {
 		this.provider = resourceProvider;
 	}
 
+	@Override
 	public Resource createResource(URI uri) {
 		XtextResource xtextResource = provider.get();
 		xtextResource.setURI(uri);

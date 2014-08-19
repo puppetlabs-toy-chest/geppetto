@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -24,14 +24,14 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @deprecated
 	 * @generated
 	 */
@@ -44,7 +44,7 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public static CatalogFactory init() {
@@ -64,7 +64,7 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public CatalogFactoryImpl() {
@@ -74,7 +74,7 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -98,9 +98,10 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Catalog createCatalog() {
 		CatalogImpl catalog = new CatalogImpl();
 		return catalog;
@@ -109,9 +110,10 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CatalogEdge createCatalogEdge() {
 		CatalogEdgeImpl catalogEdge = new CatalogEdgeImpl();
 		return catalogEdge;
@@ -120,9 +122,10 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CatalogMetadata createCatalogMetadata() {
 		CatalogMetadataImpl catalogMetadata = new CatalogMetadataImpl();
 		return catalogMetadata;
@@ -131,9 +134,10 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CatalogResource createCatalogResource() {
 		CatalogResourceImpl catalogResource = new CatalogResourceImpl();
 		return catalogResource;
@@ -142,9 +146,10 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CatalogResourceParameter createCatalogResourceParameter() {
 		CatalogResourceParameterImpl catalogResourceParameter = new CatalogResourceParameterImpl();
 		return catalogResourceParameter;
@@ -153,9 +158,10 @@ public class CatalogFactoryImpl extends EFactoryImpl implements CatalogFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CatalogPackage getCatalogPackage() {
 		return (CatalogPackage) getEPackage();
 	}

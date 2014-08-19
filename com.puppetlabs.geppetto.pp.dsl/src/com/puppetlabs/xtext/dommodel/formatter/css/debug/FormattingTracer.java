@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -27,9 +27,9 @@ import com.google.inject.name.Named;
  * The FormattingTracer is a singleton that performs tracing if the debug option "debug/formatter" is
  * set (in .options, or via launch configuration). If not turned on, all of the formatters operations
  * have no effect.
- * 
+ *
  * The FormattingTracer also implements ITracer which delegates to a configurable tracer named {@link #DEBUG_FORMATTER}.
- * 
+ *
  */
 @Singleton
 public class FormattingTracer implements ITracer {
@@ -65,7 +65,7 @@ public class FormattingTracer implements ITracer {
 	public StyleSet getEffectiveStyle(IDomNode node) {
 		return isTracing()
 				? effectiveStyleMap.get(node)
-				: null;
+						: null;
 	}
 
 	@Override
@@ -73,6 +73,7 @@ public class FormattingTracer implements ITracer {
 		return tracer.getStringProvider();
 	}
 
+	@Override
 	public boolean isTracing() {
 		return tracing;
 	}

@@ -45,7 +45,7 @@ public class StyleFactory implements IStyleFactory {
 		public T getValue(IDomNode ge) {
 			return function != null
 					? function.apply(ge)
-					: value;
+							: value;
 		}
 
 		@Override
@@ -61,14 +61,14 @@ public class StyleFactory implements IStyleFactory {
 		public boolean supports(NodeType type) {
 			return types == null
 					? true
-					: types.contains(type);
+							: types.contains(type);
 		}
 
 		@Override
 		public boolean supports(Set<NodeType> types) {
 			return types == null
 					? true
-					: this.types.containsAll(types);
+							: this.types.containsAll(types);
 		}
 	}
 

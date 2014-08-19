@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ public class PuppetTypeTests {
 	@Test
 	public void testParseFunctionInNestedModules() throws Exception {
 		File aRubyFile = TestDataProvider.getTestFile(new Path(
-			"testData/pp-modules-ruby/module-x/lib/puppet/type/thing.rb"));
+				"testData/pp-modules-ruby/module-x/lib/puppet/type/thing.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {

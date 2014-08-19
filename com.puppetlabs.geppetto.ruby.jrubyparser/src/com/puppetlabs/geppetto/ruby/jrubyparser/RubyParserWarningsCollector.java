@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -29,8 +29,11 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 		private ID id;
 
 		private int line;
+
 		private int startLine;
+
 		private String fileName;
+
 		private String message;
 
 		private Object[] data;
@@ -41,9 +44,8 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 
 		private static final Object[] EMPTY_DATA = {};
 
-		protected RubyIssue(ID id, int line, int startLine, String fileName,
-				String message, Object... data) {
-			if (id == null)
+		protected RubyIssue(ID id, int line, int startLine, String fileName, String message, Object... data) {
+			if(id == null)
 				throw new IllegalArgumentException("ID may not be null");
 			this.id = id;
 			this.line = line;
@@ -55,8 +57,7 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 			this.length = -1;
 		}
 
-		protected RubyIssue(ID id, SourcePosition position, String message,
-				Object... data) {
+		protected RubyIssue(ID id, SourcePosition position, String message, Object... data) {
 			this.id = id;
 			this.line = position.getEndLine();
 			this.startLine = position.getStartLine();
@@ -71,22 +72,24 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 			this(null, error.getPosition(), error.getMessage(), EMPTY_DATA);
 		}
 
+		@Override
 		public Object[] getData() {
 			return data;
 		}
 
 		/**
 		 * Returns null if issue did not report a filename
-		 * 
+		 *
 		 * @return
 		 */
+		@Override
 		public String getFileName() {
 			return fileName;
 		}
 
 		/**
 		 * Implementation specific.
-		 * 
+		 *
 		 * @return null if this issue represents a syntax error.
 		 */
 		public ID getId() {
@@ -97,34 +100,42 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 		 * Returns "jruby.syntax.error" if this issue represents a syntax error,
 		 * else the ID as a string. The ID is ruby parser implementation
 		 * specific.
-		 * 
+		 *
 		 * @return
 		 */
+		@Override
 		public String getIdString() {
-			return id == null ? "jruby.syntax.error" : id.toString();
+			return id == null
+					? "jruby.syntax.error"
+					: id.toString();
 		}
 
+		@Override
 		public int getLength() {
 			return length;
 		}
 
+		@Override
 		public int getLine() {
 			return line;
 		}
 
+		@Override
 		public String getMessage() {
 			return message;
 		}
 
 		/**
 		 * Returns -1 if no start line has been set.
-		 * 
+		 *
 		 * @return
 		 */
+		@Override
 		public int getStartLine() {
 			return startLine;
 		}
 
+		@Override
 		public int getStartOffset() {
 			return startOffset;
 		}
@@ -132,9 +143,10 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 		/**
 		 * Indicates if this is a syntax error. This is the same as getId() ==
 		 * null.
-		 * 
+		 *
 		 * @return
 		 */
+		@Override
 		public boolean isSyntaxError() {
 			return id == null;
 		}
@@ -170,14 +182,12 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 	}
 
 	@Override
-	public void warn(ID id, SourcePosition position, String message,
-			Object... data) {
+	public void warn(ID id, SourcePosition position, String message, Object... data) {
 		issues.add(new RubyIssue(id, position, message, data));
 	}
 
 	@Override
-	public void warn(ID id, String fileName, int lineNumber, String message,
-			Object... data) {
+	public void warn(ID id, String fileName, int lineNumber, String message, Object... data) {
 		issues.add(new RubyIssue(id, lineNumber, -1, fileName, message, data));
 	}
 
@@ -187,14 +197,12 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 	}
 
 	@Override
-	public void warning(ID id, SourcePosition position, String message,
-			Object... data) {
+	public void warning(ID id, SourcePosition position, String message, Object... data) {
 		issues.add(new RubyIssue(id, position, message, data));
 	}
 
 	@Override
-	public void warning(ID id, String fileName, int lineNumber, String message,
-			Object... data) {
+	public void warning(ID id, String fileName, int lineNumber, String message, Object... data) {
 		issues.add(new RubyIssue(id, lineNumber, -1, fileName, message, data));
 	}
 

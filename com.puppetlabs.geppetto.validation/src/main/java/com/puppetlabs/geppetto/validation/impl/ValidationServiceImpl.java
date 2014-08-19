@@ -98,7 +98,7 @@ public class ValidationServiceImpl implements ValidationService {
 	public static void addIssueDiagnostic(Diagnostic diagnostics, Issue issue, File processedFile, File rootDirectory) {
 		DiagnosticType type = issue.isSyntaxError()
 				? GEPPETTO_SYNTAX
-				: GEPPETTO;
+						: GEPPETTO;
 		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(
 			translateIssueSeverity(issue.getSeverity()), type, issue.getMessage(), relativeFile(
 				processedFile, rootDirectory));
@@ -130,10 +130,10 @@ public class ValidationServiceImpl implements ValidationService {
 
 		int severity = issue.isSyntaxError()
 				? Diagnostic.ERROR
-				: Diagnostic.WARNING;
+						: Diagnostic.WARNING;
 		DiagnosticType type = issue.isSyntaxError()
 				? RUBY_SYNTAX
-				: RUBY;
+						: RUBY;
 
 		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(severity, type, issue.getMessage(), pathToFile(
 			issue.getFileName(), rootDirectory));
@@ -215,6 +215,7 @@ public class ValidationServiceImpl implements ValidationService {
 	 * @param monitor
 	 *            - client should call done unless using a SubMonitor
 	 */
+	@Override
 	public BuildResult validate(Diagnostic diagnostics, ValidationOptions options, File source, IProgressMonitor monitor) {
 		if(diagnostics == null)
 			throw new IllegalArgumentException("diagnostics can not be null");
@@ -299,6 +300,7 @@ public class ValidationServiceImpl implements ValidationService {
 	/**
 	 * TODO: Is currently limited to .pp content.
 	 */
+	@Override
 	public Resource validate(Diagnostic diagnostics, ValidationOptions options, String code, IProgressMonitor monitor) {
 		if(diagnostics == null)
 			throw new IllegalArgumentException("DiagnosticChain can not be null");
@@ -317,6 +319,7 @@ public class ValidationServiceImpl implements ValidationService {
 			// no need to remember "/" as the root
 			IResourceValidator rv = ppRunner.getPPResourceValidator();
 			final CancelIndicator cancelMonitor = new CancelIndicator() {
+				@Override
 				public boolean isCanceled() {
 					return ticker.isCanceled();
 				}
@@ -335,6 +338,7 @@ public class ValidationServiceImpl implements ValidationService {
 		return r;
 	}
 
+	@Override
 	public void validateManifest(Diagnostic diagnostics, ValidationOptions options, File sourceFile,
 			IProgressMonitor monitor) {
 		options = new ValidationOptions(options);
@@ -349,6 +353,7 @@ public class ValidationServiceImpl implements ValidationService {
 	/**
 	 * @deprecated use {@link #validate(DiagnosticChain, String)} instead.
 	 */
+	@Override
 	@Deprecated
 	public Resource validateManifest(Diagnostic diagnostics, ValidationOptions options, String code,
 			IProgressMonitor monitor) {
@@ -372,6 +377,7 @@ public class ValidationServiceImpl implements ValidationService {
 			Resource r = mdRunner.loadResource(input, URI.createFileURI(f.getPath()));
 			IResourceValidator rv = mdRunner.getModuleResourceValidator();
 			final CancelIndicator cancelMonitor = new CancelIndicator() {
+				@Override
 				public boolean isCanceled() {
 					return ticker.isCanceled();
 				}
@@ -388,6 +394,7 @@ public class ValidationServiceImpl implements ValidationService {
 		}
 	}
 
+	@Override
 	public BuildResult validateModule(Diagnostic diagnostics, ValidationOptions options, File moduleRoot,
 			IProgressMonitor monitor) {
 		options = new ValidationOptions(options);
@@ -408,6 +415,7 @@ public class ValidationServiceImpl implements ValidationService {
 			Resource r = dr.loadResource(input, URI.createFileURI(f.getPath()));
 			IResourceValidator rv = dr.getPPResourceValidator();
 			final CancelIndicator cancelMonitor = new CancelIndicator() {
+				@Override
 				public boolean isCanceled() {
 					return ticker.isCanceled();
 				}
@@ -424,6 +432,7 @@ public class ValidationServiceImpl implements ValidationService {
 		}
 	}
 
+	@Override
 	public void validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot,
 			File factorData, File siteFile, String nodeName, IProgressMonitor monitor) {
 		if(diagnostics == null)
@@ -458,6 +467,7 @@ public class ValidationServiceImpl implements ValidationService {
 		diagnostics.addChildren(runner.getDiagnostics());
 	}
 
+	@Override
 	public BuildResult validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot,
 			IProgressMonitor monitor) {
 		options = new ValidationOptions(options);

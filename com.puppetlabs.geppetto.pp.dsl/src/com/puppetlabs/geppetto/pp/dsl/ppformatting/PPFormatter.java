@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -22,12 +22,12 @@ import org.eclipse.xtext.util.Pair;
 
 /**
  * This class contains custom formatting description.
- * 
+ *
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
  * on how and when to use it
- * 
+ *
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
- * 
+ *
  * TODO: Formatting currently plagued by bugs in Xtext 2.0. See JUnit tests.
  */
 public class PPFormatter extends AbstractDeclarativeFormatter {
@@ -148,7 +148,7 @@ public class PPFormatter extends AbstractDeclarativeFormatter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter#createFormatterStream(java.lang.String,
 	 * org.eclipse.xtext.parsetree.reconstr.ITokenStream, boolean)
 	 */
@@ -254,7 +254,7 @@ public class PPFormatter extends AbstractDeclarativeFormatter {
 	/**
 	 * Adds formatting instructions for ResourceExpression and VirtualResourceExpression.
 	 * Sample formatting (wanted result) :
-	 * 
+	 *
 	 * <pre>
 	 * type {
 	 *     "title" :
@@ -268,16 +268,16 @@ public class PPFormatter extends AbstractDeclarativeFormatter {
 	 * Type {
 	 *     attr => expr,
 	 *     attr => expr
-	 * }    
+	 * }
 	 * &#064; type {
 	 * ... // as above
 	 * }
 	 * &#064;&#064; type {
 	 * ... // as above
 	 * }
-	 * 
+	 *
 	 * </pre>
-	 * 
+	 *
 	 * @param c
 	 *            - formatter to configure
 	 */

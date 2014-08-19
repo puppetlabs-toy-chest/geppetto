@@ -474,7 +474,7 @@ public class PPDiagnosticsRunner {
 		IContainer.Manager manager = resourceServiceProvider.getContainerManager();
 		if(!(manager instanceof ValidationStateBasedContainerManager))
 			throw new IllegalStateException(
-				"Guice Configuration Error: container manager must be a ValidationStateBasedContainerManager");
+					"Guice Configuration Error: container manager must be a ValidationStateBasedContainerManager");
 
 		return (ValidationStateBasedContainerManager) manager;
 	}
@@ -629,6 +629,7 @@ public class PPDiagnosticsRunner {
 			// The default linking
 			long before = System.currentTimeMillis();
 			final CancelIndicator cancelMonitor = new CancelIndicator() {
+				@Override
 				public boolean isCanceled() {
 					return monitor.isCanceled();
 				}
@@ -742,13 +743,13 @@ public class PPDiagnosticsRunner {
 
 		String path = uri.isFile()
 				? uri.toFileString()
-				: uri.path();
-		File f = pathToFileMap.get(path);
-		if(f != null)
-			return f;
-		f = new File(path);
-		pathToFileMap.put(path, f);
-		return f;
+						: uri.path();
+				File f = pathToFileMap.get(path);
+				if(f != null)
+					return f;
+				f = new File(path);
+				pathToFileMap.put(path, f);
+				return f;
 	}
 
 }

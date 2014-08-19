@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -59,15 +59,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class PPQuickfixProvider extends DefaultQuickfixProvider {
-	@Inject
-	protected PPDescriptionLabelProvider descriptionLabelProvider;
-
-	private final static EClass[] PARAMS_AND_VARIABLES = { //
-	//
-			PPPackage.Literals.DEFINITION_ARGUMENT, //
-			// PPTPPackage.Literals.TYPE_ARGUMENT, //
-			PPPackage.Literals.VARIABLE_EXPRESSION };
-
 	private static String toInitialCase(String s, boolean upper) {
 		if(s.length() < 1)
 			return s;
@@ -84,6 +75,15 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 		}
 		return builder.toString();
 	}
+
+	@Inject
+	protected PPDescriptionLabelProvider descriptionLabelProvider;
+
+	private final static EClass[] PARAMS_AND_VARIABLES = { //
+		//
+		PPPackage.Literals.DEFINITION_ARGUMENT, //
+		// PPTPPackage.Literals.TYPE_ARGUMENT, //
+		PPPackage.Literals.VARIABLE_EXPRESSION };
 
 	/**
 	 * Access to naming of model elements.
@@ -193,13 +193,13 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 				String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 				int pos = issueString.startsWith("$")
 						? 1
-						: 0;
+								: 0;
 				if(issueString.length() > pos) {
 					char c = issueString.charAt(pos);
 					if(Character.isLetter(c)) {
 						StringBuilder builder = new StringBuilder();
 						builder.append("Change '").append(c).append("' to '").append(Character.toLowerCase(c)).append(
-							"'.");
+								"'.");
 						if(Character.isLetter(issueString.charAt(pos)))
 							acceptor.accept(
 								issue,
@@ -463,8 +463,8 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 			acceptor.accept(issue, "Replace with '" + proposal + "'", //
 				"Change the reference to" + (proposal.startsWith("::")
 						? " the absolute: \n"
-						: ": \n") + proposal, null, new ReplacingModification(
-					issue.getOffset(), issue.getLength(), proposal));
+								: ": \n") + proposal, null, new ReplacingModification(
+									issue.getOffset(), issue.getLength(), proposal));
 		}
 	}
 
@@ -569,7 +569,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 						acceptor.accept(issue, "Change to '$" + s + "'", "Did you mean '$" + s + "'", null, //
 							new ReplacingModification(issue.getOffset() + (dollarVar
 									? 1
-									: 0), issueString.length(), s));
+											: 0), issueString.length(), s));
 				}
 				else {
 					unqualified[0] = true;
@@ -601,9 +601,9 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 				// --GLOBAL NAME
 				acceptor.accept(issue, "Change to '$::" + issueString + "'", "Change to '$" + issueString +
-						"' in global scope", null, new ReplacingModification(issue.getOffset() + (dollarVar
-						? 1
-						: 0), issueString.length(), "::" + issueString));
+					"' in global scope", null, new ReplacingModification(issue.getOffset() + (dollarVar
+							? 1
+									: 0), issueString.length(), "::" + issueString));
 
 				// --NAME IN THIS SCOPE - AND OUTER
 				// (Propose existing names in this and outer scopes)
@@ -617,13 +617,13 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 					String foundNameOfScope = converter.toString(desc.getName().skipLast(1));
 					String scopeType = desc.getName().skipLast(1).equals(nameOfScope)
 							? "current"
-							: "inhertied";
+									: "inhertied";
 					acceptor.accept(
 						issue, "Change to '$" + nameInScopeString + "'", "Change to '$" + issueString + "' in the " +
 								scopeType + " scope:\n '" + foundNameOfScope + "'", null, new ReplacingModification(
-							issue.getOffset() + (dollarVar
-									? 1
-									: 0), issueString.length(), nameInScopeString));
+									issue.getOffset() + (dollarVar
+											? 1
+													: 0), issueString.length(), nameInScopeString));
 				}
 				// String scopeType = "current";
 
@@ -636,9 +636,9 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 						acceptor.accept(
 							issue, "Change to '$" + converter.toString(nameInScope) + "'", "Change to '$" +
 									issueString + "' in the outer scope:\n '" + converter.toString(qn) + "'", null,
-							new ReplacingModification(issue.getOffset() + (dollarVar
-									? 1
-									: 0), issueString.length(), nameInScopeString));
+									new ReplacingModification(issue.getOffset() + (dollarVar
+											? 1
+													: 0), issueString.length(), nameInScopeString));
 				}
 				// --VARIABLE OR PARAMETER IN A SUPERCLASS
 				List<IEObjectDescription> classes = ppFinder.findHostClasses(

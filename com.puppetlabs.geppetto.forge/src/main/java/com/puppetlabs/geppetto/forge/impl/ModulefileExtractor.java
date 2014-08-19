@@ -22,6 +22,7 @@ import com.puppetlabs.geppetto.forge.util.ModuleUtils;
 
 @Singleton
 public class ModulefileExtractor extends AbstractMetadataExtractor {
+	@Override
 	public int getCardinal() {
 		return 20;
 	}

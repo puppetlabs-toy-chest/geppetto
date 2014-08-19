@@ -181,6 +181,7 @@ public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 			return false;
 		}
 
+		@Override
 		public void handleEvent(Event e) {
 			if(validationChange)
 				// Don't act on events that stems from login/password settings made
@@ -337,8 +338,8 @@ public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 			try {
 				return node.get("password", null);
 			}
-			catch(StorageException e) {
-			}
+		catch(StorageException e) {
+		}
 		return null;
 	}
 

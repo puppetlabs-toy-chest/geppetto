@@ -70,7 +70,7 @@ public class PPSemanticSequencer extends AbstractPPSemanticSequencer {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.serializer.AbstractPPSemanticSequencer#sequence_LiteralList(org.eclipse.emf.ecore.EObject,
 	 * com.puppetlabs.geppetto.pp.LiteralList)
 	 */
@@ -99,7 +99,7 @@ public class PPSemanticSequencer extends AbstractPPSemanticSequencer {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.serializer.AbstractPPSemanticSequencer#sequence_SelectorExpression(org.eclipse.emf.ecore.EObject,
 	 * com.puppetlabs.geppetto.pp.SelectorExpression)
 	 */

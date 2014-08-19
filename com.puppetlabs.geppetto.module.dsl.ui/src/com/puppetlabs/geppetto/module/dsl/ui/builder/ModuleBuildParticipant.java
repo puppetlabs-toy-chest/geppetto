@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.BuilderParticipant;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
@@ -52,8 +53,11 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 	}
 
 	public static String PUPPET_MODULE_PROBLEM_MARKER_TYPE = "com.puppetlabs.geppetto.module.dsl.ui.puppetModuleProblem";
+
 	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_FAST = "com.puppetlabs.geppetto.module.dsl.ui.module.check.fast";
+
 	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_NORMAL = "com.puppetlabs.geppetto.module.dsl.ui.module.check.normal";
+
 	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE = "com.puppetlabs.geppetto.module.dsl.ui.module.check.expensive";
 
 	private final ModuleUtil moduleUtil;
@@ -92,7 +96,7 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 				for(IEObjectDescription objDesc : dsc.getExportedObjectsByType(Literals.JSON_METADATA)) {
 					EObject obj = objDesc.getEObjectOrProxy();
 					if(obj.eIsProxy())
-						obj = EcoreUtil2.resolve(obj, context.getResourceSet());
+						obj = EcoreUtil.resolve(obj, context.getResourceSet());
 					if(!obj.eIsProxy())
 						syncProjectReferences(proj, getProjectReferences(((JsonMetadata) obj)), subMon.newChild(1));
 				}
@@ -210,13 +214,13 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 			if(validationAdvisor.getModulefileExists() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExists()), Forge.FORGE,
-						"Modulefile is deprecated. Using metadata.json"));
+					"Modulefile is deprecated. Using metadata.json"));
 		}
 		else {
 			if(validationAdvisor.getModulefileExistsAndIsUsed() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExistsAndIsUsed()), Forge.FORGE,
-					"Modulefile is deprecated. Building metadata.json from modulefile"));
+						"Modulefile is deprecated. Building metadata.json from modulefile"));
 
 			try {
 				Metadata md = forge.loadModulefile(ModuleBuildParticipant.toLocalFile(moduleFile, monitor.newChild(1)), diag);

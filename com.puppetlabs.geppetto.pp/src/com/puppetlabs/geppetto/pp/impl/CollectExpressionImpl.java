@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.CollectExpressionImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CollectExpressionImpl extends ExpressionImpl implements CollectExpression {
@@ -41,7 +41,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	 * The cached value of the '{@link #getClassReference() <em>Class Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getClassReference()
 	 * @generated
 	 * @ordered
@@ -52,7 +52,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	 * The cached value of the '{@link #getQuery() <em>Query</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getQuery()
 	 * @generated
 	 * @ordered
@@ -63,7 +63,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getAttributes()
 	 * @generated
 	 * @ordered
@@ -73,7 +73,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CollectExpressionImpl() {
@@ -83,7 +83,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetAttributes(AttributeOperations newAttributes, NotificationChain msgs) {
@@ -103,7 +103,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetClassReference(Expression newClassReference, NotificationChain msgs) {
@@ -124,7 +124,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public NotificationChain basicSetQuery(ICollectQuery newQuery, NotificationChain msgs) {
@@ -144,7 +144,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -163,7 +163,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -182,7 +182,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -201,7 +201,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -223,7 +223,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -234,7 +234,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -256,9 +256,10 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AttributeOperations getAttributes() {
 		return attributes;
 	}
@@ -266,9 +267,10 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression getClassReference() {
 		return classReference;
 	}
@@ -276,9 +278,10 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ICollectQuery getQuery() {
 		return query;
 	}
@@ -286,18 +289,19 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setAttributes(AttributeOperations newAttributes) {
 		if(newAttributes != attributes) {
 			NotificationChain msgs = null;
 			if(attributes != null)
 				msgs = ((InternalEObject) attributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.COLLECT_EXPRESSION__ATTRIBUTES, null, msgs);
+					PPPackage.COLLECT_EXPRESSION__ATTRIBUTES, null, msgs);
 			if(newAttributes != null)
 				msgs = ((InternalEObject) newAttributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.COLLECT_EXPRESSION__ATTRIBUTES, null, msgs);
+					PPPackage.COLLECT_EXPRESSION__ATTRIBUTES, null, msgs);
 			msgs = basicSetAttributes(newAttributes, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -310,18 +314,19 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setClassReference(Expression newClassReference) {
 		if(newClassReference != classReference) {
 			NotificationChain msgs = null;
 			if(classReference != null)
 				msgs = ((InternalEObject) classReference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.COLLECT_EXPRESSION__CLASS_REFERENCE, null, msgs);
+					PPPackage.COLLECT_EXPRESSION__CLASS_REFERENCE, null, msgs);
 			if(newClassReference != null)
 				msgs = ((InternalEObject) newClassReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.COLLECT_EXPRESSION__CLASS_REFERENCE, null, msgs);
+					PPPackage.COLLECT_EXPRESSION__CLASS_REFERENCE, null, msgs);
 			msgs = basicSetClassReference(newClassReference, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -335,18 +340,19 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setQuery(ICollectQuery newQuery) {
 		if(newQuery != query) {
 			NotificationChain msgs = null;
 			if(query != null)
 				msgs = ((InternalEObject) query).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.COLLECT_EXPRESSION__QUERY, null, msgs);
+					PPPackage.COLLECT_EXPRESSION__QUERY, null, msgs);
 			if(newQuery != null)
 				msgs = ((InternalEObject) newQuery).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPPackage.COLLECT_EXPRESSION__QUERY, null, msgs);
+					PPPackage.COLLECT_EXPRESSION__QUERY, null, msgs);
 			msgs = basicSetQuery(newQuery, msgs);
 			if(msgs != null)
 				msgs.dispatch();

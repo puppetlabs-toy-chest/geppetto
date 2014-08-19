@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -37,12 +37,12 @@ import com.google.gson.JsonSerializer;
  * <li>{@link com.puppetlabs.geppetto.catalog.impl.CatalogEdgeImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogEdge> implements
-			JsonSerializer<CatalogEdge> {
+	JsonSerializer<CatalogEdge> {
 
 		private static String getString(JsonObject jsonObj, String key) {
 			JsonElement json = jsonObj.get(key);
@@ -53,7 +53,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 			// unset values are null, not empty strings
 			return value.length() == 0
 					? null
-					: value;
+							: value;
 		}
 
 		private static void putString(JsonObject jsonObj, String key, String value) {
@@ -89,7 +89,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	 * The default value of the '{@link #getTarget() <em>Target</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getTarget()
 	 * @generated
 	 * @ordered
@@ -100,7 +100,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getTarget()
 	 * @generated
 	 * @ordered
@@ -111,7 +111,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	 * The default value of the '{@link #getSource() <em>Source</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getSource()
 	 * @generated
 	 * @ordered
@@ -122,7 +122,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getSource()
 	 * @generated
 	 * @ordered
@@ -132,7 +132,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected CatalogEdgeImpl() {
@@ -142,7 +142,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -159,7 +159,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -167,12 +167,12 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 		switch(featureID) {
 			case CatalogPackage.CATALOG_EDGE__TARGET:
 				return TARGET_EDEFAULT == null
-						? target != null
-						: !TARGET_EDEFAULT.equals(target);
+				? target != null
+				: !TARGET_EDEFAULT.equals(target);
 			case CatalogPackage.CATALOG_EDGE__SOURCE:
 				return SOURCE_EDEFAULT == null
-						? source != null
-						: !SOURCE_EDEFAULT.equals(source);
+				? source != null
+				: !SOURCE_EDEFAULT.equals(source);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -180,7 +180,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -199,7 +199,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -210,7 +210,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -229,9 +229,10 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getSource() {
 		return source;
 	}
@@ -239,9 +240,10 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getTarget() {
 		return target;
 	}
@@ -249,9 +251,10 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setSource(String newSource) {
 		String oldSource = source;
 		source = newSource;
@@ -263,9 +266,10 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setTarget(String newTarget) {
 		String oldTarget = target;
 		target = newTarget;
@@ -277,7 +281,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

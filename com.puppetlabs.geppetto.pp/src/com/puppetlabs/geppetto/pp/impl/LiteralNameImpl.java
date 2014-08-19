@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.impl.LiteralNameImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralName {
@@ -34,7 +34,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -45,7 +45,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -55,7 +55,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected LiteralNameImpl() {
@@ -65,7 +65,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -80,7 +80,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -88,8 +88,8 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 		switch(featureID) {
 			case PPPackage.LITERAL_NAME__VALUE:
 				return VALUE_EDEFAULT == null
-						? value != null
-						: !VALUE_EDEFAULT.equals(value);
+				? value != null
+				: !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -97,7 +97,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -113,7 +113,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -140,9 +140,10 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
@@ -150,9 +151,10 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
@@ -163,7 +165,7 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

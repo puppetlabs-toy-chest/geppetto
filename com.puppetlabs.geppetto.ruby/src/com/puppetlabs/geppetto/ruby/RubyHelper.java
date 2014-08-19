@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -54,12 +54,12 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyServicesFactory;
  * service will provide an empty
  * parse result (i.e. "no errors or warning"), and will return empty results for
  * information.
- * 
+ *
  * The caller can then adjust how to deal with service not being present.
- * 
+ *
  * To use the RubyHelper, a call must be made to {@link #setUp()}, then followed
  * by a series of requests to parse or get information.
- * 
+ *
  */
 public class RubyHelper {
 
@@ -137,7 +137,7 @@ public class RubyHelper {
 
 		@Override
 		public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException,
-				RubySyntaxException {
+		RubySyntaxException {
 			return emptyTypeInfo;
 		}
 
@@ -168,6 +168,10 @@ public class RubyHelper {
 
 	}
 
+	public static void setRubyServicesFactory(IRubyServicesFactory factory) {
+		rubyProviderFactory = factory;
+	}
+
 	private IRubyServices rubyProvider;
 
 	private static final FilenameFilter rbFileFilter = new FilenameFilter() {
@@ -189,10 +193,6 @@ public class RubyHelper {
 	};
 
 	private static IRubyServicesFactory rubyProviderFactory = null;
-
-	public static void setRubyServicesFactory(IRubyServicesFactory factory) {
-		rubyProviderFactory = factory;
-	}
 
 	private TPVariable addTPVariable(ITargetElementContainer container, String name, String documentation,
 			boolean deprecated) {
@@ -232,7 +232,7 @@ public class RubyHelper {
 	/**
 	 * Returns a list of custom PP parser functions from the given .rb file. The
 	 * returned list is empty if no function could be found.
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -320,7 +320,7 @@ public class RubyHelper {
 	/**
 	 * Returns a list of custom PP types from the given .rb file. The returned
 	 * list is empty if no type could be found.
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -342,7 +342,7 @@ public class RubyHelper {
 	/**
 	 * Returns a list of custom PP types from the given .rb file. The returned
 	 * list is empty if no type could be found.
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -373,11 +373,11 @@ public class RubyHelper {
 	 * type and parser/functions. The path to the distroDir should contain a
 	 * version string segment directly after a segment called 'puppet'. e.g.
 	 * /somewhere/on/disk/puppet/2.6.2_0/some/path/to/puppet.
-	 * 
+	 *
 	 * Will also load default settings:: variables, and meta variables.
-	 * 
+	 *
 	 * Output file will contain a PPTP model as a result of this call.
-	 * 
+	 *
 	 * @param distroDir
 	 *            - path to a puppet directory
 	 * @param outputFile
@@ -408,13 +408,13 @@ public class RubyHelper {
 	 * directory where the sub-directories "parser" and "type" are. The path to
 	 * this directory is expected to have a ../../ name on the form puppet-version
 	 * e.g. /somewhere/puppet-2.6.9/lib/puppet.
-	 * 
+	 *
 	 * The implementation will scan the known locations for definitions that
 	 * should be reflected in the target - i.e. parser/functions/*.rb and
 	 * type/*.rb
-	 * 
+	 *
 	 * Note, this does not load default settings:: variables.
-	 * 
+	 *
 	 * @throws IOException
 	 *             on problems with reading files
 	 * @throws RubySyntaxException
@@ -443,7 +443,7 @@ public class RubyHelper {
 		final String distroName = segments[sc - 3];
 		if(!distroName.startsWith("puppet-"))
 			throw new IllegalArgumentException(
-				"The ../../ of the given directory must be named on the form: 'puppet-<version>'");
+					"The ../../ of the given directory must be named on the form: 'puppet-<version>'");
 
 		puppetDistro.setLabel("puppet");
 		// 7 is the first char after 'puppet-'
@@ -500,7 +500,7 @@ public class RubyHelper {
 	/**
 	 * Load function(s) from a rubyfile (supposed to contain PP function
 	 * declarations).
-	 * 
+	 *
 	 * @param rbFile
 	 * @param rememberFile
 	 * @return
@@ -513,7 +513,7 @@ public class RubyHelper {
 
 	/**
 	 * Load function info into target.
-	 * 
+	 *
 	 * @param target
 	 * @param functionsDir
 	 * @throws IOException
@@ -565,7 +565,7 @@ public class RubyHelper {
 	/**
 	 * Loads meta variables into the target. These are variables that looks like
 	 * local variables in every scope, but they are not found from the outside.
-	 * 
+	 *
 	 * @param target
 	 */
 	public void loadMetaVariables(TargetEntry target) {
@@ -701,7 +701,7 @@ public class RubyHelper {
 	/**
 	 * Loads predefined variables in the settings:: namespace. These are hard to
 	 * find in the puppet logic.
-	 * 
+	 *
 	 * @param target
 	 */
 	public void loadSettings(TargetEntry target) {
@@ -767,7 +767,7 @@ public class RubyHelper {
 
 	/**
 	 * Load type(s) from ruby file.
-	 * 
+	 *
 	 * @param rbFile
 	 *            - the file to parse
 	 * @param rememberFiles
@@ -807,7 +807,7 @@ public class RubyHelper {
 
 	/**
 	 * Load type info into target.
-	 * 
+	 *
 	 * @param target
 	 * @param typesDir
 	 * @throws IOException
@@ -824,7 +824,7 @@ public class RubyHelper {
 	/**
 	 * Parse a .rb file and return information about syntax errors and warnings.
 	 * Must be preceded with a call to setUp().
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -840,7 +840,7 @@ public class RubyHelper {
 	/**
 	 * Parse a .rb file and return information about syntax errors and warnings.
 	 * Must be preceded with a call to setUp().
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IOException
@@ -860,9 +860,9 @@ public class RubyHelper {
 	public synchronized void setUp() {
 		if(rubyProvider == null)
 			rubyProvider = rubyProviderFactory == null
-					? new MockRubyServices()
-					: rubyProviderFactory.create();
-		rubyProvider.setUp();
+			? new MockRubyServices()
+		: rubyProviderFactory.create();
+			rubyProvider.setUp();
 	}
 
 	public void tearDown() {

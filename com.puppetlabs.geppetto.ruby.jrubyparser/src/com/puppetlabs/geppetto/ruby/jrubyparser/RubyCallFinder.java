@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -26,14 +26,14 @@ import com.google.common.collect.Lists;
 /**
  * Finds calls in a parsed ruby AST. An instance of this class can be reused,
  * but it is not threadsafe.
- * 
+ *
  * Calls are found using a FQN - i.e. a sequence of module/receiver names, where
  * the last name segment is the name of the function. The search will find
  * function calls irrespective of call type (e.g. a FCallNode (where receiver is
  * implied), or CallNode where receiver is explicit. All FQN names are appended
  * to the current scope - i.e. if a call is made to X::Y::foo() in module A, it
  * will be found by a search of A::X::Y::foo().
- * 
+ *
  * TODO: global references are not handled - i.e. if a call to ::X::Y::foo() is
  * made inside module A, it will be recognized (in error) as A::X::Y::foo() -
  * also see {@link ConstEvaluator}.
@@ -80,7 +80,7 @@ public class RubyCallFinder {
 		List<GenericCallNode> result = findCallInternal(root, true);
 		return result == null || result.size() != 1
 				? null
-				: result.get(0);
+						: result.get(0);
 	}
 
 	private List<GenericCallNode> findCallInternal(Node root, boolean findFirst) {
@@ -146,7 +146,7 @@ public class RubyCallFinder {
 		// return a found result or null
 		return result == null || result.size() == 0
 				? null
-				: result;
+						: result;
 	}
 
 	public List<GenericCallNode> findCalls(Node root, String... qualifiedName) {
@@ -168,7 +168,7 @@ public class RubyCallFinder {
 
 	/**
 	 * If in the exact scope, or if scope is an outer scope of the wanted scope.
-	 * 
+	 *
 	 * @return true if wanted or outer scope of wanted
 	 */
 	private boolean inCompatibleScope() {
@@ -178,7 +178,7 @@ public class RubyCallFinder {
 		//
 		if(nameStack.size() >= qualifiedName.size())
 			return false; // will not be found in this module - it is out of
-							// scope
+		// scope
 
 		// the module's name is shorter than wanted, does it match so far?
 		// i.e. we find module a::b when we are looking for a::b::c::FUNC
@@ -188,7 +188,7 @@ public class RubyCallFinder {
 		try {
 			return qualifiedName.subList(sizeX - sizeY, sizeX).equals(nameStack)
 					? true
-					: false;
+							: false;
 		}
 		catch(IndexOutOfBoundsException e) {
 			return false;
@@ -197,7 +197,7 @@ public class RubyCallFinder {
 
 	/**
 	 * Returns true if the current scope is the wanted scope.
-	 * 
+	 *
 	 * @return
 	 */
 	private boolean inWantedScope() {
@@ -206,7 +206,7 @@ public class RubyCallFinder {
 		try {
 			return qualifiedName.subList(1, qualifiedName.size()).equals(nameStack)
 					? true
-					: false;
+							: false;
 		}
 		catch(IndexOutOfBoundsException e) {
 			return false;
@@ -215,7 +215,7 @@ public class RubyCallFinder {
 
 	/**
 	 * Pops the stack until we are the previous scope.
-	 * 
+	 *
 	 * @param n
 	 */
 	private void pop(Node n) {
@@ -237,7 +237,7 @@ public class RubyCallFinder {
 
 	/**
 	 * Push node so we know where we are in scope.
-	 * 
+	 *
 	 * @param n
 	 */
 	private void push(Node n) {
@@ -247,7 +247,7 @@ public class RubyCallFinder {
 	/**
 	 * Pushes a name onto the name stack (and the scope stack, as we need to
 	 * discard the names when leaving a named scope).
-	 * 
+	 *
 	 * @param name
 	 */
 	private void pushName(String name) {
@@ -257,7 +257,7 @@ public class RubyCallFinder {
 
 	/**
 	 * Convenience for pushing 0-n names in a list. Same as call {@link #pushName(String)} for each.
-	 * 
+	 *
 	 * @param names
 	 */
 	private void pushNames(List<String> names) {

@@ -32,6 +32,7 @@ import com.google.inject.Module;
 import com.puppetlabs.geppetto.forge.client.ForgeHttpModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeServiceModule;
 import com.puppetlabs.geppetto.module.dsl.ui.internal.Activator;
+import com.puppetlabs.geppetto.module.dsl.ui.internal.ModuleActivator;
 import com.puppetlabs.geppetto.module.dsl.ui.preferences.ModulePreferencesHelper;
 
 /**
@@ -61,7 +62,7 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 		String msg = getInstance().getString(key);
 		return params.length == 0
 				? msg
-				: MessageFormat.format(msg, params);
+						: MessageFormat.format(msg, params);
 	}
 
 	public static void logException(String message, Exception e) {
@@ -87,8 +88,8 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 	}
 
 	public Injector createInjector(Module... modules) {
-		final Injector moduleInjector = Activator.getInstance().getInjector(
-			Activator.COM_PUPPETLABS_GEPPETTO_MODULE_DSL_MODULE);
+		final Injector moduleInjector = ModuleActivator.getInstance().getInjector(
+			ModuleActivator.COM_PUPPETLABS_GEPPETTO_MODULE_DSL_MODULE);
 		List<Module> forgeModules = new ArrayList<Module>();
 		for(Module module : modules)
 			forgeModules.add(module);

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <li>{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeArgumentImpl#isNamevar <em>Namevar</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class TypeArgumentImpl extends TargetElementImpl implements TypeArgument {
@@ -38,7 +38,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	 * The default value of the '{@link #isRequired() <em>Required</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isRequired()
 	 * @generated
 	 * @ordered
@@ -49,7 +49,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	 * The cached value of the '{@link #isRequired() <em>Required</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isRequired()
 	 * @generated
 	 * @ordered
@@ -60,7 +60,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	 * The default value of the '{@link #isNamevar() <em>Namevar</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isNamevar()
 	 * @generated
 	 * @ordered
@@ -71,7 +71,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	 * The cached value of the '{@link #isNamevar() <em>Namevar</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @see #isNamevar()
 	 * @generated
 	 * @ordered
@@ -81,7 +81,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected TypeArgumentImpl() {
@@ -91,7 +91,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -108,7 +108,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -125,7 +125,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -144,7 +144,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -155,7 +155,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -174,9 +174,10 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isNamevar() {
 		return namevar;
 	}
@@ -184,9 +185,10 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public boolean isRequired() {
 		return required;
 	}
@@ -194,9 +196,10 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setNamevar(boolean newNamevar) {
 		boolean oldNamevar = namevar;
 		namevar = newNamevar;
@@ -208,9 +211,10 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public void setRequired(boolean newRequired) {
 		boolean oldRequired = required;
 		required = newRequired;
@@ -222,7 +226,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

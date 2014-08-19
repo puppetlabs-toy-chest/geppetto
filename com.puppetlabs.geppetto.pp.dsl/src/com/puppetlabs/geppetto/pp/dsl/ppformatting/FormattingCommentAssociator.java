@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 
 /**
  * Provides a mapping from semantic objects to comments before and after the object.
- * 
+ *
  */
 public class FormattingCommentAssociator {
 	public static class CommentAssociations {

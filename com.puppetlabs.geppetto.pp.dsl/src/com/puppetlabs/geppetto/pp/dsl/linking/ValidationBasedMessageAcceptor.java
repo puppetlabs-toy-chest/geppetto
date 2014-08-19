@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -19,7 +19,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 /**
  * A message acceptor using an instance of an {@link IDiagnosticConsumer} as the recipient of
  * the message.
- * 
+ *
  */
 public class ValidationBasedMessageAcceptor extends AbstractMessageAcceptor {
 	private ValidationMessageAcceptor acceptor;
@@ -32,7 +32,7 @@ public class ValidationBasedMessageAcceptor extends AbstractMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#accept(org.eclipse.xtext.diagnostics.Severity, java.lang.String,
 	 * org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
@@ -63,7 +63,7 @@ public class ValidationBasedMessageAcceptor extends AbstractMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#accept(org.eclipse.xtext.diagnostics.Severity, java.lang.String,
 	 * org.eclipse.xtext.nodemodel.INode, java.lang.String, java.lang.String)
 	 */
@@ -92,7 +92,7 @@ public class ValidationBasedMessageAcceptor extends AbstractMessageAcceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor#accept(org.eclipse.xtext.diagnostics.Severity, java.lang.String,
 	 * org.eclipse.xtext.nodemodel.INode, java.lang.String, java.lang.String)
 	 */

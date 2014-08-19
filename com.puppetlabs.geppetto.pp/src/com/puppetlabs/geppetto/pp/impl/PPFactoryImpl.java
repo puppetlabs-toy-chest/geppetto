@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -80,14 +80,14 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @deprecated
 	 * @generated
 	 */
@@ -100,7 +100,7 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public static PPFactory init() {
@@ -120,7 +120,7 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public PPFactoryImpl() {
@@ -130,7 +130,7 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -276,9 +276,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AdditiveExpression createAdditiveExpression() {
 		AdditiveExpressionImpl additiveExpression = new AdditiveExpressionImpl();
 		return additiveExpression;
@@ -287,9 +288,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AndExpression createAndExpression() {
 		AndExpressionImpl andExpression = new AndExpressionImpl();
 		return andExpression;
@@ -298,9 +300,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AppendExpression createAppendExpression() {
 		AppendExpressionImpl appendExpression = new AppendExpressionImpl();
 		return appendExpression;
@@ -309,9 +312,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AssignmentExpression createAssignmentExpression() {
 		AssignmentExpressionImpl assignmentExpression = new AssignmentExpressionImpl();
 		return assignmentExpression;
@@ -320,9 +324,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AtExpression createAtExpression() {
 		AtExpressionImpl atExpression = new AtExpressionImpl();
 		return atExpression;
@@ -331,9 +336,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AttributeOperation createAttributeOperation() {
 		AttributeOperationImpl attributeOperation = new AttributeOperationImpl();
 		return attributeOperation;
@@ -342,9 +348,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public AttributeOperations createAttributeOperations() {
 		AttributeOperationsImpl attributeOperations = new AttributeOperationsImpl();
 		return attributeOperations;
@@ -353,9 +360,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Case createCase() {
 		CaseImpl case_ = new CaseImpl();
 		return case_;
@@ -364,9 +372,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CaseExpression createCaseExpression() {
 		CaseExpressionImpl caseExpression = new CaseExpressionImpl();
 		return caseExpression;
@@ -375,9 +384,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public CollectExpression createCollectExpression() {
 		CollectExpressionImpl collectExpression = new CollectExpressionImpl();
 		return collectExpression;
@@ -386,9 +396,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Definition createDefinition() {
 		DefinitionImpl definition = new DefinitionImpl();
 		return definition;
@@ -397,9 +408,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public DefinitionArgument createDefinitionArgument() {
 		DefinitionArgumentImpl definitionArgument = new DefinitionArgumentImpl();
 		return definitionArgument;
@@ -408,9 +420,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public DefinitionArgumentList createDefinitionArgumentList() {
 		DefinitionArgumentListImpl definitionArgumentList = new DefinitionArgumentListImpl();
 		return definitionArgumentList;
@@ -419,9 +432,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public DoubleQuotedString createDoubleQuotedString() {
 		DoubleQuotedStringImpl doubleQuotedString = new DoubleQuotedStringImpl();
 		return doubleQuotedString;
@@ -430,9 +444,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ElseExpression createElseExpression() {
 		ElseExpressionImpl elseExpression = new ElseExpressionImpl();
 		return elseExpression;
@@ -441,9 +456,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ElseIfExpression createElseIfExpression() {
 		ElseIfExpressionImpl elseIfExpression = new ElseIfExpressionImpl();
 		return elseIfExpression;
@@ -452,9 +468,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public EqualityExpression createEqualityExpression() {
 		EqualityExpressionImpl equalityExpression = new EqualityExpressionImpl();
 		return equalityExpression;
@@ -463,9 +480,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ExportedCollectQuery createExportedCollectQuery() {
 		ExportedCollectQueryImpl exportedCollectQuery = new ExportedCollectQueryImpl();
 		return exportedCollectQuery;
@@ -474,9 +492,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public Expression createExpression() {
 		ExpressionImpl expression = new ExpressionImpl();
 		return expression;
@@ -485,9 +504,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ExpressionTE createExpressionTE() {
 		ExpressionTEImpl expressionTE = new ExpressionTEImpl();
 		return expressionTE;
@@ -496,9 +516,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ExprList createExprList() {
 		ExprListImpl exprList = new ExprListImpl();
 		return exprList;
@@ -507,9 +528,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public FunctionCall createFunctionCall() {
 		FunctionCallImpl functionCall = new FunctionCallImpl();
 		return functionCall;
@@ -518,9 +540,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public HashEntry createHashEntry() {
 		HashEntryImpl hashEntry = new HashEntryImpl();
 		return hashEntry;
@@ -529,9 +552,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public HostClassDefinition createHostClassDefinition() {
 		HostClassDefinitionImpl hostClassDefinition = new HostClassDefinitionImpl();
 		return hostClassDefinition;
@@ -540,9 +564,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public IfExpression createIfExpression() {
 		IfExpressionImpl ifExpression = new IfExpressionImpl();
 		return ifExpression;
@@ -551,9 +576,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ImportExpression createImportExpression() {
 		ImportExpressionImpl importExpression = new ImportExpressionImpl();
 		return importExpression;
@@ -562,9 +588,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public InExpression createInExpression() {
 		InExpressionImpl inExpression = new InExpressionImpl();
 		return inExpression;
@@ -573,9 +600,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public InterpolatedVariable createInterpolatedVariable() {
 		InterpolatedVariableImpl interpolatedVariable = new InterpolatedVariableImpl();
 		return interpolatedVariable;
@@ -584,9 +612,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public JavaLambda createJavaLambda() {
 		JavaLambdaImpl javaLambda = new JavaLambdaImpl();
 		return javaLambda;
@@ -595,9 +624,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralBoolean createLiteralBoolean() {
 		LiteralBooleanImpl literalBoolean = new LiteralBooleanImpl();
 		return literalBoolean;
@@ -606,9 +636,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralClass createLiteralClass() {
 		LiteralClassImpl literalClass = new LiteralClassImpl();
 		return literalClass;
@@ -617,9 +648,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralDefault createLiteralDefault() {
 		LiteralDefaultImpl literalDefault = new LiteralDefaultImpl();
 		return literalDefault;
@@ -628,9 +660,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralHash createLiteralHash() {
 		LiteralHashImpl literalHash = new LiteralHashImpl();
 		return literalHash;
@@ -639,9 +672,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralList createLiteralList() {
 		LiteralListImpl literalList = new LiteralListImpl();
 		return literalList;
@@ -650,9 +684,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralName createLiteralName() {
 		LiteralNameImpl literalName = new LiteralNameImpl();
 		return literalName;
@@ -661,9 +696,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralNameOrReference createLiteralNameOrReference() {
 		LiteralNameOrReferenceImpl literalNameOrReference = new LiteralNameOrReferenceImpl();
 		return literalNameOrReference;
@@ -672,9 +708,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralRegex createLiteralRegex() {
 		LiteralRegexImpl literalRegex = new LiteralRegexImpl();
 		return literalRegex;
@@ -683,9 +720,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public LiteralUndef createLiteralUndef() {
 		LiteralUndefImpl literalUndef = new LiteralUndefImpl();
 		return literalUndef;
@@ -694,9 +732,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public MatchingExpression createMatchingExpression() {
 		MatchingExpressionImpl matchingExpression = new MatchingExpressionImpl();
 		return matchingExpression;
@@ -705,9 +744,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public MethodCall createMethodCall() {
 		MethodCallImpl methodCall = new MethodCallImpl();
 		return methodCall;
@@ -716,9 +756,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public MultiplicativeExpression createMultiplicativeExpression() {
 		MultiplicativeExpressionImpl multiplicativeExpression = new MultiplicativeExpressionImpl();
 		return multiplicativeExpression;
@@ -727,9 +768,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public NamedAccessExpression createNamedAccessExpression() {
 		NamedAccessExpressionImpl namedAccessExpression = new NamedAccessExpressionImpl();
 		return namedAccessExpression;
@@ -738,9 +780,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public NodeDefinition createNodeDefinition() {
 		NodeDefinitionImpl nodeDefinition = new NodeDefinitionImpl();
 		return nodeDefinition;
@@ -749,9 +792,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public OrExpression createOrExpression() {
 		OrExpressionImpl orExpression = new OrExpressionImpl();
 		return orExpression;
@@ -760,9 +804,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ParenthesisedExpression createParenthesisedExpression() {
 		ParenthesisedExpressionImpl parenthesisedExpression = new ParenthesisedExpressionImpl();
 		return parenthesisedExpression;
@@ -771,9 +816,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public PuppetManifest createPuppetManifest() {
 		PuppetManifestImpl puppetManifest = new PuppetManifestImpl();
 		return puppetManifest;
@@ -782,9 +828,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public RelationalExpression createRelationalExpression() {
 		RelationalExpressionImpl relationalExpression = new RelationalExpressionImpl();
 		return relationalExpression;
@@ -793,9 +840,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public RelationshipExpression createRelationshipExpression() {
 		RelationshipExpressionImpl relationshipExpression = new RelationshipExpressionImpl();
 		return relationshipExpression;
@@ -804,9 +852,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ResourceBody createResourceBody() {
 		ResourceBodyImpl resourceBody = new ResourceBodyImpl();
 		return resourceBody;
@@ -815,9 +864,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ResourceExpression createResourceExpression() {
 		ResourceExpressionImpl resourceExpression = new ResourceExpressionImpl();
 		return resourceExpression;
@@ -826,9 +876,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public RubyLambda createRubyLambda() {
 		RubyLambdaImpl rubyLambda = new RubyLambdaImpl();
 		return rubyLambda;
@@ -837,9 +888,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public SelectorEntry createSelectorEntry() {
 		SelectorEntryImpl selectorEntry = new SelectorEntryImpl();
 		return selectorEntry;
@@ -848,9 +900,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public SelectorExpression createSelectorExpression() {
 		SelectorExpressionImpl selectorExpression = new SelectorExpressionImpl();
 		return selectorExpression;
@@ -859,9 +912,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public SeparatorExpression createSeparatorExpression() {
 		SeparatorExpressionImpl separatorExpression = new SeparatorExpressionImpl();
 		return separatorExpression;
@@ -870,9 +924,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public ShiftExpression createShiftExpression() {
 		ShiftExpressionImpl shiftExpression = new ShiftExpressionImpl();
 		return shiftExpression;
@@ -881,9 +936,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public SingleQuotedString createSingleQuotedString() {
 		SingleQuotedStringImpl singleQuotedString = new SingleQuotedStringImpl();
 		return singleQuotedString;
@@ -892,9 +948,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public UnaryMinusExpression createUnaryMinusExpression() {
 		UnaryMinusExpressionImpl unaryMinusExpression = new UnaryMinusExpressionImpl();
 		return unaryMinusExpression;
@@ -903,9 +960,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public UnaryNotExpression createUnaryNotExpression() {
 		UnaryNotExpressionImpl unaryNotExpression = new UnaryNotExpressionImpl();
 		return unaryNotExpression;
@@ -914,9 +972,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public UnlessExpression createUnlessExpression() {
 		UnlessExpressionImpl unlessExpression = new UnlessExpressionImpl();
 		return unlessExpression;
@@ -925,9 +984,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public UnquotedString createUnquotedString() {
 		UnquotedStringImpl unquotedString = new UnquotedStringImpl();
 		return unquotedString;
@@ -936,9 +996,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public VariableExpression createVariableExpression() {
 		VariableExpressionImpl variableExpression = new VariableExpressionImpl();
 		return variableExpression;
@@ -947,9 +1008,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public VariableTE createVariableTE() {
 		VariableTEImpl variableTE = new VariableTEImpl();
 		return variableTE;
@@ -958,9 +1020,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public VerbatimTE createVerbatimTE() {
 		VerbatimTEImpl verbatimTE = new VerbatimTEImpl();
 		return verbatimTE;
@@ -969,9 +1032,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public VirtualCollectQuery createVirtualCollectQuery() {
 		VirtualCollectQueryImpl virtualCollectQuery = new VirtualCollectQueryImpl();
 		return virtualCollectQuery;
@@ -980,9 +1044,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public VirtualNameOrReference createVirtualNameOrReference() {
 		VirtualNameOrReferenceImpl virtualNameOrReference = new VirtualNameOrReferenceImpl();
 		return virtualNameOrReference;
@@ -991,9 +1056,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public WithLambdaExpression createWithLambdaExpression() {
 		WithLambdaExpressionImpl withLambdaExpression = new WithLambdaExpressionImpl();
 		return withLambdaExpression;
@@ -1002,9 +1068,10 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
+	@Override
 	public PPPackage getPPPackage() {
 		return (PPPackage) getEPackage();
 	}

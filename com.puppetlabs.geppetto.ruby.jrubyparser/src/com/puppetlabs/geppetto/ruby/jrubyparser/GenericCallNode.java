@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -40,40 +40,40 @@ public class GenericCallNode implements INameNode, IArgumentNode, BlockAccepting
 	public Node getArgs() {
 		return (callNode == null
 				? fcallNode
-				: callNode).getArgs();
+						: callNode).getArgs();
 	}
 
 	@Override
 	public Node getIter() {
 		return (callNode == null
 				? fcallNode
-				: callNode).getIter();
+						: callNode).getIter();
 	}
 
 	@Override
 	public String getName() {
 		return (callNode == null
 				? fcallNode
-				: callNode).getName();
+						: callNode).getName();
 	}
 
 	public Node getNode() {
 		return callNode == null
 				? fcallNode
-				: callNode;
+						: callNode;
 	}
 
 	public SourcePosition getPosition() {
 		return (callNode == null
 				? fcallNode
-				: callNode).getPosition();
+						: callNode).getPosition();
 	}
 
 	@Override
 	public boolean hasParens() {
 		return (callNode == null
 				? fcallNode
-				: callNode).hasParens();
+						: callNode).hasParens();
 	}
 
 	public boolean isValid() {
@@ -84,28 +84,28 @@ public class GenericCallNode implements INameNode, IArgumentNode, BlockAccepting
 	public void setArgs(Node argsNode) {
 		(callNode == null
 				? fcallNode
-				: callNode).setArgs(argsNode);
+						: callNode).setArgs(argsNode);
 	}
 
 	@Override
 	public void setHasParens(boolean hasParens) {
 		(callNode == null
 				? fcallNode
-				: callNode).setHasParens(hasParens);
+						: callNode).setHasParens(hasParens);
 	}
 
 	@Override
 	public void setIter(Node iterNode) {
 		(callNode == null
 				? fcallNode
-				: callNode).setIter(iterNode);
+						: callNode).setIter(iterNode);
 	}
 
 	@Override
 	public void setName(String newName) {
 		(callNode == null
 				? fcallNode
-				: callNode).setName(newName);
+						: callNode).setName(newName);
 	}
 
 }
