@@ -225,14 +225,8 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	private void _link(HostClassDefinition o, PPImportedNamesAdapter importedNames, IMessageAcceptor acceptor) {
 		final LiteralExpression parent = o.getParent();
-		if(parent == null)
-			return;
-		String parentString = null;
-		if(parent.eClass() == PPPackage.Literals.LITERAL_DEFAULT)
-			parentString = "default";
-		else if(parent.eClass() == PPPackage.Literals.LITERAL_NAME_OR_REFERENCE)
-			parentString = ((LiteralNameOrReference) parent).getValue();
-		if(parentString == null || parentString.length() < 1)
+		String parentString = PPFinder.getNameString(parent);
+		if(parentString == null)
 			return;
 
 		SearchResult searchResult = ppFinder.findHostClasses(o, parentString, importedNames);

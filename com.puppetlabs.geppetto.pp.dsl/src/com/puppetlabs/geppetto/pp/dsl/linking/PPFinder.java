@@ -49,6 +49,8 @@ import com.puppetlabs.geppetto.pp.DefinitionArgumentList;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.HostClassDefinition;
 import com.puppetlabs.geppetto.pp.Lambda;
+import com.puppetlabs.geppetto.pp.LiteralExpression;
+import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.NodeDefinition;
 import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.ResourceBody;
@@ -97,6 +99,22 @@ public class PPFinder {
 		public List<IEObjectDescription> getRaw() {
 			return raw;
 		}
+	}
+
+	static String getNameString(LiteralExpression expr) {
+		if(expr == null)
+			return null;
+
+		if(expr.eClass() == PPPackage.Literals.LITERAL_DEFAULT)
+			return "default";
+
+		if(expr.eClass() == PPPackage.Literals.LITERAL_NAME_OR_REFERENCE) {
+			String parentString = ((LiteralNameOrReference) expr).getValue();
+			if(parentString.isEmpty())
+				parentString = null;
+			return parentString;
+		}
+		return null;
 	}
 
 	private final static EClass[] CLASSES_FOR_VARIABLES = { //
@@ -535,6 +553,24 @@ public class PPFinder {
 				IEObjectDescription desc = findDefinitionArgument((DefinitionArgumentList) container, name);
 				if(desc != null)
 					return desc;
+				if(container.eContainer() instanceof HostClassDefinition) {
+					// The argument list belongs to a class definition. Check if the name references
+					// a variable defined by an inherited class.
+					LiteralExpression parent = ((HostClassDefinition) container.eContainer()).getParent();
+					String parentString = getNameString(parent);
+					if(parentString != null) {
+						SearchResult parentAttrs = findInherited(
+							scopeDetermeningObject, QualifiedName.create(parentString, name), importedNames,
+							Lists.<QualifiedName> newArrayList(), matchingStrategy, CLASSES_FOR_VARIABLES);
+
+						// Return first result with preference for adjusted matches.
+						List<IEObjectDescription> result = parentAttrs.getAdjusted();
+						if(result.isEmpty())
+							result = parentAttrs.getRaw();
+						if(!result.isEmpty())
+							return result.get(0);
+					}
+				}
 			}
 			if(container instanceof HostClassDefinition)
 				break;
