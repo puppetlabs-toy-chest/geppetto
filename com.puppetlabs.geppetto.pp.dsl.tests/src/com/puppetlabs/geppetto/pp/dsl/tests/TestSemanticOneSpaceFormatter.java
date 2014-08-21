@@ -16,7 +16,6 @@ import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Binder;
@@ -58,13 +57,6 @@ public class TestSemanticOneSpaceFormatter extends AbstractPuppetTests {
 				binder.bind(IDomModelFormatter.class).to(DebugFormatter.class);
 			}
 		};
-	}
-
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		with(getSetupInstance());
 	}
 
 	@Override

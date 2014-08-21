@@ -10,9 +10,20 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningCode;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
+import org.eclipse.xtext.resource.XtextResource;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.puppetlabs.geppetto.pp.AppendExpression;
 import com.puppetlabs.geppetto.pp.AssignmentExpression;
@@ -33,13 +44,6 @@ import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VirtualCollectQuery;
 import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
-import org.eclipse.xtext.resource.XtextResource;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Tests for expressions not covered by separate test classes.
@@ -68,7 +72,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	static final String Sample_ClassDefinition = "class testClass {\n}\n";
 
 	static final String Sample_If = //
-			"if $a == 1 {\n" + //
+	"if $a == 1 {\n" + //
 			"  true\n" + //
 			"} else {\n" + //
 			"  false\n" + //
@@ -609,7 +613,9 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		ImportExpression ip = pf.createImportExpression();
 		pp.getStatements().add(ip);
 
-		tester.validate(ip).assertError(IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
+		tester.validate(ip).assertAll(
+			errorCode(IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION),
+			warningCode(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED));
 	}
 
 	@Test
@@ -619,9 +625,9 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		ip.getValues().add(createSqString("somewhere/*.pp"));
 		pp.getStatements().add(ip);
 
-		tester.validate(ip).assertOK();
+		tester.validate(ip).assertWarning(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED);
 		ip.getValues().add(createSqString("nowhere/*.pp"));
-		tester.validate(ip).assertOK();
+		tester.validate(ip).assertWarning(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED);
 	}
 
 	@Test

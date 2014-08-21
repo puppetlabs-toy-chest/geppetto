@@ -64,6 +64,8 @@ import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
 import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
 import com.puppetlabs.geppetto.pp.dsl.PPStandaloneSetup;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.IConfigurableProvider;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
@@ -169,8 +171,8 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		for(int i = 0; i < keyValPairs.length; i++) {
 			AttributeOperation ao = pf.createAttributeOperation();
 			ao.setOp(additive
-				? "+>"
-						: "=>");
+					? "+>"
+					: "=>");
 			if(!(keyValPairs[i] instanceof String))
 				throw new IllegalArgumentException("Bad test spec, key not a String");
 			ao.setKey((String) (keyValPairs[i++]));
@@ -511,6 +513,11 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		with(getSetupInstance());
 		PPJavaValidator validator = get(PPJavaValidator.class);
 		EValidatorRegistrar registrar = get(EValidatorRegistrar.class);
+		ISearchPathProvider searchPathProvider = get(ISearchPathProvider.class);
+		if(searchPathProvider instanceof IConfigurableProvider)
+			((IConfigurableProvider) searchPathProvider).configure(
+				URI.createFileURI(System.getProperty("java.io.tmpdir")), null, null, null);
+
 		tester = new ValidatorTester<PPJavaValidator>(validator, registrar, "com.puppetlabs.geppetto.pp.dsl.PP");
 	}
 }

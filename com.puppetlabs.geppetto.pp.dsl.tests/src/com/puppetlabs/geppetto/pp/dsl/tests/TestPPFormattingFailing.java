@@ -19,7 +19,6 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Binder;
@@ -142,13 +141,6 @@ public class TestPPFormattingFailing extends AbstractPuppetTests {
 
 		// Runs with configuration that shows problem
 		return new TestModule();
-	}
-
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		with(getSetupInstance());
 	}
 
 	/**
