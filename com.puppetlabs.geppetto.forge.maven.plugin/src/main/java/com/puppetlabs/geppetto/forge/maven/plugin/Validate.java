@@ -155,6 +155,12 @@ public class Validate extends AbstractForgeServiceMojo {
 	private ValidationPreference ensureShouldAppearFirstInResource = IGNORE;
 
 	/**
+	 * How to validate use of 'import' keyword that was deprecated in Puppet 3.5
+	 */
+	@Parameter(property = "forge.validation.importIsDeprecated", defaultValue = "WARNING")
+	protected ValidationPreference importIsDeprecated = WARNING;
+
+	/**
 	 * How to validate hyphens in non brace enclosed interpolations. In < 2.7 interpolation stops at a hyphen, but
 	 * not in 2.7. Thus when using 2.6 code in 2.7 or vice versa, the result is different.
 	 */
@@ -273,6 +279,12 @@ public class Validate extends AbstractForgeServiceMojo {
 	private ValidationPreference unresolvedReference = WARNING;
 
 	/**
+	 * How to handle cases where expression validity cannot be asserted until runtime.
+	 */
+	@Parameter(property = "forge.validation.validityAssertedAtRuntime", defaultValue = "IGNORE")
+	protected ValidationPreference validityAssertedAtRuntime = IGNORE;
+
+	/**
 	 * How should tags containing whitespace characters be reported
 	 */
 	@Parameter(property = "forge.validation.whitespaceInTag", defaultValue = "WARNING")
@@ -378,6 +390,11 @@ public class Validate extends AbstractForgeServiceMojo {
 		}
 
 		@Override
+		public ValidationPreference importIsDeprecated() {
+			return importIsDeprecated;
+		}
+
+		@Override
 		public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
 			return interpolatedNonBraceEnclosedHyphens;
 		}
@@ -410,6 +427,11 @@ public class Validate extends AbstractForgeServiceMojo {
 		@Override
 		public ValidationPreference unquotedResourceTitles() {
 			return unquotedResourceTitles;
+		}
+
+		@Override
+		public ValidationPreference validityAssertedAtRuntime() {
+			return validityAssertedAtRuntime;
 		}
 	};
 
