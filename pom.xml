@@ -35,7 +35,7 @@
 		<guice.groupId>org.sonatype.sisu</guice.groupId>
 		<guice.artifactId>sisu-guice</guice.artifactId>
 		<emf.version>2.10.0-v20140514-1158</emf.version>
-		<xtext.version>2.6.1-v201406120726</xtext.version>
+		<xtext.version>2.6.2-v201407030533</xtext.version>
 	</properties>
 
 	<organization>
