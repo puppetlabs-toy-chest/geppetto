@@ -111,7 +111,7 @@ public class DirectoryValidator {
 				if(!(length == 8 //
 						||
 						(length == 11 && lcname.endsWith(".rb")) //
-						|| (length == 13 && lcname.endsWith(".rake"))))
+				|| (length == 13 && lcname.endsWith(".rake"))))
 					return false;
 			}
 			else if(!lcname.endsWith(".rake")) {
@@ -232,16 +232,16 @@ public class DirectoryValidator {
 				mdAdvisor.getUnexpectedSubmodule(), new File(moduleRoot, "modules"),
 				"Submodules in a module is not allowed", ModuleDiagnostics.ISSUE__UNEXPECTED_SUBMODULE_DIRECTORY);
 
-		boolean hasModulefile = new File(moduleRoot, Forge.MODULEFILE_NAME).isFile();
+		File moduleFile = new File(moduleRoot, Forge.MODULEFILE_NAME);
 		boolean hasMetadataJsonFile = new File(moduleRoot, Forge.METADATA_JSON_NAME).isFile();
-		if(hasModulefile) {
+		if(moduleFile.isFile()) {
 			if(hasMetadataJsonFile)
 				addFileDiagnostic(
-					mdAdvisor.getModulefileExists(), moduleRoot, "Modulefile is deprecated. Using metadata.json",
+					mdAdvisor.getModulefileExists(), moduleFile, "Modulefile is deprecated. Using metadata.json",
 					ModuleDiagnostics.ISSUE__MODULEFILE_IS_DEPRECATED);
 			else
 				addFileDiagnostic(
-					mdAdvisor.getModulefileExistsAndIsUsed(), moduleRoot,
+					mdAdvisor.getModulefileExistsAndIsUsed(), moduleFile,
 					"Modulefile is deprecated. Building metadata.json from modulefile",
 					ModuleDiagnostics.ISSUE__MODULEFILE_IS_DEPRECATED_BUT_USED);
 		}
@@ -318,8 +318,8 @@ public class DirectoryValidator {
 			if(filesOnPath.add(f)) {
 				nonRootsOnPath.add(f);
 				resourcesOnPath.add(URI.createFileURI(Forge.MODULEFILE_NAME.equals(f.getName())
-					? new File(f.getParentFile(), Forge.METADATA_JSON_NAME).getPath()
-							: f.getPath()));
+						? new File(f.getParentFile(), Forge.METADATA_JSON_NAME).getPath()
+						: f.getPath()));
 			}
 		}
 
@@ -550,7 +550,7 @@ public class DirectoryValidator {
 			URI platformURI = options.getPlatformURI();
 			ppRunner.loadResource(platformURI != null
 					? platformURI
-							: PuppetTarget.getDefault().getPlatformURI());
+					: PuppetTarget.getDefault().getPlatformURI());
 		}
 		catch(IOException e) {
 			addExceptionDiagnostic("Internal Error: Could not load pptp.", e);
@@ -637,7 +637,7 @@ public class DirectoryValidator {
 				+ rakeFiles.size() * 2 //
 				+ 1 // load pptp
 				+ 1 // "for the pot" (to make sure there is a final tick to report)
-				;
+		;
 
 		final SubMonitor ticker = SubMonitor.convert(monitor, workload); // TODO: scaling
 
