@@ -221,7 +221,7 @@ public class TestValidatorService extends AbstractValidationTest {
 			if(IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN.equals(e.getIssue()) ||
 					IPPDiagnostics.ISSUE__HYPHEN_IN_NAME.equals(e.getIssue()))
 				hyphenWarning++;
-		assertEquals("There should be two errors", 2, chain.getChildren().size() - hyphenWarning);
+		assertEquals("There should be four warnings", 4, chain.getChildren().size() - hyphenWarning);
 	}
 
 }

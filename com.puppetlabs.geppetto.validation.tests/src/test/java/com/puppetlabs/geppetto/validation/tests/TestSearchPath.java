@@ -62,6 +62,7 @@ public class TestSearchPath extends AbstractValidationTest {
 		assertContainsIssue(chain, IPPDiagnostics.ISSUE__NOT_ON_PATH);
 
 		// Remove $manifestdir from searhc path and test again. Should be OK now.
+		chain = new Diagnostic();
 		options.setSearchPath("lib/*:environments/$environment/*:manifests/*:modules/*");
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertDoesNotContainIssue(chain, IPPDiagnostics.ISSUE__NOT_ON_PATH);
