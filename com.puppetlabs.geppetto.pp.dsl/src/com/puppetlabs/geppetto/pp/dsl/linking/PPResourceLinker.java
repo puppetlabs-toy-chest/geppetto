@@ -48,6 +48,7 @@ import com.puppetlabs.geppetto.pp.Case;
 import com.puppetlabs.geppetto.pp.CaseExpression;
 import com.puppetlabs.geppetto.pp.CollectExpression;
 import com.puppetlabs.geppetto.pp.Definition;
+import com.puppetlabs.geppetto.pp.DefinitionArgument;
 import com.puppetlabs.geppetto.pp.ElseExpression;
 import com.puppetlabs.geppetto.pp.ElseIfExpression;
 import com.puppetlabs.geppetto.pp.ExprList;
@@ -224,14 +225,8 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 	private void _link(HostClassDefinition o, PPImportedNamesAdapter importedNames, IMessageAcceptor acceptor) {
 		final LiteralExpression parent = o.getParent();
-		if(parent == null)
-			return;
-		String parentString = null;
-		if(parent.eClass() == PPPackage.Literals.LITERAL_DEFAULT)
-			parentString = "default";
-		else if(parent.eClass() == PPPackage.Literals.LITERAL_NAME_OR_REFERENCE)
-			parentString = ((LiteralNameOrReference) parent).getValue();
-		if(parentString == null || parentString.length() < 1)
+		String parentString = PPFinder.getNameString(parent);
+		if(parentString == null)
 			return;
 
 		SearchResult searchResult = ppFinder.findHostClasses(o, parentString, importedNames);
@@ -1066,9 +1061,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 			searchResult = ppFinder.findVariable(o, qName, importedNames);
 
 			// remove all references to not yet initialized variables
-			disqualified = (0 != removeDisqualifiedVariables(searchResult.getRaw(), o));
+			disqualified = (0 != removeDisqualifiedVariables(searchResult.getRaw(), o, varName));
 			if(disqualified) // adjusted can not have disqualified entries if raw did not have them
-				removeDisqualifiedVariables(searchResult.getAdjusted(), o);
+				removeDisqualifiedVariables(searchResult.getAdjusted(), o, varName);
 			existsAdjusted = searchResult.getAdjusted().size() > 0;
 			existsOutside = existsAdjusted
 					? false // we are not interested in that it may be both adjusted and raw
@@ -1350,8 +1345,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 		}
 	}
 
-	private int removeDisqualifiedVariables(List<IEObjectDescription> descs, EObject o) {
-		return removeDisqualifiedVariablesDefinitionArg(descs, o) + removeDisqualifiedVariablesAssignment(descs, o);
+	private int removeDisqualifiedVariables(List<IEObjectDescription> descs, EObject o, String varName) {
+		return removeDisqualifiedVariablesDefinitionArg(descs, o, varName) +
+				removeDisqualifiedVariablesAssignment(descs, o);
 	}
 
 	/**
@@ -1408,7 +1404,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 	 * @param o
 	 * @return the number of disqualified variables removed from the list
 	 */
-	private int removeDisqualifiedVariablesDefinitionArg(List<IEObjectDescription> descs, EObject o) {
+	private int removeDisqualifiedVariablesDefinitionArg(List<IEObjectDescription> descs, EObject o, String varName) {
 		if(descs == null || descs.size() == 0)
 			return 0;
 		EObject p = o;
@@ -1417,13 +1413,25 @@ public class PPResourceLinker implements IPPDiagnostics {
 		if(p == null)
 			return 0; // not in a definition argument value tree
 
-		// p is a DefinitionArgument at this point, we want it's parent being an abstract Definition
 		EObject d = p.eContainer();
 		if(d == null)
 			return 0; // broken model
+
+		// Check if variable references an argument declaration made previously in the definition argument list
+		for(EObject arg : d.eContents()) {
+			if(arg == p)
+				// Can't include or go beyond current argument
+				break;
+			if(((DefinitionArgument) arg).getArgName().regionMatches(1, varName, 0, varName.length()))
+				// No need to disqualify.
+				return 0;
+		}
+
+		// d is a DefinitionArgumentList at this point, we want it's parent being an abstract Definition
 		d = d.eContainer();
-		final String definitionFragment = d.eResource().getURIFragment(d);
-		final String definitionURI = d.eResource().getURI().toString();
+		final Resource resource = d.eResource();
+		final String definitionFragment = resource.getURIFragment(d);
+		final String definitionURI = resource.getURI().toString();
 
 		int removedCount = 0;
 		ListIterator<IEObjectDescription> litor = descs.listIterator();
