@@ -166,8 +166,6 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 		PPPackage.UNLESS_EXPRESSION, PPPackage.NODE_DEFINITION, PPPackage.RESOURCE_EXPRESSION,
 		PPPackage.SELECTOR_EXPRESSION };
 
-	private static final int ATTRIBUTE_OPERATIONS_CLUSTER_SIZE = 20;
-
 	@Inject
 	private DomNodeLayoutFeeder feeder;
 
@@ -204,7 +202,7 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 			ILayoutContext context) {
 		LayoutUtils.unifyWidthAndAlign(
 			node, grammarAccess.getAttributeOperationAccess().getKeyAttributeNameParserRuleCall_1_0(), Alignment.left,
-			ATTRIBUTE_OPERATIONS_CLUSTER_SIZE);
+			adviceProvider.get().clusterSize());
 		return false;
 	}
 
