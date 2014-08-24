@@ -10,13 +10,14 @@
  */
 package com.puppetlabs.geppetto.pp.pptp.impl;
 
-import com.puppetlabs.geppetto.pp.pptp.IDocumented;
-import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
-import com.puppetlabs.geppetto.pp.pptp.TargetElement;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.puppetlabs.geppetto.pp.pptp.IDocumented;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
+import com.puppetlabs.geppetto.pp.pptp.TargetElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -243,15 +244,6 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 				return;
 		}
 		super.eUnset(featureID);
-	}
-
-	private String fixUnformattedDoc(String unformatted) {
-		if(unformatted == null || unformatted.length() < 1)
-			return unformatted;
-		if(unformatted.startsWith("<"))
-			return unformatted; // assume it is formatted already
-		unformatted.split("\\n");
-		return unformatted;
 	}
 
 	/**

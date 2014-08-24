@@ -23,7 +23,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.BuilderParticipant;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -214,13 +213,13 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 			if(validationAdvisor.getModulefileExists() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExists()), Forge.FORGE,
-					"Modulefile is deprecated. Using metadata.json"));
+						"Modulefile is deprecated. Using metadata.json"));
 		}
 		else {
 			if(validationAdvisor.getModulefileExistsAndIsUsed() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExistsAndIsUsed()), Forge.FORGE,
-						"Modulefile is deprecated. Building metadata.json from modulefile"));
+					"Modulefile is deprecated. Building metadata.json from modulefile"));
 
 			try {
 				Metadata md = forge.loadModulefile(ModuleBuildParticipant.toLocalFile(moduleFile, monitor.newChild(1)), diag);

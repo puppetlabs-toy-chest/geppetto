@@ -51,7 +51,6 @@ import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
 import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapter;
 import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 import com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz.ImagesOnFileSystemRegistry;
 
 /**
@@ -118,7 +117,7 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 	}
 
 	private PolymorphicDispatcher<Boolean> hoverDispatcher = new PolymorphicDispatcher<Boolean>(
-			"_hover", 1, 1, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
+		"_hover", 1, 1, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
 		@Override
 		protected Boolean handleNoSuchMethod(Object... params) {
 			return false;
@@ -244,9 +243,9 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 			try {
 				return Files.readStreamIntoString(styleSheetURL.openStream());
 			}
-		catch(IOException e) {
-			// ignore
-		}
+			catch(IOException e) {
+				// ignore
+			}
 		return super.loadStyleSheet();
 	}
 

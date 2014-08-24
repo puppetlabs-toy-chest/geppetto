@@ -24,7 +24,6 @@ import org.eclipse.swt.graphics.ImageLoader;
 
 import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 
 //import org.eclipse.jdt.core.IJavaElement;
 
