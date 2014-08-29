@@ -18,7 +18,6 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 /**
  * This is the puppet root preference pane for formatting preferences as well as the editor pane for
  * the two most basic formatter related preferences (indent size, and preferred width).
- *
  */
 public class PPFormatterPreferencePage extends AbstractPreferencePage {
 
@@ -39,8 +38,7 @@ public class PPFormatterPreferencePage extends AbstractPreferencePage {
 		maxWidthFieldEditor.setValidRange(40, 255);
 		addField(maxWidthFieldEditor);
 
-		BooleanFieldEditor spacesForTabs = new BooleanFieldEditor(
-			FormatterGeneralPreferences.FORMATTER_SPACES_FOR_TABS, //
+		BooleanFieldEditor spacesForTabs = new BooleanFieldEditor(FormatterGeneralPreferences.FORMATTER_SPACES_FOR_TABS, //
 			"Replace tabs with spaces on input", //
 			getFieldEditorParent());
 		addField(spacesForTabs);

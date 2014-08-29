@@ -18,7 +18,6 @@ import com.google.common.collect.Iterators;
 
 /**
  * A Leaf DomNode
- *
  */
 public class LeafDomNode extends BaseDomNode {
 

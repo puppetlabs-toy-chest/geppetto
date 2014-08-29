@@ -39,7 +39,6 @@ import com.google.inject.Provider;
 
 /**
  * A ResourceDescription for PP that adds specially imported names via resource adapter.
- *
  */
 public class PPResourceDescription extends DefaultResourceDescription {
 	private IResourceScopeCache cache;
@@ -47,10 +46,9 @@ public class PPResourceDescription extends DefaultResourceDescription {
 	private PPResourceDescriptionStrategy strategy;
 
 	private static final String PPREFERENCE_DESCRIPTIONS_CACHE_KEY = DefaultReferenceDescription.class.getName() +
-			"#getPPReferenceDescriptions";
+		"#getPPReferenceDescriptions";
 
-	public PPResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy,
-			IResourceScopeCache cache) {
+	public PPResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy, IResourceScopeCache cache) {
 		super(resource, strategy, cache);
 		this.cache = cache;
 		if(strategy instanceof PPResourceDescriptionStrategy)
@@ -60,8 +58,7 @@ public class PPResourceDescription extends DefaultResourceDescription {
 
 	protected List<PPReferenceDescription> computePPReferenceDescriptions() {
 		if(strategy == null)
-			throw new IllegalStateException(
-					"Configuration not correct. PPResourceDescription requires a PPResourceDescriptionStrategy");
+			throw new IllegalStateException("Configuration not correct. PPResourceDescription requires a PPResourceDescriptionStrategy");
 
 		final List<PPReferenceDescription> referenceDescriptions = Lists.newArrayList();
 		IAcceptor<PPReferenceDescription> acceptor = new IAcceptor<PPReferenceDescription>() {
@@ -81,8 +78,7 @@ public class PPResourceDescription extends DefaultResourceDescription {
 			List<IEObjectDescription> referenced = CrossReferenceAdapterFactory.eINSTANCE.get(eObject);
 			if(referenced == null || referenced.isEmpty())
 				continue;
-			IEObjectDescription sourceContainer = findClosestExportedContainerDescriptor(
-				eObject2exportedEObjects.get(eObject), allExported);
+			IEObjectDescription sourceContainer = findClosestExportedContainerDescriptor(eObject2exportedEObjects.get(eObject), allExported);
 			for(IEObjectDescription targetDescriptor : referenced)
 				if(!strategy.createPPReferenceDescriptions(eObject, sourceContainer, targetDescriptor, acceptor))
 					contents.prune();
@@ -145,13 +141,12 @@ public class PPResourceDescription extends DefaultResourceDescription {
 	 * with adapters and IEObjectDescription.
 	 */
 	public Iterable<PPReferenceDescription> getPPReferenceDescriptions() {
-		return cache.get(
-			PPREFERENCE_DESCRIPTIONS_CACHE_KEY, getResource(), new Provider<List<PPReferenceDescription>>() {
-				@Override
-				public List<PPReferenceDescription> get() {
-					return computePPReferenceDescriptions();
-				}
-			});
+		return cache.get(PPREFERENCE_DESCRIPTIONS_CACHE_KEY, getResource(), new Provider<List<PPReferenceDescription>>() {
+			@Override
+			public List<PPReferenceDescription> get() {
+				return computePPReferenceDescriptions();
+			}
+		});
 	}
 
 }

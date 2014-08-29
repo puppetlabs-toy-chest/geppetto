@@ -48,7 +48,6 @@ public class JRubyServices implements IRubyServices {
 
 	/**
 	 * Holds the JRuby parser result (the AST and any reported issues/errors).
-	 *
 	 */
 	public static class Result implements IRubyParseResult {
 		private List<IRubyIssue> issues;
@@ -162,8 +161,8 @@ public class JRubyServices implements IRubyServices {
 		boolean rValue = "rvalue".equals(type);
 		Object doc = ((Map<?, ?>) hash).get("doc");
 		String docString = doc == null
-				? ""
-						: doc.toString();
+			? ""
+			: doc.toString();
 
 		functions.add(new PPFunctionInfo((String) name, rValue, docString));
 		return functions;
@@ -204,8 +203,7 @@ public class JRubyServices implements IRubyServices {
 					if(!(value instanceof List<?>))
 						return functions;
 					for(Object o : (List<?>) value) {
-						functions.add(new PPFunctionInfo((String) o, false, "Log a message on the server at level " +
-								o + "."));
+						functions.add(new PPFunctionInfo((String) o, false, "Log a message on the server at level " + o + "."));
 					}
 
 				}
@@ -298,8 +296,7 @@ public class JRubyServices implements IRubyServices {
 	}
 
 	@Override
-	public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException,
-	RubySyntaxException {
+	public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException, RubySyntaxException {
 		return getTypePropertiesInfo(internalParse(fileName, reader));
 	}
 

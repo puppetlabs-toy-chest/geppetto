@@ -15,7 +15,6 @@ package com.puppetlabs.geppetto.pp;
  * A representation of the model object '<em><b>Literal Expression</b></em>'.
  * <!-- end-user-doc -->
  *
- *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getLiteralExpression()
  * @model abstract="true"
  * @generated

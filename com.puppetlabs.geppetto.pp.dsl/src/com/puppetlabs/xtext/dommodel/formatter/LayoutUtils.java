@@ -28,16 +28,14 @@ import com.google.inject.Inject;
 
 /**
  * Layout Utility functions
- *
  */
 public class LayoutUtils {
 
 	/**
 	 * <p>
-	 * Unifies the width of the nodes matching the given grammar element in the subtree rooted at the given node. The
-	 * resulting width is set as the width style of the corresponding nodes.
+	 * Unifies the width of the nodes matching the given grammar element in the subtree rooted at the given node. The resulting width is set
+	 * as the width style of the corresponding nodes.
 	 * </p>
-	 *
 	 * <p>
 	 * The width is calculated using the unformatted text in the dom nodes with matching grammar elements.
 	 * </p>
@@ -46,8 +44,7 @@ public class LayoutUtils {
 	 *            - the subtree root to scan
 	 * @param grammarElement
 	 */
-	public static void unifyWidthAndAlign(IDomNode dom, AbstractElement grammarElement, Alignment alignment,
-			int clusterMax) {
+	public static void unifyWidthAndAlign(IDomNode dom, AbstractElement grammarElement, Alignment alignment, int clusterMax) {
 
 		IntegerCluster cluster = new IntegerCluster(clusterMax);
 		// int max = 0;
@@ -77,8 +74,8 @@ public class LayoutUtils {
 	@Inject
 	DomNodeLayoutFeeder feeder;
 
-	public boolean fitsOnSameLine(IDomNode node, AbstractElement startGrammarElement,
-			AbstractElement untilGrammarElement, ITextFlow flow, ILayoutContext context) {
+	public boolean fitsOnSameLine(IDomNode node, AbstractElement startGrammarElement, AbstractElement untilGrammarElement, ITextFlow flow,
+			ILayoutContext context) {
 		DelegatingLayoutContext dlc = new DelegatingLayoutContext(context);
 		MeasuredTextFlow continuedFlow = new MeasuredTextFlow((MeasuredTextFlow) flow);
 
@@ -116,8 +113,7 @@ public class LayoutUtils {
 	 *            - the context used to write to the given flow
 	 * @return true if the formatted node fits on the same line
 	 */
-	public boolean fitsOnSameLine(IDomNode node, AbstractElement untilGrammarElement, ITextFlow flow,
-			ILayoutContext context) {
+	public boolean fitsOnSameLine(IDomNode node, AbstractElement untilGrammarElement, ITextFlow flow, ILayoutContext context) {
 		return fitsOnSameLine(node, null, untilGrammarElement, flow, context);
 	}
 

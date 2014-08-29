@@ -23,7 +23,6 @@ import com.google.common.collect.Lists;
 
 /**
  * A better Ruby Doc parser
- *
  */
 public class RubyDocProcessor {
 	public static class RubyDocLexer {
@@ -346,7 +345,7 @@ public class RubyDocProcessor {
 	}
 
 	private PolymorphicDispatcher<String> htmlDispatcher = new PolymorphicDispatcher<String>(
-			"_html", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
+		"_html", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
 		@Override
 		protected String handleNoSuchMethod(Object... params) {
 			return "<pre>INTERNAL ERROR, missing _html method for token: " + params[0].getClass().getName() + "</pre>";

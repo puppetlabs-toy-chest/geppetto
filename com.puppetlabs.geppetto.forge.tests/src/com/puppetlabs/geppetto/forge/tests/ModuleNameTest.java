@@ -70,8 +70,7 @@ public class ModuleNameTest extends AbstractForgeTest {
 	@Test
 	public void equalsSeparatorInsensitive() {
 		ModuleName name = ModuleName.fromString("some-name");
-		assertEquals(
-			"ModuleName should not consider separator when comparing", ModuleName.fromString("some/name"), name);
+		assertEquals("ModuleName should not consider separator when comparing", ModuleName.fromString("some/name"), name);
 	}
 
 	@Test

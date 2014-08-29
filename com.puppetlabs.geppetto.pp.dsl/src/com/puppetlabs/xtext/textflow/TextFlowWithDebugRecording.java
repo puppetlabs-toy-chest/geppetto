@@ -19,7 +19,6 @@ import com.google.inject.Inject;
 
 /**
  * An implementation of ITextFlow that records and measures the appended content.
- *
  */
 public class TextFlowWithDebugRecording extends TextFlow {
 

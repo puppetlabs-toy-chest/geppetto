@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource.Factory;
 /**
  * Factory for a Ruby (.rb) resource for translation of puppet specific ruby
  * code to puppet "target platform" model.
- *
  */
 public class PptpRubyResourceFactory implements Factory {
 

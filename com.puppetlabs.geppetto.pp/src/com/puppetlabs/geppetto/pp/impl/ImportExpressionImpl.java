@@ -156,8 +156,7 @@ public class ImportExpressionImpl extends ExpressionImpl implements ImportExpres
 	@Override
 	public EList<IQuotedString> getValues() {
 		if(values == null) {
-			values = new EObjectContainmentEList<IQuotedString>(
-					IQuotedString.class, this, PPPackage.IMPORT_EXPRESSION__VALUES);
+			values = new EObjectContainmentEList<IQuotedString>(IQuotedString.class, this, PPPackage.IMPORT_EXPRESSION__VALUES);
 		}
 		return values;
 	}

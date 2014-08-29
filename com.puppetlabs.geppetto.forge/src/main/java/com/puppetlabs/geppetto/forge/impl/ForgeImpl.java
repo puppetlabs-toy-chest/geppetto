@@ -84,8 +84,8 @@ class ForgeImpl implements Forge {
 	};
 
 	@Override
-	public File build(File moduleSource, File destination, FileFilter fileFilter, Metadata[] resultingMetadata,
-			byte[][] resultingMD5, Diagnostic result) throws IOException {
+	public File build(File moduleSource, File destination, FileFilter fileFilter, Metadata[] resultingMetadata, byte[][] resultingMD5,
+			Diagnostic result) throws IOException {
 		if(fileFilter == null)
 			fileFilter = moduleFileFilter;
 
@@ -169,8 +169,8 @@ class ForgeImpl implements Forge {
 	}
 
 	@Override
-	public Metadata createFromModuleDirectory(File moduleDirectory, FileFilter filter, File[] extractedFrom,
-			Diagnostic result) throws IOException {
+	public Metadata createFromModuleDirectory(File moduleDirectory, FileFilter filter, File[] extractedFrom, Diagnostic result)
+			throws IOException {
 
 		if(filter == null)
 			filter = moduleFileFilter;
@@ -189,8 +189,7 @@ class ForgeImpl implements Forge {
 			return md;
 
 		if(md == null) {
-			result.addChild(new Diagnostic(ERROR, FORGE, "No Module Metadata found in directory " +
-					moduleDirectory.getAbsolutePath()));
+			result.addChild(new Diagnostic(ERROR, FORGE, "No Module Metadata found in directory " + moduleDirectory.getAbsolutePath()));
 			return null;
 		}
 		return md;

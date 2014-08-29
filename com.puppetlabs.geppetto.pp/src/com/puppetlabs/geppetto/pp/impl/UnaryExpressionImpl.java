@@ -184,11 +184,9 @@ public abstract class UnaryExpressionImpl extends ExpressionImpl implements Unar
 		if(newExpr != expr) {
 			NotificationChain msgs = null;
 			if(expr != null)
-				msgs = ((InternalEObject) expr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.UNARY_EXPRESSION__EXPR, null, msgs);
+				msgs = ((InternalEObject) expr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PPPackage.UNARY_EXPRESSION__EXPR, null, msgs);
 			if(newExpr != null)
-				msgs = ((InternalEObject) newExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.UNARY_EXPRESSION__EXPR, null, msgs);
+				msgs = ((InternalEObject) newExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PPPackage.UNARY_EXPRESSION__EXPR, null, msgs);
 			msgs = basicSetExpr(newExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();

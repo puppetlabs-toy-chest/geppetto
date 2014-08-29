@@ -41,8 +41,7 @@ public interface IPPEObjectSearch {
 		private IQualifiedNameConverter qualifiedNameConverter;
 
 		@Override
-		public Iterable<IEObjectDescription> findMatches(final String searchPattern,
-			final Collection<EClass> acceptedClasses) {
+		public Iterable<IEObjectDescription> findMatches(final String searchPattern, final Collection<EClass> acceptedClasses) {
 			return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern, acceptedClasses));
 		}
 
@@ -50,8 +49,7 @@ public interface IPPEObjectSearch {
 			return resourceDescriptions;
 		}
 
-		protected Predicate<IEObjectDescription> getSearchPredicate(final String stringPattern,
-			final Collection<EClass> acceptedClasses) {
+		protected Predicate<IEObjectDescription> getSearchPredicate(final String stringPattern, final Collection<EClass> acceptedClasses) {
 			final SearchPattern searchPattern = new SearchPattern();
 			searchPattern.setPattern(stringPattern);
 

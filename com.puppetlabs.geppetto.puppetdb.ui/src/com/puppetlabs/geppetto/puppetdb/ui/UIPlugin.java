@@ -43,8 +43,8 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 	public static String getLocalString(String key, Object... params) {
 		String msg = getInstance().getString(key);
 		return params.length == 0
-				? msg
-						: MessageFormat.format(msg, params);
+			? msg
+			: MessageFormat.format(msg, params);
 	}
 
 	public static void logException(String message, Exception e) {

@@ -29,19 +29,17 @@ import com.google.inject.name.Named;
  * A DomNodeLayoutFeeder feeds {@link IDomNode} instances to an {@link ILayoutManager}.
  * </p>
  * <p>
- * This feeder obtains the layout manager to use by looking up the style of the respective node. If a node does not
- * specify how to be formatted, a {@link FlowLayout} will be used.
+ * This feeder obtains the layout manager to use by looking up the style of the respective node. If a node does not specify how to be
+ * formatted, a {@link FlowLayout} will be used.
  * </p>
  * <p>
- * This class is useful in specialized layout managers that want to control certain aspects of formatting, but allows
- * children to be formatted as per their specified formatting styles. Simply calling
- * {@link #sequence(IDomNode, ITextFlow, ILayoutContext)} on a node will invoke an
- * {@link ILayoutManager#format(StyleSet, IDomNode, ITextFlow, ILayoutContext)} for the given node (and all sub nodes).
+ * This class is useful in specialized layout managers that want to control certain aspects of formatting, but allows children to be
+ * formatted as per their specified formatting styles. Simply calling {@link #sequence(IDomNode, ITextFlow, ILayoutContext)} on a node will
+ * invoke an {@link ILayoutManager#format(StyleSet, IDomNode, ITextFlow, ILayoutContext)} for the given node (and all sub nodes).
  * </p>
  * <p>
  * The feeder prunes children by returning if the layout manager returns true from one of its format methods.
  * </p>
- *
  */
 public class DomNodeLayoutFeeder {
 
@@ -65,8 +63,8 @@ public class DomNodeLayoutFeeder {
 		sequence(nodes, output, context, Predicates.<IDomNode> alwaysTrue(), Predicates.<IDomNode> alwaysFalse());
 	}
 
-	public IDomNode sequence(Collection<IDomNode> nodes, ITextFlow output, ILayoutContext context,
-			Predicate<IDomNode> include, Predicate<IDomNode> until) {
+	public IDomNode sequence(Collection<IDomNode> nodes, ITextFlow output, ILayoutContext context, Predicate<IDomNode> include,
+			Predicate<IDomNode> until) {
 		IDomNode last = null;
 		for(IDomNode n : nodes) {
 			if(until.apply(n))
@@ -93,8 +91,7 @@ public class DomNodeLayoutFeeder {
 		return sequence(node, output, context, Predicates.<IDomNode> alwaysTrue(), until);
 	}
 
-	public IDomNode sequence(IDomNode node, ITextFlow output, ILayoutContext context, Predicate<IDomNode> include,
-			Predicate<IDomNode> until) {
+	public IDomNode sequence(IDomNode node, ITextFlow output, ILayoutContext context, Predicate<IDomNode> include, Predicate<IDomNode> until) {
 		if(until.apply(node))
 			return node;
 		if(node.isLeaf()) {
@@ -106,8 +103,8 @@ public class DomNodeLayoutFeeder {
 		return null;
 	}
 
-	protected IDomNode sequenceComposite(IDomNode node, ITextFlow output, ILayoutContext context,
-			Predicate<IDomNode> include, Predicate<IDomNode> until) {
+	protected IDomNode sequenceComposite(IDomNode node, ITextFlow output, ILayoutContext context, Predicate<IDomNode> include,
+			Predicate<IDomNode> until) {
 		final StyleSet styleSet = context.getCSS().collectStyles(node);
 		tracer.recordEffectiveStyle(node, styleSet);
 

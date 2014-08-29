@@ -174,7 +174,6 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	 * Add specialization that selects better "significant part" per semantic object than the default.
 	 * (This is used when a location in a file is wanted for selection when opening the file and there is a reference
 	 * to the object - which of each features / text should be selected).
-	 *
 	 */
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return PPLocationInFileProvider.class;
@@ -196,7 +195,6 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	/**
 	 * This is an override of the runtime module's configuration as the UI should use PPResource instead of
 	 * LazyLinkingResource for PP linking to work correctly with the global build index.
-	 *
 	 */
 	public Class<? extends IResourceFactory> bindIResourceFactory() {
 		return PPResourceFactory.class;
@@ -263,15 +261,13 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	/**
 	 * Override that injects a wrapper for the external lexer used by the main parser.
 	 * contributed by org.eclipse.xtext.generator.parser.antlr.ex.ca.ContentAssistParserGeneratorFragment.
-	 *
 	 * Without this override, a default generated lexer will be used and this lexer will not be correct as
 	 * PP parsing requires an external lexer. The binding reuses the main lexer.
 	 */
 	@Override
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(
-			com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(
-				PPContentAssistLexer.class);
+			com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(PPContentAssistLexer.class);
 		// This is the default generated one:
 		// com.puppetlabs.geppetto.pp.dsl.ui.contentassist.antlr.lexer.InternalPPLexer.class);
 	}
@@ -282,8 +278,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	 */
 	@Override
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(PPContentAssistLexer.class).toProvider(
-			org.eclipse.xtext.parser.antlr.LexerProvider.create(PPContentAssistLexer.class));
+		binder.bind(PPContentAssistLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(PPContentAssistLexer.class));
 	}
 
 	public void configureDebugTracing(com.google.inject.Binder binder) {
@@ -331,8 +326,7 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 	@Override
 	public void configureHighlightingLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(
-			com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(
-				PPOverridingLexer.class);
+			com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(PPOverridingLexer.class);
 	}
 
 	public void configureIIndentationInformationProvider(Binder binder) {

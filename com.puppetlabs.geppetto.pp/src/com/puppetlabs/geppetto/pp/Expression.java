@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
  *
- *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getExpression()
  * @model
  * @generated

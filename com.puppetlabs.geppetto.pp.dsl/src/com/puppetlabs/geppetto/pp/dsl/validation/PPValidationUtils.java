@@ -16,7 +16,6 @@ import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 
 /**
  * Helper class for validation related tasks.
- *
  */
 public class PPValidationUtils {
 

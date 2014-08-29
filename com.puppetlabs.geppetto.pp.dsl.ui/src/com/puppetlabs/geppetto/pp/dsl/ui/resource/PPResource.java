@@ -28,9 +28,7 @@ import com.google.inject.Inject;
 /**
  * A PP Resource that performs PP specific linking when the resource is loaded (the first time), and
  * when the parse result is updated.
- * Note that this is UI specific, in headless runtime, the same functionality is triggered by the @link {@link PPLinker}
- * .
- *
+ * Note that this is UI specific, in headless runtime, the same functionality is triggered by the @link {@link PPLinker} .
  */
 public class PPResource extends LazyLinkingResource {
 	@Inject
@@ -78,8 +76,7 @@ public class PPResource extends LazyLinkingResource {
 	/**
 	 * {@inheritDoc}
 	 * <p>
-	 * Overridden to make sure that a resource is not initialized just to compute the root URI fragment for the parse
-	 * result.
+	 * Overridden to make sure that a resource is not initialized just to compute the root URI fragment for the parse result.
 	 */
 	@Override
 	protected String getURIFragmentRootSegment(EObject eObject) {

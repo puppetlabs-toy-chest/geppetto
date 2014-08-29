@@ -53,9 +53,9 @@ public class TreeNodeContentProvider implements ILazyTreePathContentProvider {
 
 	private TreeNode<?, ?> getNode(TreePath treePath) {
 		Object node = treePath.getSegmentCount() > 0
-				? treePath.getLastSegment()
-						: viewer.getInput();
-				return (TreeNode<?, ?>) node;
+			? treePath.getLastSegment()
+			: viewer.getInput();
+		return (TreeNode<?, ?>) node;
 	}
 
 	/**

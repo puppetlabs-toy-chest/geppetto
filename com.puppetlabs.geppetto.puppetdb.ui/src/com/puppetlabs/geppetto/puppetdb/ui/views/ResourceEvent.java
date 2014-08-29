@@ -60,8 +60,8 @@ public class ResourceEvent extends LeafNode<ResourceEvents> {
 				txt = dateFormat.format(event.getTimestamp());
 		}
 		return txt == null
-				? ""
-						: txt.trim();
+			? ""
+			: txt.trim();
 	}
 
 	public Event getEvent() {
@@ -71,8 +71,8 @@ public class ResourceEvent extends LeafNode<ResourceEvents> {
 	@Override
 	public Image getImage(int colIdx) {
 		return colIdx == 0
-				? image
-						: null;
+			? image
+			: null;
 	}
 
 	public Resource getResource() {

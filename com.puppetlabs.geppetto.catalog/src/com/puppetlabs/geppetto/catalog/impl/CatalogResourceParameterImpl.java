@@ -48,10 +48,9 @@ import com.google.gson.reflect.TypeToken;
 public class CatalogResourceParameterImpl extends EObjectImpl implements CatalogResourceParameter {
 	/**
 	 * TODO: This serializer/deserializer is broken (and unused).
-	 *
 	 */
-	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogResourceParameter>
-	implements JsonSerializer<CatalogResourceParameter> {
+	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogResourceParameter> implements
+			JsonSerializer<CatalogResourceParameter> {
 		private static String getString(JsonObject jsonObj, String key) {
 			JsonElement json = jsonObj.get(key);
 			if(json == null)
@@ -60,8 +59,8 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 
 			// unset values are null, not empty strings
 			return value.length() == 0
-					? null
-							: value;
+				? null
+				: value;
 		}
 
 		private static void putString(JsonObject jsonObj, String key, String value) {
@@ -74,8 +73,8 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 		}.getType();
 
 		@Override
-		public CatalogResourceParameter deserialize(JsonElement json, java.lang.reflect.Type typeOfT,
-				JsonDeserializationContext context) throws JsonParseException {
+		public CatalogResourceParameter deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
 			final CatalogResourceParameter result = CatalogFactory.eINSTANCE.createCatalogResourceParameter();
 			JsonObject jsonObj = json.getAsJsonObject();
 
@@ -90,8 +89,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 		}
 
 		@Override
-		public JsonElement serialize(CatalogResourceParameter src, java.lang.reflect.Type typeOfSrc,
-				JsonSerializationContext context) {
+		public JsonElement serialize(CatalogResourceParameter src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
 			final JsonObject result = new JsonObject();
 			final CatalogResourceParameterImpl cat = (CatalogResourceParameterImpl) src;
 
@@ -176,8 +174,8 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 		switch(featureID) {
 			case CatalogPackage.CATALOG_RESOURCE_PARAMETER__NAME:
 				return NAME_EDEFAULT == null
-				? name != null
-				: !NAME_EDEFAULT.equals(name);
+					? name != null
+					: !NAME_EDEFAULT.equals(name);
 			case CatalogPackage.CATALOG_RESOURCE_PARAMETER__VALUE:
 				return value != null && !value.isEmpty();
 		}
@@ -255,8 +253,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 	@Override
 	public EList<String> getValue() {
 		if(value == null) {
-			value = new EDataTypeUniqueEList<String>(
-					String.class, this, CatalogPackage.CATALOG_RESOURCE_PARAMETER__VALUE);
+			value = new EDataTypeUniqueEList<String>(String.class, this, CatalogPackage.CATALOG_RESOURCE_PARAMETER__VALUE);
 		}
 		return value;
 	}
@@ -272,8 +269,7 @@ public class CatalogResourceParameterImpl extends EObjectImpl implements Catalog
 		String oldName = name;
 		name = newName;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, CatalogPackage.CATALOG_RESOURCE_PARAMETER__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, CatalogPackage.CATALOG_RESOURCE_PARAMETER__NAME, oldName, name));
 	}
 
 	/**

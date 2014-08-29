@@ -15,7 +15,6 @@ import com.google.inject.Singleton;
 
 /**
  * The Formatting Advisor provides answers to the formatter when there are options.
- *
  */
 @ImplementedBy(IFormattingAdvisor.Default.class)
 public interface IFormattingAdvisor {

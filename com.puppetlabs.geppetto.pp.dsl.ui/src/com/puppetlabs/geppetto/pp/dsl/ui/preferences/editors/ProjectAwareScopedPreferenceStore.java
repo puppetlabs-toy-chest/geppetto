@@ -43,21 +43,19 @@ import com.google.common.collect.Maps;
  * It fixes the memory leek described in
  * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=239033">these</a>
  * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=362199">bugs</a>.
- *
  * The ProjectAwareScopedPreferenceStore is an IPreferenceStore that uses the scopes
  * provided in org.eclipse.core.runtime.preferences.
  * <p>
- * A {@link ProjectAwareScopedPreferenceStore} does the lookup of a preference based on it's search scopes and sets the
- * value of the preference based on its store scope.
+ * A {@link ProjectAwareScopedPreferenceStore} does the lookup of a preference based on it's search scopes and sets the value of the
+ * preference based on its store scope.
  * </p>
  * <p>
  * The default scope is always included in the search scopes when searching for preference values.
  * </p>
  * <p>
- * This store employs write optimization; if the same value as the value read is written no value is written, and if the
- * value is the same as the default value, no value is written. However, when a project preference store is the type of
- * store being written to write optimizations are turned off. This enables writing project specific values that are the
- * same as instance and default values.
+ * This store employs write optimization; if the same value as the value read is written no value is written, and if the value is the same
+ * as the default value, no value is written. However, when a project preference store is the type of store being written to write
+ * optimizations are turned off. This enables writing project specific values that are the same as instance and default values.
  * </p>
  *
  * @see org.eclipse.ui.preferences.ScopedPreferenceStore
@@ -153,14 +151,12 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 	}
 
 	/**
-	 *
 	 * {@inheritDoc}
 	 * <p>
-	 * <b>Note</b> The added {@link IPropertyChangeListener} will receive property change events from all the preference
-	 * nodes for the given search scopes regardless of the property being changed is the visible one or not. A receiver
-	 * of the event should use the correct way of retrieving the current value of the property - from the perspective of
-	 * the receiver the value to use may not have changed, as the changed value may be masked by a more specific
-	 * setting).
+	 * <b>Note</b> The added {@link IPropertyChangeListener} will receive property change events from all the preference nodes for the given
+	 * search scopes regardless of the property being changed is the visible one or not. A receiver of the event should use the correct way
+	 * of retrieving the current value of the property - from the perspective of the receiver the value to use may not have changed, as the
+	 * changed value may be masked by a more specific setting).
 	 * </p>
 	 */
 	@Override
@@ -189,9 +185,9 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 					if(p.nodeExists(""))
 						p.removeNodeChangeListener(nodeChangeListener);
 				}
-			catch(BackingStoreException e) {
-				throw new RuntimeException(e);
-			}
+				catch(BackingStoreException e) {
+					throw new RuntimeException(e);
+				}
 			monitoredNodes.clear();
 			nodeChangeListener = null;
 		}
@@ -202,8 +198,7 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 	 */
 	private void disposePreferenceStoreListener() {
 
-		IEclipsePreferences root = (IEclipsePreferences) Platform.getPreferencesService().getRootNode().node(
-			Plugin.PLUGIN_PREFERENCE_SCOPE);
+		IEclipsePreferences root = (IEclipsePreferences) Platform.getPreferencesService().getRootNode().node(Plugin.PLUGIN_PREFERENCE_SCOPE);
 		try {
 			if(!(root.nodeExists(nodeQualifier))) {
 				return;
@@ -219,9 +214,9 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 					if(p.nodeExists(""))
 						p.removePreferenceChangeListener(preferencesListener);
 				}
-			catch(BackingStoreException e) {
-				throw new RuntimeException(e);
-			}
+				catch(BackingStoreException e) {
+					throw new RuntimeException(e);
+				}
 
 			preferencesListener = null;
 		}
@@ -251,8 +246,8 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 	public boolean getBoolean(String name) {
 		String value = internalGet(name);
 		return value == null
-				? BOOLEAN_DEFAULT_DEFAULT
-						: Boolean.valueOf(value).booleanValue();
+			? BOOLEAN_DEFAULT_DEFAULT
+			: Boolean.valueOf(value).booleanValue();
 	}
 
 	/**
@@ -286,8 +281,8 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 		}
 		else if(obj instanceof Boolean) {
 			return defaults.getBoolean(key, BOOLEAN_DEFAULT_DEFAULT)
-					? Boolean.TRUE
-							: Boolean.FALSE;
+				? Boolean.TRUE
+				: Boolean.FALSE;
 		}
 		else {
 			return null;
@@ -394,8 +389,8 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 	 * preference nodes based on the scope contexts for this store. If there are
 	 * no search contexts set, then return this store's context.
 	 * <p>
-	 * Whether or not the default context should be included in the resulting list is specified by the
-	 * <code>includeDefault</code> parameter.
+	 * Whether or not the default context should be included in the resulting list is specified by the <code>includeDefault</code>
+	 * parameter.
 	 * </p>
 	 *
 	 * @param includeDefault
@@ -442,8 +437,8 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 	public String getString(String name) {
 		String value = internalGet(name);
 		return value == null
-				? STRING_DEFAULT_DEFAULT
-						: value;
+			? STRING_DEFAULT_DEFAULT
+			: value;
 	}
 
 	// Fix is here and in disposeNodeChangeListener. Look for callees accordingly.
@@ -616,12 +611,11 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 	 * will be done in the order of scope contexts and will not search the
 	 * storeContext unless it is in this list.
 	 * <p>
-	 * If the given list is <code>null</code>, then clear this store's search contexts. This means that only this
-	 * store's scope context and default scope will be used during preference value searching.
+	 * If the given list is <code>null</code>, then clear this store's search contexts. This means that only this store's scope context and
+	 * default scope will be used during preference value searching.
 	 * </p>
 	 * <p>
-	 * The defaultContext will be added to the end of this list automatically and <em>MUST NOT</em> be included by the
-	 * user.
+	 * The defaultContext will be added to the end of this list automatically and <em>MUST NOT</em> be included by the user.
 	 * </p>
 	 *
 	 * @param scopes
@@ -704,9 +698,9 @@ public class ProjectAwareScopedPreferenceStore extends EventManager implements I
 			dirty = true;
 			firePropertyChangeEvent(name, oldValue
 				? Boolean.TRUE
-						: Boolean.FALSE, value
-						? Boolean.TRUE
-								: Boolean.FALSE);
+				: Boolean.FALSE, value
+				? Boolean.TRUE
+				: Boolean.FALSE);
 		}
 		finally {
 			silentRunning = false;// Restart listening to preferences

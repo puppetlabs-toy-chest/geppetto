@@ -114,8 +114,8 @@ public class JsonPositionalParser {
 		@Override
 		public Object getValue() {
 			return value == null
-					? null
-							: value.getValue();
+				? null
+				: value.getValue();
 		}
 	}
 
@@ -159,8 +159,8 @@ public class JsonPositionalParser {
 		@Override
 		public String toStringOrNull() {
 			return value instanceof String
-					? (String) value
-							: null;
+				? (String) value
+				: null;
 		}
 	}
 
@@ -208,8 +208,7 @@ public class JsonPositionalParser {
 		for(;;) {
 			JsonToken token = jp.nextToken();
 			if(token == JsonToken.END_ARRAY) {
-				int[] pos = adjustPosition(
-					line, (int) startPos, (int) (jp.getCurrentLocation().getCharOffset() - startPos));
+				int[] pos = adjustPosition(line, (int) startPos, (int) (jp.getCurrentLocation().getCharOffset() - startPos));
 				return new JArray(loc.getSourceRef(), pos, values);
 			}
 			values.add(parseValue(token));
@@ -237,8 +236,7 @@ public class JsonPositionalParser {
 		for(;;) {
 			switch(jp.nextToken()) {
 				case END_OBJECT:
-					int[] pos = adjustPosition(
-						line, (int) startPos, (int) (jp.getCurrentLocation().getCharOffset() - startPos));
+					int[] pos = adjustPosition(line, (int) startPos, (int) (jp.getCurrentLocation().getCharOffset() - startPos));
 					return new JObject(loc.getSourceRef(), pos, entries);
 				case FIELD_NAME:
 					entries.add(parseField());

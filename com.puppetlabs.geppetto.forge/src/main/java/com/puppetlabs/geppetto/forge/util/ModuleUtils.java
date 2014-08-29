@@ -89,8 +89,8 @@ public class ModuleUtils {
 		if(msg == null)
 			msg = "syntax error";
 		FileDiagnostic fd = new FileDiagnostic(ERROR, PARSE_FAILURE, msg, new File(id == null
-				? pos.getFile()
-						: id));
+			? pos.getFile()
+			: id));
 		fd.setLineNumber(pos.getStartLine() + 1);
 		return fd;
 	}
@@ -102,8 +102,7 @@ public class ModuleUtils {
 	 *
 	 * @return A list of directories where such files were found
 	 */
-	public static Collection<File> findModuleRoots(File modulesRoot, FileFilter filter,
-		Iterable<MetadataExtractor> metadataExtractors) {
+	public static Collection<File> findModuleRoots(File modulesRoot, FileFilter filter, Iterable<MetadataExtractor> metadataExtractors) {
 		Collection<File> moduleRoots = new ArrayList<File>();
 		if(ModuleUtils.findModuleRoots(filter, modulesRoot, moduleRoots, metadataExtractors))
 			// The repository is a module in itself
@@ -156,8 +155,7 @@ public class ModuleUtils {
 	 * @throws IllegalArgumentException
 	 *             if <tt>result</tt> is <tt>null</tt> and errors are detected in the file.
 	 */
-	public static void parseModulefile(File modulefile, Metadata receiver, Diagnostic chain) throws IOException,
-	IllegalArgumentException {
+	public static void parseModulefile(File modulefile, Metadata receiver, Diagnostic chain) throws IOException, IllegalArgumentException {
 		StrictModulefileParser parser = new StrictModulefileParser(receiver);
 		try {
 			parser.parseRubyAST(RubyParserUtils.parseFile(modulefile), chain);
@@ -186,8 +184,8 @@ public class ModuleUtils {
 	 * @throws IllegalArgumentException
 	 *             if <tt>result</tt> is <tt>null</tt> and errors are detected in the file.
 	 */
-	public static void parseModulefile(String id, String content, Metadata receiver, Diagnostic chain)
-			throws IOException, IllegalArgumentException {
+	public static void parseModulefile(String id, String content, Metadata receiver, Diagnostic chain) throws IOException,
+			IllegalArgumentException {
 		StrictModulefileParser parser = new StrictModulefileParser(receiver);
 		try {
 			parser.parseRubyAST(RubyParserUtils.parseString(id, content), chain);

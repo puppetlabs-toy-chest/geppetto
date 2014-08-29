@@ -38,7 +38,6 @@ import org.junit.Test;
  * ResourceExpression used as:
  * - default resource
  * - resource override
- *
  * Tests serialization and validation.
  */
 public class TestPuppetResourceExpr extends AbstractPuppetTests {
@@ -47,58 +46,58 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 	// IMPORTANT - MAKE SURE THESE ARE NOT SCREWED UP ON CHECKIN - MAKES IT VERY DIFFICULT TO READ
 	// @formatter:off
 	static final String Sample_ResourceOneAttribute = "file { 'a resource':\n" + //
-			"  owner => 'fred',\n" + //
-			"}\n";
+		"  owner => 'fred',\n" + //
+		"}\n";
 
 	static final String Sample_ResourceNoAttributes = "class { 'myclass':\n" + //
-			"}\n";
+		"}\n";
 
 	static final String Sample_TwoResources = "file { 'r1':\n" + //
-			"  owner => 'fred',\n" + //
-			"}\n\n" + //
-			"file { 'r2':\n" + //
-			"  owner => 'fred',\n" + //
-			"}\n";
+		"  owner => 'fred',\n" + //
+		"}\n\n" + //
+		"file { 'r2':\n" + //
+		"  owner => 'fred',\n" + //
+		"}\n";
 
 	static final String Sample_VirtualResource = "@file { 'a resource':\n" + //
-			"  owner => 'fred',\n" + //
-			"}\n";
+		"  owner => 'fred',\n" + //
+		"}\n";
 
 	static final String Sample_ResourceWithRequire = "file { 'x':\n" + //
-			"  require => Package['a', 'b', 'c'],\n" + //
-			"}\n";
+		"  require => Package['a', 'b', 'c'],\n" + //
+		"}\n";
 
 	static final String Sample_VirtualResourceExported = "@@file { 'a resource':\n" + //
-			"  owner => 'fred',\n" + //
-			"}\n";
+		"  owner => 'fred',\n" + //
+		"}\n";
 
 	static final String Sample_ResourceOneAddAttribute = "File { 'a resource':\n" + //
-			"  owner +> 'fred',\n" //
-			+ "}\n";
+		"  owner +> 'fred',\n" //
+		+ "}\n";
 
 	static final String Sample_DefaultResource = "File {\n" + //
-			"  owner => 0777,\n" + //
-			"  group => 0666,\n" + //
-			"  other => 0555,\n" + //
-			"}\n";
+		"  owner => 0777,\n" + //
+		"  group => 0666,\n" + //
+		"  other => 0555,\n" + //
+		"}\n";
 
 	static final String Sample_ResourceMAttributes = "file { 'a resource':\n" + //
-			"  owner => 0777,\n" + //
-			"  group => 0666,\n" + //
-			"  other => 0555,\n" + //
-			"}\n";
+		"  owner => 0777,\n" + //
+		"  group => 0666,\n" + //
+		"  other => 0555,\n" + //
+		"}\n";
 
 	static final String Sample_MResourcesMAttributes = "file {\n" + //
-			"  'a resource':\n" + //
-			"    owner => 0777,\n" + //
-			"    group => 0666,\n" + //
-			"    other => 0555;\n" + //
-			"\n" + //
-			"  'another resource':\n" + //
-			"    a   => 1,\n" + //
-			"    bb  => 2,\n" + //
-			"    ccc => 3;\n" + //
-			"}\n";
+		"  'a resource':\n" + //
+		"    owner => 0777,\n" + //
+		"    group => 0666,\n" + //
+		"    other => 0555;\n" + //
+		"\n" + //
+		"  'another resource':\n" + //
+		"    a   => 1,\n" + //
+		"    bb  => 2,\n" + //
+		"    ccc => 3;\n" + //
+		"}\n";
 
 	// @formatter:on
 
@@ -174,11 +173,9 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		PuppetManifest pp = pf.createPuppetManifest();
 		EList<Expression> statements = pp.getStatements();
 		ResourceExpression re = createResourceExpression(
-			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		re.getResourceData().add(
-			createResourceBody(
-				"another resource", "a", createValue("1"), "bb", createValue("2"), "ccc", createValue("3")));
+			createResourceBody("another resource", "a", createValue("1"), "bb", createValue("2"), "ccc", createValue("3")));
 		statements.add(re);
 		String s = serializeFormatted(pp);
 		assertEquals("serialization should produce specified result", Sample_MResourcesMAttributes, s);
@@ -189,8 +186,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		PuppetManifest pp = pf.createPuppetManifest();
 		EList<Expression> statements = pp.getStatements();
 		statements.add(createResourceExpression(
-			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555")));
+			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555")));
 		String s = serializeFormatted(pp);
 		assertEquals("serialization should produce specified result", Sample_ResourceMAttributes, s);
 	}
@@ -332,8 +328,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		pp = pf.createPuppetManifest();
 		statements = pp.getStatements();
 		re = createResourceExpression(
-			"File", "title in error", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			"File", "title in error", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		re.getResourceData().add(createResourceBody(null, "a", "1", "b", "2", "c", "3"));
 		statements.add(re);
 		tester.validator().checkResourceExpression(re);
@@ -388,8 +383,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		pp = pf.createPuppetManifest();
 		statements = pp.getStatements();
 		re = createResourceExpression(
-			"File", "title in error", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			"File", "title in error", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		re.getResourceData().add(createResourceBody(null, "a", "1", "b", "2", "c", "3"));
 		// swap the created LiteralNameOrReference for an AtExpression
 		reRef = pf.createAtExpression();
@@ -508,8 +502,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		pp = pf.createPuppetManifest();
 		statements = pp.getStatements();
 		re = createResourceExpression(
-			true, "file", "title", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			true, "file", "title", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		statements.add(re);
 		tester.validator().checkResourceExpression(re);
 		// error will occur as many times as there are additions,so check using "any"
@@ -519,8 +512,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		pp = pf.createPuppetManifest();
 		statements = pp.getStatements();
 		re = createResourceExpression(
-			false, "file", "title", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			false, "file", "title", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		statements.add(re);
 		re.setResourceExpr(pf.createLiteralDefault());
 		tester.validator().checkResourceExpression(re);
@@ -542,8 +534,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		PuppetManifest pp = pf.createPuppetManifest();
 		EList<Expression> statements = pp.getStatements();
 		ResourceExpression re = createResourceExpression(
-			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		statements.add(re);
 		tester.validator().checkResourceExpression(re);
 		tester.diagnose().assertOK();
@@ -560,8 +551,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		pp = pf.createPuppetManifest();
 		statements = pp.getStatements();
 		re = createResourceExpression(
-			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		re.getResourceData().add(createResourceBody("another resource", "a", "1", "b", "2", "c", "3"));
 		statements.add(re);
 		tester.validator().checkResourceExpression(re);
@@ -571,8 +561,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		pp = pf.createPuppetManifest();
 		statements = pp.getStatements();
 		re = createResourceExpression(
-			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		re.getResourceData().add(createResourceBody("another resource1"));
 		re.getResourceData().add(createResourceBody("another resource2", "a", "1", "b", "2", "c", "3"));
 		statements.add(re);
@@ -621,8 +610,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		PuppetManifest pp = pf.createPuppetManifest();
 		EList<Expression> statements = pp.getStatements();
 		ResourceExpression re = createVirtualResourceExpression(
-			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			"file", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		statements.add(re);
 		tester.validator().checkResourceExpression(re);
 		tester.diagnose().assertOK();
@@ -633,8 +621,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		PuppetManifest pp = pf.createPuppetManifest();
 		EList<Expression> statements = pp.getStatements();
 		ResourceExpression re = createVirtualResourceExpression(
-			"monitor::foo", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other",
-			createValue("0555"));
+			"monitor::foo", "a resource", "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		statements.add(re);
 		tester.validator().checkResourceExpression(re);
 		// should only report unknown type - but the spec of this unknown type should be allowed
@@ -655,13 +642,11 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 			EList<Expression> statements = pp.getStatements();
 
 			ResourceExpression re = createVirtualResourceExpression(
-				"monitor::foo", titleExpr, "owner", createValue("0777"), "group", createValue("0666"), "other",
-				createValue("0555"));
+				"monitor::foo", titleExpr, "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 			statements.add(re);
 			tester.validator().checkResourceExpression(re);
 			tester.validator().checkResourceBody(re.getResourceData().get(0));
-			tester.diagnose().assertAny(
-				AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION_STRING_OK));
+			tester.diagnose().assertAny(AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION_STRING_OK));
 		}
 	}
 

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -20,7 +20,6 @@ import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * A DOM CSS consists of a set of {@link Rule} describing the styling of an {@link IDomNode}.
- *
  */
 public class DomCSS {
 	ArrayList<Rule> cssRules;
@@ -84,10 +83,10 @@ public class DomCSS {
 			return;
 
 		rule = rule.getDomCSS() != null
-				? (Rule) rule.clone()
-						: rule;
-				rule.setDomCSS(this);
-				cssRules.add(rule);
+			? (Rule) rule.clone()
+			: rule;
+		rule.setDomCSS(this);
+		cssRules.add(rule);
 	}
 
 	/**

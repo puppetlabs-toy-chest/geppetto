@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
  * A Resource that loads .rb files containing Puppet "target platform"
  * information. Ruby source on particular paths are transformed into PPTP model
  * contents.
- *
  */
 public class PptpRubyResource extends ResourceImpl {
 
@@ -223,11 +222,10 @@ public class PptpRubyResource extends ResourceImpl {
 						getContents().add(type);
 					}
 				}
-				break;
+					break;
 
 				case FUNCTION: {
-					List<PPFunctionInfo> functions = helper.getFunctionInfo(uri.path(), new InputStreamReader(
-						inputStream));
+					List<PPFunctionInfo> functions = helper.getFunctionInfo(uri.path(), new InputStreamReader(inputStream));
 
 					for(PPFunctionInfo info : functions) {
 						Function pptpFunc = PPTPFactory.eINSTANCE.createFunction();
@@ -237,7 +235,7 @@ public class PptpRubyResource extends ResourceImpl {
 						getContents().add(pptpFunc);
 					}
 				}
-				break;
+					break;
 
 				case META: {
 					PPTypeInfo info = helper.getMetaTypeInfo(uri.path(), new InputStreamReader(inputStream));

@@ -56,8 +56,7 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 		}
 
 		@Override
-		public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext,
-				Acceptor errors) {
+		public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext, Acceptor errors) {
 			// System.err.println("TestSemanticCssFormatter.DebugFormatter");
 			// System.err.println(DomModelUtils.compactDump(dom, true));
 			return super.format(dom, regionToFormat, formattingContext, errors);
@@ -121,8 +120,7 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 
 	@Test
 	public void test_CommentProcessor() {
-		CommentFormattingOptions options = new CommentFormattingOptions(
-			new ICommentFormatterAdvice.DefaultCommentAdvice(), 80);
+		CommentFormattingOptions options = new CommentFormattingOptions(new ICommentFormatterAdvice.DefaultCommentAdvice(), 80);
 		JavaLikeMLCommentContainer in = new ICommentContainerInformation.JavaLikeMLCommentContainer(0);
 		CommentProcessor cp = new CommentProcessor();
 		String source = "/* the\nquick\n     *brown\n * fox\n   \n\n*/ ";
@@ -134,23 +132,22 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 
 	@Test
 	public void test_CommentProcessor_bannerfolding() {
-		CommentFormattingOptions options = new CommentFormattingOptions(
-			new ICommentFormatterAdvice.DefaultCommentAdvice(), 24);
+		CommentFormattingOptions options = new CommentFormattingOptions(new ICommentFormatterAdvice.DefaultCommentAdvice(), 24);
 		JavaLikeMLCommentContainer in = new ICommentContainerInformation.JavaLikeMLCommentContainer(0);
 		CommentProcessor cp = new CommentProcessor();
 
 		String source = //
-				"/*******************************************\n"//
-				+ "* 0123456789 0123456789 0123456789 0123456789\n"//
-				+ "* abc\n" //
-				+ "* 0123456789 0123456789 0123456789 0123456789\n"//
-				+ "*/";
+		"/*******************************************\n"//
+			+ "* 0123456789 0123456789 0123456789 0123456789\n"//
+			+ "* abc\n" //
+			+ "* 0123456789 0123456789 0123456789 0123456789\n"//
+			+ "*/";
 		String expected = //
-				"/***********************\n"//
-				+ " * 0123456789 0123456789\n * 0123456789 0123456789\n"//
-				+ " * abc\n" //
-				+ " * 0123456789 0123456789\n * 0123456789 0123456789\n"//
-				+ " */";
+		"/***********************\n"//
+			+ " * 0123456789 0123456789\n * 0123456789 0123456789\n"//
+			+ " * abc\n" //
+			+ " * 0123456789 0123456789\n * 0123456789 0123456789\n"//
+			+ " */";
 		IFormattingContext fmtCtx = get(IFormattingContext.class);
 		TextFlow s = cp.formatComment(source, in, in, options, fmtCtx);
 		assertEquals("Should produce expected result", expected, s.getText().toString());
@@ -158,21 +155,20 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 
 	@Test
 	public void test_CommentProcessor_folding() {
-		CommentFormattingOptions options = new CommentFormattingOptions(
-			new ICommentFormatterAdvice.DefaultCommentAdvice(), 24);
+		CommentFormattingOptions options = new CommentFormattingOptions(new ICommentFormatterAdvice.DefaultCommentAdvice(), 24);
 		JavaLikeMLCommentContainer in = new ICommentContainerInformation.JavaLikeMLCommentContainer(0);
 		CommentProcessor cp = new CommentProcessor();
 
 		String source = //
-				"/* 0123456789 0123456789 0123456789 0123456789\n"//
-				+ "* abc\n" //
-				+ "* 0123456789 0123456789 0123456789 0123456789\n"//
-				+ "*/";
+		"/* 0123456789 0123456789 0123456789 0123456789\n"//
+			+ "* abc\n" //
+			+ "* 0123456789 0123456789 0123456789 0123456789\n"//
+			+ "*/";
 		String expected = //
-				"/* 0123456789 0123456789\n * 0123456789 0123456789\n"//
-				+ " * abc\n" //
-				+ " * 0123456789 0123456789\n * 0123456789 0123456789\n"//
-				+ " */";
+		"/* 0123456789 0123456789\n * 0123456789 0123456789\n"//
+			+ " * abc\n" //
+			+ " * 0123456789 0123456789\n * 0123456789 0123456789\n"//
+			+ " */";
 
 		IFormattingContext fmtCtx = get(IFormattingContext.class);
 		TextFlow s = cp.formatComment(source, in, in, options, fmtCtx);
@@ -181,21 +177,20 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 
 	@Test
 	public void test_CommentProcessor_folding_indent() {
-		CommentFormattingOptions options = new CommentFormattingOptions(
-			new ICommentFormatterAdvice.DefaultCommentAdvice(), 26);
+		CommentFormattingOptions options = new CommentFormattingOptions(new ICommentFormatterAdvice.DefaultCommentAdvice(), 26);
 		JavaLikeMLCommentContainer in = new ICommentContainerInformation.JavaLikeMLCommentContainer(0);
 		CommentProcessor cp = new CommentProcessor();
 
 		String source = //
-				"/*   0123456789 0123456789 0123456789 0123456789\n"//
-				+ "* abc\n" //
-				+ "* 0123456789 0123456789 0123456789 0123456789\n"//
-				+ "*/";
+		"/*   0123456789 0123456789 0123456789 0123456789\n"//
+			+ "* abc\n" //
+			+ "* 0123456789 0123456789 0123456789 0123456789\n"//
+			+ "*/";
 		String expected = //
-				"/*   0123456789 0123456789\n *   0123456789 0123456789\n"//
-				+ " * abc\n" //
-				+ " * 0123456789 0123456789\n * 0123456789 0123456789\n"//
-				+ " */";
+		"/*   0123456789 0123456789\n *   0123456789 0123456789\n"//
+			+ " * abc\n" //
+			+ " * 0123456789 0123456789\n * 0123456789 0123456789\n"//
+			+ " */";
 		IFormattingContext fmtCtx = get(IFormattingContext.class);
 		TextFlow s = cp.formatComment(source, in, in, options, fmtCtx);
 		assertEquals("Should produce expected result", expected, s.getText().toString());
@@ -205,8 +200,7 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 	public void test_CommentProcessor_Indented() {
 		JavaLikeMLCommentContainer in = new ICommentContainerInformation.JavaLikeMLCommentContainer(2);
 		CommentProcessor cp = new CommentProcessor();
-		CommentFormattingOptions options = new CommentFormattingOptions(
-			new ICommentFormatterAdvice.DefaultCommentAdvice(), 80);
+		CommentFormattingOptions options = new CommentFormattingOptions(new ICommentFormatterAdvice.DefaultCommentAdvice(), 80);
 		String source = "/* the\n  quick\n       *brown\n   * fox\n     \n  \n  */ ";
 		IFormattingContext fmtCtx = get(IFormattingContext.class);
 		TextFlow s = cp.formatComment(source, in, in, options, fmtCtx);
@@ -383,8 +377,7 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 
 		// "centered" in region
 		match = new RegionMatch("abc", 2, new TextRegion(0, 6));
-		assertEquals(
-			"Should be CONTAINED centered", RegionMatch.IntersectionType.CONTAINED, match.getIntersectionType());
+		assertEquals("Should be CONTAINED centered", RegionMatch.IntersectionType.CONTAINED, match.getIntersectionType());
 		applied = match.apply();
 		assertEquals("abc", applied.getFirst().toString());
 		assertEquals("", applied.getSecond().toString());
@@ -403,8 +396,7 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 	@Test
 	public void testRegionMatcher_firstPartInside() {
 		RegionMatch match = new RegionMatch("abc", 4, new TextRegion(0, 5));
-		assertEquals(
-			"Should be FIRSTPART_INSIDE", RegionMatch.IntersectionType.FIRSTPART_INSIDE, match.getIntersectionType());
+		assertEquals("Should be FIRSTPART_INSIDE", RegionMatch.IntersectionType.FIRSTPART_INSIDE, match.getIntersectionType());
 		Triple<CharSequence, CharSequence, CharSequence> applied = match.apply();
 		assertEquals("a", applied.getFirst().toString());
 		assertEquals("", applied.getSecond().toString());
@@ -415,8 +407,7 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 	@Test
 	public void testRegionMatcher_lastPartInside() {
 		RegionMatch match = new RegionMatch("abc", 0, new TextRegion(2, 5));
-		assertEquals(
-			"Should be LASTPART_INSIDE", RegionMatch.IntersectionType.LASTPART_INSIDE, match.getIntersectionType());
+		assertEquals("Should be LASTPART_INSIDE", RegionMatch.IntersectionType.LASTPART_INSIDE, match.getIntersectionType());
 		Triple<CharSequence, CharSequence, CharSequence> applied = match.apply();
 		assertEquals("c", applied.getFirst().toString());
 		assertEquals("ab", applied.getSecond().toString());
@@ -427,8 +418,7 @@ public class TestSemanticCssFormatter extends AbstractPuppetTests {
 	@Test
 	public void testRegionMatcher_midPartInside() {
 		RegionMatch match = new RegionMatch("abc", 0, new TextRegion(1, 1));
-		assertEquals(
-			"Should be MIDPART_INSIDE", RegionMatch.IntersectionType.MIDPART_INSIDE, match.getIntersectionType());
+		assertEquals("Should be MIDPART_INSIDE", RegionMatch.IntersectionType.MIDPART_INSIDE, match.getIntersectionType());
 		Triple<CharSequence, CharSequence, CharSequence> applied = match.apply();
 		assertEquals("b", applied.getFirst().toString());
 		assertEquals("a", applied.getSecond().toString());

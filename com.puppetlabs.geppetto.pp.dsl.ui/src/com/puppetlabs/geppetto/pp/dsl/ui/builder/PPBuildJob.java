@@ -32,7 +32,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
 
 /**
  * The PPBuildJob is used when there is a need to rebuild projects (such as after preference changes).
- *
  */
 public class PPBuildJob extends Job {
 	final private IWorkspace workspace;
@@ -69,9 +68,9 @@ public class PPBuildJob extends Job {
 				if(p.getNature(PPUiConstants.PUPPET_NATURE_ID) != null)
 					projects.add(p);
 			}
-		catch(CoreException e) {
-			log.error("Failed to get puppet nature information from project", e);
-		}
+			catch(CoreException e) {
+				log.error("Failed to get puppet nature information from project", e);
+			}
 		setPriority(Job.BUILD);
 		setRule(workspace.getRoot());
 	}
@@ -105,8 +104,8 @@ public class PPBuildJob extends Job {
 				}
 			}
 			return status.isOK()
-					? Status.OK_STATUS
-							: status;
+				? Status.OK_STATUS
+				: status;
 
 		}
 		finally {

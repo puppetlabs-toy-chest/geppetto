@@ -18,7 +18,6 @@ import com.puppetlabs.geppetto.semver.Version;
 
 /**
  * @author thhal
- *
  */
 public interface Releases extends ForgeService<Release, VersionedName> {
 	public static class DependencyOf extends Compare<Release> {

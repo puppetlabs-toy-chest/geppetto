@@ -20,7 +20,6 @@ import com.google.inject.Inject;
 
 /**
  * @author henrik
- *
  */
 public abstract class AbstractPreferenceData implements IPreferenceStoreInitializer {
 
@@ -83,8 +82,8 @@ public abstract class AbstractPreferenceData implements IPreferenceStoreInitiali
 
 	protected int getInt(IResource resource, String property) {
 		return resource == null || isProjectSpecific(resource)
-				? getInt(property)
-						: getContextualInt(resource, property);
+			? getInt(property)
+			: getContextualInt(resource, property);
 	}
 
 	protected int getInt(String property) {

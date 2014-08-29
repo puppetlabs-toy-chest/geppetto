@@ -88,8 +88,8 @@ public class LiteralNameOrReferenceImpl extends LiteralExpressionImpl implements
 		switch(featureID) {
 			case PPPackage.LITERAL_NAME_OR_REFERENCE__VALUE:
 				return VALUE_EDEFAULT == null
-				? value != null
-				: !VALUE_EDEFAULT.equals(value);
+					? value != null
+					: !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,8 +159,7 @@ public class LiteralNameOrReferenceImpl extends LiteralExpressionImpl implements
 		String oldValue = value;
 		value = newValue;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.LITERAL_NAME_OR_REFERENCE__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.LITERAL_NAME_OR_REFERENCE__VALUE, oldValue, value));
 	}
 
 	/**

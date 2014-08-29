@@ -49,7 +49,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		assertTrue(
 			"Message text should contain a relative reference",
 			chain.getChildren().get(0).getMessage().startsWith("Ambiguous reference to: 'fluff' found in: 1 resource [") &&
-					chain.getChildren().get(0).getMessage().contains("manifests/ambigA.pp"));
+				chain.getChildren().get(0).getMessage().contains("manifests/ambigA.pp"));
 
 	}
 
@@ -132,8 +132,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		for(Diagnostic d : chain)
 			if(d instanceof FileDiagnostic) {
 				File f = ((FileDiagnostic) d).getFile();
-				assertEquals(
-					"Reported files should start with 'manifests/'", "manifests/not ok manifest.pp", f.getPath());
+				assertEquals("Reported files should start with 'manifests/'", "manifests/not ok manifest.pp", f.getPath());
 			}
 	}
 
@@ -174,8 +173,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		assertEquals("There should have been two dependency error", 2, modulefileDiag.size());
 		for(FileDiagnostic diag : modulefileDiag) {
 			assertEquals(
-				"Should have been reported as linking error",
-				org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, diag.getIssue());
+				"Should have been reported as linking error", org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, diag.getIssue());
 			assertEquals(
 				"Should have been reported as linking error with a metadata.json target", Forge.METADATA_JSON_NAME,
 				diag.getFile().getName());
@@ -223,14 +221,13 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		List<FileDiagnostic> modulefileDiag = Lists.newArrayList();
 		for(Diagnostic d : chain) {
 			if(d instanceof FileDiagnostic && d.getSeverity() >= Diagnostic.ERROR &&
-					((FileDiagnostic) d).getFile().getName().equals(METADATA_JSON_NAME))
+				((FileDiagnostic) d).getFile().getName().equals(METADATA_JSON_NAME))
 				modulefileDiag.add((FileDiagnostic) d);
 		}
 		assertEquals("There should have been one dependency error", 1, modulefileDiag.size());
 		for(FileDiagnostic diag : modulefileDiag) {
 			assertEquals(
-				"Should have been reported as linking error",
-				org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, diag.getIssue());
+				"Should have been reported as linking error", org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, diag.getIssue());
 			assertEquals(
 				"Should have been reported as linking error with a metadata.json target", Forge.METADATA_JSON_NAME,
 				diag.getFile().getName());
@@ -273,8 +270,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		int hyphenWarning = 0;
 		int otherIssues = 0;
 		for(Diagnostic e : chain)
-			if(IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN.equals(e.getIssue()) ||
-					IPPDiagnostics.ISSUE__HYPHEN_IN_NAME.equals(e.getIssue()))
+			if(IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN.equals(e.getIssue()) || IPPDiagnostics.ISSUE__HYPHEN_IN_NAME.equals(e.getIssue()))
 				hyphenWarning++;
 			else
 				otherIssues++;
@@ -323,8 +319,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// just the manifest
-		root = TestDataProvider.getTestFile(new Path(
-			"testData/ghbindcases/asmodule/ghoneycutt-bind-1.0.0/manifests/master.pp"));
+		root = TestDataProvider.getTestFile(new Path("testData/ghbindcases/asmodule/ghoneycutt-bind-1.0.0/manifests/master.pp"));
 
 		vs = getValidationService();
 		chain = new Diagnostic();

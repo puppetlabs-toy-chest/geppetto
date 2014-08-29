@@ -61,15 +61,15 @@ public class PuppetDBConnection extends TreeNode<PuppetDBConnections, PuppetDBQu
 	@Override
 	public String getColumnText(int colIdx) {
 		return colIdx == 0
-				? dbAccess.getIdentifier()
-						: "";
+			? dbAccess.getIdentifier()
+			: "";
 	}
 
 	@Override
 	public Image getImage(int colIdx) {
 		return colIdx == 0
-				? DB_IMAGE
-						: null;
+			? DB_IMAGE
+			: null;
 	}
 
 	/**

@@ -89,8 +89,8 @@ public class TypeImpl extends AbstractTypeImpl implements Type {
 		switch(featureID) {
 			case PPTPPackage.TYPE__SUPER_TYPE:
 				return SUPER_TYPE_EDEFAULT == null
-						? superType != null
-						: !SUPER_TYPE_EDEFAULT.equals(superType);
+					? superType != null
+					: !SUPER_TYPE_EDEFAULT.equals(superType);
 		}
 		return super.eIsSet(featureID);
 	}

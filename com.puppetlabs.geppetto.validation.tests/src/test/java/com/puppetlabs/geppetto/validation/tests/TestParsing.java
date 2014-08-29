@@ -25,7 +25,6 @@ import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsRunner;
 
 /**
  * Tests PPDiagnosticsRunner's parseString method.
- *
  */
 public class TestParsing {
 
@@ -69,9 +68,7 @@ public class TestParsing {
 		// returned.
 		//
 		result = ((PuppetManifest) result).getStatements().get(0);
-		assertTrue(
-			"An instance of SingleQuotedString is obtained",
-			PPPackage.Literals.SINGLE_QUOTED_STRING.isSuperTypeOf(result.eClass()));
+		assertTrue("An instance of SingleQuotedString is obtained", PPPackage.Literals.SINGLE_QUOTED_STRING.isSuperTypeOf(result.eClass()));
 
 		runner.tearDown(); // bye for now
 	}

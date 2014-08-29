@@ -136,19 +136,17 @@ public class ReleaseListSelectionDialog extends FilteredItemsSelectionDialog {
 	}
 
 	@Override
-	protected void fillContentProvider(AbstractContentProvider contentProvider, ItemsFilter itemsFilter,
-			IProgressMonitor progressMonitor) throws CoreException {
+	protected void fillContentProvider(AbstractContentProvider contentProvider, ItemsFilter itemsFilter, IProgressMonitor progressMonitor)
+			throws CoreException {
 		for(Elem elem : elements)
 			contentProvider.add(elem, itemsFilter);
 	}
 
 	@Override
 	protected IDialogSettings getDialogSettings() {
-		IDialogSettings settings = UIPlugin.getInstance().getPluginResourceLocator().getDialogSettings().getSection(
-			DIALOG_SETTINGS);
+		IDialogSettings settings = UIPlugin.getInstance().getPluginResourceLocator().getDialogSettings().getSection(DIALOG_SETTINGS);
 		if(settings == null)
-			settings = UIPlugin.getInstance().getPluginResourceLocator().getDialogSettings().addNewSection(
-				DIALOG_SETTINGS);
+			settings = UIPlugin.getInstance().getPluginResourceLocator().getDialogSettings().addNewSection(DIALOG_SETTINGS);
 		return settings;
 	}
 

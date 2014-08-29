@@ -69,7 +69,6 @@ import com.google.inject.Singleton;
 
 /**
  * Semantic layouts for PP
- *
  */
 @Singleton
 public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
@@ -156,15 +155,14 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	LayoutUtils layoutUtils;
 
 	/**
-	 * array of classifiers that represent
-	 * {@code com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout.StatementStyle.BLOCK} - used for fast
+	 * array of classifiers that represent {@code com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout.StatementStyle.BLOCK} - used
+	 * for fast
 	 * lookup (faster
 	 * that Xtext polymorph and EMF Switch)
 	 */
 	protected final static int[] blockClassIds = new int[] {
 		PPPackage.CASE_EXPRESSION, PPPackage.DEFINITION, PPPackage.HOST_CLASS_DEFINITION, PPPackage.IF_EXPRESSION,
-		PPPackage.UNLESS_EXPRESSION, PPPackage.NODE_DEFINITION, PPPackage.RESOURCE_EXPRESSION,
-		PPPackage.SELECTOR_EXPRESSION };
+		PPPackage.UNLESS_EXPRESSION, PPPackage.NODE_DEFINITION, PPPackage.RESOURCE_EXPRESSION, PPPackage.SELECTOR_EXPRESSION };
 
 	@Inject
 	private DomNodeLayoutFeeder feeder;
@@ -174,32 +172,27 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	@Inject
 	IStyleFactory styles;
 
-	protected void _after(AttributeOperations aos, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected void _after(AttributeOperations aos, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		if(aos.eContainer() instanceof ResourceBody) {
 			flow.changeIndentation(-1);
 		}
 	}
 
-	protected void _before(AttributeOperations aos, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected void _before(AttributeOperations aos, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		if(aos.eContainer() instanceof ResourceBody) {
 			flow.changeIndentation(1);
 		}
 	}
 
-	protected boolean _format(AppendExpression ae, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(AppendExpression ae, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		return assignmentLayout._format(ae, styleSet, node, flow, context);
 	}
 
-	protected boolean _format(AssignmentExpression ae, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(AssignmentExpression ae, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		return assignmentLayout._format(ae, styleSet, node, flow, context);
 	}
 
-	protected boolean _format(AttributeOperations aos, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(AttributeOperations aos, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		LayoutUtils.unifyWidthAndAlign(
 			node, grammarAccess.getAttributeOperationAccess().getKeyAttributeNameParserRuleCall_1_0(), Alignment.left,
 			adviceProvider.get().clusterSize());
@@ -224,40 +217,32 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	}
 
 	protected boolean _format(Definition o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
-		internalFormatStatementList(
-			node, grammarAccess.getDefinitionAccess().getStatementsExpressionListParserRuleCall_4_0());
+		internalFormatStatementList(node, grammarAccess.getDefinitionAccess().getStatementsExpressionListParserRuleCall_4_0());
 		return false;
 	}
 
-	protected boolean _format(DefinitionArgumentList o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(DefinitionArgumentList o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		return definitionListArgumentLayout.format(o, styleSet, node, flow, context);
 	}
 
 	protected boolean _format(ElseExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
-		internalFormatStatementList(
-			node, grammarAccess.getElseExpressionAccess().getStatementsExpressionListParserRuleCall_2_0());
+		internalFormatStatementList(node, grammarAccess.getElseExpressionAccess().getStatementsExpressionListParserRuleCall_2_0());
 		return false;
 	}
 
-	protected boolean _format(ElseIfExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
-		internalFormatStatementList(
-			node, grammarAccess.getElseIfExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
+	protected boolean _format(ElseIfExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
+		internalFormatStatementList(node, grammarAccess.getElseIfExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
 		return false;
 	}
 
-	protected boolean _format(HostClassDefinition o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(HostClassDefinition o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 
-		internalFormatStatementList(
-			node, grammarAccess.getHostClassDefinitionAccess().getStatementsExpressionListParserRuleCall_5_0());
+		internalFormatStatementList(node, grammarAccess.getHostClassDefinitionAccess().getStatementsExpressionListParserRuleCall_5_0());
 		return false;
 	}
 
 	protected boolean _format(IfExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
-		internalFormatStatementList(
-			node, grammarAccess.getIfExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
+		internalFormatStatementList(node, grammarAccess.getIfExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
 		return false;
 	}
 
@@ -278,20 +263,16 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 
 	protected boolean _format(NodeDefinition o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 
-		internalFormatStatementList(
-			node, grammarAccess.getNodeDefinitionAccess().getStatementsExpressionListParserRuleCall_5_0());
+		internalFormatStatementList(node, grammarAccess.getNodeDefinitionAccess().getStatementsExpressionListParserRuleCall_5_0());
 		return false;
 	}
 
-	protected boolean _format(PuppetManifest manifest, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
-		internalFormatStatementList(
-			node, grammarAccess.getPuppetManifestAccess().getStatementsExpressionListParserRuleCall_1_0());
+	protected boolean _format(PuppetManifest manifest, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
+		internalFormatStatementList(node, grammarAccess.getPuppetManifestAccess().getStatementsExpressionListParserRuleCall_1_0());
 		return false;
 	}
 
-	protected boolean _format(ResourceExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(ResourceExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		List<Object> styles = Lists.newArrayList();
 		boolean compactResource = adviceProvider.get().compactResourceWhenPossible();
 		switch(o.getResourceData().size()) {
@@ -302,8 +283,8 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 				break;
 			case 1:
 				styles.add(o.getResourceData().get(0).getNameExpr() != null
-				? ResourceStyle.SINGLEBODY_TITLE
-						: ResourceStyle.SINGLEBODY_NO_TITLE);
+					? ResourceStyle.SINGLEBODY_TITLE
+					: ResourceStyle.SINGLEBODY_NO_TITLE);
 				// if there is more than 1 attribute operation, the resource can't be compacted
 				AttributeOperations attributes = o.getResourceData().get(0).getAttributes();
 				if(compactResource && (attributes == null || attributes.getAttributes().size() < 2))
@@ -338,13 +319,11 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 		return internalFormatLambda(node, flow, context, statements, fromElement, toElement);
 	}
 
-	protected boolean _format(SelectorExpression se, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(SelectorExpression se, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		return selectorLayout._format(se, styleSet, node, flow, context);
 	}
 
-	protected boolean _format(SingleQuotedString o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(SingleQuotedString o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		// Unless the actual string part is not marked verbatim, any literal new lines in the string will cause indentation
 		for(IDomNode n : node.getChildren()) {
 			if(n.getGrammarElement() == grammarAccess.getSingleQuotedStringAccess().getTextSqTextParserRuleCall_1_0()) {
@@ -354,10 +333,8 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 		return false;
 	}
 
-	protected boolean _format(UnlessExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
-		internalFormatStatementList(
-			node, grammarAccess.getUnlessExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
+	protected boolean _format(UnlessExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
+		internalFormatStatementList(node, grammarAccess.getUnlessExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
 		return false;
 	}
 
@@ -437,8 +414,8 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 		return firstToken;
 	}
 
-	protected boolean internalFormatLambda(IDomNode node, ITextFlow flow, ILayoutContext context,
-			AbstractElement statements, AbstractElement fromElement, AbstractElement toElement) {
+	protected boolean internalFormatLambda(IDomNode node, ITextFlow flow, ILayoutContext context, AbstractElement statements,
+			AbstractElement fromElement, AbstractElement toElement) {
 		boolean hasLineBreak = containsEndLineBreak(node);
 		Pair<Integer, Integer> counts = internalFormatStatementList(node, statements);
 

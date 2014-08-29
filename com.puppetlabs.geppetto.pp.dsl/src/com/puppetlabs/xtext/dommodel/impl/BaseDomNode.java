@@ -16,7 +16,6 @@ import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * A BaseDomNode is parented by an CompositeNode (or <code>null</node>).
- *
  */
 public abstract class BaseDomNode extends AbstractDomNode {
 

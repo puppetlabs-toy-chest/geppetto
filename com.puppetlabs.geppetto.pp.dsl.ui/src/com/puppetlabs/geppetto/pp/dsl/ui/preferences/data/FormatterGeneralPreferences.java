@@ -19,7 +19,6 @@ import com.google.inject.Singleton;
 
 /**
  * Manages the Formatter General preferences.
- *
  */
 @Singleton
 public class FormatterGeneralPreferences extends AbstractPreferenceData {
@@ -33,7 +32,7 @@ public class FormatterGeneralPreferences extends AbstractPreferenceData {
 	public static final String FORMATTER_GENERAL_ID = "com.puppetlabs.geppetto.pp.dsl.PP.formatter";
 
 	public static final String FORMATTER_GENERAL_USE_PROJECT_SETTINGS = FORMATTER_GENERAL_ID + "." +
-			PPPreferenceConstants.USE_PROJECT_SETTINGS;
+		PPPreferenceConstants.USE_PROJECT_SETTINGS;
 
 	public static final String FORMATTER_SPACES_FOR_TABS = "formatterSpacesForTabs";
 

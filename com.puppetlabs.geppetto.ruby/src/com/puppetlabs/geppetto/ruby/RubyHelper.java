@@ -54,12 +54,9 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyServicesFactory;
  * service will provide an empty
  * parse result (i.e. "no errors or warning"), and will return empty results for
  * information.
- *
  * The caller can then adjust how to deal with service not being present.
- *
  * To use the RubyHelper, a call must be made to {@link #setUp()}, then followed
  * by a series of requests to parse or get information.
- *
  */
 public class RubyHelper {
 
@@ -136,8 +133,7 @@ public class RubyHelper {
 		}
 
 		@Override
-		public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException,
-		RubySyntaxException {
+		public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException, RubySyntaxException {
 			return emptyTypeInfo;
 		}
 
@@ -194,8 +190,7 @@ public class RubyHelper {
 
 	private static IRubyServicesFactory rubyProviderFactory = null;
 
-	private TPVariable addTPVariable(ITargetElementContainer container, String name, String documentation,
-			boolean deprecated) {
+	private TPVariable addTPVariable(ITargetElementContainer container, String name, String documentation, boolean deprecated) {
 		TPVariable var = PPTPFactory.eINSTANCE.createTPVariable();
 		var.setName(name);
 		var.setDocumentation(documentation);
@@ -373,9 +368,7 @@ public class RubyHelper {
 	 * type and parser/functions. The path to the distroDir should contain a
 	 * version string segment directly after a segment called 'puppet'. e.g.
 	 * /somewhere/on/disk/puppet/2.6.2_0/some/path/to/puppet.
-	 *
 	 * Will also load default settings:: variables, and meta variables.
-	 *
 	 * Output file will contain a PPTP model as a result of this call.
 	 *
 	 * @param distroDir
@@ -408,11 +401,9 @@ public class RubyHelper {
 	 * directory where the sub-directories "parser" and "type" are. The path to
 	 * this directory is expected to have a ../../ name on the form puppet-version
 	 * e.g. /somewhere/puppet-2.6.9/lib/puppet.
-	 *
 	 * The implementation will scan the known locations for definitions that
 	 * should be reflected in the target - i.e. parser/functions/*.rb and
 	 * type/*.rb
-	 *
 	 * Note, this does not load default settings:: variables.
 	 *
 	 * @throws IOException
@@ -442,8 +433,7 @@ public class RubyHelper {
 			throw new IllegalArgumentException("path to .../puppet/lib is not correct");
 		final String distroName = segments[sc - 3];
 		if(!distroName.startsWith("puppet-"))
-			throw new IllegalArgumentException(
-					"The ../../ of the given directory must be named on the form: 'puppet-<version>'");
+			throw new IllegalArgumentException("The ../../ of the given directory must be named on the form: 'puppet-<version>'");
 
 		puppetDistro.setLabel("puppet");
 		// 7 is the first char after 'puppet-'
@@ -673,9 +663,9 @@ public class RubyHelper {
 		var = PPTPFactory.eINSTANCE.createTPVariable();
 		var.setName("servername");
 		var.setDocumentation("The puppet master’s fully-qualified domain name. (Note that this information "
-				+ "is gathered from the puppet master by Facter, rather than read from the config files; even if the "
-				+ "master’s certname is set to something other than its fully-qualified domain name, this variable "
-				+ "will still contain the server’s fqdn.)");
+			+ "is gathered from the puppet master by Facter, rather than read from the config files; even if the "
+			+ "master’s certname is set to something other than its fully-qualified domain name, this variable "
+			+ "will still contain the server’s fqdn.)");
 		var.setDeprecated(false);
 		target.getContents().add(var);
 
@@ -860,9 +850,9 @@ public class RubyHelper {
 	public synchronized void setUp() {
 		if(rubyProvider == null)
 			rubyProvider = rubyProviderFactory == null
-			? new MockRubyServices()
-		: rubyProviderFactory.create();
-			rubyProvider.setUp();
+				? new MockRubyServices()
+				: rubyProviderFactory.create();
+		rubyProvider.setUp();
 	}
 
 	public void tearDown() {

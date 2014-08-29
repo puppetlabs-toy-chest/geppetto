@@ -57,7 +57,7 @@ import com.google.gson.reflect.TypeToken;
  */
 public class CatalogResourceImpl extends TaggableImpl implements CatalogResource {
 	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogResource> implements
-	JsonSerializer<CatalogResource> {
+			JsonSerializer<CatalogResource> {
 
 		private static boolean getBoolean(JsonObject jsonObj, String key) {
 			JsonElement json = jsonObj.get(key);
@@ -74,8 +74,8 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 
 			// unset values are null, not empty strings
 			return value.length() == 0
-					? null
-							: value;
+				? null
+				: value;
 		}
 
 		private static void putBoolean(JsonObject jsonObj, String key, boolean value) {
@@ -95,8 +95,8 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 		}.getType();
 
 		@Override
-		public CatalogResource deserialize(JsonElement json, java.lang.reflect.Type typeOfT,
-				JsonDeserializationContext context) throws JsonParseException {
+		public CatalogResource deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
 			final CatalogResource result = CatalogFactory.eINSTANCE.createCatalogResource();
 			JsonObject jsonObj = json.getAsJsonObject();
 
@@ -148,8 +148,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 		}
 
 		@Override
-		public JsonElement serialize(CatalogResource src, java.lang.reflect.Type typeOfSrc,
-				JsonSerializationContext context) {
+		public JsonElement serialize(CatalogResource src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
 			final JsonObject result = new JsonObject();
 			final CatalogResourceImpl cat = (CatalogResourceImpl) src;
 
@@ -386,20 +385,20 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 		switch(featureID) {
 			case CatalogPackage.CATALOG_RESOURCE__FILE:
 				return FILE_EDEFAULT == null
-				? file != null
-				: !FILE_EDEFAULT.equals(file);
+					? file != null
+					: !FILE_EDEFAULT.equals(file);
 			case CatalogPackage.CATALOG_RESOURCE__LINE:
 				return LINE_EDEFAULT == null
-				? line != null
-				: !LINE_EDEFAULT.equals(line);
+					? line != null
+					: !LINE_EDEFAULT.equals(line);
 			case CatalogPackage.CATALOG_RESOURCE__TYPE:
 				return TYPE_EDEFAULT == null
-				? type != null
-				: !TYPE_EDEFAULT.equals(type);
+					? type != null
+					: !TYPE_EDEFAULT.equals(type);
 			case CatalogPackage.CATALOG_RESOURCE__TITLE:
 				return TITLE_EDEFAULT == null
-				? title != null
-				: !TITLE_EDEFAULT.equals(title);
+					? title != null
+					: !TITLE_EDEFAULT.equals(title);
 			case CatalogPackage.CATALOG_RESOURCE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 			case CatalogPackage.CATALOG_RESOURCE__VIRTUAL:
@@ -523,7 +522,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 	public EList<CatalogResourceParameter> getParameters() {
 		if(parameters == null) {
 			parameters = new EObjectContainmentEList<CatalogResourceParameter>(
-					CatalogResourceParameter.class, this, CatalogPackage.CATALOG_RESOURCE__PARAMETERS);
+				CatalogResourceParameter.class, this, CatalogPackage.CATALOG_RESOURCE__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -583,8 +582,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 		boolean oldExported = exported;
 		exported = newExported;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, CatalogPackage.CATALOG_RESOURCE__EXPORTED, oldExported, exported));
+			eNotify(new ENotificationImpl(this, Notification.SET, CatalogPackage.CATALOG_RESOURCE__EXPORTED, oldExported, exported));
 	}
 
 	/**
@@ -626,8 +624,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 		String oldTitle = title;
 		title = newTitle;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, CatalogPackage.CATALOG_RESOURCE__TITLE, oldTitle, title));
+			eNotify(new ENotificationImpl(this, Notification.SET, CatalogPackage.CATALOG_RESOURCE__TITLE, oldTitle, title));
 	}
 
 	/**
@@ -655,8 +652,7 @@ public class CatalogResourceImpl extends TaggableImpl implements CatalogResource
 		boolean oldVirtual = virtual;
 		virtual = newVirtual;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, CatalogPackage.CATALOG_RESOURCE__VIRTUAL, oldVirtual, virtual));
+			eNotify(new ENotificationImpl(this, Notification.SET, CatalogPackage.CATALOG_RESOURCE__VIRTUAL, oldVirtual, virtual));
 	}
 
 	/**

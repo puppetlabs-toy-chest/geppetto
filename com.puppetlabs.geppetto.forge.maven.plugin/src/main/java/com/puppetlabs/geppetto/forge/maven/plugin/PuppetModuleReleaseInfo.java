@@ -63,8 +63,7 @@ public class PuppetModuleReleaseInfo extends Entity {
 		return writer.toString();
 	}
 
-	private static final String[] readmeFiles = {
-		"README.markdown", "README.md", "README.txt", "README", "README.mkdn", "README.mkd" };
+	private static final String[] readmeFiles = { "README.markdown", "README.md", "README.txt", "README", "README.mkdn", "README.mkd" };
 
 	private static final String[] changeLogFiles = { "Changes", "Changes.md", "Changelog", "Changelog.md" };
 
@@ -123,8 +122,8 @@ public class PuppetModuleReleaseInfo extends Entity {
 
 	public List<String> getTags() {
 		return tags == null
-				? Collections.<String> emptyList()
-						: Collections.unmodifiableList(tags);
+			? Collections.<String> emptyList()
+			: Collections.unmodifiableList(tags);
 	}
 
 	/**

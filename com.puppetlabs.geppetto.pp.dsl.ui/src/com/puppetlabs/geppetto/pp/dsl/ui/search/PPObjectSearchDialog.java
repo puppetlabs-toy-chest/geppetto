@@ -107,8 +107,7 @@ public class PPObjectSearchDialog extends ListDialog {
 		setLabelProvider(labelProvider);
 	}
 
-	public PPObjectSearchDialog(Shell parent, IPPEObjectSearch searchEngine, ILabelProvider labelProvider,
-			boolean enableStyledLabels) {
+	public PPObjectSearchDialog(Shell parent, IPPEObjectSearch searchEngine, ILabelProvider labelProvider, boolean enableStyledLabels) {
 		this(parent, searchEngine, labelProvider);
 		this.enableStyledLabels = enableStyledLabels;
 	}
@@ -151,11 +150,11 @@ public class PPObjectSearchDialog extends ListDialog {
 					if(description != null) {
 						StyledString styledString = styledLabelProvider.getStyledText(description);
 						String displayString = styledString == null
-								? description.toString()
-										: styledString.toString();
-								StyleRange[] styleRanges = styledString.getStyleRanges();
-								item.setText(displayString);
-								TableOwnerDrawSupport.storeStyleRanges(item, 0, styleRanges);
+							? description.toString()
+							: styledString.toString();
+						StyleRange[] styleRanges = styledString.getStyleRanges();
+						item.setText(displayString);
+						TableOwnerDrawSupport.storeStyleRanges(item, 0, styleRanges);
 					}
 				}
 			};

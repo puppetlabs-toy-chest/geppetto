@@ -22,14 +22,13 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * @author henrik
- *
  */
 public class TestRubyDocProcessor2 {
 	public static final List<String> content1 = ImmutableList.of( //
 		"This is an example:\n", //
 		"  verbatim\n", //
 		"  verbatim\n", //
-			"Non verbatim\n");
+		"Non verbatim\n");
 
 	public static final List<String> content1Expected = ImmutableList.of( //
 		"<p>This is an example:", //
@@ -38,13 +37,13 @@ public class TestRubyDocProcessor2 {
 		"verbatim\n", //
 		"</pre>", //
 		"Non verbatim", //
-			"</p>");
+		"</p>");
 
 	public static final List<String> content2 = ImmutableList.of( //
 		"This is an example:\n", //
 		"    verbatim\n", //
 		"     verbatim\n", //
-			"Non verbatim\n");
+		"Non verbatim\n");
 
 	public static final List<String> content2Expected = ImmutableList.of( //
 		"<p>This is an example:", //
@@ -53,7 +52,7 @@ public class TestRubyDocProcessor2 {
 		"   verbatim\n", //
 		"</pre>", //
 		"Non verbatim", //
-			"</p>");
+		"</p>");
 
 	public static final List<String> content3 = ImmutableList.of( //
 		"This is an example:\n", //
@@ -61,7 +60,7 @@ public class TestRubyDocProcessor2 {
 		"* bullet2\n", //
 		"  bullet2\n", //
 		"  bullet2\n", //
-			"Non verbatim\n");
+		"Non verbatim\n");
 
 	public static final List<String> content3Expected = ImmutableList.of( //
 		"<p>This is an example:", //
@@ -70,7 +69,7 @@ public class TestRubyDocProcessor2 {
 		"<li><p>bullet2 bullet2 bullet2</p></li>", //
 		"</ul>", //
 		"Non verbatim", //
-			"</p>");
+		"</p>");
 
 	public static final List<String> content4 = ImmutableList.of( //
 		"This is an example:\n", //
@@ -78,7 +77,7 @@ public class TestRubyDocProcessor2 {
 		"   bullet2\n", //
 		"     verbatim\n", //
 		"      verbatim\n", //
-			"Non verbatim\n");
+		"Non verbatim\n");
 
 	public static final List<String> content4Expected = ImmutableList.of( //
 		"<p>This is an example:", //
@@ -88,7 +87,7 @@ public class TestRubyDocProcessor2 {
 		" verbatim\n", //
 		"</pre></p></li></ul>", //
 		"Non verbatim", //
-			"</p>");
+		"</p>");
 
 	public static final List<String> content5 = ImmutableList.of( //
 		"This is an _example_:\n", //
@@ -96,7 +95,7 @@ public class TestRubyDocProcessor2 {
 		"* *bullet2*\n", //
 		"  +bullet2+\n", //
 		"  `bullet2`\n", //
-			"Non verbatim\n");
+		"Non verbatim\n");
 
 	public static final List<String> content5Expected = ImmutableList.of( //
 		"<p>This is an <i>example</i>:", //
@@ -105,7 +104,7 @@ public class TestRubyDocProcessor2 {
 		"<li><p><b>bullet2</b> <tt>bullet2</tt> <tt>bullet2</tt></p></li>", //
 		"</ul>", //
 		"Non verbatim", //
-			"</p>");
+		"</p>");
 
 	public static final List<String> content5a = ImmutableList.of( //
 		"--\n", //
@@ -131,7 +130,7 @@ public class TestRubyDocProcessor2 {
 		"--\n", //
 		" comment\n", //
 		"++\n", //
-			"Non verbatim\n");
+		"Non verbatim\n");
 
 	public static final List<String> content6 = ImmutableList.of( //
 		"=Head1\n", //
@@ -144,7 +143,7 @@ public class TestRubyDocProcessor2 {
 		"===Head3\n", //
 		"Non verbatim\n", //
 		"========Head8\n" //
-			);
+	);
 
 	public static final List<String> content7 = ImmutableList.of( //
 		"This is an example:\n", //
@@ -152,7 +151,7 @@ public class TestRubyDocProcessor2 {
 		"   bullet1\n", //
 		"     * bullet2\n", //
 		"       bullet2\n", //
-			"Non verbatim\n");
+		"Non verbatim\n");
 
 	public static final List<String> content7Expected = ImmutableList.of( //
 		"<p>This is an example:", //
@@ -162,7 +161,7 @@ public class TestRubyDocProcessor2 {
 		" verbatim\n", //
 		"</pre></p></li></ul>", //
 		"Non verbatim", //
-			"</p>");
+		"</p>");
 
 	public static final List<String> content6Expected = ImmutableList.of( //
 		"<h1>Head1</h1>", //
@@ -175,7 +174,7 @@ public class TestRubyDocProcessor2 {
 		"<h3>Head3</h3>", //
 		"<p>Non verbatim</p>", //
 		"<h5>Head8</h5>" //
-			);
+	);
 
 	@Test
 	public void testRubyDocprocessor_1() {

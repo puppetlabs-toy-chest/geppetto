@@ -29,8 +29,7 @@ public class PuppetLintService {
 		return instance;
 	}
 
-	public static final DiagnosticType PUPPET_LINT = new DiagnosticType(
-		"PUPPET_LINT", PuppetLintService.class.getName());
+	public static final DiagnosticType PUPPET_LINT = new DiagnosticType("PUPPET_LINT", PuppetLintService.class.getName());
 
 	private static PuppetLintService instance;
 

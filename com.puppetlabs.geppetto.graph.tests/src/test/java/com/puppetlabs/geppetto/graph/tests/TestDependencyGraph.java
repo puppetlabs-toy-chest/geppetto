@@ -51,8 +51,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertTrue("Validation had errors", chain.getSeverity() < Diagnostic.ERROR);
-		getDependencyGraphProducer().produceGraph(
-			null, "Demo DefaultModules Dependencies", null, dotStream, buildResult, chain);
+		getDependencyGraphProducer().produceGraph(null, "Demo DefaultModules Dependencies", null, dotStream, buildResult, chain);
 
 		// produce SVG
 		SVGProducer svgProducer = getSVGProducer();
@@ -80,8 +79,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		ValidationService vs = getValidationService();
 		BuildResult result = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotNull("Should have found exported references", result.getAllModuleReferences());
-		getDependencyGraphProducer().produceGraph(
-			null, "Module dependencies for graphTestData", null, stream, result, chain);
+		getDependencyGraphProducer().produceGraph(null, "Module dependencies for graphTestData", null, stream, result, chain);
 
 		assertTrue("Stream contains data", stream.size() > 10);
 	}
@@ -129,8 +127,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotNull("Should have found exported references", buildResult.getAllModuleReferences());
 		// dumpExports(buildResult.getExportsForAll());
-		getDependencyGraphProducer().produceGraph(
-			null, "Module dependencies for graphTestData", modules, stream, buildResult, chain);
+		getDependencyGraphProducer().produceGraph(null, "Module dependencies for graphTestData", modules, stream, buildResult, chain);
 
 		String output = stream.toString();
 		assertTrue("Stream should contain data", stream.size() > 10);
@@ -154,8 +151,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotNull("Should have found exported references", buildResult.getAllModuleReferences());
 
-		getDependencyGraphProducer().produceGraph(
-			null, "Module dependencies for graphTestData", null, stream, buildResult, chain);
+		getDependencyGraphProducer().produceGraph(null, "Module dependencies for graphTestData", null, stream, buildResult, chain);
 
 		assertTrue("Stream should contain data", stream.size() > 10);
 
@@ -185,9 +181,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 
 		assertFalse("SVG should not contain the string \"\\L\"", svgString.contains("\"\\L\""));
 
-		assertTrue(
-			"Stream has expected size  (>20000) bytes - differs per run. Was:" + svgStream.size(),
-			svgStream.size() > 20000);
+		assertTrue("Stream has expected size  (>20000) bytes - differs per run. Was:" + svgStream.size(), svgStream.size() > 20000);
 	}
 
 	@Test
@@ -205,8 +199,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		File outputFolder = TestDataProvider.getTestOutputDir();
 		FileOutputStream dotStream = new FileOutputStream(new File(outputFolder, "forgeGraphSVG.dot"));
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
-		getDependencyGraphProducer().produceGraph(
-			null, "Forge DefaultModules Dependencies", null, dotStream, buildResult, chain);
+		getDependencyGraphProducer().produceGraph(null, "Forge DefaultModules Dependencies", null, dotStream, buildResult, chain);
 
 		// produce SVG
 		SVGProducer svgProducer = getSVGProducer();
@@ -302,8 +295,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		FileOutputStream dotStream = new FileOutputStream(new File(outputFolder, "karelGraphSVG.dot"));
 
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
-		getDependencyGraphProducer().produceGraph(
-			null, "Karel DefaultModules Dependencies", null, dotStream, buildResult, chain);
+		getDependencyGraphProducer().produceGraph(null, "Karel DefaultModules Dependencies", null, dotStream, buildResult, chain);
 
 		// produce SVG
 		SVGProducer svgProducer = getSVGProducer();

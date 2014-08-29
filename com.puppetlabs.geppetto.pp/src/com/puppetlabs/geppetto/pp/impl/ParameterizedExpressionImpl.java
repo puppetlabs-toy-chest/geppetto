@@ -213,8 +213,7 @@ public abstract class ParameterizedExpressionImpl extends ExpressionImpl impleme
 	@Override
 	public EList<Expression> getParameters() {
 		if(parameters == null) {
-			parameters = new EObjectContainmentEList<Expression>(
-					Expression.class, this, PPPackage.PARAMETERIZED_EXPRESSION__PARAMETERS);
+			parameters = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.PARAMETERIZED_EXPRESSION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -240,8 +239,7 @@ public abstract class ParameterizedExpressionImpl extends ExpressionImpl impleme
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.PARAMETERIZED_EXPRESSION__LEFT_EXPR, newLeftExpr, newLeftExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.PARAMETERIZED_EXPRESSION__LEFT_EXPR, newLeftExpr, newLeftExpr));
 	}
 
 } // ParameterizedExpressionImpl

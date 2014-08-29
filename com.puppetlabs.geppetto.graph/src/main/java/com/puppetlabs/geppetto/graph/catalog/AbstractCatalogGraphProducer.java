@@ -28,7 +28,6 @@ import com.google.inject.Inject;
 
 /**
  * Functionality common to Catalog Graph producers.
- *
  */
 public class AbstractCatalogGraphProducer implements CatalogGraphStyles {
 

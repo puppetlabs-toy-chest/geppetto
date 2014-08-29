@@ -184,18 +184,15 @@ public abstract class LambdaImpl extends ExpressionBlockImpl implements Lambda {
 		if(newArguments != arguments) {
 			NotificationChain msgs = null;
 			if(arguments != null)
-				msgs = ((InternalEObject) arguments).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.LAMBDA__ARGUMENTS, null, msgs);
+				msgs = ((InternalEObject) arguments).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PPPackage.LAMBDA__ARGUMENTS, null, msgs);
 			if(newArguments != null)
-				msgs = ((InternalEObject) newArguments).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.LAMBDA__ARGUMENTS, null, msgs);
+				msgs = ((InternalEObject) newArguments).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PPPackage.LAMBDA__ARGUMENTS, null, msgs);
 			msgs = basicSetArguments(newArguments, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.LAMBDA__ARGUMENTS, newArguments, newArguments));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.LAMBDA__ARGUMENTS, newArguments, newArguments));
 	}
 
 } // LambdaImpl

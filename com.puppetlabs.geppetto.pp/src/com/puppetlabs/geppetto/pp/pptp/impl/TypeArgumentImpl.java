@@ -204,8 +204,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 		boolean oldNamevar = namevar;
 		namevar = newNamevar;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.TYPE_ARGUMENT__NAMEVAR, oldNamevar, namevar));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.TYPE_ARGUMENT__NAMEVAR, oldNamevar, namevar));
 	}
 
 	/**
@@ -219,8 +218,7 @@ public abstract class TypeArgumentImpl extends TargetElementImpl implements Type
 		boolean oldRequired = required;
 		required = newRequired;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.TYPE_ARGUMENT__REQUIRED, oldRequired, required));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.TYPE_ARGUMENT__REQUIRED, oldRequired, required));
 	}
 
 	/**

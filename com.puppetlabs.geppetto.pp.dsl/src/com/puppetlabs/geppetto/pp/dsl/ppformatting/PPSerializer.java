@@ -28,7 +28,6 @@ import com.google.inject.Inject;
 /**
  * An {@link ISerializer} using a handwritten formatter for PP.
  * TODO: This was experimental, and will be superseded by the new DomFormatter.
- *
  */
 public class PPSerializer implements ISerializer {
 

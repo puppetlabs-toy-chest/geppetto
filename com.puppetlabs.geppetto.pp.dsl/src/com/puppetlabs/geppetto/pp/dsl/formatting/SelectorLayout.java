@@ -34,7 +34,6 @@ import com.google.inject.Inject;
 
 /**
  * A sub layout handler for SelectorExpression and SelctorEntry
- *
  */
 public class SelectorLayout {
 
@@ -67,8 +66,7 @@ public class SelectorLayout {
 
 	}
 
-	protected boolean _format(SelectorExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(SelectorExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		// unify the width of selector entry expressions
 
 		// Step 1, must format up to the first selector entry expression to know the correct indentation of the selector entry
@@ -91,15 +89,13 @@ public class SelectorLayout {
 		List<IDomNode> fatCommaNodes = Lists.newArrayList();
 		IntegerCluster clusters = new IntegerCluster(SELECTOR_EXPRESSION_CLUSTER_SIZE);
 		for(IDomNode n : node.getChildren()) {
-			if(n.getGrammarElement() instanceof RuleCall &&
-					((RuleCall) n.getGrammarElement()).getRule() == selectorEntryRule) {
+			if(n.getGrammarElement() instanceof RuleCall && ((RuleCall) n.getGrammarElement()).getRule() == selectorEntryRule) {
 				if(!firstSelectoEntrySeen) {
 					// finish measurement of the position the selectorEntry will appear at
 					//
 					continuedFlow.appendBreak();
 					continuedFlow.getIndentation();
-					availableWidth = currentMaxWidth - (continuedFlow.getIndentation() + 1) *
-							continuedFlow.getIndentSize();
+					availableWidth = currentMaxWidth - (continuedFlow.getIndentation() + 1) * continuedFlow.getIndentSize();
 				}
 				// used to measure output of formatted selector entry values
 				// adjust its width to available width (and do not mark items consumed in the given context)
@@ -142,18 +138,18 @@ public class SelectorLayout {
 	 * @param doCompaction
 	 * @return
 	 */
-	private void markupWidths(List<IDomNode> fatCommaNodes, List<Integer> widths, int availableWidth,
-			IntegerCluster clusters, boolean doAlignment) {
+	private void markupWidths(List<IDomNode> fatCommaNodes, List<Integer> widths, int availableWidth, IntegerCluster clusters,
+			boolean doAlignment) {
 		// assign widths and alignment to the fat comma nodes
 		for(int i = 0; i < fatCommaNodes.size(); i++) {
 			IDomNode c = fatCommaNodes.get(i);
 			int w = widths.get(i);
 			int mw = doAlignment
-					? clusters.clusterMax(w)
-							: w;
-					if(doAlignment)
-						c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
-							styles.width(2 + mw - w)));
+				? clusters.clusterMax(w)
+				: w;
+			if(doAlignment)
+				c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
+					styles.width(2 + mw - w)));
 		}
 	}
 }

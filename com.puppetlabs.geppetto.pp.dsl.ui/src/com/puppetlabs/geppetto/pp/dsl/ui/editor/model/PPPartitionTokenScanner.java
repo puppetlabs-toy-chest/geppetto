@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
 /**
  * A Paritioning token scanner that merges String partitions (since they are represented by a sequence of tokens in PP
  * and the default implementation only merges tokens in the default partition).
- *
  */
 public class PPPartitionTokenScanner extends PartitionTokenScanner {
 
@@ -25,8 +24,7 @@ public class PPPartitionTokenScanner extends PartitionTokenScanner {
 	 */
 	@Override
 	protected boolean shouldMergePartitions(String contentType) {
-		return super.shouldMergePartitions(contentType) ||
-				PPTokenTypeToPartionMapper.STRING_LITERAL_PARTITION.equals(contentType);
+		return super.shouldMergePartitions(contentType) || PPTokenTypeToPartionMapper.STRING_LITERAL_PARTITION.equals(contentType);
 
 	}
 }

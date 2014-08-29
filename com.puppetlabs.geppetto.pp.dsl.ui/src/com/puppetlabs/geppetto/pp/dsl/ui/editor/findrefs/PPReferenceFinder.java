@@ -51,8 +51,6 @@ import com.google.inject.Inject;
 /**
  * This is a to a large part a copy of the ReferenceFinder in the corresponding package in Xtext, modified to search
  * for references the Geppetto way.
- *
- *
  */
 public class PPReferenceFinder {
 
@@ -186,13 +184,11 @@ public class PPReferenceFinder {
 		}
 	}
 
-	protected IEObjectDescription findClosestExportedContainerDescriptor(EObject element,
-			Iterable<IEObjectDescription> exportedElements) {
+	protected IEObjectDescription findClosestExportedContainerDescriptor(EObject element, Iterable<IEObjectDescription> exportedElements) {
 		IEObjectDescription closest = null;
 		int maxSpecificity = 0;
 		for(IEObjectDescription containerCandidate : exportedElements) {
-			int specificity = containerSpecificity(
-				EcoreUtil2.getNormalizedURI(element), containerCandidate.getEObjectURI());
+			int specificity = containerSpecificity(EcoreUtil2.getNormalizedURI(element), containerCandidate.getEObjectURI());
 			if(specificity > maxSpecificity) {
 				maxSpecificity = specificity;
 				closest = containerCandidate;
@@ -241,7 +237,7 @@ public class PPReferenceFinder {
 						if(subMonitor.isCanceled())
 							return;
 						if(targetURIs.contains(referenceDescription.getTargetEObjectUri()) &&
-								(filter == null || filter.apply(referenceDescription))) {
+							(filter == null || filter.apply(referenceDescription))) {
 							acceptor.accept(referenceDescription);
 						}
 					}

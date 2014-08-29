@@ -96,8 +96,7 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 			case PPTPPackage.FILE:
 				return convertFileToString(eDataType, instanceValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() +
-						"' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -157,8 +156,7 @@ public class PPTPFactoryImpl extends EFactoryImpl implements PPTPFactory {
 			case PPTPPackage.FILE:
 				return createFileFromString(eDataType, initialValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() +
-						"' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 

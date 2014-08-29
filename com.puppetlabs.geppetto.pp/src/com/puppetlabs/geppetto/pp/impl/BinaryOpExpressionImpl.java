@@ -88,8 +88,8 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 		switch(featureID) {
 			case PPPackage.BINARY_OP_EXPRESSION__OP_NAME:
 				return OP_NAME_EDEFAULT == null
-				? opName != null
-				: !OP_NAME_EDEFAULT.equals(opName);
+					? opName != null
+					: !OP_NAME_EDEFAULT.equals(opName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,8 +159,7 @@ public abstract class BinaryOpExpressionImpl extends BinaryExpressionImpl implem
 		String oldOpName = opName;
 		opName = newOpName;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.BINARY_OP_EXPRESSION__OP_NAME, oldOpName, opName));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.BINARY_OP_EXPRESSION__OP_NAME, oldOpName, opName));
 	}
 
 	/**

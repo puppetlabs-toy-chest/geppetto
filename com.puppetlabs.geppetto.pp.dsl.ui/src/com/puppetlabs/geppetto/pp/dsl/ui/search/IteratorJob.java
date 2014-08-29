@@ -79,12 +79,12 @@ public class IteratorJob extends Job {
 					String className2 = o2.getEClass().getName();
 					if(className1 == null)
 						diff = className2 == null
-						? 0
-								: -1;
+							? 0
+							: -1;
 					else
 						diff = className2 == null
-						? 1
-								: className1.compareToIgnoreCase(className2);
+							? 1
+							: className1.compareToIgnoreCase(className2);
 					if(diff == 0) {
 						diff = o1.getEObjectURI().toString().compareTo(o2.getEObjectURI().toString());
 					}

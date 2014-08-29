@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 
 /**
  * Enumerator for validation preference.
- *
  */
 public enum ValidationPreference {
 

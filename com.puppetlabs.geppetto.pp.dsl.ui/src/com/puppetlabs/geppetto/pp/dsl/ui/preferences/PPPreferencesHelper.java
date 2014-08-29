@@ -33,7 +33,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 /**
  * A facade that helps with preference checking.
  * (The idea is to not litter the code with specifics about how preferences are stated, where they are stored etc.)
- *
  */
 public class PPPreferencesHelper implements IPreferenceStoreInitializer, IPropertyChangeListener {
 	public interface IPreferenceListener {
@@ -93,7 +92,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, //
 		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, //
 		PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED //
-			);
+	);
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
@@ -208,8 +207,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	public boolean getSaveActionEnsureEndsWithNewLine(IResource r) {
 		boolean projectSpecific = getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTIONS_USE_PROJECT_SETTINGS);
 		return projectSpecific
-				? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL)
-						: getSaveActionEnsureEndsWithNewLine();
+			? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL)
+			: getSaveActionEnsureEndsWithNewLine();
 	}
 
 	public boolean getSaveActionFormat() {
@@ -219,8 +218,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	public boolean getSaveActionFormat(IResource r) {
 		boolean projectSpecific = getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTIONS_USE_PROJECT_SETTINGS);
 		return projectSpecific
-				? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_FORMAT)
-						: getSaveActionFormat();
+			? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_FORMAT)
+			: getSaveActionFormat();
 	}
 
 	public boolean getSaveActionReplaceFunkySpaces() {
@@ -230,8 +229,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	public boolean getSaveActionReplaceFunkySpaces(IResource r) {
 		boolean projectSpecific = getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTIONS_USE_PROJECT_SETTINGS);
 		return projectSpecific
-				? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_REPLACE_FUNKY_SPACES)
-						: getSaveActionReplaceFunkySpaces();
+			? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_REPLACE_FUNKY_SPACES)
+			: getSaveActionReplaceFunkySpaces();
 	}
 
 	public boolean getSaveActionTrimLines() {
@@ -241,8 +240,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	public boolean getSaveActionTrimLines(IResource r) {
 		boolean projectSpecific = getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTIONS_USE_PROJECT_SETTINGS);
 		return projectSpecific
-				? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_TRIM_LINES)
-						: getSaveActionTrimLines();
+			? getResourceSpecificBoolean(r, PPPreferenceConstants.SAVE_ACTION_TRIM_LINES)
+			: getSaveActionTrimLines();
 	}
 
 	public ValidationPreference getSelectorDefaultShouldAppearLast() {
@@ -283,10 +282,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, ValidationPreference.WARNING.toString());
-		store.setDefault(
-			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, ValidationPreference.WARNING.toString());
-		store.setDefault(
-			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, ValidationPreference.WARNING.toString());
 
 		// stylistic
 		store.setDefault(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST, ValidationPreference.IGNORE.toString());
@@ -294,14 +291,12 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 		store.setDefault(PPPreferenceConstants.PROBLEM_UNQUOTED_RESOURCE_TITLE, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED, ValidationPreference.IGNORE.toString());
-		store.setDefault(
-			PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_ML_COMMENTS, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, ValidationPreference.IGNORE.toString());
-		store.setDefault(
-			PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED, ValidationPreference.WARNING.toString());
 
 		// save actions

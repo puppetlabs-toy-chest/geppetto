@@ -28,8 +28,7 @@ public class PPTokenTypeToPartionMapper extends TokenTypeToStringMapper implemen
 	public final static String SL_COMMENT_PARTITION = "__sl_comment";
 
 	protected static final String[] SUPPORTED_PARTITIONS = new String[] {
-		COMMENT_PARTITION, SL_COMMENT_PARTITION, STRING_LITERAL_PARTITION, REGEX_LITERAL_PARTITION,
-		IDocument.DEFAULT_CONTENT_TYPE };
+		COMMENT_PARTITION, SL_COMMENT_PARTITION, STRING_LITERAL_PARTITION, REGEX_LITERAL_PARTITION, IDocument.DEFAULT_CONTENT_TYPE };
 
 	/*
 	 * (non-Javadoc)

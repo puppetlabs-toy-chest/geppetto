@@ -33,7 +33,6 @@ import com.google.inject.Inject;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
- *
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class PPDescriptionLabelProvider extends DeclarativeLabelProvider implements IIconNames {

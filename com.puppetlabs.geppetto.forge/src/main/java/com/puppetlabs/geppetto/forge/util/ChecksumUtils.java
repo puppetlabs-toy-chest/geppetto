@@ -31,14 +31,13 @@ import com.puppetlabs.geppetto.forge.Forge;
  * Utilities for computing MD5 checksums on files.
  */
 public class ChecksumUtils {
-	public static void appendChangedFiles(Map<String, byte[]> checksums, File file, List<File> result,
-			FileFilter exclusionFilter) throws IOException {
-		appendChangedFiles(
-			checksums, file, getMessageDigest(), file.getAbsolutePath().length() + 1, result, exclusionFilter);
+	public static void appendChangedFiles(Map<String, byte[]> checksums, File file, List<File> result, FileFilter exclusionFilter)
+			throws IOException {
+		appendChangedFiles(checksums, file, getMessageDigest(), file.getAbsolutePath().length() + 1, result, exclusionFilter);
 	}
 
-	private static void appendChangedFiles(Map<String, byte[]> checksums, File file, MessageDigest md, int baseDirLen,
-			List<File> result, FileFilter exclusionFilter) throws IOException {
+	private static void appendChangedFiles(Map<String, byte[]> checksums, File file, MessageDigest md, int baseDirLen, List<File> result,
+			FileFilter exclusionFilter) throws IOException {
 		if(!isChecksumCandidate(file, exclusionFilter))
 			return;
 
@@ -131,8 +130,7 @@ public class ChecksumUtils {
 		return (filter == null || filter.accept(file)) && !FileUtils.isSymlink(file);
 	}
 
-	public static Map<String, byte[]> loadChecksums(File moduleDir, File metadataJSON, FileFilter exclusionFilter)
-			throws IOException {
+	public static Map<String, byte[]> loadChecksums(File moduleDir, File metadataJSON, FileFilter exclusionFilter) throws IOException {
 		if(exclusionFilter == null)
 			exclusionFilter = FileUtils.DEFAULT_FILE_FILTER;
 		Map<String, byte[]> checksums = new TreeMap<String, byte[]>();
@@ -141,13 +139,12 @@ public class ChecksumUtils {
 		loadChecksums(checksums, md, moduleDir, moduleDir.getAbsolutePath().length() + 1, exclusionFilter);
 		if(metadataJSON != null)
 			// Load as if it resided in moduleDir, no matter where it resides
-			loadChecksums(
-				checksums, md, metadataJSON, metadataJSON.getParentFile().getAbsolutePath().length() + 1, null);
+			loadChecksums(checksums, md, metadataJSON, metadataJSON.getParentFile().getAbsolutePath().length() + 1, null);
 		return checksums;
 	}
 
-	private static void loadChecksums(Map<String, byte[]> checksums, MessageDigest md, File file, int basedirLen,
-			FileFilter exclusionFilter) throws IOException {
+	private static void loadChecksums(Map<String, byte[]> checksums, MessageDigest md, File file, int basedirLen, FileFilter exclusionFilter)
+			throws IOException {
 		if(!isChecksumCandidate(file, exclusionFilter))
 			return;
 
@@ -166,7 +163,6 @@ public class ChecksumUtils {
 		return bld.toString();
 	}
 
-	private static final char[] hexChars = {
-		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+	private static final char[] hexChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
 }

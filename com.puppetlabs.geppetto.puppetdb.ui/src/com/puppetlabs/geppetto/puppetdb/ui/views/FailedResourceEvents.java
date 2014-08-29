@@ -44,8 +44,8 @@ public class FailedResourceEvents extends ResourceEvents {
 	@Override
 	public String getColumnText(int colIdx) {
 		return colIdx == 0
-				? FAILURES_TEXT
-						: "";
+			? FAILURES_TEXT
+			: "";
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class FailedResourceEvents extends ResourceEvents {
 	@Override
 	public Image getImage(int colIdx) {
 		return colIdx == 0
-				? FAILURE_LIST_IMAGE
-						: null;
+			? FAILURE_LIST_IMAGE
+			: null;
 	}
 
 	@Override

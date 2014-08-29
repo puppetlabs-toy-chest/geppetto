@@ -27,7 +27,6 @@ import com.google.common.collect.Lists;
 /**
  * Adaption of class with similar name in xtext. This implementation deals with IEObjectDescription instead of
  * IEReferenceDescription as PP linking is not based on EReferences.
- *
  */
 public class PPReferenceSearchResult implements ISearchResult, IAcceptor<IReferenceDescription> {
 

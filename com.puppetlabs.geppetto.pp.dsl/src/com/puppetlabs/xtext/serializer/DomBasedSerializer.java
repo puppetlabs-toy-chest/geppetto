@@ -54,7 +54,6 @@ import com.google.inject.Inject;
  * Extends Serializer and modifies the API (ITokenStream based formatting/output not supported).
  * Use Serializer methods that does not take ITokenStream as an argument.
  * TODO: This is a temporary solution.
- *
  */
 public class DomBasedSerializer extends Serializer {
 
@@ -147,24 +146,22 @@ public class DomBasedSerializer extends Serializer {
 
 	private FormattingOption formatting(SaveOptions options) {
 		return options.isFormatting()
-				? FormattingOption.Format
-						: FormattingOption.PreserveWhitespace;
+			? FormattingOption.Format
+			: FormattingOption.PreserveWhitespace;
 	}
 
 	/**
 	 * NOTE: This overridden method is required to initialize the DomModelSequences.
 	 * The base implementation checks if the tokens parameter is a specific adapter, and
 	 * then initializes it. This method does the same but for DomModelSequenceAdapter.
-	 *
 	 */
 	@Override
-	protected void serialize(EObject semanticObject, EObject context, ISequenceAcceptor tokens,
-			ISerializationDiagnostic.Acceptor errors) {
+	protected void serialize(EObject semanticObject, EObject context, ISequenceAcceptor tokens, ISerializationDiagnostic.Acceptor errors) {
 		serialize(semanticObject, context, tokens, errors, null);
 	}
 
-	protected void serialize(EObject semanticObject, EObject context, ISequenceAcceptor tokens,
-			ISerializationDiagnostic.Acceptor errors, ICommentReconcilement commentReconciliator) {
+	protected void serialize(EObject semanticObject, EObject context, ISequenceAcceptor tokens, ISerializationDiagnostic.Acceptor errors,
+			ICommentReconcilement commentReconciliator) {
 		ISemanticSequencer semantic = semanticSequencerProvider.get();
 		ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
 		IHiddenTokenSequencer hidden = hiddenTokenSequencerProvider.get();
@@ -214,8 +211,7 @@ public class DomBasedSerializer extends Serializer {
 		serialize(obj, writer, options, null /* all text */);
 	}
 
-	public void serialize(EObject obj, Writer writer, SaveOptions options, ITextRegion regionToFormat)
-			throws IOException {
+	public void serialize(EObject obj, Writer writer, SaveOptions options, ITextRegion regionToFormat) throws IOException {
 
 		// FROM SUPER VERSION (without the ITextRegion)
 		// use the CSV as long as there are cases where is provides better messages than the serializer itself.
@@ -267,8 +263,7 @@ public class DomBasedSerializer extends Serializer {
 			// GAH - this is just ridiculous internal DSL junk to set a single boolean
 			options = SaveOptions.newBuilder().format().getOptions();
 			ReplaceRegion r = domFormatter.format(
-				root, regionToFormat,
-				formattingContextFactory.create(obj.eResource().getContents().get(0), formatting(options)));
+				root, regionToFormat, formattingContextFactory.create(obj.eResource().getContents().get(0), formatting(options)));
 			// String text = serialize(obj.eContainer(), options, new TextRegion(node.getOffset(), node.getLength()));
 			return new ReplaceRegion(node.getTotalOffset(), node.getTotalLength(), r.getText());
 		}
@@ -279,8 +274,8 @@ public class DomBasedSerializer extends Serializer {
 	}
 
 	/**
-	 * Serialize and return the resulting DOM. This is the same as calling
-	 * {@link #serializeToDom(EObject, boolean, ICommentReconcilement)} with a
+	 * Serialize and return the resulting DOM. This is the same as calling {@link #serializeToDom(EObject, boolean, ICommentReconcilement)}
+	 * with a
 	 * null ICommentReconciliator.
 	 *
 	 * @param obj

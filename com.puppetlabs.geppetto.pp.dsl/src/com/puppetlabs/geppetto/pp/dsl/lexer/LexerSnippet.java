@@ -15,7 +15,6 @@ import java.util.Arrays;
 /**
  * Not used separately, this code is copied to PPLexer.g
  * (except the methods that reference KEYWORD constants which are only in PPLexer.g)
- *
  */
 @SuppressWarnings("unused")
 public class LexerSnippet {

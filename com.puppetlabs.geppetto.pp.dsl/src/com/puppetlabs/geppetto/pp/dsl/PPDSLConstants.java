@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl;
 
 /**
  * Constants for PP DSL
- *
  */
 public interface PPDSLConstants {
 	public static final String DSL_PLUGIN_NAME = "com.puppetlabs.geppetto.pp.dsl";

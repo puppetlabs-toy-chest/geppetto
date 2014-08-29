@@ -21,7 +21,6 @@ import java.util.TreeSet;
  * threshold. If equal data is eligible with different score only the best score is kept thus giving room to
  * a different data element with worse score. (This avoids monopolizing the top scores with a single item
  * when using multiple scoring methods).
- *
  */
 public class ScoreKeeper<T> {
 
@@ -53,12 +52,12 @@ public class ScoreKeeper<T> {
 				if(a.getData().hashCode() == b.getData().hashCode())
 					return 0;
 				return a.getData().hashCode() < b.getData().hashCode()
-						? -1
-								: 1;
+					? -1
+					: 1;
 			}
 			return a.score < b.score
-					? -1
-							: 1;
+				? -1
+				: 1;
 		}
 	}
 

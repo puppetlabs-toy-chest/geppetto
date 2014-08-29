@@ -206,8 +206,7 @@ public class MetadataTest extends AbstractForgeTest {
 	public void testLoadChecksums__File() {
 		try {
 			File moduleDir = getTestData("puppetlabs-apache");
-			Map<String, byte[]> checksums = ChecksumUtils.loadChecksums(moduleDir, new File(
-				moduleDir, Forge.METADATA_JSON_NAME), null);
+			Map<String, byte[]> checksums = ChecksumUtils.loadChecksums(moduleDir, new File(moduleDir, Forge.METADATA_JSON_NAME), null);
 			assertEquals("Incorrect number of checksums", 19, checksums.size());
 		}
 		catch(IOException e) {

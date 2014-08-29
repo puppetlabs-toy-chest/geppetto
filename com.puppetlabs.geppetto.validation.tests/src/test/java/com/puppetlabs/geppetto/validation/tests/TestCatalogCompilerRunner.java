@@ -25,8 +25,7 @@ public class TestCatalogCompilerRunner {
 	public void catalogCompilerRunner() throws IOException {
 		File script = TestDataProvider.getTestFile("testData/mock-output.sh");
 		PuppetCatalogCompilerRunner compiler = new PuppetCatalogCompilerRunner(script.getAbsolutePath());
-		int result = compiler.compileCatalog(
-			new File("foo"), null, "bar", new File("baz"), SubMonitor.convert(null, 10000));
+		int result = compiler.compileCatalog(new File("foo"), null, "bar", new File("baz"), SubMonitor.convert(null, 10000));
 		assertEquals("Should have 0 exit status", 0, result);
 		List<CatalogDiagnostic> diagnostics = compiler.getDiagnostics();
 		assertEquals("Should have found n diagnostics", 3, diagnostics.size());
@@ -36,7 +35,7 @@ public class TestCatalogCompilerRunner {
 			String s = d.getFile().getName();
 			assertEquals("File should end with .pp", ".pp", s.substring(s.length() > 3
 				? s.length() - 3
-						: 0));
+				: 0));
 			assertEquals("Should have 10*diag# as line", 10 * i, d.getLineNumber());
 			if(d.getMessage().startsWith("Could not parse")) {
 				assertEquals("Should have parse diagnostic code", ValidationService.CATALOG_PARSER, d.getType());

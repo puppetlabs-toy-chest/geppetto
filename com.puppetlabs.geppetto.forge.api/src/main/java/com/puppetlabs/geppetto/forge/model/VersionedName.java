@@ -53,7 +53,6 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	/**
 	 * @param moduleName
 	 * @param version
-	 *
 	 * @return The created name
 	 * @throws IllegalArgumentException
 	 */
@@ -74,8 +73,7 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	public VersionedName(String slug) {
 		int sep = getVersionSeparatorPosition(slug);
 		if(sep <= 0)
-			throw new IllegalArgumentException(
-					"Must be a full module name (owner [-/] name) and a version separated by a dash or slash");
+			throw new IllegalArgumentException("Must be a full module name (owner [-/] name) and a version separated by a dash or slash");
 
 		moduleName = ModuleName.fromString(slug.substring(0, sep));
 		version = Version.fromString(slug.substring(sep + 1));

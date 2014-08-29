@@ -21,7 +21,6 @@ import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * A default implementation of IDomNode that has the capacity to hold AbstractDomNode children.
- *
  */
 public class CompositeDomNode extends BaseDomNode {
 	// public class ListBidiIterator extends UnmodifiableIterator<IDomNode> implements BidiIterator<IDomNode> {

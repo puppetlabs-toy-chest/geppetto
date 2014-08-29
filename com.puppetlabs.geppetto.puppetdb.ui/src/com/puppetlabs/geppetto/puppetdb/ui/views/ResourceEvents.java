@@ -112,20 +112,20 @@ public abstract class ResourceEvents extends PuppetDBQuery<ResourceEvent> implem
 			int hashCount = reportHashes.size();
 			if(hashCount > 0) {
 				Expression<Event> reportQuery = hashCount == 1
-						? reportHashes.get(0)
-								: or(reportHashes);
-						List<Event> events = getClient().getEvents(and(reportQuery, getEventQuery()));
-						int top = events.size();
-						if(top > 0) {
-							Map<String, Resource> resources = buildResourceMap(events);
-							tuples = new ResourceEvent[top];
-							for(int idx = 0; idx < top; ++idx) {
-								Event event = events.get(idx);
-								Resource resource = resources.get(getResourceKey(
-									event.getCertname(), event.getResourceTitle(), event.getResourceType()));
-								tuples[idx] = new ResourceEvent(this, event, resource, getResourceEventImage());
-							}
-						}
+					? reportHashes.get(0)
+					: or(reportHashes);
+				List<Event> events = getClient().getEvents(and(reportQuery, getEventQuery()));
+				int top = events.size();
+				if(top > 0) {
+					Map<String, Resource> resources = buildResourceMap(events);
+					tuples = new ResourceEvent[top];
+					for(int idx = 0; idx < top; ++idx) {
+						Event event = events.get(idx);
+						Resource resource = resources.get(getResourceKey(
+							event.getCertname(), event.getResourceTitle(), event.getResourceType()));
+						tuples[idx] = new ResourceEvent(this, event, resource, getResourceEventImage());
+					}
+				}
 			}
 			synchronized(this) {
 				children = tuples;

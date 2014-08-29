@@ -27,7 +27,6 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * Tests specific to reported issues.
- *
  */
 public class TestIssues extends AbstractPuppetTests {
 
@@ -79,8 +78,8 @@ public class TestIssues extends AbstractPuppetTests {
 	@Test
 	public void test_Issue_11() throws Exception {
 		String code = "class xxx($p) {} class { 'xxx':\n" + //
-				"p => '666',\n" + //
-				"}\n";
+			"p => '666',\n" + //
+			"}\n";
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 	}
@@ -94,11 +93,11 @@ public class TestIssues extends AbstractPuppetTests {
 	@Test
 	public void test_Issue_4() throws Exception {
 		String code = "$confdir = 'x' \n" + //
-				"realize (\n" + //
-				"File[\"$confdir/ping/amazon.cfg\"],\n" + //
-				"File[\"$confdir/ping/amazon.cfg\"],\n" + //
-				"File[\"$confdir/ping/amazon.cfg\"],\n" + //
-				")";
+			"realize (\n" + //
+			"File[\"$confdir/ping/amazon.cfg\"],\n" + //
+			"File[\"$confdir/ping/amazon.cfg\"],\n" + //
+			"File[\"$confdir/ping/amazon.cfg\"],\n" + //
+			")";
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 	}
@@ -112,11 +111,11 @@ public class TestIssues extends AbstractPuppetTests {
 	@Test
 	public void test_Issue206() throws Exception {
 		String code = "class a {\n" + //
-				"$x = 10\n" + //
-				"class bb inherits a {\n" + //
-				"$ref = $x\n" + //
-				"}\n" + //
-				"}\n"; //
+			"$x = 10\n" + //
+			"class bb inherits a {\n" + //
+			"$ref = $x\n" + //
+			"}\n" + //
+			"}\n"; //
 		Resource r = loadAndLinkSingleResource(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertOK();
@@ -145,7 +144,7 @@ public class TestIssues extends AbstractPuppetTests {
 			"} ~> 'x' ? {", //
 			"  'y'     => Notify[b],", //
 			"  default => Notify[c]", //
-				"}\n");
+			"}\n");
 		String code = Joiner.on("\n").join(source).toString();
 		Resource r = loadAndLinkSingleResource(code);
 		AssertableDiagnostics asserter = tester.validate(r.getContents().get(0));
@@ -191,13 +190,13 @@ public class TestIssues extends AbstractPuppetTests {
 	@Test
 	public void test_Issue435_paddingDqString() throws Exception {
 		String code = "$a = true ? {\n" + //
-				"\"something\" => 'dba',\n" + //
-				"default => ''\n" + //
-				"}\n";
+			"\"something\" => 'dba',\n" + //
+			"default => ''\n" + //
+			"}\n";
 		ImmutableList<String> formatted = ImmutableList.of("$a = true ? {", //
 			"  \"something\" => 'dba',",//
 			"  default     => ''", //
-				"}\n");
+			"}\n");
 
 		String fmt = Joiner.on("\n").join(formatted).toString();
 

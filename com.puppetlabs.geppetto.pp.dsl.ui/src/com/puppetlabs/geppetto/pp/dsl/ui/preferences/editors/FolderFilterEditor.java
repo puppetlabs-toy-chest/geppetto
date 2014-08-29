@@ -79,35 +79,34 @@ public class FolderFilterEditor extends ListEditor {
 		String[] value = new String[] { input };
 		int[] okCancel = new int[] { 1 };
 
-		dialog.prompt(
-			title, "Folder path segment pattern (* = any string, ? = any character)", null, new VerifyListener() {
-				@Override
-				public void verifyText(VerifyEvent event) {
-					switch(event.keyCode) {
-						case SWT.BS:
-						case SWT.DEL:
-						case SWT.HOME:
-						case SWT.END:
-						case SWT.ARROW_LEFT:
-						case SWT.ARROW_RIGHT:
+		dialog.prompt(title, "Folder path segment pattern (* = any string, ? = any character)", null, new VerifyListener() {
+			@Override
+			public void verifyText(VerifyEvent event) {
+				switch(event.keyCode) {
+					case SWT.BS:
+					case SWT.DEL:
+					case SWT.HOME:
+					case SWT.END:
+					case SWT.ARROW_LEFT:
+					case SWT.ARROW_RIGHT:
+						break;
+					default: {
+						String txt = event.text;
+						if(txt == null)
 							break;
-						default: {
-							String txt = event.text;
-							if(txt == null)
-								break;
 
-							int len = txt.length();
-							for(int i = 0; i < len; ++i) {
-								char c = txt.charAt(i);
-								if(c == '/' || c == '\\') {
-									event.doit = false;
-									break;
-								}
+						int len = txt.length();
+						for(int i = 0; i < len; ++i) {
+							char c = txt.charAt(i);
+							if(c == '/' || c == '\\') {
+								event.doit = false;
+								break;
 							}
 						}
 					}
 				}
-			}, value, null, okCancel);
+			}
+		}, value, null, okCancel);
 		if(okCancel[0] == 0)
 			return null;
 		return value[0].trim();

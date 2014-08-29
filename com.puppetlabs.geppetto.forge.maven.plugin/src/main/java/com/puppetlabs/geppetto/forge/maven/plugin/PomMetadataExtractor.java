@@ -86,18 +86,17 @@ public class PomMetadataExtractor extends AbstractMetadataExtractor {
 				if(restrictions.size() == 1) {
 					Restriction r = restrictions.get(0);
 					Version lower = r.getLowerBound() == null
-							? Version.MIN
-									: Version.create(r.getLowerBound().toString());
+						? Version.MIN
+						: Version.create(r.getLowerBound().toString());
 					Version upper = r.getUpperBound() == null
-							? Version.MAX
-									: Version.create(r.getUpperBound().toString());
+						? Version.MAX
+						: Version.create(r.getUpperBound().toString());
 
 					Dependency forgeDep = new Dependency();
 					String dgid = mavenProject.getGroupId();
 					String downer = dgid.substring(dgid.lastIndexOf('.') + 1);
 					forgeDep.setName(ModuleName.create(downer, dep.getArtifactId(), true));
-					forgeDep.setVersionRequirement(VersionRange.create(
-						lower, r.isLowerBoundInclusive(), upper, r.isUpperBoundInclusive()));
+					forgeDep.setVersionRequirement(VersionRange.create(lower, r.isLowerBoundInclusive(), upper, r.isUpperBoundInclusive()));
 
 					if(forgeDeps == null)
 						forgeDeps = new ArrayList<Dependency>();
@@ -105,8 +104,7 @@ public class PomMetadataExtractor extends AbstractMetadataExtractor {
 				}
 			}
 			catch(InvalidVersionSpecificationException e) {
-				result.addChild(new FileDiagnostic(
-					Diagnostic.WARNING, ValidationService.GEPPETTO, e.getMessage(), mavenProject.getFile()));
+				result.addChild(new FileDiagnostic(Diagnostic.WARNING, ValidationService.GEPPETTO, e.getMessage(), mavenProject.getFile()));
 			}
 		}
 		metadata.setDependencies(forgeDeps);

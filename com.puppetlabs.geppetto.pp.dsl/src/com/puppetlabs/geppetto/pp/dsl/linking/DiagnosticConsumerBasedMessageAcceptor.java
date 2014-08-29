@@ -21,7 +21,6 @@ import org.eclipse.xtext.nodemodel.INode;
 /**
  * A message acceptor using an instance of an {@link IDiagnosticConsumer} as the recipient of
  * the message.
- *
  */
 public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAcceptor {
 	private LinkingDiagnosticProducer producer;
@@ -39,8 +38,8 @@ public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAccep
 	 * org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void accept(Severity severity, String message, EObject source, EStructuralFeature feature, int index,
-			String issueCode, String... issueData) {
+	public void accept(Severity severity, String message, EObject source, EStructuralFeature feature, int index, String issueCode,
+			String... issueData) {
 
 		if(severity == null)
 			throw new IllegalArgumentException("severity can not be null");
@@ -50,8 +49,8 @@ public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAccep
 			throw new IllegalArgumentException("source can not be null");
 
 		if(source.eClass().getEStructuralFeature(feature.getName()) != feature) {
-			throw new IllegalArgumentException("EClass '" + source.eClass().getName() +
-				"' does not expose a feature '" + feature.getName() + //
+			throw new IllegalArgumentException("EClass '" + source.eClass().getName() + "' does not expose a feature '" +
+				feature.getName() + //
 				"' (id: " + feature.getFeatureID() + ")");
 		}
 
@@ -68,8 +67,8 @@ public class DiagnosticConsumerBasedMessageAcceptor extends AbstractMessageAccep
 	 * org.eclipse.emf.ecore.EObject, int, int, java.lang.String, java.lang.String[])
 	 */
 	@Override
-	public void accept(Severity severity, String message, EObject source, int textOffset, int textLength,
-			String issueCode, String[] issueData) {
+	public void accept(Severity severity, String message, EObject source, int textOffset, int textLength, String issueCode,
+			String[] issueData) {
 		throw new UnsupportedOperationException("Please implement support to report textual error");
 	}
 

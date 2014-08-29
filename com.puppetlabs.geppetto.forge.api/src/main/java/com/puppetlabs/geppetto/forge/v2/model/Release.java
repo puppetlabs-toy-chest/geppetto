@@ -25,8 +25,8 @@ public class Release extends FlatRelease {
 	 */
 	public ModuleName getFullName() {
 		return module == null
-				? null
-						: module.getFullName();
+			? null
+			: module.getFullName();
 	}
 
 	/**

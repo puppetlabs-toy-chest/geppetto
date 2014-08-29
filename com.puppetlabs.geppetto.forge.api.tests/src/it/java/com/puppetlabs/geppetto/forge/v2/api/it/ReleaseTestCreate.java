@@ -72,8 +72,8 @@ public class ReleaseTestCreate extends ForgeAPITestBase {
 		return bytesOut.toByteArray();
 	}
 
-	private void putEntry(TarArchiveOutputStream stream, ModuleName moduleName, Version version, String name,
-			String content) throws IOException {
+	private void putEntry(TarArchiveOutputStream stream, ModuleName moduleName, Version version, String name, String content)
+			throws IOException {
 		StringBuilder fullName = new StringBuilder();
 		moduleName.toString(fullName);
 		fullName.append('-');
@@ -93,8 +93,8 @@ public class ReleaseTestCreate extends ForgeAPITestBase {
 		ModuleName moduleName = getModuleName();
 		byte[] releaseFile = getReleaseImage(moduleName, TEST_RELEASE_VERSION);
 		Release newRelease = ForgeIT.getTestUserForge().createReleaseService().create(
-			moduleName.getOwner(), moduleName.getName(), "Some notes about this release",
-			new ByteArrayInputStream(releaseFile), releaseFile.length);
+			moduleName.getOwner(), moduleName.getName(), "Some notes about this release", new ByteArrayInputStream(releaseFile),
+			releaseFile.length);
 		assertNotNull("Null Release", newRelease);
 		assertEquals("Incorrect release version", newRelease.getVersion(), TEST_RELEASE_VERSION);
 	}

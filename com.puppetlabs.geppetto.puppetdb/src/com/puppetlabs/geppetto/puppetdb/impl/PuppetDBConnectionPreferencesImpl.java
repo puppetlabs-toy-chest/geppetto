@@ -69,8 +69,8 @@ public class PuppetDBConnectionPreferencesImpl implements PuppetDBConnectionPref
 		try {
 			String certString = getPreference(prefName);
 			return certString == null
-					? null
-							: factory.generateCertificate(new ByteArrayInputStream(certString.getBytes(ASCII)));
+				? null
+				: factory.generateCertificate(new ByteArrayInputStream(certString.getBytes(ASCII)));
 		}
 		catch(BackingStoreException e) {
 			throw new IOException(e);

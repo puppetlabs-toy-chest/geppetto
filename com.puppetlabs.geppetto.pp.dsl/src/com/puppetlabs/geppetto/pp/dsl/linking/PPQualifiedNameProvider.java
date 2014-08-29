@@ -26,14 +26,13 @@ import com.google.inject.Inject;
 
 /**
  * A Puppet Qualified Name provider.
- *
  */
 public class PPQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
 	public static QualifiedName splice(QualifiedName a, QualifiedName b) {
 		return a == null
-				? b
-						: a.append(b);
+			? b
+			: a.append(b);
 	}
 
 	@Inject

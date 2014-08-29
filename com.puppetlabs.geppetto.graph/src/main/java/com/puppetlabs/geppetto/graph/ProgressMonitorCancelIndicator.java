@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 /**
  * An ICancel adapter for Eclipse IProgressMonitor, that in addition to checking for
  * cancellation, calls worked(1) on the monitor per n cancellation checks.
- *
  */
 public class ProgressMonitorCancelIndicator implements ICancel {
 

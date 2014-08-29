@@ -34,7 +34,6 @@ import com.google.common.collect.Lists;
 
 /**
  * customization of the default outline structure
- *
  */
 public class PPOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	// @Inject
@@ -49,8 +48,8 @@ public class PPOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	// private IImageHelper imageHelper;
 
 	private static final Class<?>[] structuralClasses = {
-		HostClassDefinition.class, Definition.class, NodeDefinition.class, ResourceExpression.class,
-		AppendExpression.class, ImportExpression.class };
+		HostClassDefinition.class, Definition.class, NodeDefinition.class, ResourceExpression.class, AppendExpression.class,
+		ImportExpression.class };
 
 	protected void _createChildren(IOutlineNode parentNode, Definition modelElement) {
 		for(EObject childElement : getRelevantChildren(modelElement.getStatements()))

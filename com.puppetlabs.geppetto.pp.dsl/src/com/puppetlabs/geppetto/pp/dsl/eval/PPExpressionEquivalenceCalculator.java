@@ -38,12 +38,11 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * @author henrik
- *
  */
 public class PPExpressionEquivalenceCalculator {
 
 	private PolymorphicDispatcher<Boolean> eqDispatcher = new PolymorphicDispatcher<Boolean>(
-			"_eq", 2, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
+		"_eq", 2, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
 		@Override
 		protected Boolean handleNoSuchMethod(Object... params) {
 			return null;
@@ -51,11 +50,10 @@ public class PPExpressionEquivalenceCalculator {
 	};
 
 	private Class<?> eqOrder[] = {
-			/* A very important order */
-			FunctionCall.class, DoubleQuotedString.class, UnquotedString.class, SingleQuotedString.class,
-			ExpressionTE.class, VariableTE.class, VerbatimTE.class, LiteralName.class, LiteralNameOrReference.class,
-			LiteralUndef.class, LiteralDefault.class, LiteralBoolean.class, LiteralRegex.class,
-			VariableExpression.class, String.class };
+		/* A very important order */
+		FunctionCall.class, DoubleQuotedString.class, UnquotedString.class, SingleQuotedString.class, ExpressionTE.class, VariableTE.class,
+		VerbatimTE.class, LiteralName.class, LiteralNameOrReference.class, LiteralUndef.class, LiteralDefault.class, LiteralBoolean.class,
+		LiteralRegex.class, VariableExpression.class, String.class };
 
 	protected Boolean _eq(DoubleQuotedString e1, DoubleQuotedString e2) {
 		if(e1.getStringPart().size() != e2.getStringPart().size())
@@ -365,18 +363,18 @@ public class PPExpressionEquivalenceCalculator {
 			return Boolean.TRUE;
 
 		Boolean isEq = eqPriority(e1) > eqPriority(e2)
-				? doEq(e2, e1)
-						: doEq(e1, e2);
-				if(isEq == null && e1 instanceof EObject && e2 instanceof EObject) {
-					// no eq possible, compare source text if available
-					INode n1 = NodeModelUtils.getNode((EObject) e1);
-					INode n2 = NodeModelUtils.getNode((EObject) e2);
-					if(n1 == null || n2 == null)
-						return Boolean.FALSE;
+			? doEq(e2, e1)
+			: doEq(e1, e2);
+		if(isEq == null && e1 instanceof EObject && e2 instanceof EObject) {
+			// no eq possible, compare source text if available
+			INode n1 = NodeModelUtils.getNode((EObject) e1);
+			INode n2 = NodeModelUtils.getNode((EObject) e2);
+			if(n1 == null || n2 == null)
+				return Boolean.FALSE;
 
-					// compare source text, but skip hidden nodes
-					isEq = NodeModelUtils.getTokenText(n1).equals(NodeModelUtils.getTokenText(n2));
-				}
-				return isEq;
+			// compare source text, but skip hidden nodes
+			isEq = NodeModelUtils.getTokenText(n1).equals(NodeModelUtils.getTokenText(n2));
+		}
+		return isEq;
 	}
 }

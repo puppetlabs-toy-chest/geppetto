@@ -17,7 +17,6 @@ import com.puppetlabs.xtext.textflow.ITextFlow;
 
 /**
  * An ILayout is responsible for providing textual output to an {@link ITextFlow}.
- *
  */
 public interface ILayout {
 

@@ -144,8 +144,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		for(Diagnostic d : chain)
 			if(d instanceof FileDiagnostic) {
 				File f = ((FileDiagnostic) d).getFile();
-				assertEquals(
-					"Reported files should start with 'manifests/'", "manifests/not ok manifest.pp", f.getPath());
+				assertEquals("Reported files should start with 'manifests/'", "manifests/not ok manifest.pp", f.getPath());
 			}
 	}
 
@@ -218,8 +217,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 		int hyphenWarning = 0;
 		for(Diagnostic e : chain)
-			if(IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN.equals(e.getIssue()) ||
-					IPPDiagnostics.ISSUE__HYPHEN_IN_NAME.equals(e.getIssue()))
+			if(IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN.equals(e.getIssue()) || IPPDiagnostics.ISSUE__HYPHEN_IN_NAME.equals(e.getIssue()))
 				hyphenWarning++;
 		assertEquals("There should be four warnings", 4, chain.getChildren().size() - hyphenWarning);
 	}

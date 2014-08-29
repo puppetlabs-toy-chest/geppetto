@@ -147,8 +147,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 	IHiddenTokenHelper hiddenTokenHelper;
 
 	@Override
-	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration,
-			ISourceViewer sourceViewer) {
+	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration, ISourceViewer sourceViewer) {
 		// TODO: pick up important information about viewer and pass on
 		// configuration.getTabWidth(sourceViewer); // ?? Always returns 4 ?!?
 

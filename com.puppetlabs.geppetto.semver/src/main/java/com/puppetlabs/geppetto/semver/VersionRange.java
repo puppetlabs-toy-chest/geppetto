@@ -16,11 +16,9 @@ import java.util.regex.Pattern;
 
 /**
  * <p>
- * This class represents a range of semamtic versions. The range can be inclusive or non-inclusive at both ends. Open
- * ended ranges can be created by using an inclusive {@link Version#MIN} as the lower bound or an inclusive
- * {@link Version#MAX} as the upper bound.
+ * This class represents a range of semamtic versions. The range can be inclusive or non-inclusive at both ends. Open ended ranges can be
+ * created by using an inclusive {@link Version#MIN} as the lower bound or an inclusive {@link Version#MAX} as the upper bound.
  * </p>
- *
  * <p>
  * A version range can also be created from a string. The string is parsed according to the following rules:
  * <ul>
@@ -29,12 +27,9 @@ import java.util.regex.Pattern;
  * <li>&lt;1.2.3 — Less than a specific version.</li>
  * <li>&gt;=1.2.3 — Greater than or equal to a specific version.</li>
  * <li>&lt;=1.2.3 — Less than or equal to a specific version.</li>
- * <li>&gt;=1.0.0 &lt;2.0.0 — Range of versions; both conditions must be satisfied. (This example would match 1.0.1 but
- * not 2.0.1)</li>
- * <li>1.x — A semantic major version. (This example would match 1.0.1 but not 2.0.1, and is shorthand for &gt;=1.0.0
- * &lt;2.0.0-)</li>
- * <li>1.2.x — A semantic major & minor version. (This example would match 1.2.3 but not 1.3.0, and is shorthand for
- * &gt;=1.2.0 &lt;1.3.0-)</li>
+ * <li>&gt;=1.0.0 &lt;2.0.0 — Range of versions; both conditions must be satisfied. (This example would match 1.0.1 but not 2.0.1)</li>
+ * <li>1.x — A semantic major version. (This example would match 1.0.1 but not 2.0.1, and is shorthand for &gt;=1.0.0 &lt;2.0.0-)</li>
+ * <li>1.2.x — A semantic major & minor version. (This example would match 1.2.3 but not 1.3.0, and is shorthand for &gt;=1.2.0 &lt;1.3.0-)</li>
  * <li>* — Matches any version</li>
  * </ul>
  * A range specifier starting with a tilde ~ character is matched against a version in the following fashion:
@@ -76,8 +71,7 @@ public class VersionRange implements Serializable {
 	 * @param upperBoundInclusive
 	 * @return
 	 */
-	public static VersionRange create(Version lower, boolean lowerBoundInclusive, Version upper,
-			boolean upperBoundInclusive) {
+	public static VersionRange create(Version lower, boolean lowerBoundInclusive, Version upper, boolean upperBoundInclusive) {
 		return new VersionRange(null, lower, lowerBoundInclusive, upper, upperBoundInclusive);
 	}
 
@@ -99,8 +93,8 @@ public class VersionRange implements Serializable {
 	 */
 	public static VersionRange exact(Version version) {
 		return version == null
-				? null
-						: new VersionRange(null, version, true, version, true);
+			? null
+			: new VersionRange(null, version, true, version, true);
 	}
 
 	/**
@@ -224,8 +218,7 @@ public class VersionRange implements Serializable {
 			switch(compareType2) {
 				case DASH:
 					if(compareType != CompareType.EQUAL_WITHOUT_OP)
-						throw new IllegalArgumentException(
-								"Can't create a dash range unless both sides are without operator");
+						throw new IllegalArgumentException("Can't create a dash range unless both sides are without operator");
 					max = createVersion(version, versionRequirement);
 					maxInclude = true;
 					break;
@@ -266,8 +259,8 @@ public class VersionRange implements Serializable {
 	 */
 	public static VersionRange greater(Version version) {
 		return version == null
-				? null
-						: new VersionRange(null, version, false, Version.MAX, true);
+			? null
+			: new VersionRange(null, version, false, Version.MAX, true);
 	}
 
 	/**
@@ -279,8 +272,8 @@ public class VersionRange implements Serializable {
 	 */
 	public static VersionRange greaterOrEqual(Version version) {
 		return version == null
-				? null
-						: new VersionRange(null, version, true, Version.MAX, true);
+			? null
+			: new VersionRange(null, version, true, Version.MAX, true);
 	}
 
 	private static boolean hasMore(String s, int[] posHandle) {
@@ -296,8 +289,8 @@ public class VersionRange implements Serializable {
 	 */
 	public static VersionRange less(Version version) {
 		return version == null
-				? null
-						: new VersionRange(null, Version.MIN, true, version, false);
+			? null
+			: new VersionRange(null, Version.MIN, true, version, false);
 	}
 
 	/**
@@ -309,8 +302,8 @@ public class VersionRange implements Serializable {
 	 */
 	public static VersionRange lessOrEqual(Version version) {
 		return version == null
-				? null
-						: new VersionRange(null, Version.MIN, true, version, true);
+			? null
+			: new VersionRange(null, Version.MIN, true, version, true);
 	}
 
 	private static CompareType nextCompareType(String s, int[] posHandle) {
@@ -358,8 +351,7 @@ public class VersionRange implements Serializable {
 		else if(c >= '0' && c <= '9')
 			compareType = CompareType.EQUAL_WITHOUT_OP;
 		else
-			throw new IllegalArgumentException("Expected one of '<', '>' or digit at position " + pos + " in range '" +
-					s + '\'');
+			throw new IllegalArgumentException("Expected one of '<', '>' or digit at position " + pos + " in range '" + s + '\'');
 
 		posHandle[0] = pos;
 		return compareType;
@@ -399,8 +391,7 @@ public class VersionRange implements Serializable {
 
 	private static final Pattern X_PATTERN = Pattern.compile("^(\\d+)(?:(?:\\.(x|\\d+))(?:\\.x)?)?$");
 
-	public static final VersionRange ALL_INCLUSIVE = new VersionRange(
-		">=" + Version.MIN, Version.MIN, true, Version.MAX, true);
+	public static final VersionRange ALL_INCLUSIVE = new VersionRange(">=" + Version.MIN, Version.MIN, true, Version.MAX, true);
 
 	private final Version minVersion;
 
@@ -412,8 +403,7 @@ public class VersionRange implements Serializable {
 
 	private final String originalString;
 
-	private VersionRange(String originalString, Version minVersion, boolean includeMin, Version maxVersion,
-			boolean includeMax) {
+	private VersionRange(String originalString, Version minVersion, boolean includeMin, Version maxVersion, boolean includeMax) {
 		this.originalString = originalString;
 		this.minVersion = minVersion;
 		this.includeMin = includeMin;
@@ -426,7 +416,7 @@ public class VersionRange implements Serializable {
 		if(o instanceof VersionRange) {
 			VersionRange vr = (VersionRange) o;
 			return includeMin == vr.includeMin && includeMax == vr.includeMax && minVersion.equals(vr.minVersion) &&
-					maxVersion.equals(vr.maxVersion);
+				maxVersion.equals(vr.maxVersion);
 		}
 		return false;
 	}
@@ -476,11 +466,11 @@ public class VersionRange implements Serializable {
 		result = prime * result + maxVersion.hashCode();
 		result = prime * result + minVersion.hashCode();
 		result = prime * result + (includeMax
-				? 1231
-						: 1237);
+			? 1231
+			: 1237);
 		result = prime * result + (includeMin
-				? 1231
-						: 1237);
+			? 1231
+			: 1237);
 		return result;
 	}
 
@@ -566,11 +556,11 @@ public class VersionRange implements Serializable {
 			return minVersion.equals(version);
 
 		int minCheck = includeMin
-				? 0
-						: -1;
+			? 0
+			: -1;
 		int maxCheck = includeMax
-				? 0
-						: 1;
+			? 0
+			: 1;
 		return minVersion.compareTo(version) <= minCheck && maxVersion.compareTo(version) >= maxCheck;
 	}
 

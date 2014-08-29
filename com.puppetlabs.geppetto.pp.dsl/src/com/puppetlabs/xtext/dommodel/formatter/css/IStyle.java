@@ -26,8 +26,7 @@ public interface IStyle<T> {
 	/**
 	 * Gets the value of the style. A {@link IDomNode} must be provided as the style may be dynamic
 	 * and produce its value as a function of the given node. If a style returns false
-	 * from {@link #isFunction()}, the parameter node may be null. At all other times must node be a valid
-	 * {@link IDomNode}.
+	 * from {@link #isFunction()}, the parameter node may be null. At all other times must node be a valid {@link IDomNode}.
 	 *
 	 * @param node
 	 * @return the style's value

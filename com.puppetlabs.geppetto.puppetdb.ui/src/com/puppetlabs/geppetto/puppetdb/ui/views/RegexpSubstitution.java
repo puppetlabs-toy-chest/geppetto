@@ -26,7 +26,7 @@ public class RegexpSubstitution {
 	public String replaceOrNull(String str) {
 		Matcher m = pattern.matcher(str);
 		return m.matches()
-				? m.replaceAll(replacement)
-						: null;
+			? m.replaceAll(replacement)
+			: null;
 	}
 }

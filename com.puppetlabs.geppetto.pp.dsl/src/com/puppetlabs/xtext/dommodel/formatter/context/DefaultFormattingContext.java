@@ -21,13 +21,13 @@ import com.google.inject.Provider;
 
 /**
  * <p>
- * This is a default implementation of IFormattingContext. Instances are created without consideration to the resource
- * being formatted ("one-size-fits-all"). Use more specialized contexts for resource and container based creation of
- * IFormattingContext (e.g. to format code in different "projects"/"containers" differently).
+ * This is a default implementation of IFormattingContext. Instances are created without consideration to the resource being formatted
+ * ("one-size-fits-all"). Use more specialized contexts for resource and container based creation of IFormattingContext (e.g. to format code
+ * in different "projects"/"containers" differently).
  * </p>
  * <p>
- * The returned IFormattingContext has a fixed max width of 132 characters, and picks up indentation and line separator
- * information from the bindings of {@link ILineSeparatorInformation}, and {@link IIndentationInformation}
+ * The returned IFormattingContext has a fixed max width of 132 characters, and picks up indentation and line separator information from the
+ * bindings of {@link ILineSeparatorInformation}, and {@link IIndentationInformation}
  * <p>
  * The DefaultFormattingContext can be used without injection,or via a guice binding of:
  *
@@ -37,15 +37,14 @@ import com.google.inject.Provider;
  *
  * </p>
  * <p>
- * It is also possible to bind this class via a simple binding to the <code>IFormattingContext.class</code>, but this
- * assumes a very simple configuration.
+ * It is also possible to bind this class via a simple binding to the <code>IFormattingContext.class</code>, but this assumes a very simple
+ * configuration.
  * </p>
  */
 public class DefaultFormattingContext implements IFormattingContext {
 
 	/**
 	 * This factory ignores the given semantic object, and returns the same result for all.
-	 *
 	 */
 	public static class Factory implements IFormattingContextFactory {
 		@Inject
@@ -92,8 +91,8 @@ public class DefaultFormattingContext implements IFormattingContext {
 
 	private int wrapIndentSize;
 
-	public DefaultFormattingContext(ILineSeparatorInformation lineInfo, IIndentationInformation indentInfo,
-			boolean whitespacePreservation, IPreferredMaxWidthInformation preferredMaxWidthInfo, int wrapIndentSize) {
+	public DefaultFormattingContext(ILineSeparatorInformation lineInfo, IIndentationInformation indentInfo, boolean whitespacePreservation,
+			IPreferredMaxWidthInformation preferredMaxWidthInfo, int wrapIndentSize) {
 		this.lineInfo = lineInfo;
 		this.indentInfo = indentInfo;
 		this.whitespacePreservation = whitespacePreservation;

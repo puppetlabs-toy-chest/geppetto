@@ -26,7 +26,6 @@ import com.google.inject.Provider;
 /**
  * An Eclipse Platform based {@link Provider} implementation making use of the {@link ResourceContext} to provide
  * a {@link Resource} specific instance of {@code T} (or "global" if the context is not resource specific).
- *
  */
 public abstract class PlatformResourceSpecificProvider<T> implements Provider<T> {
 
@@ -40,8 +39,8 @@ public abstract class PlatformResourceSpecificProvider<T> implements Provider<T>
 	private IStorage2UriMapper storage2UriMapper;
 
 	/**
-	 * A concrete implementation should lookup specific data of type {@code T} for the given IResource. If the given
-	 * {@code resource} is null, the
+	 * A concrete implementation should lookup specific data of type {@code T} for the given IResource. If the given {@code resource} is
+	 * null, the
 	 * implementation should return a "global"/default {@code T}.
 	 *
 	 * @param resource

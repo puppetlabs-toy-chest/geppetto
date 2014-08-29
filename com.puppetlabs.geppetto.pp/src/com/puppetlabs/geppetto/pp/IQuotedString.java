@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>IQuoted String</b></em>'.
  * <!-- end-user-doc -->
  *
- *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getIQuotedString()
  * @model interface="true" abstract="true"
  * @generated

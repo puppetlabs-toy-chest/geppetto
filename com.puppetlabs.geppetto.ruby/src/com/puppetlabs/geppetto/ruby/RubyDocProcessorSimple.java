@@ -15,8 +15,6 @@ import com.puppetlabs.geppetto.common.CharSequences;
 /**
  * Processes documentation text found in ruby code. The main problem is determining the "natural margin" as it is
  * ambiguous.
- *
- *
  */
 public class RubyDocProcessorSimple {
 

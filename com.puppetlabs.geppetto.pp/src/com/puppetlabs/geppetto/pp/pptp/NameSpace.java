@@ -14,7 +14,6 @@ package com.puppetlabs.geppetto.pp.pptp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Name Space</b></em>'.
  * <!-- end-user-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,8 +30,7 @@ public interface NameSpace extends TargetElement, ITargetElementContainer {
 	 * Returns the value of the '<em><b>Reserved</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Reserved</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Reserved</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *

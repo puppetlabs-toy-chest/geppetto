@@ -17,7 +17,6 @@ import com.google.common.base.Predicate;
 
 /**
  * Predicate that tests if a given IEObjectDescription's type is an instance of a set of given classes.
- *
  */
 public class InstanceOfPredicate implements Predicate<IEObjectDescription> {
 

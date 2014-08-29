@@ -184,18 +184,17 @@ public class WithLambdaExpressionImpl extends ParameterizedExpressionImpl implem
 		if(newLambda != lambda) {
 			NotificationChain msgs = null;
 			if(lambda != null)
-				msgs = ((InternalEObject) lambda).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, null, msgs);
+				msgs = ((InternalEObject) lambda).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, null, msgs);
 			if(newLambda != null)
-				msgs = ((InternalEObject) newLambda).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, null, msgs);
+				msgs = ((InternalEObject) newLambda).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, null, msgs);
 			msgs = basicSetLambda(newLambda, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, newLambda, newLambda));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.WITH_LAMBDA_EXPRESSION__LAMBDA, newLambda, newLambda));
 	}
 
 } // WithLambdaExpressionImpl

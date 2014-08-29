@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.graph.catalog;
 
 /**
  * Definition of styles used by DependencyGraphTheme
- *
  */
 public interface CatalogGraphStyles {
 	static final String STYLE_Resource = "Resource";

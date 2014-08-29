@@ -1068,8 +1068,7 @@ public class PPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.JavaLambda <em>Java Lambda</em>}
-	 * '.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.JavaLambda <em>Java Lambda</em>} '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -1275,8 +1274,7 @@ public class PPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.MethodCall <em>Method Call</em>}
-	 * '.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.MethodCall <em>Method Call</em>} '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -1467,8 +1465,7 @@ public class PPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.RubyLambda <em>Ruby Lambda</em>}
-	 * '.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.RubyLambda <em>Ruby Lambda</em>} '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -1691,8 +1688,7 @@ public class PPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.VariableTE <em>Variable TE</em>}
-	 * '.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.VariableTE <em>Variable TE</em>} '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -1707,8 +1703,7 @@ public class PPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.VerbatimTE <em>Verbatim TE</em>}
-	 * '.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.VerbatimTE <em>Verbatim TE</em>} '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.

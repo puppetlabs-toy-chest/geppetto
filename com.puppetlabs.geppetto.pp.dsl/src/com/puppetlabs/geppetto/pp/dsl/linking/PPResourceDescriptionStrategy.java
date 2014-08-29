@@ -46,7 +46,6 @@ import com.google.inject.Inject;
 /**
  * Overrides the default description strategy to provide the super class name for element
  * that implement this aspect.
- *
  */
 public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
 	public class DefaultReferenceDescription implements IReferenceDescription {
@@ -136,12 +135,11 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 	 * @param acceptor
 	 *            - where the resulting PPReferenceDescription should be accepted
 	 */
-	public boolean createPPReferenceDescriptions(EObject source, IEObjectDescription sourceContainer,
-			IEObjectDescription targetDescriptor, IAcceptor<PPReferenceDescription> acceptor) {
+	public boolean createPPReferenceDescriptions(EObject source, IEObjectDescription sourceContainer, IEObjectDescription targetDescriptor,
+			IAcceptor<PPReferenceDescription> acceptor) {
 		List<IEObjectDescription> targetReferences = CrossReferenceAdapterFactory.eINSTANCE.get(source);
 		if(targetReferences != null) {
-			acceptor.accept(PPReferenceDescription.create(
-				EcoreUtil2.getNormalizedURI(source), sourceContainer, targetDescriptor));
+			acceptor.accept(PPReferenceDescription.create(EcoreUtil2.getNormalizedURI(source), sourceContainer, targetDescriptor));
 		}
 		return true;
 	}
@@ -153,8 +151,7 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 	 * org.eclipse.emf.common.util.URI, org.eclipse.xtext.util.IAcceptor)
 	 */
 	@Override
-	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI,
-			IAcceptor<IReferenceDescription> acceptor) {
+	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI, IAcceptor<IReferenceDescription> acceptor) {
 		boolean result = super.createReferenceDescriptions(from, exportedContainerURI, acceptor);
 		// Add PP references
 		List<IEObjectDescription> xrefs = CrossReferenceAdapterFactory.eINSTANCE.get(from);
@@ -182,8 +179,8 @@ public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStr
 				data.put(PPDSLConstants.PARENT_NAME_DATA, parentName);
 			}
 			int argCount = d.getArguments() == null
-					? 0
-							: d.getArguments().getArguments().size();
+				? 0
+				: d.getArguments().getArguments().size();
 			if(argCount > 0)
 				data.put(PPDSLConstants.CLASS_ARG_COUNT, Integer.toString(argCount));
 			return data;

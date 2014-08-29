@@ -21,7 +21,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferenceP
 /**
  * Adds behavior to the abstract preference page that checks if a single preference id has
  * changed, and if so, triggers a clean build of the project.
- *
  */
 public abstract class AbstractRebuildingPreferencePage extends AbstractPreferencePage {
 

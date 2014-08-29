@@ -26,7 +26,6 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * Abstract implementation of ILayoutManaager
- *
  */
 public abstract class AbstractLayoutManager extends AbstractLayout implements ILayoutManager {
 
@@ -51,12 +50,12 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 	 * Called when it has been decided that a whitespace should be processed (it is included in the region to format).
 	 * </p>
 	 * <p>
-	 * If the given {@link LineBreaks} has a <i>normal</i> {@link LineBreaks#getNormal()} or <i>max</i>
-	 * {@link LineBreaks#getMax()} greater than 0 the line break specification wins, and no spaces are produced.
+	 * If the given {@link LineBreaks} has a <i>normal</i> {@link LineBreaks#getNormal()} or <i>max</i> {@link LineBreaks#getMax()} greater
+	 * than 0 the line break specification wins, and no spaces are produced.
 	 * </p>
 	 * <p>
-	 * A missing quantity will produce the <i>normal</i> quantity, a quantity less than <i>min</i> will produce a
-	 * <i>min</i> quantity, and a quantity greater than <i>max</i> will produce a <i>max</i> quantity.
+	 * A missing quantity will produce the <i>normal</i> quantity, a quantity less than <i>min</i> will produce a <i>min</i> quantity, and a
+	 * quantity greater than <i>max</i> will produce a <i>max</i> quantity.
 	 * </p>
 	 *
 	 * @param context
@@ -70,11 +69,11 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 	 * @param output
 	 *            - where output is produced
 	 */
-	protected void applySpacingAndLinebreaks(ILayoutContext context, IDomNode node, String text, Spacing spacing,
-			LineBreaks linebreaks, ITextFlow output) {
+	protected void applySpacingAndLinebreaks(ILayoutContext context, IDomNode node, String text, Spacing spacing, LineBreaks linebreaks,
+			ITextFlow output) {
 		text = text == null
-				? ""
-						: text;
+			? ""
+			: text;
 		final String lineSep = context.getLineSeparatorInformation().getLineSeparator();
 		final int existingLinebreaks = Strings.countLines(text, lineSep.toCharArray());
 		// if line break is wanted, it wins
@@ -86,7 +85,7 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 			if(existingLinebreaks == 0 && linebreaks.isCommentEndingWithBreakAcceptable()) {
 				IDomNode n = DomModelUtils.nextLeaf(node);
 				if(n != null && n.getNodeType() == NodeType.COMMENT &&
-						n.getStyleClassifiers().contains(NodeClassifier.LINESEPARATOR_TERMINATED)) {
+					n.getStyleClassifiers().contains(NodeClassifier.LINESEPARATOR_TERMINATED)) {
 					// comment breaks the line
 					output.appendSpaces(1); // separate the comment with a space
 
@@ -165,8 +164,8 @@ public abstract class AbstractLayoutManager extends AbstractLayout implements IL
 	 * This implementation does nothing, and returns <code>false</code>.
 	 * </p>
 	 * <p>
-	 * A derived class may want to decorate children of the composite node and return <code>false</code>, or process and
-	 * provide all output for children and return <code>true</code>
+	 * A derived class may want to decorate children of the composite node and return <code>false</code>, or process and provide all output
+	 * for children and return <code>true</code>
 	 * </p>
 	 *
 	 * @param styleSet

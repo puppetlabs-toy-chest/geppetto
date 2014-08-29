@@ -20,8 +20,8 @@ public class Strings {
 	 */
 	public static String emptyToNull(String s) {
 		return s == null || s.length() == 0
-				? null
-						: s;
+			? null
+			: s;
 	}
 
 	/**

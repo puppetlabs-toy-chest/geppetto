@@ -32,10 +32,8 @@ import com.google.inject.Singleton;
 /**
  * A service facade for Graphviz SVG production that configures a Guice injector and performs
  * optional post processing of SVG stream.
- *
  * The only state held by the SVGProducer is the injector. It is safe to hold on to an instance
  * of this class and use it multiple times. If instantiated via Guice it is a singleton.
- *
  */
 @Singleton
 public class SVGProducer {
@@ -51,15 +49,11 @@ public class SVGProducer {
 	/**
 	 * Transforms the text in DOT language in the given dotStream to SVG and writes the resulting SVG
 	 * text to the given svgStream. If compress is true, the SVG output is written as SVGZ.
-	 *
 	 * When transformation is completed, the given svgStream is in a state where further writes are
 	 * possible. It is the caller's responsibility to close the stream.
-	 *
-	 * It is possible to inject a filter configuration into the SVG stream by binding an
-	 * {@link IOutputStreamFilterFactory} annotated with
+	 * It is possible to inject a filter configuration into the SVG stream by binding an {@link IOutputStreamFilterFactory} annotated with
 	 *
 	 * @Named(DependencyGraphModule.GRAPH_SVG_OUTPUT).
-	 *
 	 * @param dotStream
 	 *            stream with text in DOT language
 	 * @param svgStream
@@ -73,8 +67,7 @@ public class SVGProducer {
 	 *            the passed monitor - this is the callers responsibility unless a SubMonitor was passed.
 	 */
 	@SuppressWarnings("resource")
-	public void produceSVG(InputStream dotStream, OutputStream svgStream, boolean compress, IProgressMonitor monitor)
-			throws IOException {
+	public void produceSVG(InputStream dotStream, OutputStream svgStream, boolean compress, IProgressMonitor monitor) throws IOException {
 		// monitor
 		SubMonitor m2 = SubMonitor.convert(monitor);
 		// convert every 1000 checks for cancel into a worked(1)

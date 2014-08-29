@@ -31,7 +31,6 @@ import com.google.inject.Inject;
  * TODO: Can probably be simplified further as there is less need for the fancy overrides required for the
  * Xtext 1.0 implementation.
  * TODO: This class can probably be removed - with the change in dollarVar parsing there is nothing left it needs to do.
- *
  */
 public class PPValueSerializer extends ValueSerializer {
 
@@ -40,12 +39,12 @@ public class PPValueSerializer extends ValueSerializer {
 	private Map<AbstractRule, String> ruleToText;
 
 	private final PolymorphicDispatcher<String> unassignedDispatch = new PolymorphicDispatcher<String>(
-			"unassigned", 2, 3, Collections.singletonList(this), new ErrorHandler<String>() {
-				@Override
-				public String handle(Object[] params, Throwable e) {
-					return handleError(params, e);
-				}
-			});
+		"unassigned", 2, 3, Collections.singletonList(this), new ErrorHandler<String>() {
+			@Override
+			public String handle(Object[] params, Throwable e) {
+				return handleError(params, e);
+			}
+		});
 
 	@Inject
 	public PPValueSerializer(IGrammarAccess ga) {

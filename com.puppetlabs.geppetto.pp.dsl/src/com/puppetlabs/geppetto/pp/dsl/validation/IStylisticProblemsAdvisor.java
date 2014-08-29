@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 
 /**
  * An interface for stylistic problems preferences.
- *
  */
 public interface IStylisticProblemsAdvisor {
 

@@ -74,8 +74,7 @@ public class TestNodeHandling extends AbstractValidationTest {
 		assertFalse("Should not contain 'cclass'", classMap.containsKey("cclass"));
 
 		assertEquals(
-			"a class should have a param", "aparam",
-			classMap.get("aclass").getExportedParameters().get("aparam").getLastNameSegment());
+			"a class should have a param", "aparam", classMap.get("aclass").getExportedParameters().get("aparam").getLastNameSegment());
 
 		assertEquals("should have one parameter", 1, classMap.get("aclass").getExportedParameters().size());
 
@@ -88,7 +87,6 @@ public class TestNodeHandling extends AbstractValidationTest {
 	 * Tests that role X (with declares a dependency on module A, which has a
 	 * transitive dependency on B) can see functions afunc and bfunc, but not
 	 * cfunc.
-	 *
 	 * Use a path that reveals two versions of the role X.
 	 */
 	@Test
@@ -150,8 +148,7 @@ public class TestNodeHandling extends AbstractValidationTest {
 		assertEquals("Should have one parameter", 1, Iterables.size(paramsForA));
 
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
-		asserter.assertErrors(
-			asserter.messageFragment("Unknown function: 'cfunc'"), asserter.messageFragment("Unknown class: 'cclass'"));
+		asserter.assertErrors(asserter.messageFragment("Unknown function: 'cfunc'"), asserter.messageFragment("Unknown class: 'cclass'"));
 	}
 
 	/**
@@ -195,8 +192,7 @@ public class TestNodeHandling extends AbstractValidationTest {
 		assertFalse("Should not contain 'cclass'", classMap.containsKey("cclass"));
 
 		assertEquals(
-			"a class should have a param", "aparam",
-			classMap.get("aclass").getExportedParameters().get("aparam").getLastNameSegment());
+			"a class should have a param", "aparam", classMap.get("aclass").getExportedParameters().get("aparam").getLastNameSegment());
 
 		assertEquals("should have one parameter", 1, classMap.get("aclass").getExportedParameters().size());
 

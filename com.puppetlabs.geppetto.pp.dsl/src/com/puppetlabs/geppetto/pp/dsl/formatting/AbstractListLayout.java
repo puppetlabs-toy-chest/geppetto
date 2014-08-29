@@ -24,7 +24,6 @@ import com.google.inject.Provider;
 
 /**
  * @author henrik
- *
  */
 public abstract class AbstractListLayout {
 

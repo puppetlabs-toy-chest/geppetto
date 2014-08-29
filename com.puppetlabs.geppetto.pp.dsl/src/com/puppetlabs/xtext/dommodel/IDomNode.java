@@ -28,7 +28,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
  * A node in a document model.
  * TODO: Should probably be capable of providing diagnostics/errors since formatting is often not wanted / required
  * to be verbatim.
- *
  */
 public interface IDomNode {
 	/**
@@ -198,7 +197,6 @@ public interface IDomNode {
 	/**
 	 * NOTE: If there a nodes in the DOM that represents layout structure e.g. table/columns it is not possible to
 	 * provide a grammarElement for the Table or Row. Return null for those as well - or move to a sub interface.
-	 *
 	 * Returns the grammar element that created this node. May return <code>null</code> in case of unrecoverable syntax
 	 * errors. This happens usually when a keyword occurred at an unexpected offset.
 	 *
@@ -211,7 +209,6 @@ public interface IDomNode {
 	 * the length of a table? The length of rows and columns may be affected by layout.
 	 * NOTE: the INode reports length excluding hidden tokens - confused over the difference / getText, getTotalLength
 	 * etc. Should the DOM behave the same way.
-	 *
 	 * Returns the length of this node excluding hidden tokens. If this node is a hidden leaf node, the
 	 * total length is returned.
 	 *
@@ -224,8 +221,7 @@ public interface IDomNode {
 	 * May return <code>null</code> for situation like when a parser refused to create any objects due to
 	 * unrecoverable errors.
 	 *
-	 * @return the nearest semantic object that is associated with the (sub) tree rooted in this node. May return
-	 *         <code>null</code>.
+	 * @return the nearest semantic object that is associated with the (sub) tree rooted in this node. May return <code>null</code>.
 	 */
 	public EObject getNearestSemanticObject();
 
@@ -304,8 +300,7 @@ public interface IDomNode {
 	public StyleSet getStyles();
 
 	/**
-	 * Returns the text that is covered by this node (including hidden tokens). The result is never <code>null</code>
-	 * but may be empty.
+	 * Returns the text that is covered by this node (including hidden tokens). The result is never <code>null</code> but may be empty.
 	 *
 	 * @return the text that is covered by this node (including hidden tokens). Never <code>null</code>.
 	 */

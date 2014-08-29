@@ -39,41 +39,41 @@ public class GenericCallNode implements INameNode, IArgumentNode, BlockAccepting
 	@Override
 	public Node getArgs() {
 		return (callNode == null
-				? fcallNode
-						: callNode).getArgs();
+			? fcallNode
+			: callNode).getArgs();
 	}
 
 	@Override
 	public Node getIter() {
 		return (callNode == null
-				? fcallNode
-						: callNode).getIter();
+			? fcallNode
+			: callNode).getIter();
 	}
 
 	@Override
 	public String getName() {
 		return (callNode == null
-				? fcallNode
-						: callNode).getName();
+			? fcallNode
+			: callNode).getName();
 	}
 
 	public Node getNode() {
 		return callNode == null
-				? fcallNode
-						: callNode;
+			? fcallNode
+			: callNode;
 	}
 
 	public SourcePosition getPosition() {
 		return (callNode == null
-				? fcallNode
-						: callNode).getPosition();
+			? fcallNode
+			: callNode).getPosition();
 	}
 
 	@Override
 	public boolean hasParens() {
 		return (callNode == null
-				? fcallNode
-						: callNode).hasParens();
+			? fcallNode
+			: callNode).hasParens();
 	}
 
 	public boolean isValid() {
@@ -83,29 +83,29 @@ public class GenericCallNode implements INameNode, IArgumentNode, BlockAccepting
 	@Override
 	public void setArgs(Node argsNode) {
 		(callNode == null
-				? fcallNode
-						: callNode).setArgs(argsNode);
+			? fcallNode
+			: callNode).setArgs(argsNode);
 	}
 
 	@Override
 	public void setHasParens(boolean hasParens) {
 		(callNode == null
-				? fcallNode
-						: callNode).setHasParens(hasParens);
+			? fcallNode
+			: callNode).setHasParens(hasParens);
 	}
 
 	@Override
 	public void setIter(Node iterNode) {
 		(callNode == null
-				? fcallNode
-						: callNode).setIter(iterNode);
+			? fcallNode
+			: callNode).setIter(iterNode);
 	}
 
 	@Override
 	public void setName(String newName) {
 		(callNode == null
-				? fcallNode
-						: callNode).setName(newName);
+			? fcallNode
+			: callNode).setName(newName);
 	}
 
 }

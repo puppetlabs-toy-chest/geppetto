@@ -14,7 +14,6 @@ import com.google.inject.ImplementedBy;
 
 /**
  * Provides the Preferred max Width Information
- *
  */
 @ImplementedBy(IPreferredMaxWidthInformation.Default.class)
 public interface IPreferredMaxWidthInformation {

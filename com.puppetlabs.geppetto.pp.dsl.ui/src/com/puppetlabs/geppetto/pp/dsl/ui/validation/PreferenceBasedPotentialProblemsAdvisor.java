@@ -19,8 +19,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
  * A potential problems advisor based on preference settings.
  * Note, that the preferences are read when this advisor is instantiated. Get a new instance when a preference has
  * changed.
- *
- *
  */
 public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProblemsAdvisor {
 

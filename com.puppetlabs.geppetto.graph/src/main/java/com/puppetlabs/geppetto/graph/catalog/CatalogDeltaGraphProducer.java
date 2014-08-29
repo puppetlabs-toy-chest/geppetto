@@ -47,7 +47,6 @@ import com.google.common.collect.Sets.SetView;
 
 /**
  * Produces a Catalog graph in DOT format.
- *
  */
 public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer implements CatalogGraphStyles {
 
@@ -156,28 +155,21 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 			if(values.size() > 1) {
 				styleClass = STYLE_Modified;
 				String valueOld = oldProperties.get(propertyName);
-				labelRows.add(getStyles().labelRow(
-					STYLE_ResourcePropertyRow, //
+				labelRows.add(getStyles().labelRow(STYLE_ResourcePropertyRow, //
 					createResourcePropertyMarker(LT, STYLE_Removed, renderMarkerColumnFunc), //
-					getStyles().labelCell(
-						Sets.newHashSet(STYLE_ResourcePropertyName, STYLE_Removed), propertyName, Span.rowSpan(1)), //
-						getStyles().labelCell(
-							Sets.newHashSet(STYLE_ResourcePropertyValue, STYLE_Removed), DOUBLE_RIGHT_ARROW + //
-							valueOld, Span.colSpan(1))//
-						));
+					getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyName, STYLE_Removed), propertyName, Span.rowSpan(1)), //
+					getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyValue, STYLE_Removed), DOUBLE_RIGHT_ARROW + //
+						valueOld, Span.colSpan(1))//
+				));
 
 				String valueNew = newProperties.get(propertyName);
-				labelRows.add(getStyles().labelRow(
-					STYLE_ResourcePropertyRow, //
+				labelRows.add(getStyles().labelRow(STYLE_ResourcePropertyRow, //
 					createResourcePropertyMarker(GT, STYLE_Added, renderMarkerColumnFunc), //
-					getStyles().labelCell(
-						Sets.newHashSet(STYLE_ResourcePropertyName, STYLE_Added), propertyName, Span.rowSpan(1)), //
-						getStyles().labelCell(
-							Sets.newHashSet(STYLE_ResourcePropertyValue, STYLE_Added), DOUBLE_RIGHT_ARROW + //
-							valueNew, Span.colSpan(1)) //
-						));
-				result.width = Math.max(
-					result.width, propertyName.length() + Math.max(valueOld.length(), valueNew.length()) + 2);
+					getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyName, STYLE_Added), propertyName, Span.rowSpan(1)), //
+					getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyValue, STYLE_Added), DOUBLE_RIGHT_ARROW + //
+						valueNew, Span.colSpan(1)) //
+				));
+				result.width = Math.max(result.width, propertyName.length() + Math.max(valueOld.length(), valueNew.length()) + 2);
 			}
 			else {
 				// added, removed, or unmodified
@@ -216,7 +208,7 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 					getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyName, styleClass), propertyName), //
 					getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyValue, styleClass), DOUBLE_RIGHT_ARROW + //
 						value, Span.colSpan(1)) //
-						));
+				));
 
 				result.width = Math.max(result.width, propertyName.length() + value.length() + 2);
 			}
@@ -224,13 +216,12 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 		return result;
 	}
 
-	private LabelCell createResourcePropertyMarker(String marker, String styleName,
-			Function<IGraphElement, Boolean> renderedFunc) {
+	private LabelCell createResourcePropertyMarker(String marker, String styleName, Function<IGraphElement, Boolean> renderedFunc) {
 		return getStyles().labelCell(Sets.newHashSet(STYLE_ResourcePropertyMarker, styleName), marker)//
-				.withStyles(// getStyles().fixedSize(true),
-					getStyles().fixedSize(true), getStyles().width(8), getStyles().height(8), getStyles().cellSpacing(0), //
-					getStyles().cellPadding(0), getStyles().rendered(renderedFunc) //
-						);
+		.withStyles(// getStyles().fixedSize(true),
+			getStyles().fixedSize(true), getStyles().width(8), getStyles().height(8), getStyles().cellSpacing(0), //
+			getStyles().cellPadding(0), getStyles().rendered(renderedFunc) //
+		);
 	}
 
 	private void createVertexesFor(Iterable<CatalogResource> resources, //
@@ -265,16 +256,14 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 		}
 	}
 
-	private void edgesForResources(RootGraph g, Iterable<CatalogResource> resources,
-			Map<CatalogResource, Vertex> resourceVertexMap, //
+	private void edgesForResources(RootGraph g, Iterable<CatalogResource> resources, Map<CatalogResource, Vertex> resourceVertexMap, //
 			Map<String, Vertex> vertexMap, //
 			Map<String, Edge> edgeMap, //
 			Set<String> edges) {
 		for(CatalogResource r : resources) {
 			final String sourceKey = keyOf(r);
 			final Vertex source = vertexMap.get(sourceKey);
-			for(CatalogResourceParameter p : Iterables.filter(
-				getParameterIterable(r), Predicates.not(regularParameterPredicate))) {
+			for(CatalogResourceParameter p : Iterables.filter(getParameterIterable(r), Predicates.not(regularParameterPredicate))) {
 				String aName = p.getName();
 				String style = null;
 				if("subscribe".equals(aName))
@@ -304,8 +293,7 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 		}
 	}
 
-	private void generateEdgeDelta(RootGraph g, Set<String> edges, Map<String, Edge> oldEdgeMap,
-			Map<String, Edge> newEdgeMap) {
+	private void generateEdgeDelta(RootGraph g, Set<String> edges, Map<String, Edge> oldEdgeMap, Map<String, Edge> newEdgeMap) {
 		for(String key : edges) {
 			boolean inOld = oldEdgeMap.containsKey(key);
 			boolean inNew = newEdgeMap.containsKey(key);
@@ -343,22 +331,20 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 		return builder.toString();
 	}
 
-	private StyleSet labelStyleForResource(CatalogResource oldR, IPath oldRoot, CatalogResource newR, IPath newRoot,
-			String[] resultingStyle) {
+	private StyleSet labelStyleForResource(CatalogResource oldR, IPath oldRoot, CatalogResource newR, IPath newRoot, String[] resultingStyle) {
 		if(resultingStyle == null || resultingStyle.length != 1)
 			throw new IllegalArgumentException("resulting style must be String[1]");
 		final CatalogResource singleResource = newR == null
-				? oldR
-						: newR;
+			? oldR
+			: newR;
 		final IPath singleRoot = newR == null
-				? oldRoot
-						: newRoot;
+			? oldRoot
+			: newRoot;
 
 		if(singleResource == null)
 			throw new IllegalArgumentException("At least one catalog must be specified");
 		if(oldR != null && newR != null) {
-			if(!(oldR.getType().equals(newR.getType()) && oldR.getTitle().toLowerCase().equals(
-				newR.getTitle().toLowerCase())))
+			if(!(oldR.getType().equals(newR.getType()) && oldR.getTitle().toLowerCase().equals(newR.getTitle().toLowerCase())))
 				throw new IllegalArgumentException("old and new resource must have same type and title");
 		}
 		// PROPERTIES
@@ -373,8 +359,8 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 			resultingStyle[0] = propertyInfo.singleResourceStyle;
 		else
 			resultingStyle[0] = propertyInfo.modifiedCount == 0
-			? STYLE_UnModified
-					: STYLE_Modified;
+				? STYLE_UnModified
+				: STYLE_Modified;
 
 		// The title can never differ as that means different resources - it is either a single catalog
 		// (the non null catalog), or the newCatalog in case both are passed.
@@ -398,8 +384,7 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 		List<LabelRow> labelRows = Lists.newArrayList();
 
 		if(hasParameters || hasFooter)
-			labelRows.add(getStyles().labelRow(
-				"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
+			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
 
 		labelRows.add(getStyles().labelRow(STYLE_ResourceTitleRow, //
 			getStyles().labelCell(STYLE_ResourceTitleCell, builder.toString(), Span.colSpan(1))));
@@ -408,19 +393,16 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 		// Rendering of separator line fails in graphviz 2.28 with an error
 		// labelRows.add(getStyles().rowSeparator());
 		if(hasParameters || hasFooter) {
-			labelRows.add(getStyles().labelRow(
-				"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
+			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
 			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("HRCell", "", Span.colSpan(1))));
-			labelRows.add(getStyles().labelRow(
-				"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
+			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
 		}
 
 		// // OLD STYLE
 		// labelRows.addAll(innerLabelRows);
 		// NEW STYLE
 		if(innerLabelRows.size() > 0) {
-			LabelCell tableCell = getStyles().labelCell(
-				"ResourceTableCell",//
+			LabelCell tableCell = getStyles().labelCell("ResourceTableCell",//
 				getStyles().labelTable(STYLE_ResourceTable, innerLabelRows.toArray(new LabelRow[innerLabelRows.size()])));
 			labelRows.add(getStyles().labelRow("ResourceTableRow", tableCell));
 		}
@@ -448,8 +430,7 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 			}
 
 			if(hasParameters)
-				labelRows.add(getStyles().labelRow(
-					"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
+				labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
 
 			int line = -1;
 			try {
@@ -462,21 +443,19 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 				STYLE_ResourceFileInfoRow, //
 				getStyles().labelCell(STYLE_ResourceFileInfoCell, builder.toString(), Span.colSpan(1)).withStyles(
 					getStyles().tooltip(tooltip), //
-					getStyles().href(
-						getHrefProducer().hrefToManifest(new Path(singleResource.getFile()), singleRoot, line)) //
-						)) //
-					);
+					getStyles().href(getHrefProducer().hrefToManifest(new Path(singleResource.getFile()), singleRoot, line)) //
+				)) //
+			);
 		}
 		else if(hasParameters) {
 			// add a bit of padding at the bottom if there is no footer
-			labelRows.add(getStyles().labelRow(
-				"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
+			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(1))));
 		}
 
 		return StyleSet.withStyle(//
-			getStyles().labelFormat(//
-				getStyles().labelTable(STYLE_ResourceTable, //
-					labelRows.toArray(new LabelRow[labelRows.size()]))));
+		getStyles().labelFormat(//
+			getStyles().labelTable(STYLE_ResourceTable, //
+				labelRows.toArray(new LabelRow[labelRows.size()]))));
 
 	}
 
@@ -492,8 +471,8 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 	 * @param moduleData
 	 *            Name -> 0* MetadataInfo representing one version of a module with given name
 	 */
-	public void produceGraph(ICancel cancel, String title, Catalog oldCatalog, IPath oldRoot, Catalog newCatalog,
-			IPath newRoot, OutputStream out) {
+	public void produceGraph(ICancel cancel, String title, Catalog oldCatalog, IPath oldRoot, Catalog newCatalog, IPath newRoot,
+			OutputStream out) {
 		if(cancel == null || oldCatalog == null || newCatalog == null || out == null)
 			throw new IllegalArgumentException("one or more parameters are null");
 
@@ -504,10 +483,8 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 
 	/**
 	 * Produces the graph data structure (RootGraph, Vertexes, Edges).
-	 *
 	 */
-	private RootGraph produceRootGraph(ICancel cancel, String title, Catalog oldCatalog, IPath oldRoot,
-			Catalog newCatalog, IPath newRoot) {
+	private RootGraph produceRootGraph(ICancel cancel, String title, Catalog oldCatalog, IPath oldRoot, Catalog newCatalog, IPath newRoot) {
 
 		RootGraph g = new RootGraph(title, "RootGraph", "root");
 
@@ -556,8 +533,7 @@ public class CatalogDeltaGraphProducer extends AbstractCatalogGraphProducer impl
 
 			Vertex v = new Vertex("", STYLE_Resource);
 			String computedStyle[] = new String[1];
-			v.setStyles(labelStyleForResource(
-				catalogMap.get(vOld), oldRoot, catalogMap.get(vNew), newRoot, computedStyle));
+			v.setStyles(labelStyleForResource(catalogMap.get(vOld), oldRoot, catalogMap.get(vNew), newRoot, computedStyle));
 			v.addStyleClass(computedStyle[0]);
 			resultingVertexMap.put(s, v);
 			g.addVertex(v);

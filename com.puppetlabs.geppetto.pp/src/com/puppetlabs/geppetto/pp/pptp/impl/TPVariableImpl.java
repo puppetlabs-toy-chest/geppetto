@@ -118,8 +118,8 @@ public class TPVariableImpl extends TargetElementImpl implements TPVariable {
 				return assignable != ASSIGNABLE_EDEFAULT;
 			case PPTPPackage.TP_VARIABLE__PATTERN:
 				return PATTERN_EDEFAULT == null
-						? pattern != null
-						: !PATTERN_EDEFAULT.equals(pattern);
+					? pattern != null
+					: !PATTERN_EDEFAULT.equals(pattern);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -206,8 +206,7 @@ public class TPVariableImpl extends TargetElementImpl implements TPVariable {
 		boolean oldAssignable = assignable;
 		assignable = newAssignable;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.TP_VARIABLE__ASSIGNABLE, oldAssignable, assignable));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.TP_VARIABLE__ASSIGNABLE, oldAssignable, assignable));
 	}
 
 	/**

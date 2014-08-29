@@ -28,9 +28,9 @@ public class TestWsAndComments extends AbstractPuppetTests {
 
 	// PLACE formatting samples here
 	public static final String sample_definitionDocumentation1 = "# 1. sl cmnt1\n" //
-			+ "# 2. sl cmnt2\n" + //
-			"define myDefinition {\n" + //
-			"}";
+		+ "# 2. sl cmnt2\n" + //
+		"define myDefinition {\n" + //
+		"}";
 
 	@Override
 	@Before
@@ -104,8 +104,7 @@ public class TestWsAndComments extends AbstractPuppetTests {
 		String code = "$x = $a/* add a */+/* with b */$b\n";
 		XtextResource r = getResourceFromString(code);
 		String s = serializeFormatted(r.getContents().get(0));
-		assertEquals(
-			"serialization with formatting should add space around +", "$x = $a /* add a */ + /* with b */ $b\n", s);
+		assertEquals("serialization with formatting should add space around +", "$x = $a /* add a */ + /* with b */ $b\n", s);
 	}
 
 	@Test
@@ -119,9 +118,9 @@ public class TestWsAndComments extends AbstractPuppetTests {
 	@Test
 	public void test_SerializeCommentMix() throws Exception {
 		String code = "/* 1 */ class /* 2 */ a /* 3 */ { /* 4 */\n" + //
-				"  /* 5 */ $b /* 6 */ = /* 7 */ 10 /* 8 */\n" + //
-				"/* 9 */ } /* 10 */\n" + //
-				"/* 11 */\n";
+			"  /* 5 */ $b /* 6 */ = /* 7 */ 10 /* 8 */\n" + //
+			"/* 9 */ } /* 10 */\n" + //
+			"/* 11 */\n";
 		XtextResource r = getResourceFromString(code);
 		String s = serialize(r.getContents().get(0));
 		assertEquals("serialization should produce same result", code, s);

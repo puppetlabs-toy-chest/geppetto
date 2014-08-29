@@ -28,7 +28,6 @@ import com.google.inject.ImplementedBy;
 
 /**
  * A Factory for basic DOM styling - see {@link IStyle}.
- *
  * Note to implementors: To extend formatting, simply created wanted {@link IStyle} implementations
  * that are supported by an extended formatter. Do not extend this interface.
  */
@@ -116,8 +115,7 @@ public interface IStyleFactory {
 	 */
 	public LineBreakStyle lineBreaks(int min, int normal, int max);
 
-	public LineBreakStyle lineBreaks(int min, int normal, int max, boolean acceptCommentWithBreak,
-			boolean acceptExisting);
+	public LineBreakStyle lineBreaks(int min, int normal, int max, boolean acceptCommentWithBreak, boolean acceptExisting);
 
 	/**
 	 * @return style with literal {@link LineBreaks} information describing "no line breaks"

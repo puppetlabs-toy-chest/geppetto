@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.linking;
 
 /**
  * Contains information about a task parsed from "TODO", "FIXME" and the like
- *
  */
 public class PPTask {
 

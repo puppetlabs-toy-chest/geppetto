@@ -17,7 +17,6 @@ import com.google.common.base.Joiner;
  * already emitted line breaks ({@link #isExistingAcceptable()} in which case the number of new line breaks
  * is reduced by the number of existing line breaks (down to 0), and if a successor comment that is terminated
  * by a line break is accepted as a line break or not ({@link #isCommentEndingWithBreakAcceptable()}.
- *
  */
 public class LineBreaks extends FlexibleQuantity {
 	private boolean acceptComment;
@@ -76,8 +75,7 @@ public class LineBreaks extends FlexibleQuantity {
 	}
 
 	/**
-	 * Returns true if this line break spec accepts an existing emitted sequence as part of the count (<code>true</code>
-	 * ),
+	 * Returns true if this line break spec accepts an existing emitted sequence as part of the count (<code>true</code> ),
 	 * or if a new count should be emitted (<code>false</code>).
 	 *
 	 * @return <code>true</code> if existing already emitted line breaks are included in the count
@@ -90,8 +88,7 @@ public class LineBreaks extends FlexibleQuantity {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("LineBreaks(");
-		Joiner.on(",").appendTo(
-			builder, getMin(), getNormal(), getMax(), isCommentEndingWithBreakAcceptable(), isExistingAcceptable());
+		Joiner.on(",").appendTo(builder, getMin(), getNormal(), getMax(), isCommentEndingWithBreakAcceptable(), isExistingAcceptable());
 		builder.append(")");
 		return builder.toString();
 	}

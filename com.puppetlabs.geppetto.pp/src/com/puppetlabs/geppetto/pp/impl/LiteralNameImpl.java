@@ -88,8 +88,8 @@ public class LiteralNameImpl extends LiteralExpressionImpl implements LiteralNam
 		switch(featureID) {
 			case PPPackage.LITERAL_NAME__VALUE:
 				return VALUE_EDEFAULT == null
-				? value != null
-				: !VALUE_EDEFAULT.equals(value);
+					? value != null
+					: !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}

@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 
 /**
  * Interface for formatting of validation/build result.
- *
  */
 public interface IValidationResultFormatter {
 

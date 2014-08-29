@@ -28,8 +28,6 @@ import com.google.common.collect.Lists;
 /**
  * notes:
  * rootURI - URI to file:: root, used to make paths relative if URI is an absolute file uri
- *
- *
  */
 public class PPSearchPath {
 
@@ -107,8 +105,8 @@ public class PPSearchPath {
 					if(!((sep == '/' || sep == '\\') && s.length() == 14 && s.charAt(13) == '*'))
 						throw new IllegalArgumentException("$manifestdir can only exist as a separate path segment");
 				}
-				p.add(Path.fromOSString(URI.createURI(manifestDir).resolve(rootDirectory).toFileString()).makeRelativeTo(
-					rootPath).append("*"));
+				p.add(Path.fromOSString(URI.createURI(manifestDir).resolve(rootDirectory).toFileString()).makeRelativeTo(rootPath).append(
+					"*"));
 			}
 			else
 				p.add(new Path(s));

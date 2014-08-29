@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.QualifiedName;
 
 /**
  * Constants for PP Ui
- *
  */
 public interface PPUiConstants {
 	String PLUGIN_ID = "com.puppetlabs.geppetto.pp.dsl.ui";

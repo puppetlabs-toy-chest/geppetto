@@ -15,7 +15,6 @@ package com.puppetlabs.geppetto.pp.pptp;
  * A representation of the model object '<em><b>Property</b></em>'.
  * <!-- end-user-doc -->
  *
- *
  * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getProperty()
  * @model
  * @generated

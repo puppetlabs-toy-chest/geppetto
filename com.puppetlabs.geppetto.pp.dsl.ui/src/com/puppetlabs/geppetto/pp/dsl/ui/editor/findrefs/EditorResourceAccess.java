@@ -45,12 +45,9 @@ import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceFinder.ILoca
  * This is a repackaing of the class from the xtext findrefs package - it implements a package private interface in a
  * class
  * that needed a different implementation.
- *
  * TODO: Contribute change to Xtext, make the ILocalResourceAccess a public interface. (The implementation is public).
  *
  * @author Jan Koehnlein - Initial contribution and API
- *
- *
  */
 public class EditorResourceAccess implements ILocalResourceAccess {
 
@@ -70,13 +67,12 @@ public class EditorResourceAccess implements ILocalResourceAccess {
 		if(workbench == null)
 			return null;
 		Iterable<Pair<IStorage, IProject>> storagesToProject = storage2UriMapper.getStorages(targetURI.trimFragment());
-		final Iterable<IStorage> storages = Iterables.transform(
-			storagesToProject, new Function<Pair<IStorage, IProject>, IStorage>() {
-				@Override
-				public IStorage apply(Pair<IStorage, IProject> from) {
-					return from.getFirst();
-				}
-			});
+		final Iterable<IStorage> storages = Iterables.transform(storagesToProject, new Function<Pair<IStorage, IProject>, IStorage>() {
+			@Override
+			public IStorage apply(Pair<IStorage, IProject> from) {
+				return from.getFirst();
+			}
+		});
 		if(!isEmpty(storages)) {
 			return new DisplayRunnableWithResult<IXtextDocument>() {
 				@Override
@@ -88,7 +84,7 @@ public class EditorResourceAccess implements ILocalResourceAccess {
 						try {
 							IEditorInput editorInput = editorReference.getEditorInput();
 							if(editorInput instanceof IStorageEditorInput &&
-									contains(storages, ((IStorageEditorInput) editorInput).getStorage())) {
+								contains(storages, ((IStorageEditorInput) editorInput).getStorage())) {
 								IEditorPart editor = editorReference.getEditor(true);
 								if(editor instanceof XtextEditor) {
 									XtextEditor xtextEditor = (XtextEditor) editor;
@@ -123,7 +119,7 @@ public class EditorResourceAccess implements ILocalResourceAccess {
 			});
 		}
 		return result != null
-				? result
-						: delegate.readOnly(targetURI, work);
+			? result
+			: delegate.readOnly(targetURI, work);
 	}
 }

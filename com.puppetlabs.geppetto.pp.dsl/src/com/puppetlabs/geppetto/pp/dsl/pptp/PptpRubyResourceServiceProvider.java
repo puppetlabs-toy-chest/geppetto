@@ -14,7 +14,6 @@ public class PptpRubyResourceServiceProvider extends GenericResourceServiceProvi
 
 	/**
 	 * Returns true for .rb files that make a contribution to PPTP.
-	 *
 	 * This is the only difference from the default...
 	 */
 	@Override

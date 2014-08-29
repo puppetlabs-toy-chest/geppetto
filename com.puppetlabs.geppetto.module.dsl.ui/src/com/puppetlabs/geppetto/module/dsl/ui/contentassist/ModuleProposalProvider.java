@@ -46,8 +46,8 @@ public class ModuleProposalProvider extends AbstractModuleProposalProvider {
 				minVer = Version.create("0.1.0");
 		else if(rq instanceof JsonObject) {
 			minVer = "puppet".equals(moduleUtil.getString((JsonObject) rq, "name"))
-					? Version.create("3.6.0")
-							: Version.create("3.0.0");
+				? Version.create("3.6.0")
+				: Version.create("3.0.0");
 		}
 		else
 			minVer = Version.create("0.1.0");

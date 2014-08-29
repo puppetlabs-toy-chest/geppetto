@@ -113,8 +113,8 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 		switch(featureID) {
 			case PPPackage.VIRTUAL_NAME_OR_REFERENCE__VALUE:
 				return VALUE_EDEFAULT == null
-				? value != null
-				: !VALUE_EDEFAULT.equals(value);
+					? value != null
+					: !VALUE_EDEFAULT.equals(value);
 			case PPPackage.VIRTUAL_NAME_OR_REFERENCE__EXPORTED:
 				return exported != EXPORTED_EDEFAULT;
 		}
@@ -203,8 +203,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 		boolean oldExported = exported;
 		exported = newExported;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.VIRTUAL_NAME_OR_REFERENCE__EXPORTED, oldExported, exported));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.VIRTUAL_NAME_OR_REFERENCE__EXPORTED, oldExported, exported));
 	}
 
 	/**
@@ -218,8 +217,7 @@ public class VirtualNameOrReferenceImpl extends LiteralExpressionImpl implements
 		String oldValue = value;
 		value = newValue;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.VIRTUAL_NAME_OR_REFERENCE__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.VIRTUAL_NAME_OR_REFERENCE__VALUE, oldValue, value));
 	}
 
 	/**

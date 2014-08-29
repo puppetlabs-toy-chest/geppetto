@@ -39,7 +39,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 		public BadNameCharactersException(boolean strict) {
 			super(strict
 				? STRICT_MSG
-						: LENIENT_MSG);
+				: LENIENT_MSG);
 		}
 	}
 
@@ -63,14 +63,14 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 		public BadOwnerCharactersException(boolean strict) {
 			super(strict
 				? STRICT_MSG
-						: LENIENT_MSG);
+				: LENIENT_MSG);
 		}
 	}
 
 	public static class JsonAdapter implements JsonDeserializer<ModuleName>, JsonSerializer<ModuleName> {
 		@Override
-		public ModuleName deserialize(JsonElement json, java.lang.reflect.Type typeOfT,
-				JsonDeserializationContext context) throws JsonParseException {
+		public ModuleName deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
 			String name = json.getAsString();
 			String owner = null;
 			int sepIdx = name.indexOf('/');
@@ -95,8 +95,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 
 	/**
 	 * <p>
-	 * Checks that the given name only contains lowercase letters, numbers and underscores and that it begins with a
-	 * letter. This check is valid for the name part of a full module name.
+	 * Checks that the given name only contains lowercase letters, numbers and underscores and that it begins with a letter. This check is
+	 * valid for the name part of a full module name.
 	 * </p>
 	 * Certain module names are disallowed:
 	 * <ul>
@@ -114,8 +114,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 */
 	public static String checkName(String name, boolean strict) throws BadNameCharactersException {
 		Pattern p = strict
-				? STRICT_NAME_PATTERN
-						: NAME_PATTERN;
+			? STRICT_NAME_PATTERN
+			: NAME_PATTERN;
 		Matcher m = p.matcher(name);
 		if(m.matches()) {
 			if(name.equals("main") || name.equals("settings"))
@@ -139,8 +139,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 */
 	public static String checkOwner(String owner, boolean strict) throws BadOwnerCharactersException {
 		Pattern p = strict
-				? STRICT_OWNER_PATTERN
-						: OWNER_PATTERN;
+			? STRICT_OWNER_PATTERN
+			: OWNER_PATTERN;
 		Matcher m = p.matcher(owner);
 		if(m.matches())
 			return owner;
@@ -152,8 +152,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * Creates a name from a string with a separator.
 	 * </p>
 	 * <p>
-	 * The separator may be either '/' or '-' and if more than one separator is present, then one placed first wins.
-	 * Thus<br/>
+	 * The separator may be either '/' or '-' and if more than one separator is present, then one placed first wins. Thus<br/>
 	 * &quot;foo-bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '-'<br/>
 	 * &quot;foo/bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '/'<br/>
 	 * &quot;foo/bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '/'<br/>
@@ -169,11 +168,11 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * @throws BadOwnerCharactersException
 	 * @throws BadNameSyntaxException
 	 */
-	public static ModuleName create(String fullName, boolean strict) throws BadNameSyntaxException,
-	BadNameCharactersException, BadOwnerCharactersException {
+	public static ModuleName create(String fullName, boolean strict) throws BadNameSyntaxException, BadNameCharactersException,
+			BadOwnerCharactersException {
 		return fullName == null
-				? null
-						: new ModuleName(fullName, strict);
+			? null
+			: new ModuleName(fullName, strict);
 	}
 
 	/**
@@ -188,8 +187,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * @throws BadOwnerCharactersException
 	 * @throws BadNameSyntaxException
 	 */
-	public static ModuleName create(String owner, String name, boolean strict) throws BadNameSyntaxException,
-	BadOwnerCharactersException, BadNameCharactersException {
+	public static ModuleName create(String owner, String name, boolean strict) throws BadNameSyntaxException, BadOwnerCharactersException,
+			BadNameCharactersException {
 		return new ModuleName(owner, name, strict);
 	}
 
@@ -212,21 +211,19 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * @throws BadNameSyntaxException
 	 */
 	public static ModuleName fromString(String fullName) throws BadNameSyntaxException, BadNameCharactersException,
-	BadOwnerCharactersException {
+			BadOwnerCharactersException {
 		return fullName == null || fullName.isEmpty()
-				? null
-						: new ModuleName(fullName, false);
+			? null
+			: new ModuleName(fullName, false);
 	}
 
 	/**
 	 * Creates a &quot;safe&quot; name from the given name. The following
 	 * happens:
 	 * <ul>
-	 * <li>If <code>strict</code> is <code>true</code>, then all uppercase characters in the range 'A' - 'Z' are
-	 * lowercased</li>
+	 * <li>If <code>strict</code> is <code>true</code>, then all uppercase characters in the range 'A' - 'Z' are lowercased</li>
 	 * <li>All characters that are not underscore, digit, or in the range 'a' - 'z' is replaced with an underscore</li>
-	 * <li>If an underscore or digit is found at the first position (after replacement), then it is replaced by the
-	 * letter 'z'</li>
+	 * <li>If an underscore or digit is found at the first position (after replacement), then it is replaced by the letter 'z'</li>
 	 * </ul>
 	 *
 	 * @param name
@@ -252,8 +249,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 					c += 0x20;
 				else
 					c = idx == 0
-					? 'z'
-							: '_';
+						? 'z'
+						: '_';
 				if(bld == null)
 					bld = createBuilder(name, idx);
 			}
@@ -261,8 +258,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 				bld.append(c);
 		}
 		return bld == null
-				? name
-						: bld.toString();
+			? name
+			: bld.toString();
 	}
 
 	/**
@@ -290,8 +287,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 				bld.append(c);
 		}
 		return bld == null
-				? owner
-						: bld.toString();
+			? owner
+			: bld.toString();
 	}
 
 	/**
@@ -300,8 +297,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * of the names.
 	 * </p>
 	 * <p>
-	 * The separator may be either '/' or '-' and if more than one separator is present, then one placed first wins.
-	 * Thus<br/>
+	 * The separator may be either '/' or '-' and if more than one separator is present, then one placed first wins. Thus<br/>
 	 * &quot;foo-bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '-'<br/>
 	 * &quot;foo/bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '/'<br/>
 	 * &quot;foo/bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '/'<br/>
@@ -311,8 +307,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * second element.</p>
 	 *
 	 * @param moduleName
-	 * @return A two element array with the owner and name of the module. The first element in this array may be
-	 *         <code>null</code> .
+	 * @return A two element array with the owner and name of the module. The first element in this array may be <code>null</code> .
 	 * @see #checkOwner(String)
 	 * @see #checkName(String, boolean)
 	 */
@@ -325,8 +320,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 
 		if(sepIdx >= 0) {
 			owner = sepIdx == 0
-					? null
-							: moduleName.substring(0, sepIdx);
+				? null
+				: moduleName.substring(0, sepIdx);
 			name = moduleName.substring(sepIdx + 1);
 		}
 		else
@@ -355,7 +350,7 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	private final String semanticName;
 
 	private ModuleName(String fullName, boolean strict) throws BadNameSyntaxException, BadNameCharactersException,
-	BadOwnerCharactersException {
+			BadOwnerCharactersException {
 		int idx = fullName.indexOf('/');
 		if(idx < 0)
 			idx = fullName.indexOf('-');
@@ -374,15 +369,15 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 		this.semanticName = createSemanticName();
 	}
 
-	private ModuleName(String owner, String name, boolean strict) throws BadNameSyntaxException,
-	BadOwnerCharactersException, BadNameCharactersException {
+	private ModuleName(String owner, String name, boolean strict) throws BadNameSyntaxException, BadOwnerCharactersException,
+			BadNameCharactersException {
 		this.owner = owner == null || owner.length() == 0
-				? NO_VALUE
-						: checkOwner(owner, strict).intern();
+			? NO_VALUE
+			: checkOwner(owner, strict).intern();
 
 		this.name = name == null || name.length() == 0
-				? NO_VALUE
-						: checkName(name, strict).intern();
+			? NO_VALUE
+			: checkName(name, strict).intern();
 		this.semanticName = createSemanticName();
 	}
 
@@ -398,8 +393,8 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	@Override
 	public int compareTo(ModuleName other) {
 		return semanticName == other.semanticName
-				? 0
-						: semanticName.compareTo(other.semanticName); // Both are intern
+			? 0
+			: semanticName.compareTo(other.semanticName); // Both are intern
 	}
 
 	private String createSemanticName() {

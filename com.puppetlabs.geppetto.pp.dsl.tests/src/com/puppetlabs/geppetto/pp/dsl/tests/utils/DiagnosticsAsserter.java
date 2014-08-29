@@ -27,7 +27,6 @@ import com.google.common.collect.Iterables;
 
 /**
  * Helper class making it easier to assert content of a Resource.Diagnostic
- *
  */
 public class DiagnosticsAsserter {
 
@@ -132,10 +131,8 @@ public class DiagnosticsAsserter {
 				}
 			if(!found) {
 				if(predicates.length == 1)
-					throw new ComparisonFailure(
-						"Predicate does not match", predicates[0].toString(), diagnosticsToString(d));
-				throw new ComparisonFailure(
-					"No predicate in expected matches", Arrays.toString(predicates), diagnosticsToString(d));
+					throw new ComparisonFailure("Predicate does not match", predicates[0].toString(), diagnosticsToString(d));
+				throw new ComparisonFailure("No predicate in expected matches", Arrays.toString(predicates), diagnosticsToString(d));
 			}
 		}
 		ArrayList<DiagnosticPredicate> unconsumed = new ArrayList<DiagnosticPredicate>();
@@ -144,8 +141,7 @@ public class DiagnosticsAsserter {
 				unconsumed.add(e.getKey());
 		if(unconsumed.size() != 0)
 			throw new ComparisonFailure(
-				"Missing diagnostics for required predicates", Arrays.toString(unconsumed.toArray()),
-				diagnosticsToString(asserted));
+				"Missing diagnostics for required predicates", Arrays.toString(unconsumed.toArray()), diagnosticsToString(asserted));
 	}
 
 	public void assertAny(Iterable<Diagnostic> asserted, DiagnosticPredicate... predicates) {
@@ -153,8 +149,7 @@ public class DiagnosticsAsserter {
 			if(Iterables.any(asserted, predicate))
 				return;
 		throw new ComparisonFailure(
-			"No predicate (any expected) matches diagnostics", Arrays.toString(predicates),
-			diagnosticsToString(asserted));
+			"No predicate (any expected) matches diagnostics", Arrays.toString(predicates), diagnosticsToString(asserted));
 
 	}
 

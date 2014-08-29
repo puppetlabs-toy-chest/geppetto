@@ -28,7 +28,6 @@ import com.puppetlabs.geppetto.validation.ValidationService;
 
 /**
  * @author thhal
- *
  */
 public class TestSearchPath extends AbstractValidationTest {
 

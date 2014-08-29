@@ -44,8 +44,8 @@ public class OKResourceEvents extends ResourceEvents {
 	@Override
 	public String getColumnText(int colIdx) {
 		return colIdx == 0
-				? CHANGES_TEXT
-						: "";
+			? CHANGES_TEXT
+			: "";
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class OKResourceEvents extends ResourceEvents {
 	@Override
 	public Image getImage(int colIdx) {
 		return colIdx == 0
-				? CHANGE_LIST_IMAGE
-						: null;
+			? CHANGE_LIST_IMAGE
+			: null;
 	}
 
 	@Override

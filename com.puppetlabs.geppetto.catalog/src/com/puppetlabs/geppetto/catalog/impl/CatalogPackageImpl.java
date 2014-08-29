@@ -36,11 +36,9 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
 	 * <p>
-	 * This method is used to initialize {@link CatalogPackage#eINSTANCE} when that field is accessed. Clients should
-	 * not invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * This method is used to initialize {@link CatalogPackage#eINSTANCE} when that field is accessed. Clients should not invoke it
+	 * directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 *
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -53,8 +51,8 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 
 		// Obtain or create and register package
 		CatalogPackageImpl theCatalogPackage = (CatalogPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CatalogPackageImpl
-				? EPackage.Registry.INSTANCE.get(eNS_URI)
-						: new CatalogPackageImpl());
+			? EPackage.Registry.INSTANCE.get(eNS_URI)
+			: new CatalogPackageImpl());
 
 		isInited = true;
 
@@ -150,9 +148,8 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 	 * package
 	 * package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
-	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also performs initialization
+	 * of the package, or returns the registered package, if one already exists. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 *
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see com.puppetlabs.geppetto.catalog.CatalogPackage#eNS_URI
@@ -524,87 +521,77 @@ public class CatalogPackageImpl extends EPackageImpl implements CatalogPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(catalogEClass, Catalog.class, "Catalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getCatalog_Name(), ecorePackage.getEString(), "name", null, 0, 1, Catalog.class, !IS_TRANSIENT,
-			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getCatalog_Name(), ecorePackage.getEString(), "name", null, 0, 1, Catalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(
-			getCatalog_Version(), ecorePackage.getEString(), "version", null, 0, 1, Catalog.class, !IS_TRANSIENT,
-			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getCatalog_Version(), ecorePackage.getEString(), "version", null, 0, 1, Catalog.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(
-			getCatalog_Resources(), this.getCatalogResource(), null, "resources", null, 0, -1, Catalog.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+			getCatalog_Resources(), this.getCatalogResource(), null, "resources", null, 0, -1, Catalog.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(
-			getCatalog_Classes(), ecorePackage.getEString(), "classes", null, 0, -1, Catalog.class, !IS_TRANSIENT,
-			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getCatalog_Classes(), ecorePackage.getEString(), "classes", null, 0, -1, Catalog.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(
-			getCatalog_Metadata(), this.getCatalogMetadata(), null, "metadata", null, 0, 1, Catalog.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+			getCatalog_Metadata(), this.getCatalogMetadata(), null, "metadata", null, 0, 1, Catalog.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(
-			getCatalog_Edges(), this.getCatalogEdge(), null, "edges", null, 0, -1, Catalog.class, !IS_TRANSIENT,
-			!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+			getCatalog_Edges(), this.getCatalogEdge(), null, "edges", null, 0, -1, Catalog.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(
+			catalogResourceEClass, CatalogResource.class, "CatalogResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(
+			getCatalogResource_File(), ecorePackage.getEString(), "file", null, 0, 1, CatalogResource.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getCatalogResource_Line(), ecorePackage.getEString(), "line", null, 0, 1, CatalogResource.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getCatalogResource_Type(), ecorePackage.getEString(), "type", null, 1, 1, CatalogResource.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getCatalogResource_Title(), ecorePackage.getEString(), "title", null, 1, 1, CatalogResource.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(
+			getCatalogResource_Parameters(), this.getCatalogResourceParameter(), null, "parameters", null, 0, -1, CatalogResource.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 			IS_ORDERED);
-
-		initEClass(
-			catalogResourceEClass, CatalogResource.class, "CatalogResource", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getCatalogResource_File(), ecorePackage.getEString(), "file", null, 0, 1, CatalogResource.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(
-			getCatalogResource_Line(), ecorePackage.getEString(), "line", null, 0, 1, CatalogResource.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(
-			getCatalogResource_Type(), ecorePackage.getEString(), "type", null, 1, 1, CatalogResource.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(
-			getCatalogResource_Title(), ecorePackage.getEString(), "title", null, 1, 1, CatalogResource.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(
-			getCatalogResource_Parameters(), this.getCatalogResourceParameter(), null, "parameters", null, 0, -1,
-			CatalogResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(
-			getCatalogResource_Virtual(), ecorePackage.getEBoolean(), "virtual", null, 0, 1, CatalogResource.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(
-			getCatalogResource_Exported(), ecorePackage.getEBoolean(), "exported", null, 0, 1, CatalogResource.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(
-			catalogMetadataEClass, CatalogMetadata.class, "CatalogMetadata", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(
-			getCatalogMetadata_Api_version(), ecorePackage.getEString(), "api_version", null, 0, 1,
-			CatalogMetadata.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
-
-		initEClass(
-			catalogEdgeEClass, CatalogEdge.class, "CatalogEdge", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(
-			getCatalogEdge_Target(), ecorePackage.getEString(), "target", null, 1, 1, CatalogEdge.class, !IS_TRANSIENT,
+			getCatalogResource_Virtual(), ecorePackage.getEBoolean(), "virtual", null, 0, 1, CatalogResource.class, !IS_TRANSIENT,
 			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(
-			getCatalogEdge_Source(), ecorePackage.getEString(), "source", null, 1, 1, CatalogEdge.class, !IS_TRANSIENT,
+			getCatalogResource_Exported(), ecorePackage.getEBoolean(), "exported", null, 0, 1, CatalogResource.class, !IS_TRANSIENT,
 			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(
-			catalogResourceParameterEClass, CatalogResourceParameter.class, "CatalogResourceParameter", !IS_ABSTRACT,
-			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+			catalogMetadataEClass, CatalogMetadata.class, "CatalogMetadata", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getCatalogResourceParameter_Name(), ecorePackage.getEString(), "name", null, 1, 1,
-			CatalogResourceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getCatalogMetadata_Api_version(), ecorePackage.getEString(), "api_version", null, 0, 1, CatalogMetadata.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(catalogEdgeEClass, CatalogEdge.class, "CatalogEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getCatalogResourceParameter_Value(), ecorePackage.getEString(), "value", null, 1, -1,
-			CatalogResourceParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getCatalogEdge_Target(), ecorePackage.getEString(), "target", null, 1, 1, CatalogEdge.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getCatalogEdge_Source(), ecorePackage.getEString(), "source", null, 1, 1, CatalogEdge.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(
+			catalogResourceParameterEClass, CatalogResourceParameter.class, "CatalogResourceParameter", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(
+			getCatalogResourceParameter_Name(), ecorePackage.getEString(), "name", null, 1, 1, CatalogResourceParameter.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getCatalogResourceParameter_Value(), ecorePackage.getEString(), "value", null, 1, -1, CatalogResourceParameter.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taggableEClass, Taggable.class, "Taggable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getTaggable_Tags(), ecorePackage.getEString(), "tags", null, 0, -1, Taggable.class, !IS_TRANSIENT,
-			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getTaggable_Tags(), ecorePackage.getEString(), "tags", null, 0, -1, Taggable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -64,8 +64,7 @@ public class DefinitionArgumentListLayout {
 	private void assignAlignmentAndWidths(Map<IDomNode, Integer> operatorNodes, IntegerCluster cluster) {
 		for(Entry<IDomNode, Integer> entry : operatorNodes.entrySet()) {
 			int w = entry.getValue();
-			entry.getKey().getStyles().add(
-				StyleSet.withStyles(styles.align(Alignment.right), styles.width(1 + cluster.clusterMax(w) - w)));
+			entry.getKey().getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), styles.width(1 + cluster.clusterMax(w) - w)));
 		}
 
 	}
@@ -78,8 +77,7 @@ public class DefinitionArgumentListLayout {
 		return false;
 	}
 
-	protected boolean format(DefinitionArgumentList o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean format(DefinitionArgumentList o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 
 		final IBreakAndAlignAdvice advisor = getAlignAdvice();
 		final WhenToApplyForDefinition advice = advisor.definitionParameterListAdvice();
@@ -158,13 +156,13 @@ public class DefinitionArgumentListLayout {
 				//
 				// }
 				else if(ge == grammarAccess.getDefinitionArgumentAccess().getOpEqualsSignGreaterThanSignKeyword_1_0_1_0() ||
-						ge == grammarAccess.getDefinitionArgumentAccess().getOpEqualsSignKeyword_1_0_0_0()) {
+					ge == grammarAccess.getDefinitionArgumentAccess().getOpEqualsSignKeyword_1_0_0_0()) {
 					EObject semantic = n.getParent().getSemanticObject();
 					if(semantic != null && semantic instanceof DefinitionArgument) {
 						DefinitionArgument da = (DefinitionArgument) semantic;
 						int length = da.getArgName() == null
-								? 0
-										: da.getArgName().length();
+							? 0
+							: da.getArgName().length();
 						operatorNodes.put(n, length);
 						cluster.add(length);
 					}

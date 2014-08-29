@@ -77,8 +77,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 		Expression oldKey = key;
 		key = newKey;
 		if(eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(
-				this, Notification.SET, PPPackage.HASH_ENTRY__KEY, oldKey, newKey);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PPPackage.HASH_ENTRY__KEY, oldKey, newKey);
 			if(msgs == null)
 				msgs = notification;
 			else
@@ -97,8 +96,7 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 		Expression oldValue = value;
 		value = newValue;
 		if(eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(
-				this, Notification.SET, PPPackage.HASH_ENTRY__VALUE, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PPPackage.HASH_ENTRY__VALUE, oldValue, newValue);
 			if(msgs == null)
 				msgs = notification;
 			else
@@ -240,11 +238,9 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 		if(newKey != key) {
 			NotificationChain msgs = null;
 			if(key != null)
-				msgs = ((InternalEObject) key).eInverseRemove(
-					this, EOPPOSITE_FEATURE_BASE - PPPackage.HASH_ENTRY__KEY, null, msgs);
+				msgs = ((InternalEObject) key).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PPPackage.HASH_ENTRY__KEY, null, msgs);
 			if(newKey != null)
-				msgs = ((InternalEObject) newKey).eInverseAdd(
-					this, EOPPOSITE_FEATURE_BASE - PPPackage.HASH_ENTRY__KEY, null, msgs);
+				msgs = ((InternalEObject) newKey).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PPPackage.HASH_ENTRY__KEY, null, msgs);
 			msgs = basicSetKey(newKey, msgs);
 			if(msgs != null)
 				msgs.dispatch();
@@ -264,11 +260,9 @@ public class HashEntryImpl extends EObjectImpl implements HashEntry {
 		if(newValue != value) {
 			NotificationChain msgs = null;
 			if(value != null)
-				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.HASH_ENTRY__VALUE, null, msgs);
+				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PPPackage.HASH_ENTRY__VALUE, null, msgs);
 			if(newValue != null)
-				msgs = ((InternalEObject) newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.HASH_ENTRY__VALUE, null, msgs);
+				msgs = ((InternalEObject) newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PPPackage.HASH_ENTRY__VALUE, null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if(msgs != null)
 				msgs.dispatch();

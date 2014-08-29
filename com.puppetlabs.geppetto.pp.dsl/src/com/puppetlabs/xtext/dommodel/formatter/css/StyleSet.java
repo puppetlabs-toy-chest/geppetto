@@ -23,7 +23,6 @@ import com.google.common.collect.ImmutableMap;
 /**
  * A set of styles.
  * This implementation is not thread safe.
- *
  */
 public class StyleSet {
 	public static class ImmutableStyleSet extends StyleSet {
@@ -105,7 +104,6 @@ public class StyleSet {
 	 * information about returned type.
 	 *
 	 * @param <T>
-	 *
 	 * @param x
 	 * @return
 	 */
@@ -125,7 +123,6 @@ public class StyleSet {
 	 * See the respective style type (doc) for information about returned type.
 	 *
 	 * @param <T>
-	 *
 	 * @param styleClass
 	 *            - the class of the wanted style
 	 * @param node
@@ -137,8 +134,8 @@ public class StyleSet {
 	public <T> T getStyleValue(Class<? extends IStyle<T>> styleClass, IDomNode node, Function<IDomNode, T> defaultFunc) {
 		T style = getStyleValue(styleClass, node);
 		return style == null
-				? defaultFunc.apply(node)
-						: style;
+			? defaultFunc.apply(node)
+			: style;
 	}
 
 	/**
@@ -146,15 +143,14 @@ public class StyleSet {
 	 * See the respective style type (doc) for information about returned type.
 	 *
 	 * @param <T>
-	 *
 	 * @param x
 	 * @return
 	 */
 	public <T> T getStyleValue(Class<? extends IStyle<T>> x, IDomNode node, T defaultValue) {
 		T style = getStyleValue(x, node);
 		return style == null
-				? defaultValue
-						: style;
+			? defaultValue
+			: style;
 	}
 
 	/**

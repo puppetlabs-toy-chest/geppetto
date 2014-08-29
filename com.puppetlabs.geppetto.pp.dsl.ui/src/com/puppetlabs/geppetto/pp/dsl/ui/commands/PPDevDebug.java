@@ -62,7 +62,6 @@ import com.google.inject.name.Named;
  * A command to use for development debugging purposes.
  * The intent is to install this using the com.puppetlabs.geppetto.pp.dsl.ui.devdebug
  * fragment which makes it visible in the outline menu.
- *
  */
 public class PPDevDebug extends AbstractHandler {
 	public static String compactDump(INode node, boolean showHidden) {
@@ -76,8 +75,7 @@ public class PPDevDebug extends AbstractHandler {
 		return result.toString();
 	}
 
-	private static void compactDump(INode node, boolean showHidden, String prefix, Appendable result)
-			throws IOException {
+	private static void compactDump(INode node, boolean showHidden, String prefix, Appendable result) throws IOException {
 		if(!showHidden && node instanceof ILeafNode && ((ILeafNode) node).isHidden())
 			return;
 		if(prefix.length() != 0) {
@@ -269,15 +267,13 @@ public class PPDevDebug extends AbstractHandler {
 	 */
 	private IStatus formattedDomDump(XtextResource resource) {
 		if(serializer instanceof DomBasedSerializer == false)
-			return new Status(
-				IStatus.ERROR, "com.puppetlabs.geppetto.pp.dsl.ui", "Not configured to use DomBasedSerializer");
+			return new Status(IStatus.ERROR, "com.puppetlabs.geppetto.pp.dsl.ui", "Not configured to use DomBasedSerializer");
 		DomBasedSerializer domSerializer = ((DomBasedSerializer) serializer);
 		IDomNode dom = domSerializer.serializeToDom(resource.getContents().get(0), false);
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
 
 		// ReplaceRegion r = domFormatter.format(dom, null /* all text */, formattingContextProvider.get(false), errors);
-		getDomFormatter().format(
-			dom, null /* all text */, formattingContextFactory.create(resource, FormattingOption.Format), errors);
+		getDomFormatter().format(dom, null /* all text */, formattingContextFactory.create(resource, FormattingOption.Format), errors);
 
 		serializer.serialize(resource.getContents().get(0), SaveOptions.newBuilder().format().getOptions());
 
@@ -308,7 +304,7 @@ public class PPDevDebug extends AbstractHandler {
 		for(IResourceDescription visibleResourceDesc : index.getAllResourceDescriptions()) {
 			for(IEObjectDescription objDesc : visibleResourceDesc.getExportedObjects())
 				System.out.println("\texported: " + converter.toString(objDesc.getQualifiedName()) + " type: " +
-						objDesc.getEClass().getName());
+					objDesc.getEClass().getName());
 			System.out.println(visibleResourceDesc.getURI());
 		}
 
@@ -320,7 +316,7 @@ public class PPDevDebug extends AbstractHandler {
 			for(IResourceDescription visibleResourceDesc : visibleContainer.getResourceDescriptions()) {
 				for(IEObjectDescription objDesc : visibleResourceDesc.getExportedObjects())
 					System.out.println("\texported: " + converter.toString(objDesc.getQualifiedName()) + " type: " +
-							objDesc.getEClass().getName());
+						objDesc.getEClass().getName());
 				System.out.println(visibleResourceDesc.getURI());
 			}
 		}

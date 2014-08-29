@@ -22,12 +22,9 @@ import org.eclipse.xtext.util.Pair;
 
 /**
  * This class contains custom formatting description.
- *
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
  * on how and when to use it
- *
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
- *
  * TODO: Formatting currently plagued by bugs in Xtext 2.0. See JUnit tests.
  */
 public class PPFormatter extends AbstractDeclarativeFormatter {

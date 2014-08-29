@@ -13,7 +13,6 @@ package com.puppetlabs.xtext.dommodel.formatter.css;
 /**
  * Describes a flexible int quantity (min, normal, max). Where min is the minimum allowed, normal
  * what is wanted if value is missing, and max, the maximum allowed value.
- *
  */
 public interface IFlexibleQuantity {
 

@@ -17,7 +17,6 @@ import org.eclipse.ui.part.FileEditorInput;
 
 /**
  * PP Specific Editor Customizer.
- *
  */
 public class PPEditorCustomizer extends DefaultExtXtextEditorCustomizer {
 	/**

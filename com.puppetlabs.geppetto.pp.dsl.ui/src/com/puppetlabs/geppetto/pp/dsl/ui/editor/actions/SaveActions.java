@@ -32,7 +32,6 @@ import com.puppetlabs.xtext.ui.editor.formatting.DummyReadOnly;
 
 /**
  * Implementation of save actions
- *
  */
 public class SaveActions implements ISaveActions {
 
@@ -66,8 +65,7 @@ public class SaveActions implements ISaveActions {
 	private IContentFormatterFactory contentFormatterFactory;
 
 	@Override
-	public void perform(SourceViewerConfiguration viewerConfig, ISourceViewer viewer, IResource r,
-			final IXtextDocument document) {
+	public void perform(SourceViewerConfiguration viewerConfig, ISourceViewer viewer, IResource r, final IXtextDocument document) {
 		final boolean ensureNl = preferenceHelper.getSaveActionEnsureEndsWithNewLine(r);
 		final boolean replaceFunkySpace = preferenceHelper.getSaveActionReplaceFunkySpaces(r);
 		final boolean fullFormat = preferenceHelper.getSaveActionFormat(r);
@@ -150,7 +148,6 @@ public class SaveActions implements ISaveActions {
 		if(fullFormat)
 			// Needs to be executed in a separate modify operation since it uses the state rather than
 			// the document itself. The state is modified by the document.modify operation.
-			contentFormatterFactory.createConfiguredFormatter(viewerConfig, viewer).format(
-				document, new Region(0, document.getLength()));
+			contentFormatterFactory.createConfiguredFormatter(viewerConfig, viewer).format(document, new Region(0, document.getLength()));
 	}
 }

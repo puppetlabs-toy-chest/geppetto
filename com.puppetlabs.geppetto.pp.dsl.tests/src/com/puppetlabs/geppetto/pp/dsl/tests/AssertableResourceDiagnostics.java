@@ -17,7 +17,6 @@ import com.google.common.collect.Iterables;
 /**
  * Provides convenient predicates and assertions for testing Resource.Diganostic.
  * Use one instance of this class for {@link Resource#getErrors()}, and another for {@link Resource#getWarnings()}.
- *
  */
 public class AssertableResourceDiagnostics {
 

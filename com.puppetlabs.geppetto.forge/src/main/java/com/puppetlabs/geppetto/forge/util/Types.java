@@ -37,7 +37,6 @@ import org.jrubyparser.ast.SymbolNode;
 
 /**
  * @author thhal
- *
  */
 public class Types {
 	public static void loadProvider(Type type, File providerDir) throws IOException {
@@ -76,8 +75,7 @@ public class Types {
 					continue;
 
 				// Receiver is Puppet::Type.type
-				List<Node> symArgs = RubyParserUtils.findNodes(
-					receiver.getArgs(), new NodeType[] { NodeType.SYMBOLNODE });
+				List<Node> symArgs = RubyParserUtils.findNodes(receiver.getArgs(), new NodeType[] { NodeType.SYMBOLNODE });
 				if(!(symArgs.size() == 1 && type.getName().equals(((SymbolNode) symArgs.get(0)).getName())))
 					// Not this type
 					continue;
@@ -92,16 +90,14 @@ public class Types {
 					providers = new ArrayList<NamedTypeItem>();
 				providers.add(provider);
 
-				List<Node> calls = RubyParserUtils.findNodes(call.getIter(), new NodeType[] {
-					NodeType.BLOCKNODE, NodeType.FCALLNODE });
+				List<Node> calls = RubyParserUtils.findNodes(call.getIter(), new NodeType[] { NodeType.BLOCKNODE, NodeType.FCALLNODE });
 				if(calls.isEmpty())
 					calls = RubyParserUtils.findNodes(call.getIter(), new NodeType[] { NodeType.FCALLNODE });
 				if(!calls.isEmpty()) {
 					for(Node snode : calls) {
 						FCallNode subCall = (FCallNode) snode;
 						if("desc".equals(subCall.getName())) {
-							List<Node> strArgs = RubyParserUtils.findNodes(
-								subCall.getArgs(), new NodeType[] { NodeType.STRNODE });
+							List<Node> strArgs = RubyParserUtils.findNodes(subCall.getArgs(), new NodeType[] { NodeType.STRNODE });
 							if(strArgs.size() >= 1)
 								provider.setDocumentation(((StrNode) strArgs.get(0)).getValue());
 							break;
@@ -164,7 +160,7 @@ public class Types {
 					if(receiver instanceof Colon2ConstNode) {
 						Colon2ConstNode c2cNode = (Colon2ConstNode) receiver;
 						if("Type".equals(c2cNode.getName()) && c2cNode.getLeftNode() instanceof ConstNode &&
-								"Puppet".equals(((ConstNode) c2cNode.getLeftNode()).getName())) {
+							"Puppet".equals(((ConstNode) c2cNode.getLeftNode()).getName())) {
 							newtypeNode = call;
 							break;
 						}
@@ -225,8 +221,7 @@ public class Types {
 
 			List<Node> pnodes = RubyParserUtils.findNodes(callNode.getArgs(), new NodeType[] { NodeType.SYMBOLNODE });
 			if(pnodes.size() != 1)
-				throw new IOException("A newparam or newproperty call does not take exactly one symbol parameter in " +
-						typeFileStr);
+				throw new IOException("A newparam or newproperty call does not take exactly one symbol parameter in " + typeFileStr);
 
 			NamedTypeItem elem = new NamedTypeItem();
 			if(isParam) {
@@ -252,8 +247,7 @@ public class Types {
 				if("desc".equals(pcallNode.getName())) {
 					List<Node> args = pcallNode.getArgs().childNodes();
 					if(args.size() != 1)
-						throw new IOException(
-							"A newparam or newproperty desc call does not take exactly one parameter in " + typeFileStr);
+						throw new IOException("A newparam or newproperty desc call does not take exactly one parameter in " + typeFileStr);
 					elem.setDocumentation(RubyParserUtils.stringValue(args.get(0)));
 					break;
 				}

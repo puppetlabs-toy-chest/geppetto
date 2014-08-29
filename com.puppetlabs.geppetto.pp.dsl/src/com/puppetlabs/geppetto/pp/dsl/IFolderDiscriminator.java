@@ -19,12 +19,12 @@ import org.eclipse.emf.common.util.URI;
 public interface IFolderDiscriminator {
 	/**
 	 * <p>
-	 * Checks if the given URI contains a path segment that is matched by the exclude pattern and returns
-	 * <code>true</code> if that is the case.
+	 * Checks if the given URI contains a path segment that is matched by the exclude pattern and returns <code>true</code> if that is the
+	 * case.
 	 * </p>
 	 * <p>
-	 * The last path segment is considered to be a file name unless the URI has a trailing separator. File names do not
-	 * participate in the check.
+	 * The last path segment is considered to be a file name unless the URI has a trailing separator. File names do not participate in the
+	 * check.
 	 * </p>
 	 *
 	 * @param uri

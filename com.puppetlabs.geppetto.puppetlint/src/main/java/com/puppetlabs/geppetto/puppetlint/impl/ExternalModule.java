@@ -16,7 +16,6 @@ import com.google.inject.AbstractModule;
 
 /**
  * @author thhal
- *
  */
 public class ExternalModule extends AbstractModule {
 	@Override

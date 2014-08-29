@@ -129,8 +129,7 @@ class ERBImpl implements ERB {
 		String expr = consumeUntilEndMark(input);
 		Matcher m = expressionPattern.matcher(expr);
 		if(!m.matches())
-			throw new UnsupportedOperationException("This very limited evaluator does not understand the expression: " +
-					expr);
+			throw new UnsupportedOperationException("This very limited evaluator does not understand the expression: " + expr);
 
 		String key = m.group(1);
 		if("full_name".equals(key) && metadata.getName() != null)

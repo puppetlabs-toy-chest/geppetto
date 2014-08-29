@@ -88,8 +88,8 @@ public class VariableTEImpl extends TextExpressionImpl implements VariableTE {
 		switch(featureID) {
 			case PPPackage.VARIABLE_TE__VAR_NAME:
 				return VAR_NAME_EDEFAULT == null
-				? varName != null
-				: !VAR_NAME_EDEFAULT.equals(varName);
+					? varName != null
+					: !VAR_NAME_EDEFAULT.equals(varName);
 		}
 		return super.eIsSet(featureID);
 	}

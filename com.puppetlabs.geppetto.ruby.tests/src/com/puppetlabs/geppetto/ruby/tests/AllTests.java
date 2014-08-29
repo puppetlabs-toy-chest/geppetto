@@ -51,9 +51,7 @@ public class AllTests {
 			registry.put(com.puppetlabs.geppetto.pp.PPPackage.eNS_URI, com.puppetlabs.geppetto.pp.PPPackage.eINSTANCE);
 
 		if(!registry.containsKey(com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eNS_URI))
-			registry.put(
-				com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eNS_URI,
-				com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eINSTANCE);
+			registry.put(com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eNS_URI, com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eINSTANCE);
 
 		Map<String, Object> factoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
 		if(!factoryMap.containsKey("pptp"))

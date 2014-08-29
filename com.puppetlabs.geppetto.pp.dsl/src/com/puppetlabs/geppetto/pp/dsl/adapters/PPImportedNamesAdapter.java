@@ -183,8 +183,8 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	 */
 	public Collection<IEObjectDescription> getAmbiguousDescriptions() {
 		return Collections.unmodifiableSet(ambigousDescriptions != null
-				? ambigousDescriptions
-						: EMPTY_DESCSET);
+			? ambigousDescriptions
+			: EMPTY_DESCSET);
 	}
 
 	/**
@@ -192,8 +192,8 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	 */
 	public List<QualifiedName> getNames() {
 		return Collections.unmodifiableList(importedNames != null
-				? importedNames
-						: EMPTY);
+			? importedNames
+			: EMPTY);
 	}
 
 	/**
@@ -201,8 +201,8 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	 */
 	public Collection<IEObjectDescription> getResolvedDescriptions() {
 		return Collections.unmodifiableSet(resolvedDescriptions != null
-				? resolvedDescriptions
-						: EMPTY_DESCSET);
+			? resolvedDescriptions
+			: EMPTY_DESCSET);
 	}
 
 	/**
@@ -214,8 +214,8 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	 */
 	public Map<QualifiedName, List<Location>> getUnresolved() {
 		return unresolvedNames == null
-				? EMPTY_UNRESOLVED
-						: Collections.unmodifiableMap(unresolvedNames);
+			? EMPTY_UNRESOLVED
+			: Collections.unmodifiableMap(unresolvedNames);
 	}
 
 	/**
@@ -223,8 +223,8 @@ public class PPImportedNamesAdapter extends AdapterImpl {
 	 */
 	public Collection<QualifiedName> getUnresolvedNames() {
 		return Collections.unmodifiableSet(unresolvedNames != null
-				? unresolvedNames.keySet()
-						: EMPTY_NAMESET);
+			? unresolvedNames.keySet()
+			: EMPTY_NAMESET);
 	}
 
 	@Override

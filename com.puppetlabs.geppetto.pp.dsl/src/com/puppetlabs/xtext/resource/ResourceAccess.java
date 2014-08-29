@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.URI;
 /**
  * A ResourceContext contains the instances created in a Guice scope as well as a reference
  * to a Resource URI.
- *
  */
 public final class ResourceAccess {
 

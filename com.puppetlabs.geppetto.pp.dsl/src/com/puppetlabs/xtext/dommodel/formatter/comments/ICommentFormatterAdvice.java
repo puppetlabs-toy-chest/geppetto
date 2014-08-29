@@ -17,20 +17,20 @@ import com.google.inject.Provider;
  * Describes advice/preferences to a comment formatter.
  * </p>
  * <p>
- * Note that parts of the advice may be needed by a "comment extractor" that separates the comment text from its comment
- * container. This happens when there is an ambiguity if whitespace is part of the container/the language it is embedded
- * in, or if it is part of the comment.
+ * Note that parts of the advice may be needed by a "comment extractor" that separates the comment text from its comment container. This
+ * happens when there is an ambiguity if whitespace is part of the container/the language it is embedded in, or if it is part of the
+ * comment.
  * </p>
  * <p>
- * The formatting advice described by this interface is considered to be a useful set of "preferences" for comment
- * formatting in a generic sense. Naturally, if the default textual comment processor is overridden with a more advanced
- * parser, such a processor may use only parts of this advice, and may use an extended interface to provide additional
- * implementation specific advice. When doing so, the implementation should naturally also use custom preference pages.
+ * The formatting advice described by this interface is considered to be a useful set of "preferences" for comment formatting in a generic
+ * sense. Naturally, if the default textual comment processor is overridden with a more advanced parser, such a processor may use only parts
+ * of this advice, and may use an extended interface to provide additional implementation specific advice. When doing so, the implementation
+ * should naturally also use custom preference pages.
  * </p>
  * <p>
- * <b>TODO</b>: This construct is a bit of a crutch. The best way to handle comment formatting is to parse the comment
- * into a Dom, and then apply styling with CSS. The "comment formatter advice" would then simply be a CSS. The current
- * implementation is basically one single complex "style", with a special mechanism to apply it.
+ * <b>TODO</b>: This construct is a bit of a crutch. The best way to handle comment formatting is to parse the comment into a Dom, and then
+ * apply styling with CSS. The "comment formatter advice" would then simply be a CSS. The current implementation is basically one single
+ * complex "style", with a special mechanism to apply it.
  * </p>
  */
 public interface ICommentFormatterAdvice {

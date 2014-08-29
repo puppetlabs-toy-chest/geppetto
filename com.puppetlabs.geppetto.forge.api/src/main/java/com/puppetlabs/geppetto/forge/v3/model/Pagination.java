@@ -44,8 +44,8 @@ public class Pagination extends Entity {
 	 */
 	public int getLimit() {
 		return limit == null
-				? 0
-						: limit.intValue();
+			? 0
+			: limit.intValue();
 	}
 
 	/**
@@ -60,8 +60,8 @@ public class Pagination extends Entity {
 	 */
 	public int getOffset() {
 		return offset == null
-				? 0
-						: offset.intValue();
+			? 0
+			: offset.intValue();
 	}
 
 	/**
@@ -76,8 +76,8 @@ public class Pagination extends Entity {
 	 */
 	public int getTotal() {
 		return total == null
-				? 0
-						: total.intValue();
+			? 0
+			: total.intValue();
 	}
 
 	/**

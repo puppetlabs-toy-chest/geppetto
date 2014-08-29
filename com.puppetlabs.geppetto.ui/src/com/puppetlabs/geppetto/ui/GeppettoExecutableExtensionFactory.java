@@ -17,7 +17,6 @@ import com.google.inject.Injector;
 
 /**
  * Extension Factory that allows UI classes to be injected.
- *
  */
 public class GeppettoExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 	@Override

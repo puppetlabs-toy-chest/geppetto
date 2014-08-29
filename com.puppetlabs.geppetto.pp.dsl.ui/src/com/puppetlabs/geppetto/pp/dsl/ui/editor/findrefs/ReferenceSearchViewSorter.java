@@ -22,12 +22,10 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  * so order appears natural for user (i.e. as close to from top to bottom in file it is possible to get without access
  * to actual
  * offsets in text).
- *
  */
 public class ReferenceSearchViewSorter extends ViewerSorter {
 
-	private PolymorphicDispatcher<Integer> comparator = PolymorphicDispatcher.createForSingleTarget(
-		"_compare", 2, 2, this);
+	private PolymorphicDispatcher<Integer> comparator = PolymorphicDispatcher.createForSingleTarget("_compare", 2, 2, this);
 
 	protected Integer _compare(IReferenceDescription o0, IReferenceDescription o1) {
 		return comparator.invoke(o0.getSourceEObjectUri(), o1.getSourceEObjectUri());
@@ -62,11 +60,11 @@ public class ReferenceSearchViewSorter extends ViewerSorter {
 		if(f0 == null && f1 == null)
 			return diff;
 		f0 = f0 == null
-				? ""
-						: f0;
+			? ""
+			: f0;
 		f1 = f1 == null
-				? ""
-						: f1;
+			? ""
+			: f1;
 		return f0.compareTo(f1);
 
 	}
@@ -75,7 +73,7 @@ public class ReferenceSearchViewSorter extends ViewerSorter {
 	public int compare(Viewer viewer, Object e1, Object e2) {
 		Integer result = comparator.invoke(e1, e2);
 		return result == null
-				? super.compare(viewer, e1, e2)
-						: result;
+			? super.compare(viewer, e1, e2)
+			: result;
 	}
 }

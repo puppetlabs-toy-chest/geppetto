@@ -15,7 +15,6 @@ import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 
 /**
  * @author henrik
- *
  */
 interface IFormattingContext {
 	IIndentationInformation getIndentationInformation();

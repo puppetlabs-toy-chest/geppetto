@@ -19,7 +19,6 @@ import com.google.inject.Inject;
  * Checks the workspace state.
  * Pariticipates early in the startup sequence. (Needs to run before user hits a "build" that would
  * otherwise initializes this bundle).
- *
  */
 public class PPStartup implements IStartup {
 

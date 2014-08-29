@@ -204,8 +204,8 @@ public class PPReferenceSearchViewPage extends Page implements ISearchResultPage
 	@Override
 	public String getLabel() {
 		return searchResult == null
-				? ""
-						: searchResult.getLabel();
+			? ""
+			: searchResult.getLabel();
 	}
 
 	@Override

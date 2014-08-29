@@ -20,7 +20,6 @@ import com.google.inject.Provider;
 
 /**
  * A Provider of a PP specific Resource
- *
  */
 public class PPResourceFactory implements IResourceFactory {
 	private Provider<PPResource> provider;

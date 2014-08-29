@@ -27,9 +27,7 @@ import com.google.inject.name.Named;
  * The FormattingTracer is a singleton that performs tracing if the debug option "debug/formatter" is
  * set (in .options, or via launch configuration). If not turned on, all of the formatters operations
  * have no effect.
- *
  * The FormattingTracer also implements ITracer which delegates to a configurable tracer named {@link #DEBUG_FORMATTER}.
- *
  */
 @Singleton
 public class FormattingTracer implements ITracer {
@@ -64,8 +62,8 @@ public class FormattingTracer implements ITracer {
 
 	public StyleSet getEffectiveStyle(IDomNode node) {
 		return isTracing()
-				? effectiveStyleMap.get(node)
-						: null;
+			? effectiveStyleMap.get(node)
+			: null;
 	}
 
 	@Override

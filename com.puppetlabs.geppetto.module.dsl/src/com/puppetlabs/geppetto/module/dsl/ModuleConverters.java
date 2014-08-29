@@ -93,14 +93,14 @@ public class ModuleConverters extends DefaultTerminalConverters {
 			return super.toString(value, lexerRule);
 
 		return isQuoted(lexerRule)
-				? '"' + Strings.convertToJavaString((String) value, false) + '"'
-						: super.toString(value, lexerRule);
+			? '"' + Strings.convertToJavaString((String) value, false) + '"'
+			: super.toString(value, lexerRule);
 	}
 
 	@Override
 	public Object toValue(String string, String lexerRule, INode node) throws ValueConverterException {
 		return isQuoted(lexerRule)
-				? STRING().toValue(string, node)
-						: super.toValue(string, lexerRule, node);
+			? STRING().toValue(string, node)
+			: super.toValue(string, lexerRule, node);
 	}
 }

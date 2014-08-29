@@ -60,8 +60,8 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 	public static String getLocalString(String key, Object... params) {
 		String msg = getInstance().getString(key);
 		return params.length == 0
-				? msg
-				: MessageFormat.format(msg, params);
+			? msg
+			: MessageFormat.format(msg, params);
 	}
 
 	public static void logException(String message, Exception e) {
@@ -87,8 +87,7 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 	}
 
 	public Injector createInjector(Module... modules) {
-		final Injector moduleInjector = ModuleActivator.getInstance().getInjector(
-			ModuleActivator.COM_PUPPETLABS_GEPPETTO_MODULE_DSL_MODULE);
+		final Injector moduleInjector = ModuleActivator.getInstance().getInjector(ModuleActivator.COM_PUPPETLABS_GEPPETTO_MODULE_DSL_MODULE);
 		List<Module> forgeModules = new ArrayList<Module>();
 		for(Module module : modules)
 			forgeModules.add(module);

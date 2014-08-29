@@ -234,8 +234,7 @@ public class StringFieldEditor extends FieldEditor {
 	private ControlDecoration createDecorator(Text text, String message) {
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
 		controlDecoration.setDescriptionText(message);
-		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(
-			FieldDecorationRegistry.DEC_ERROR);
+		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_ERROR);
 		controlDecoration.setImage(fieldDecoration.getImage());
 		return controlDecoration;
 	}
@@ -243,8 +242,8 @@ public class StringFieldEditor extends FieldEditor {
 	/**
 	 * Hook for subclasses to do specific state checks.
 	 * <p>
-	 * The default implementation of this framework method does nothing and returns <code>true</code>. Subclasses should
-	 * override this method to specific state checks.
+	 * The default implementation of this framework method does nothing and returns <code>true</code>. Subclasses should override this
+	 * method to specific state checks.
 	 * </p>
 	 *
 	 * @return <code>true</code> if the field value is valid,
@@ -257,8 +256,8 @@ public class StringFieldEditor extends FieldEditor {
 	/**
 	 * Fills this field editor's basic controls into the given parent.
 	 * <p>
-	 * The string field implementation of this <code>FieldEditor</code> framework method contributes the text field.
-	 * Subclasses may override but must call <code>super.doFillIntoGrid</code>.
+	 * The string field implementation of this <code>FieldEditor</code> framework method contributes the text field. Subclasses may override
+	 * but must call <code>super.doFillIntoGrid</code>.
 	 * </p>
 	 */
 	@Override
@@ -561,8 +560,8 @@ public class StringFieldEditor extends FieldEditor {
 	/**
 	 * Sets the strategy for validating the text.
 	 * <p>
-	 * Calling this method has no effect after <code>createPartControl</code> is called. Thus this method is really only
-	 * useful for subclasses to call in their constructor. However, it has public visibility for backward compatibility.
+	 * Calling this method has no effect after <code>createPartControl</code> is called. Thus this method is really only useful for
+	 * subclasses to call in their constructor. However, it has public visibility for backward compatibility.
 	 * </p>
 	 *
 	 * @param value
@@ -603,8 +602,7 @@ public class StringFieldEditor extends FieldEditor {
 	 * to the value (<code>VALUE</code> property) provided that the old and
 	 * new values are different.
 	 * <p>
-	 * This hook is <em>not</em> called when the text is initialized (or reset to the default value) from the preference
-	 * store.
+	 * This hook is <em>not</em> called when the text is initialized (or reset to the default value) from the preference store.
 	 * </p>
 	 */
 	protected void valueChanged() {

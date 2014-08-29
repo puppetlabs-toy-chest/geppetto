@@ -14,7 +14,6 @@ package com.puppetlabs.geppetto.pp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Single Quoted String</b></em>'.
  * <!-- end-user-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>

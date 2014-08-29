@@ -28,7 +28,6 @@ public class PuppetCatalogCompilerRunner {
 	/**
 	 * Returns message as message, filename and line are available as Data[0]
 	 * and Data[1] (or via the more specific CatalogDiagnostic methods).
-	 *
 	 */
 	public static class CatalogDiagnostic extends FileDiagnostic {
 		public static CatalogDiagnostic create(String message, String fileName, String line, String nodeName) {
@@ -49,8 +48,8 @@ public class PuppetCatalogCompilerRunner {
 				message = message.substring(7);
 			}
 			DiagnosticType type = message.startsWith("Could not parse")
-					? ValidationService.CATALOG_PARSER
-							: ValidationService.CATALOG;
+				? ValidationService.CATALOG_PARSER
+				: ValidationService.CATALOG;
 			CatalogDiagnostic diag = new CatalogDiagnostic(severity, type, message, new File(fileName));
 			try {
 				diag.setLineNumber(Integer.parseInt(line));
@@ -126,15 +125,14 @@ public class PuppetCatalogCompilerRunner {
 		buf.delete(0, buf.length());
 	}
 
-	public int compileCatalog(File manifest, File moduleDirectory, String nodeName, File factorData,
-			IProgressMonitor monitor) {
+	public int compileCatalog(File manifest, File moduleDirectory, String nodeName, File factorData, IProgressMonitor monitor) {
 		SubMonitor ticker = SubMonitor.convert(monitor, 2);
 		int offset = arguments.length;
 		String[] args = Arrays.copyOf(arguments, offset + 4);
 		args[offset++] = manifest.getAbsolutePath();
 		args[offset++] = moduleDirectory == null
-				? ""
-						: moduleDirectory.getAbsolutePath();
+			? ""
+			: moduleDirectory.getAbsolutePath();
 		if(nodeName == null)
 			throw new IllegalArgumentException("Node name to compile the catalog for must be specified");
 		args[offset++] = nodeName;
@@ -199,8 +197,7 @@ public class PuppetCatalogCompilerRunner {
 				Matcher matcher = errorPattern.matcher(buf);
 				if(matcher.matches()) {
 					diagnostics.add(CatalogDiagnostic.create(
-						matcher.group(MESSAGE_GROUP), matcher.group(FILE_GROUP), matcher.group(LINE_GROUP),
-						matcher.group(NODE_GROUP)));
+						matcher.group(MESSAGE_GROUP), matcher.group(FILE_GROUP), matcher.group(LINE_GROUP), matcher.group(NODE_GROUP)));
 					clear(buf);
 				}
 				// else,

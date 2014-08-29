@@ -80,7 +80,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 	protected PPDescriptionLabelProvider descriptionLabelProvider;
 
 	private final static EClass[] PARAMS_AND_VARIABLES = { //
-		//
+	//
 		PPPackage.Literals.DEFINITION_ARGUMENT, //
 		// PPTPPackage.Literals.TYPE_ARGUMENT, //
 		PPPackage.Literals.VARIABLE_EXPRESSION };
@@ -120,8 +120,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE_UNWANTED_ML_COMMENT)
 	public void changeMLCommentToSLComment(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -131,22 +130,21 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 					String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 					final boolean endsWithBreak = issue.getData() != null && issue.getData().length == 1 &&
-							"true".equals(issue.getData()[0]);
+						"true".equals(issue.getData()[0]);
 					CommentProcessor commentProcessor = new CommentProcessor();
 					JavaLikeMLCommentContainer mlContainer = new ICommentContainerInformation.JavaLikeMLCommentContainer();
 					HashSLCommentContainer hashContainer = new ICommentContainerInformation.HashSLCommentContainer();
 					int offsetOfNode = issue.getOffset();
 
 					int posOnLine = offsetOfNode -
-							Math.max(0, 1 + CharSequences.lastIndexOf(
-								xtextDocument.get(0, xtextDocument.getLength()), "\n", offsetOfNode - 1));
+						Math.max(0, 1 + CharSequences.lastIndexOf(xtextDocument.get(0, xtextDocument.getLength()), "\n", offsetOfNode - 1));
 
 					CommentText commentText = commentProcessor.separateCommentFromContainer(
 						issueString, mlContainer.create(posOnLine), "\n");
 					TextFlow result = commentProcessor.formatComment(
 						commentText, hashContainer.create(posOnLine), new CommentFormattingOptions(
-							commentConfigurationProvider.get().getFormatterAdvice(CommentType.SingleLine),
-							Integer.MAX_VALUE, 0, 1), formattingContextFactory.create(state, FormattingOption.Format));
+							commentConfigurationProvider.get().getFormatterAdvice(CommentType.SingleLine), Integer.MAX_VALUE, 0, 1),
+						formattingContextFactory.create(state, FormattingOption.Format));
 
 					if(!endsWithBreak)
 						result.appendBreak();
@@ -166,8 +164,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__UNBRACED_INTERPOLATION)
 	public void changeToBracedInterpolation(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -184,30 +181,24 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__NOT_INITIAL_LOWERCASE)
 	public void changeToInitialLowerCase(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
 				String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 				int pos = issueString.startsWith("$")
-						? 1
-								: 0;
+					? 1
+					: 0;
 				if(issueString.length() > pos) {
 					char c = issueString.charAt(pos);
 					if(Character.isLetter(c)) {
 						StringBuilder builder = new StringBuilder();
-						builder.append("Change '").append(c).append("' to '").append(Character.toLowerCase(c)).append(
-								"'.");
+						builder.append("Change '").append(c).append("' to '").append(Character.toLowerCase(c)).append("'.");
 						if(Character.isLetter(issueString.charAt(pos)))
 							acceptor.accept(
-								issue,
-								"Change first character to lower case",
-								builder.toString(),
-								null,
-								new ReplacingModification(
-									issue.getOffset() + pos, 1, Character.toString(Character.toLowerCase(c))));
+								issue, "Change first character to lower case", builder.toString(), null,
+								new ReplacingModification(issue.getOffset() + pos, 1, Character.toString(Character.toLowerCase(c))));
 					}
 					else {
 						if(c == '_') {
@@ -230,9 +221,8 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 						}
 						// ? insert 'a' ? (stupid, but perhaps better than nothing)
 						acceptor.accept(
-							issue, "Insert an 'a' before first character.",
-							"Inserts the lower case letter 'a' before the first character", null,
-							new ReplacingModification(issue.getOffset() + pos, 0, "a"));
+							issue, "Insert an 'a' before first character.", "Inserts the lower case letter 'a' before the first character",
+							null, new ReplacingModification(issue.getOffset() + pos, 0, "a"));
 
 					}
 				}
@@ -242,8 +232,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__DQ_STRING_NOT_REQUIRED)
 	public void changeToSQString(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -263,8 +252,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__DQ_STRING_NOT_REQUIRED_VAR)
 	public void changeToVariable(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -281,16 +269,14 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(IPPDiagnostics.ISSUE__ENSURE_NOT_FIRST)
 	public void ensureNotFirst(final Issue issue, final IssueResolutionAcceptor acceptor) {
 
-		acceptor.accept(
-			issue, "Move ensure first.", "Moves the ensure first among the set attributes", null,
-			new ISemanticModification() {
+		acceptor.accept(issue, "Move ensure first.", "Moves the ensure first among the set attributes", null, new ISemanticModification() {
 
-				@Override
-				public void apply(EObject element, IModificationContext context) throws Exception {
-					AttributeOperations aos = (AttributeOperations) element.eContainer();
-					aos.getAttributes().move(0, (AttributeOperation) element);
-				}
-			});
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				AttributeOperations aos = (AttributeOperations) element.eContainer();
+				aos.getAttributes().move(0, (AttributeOperation) element);
+			}
+		});
 	}
 
 	private String escapeChar(String s, char x) {
@@ -331,8 +317,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE_RIGHT_TO_LEFT_RELATIONSHIP)
 	public void fixRightToLeftRelationsip(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		if(issue.getLength() > 2 || issue.getData() == null || issue.getData().length != 2 ||
-				"false".equals(issue.getData()[1]))
+		if(issue.getLength() > 2 || issue.getData() == null || issue.getData().length != 2 || "false".equals(issue.getData()[1]))
 			return; // can't fix it
 
 		relationshipExpressionFixer.get().fixRightToLeftRelationsip(issue, acceptor);
@@ -341,8 +326,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME)
 	public void hyphenInName(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -350,8 +334,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 				String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 				String replacementString = issueString.replaceAll("-", "_");
 
-				acceptor.accept(
-					issue, "Change to '" + replacementString + "'", "Changes all '-' to '_' in the name", null, //
+				acceptor.accept(issue, "Change to '" + replacementString + "'", "Changes all '-' to '_' in the name", null, //
 					new ReplacingModification(issue.getOffset(), issue.getLength(), replacementString));
 
 				replacementString = issueString.replaceAll("-", "");
@@ -363,15 +346,13 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__MISSING_COMMA)
 	public void insertMissingComma(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(
-			issue, "Insert missing comma", "Insert missing comma", null, new ReplacingModification(
-				issue.getOffset() + 1, 0, ","));
+		acceptor.accept(issue, "Insert missing comma", "Insert missing comma", null, new ReplacingModification(
+			issue.getOffset() + 1, 0, ","));
 	}
 
 	@Fix(IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN)
 	public void interpolatedHyphen(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -396,8 +377,8 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 				builder.append(issueString);
 				builder.append("}");
 				acceptor.accept(
-					issue, "Change to '" + builder.toString() + "'",
-					"Enclose in { } to prevent '-' from being included in variable name", null, //
+					issue, "Change to '" + builder.toString() + "'", "Enclose in { } to prevent '-' from being included in variable name",
+					null, //
 					new ReplacingModification(issue.getOffset(), issue.getLength(), builder.toString()));
 
 				// // --b)
@@ -446,12 +427,10 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 		String tmp = getQualifiedNameConverter().toString(upperCaseName);
 		acceptor.accept(issue, "Make all segments start with upper case", //
-			"Change the name to '" + tmp + "'", null, new ReplacingModification(
-				issue.getOffset(), issue.getLength(), tmp));
+			"Change the name to '" + tmp + "'", null, new ReplacingModification(issue.getOffset(), issue.getLength(), tmp));
 		tmp = getQualifiedNameConverter().toString(lowerCaseName);
 		acceptor.accept(issue, "Make all segments start with lower case", //
-			"Change the name to '" + tmp + "'", null, new ReplacingModification(
-				issue.getOffset(), issue.getLength(), tmp));
+			"Change the name to '" + tmp + "'", null, new ReplacingModification(issue.getOffset(), issue.getLength(), tmp));
 	}
 
 	@Fix(IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE)
@@ -462,9 +441,8 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 		for(String proposal : data) {
 			acceptor.accept(issue, "Replace with '" + proposal + "'", //
 				"Change the reference to" + (proposal.startsWith("::")
-						? " the absolute: \n"
-								: ": \n") + proposal, null, new ReplacingModification(
-									issue.getOffset(), issue.getLength(), proposal));
+					? " the absolute: \n"
+					: ": \n") + proposal, null, new ReplacingModification(issue.getOffset(), issue.getLength(), proposal));
 		}
 	}
 
@@ -472,8 +450,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 	public void makeStringBoolean(final Issue issue, final IssueResolutionAcceptor acceptor) {
 		String booleanText = issue.getData()[0];
 		acceptor.accept(
-			issue, "Change to boolean " + booleanText,
-			"A string is always true in boolean sense.\nChange to a real boolean value.", null, //
+			issue, "Change to boolean " + booleanText, "A string is always true in boolean sense.\nChange to a real boolean value.", null, //
 			new ReplacingModification(issue.getOffset(), issue.getLength(), booleanText));
 	}
 
@@ -517,16 +494,15 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 	public void surroundExprWithSingleQuote(final Issue issue, IssueResolutionAcceptor acceptor) {
 
 		acceptor.accept(
-			issue, "Quote expression", "Surround expression with single quotes", null,
-			new SurroundWithTextModification(issue.getOffset(), issue.getLength(), "'"));
+			issue, "Quote expression", "Surround expression with single quotes", null, new SurroundWithTextModification(
+				issue.getOffset(), issue.getLength(), "'"));
 	}
 
 	@Fix(IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION_STRING_OK)
 	public void surroundWithInterpolation(final Issue issue, IssueResolutionAcceptor acceptor) {
 
-		acceptor.accept(
-			issue, "Interpolate expression", "Surround expression with '\"${', '}\"' ", null,
-			new SurroundWithTextModification(issue.getOffset(), issue.getLength(), "\"${", "}\""));
+		acceptor.accept(issue, "Interpolate expression", "Surround expression with '\"${', '}\"' ", null, new SurroundWithTextModification(
+			issue.getOffset(), issue.getLength(), "\"${", "}\""));
 	}
 
 	@Fix(IPPDiagnostics.ISSUE__UNQUOTED_QUALIFIED_NAME)
@@ -538,8 +514,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE)
 	public void unknownVariable(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 
 		final boolean[] unqualified = new boolean[1];
 		unqualified[0] = false;
@@ -568,8 +543,8 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 					for(String s : proposals)
 						acceptor.accept(issue, "Change to '$" + s + "'", "Did you mean '$" + s + "'", null, //
 							new ReplacingModification(issue.getOffset() + (dollarVar
-									? 1
-											: 0), issueString.length(), s));
+								? 1
+								: 0), issueString.length(), s));
 				}
 				else {
 					unqualified[0] = true;
@@ -584,8 +559,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(IPPDiagnostics.ISSUE__UNQUALIFIED_VARIABLE)
 	public void unqualifiedVariable(final Issue issue, final IssueResolutionAcceptor acceptor) {
 
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
-			issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -600,10 +574,11 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 					issueString = issueString.substring(1);
 
 				// --GLOBAL NAME
-				acceptor.accept(issue, "Change to '$::" + issueString + "'", "Change to '$" + issueString +
-					"' in global scope", null, new ReplacingModification(issue.getOffset() + (dollarVar
-							? 1
-									: 0), issueString.length(), "::" + issueString));
+				acceptor.accept(
+					issue, "Change to '$::" + issueString + "'", "Change to '$" + issueString + "' in global scope", null,
+					new ReplacingModification(issue.getOffset() + (dollarVar
+						? 1
+						: 0), issueString.length(), "::" + issueString));
 
 				// --NAME IN THIS SCOPE - AND OUTER
 				// (Propose existing names in this and outer scopes)
@@ -616,14 +591,12 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 					String nameInScopeString = converter.toString(desc.getName());
 					String foundNameOfScope = converter.toString(desc.getName().skipLast(1));
 					String scopeType = desc.getName().skipLast(1).equals(nameOfScope)
-							? "current"
-									: "inhertied";
-					acceptor.accept(
-						issue, "Change to '$" + nameInScopeString + "'", "Change to '$" + issueString + "' in the " +
-								scopeType + " scope:\n '" + foundNameOfScope + "'", null, new ReplacingModification(
-									issue.getOffset() + (dollarVar
-											? 1
-													: 0), issueString.length(), nameInScopeString));
+						? "current"
+						: "inhertied";
+					acceptor.accept(issue, "Change to '$" + nameInScopeString + "'", "Change to '$" + issueString + "' in the " +
+						scopeType + " scope:\n '" + foundNameOfScope + "'", null, new ReplacingModification(issue.getOffset() + (dollarVar
+						? 1
+						: 0), issueString.length(), nameInScopeString));
 				}
 				// String scopeType = "current";
 
@@ -633,16 +606,14 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 					// TODO: Only propose if this name exists
 					// configure for lookup of things
 					if(ppFinder.findVariables(varExpr, nameInScopeString, null).getAdjusted().size() > 0)
-						acceptor.accept(
-							issue, "Change to '$" + converter.toString(nameInScope) + "'", "Change to '$" +
-									issueString + "' in the outer scope:\n '" + converter.toString(qn) + "'", null,
-									new ReplacingModification(issue.getOffset() + (dollarVar
-											? 1
-													: 0), issueString.length(), nameInScopeString));
+						acceptor.accept(issue, "Change to '$" + converter.toString(nameInScope) + "'", "Change to '$" + issueString +
+							"' in the outer scope:\n '" + converter.toString(qn) + "'", null, new ReplacingModification(issue.getOffset() +
+							(dollarVar
+								? 1
+								: 0), issueString.length(), nameInScopeString));
 				}
 				// --VARIABLE OR PARAMETER IN A SUPERCLASS
-				List<IEObjectDescription> classes = ppFinder.findHostClasses(
-					varExpr, converter.toString(nameOfScope), null).getAdjusted();
+				List<IEObjectDescription> classes = ppFinder.findHostClasses(varExpr, converter.toString(nameOfScope), null).getAdjusted();
 				if(classes.size() > 0) {
 					// ignore ambiguities, just pick the first
 					// TODO: Complete PPFinder to search for variables with a search strategy exact, allscopes, allscopesStartsWith
@@ -656,26 +627,22 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 		// "${x}
 		acceptor.accept(
-			issue, "Surround with double quotes", "Places the unquoted interpolation in a string", null,
-			new SurroundWithTextModification(issue.getOffset(), issue.getLength(), "\"", "\""));
+			issue, "Surround with double quotes", "Places the unquoted interpolation in a string", null, new SurroundWithTextModification(
+				issue.getOffset(), issue.getLength(), "\"", "\""));
 
 		// $x
-		acceptor.accept(
-			issue, "Change to regular variable reference", "Removes the '{' and '}'", null, new IModification() {
+		acceptor.accept(issue, "Change to regular variable reference", "Removes the '{' and '}'", null, new IModification() {
 
-				@Override
-				public void apply(IModificationContext context) throws Exception {
-					IXtextDocument doc = context.getXtextDocument();
-					doc.replace(
-						issue.getOffset(), issue.getLength(),
-						"$" + doc.get(issue.getOffset() + 2, issue.getLength() - 3));
-				}
-			});
+			@Override
+			public void apply(IModificationContext context) throws Exception {
+				IXtextDocument doc = context.getXtextDocument();
+				doc.replace(issue.getOffset(), issue.getLength(), "$" + doc.get(issue.getOffset() + 2, issue.getLength() - 3));
+			}
+		});
 
 		// $x ? { undef => '', default => $x }
 		acceptor.accept(
-			issue, "Change to selector that makes undef empty string", "$x ? {undef => '', default => $x }", null,
-			new IModification() {
+			issue, "Change to selector that makes undef empty string", "$x ? {undef => '', default => $x }", null, new IModification() {
 
 				@Override
 				public void apply(IModificationContext context) throws Exception {

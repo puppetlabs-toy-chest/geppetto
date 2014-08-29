@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   AT&T - initial API
  *   Puppet Labs
@@ -14,7 +14,6 @@ package com.puppetlabs.xtext.dommodel.formatter.css;
 
 /**
  * Describes Horizontal Alignment
- *
  */
 public enum Alignment {
 	center, left, right,

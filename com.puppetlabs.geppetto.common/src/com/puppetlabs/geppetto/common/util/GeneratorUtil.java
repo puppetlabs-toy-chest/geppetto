@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 
 /**
  * @author filip.hrbek@gmail.com
- *
  */
 public class GeneratorUtil {
 

@@ -109,8 +109,8 @@ public class DirectoryValidator {
 			if(lcname.startsWith("rakefile")) {
 				int length = lcname.length();
 				if(!(length == 8 //
-						||
-						(length == 11 && lcname.endsWith(".rb")) //
+					||
+					(length == 11 && lcname.endsWith(".rb")) //
 				|| (length == 13 && lcname.endsWith(".rake"))))
 					return false;
 			}
@@ -229,8 +229,8 @@ public class DirectoryValidator {
 
 		if(hasModulesSubDirectory(moduleRoot))
 			addFileDiagnostic(
-				mdAdvisor.getUnexpectedSubmodule(), new File(moduleRoot, "modules"),
-				"Submodules in a module is not allowed", ModuleDiagnostics.ISSUE__UNEXPECTED_SUBMODULE_DIRECTORY);
+				mdAdvisor.getUnexpectedSubmodule(), new File(moduleRoot, "modules"), "Submodules in a module is not allowed",
+				ModuleDiagnostics.ISSUE__UNEXPECTED_SUBMODULE_DIRECTORY);
 
 		File moduleFile = new File(moduleRoot, Forge.MODULEFILE_NAME);
 		boolean hasMetadataJsonFile = new File(moduleRoot, Forge.METADATA_JSON_NAME).isFile();
@@ -248,8 +248,7 @@ public class DirectoryValidator {
 		else {
 			if(!hasMetadataJsonFile)
 				addFileDiagnostic(
-					ValidationPreference.ERROR, moduleRoot, "Missing metadata.json",
-					ModuleDiagnostics.ISSUE__MISSING_METADATA_JSON_FILE);
+					ValidationPreference.ERROR, moduleRoot, "Missing metadata.json", ModuleDiagnostics.ISSUE__MISSING_METADATA_JSON_FILE);
 		}
 	}
 
@@ -318,8 +317,8 @@ public class DirectoryValidator {
 			if(filesOnPath.add(f)) {
 				nonRootsOnPath.add(f);
 				resourcesOnPath.add(URI.createFileURI(Forge.MODULEFILE_NAME.equals(f.getName())
-						? new File(f.getParentFile(), Forge.METADATA_JSON_NAME).getPath()
-						: f.getPath()));
+					? new File(f.getParentFile(), Forge.METADATA_JSON_NAME).getPath()
+					: f.getPath()));
 			}
 		}
 
@@ -366,9 +365,7 @@ public class DirectoryValidator {
 				// remember the metadata and where it came from
 				// and if it represents a NODE as opposed to a regular MODULE
 				moduleData.put(
-					moduleName,
-					new MetadataInfo(
-						mdUtil.getApiMetadata(m), f, nodeRootPath.isPrefixOf(new Path(f.getAbsolutePath()))));
+					moduleName, new MetadataInfo(mdUtil.getApiMetadata(m), f, nodeRootPath.isPrefixOf(new Path(f.getAbsolutePath()))));
 			}
 		}
 
@@ -393,8 +390,7 @@ public class DirectoryValidator {
 					if(redefined)
 						addFileDiagnostic(
 							options.getModuleValidationAdvisor().getModuleRedefinition(), mi.getFile(),
-							"Redefinition - equally named module already exists",
-							ModuleDiagnostics.ISSUE__MODULE_REDEFINITION);
+							"Redefinition - equally named module already exists", ModuleDiagnostics.ISSUE__MODULE_REDEFINITION);
 				}
 			}
 
@@ -549,8 +545,8 @@ public class DirectoryValidator {
 		try {
 			URI platformURI = options.getPlatformURI();
 			ppRunner.loadResource(platformURI != null
-					? platformURI
-					: PuppetTarget.getDefault().getPlatformURI());
+				? platformURI
+				: PuppetTarget.getDefault().getPlatformURI());
 		}
 		catch(IOException e) {
 			addExceptionDiagnostic("Internal Error: Could not load pptp.", e);
@@ -634,9 +630,9 @@ public class DirectoryValidator {
 			checkLayout();
 
 		final int workload = ppFiles.size() + metadataFiles.size() * 3 + rbFiles.size() * 2 //
-				+ rakeFiles.size() * 2 //
-				+ 1 // load pptp
-				+ 1 // "for the pot" (to make sure there is a final tick to report)
+			+ rakeFiles.size() * 2 //
+			+ 1 // load pptp
+			+ 1 // "for the pot" (to make sure there is a final tick to report)
 		;
 
 		final SubMonitor ticker = SubMonitor.convert(monitor, workload); // TODO: scaling
@@ -662,8 +658,7 @@ public class DirectoryValidator {
 
 		try {
 			ppRunner.configureEncoding(options.getEncodingProvider());
-			ppRunner.configureSearchPath(
-				root, options.getSearchPath(), options.getEnvironment(), options.getManifestDir());
+			ppRunner.configureSearchPath(root, options.getSearchPath(), options.getEnvironment(), options.getManifestDir());
 
 			// Load pptp
 			if(options.isCheckReferences()) {

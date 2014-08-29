@@ -103,7 +103,6 @@ public class ValidationAdvisor {
 
 	/**
 	 * Validation Advisor for Puppet 2.6
-	 *
 	 */
 	public static class ValidationAdvisor_2_6 extends BaseValidationAdvisor implements IValidationAdvisor {
 		/**
@@ -243,7 +242,6 @@ public class ValidationAdvisor {
 
 	/**
 	 * Validation Advisor for Puppet 2.7
-	 *
 	 */
 	public static class ValidationAdvisor_2_7 extends ValidationAdvisor_2_6 implements IValidationAdvisor {
 
@@ -287,7 +285,6 @@ public class ValidationAdvisor {
 
 	/**
 	 * Validation Advisor for Puppet 3.0
-	 *
 	 */
 	public static class ValidationAdvisor_3_0 extends ValidationAdvisor_2_7 implements IValidationAdvisor {
 		/**

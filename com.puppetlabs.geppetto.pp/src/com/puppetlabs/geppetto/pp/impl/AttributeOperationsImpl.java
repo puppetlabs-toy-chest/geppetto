@@ -158,7 +158,7 @@ public class AttributeOperationsImpl extends EObjectImpl implements AttributeOpe
 	public EList<AttributeOperation> getAttributes() {
 		if(attributes == null) {
 			attributes = new EObjectContainmentEList<AttributeOperation>(
-					AttributeOperation.class, this, PPPackage.ATTRIBUTE_OPERATIONS__ATTRIBUTES);
+				AttributeOperation.class, this, PPPackage.ATTRIBUTE_OPERATIONS__ATTRIBUTES);
 		}
 		return attributes;
 	}

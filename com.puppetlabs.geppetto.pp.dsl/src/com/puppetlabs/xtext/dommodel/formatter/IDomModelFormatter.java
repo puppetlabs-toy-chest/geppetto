@@ -39,8 +39,7 @@ public interface IDomModelFormatter {
 	 * @param formattingContext
 	 * @return
 	 */
-	public ReplaceRegion format(IDomNode dom, /* @Nullable */ITextRegion regionToFormat,
-			IFormattingContext formattingContext);
+	public ReplaceRegion format(IDomNode dom, /* @Nullable */ITextRegion regionToFormat, IFormattingContext formattingContext);
 
 	/**
 	 * Formats the given dom node (and its children) and produces a ReplaceRegion with the formatted text.
@@ -57,6 +56,6 @@ public interface IDomModelFormatter {
 	 *            - an acceptor of errors discovered during formatting
 	 * @return
 	 */
-	public ReplaceRegion format(IDomNode dom, /* @Nullable */ITextRegion regionToFormat,
-			IFormattingContext formattingContext, ISerializationDiagnostic.Acceptor errors);
+	public ReplaceRegion format(IDomNode dom, /* @Nullable */ITextRegion regionToFormat, IFormattingContext formattingContext,
+			ISerializationDiagnostic.Acceptor errors);
 }

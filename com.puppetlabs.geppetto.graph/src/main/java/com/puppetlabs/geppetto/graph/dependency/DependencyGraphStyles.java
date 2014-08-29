@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.graph.dependency;
 
 /**
  * Definition of styles used by DependencyGraphTheme
- *
  */
 public interface DependencyGraphStyles {
 	static final String STYLE_CLASS_RESOLVED_MODULE = "Resolved";

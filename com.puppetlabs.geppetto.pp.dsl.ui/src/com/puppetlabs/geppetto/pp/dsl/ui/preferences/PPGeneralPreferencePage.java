@@ -19,18 +19,15 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferenceP
 /**
  * A simple preference page for selection of puppet target.
  * This is also the puppet root preference pane.
- *
  * <p>
- * Note: Previous versions used "2.8" but this version will never be released as 2.7 is the last in the 2.x series. The
- * implementation below corrects this by updating the preferences from "2.8" to "3.0" if the value "2.8" is encountered.
+ * Note: Previous versions used "2.8" but this version will never be released as 2.7 is the last in the 2.x series. The implementation below
+ * corrects this by updating the preferences from "2.8" to "3.0" if the value "2.8" is encountered.
  * </p>
- *
  */
 public class PPGeneralPreferencePage extends AbstractPreferencePage {
 
 	/**
 	 * Specialized version that corrects stored "2.8" value for the "3.0" release.
-	 *
 	 */
 	private static class PuppetVersionFieldEditor extends RadioGroupFieldEditor {
 
@@ -41,8 +38,7 @@ public class PPGeneralPreferencePage extends AbstractPreferencePage {
 		 * @param strings
 		 * @param fieldEditorParent
 		 */
-		public PuppetVersionFieldEditor(String puppetTargetVersion, String string, int i, String[][] strings,
-				Composite fieldEditorParent) {
+		public PuppetVersionFieldEditor(String puppetTargetVersion, String string, int i, String[][] strings, Composite fieldEditorParent) {
 			super(puppetTargetVersion, string, i, strings, fieldEditorParent);
 		}
 

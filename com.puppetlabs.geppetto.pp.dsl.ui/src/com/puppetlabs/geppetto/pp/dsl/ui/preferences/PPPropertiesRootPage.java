@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.editor.preferences.fields.LabelFieldEditor;
 /**
  * A simple preference page for selection of puppet target.
  * This is also the puppet root preference pane.
- *
  */
 public class PPPropertiesRootPage extends FieldEditorPreferencePage implements IWorkbenchPropertyPage {
 

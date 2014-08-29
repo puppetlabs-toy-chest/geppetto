@@ -23,7 +23,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdv
 /**
  * An advisor to validation. Different implementations of this class capture the validation rules specific
  * to a language version.
- *
  */
 public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public enum ComplianceLevel {

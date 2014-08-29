@@ -25,8 +25,7 @@ import com.google.common.collect.Multimap;
  * Producer of dot graphs
  */
 public interface DependencyGraphProducer {
-	void produceGraph(ICancel cancel, String title, File[] roots, OutputStream output, BuildResult buildResult,
-			Diagnostic chain);
+	void produceGraph(ICancel cancel, String title, File[] roots, OutputStream output, BuildResult buildResult, Diagnostic chain);
 
 	void produceGraph(ICancel cancel, String title, File[] roots, OutputStream output, File root,
 			Multimap<ModuleName, MetadataInfo> moduleData, AllModulesState exportData, Diagnostic chain);

@@ -14,7 +14,6 @@ package com.puppetlabs.geppetto.pp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Binary Expression</b></em>'.
  * <!-- end-user-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,8 +31,7 @@ public interface BinaryExpression extends Expression {
 	 * Returns the value of the '<em><b>Left Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Left Expr</em>' containment reference isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of the '<em>Left Expr</em>' containment reference isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *
@@ -49,8 +47,7 @@ public interface BinaryExpression extends Expression {
 	 * Returns the value of the '<em><b>Right Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Right Expr</em>' containment reference isn't clear, there really should be more of a
-	 * description here...
+	 * If the meaning of the '<em>Right Expr</em>' containment reference isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *

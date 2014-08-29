@@ -14,7 +14,6 @@ package com.puppetlabs.geppetto.pp.pptp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Type Argument</b></em>'.
  * <!-- end-user-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,8 +31,7 @@ public interface TypeArgument extends TargetElement {
 	 * Returns the value of the '<em><b>Namevar</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Namevar</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Namevar</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *
@@ -49,8 +47,7 @@ public interface TypeArgument extends TargetElement {
 	 * Returns the value of the '<em><b>Required</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Required</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Required</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *

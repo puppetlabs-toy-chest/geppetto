@@ -63,8 +63,7 @@ public class PPSemanticSequencer extends AbstractPPSemanticSequencer {
 		// }
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(
-			grammarAccess.getLiteralBooleanAccess().getValueBooleanValueParserRuleCall_0(), semanticObject.isValue());
+		feeder.accept(grammarAccess.getLiteralBooleanAccess().getValueBooleanValueParserRuleCall_0(), semanticObject.isValue());
 		feeder.finish();
 	}
 

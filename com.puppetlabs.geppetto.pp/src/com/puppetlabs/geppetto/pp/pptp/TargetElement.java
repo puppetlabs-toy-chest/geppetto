@@ -14,7 +14,6 @@ package com.puppetlabs.geppetto.pp.pptp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Target Element</b></em>'.
  * <!-- end-user-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,8 +31,7 @@ public interface TargetElement extends INamed, IDocumented {
 	 * Returns the value of the '<em><b>Deprecated</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Deprecated</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Deprecated</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *

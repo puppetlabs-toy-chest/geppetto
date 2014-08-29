@@ -36,8 +36,8 @@ public class PPObjectAtOffsetHelper {
 	 *
 	 * @param a
 	 *            node (possibly null)
-	 * @return if the given node is part of a cross reference this method returns the node pointing to the
-	 *         {@link CrossReference} <code>null</code> if
+	 * @return if the given node is part of a cross reference this method returns the node pointing to the {@link CrossReference}
+	 *         <code>null</code> if
 	 *         the passed node was a null reference or if the passed node is
 	 *         not part of a cross reference.
 	 * @since 2.1
@@ -95,13 +95,11 @@ public class PPObjectAtOffsetHelper {
 			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), region.getOffset());
 			INode crossRefNode = findCrossReferenceNode(leaf);
 			// if not a cross reference position and the cursor is at the beginning of a node try the previous one.
-			if(crossRefNode == null && leaf != null && region.getLength() == 0 &&
-					leaf.getOffset() == region.getOffset()) {
+			if(crossRefNode == null && leaf != null && region.getLength() == 0 && leaf.getOffset() == region.getOffset()) {
 				leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), region.getOffset() - 1);
 				return findCrossReferenceNode(leaf);
 			}
-			else if(crossRefNode != null &&
-					crossRefNode.getOffset() + crossRefNode.getLength() >= region.getOffset() + region.getLength()) {
+			else if(crossRefNode != null && crossRefNode.getOffset() + crossRefNode.getLength() >= region.getOffset() + region.getLength()) {
 				return crossRefNode;
 			}
 		}

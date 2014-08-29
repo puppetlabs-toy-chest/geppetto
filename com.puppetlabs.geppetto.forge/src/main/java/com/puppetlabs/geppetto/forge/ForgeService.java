@@ -36,8 +36,7 @@ public interface ForgeService {
 	 * @return A list files appointing the installed modules.
 	 * @throws IOException
 	 */
-	Collection<File> downloadDependencies(Iterable<Metadata> metadatas, File importedModulesDir, Diagnostic result)
-			throws IOException;
+	Collection<File> downloadDependencies(Iterable<Metadata> metadatas, File importedModulesDir, Diagnostic result) throws IOException;
 
 	/**
 	 * Install a specific release of a module from the Forge repository. A
@@ -61,8 +60,7 @@ public interface ForgeService {
 	 *            Set to <code>true</code> to overwrite an existing module.
 	 * @return The metadata extracted from the metadata.json file
 	 */
-	Metadata install(Metadata release, File destination, boolean destinationIncludesTopFolder, boolean force)
-			throws IOException;
+	Metadata install(Metadata release, File destination, boolean destinationIncludesTopFolder, boolean force) throws IOException;
 
 	/**
 	 * Install a module (eg, 'user-modname') from the Forge repository. A
@@ -90,8 +88,8 @@ public interface ForgeService {
 	 *            Set to <code>true</code> to overwrite an existing module.
 	 * @return The metadata extracted from the metadata.json file
 	 */
-	Metadata install(ModuleName fullName, VersionRange range, File destination, boolean destinationIncludesTopFolder,
-			boolean force) throws IOException;
+	Metadata install(ModuleName fullName, VersionRange range, File destination, boolean destinationIncludesTopFolder, boolean force)
+			throws IOException;
 
 	/**
 	 * Publish a gzipped module tarball to the Forge. The provided diagnostic is used for informational messages
@@ -134,6 +132,5 @@ public interface ForgeService {
 	 * @return A set of releases that constitutes the successful part of the resolution
 	 * @throws IOException
 	 */
-	Set<Metadata> resolveDependencies(Iterable<Metadata> metadatas, Set<Dependency> unresolvedCollector)
-			throws IOException;
+	Set<Metadata> resolveDependencies(Iterable<Metadata> metadatas, Set<Dependency> unresolvedCollector) throws IOException;
 }

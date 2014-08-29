@@ -57,8 +57,7 @@ import com.puppetlabs.geppetto.semver.VersionRange;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog;
 import com.puppetlabs.geppetto.ui.dialog.ReleaseListSelectionDialog.Elem;
 
-public class ImportPuppetModuleFromForgeWizard extends AbstractPuppetModuleWizard implements NewWithKeyword,
-IImportWizard {
+public class ImportPuppetModuleFromForgeWizard extends AbstractPuppetModuleWizard implements NewWithKeyword, IImportWizard {
 
 	protected class PuppetProjectFromForgeCreationPage extends AbstractPuppetProjectWizard.PuppetProjectCreationPage {
 		private Listener keywordModifyListener = new Listener() {
@@ -207,8 +206,7 @@ IImportWizard {
 				if(!choices.isEmpty())
 					return choices;
 				MessageDialog.openConfirm(
-					getShell(), getLocalString("_UI_No_modules_found"),
-					getLocalString("_UI_No_module_matching_keyword", keyword));
+					getShell(), getLocalString("_UI_No_modules_found"), getLocalString("_UI_No_module_matching_keyword", keyword));
 			}
 			catch(InvocationTargetException e) {
 				Throwable t = e.getTargetException();
@@ -302,8 +300,7 @@ IImportWizard {
 				String preferredProjectName = release.getModuleName().getName();
 
 				if(!preferredProjectName.equals(getProjectName())) {
-					setMessage(
-						getLocalString("_UI_ProjectNameShouldMatchModule_message", preferredProjectName), WARNING); //$NON-NLS-1$
+					setMessage(getLocalString("_UI_ProjectNameShouldMatchModule_message", preferredProjectName), WARNING); //$NON-NLS-1$
 				}
 
 				return true;
@@ -352,8 +349,8 @@ IImportWizard {
 		try {
 			Version v = release.getVersion();
 			VersionRange vr = v == null
-					? null
-							: VersionRange.exact(v);
+				? null
+				: VersionRange.exact(v);
 
 			File projectDir = project.getLocation().toFile();
 			forgeService.install(release.getModuleName(), vr, projectDir, true, true);

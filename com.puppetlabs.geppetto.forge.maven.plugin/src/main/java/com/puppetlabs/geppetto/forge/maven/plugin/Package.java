@@ -41,8 +41,8 @@ public class Package extends AbstractForgeMojo {
 	@Component
 	private RepositorySystem repositorySystem;
 
-	private File buildForge(File moduleSource, File destination, Metadata[] resultingMetadata, byte[][] resultingMD5,
-			Diagnostic result) throws IOException {
+	private File buildForge(File moduleSource, File destination, Metadata[] resultingMetadata, byte[][] resultingMD5, Diagnostic result)
+			throws IOException {
 		return getForgeUtil().build(moduleSource, destination, null, resultingMetadata, resultingMD5, result);
 	}
 

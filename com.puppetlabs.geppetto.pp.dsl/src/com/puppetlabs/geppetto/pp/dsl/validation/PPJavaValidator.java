@@ -131,12 +131,12 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	 */
 	protected class CollectChecker {
 		private final PolymorphicDispatcher<Void> collectCheckerDispatch = new PolymorphicDispatcher<Void>(
-				"check", 1, 2, Collections.singletonList(this), new ErrorHandler<Void>() {
-					@Override
-					public Void handle(Object[] params, Throwable e) {
-						return handleError(params, e);
-					}
-				});
+			"check", 1, 2, Collections.singletonList(this), new ErrorHandler<Void>() {
+				@Override
+				public Void handle(Object[] params, Throwable e) {
+					return handleError(params, e);
+				}
+			});
 
 		public void check(AndExpression o) {
 			doCheck(o.getLeftExpr());
@@ -166,9 +166,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		public void check(Expression o, boolean left) {
 			acceptor.acceptError(
 				"Expression type not allowed as " + (left
-						? "left"
-								: "right") + " expression.", o.eContainer(), o.eContainingFeature(), INSIGNIFICANT_INDEX,
-								IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+					? "left"
+					: "right") + " expression.", o.eContainer(), o.eContainingFeature(), INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 		}
 
 		public void check(LiteralBoolean o, boolean left) {
@@ -187,10 +187,10 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				return;
 
 			acceptor.acceptError("Must be a name" + (!left
-					? " or type."
-							: "."), o, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, INSIGNIFICANT_INDEX, left
-							? IPPDiagnostics.ISSUE__NOT_NAME
-									: IPPDiagnostics.ISSUE__NOT_NAME_OR_REF);
+				? " or type."
+				: "."), o, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, INSIGNIFICANT_INDEX, left
+				? IPPDiagnostics.ISSUE__NOT_NAME
+				: IPPDiagnostics.ISSUE__NOT_NAME_OR_REF);
 		}
 
 		public void check(OrExpression o) {
@@ -297,8 +297,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		AndExpression.class, };
 
 	private static final String[] keywords = {
-		"and", "or", "case", "default", "define", "import", "if", "elsif", "else", "inherits", "node", "in",
-		"undef", "true", "false" };
+		"and", "or", "case", "default", "define", "import", "if", "elsif", "else", "inherits", "node", "in", "undef", "true", "false" };
 
 	@Inject
 	protected PPExpressionTypeNameProvider expressionTypeNameProvider;
@@ -309,8 +308,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	@Inject
 	private PPGrammarAccess grammarAccess;
 
-	private final ImmutableSet<EClass> extendedRelationshipClasses = ImmutableSet.of(
-		PPPackage.Literals.VARIABLE_EXPRESSION, //
+	private final ImmutableSet<EClass> extendedRelationshipClasses = ImmutableSet.of(PPPackage.Literals.VARIABLE_EXPRESSION, //
 		PPPackage.Literals.DOUBLE_QUOTED_STRING, //
 		PPPackage.Literals.SINGLE_QUOTED_STRING, //
 		PPPackage.Literals.LITERAL_HASH, //
@@ -318,8 +316,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		PPPackage.Literals.SELECTOR_EXPRESSION, //
 		PPPackage.Literals.CASE_EXPRESSION, //
 		PPPackage.Literals.COLLECT_EXPRESSION
-		// ,
-			);
+	// ,
+	);
 
 	@Inject
 	public PPJavaValidator(IGrammarAccess ga, Provider<IValidationAdvisor> validationAdvisorProvider) {
@@ -342,8 +340,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		Expression leftExpr = o.getLeftExpr();
 		if(!(leftExpr instanceof VariableExpression))
 			acceptor.acceptError(
-				"Not an appendable expression", o, PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_APPENDABLE);
+				"Not an appendable expression", o, PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__NOT_APPENDABLE);
 		else
 			checkAssignability(o, (VariableExpression) leftExpr);
 
@@ -374,8 +372,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		// The name "$string" causes inline templates to produce the wrong content.
 		// http://projects.puppetlabs.com/issues/14093
 		ValidationPreference preference = advisor().assignmentToVarNamedString();
-		if(preference.isWarningOrError() &&
-				("string".equals(varExpr.getVarName()) || "$string".equals(varExpr.getVarName()))) {
+		if(preference.isWarningOrError() && ("string".equals(varExpr.getVarName()) || "$string".equals(varExpr.getVarName()))) {
 			warningOrError(
 				acceptor, preference, "Assignment to $string will cause inline templates to fail", varExpr,
 				IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_STRING);
@@ -383,11 +380,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		// The name "$trusted" will automatically contain trusted node data in future versions.
 		preference = advisor().assignmentToVarNamedTrusted();
-		if(preference.isWarningOrError() &&
-				("trusted".equals(varExpr.getVarName()) || "$trusted".equals(varExpr.getVarName()))) {
+		if(preference.isWarningOrError() && ("trusted".equals(varExpr.getVarName()) || "$trusted".equals(varExpr.getVarName()))) {
 			warningOrError(
-				acceptor, preference,
-				"$trusted will automatically contain trusted node data in future versions - avoid using this name.",
+				acceptor, preference, "$trusted will automatically contain trusted node data in future versions - avoid using this name.",
 				varExpr, IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
 		}
 	}
@@ -397,8 +392,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		Expression leftExpr = o.getLeftExpr();
 		if(!(leftExpr instanceof VariableExpression || leftExpr instanceof AtExpression))
 			acceptor.acceptError(
-				"Not an assignable expression", o, PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_ASSIGNABLE);
+				"Not an assignable expression", o, PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__NOT_ASSIGNABLE);
 		if(leftExpr instanceof VariableExpression)
 			checkAssignability(o, (VariableExpression) leftExpr);
 
@@ -425,8 +420,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		final Expression leftExpr = o.getLeftExpr();
 		if(leftExpr == null)
 			acceptor.acceptError(
-				"Expression left of [] is required", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
+				"Expression left of [] is required", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
 		else if(!(leftExpr instanceof VariableExpression || (leftExpr instanceof LiteralNameOrReference && isFirstNameInTE((LiteralNameOrReference) leftExpr)))) {
 			// then, the leftExpression *must* be an AtExpression with a leftExpr being a variable
 			if(leftExpr instanceof AtExpression) {
@@ -435,7 +430,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 					final Expression nestedLeftExpr = ((AtExpression) leftExpr).getLeftExpr();
 					// if nestedLeftExpr is null, it is validated for the nested instance
 					if(nestedLeftExpr != null &&
-							!(nestedLeftExpr instanceof VariableExpression || (nestedLeftExpr instanceof LiteralNameOrReference && isFirstNameInTE((LiteralNameOrReference) nestedLeftExpr))))
+						!(nestedLeftExpr instanceof VariableExpression || (nestedLeftExpr instanceof LiteralNameOrReference && isFirstNameInTE((LiteralNameOrReference) nestedLeftExpr))))
 						acceptor.acceptError(
 							"Expression left of [] must be a variable.", nestedLeftExpr,
 							PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
@@ -444,17 +439,16 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			}
 			else {
 				acceptor.acceptError(
-					"Expression left of [] must be a variable.", leftExpr,
-					PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
-					IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+					"Expression left of [] must be a variable.", leftExpr, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR,
+					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 			}
 		}
 		// -- check that there is exactly one parameter expression (the key)
 		switch(o.getParameters().size()) {
 			case 0:
 				acceptor.acceptError(
-					"Key/index expression is required", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS,
-					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
+					"Key/index expression is required", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX,
+					IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
 				break;
 			case 1:
 				break; // ok
@@ -485,22 +479,21 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				IPPDiagnostics.ISSUE__RESOURCE_REFERENCE_NO_REFERENCE);
 		else {
 			String name = leftExpr instanceof LiteralNameOrReference
-					? ((LiteralNameOrReference) leftExpr).getValue()
-							: null;
-					boolean isref = isCLASSREF(name);
-					boolean isname = isNAME(name);
-					if(!isref) {
-						if(!isname)
-							acceptor.acceptError(
-								errorStartText + " must start with a [(deprecated) name, or] class reference.", resourceRef,
-								PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
-								IPPDiagnostics.ISSUE__NOT_CLASSREF);
-						else
-							acceptor.acceptWarning(
-								errorStartText + " uses deprecated form of reference. Should start with upper case letter.",
-								resourceRef, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
-								IPPDiagnostics.ISSUE__DEPRECATED_REFERENCE);
-					}
+				? ((LiteralNameOrReference) leftExpr).getValue()
+				: null;
+			boolean isref = isCLASSREF(name);
+			boolean isname = isNAME(name);
+			if(!isref) {
+				if(!isname)
+					acceptor.acceptError(
+						errorStartText + " must start with a [(deprecated) name, or] class reference.", resourceRef,
+						PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_CLASSREF);
+				else
+					acceptor.acceptWarning(
+						errorStartText + " uses deprecated form of reference. Should start with upper case letter.", resourceRef,
+						PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
+						IPPDiagnostics.ISSUE__DEPRECATED_REFERENCE);
+			}
 
 		}
 		if(resourceRef.getParameters().size() < 1)
@@ -524,8 +517,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkAttributeAddition(AttributeOperation o) {
 		if(!isNAME(o.getKey()))
 			acceptor.acceptError(
-				"Bad name format.", o, PPPackage.Literals.ATTRIBUTE_OPERATION__KEY, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__NOT_NAME);
+				"Bad name format.", o, PPPackage.Literals.ATTRIBUTE_OPERATION__KEY, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_NAME);
 		String op = o.getOp();
 		if(!(op != null && (op.equals("=>") || op.equals("+>"))))
 			acceptor.acceptError(
@@ -557,8 +549,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(commaNode == null || !",".equals(commaNode.getText())) {
 				int expectOffset = n.getTotalOffset() + n.getTotalLength();
 				acceptor.acceptError("Missing comma.", n.getSemanticElement(),
-					// note that offset must be -1 as this ofter a hidden newline and this
-					// does not work otherwise. Any quickfix needs to adjust the offset on replacement.
+				// note that offset must be -1 as this ofter a hidden newline and this
+				// does not work otherwise. Any quickfix needs to adjust the offset on replacement.
 					expectOffset - 1, 2, IPPDiagnostics.ISSUE__MISSING_COMMA);
 			}
 		}
@@ -587,12 +579,12 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkBinaryExpression(BinaryExpression o) {
 		if(o.getLeftExpr() == null)
 			acceptor.acceptError(
-				"A binary expression must have a left expr", o, PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NULL_EXPRESSION);
+				"A binary expression must have a left expr", o, PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__NULL_EXPRESSION);
 		if(o.getRightExpr() == null)
 			acceptor.acceptError(
-				"A binary expression must have a right expr", o, PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NULL_EXPRESSION);
+				"A binary expression must have a right expr", o, PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__NULL_EXPRESSION);
 	}
 
 	/**
@@ -613,12 +605,10 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 					if(v != null && v.contains(".")) {
 						if(periodInCase == ValidationPreference.ERROR)
 							acceptor.acceptError(
-								"A case value containing '.' (period) must be quoted", value,
-								IPPDiagnostics.ISSUE__REQUIRES_QUOTING);
+								"A case value containing '.' (period) must be quoted", value, IPPDiagnostics.ISSUE__REQUIRES_QUOTING);
 						else
 							acceptor.acceptWarning(
-								"A case value containing '.' (period) should be quoted", value,
-								IPPDiagnostics.ISSUE__REQUIRES_QUOTING);
+								"A case value containing '.' (period) should be quoted", value, IPPDiagnostics.ISSUE__REQUIRES_QUOTING);
 					}
 				}
 			}
@@ -693,13 +683,13 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			final String classRefString = ((LiteralNameOrReference) classRefExpr).getValue();
 			if(!isCLASSREF(classRefString))
 				acceptor.acceptError(
-					"Not a well formed class reference.", o, PPPackage.Literals.COLLECT_EXPRESSION__CLASS_REFERENCE,
-					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_CLASSREF);
+					"Not a well formed class reference.", o, PPPackage.Literals.COLLECT_EXPRESSION__CLASS_REFERENCE, INSIGNIFICANT_INDEX,
+					IPPDiagnostics.ISSUE__NOT_CLASSREF);
 		}
 		else {
 			acceptor.acceptError(
-				"Not a class reference.", o, PPPackage.Literals.COLLECT_EXPRESSION__CLASS_REFERENCE,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_CLASSREF);
+				"Not a class reference.", o, PPPackage.Literals.COLLECT_EXPRESSION__CLASS_REFERENCE, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__NOT_CLASSREF);
 		}
 
 		// -- the rhs expressions do not allow a full set of expressions, an extensive search must be made
@@ -720,20 +710,20 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		internalCheckTopLevelExpressions(o.getStatements());
 
 		String typeLabel = o instanceof HostClassDefinition
-				? "class"
-						: "define";
+			? "class"
+			: "define";
 		// Can only be contained by manifest (global scope), or another class.
 		EObject container = o.eContainer();
 		if(!(container instanceof PuppetManifest || container instanceof HostClassDefinition))
 			acceptor.acceptError(
-				"A '" + typeLabel + "' may only appear at top level or directly inside a class.", o.eContainer(),
-				o.eContainingFeature(), INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_AT_TOPLEVEL_OR_CLASS);
+				"A '" + typeLabel + "' may only appear at top level or directly inside a class.", o.eContainer(), o.eContainingFeature(),
+				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_AT_TOPLEVEL_OR_CLASS);
 
 		if(!isCLASSNAME(o.getClassName())) {
 			// invalid name
 			acceptor.acceptError(
-				"Must be a valid name (each segment must start with lower case letter)", o,
-				PPPackage.Literals.DEFINITION__CLASS_NAME, IPPDiagnostics.ISSUE__NOT_CLASSNAME);
+				"Must be a valid name (each segment must start with lower case letter)", o, PPPackage.Literals.DEFINITION__CLASS_NAME,
+				IPPDiagnostics.ISSUE__NOT_CLASSNAME);
 		}
 		else {
 			// hyphen in name =
@@ -743,17 +733,14 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				if(hyphenIdx >= 0) {
 					String message = "Hyphen '-' in name only unofficially supported in some puppet versions.";
 					if(hyphens == ValidationPreference.WARNING)
-						acceptor.acceptWarning(
-							message, o, PPPackage.Literals.DEFINITION__CLASS_NAME, IPPDiagnostics.ISSUE__HYPHEN_IN_NAME);
+						acceptor.acceptWarning(message, o, PPPackage.Literals.DEFINITION__CLASS_NAME, IPPDiagnostics.ISSUE__HYPHEN_IN_NAME);
 					else
-						acceptor.acceptError(
-							message, o, PPPackage.Literals.DEFINITION__CLASS_NAME, IPPDiagnostics.ISSUE__HYPHEN_IN_NAME);
+						acceptor.acceptError(message, o, PPPackage.Literals.DEFINITION__CLASS_NAME, IPPDiagnostics.ISSUE__HYPHEN_IN_NAME);
 				}
 			}
 			// reserved ?
 			if(PPReservedNameHelper.isReservedClassName(o.getClassName())) {
-				acceptor.acceptError(
-					"Reserved name", o, PPPackage.Literals.DEFINITION__CLASS_NAME, IPPDiagnostics.ISSUE__RESERVED_NAME);
+				acceptor.acceptError("Reserved name", o, PPPackage.Literals.DEFINITION__CLASS_NAME, IPPDiagnostics.ISSUE__RESERVED_NAME);
 			}
 		}
 	}
@@ -772,9 +759,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			missingDollar = advisor().definitionParamterMissingDollar();
 			warningOrError(
 				acceptor, missingDollar, (missingDollar.isWarning()
-						? "Deprecation: "
-								: "") + "Definition argument should start with $", o,
-								PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME, IPPDiagnostics.ISSUE__NOT_VARNAME);
+					? "Deprecation: "
+					: "") + "Definition argument should start with $", o, PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME,
+				IPPDiagnostics.ISSUE__NOT_VARNAME);
 		}
 		else if(!isVARIABLE(argName))
 			acceptor.acceptError(
@@ -794,8 +781,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		if(o.getOp() != null && !"=".equals(o.getOp()))
 			acceptor.acceptError(
-				"Must be an assignment operator '=' (not definition '=>')", o,
-				PPPackage.Literals.DEFINITION_ARGUMENT__OP, IPPDiagnostics.ISSUE__NOT_ASSIGNMENT_OP);
+				"Must be an assignment operator '=' (not definition '=>')", o, PPPackage.Literals.DEFINITION_ARGUMENT__OP,
+				IPPDiagnostics.ISSUE__NOT_ASSIGNMENT_OP);
 		// -- RHS should be a rvalue
 		internalCheckRvalueExpression(o.getValue());
 	}
@@ -811,8 +798,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(s.startsWith("$"))
 				s = s.substring(1);
 			if(seen.contains(s)) {
-				acceptor.acceptError(
-					"Duplicate definition of parameter", arg, IPPDiagnostics.ISSUE__DUPLICATE_PARAMETER);
+				acceptor.acceptError("Duplicate definition of parameter", arg, IPPDiagnostics.ISSUE__DUPLICATE_PARAMETER);
 			}
 			else
 				seen.add(s);
@@ -842,8 +828,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 					EObject grammarE = i.getGrammarElement();
 					if(grammarE instanceof RuleCall && "endComma".equals(((RuleCall) grammarE).getRule().getName())) {
 						warningOrError(
-							acceptor, endComma, "End comma not allowed in versions < 2.7.8", o, i.getOffset(),
-							i.getLength(), IPPDiagnostics.ISSUE__ENDCOMMA);
+							acceptor, endComma, "End comma not allowed in versions < 2.7.8", o, i.getOffset(), i.getLength(),
+							IPPDiagnostics.ISSUE__ENDCOMMA);
 						return;
 					}
 					return;
@@ -866,11 +852,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				VerbatimTE verbatim = (VerbatimTE) te;
 				if(verbatim.getText().startsWith("-")) {
 					if(hyphens.isWarningOrError()) {
-						warningOrError(
-							acceptor, hyphens,
-							"Interpolation continues past '-' in some puppet 2.7 versions", //
-							o, PPPackage.Literals.DOUBLE_QUOTED_STRING__STRING_PART, idx - 1,
-							IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN);
+						warningOrError(acceptor, hyphens, "Interpolation continues past '-' in some puppet 2.7 versions", //
+							o, PPPackage.Literals.DOUBLE_QUOTED_STRING__STRING_PART, idx - 1, IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN);
 					}
 				}
 			}
@@ -886,9 +869,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				break BOOLEAN_STRING;
 			constant = constant.trim();
 			if("true".equals(constant) || "false".equals(constant))
-				warningOrError(
-					acceptor, booleansInStringForm, "This is not a boolean", o, IPPDiagnostics.ISSUE__STRING_BOOLEAN,
-					constant);
+				warningOrError(acceptor, booleansInStringForm, "This is not a boolean", o, IPPDiagnostics.ISSUE__STRING_BOOLEAN, constant);
 		}
 
 		// DQ_STRING_NOT_REQUIRED
@@ -898,8 +879,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			String constant = stringConstantEvaluator.doToString(o);
 			if(!constant.contains("\\"))
 				warningOrError(
-					acceptor, dqStringNotRequired, "Double quoted string not required", o,
-					IPPDiagnostics.ISSUE__DQ_STRING_NOT_REQUIRED);
+					acceptor, dqStringNotRequired, "Double quoted string not required", o, IPPDiagnostics.ISSUE__DQ_STRING_NOT_REQUIRED);
 		}
 		// UNBRACED INTERPOLATION
 		ValidationPreference unbracedInterpolation = advisor.unbracedInterpolation();
@@ -933,9 +913,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				}
 				if(replacement != null) {
 					warningOrError(
-						acceptor, dqStringNotRequiredVariable,
-						"String contains single interpolated variable. Double quotes not required.", o,
-						IPPDiagnostics.ISSUE__DQ_STRING_NOT_REQUIRED_VAR, replacement);
+						acceptor, dqStringNotRequiredVariable, "String contains single interpolated variable. Double quotes not required.",
+						o, IPPDiagnostics.ISSUE__DQ_STRING_NOT_REQUIRED_VAR, replacement);
 				}
 			}
 		}
@@ -945,16 +924,14 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkElseExpression(ElseExpression o) {
 		internalCheckTopLevelExpressions(o.getStatements());
 		EObject container = o.eContainer();
-		if(container instanceof IfExpression || container instanceof ElseExpression ||
-				container instanceof ElseIfExpression)
+		if(container instanceof IfExpression || container instanceof ElseExpression || container instanceof ElseIfExpression)
 			return;
 		if(container instanceof UnlessExpression) {
 			if(advisor().allowUnlessElse())
 				return;
-			acceptor.acceptError(
-				"'else' expression can only be used in an 'unless' in puppet version >= 3.2 --parser future", o,
-				// o.eContainer(), o.eContainingFeature(), INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+			acceptor.acceptError("'else' expression can only be used in an 'unless' in puppet version >= 3.2 --parser future", o,
+			// o.eContainer(), o.eContainingFeature(), INSIGNIFICANT_INDEX,
+			IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 		}
 		acceptor.acceptError(
 			"'else' expression can only be used in an 'if', 'else' or 'elsif'", o.eContainer(), o.eContainingFeature(),
@@ -965,12 +942,11 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkElseIfExpression(ElseIfExpression o) {
 		internalCheckTopLevelExpressions(o.getThenStatements());
 		EObject container = o.eContainer();
-		if(container instanceof IfExpression || container instanceof ElseExpression ||
-				container instanceof ElseIfExpression)
+		if(container instanceof IfExpression || container instanceof ElseExpression || container instanceof ElseIfExpression)
 			return;
 		acceptor.acceptError(
-			"'elsif' expression can only be used in an 'if', 'else' or 'elsif'", o, o.eContainingFeature(),
-			INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+			"'elsif' expression can only be used in an 'if', 'else' or 'elsif'", o, o.eContainingFeature(), INSIGNIFICANT_INDEX,
+			IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 	}
 
 	@Check
@@ -997,26 +973,23 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		internalCheckTopLevelExpressions(o.getThenStatements());
 		Expression elseStatement = o.getElseStatement();
 		if(elseStatement == null || elseStatement instanceof ElseExpression || elseStatement instanceof IfExpression ||
-				elseStatement instanceof ElseIfExpression)
+			elseStatement instanceof ElseIfExpression)
 			return;
 		acceptor.acceptError(
-			"If Expression's else part can only be an 'if' or 'elsif'", o,
-			PPPackage.Literals.IF_EXPRESSION__ELSE_STATEMENT, INSIGNIFICANT_INDEX,
-			IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+			"If Expression's else part can only be an 'if' or 'elsif'", o, PPPackage.Literals.IF_EXPRESSION__ELSE_STATEMENT,
+			INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 	}
 
 	@Check
 	public void checkImportExpression(ImportExpression o) {
 		if(advisor().importIsDeprecated() != ValidationPreference.IGNORE)
 			warningOrError(
-				acceptor, advisor().importIsDeprecated(), "Import is deprecated in Puppet version >= 3.5.", o,
-				ISSUE__IMPORT_IS_DEPRECATED);
+				acceptor, advisor().importIsDeprecated(), "Import is deprecated in Puppet version >= 3.5.", o, ISSUE__IMPORT_IS_DEPRECATED);
 
 		if(o.getValues().size() <= 0)
 			acceptor.acceptError(
-				"Empty import - should be followed by at least one string.", o,
-				PPPackage.Literals.IMPORT_EXPRESSION__VALUES, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
+				"Empty import - should be followed by at least one string.", o, PPPackage.Literals.IMPORT_EXPRESSION__VALUES,
+				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
 		// warn against interpolation in double quoted strings
 		for(IQuotedString s : o.getValues()) {
 			if(s instanceof DoubleQuotedString)
@@ -1037,14 +1010,13 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkLambda(Lambda o) {
 		if(!advisor().allowLambdas()) {
 			acceptor.acceptError(
-				"A Lambda expression is only available in Puppet version >= 3.2 --parser future. (Change target preference?)",
-				o, IPPDiagnostics.ISSUE__UNSUPPORTED_LAMBDA);
+				"A Lambda expression is only available in Puppet version >= 3.2 --parser future. (Change target preference?)", o,
+				IPPDiagnostics.ISSUE__UNSUPPORTED_LAMBDA);
 		}
 		else {
 			if(o instanceof RubyLambda || (o instanceof JavaLambda && ((JavaLambda) o).isFarrow())) {
 				acceptor.acceptError(
-					"A Lambda expression should be written as \"func |$x| {...}\"", o,
-					IPPDiagnostics.ISSUE__ALTERNATIVE_LAMBDA_SYNTAX);
+					"A Lambda expression should be written as \"func |$x| {...}\"", o, IPPDiagnostics.ISSUE__ALTERNATIVE_LAMBDA_SYNTAX);
 			}
 			else
 				internalCheckTopLevelExpressions(o.getStatements());
@@ -1077,24 +1049,22 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		if(!isCLASSNAME_OR_REFERENCE(varName))
 			acceptor.acceptError(
-				"Must be a name or type (all segments must start with same case).", o,
-				PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__NOT_NAME_OR_REF, o.getValue());
+				"Must be a name or type (all segments must start with same case).", o, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE,
+				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_NAME_OR_REF, o.getValue());
 	}
 
 	@Check
 	public void checkLiteralRegex(LiteralRegex o) {
 		if(!isREGEX(o.getValue())) {
 			acceptor.acceptError(
-				"Expected to comply with Puppet regular expression", o, PPPackage.Literals.LITERAL_REGEX__VALUE,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_REGEX);
+				"Expected to comply with Puppet regular expression", o, PPPackage.Literals.LITERAL_REGEX__VALUE, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__NOT_REGEX);
 			return;
 		}
 		if(!o.getValue().endsWith("/"))
 			acceptor.acceptError(
-				"Puppet regular expression does not support flags after end slash", o,
-				PPPackage.Literals.LITERAL_REGEX__VALUE, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__UNSUPPORTED_REGEX_FLAGS);
+				"Puppet regular expression does not support flags after end slash", o, PPPackage.Literals.LITERAL_REGEX__VALUE,
+				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_REGEX_FLAGS);
 	}
 
 	@Check
@@ -1105,9 +1075,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(!advisor().allowExtendedMatchRHS()) {
 				if(!(rhs instanceof LiteralRegex)) {
 					acceptor.acceptError(
-						"Right expression must be a regular expression.", o,
-						PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX,
-						IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+						"Right expression must be a regular expression.", o, PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR,
+						INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 				}
 			}
 			else {
@@ -1121,12 +1090,10 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 				}
 
-				if(!(rhs instanceof LiteralExpression || rhs instanceof StringExpression ||
-						rhs instanceof VariableExpression || rhs instanceof InterpolatedVariable)) {
+				if(!(rhs instanceof LiteralExpression || rhs instanceof StringExpression || rhs instanceof VariableExpression || rhs instanceof InterpolatedVariable)) {
 					acceptor.acceptError(
 						"Right expression must be a regular expression, string, type, or variable", o,
-						PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX,
-						IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+						PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 				}
 			}
 		}
@@ -1137,8 +1104,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkMethodCall(MethodCall o) {
 		if(!advisor().allowLambdas()) { // Note, same check as for lambdas...
 			acceptor.acceptError(
-				"A call on the form 'a.b()' is only available in Puppet version >= 3.2 --parser future. (Change target preference?)",
-				o, IPPDiagnostics.ISSUE__UNSUPPORTED_METHOD_CALL);
+				"A call on the form 'a.b()' is only available in Puppet version >= 3.2 --parser future. (Change target preference?)", o,
+				IPPDiagnostics.ISSUE__UNSUPPORTED_METHOD_CALL);
 		}
 		else {
 			Expression methodExpr = o.getMethodExpr();
@@ -1166,16 +1133,16 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		EObject container = o.eContainer();
 		if(!(container instanceof PuppetManifest || container instanceof HostClassDefinition))
 			acceptor.acceptError(
-				"A node definition may only appear at toplevel or directly inside classes.", container,
-				o.eContainingFeature(), INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_AT_TOPLEVEL_OR_CLASS);
+				"A node definition may only appear at toplevel or directly inside classes.", container, o.eContainingFeature(),
+				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_AT_TOPLEVEL_OR_CLASS);
 
 		Expression parentExpr = o.getParentName();
 		if(parentExpr != null) {
 			String parentName = stringConstantEvaluator.doToString(parentExpr);
 			if(parentName == null)
 				acceptor.acceptError(
-					"Must be a constant name/string expression.", o, PPPackage.Literals.NODE_DEFINITION__PARENT_NAME,
-					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_CONSTANT);
+					"Must be a constant name/string expression.", o, PPPackage.Literals.NODE_DEFINITION__PARENT_NAME, INSIGNIFICANT_INDEX,
+					IPPDiagnostics.ISSUE__NOT_CONSTANT);
 		}
 	}
 
@@ -1185,8 +1152,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				break;
 			case NO:
 				acceptor.acceptError(
-					"Operator " + o.getOpName() + " requires numeric value.", o,
-					PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR, IPPDiagnostics.ISSUE__NOT_NUMERIC);
+					"Operator " + o.getOpName() + " requires numeric value.", o, PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR,
+					IPPDiagnostics.ISSUE__NOT_NUMERIC);
 				break;
 			case INCONCLUSIVE:
 		}
@@ -1195,8 +1162,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				break;
 			case NO:
 				acceptor.acceptError(
-					"Operator " + o.getOpName() + " requires numeric value.", o,
-					PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, IPPDiagnostics.ISSUE__NOT_NUMERIC);
+					"Operator " + o.getOpName() + " requires numeric value.", o, PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR,
+					IPPDiagnostics.ISSUE__NOT_NUMERIC);
 				break;
 			case INCONCLUSIVE:
 		}
@@ -1208,11 +1175,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		for(String s : ops)
 			if(s.equals(op))
 				return;
-		acceptor.acceptError(
-			"Illegal operator: " + (op == null
+		acceptor.acceptError("Illegal operator: " + (op == null
 			? "null"
-					: op), o, PPPackage.Literals.BINARY_OP_EXPRESSION__OP_NAME, INSIGNIFICANT_INDEX,
-					IPPDiagnostics.ISSUE__ILLEGAL_OP);
+			: op), o, PPPackage.Literals.BINARY_OP_EXPRESSION__OP_NAME, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__ILLEGAL_OP);
 
 	}
 
@@ -1223,22 +1188,21 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			final String issue = IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION;
 			final ICompositeNode node = NodeModelUtils.getNode(o);
 			if(node == null)
-				acceptor.acceptError(
-					msg, o, PPPackage.Literals.PARENTHESISED_EXPRESSION__EXPR, INSIGNIFICANT_INDEX, issue);
+				acceptor.acceptError(msg, o, PPPackage.Literals.PARENTHESISED_EXPRESSION__EXPR, INSIGNIFICANT_INDEX, issue);
 			else {
 				// if node's text is empty, mark the nodes before/after, if present.
 				int textSize = node.getLength();
 				INode endNode = textSize == 0 && node.hasNextSibling()
-						? node.getNextSibling()
-								: node;
-						INode startNode = textSize == 0 && node.hasPreviousSibling()
-								? node.getPreviousSibling()
-										: node;
+					? node.getNextSibling()
+					: node;
+				INode startNode = textSize == 0 && node.hasPreviousSibling()
+					? node.getPreviousSibling()
+					: node;
 
-								((ValidationBasedMessageAcceptor) acceptor).acceptError(
-									msg, o, startNode.getOffset(), startNode.getLength() + ((startNode != endNode)
-											? endNode.getLength()
-													: 0), issue);
+				((ValidationBasedMessageAcceptor) acceptor).acceptError(msg, o, startNode.getOffset(), startNode.getLength() +
+					((startNode != endNode)
+						? endNode.getLength()
+						: 0), issue);
 			}
 		}
 	}
@@ -1255,8 +1219,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		if("<".equals(op) || "<=".equals(op) || ">".equals(op) || ">=".equals(op))
 			return;
 		acceptor.acceptError(
-			"Illegal operator.", o, PPPackage.Literals.BINARY_OP_EXPRESSION__OP_NAME, INSIGNIFICANT_INDEX,
-			IPPDiagnostics.ISSUE__ILLEGAL_OP);
+			"Illegal operator.", o, PPPackage.Literals.BINARY_OP_EXPRESSION__OP_NAME, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__ILLEGAL_OP);
 	}
 
 	/**
@@ -1265,7 +1228,6 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	 * - ResourceExpression (but not a ResourceOverride)
 	 * - ResourceReference
 	 * - CollectExpression
-	 *
 	 * That the operator name is a valid name (if defined from code).
 	 * INEDGE : MINUS GT; // '->'
 	 * OUTEDGE : LT MINUS; // '<-'
@@ -1276,18 +1238,13 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkRelationshipExpression(RelationshipExpression o) {
 		// -- Check operator validity
 		String opName = o.getOpName();
-		if(opName == null ||
-				!("->".equals(opName) || "<-".equals(opName) || "~>".equals(opName) || "<~".equals(opName)))
-			acceptor.acceptError(
-				"Illegal operator: " + opName == null
+		if(opName == null || !("->".equals(opName) || "<-".equals(opName) || "~>".equals(opName) || "<~".equals(opName)))
+			acceptor.acceptError("Illegal operator: " + opName == null
 				? "null"
-						: opName, o, PPPackage.Literals.BINARY_OP_EXPRESSION__OP_NAME, INSIGNIFICANT_INDEX,
-						IPPDiagnostics.ISSUE__ILLEGAL_OP);
+				: opName, o, PPPackage.Literals.BINARY_OP_EXPRESSION__OP_NAME, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__ILLEGAL_OP);
 
-		boolean okL = internalCheckRelationshipOperand(
-			o, o.getLeftExpr(), PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR);
-		boolean okR = internalCheckRelationshipOperand(
-			o, o.getRightExpr(), PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR);
+		boolean okL = internalCheckRelationshipOperand(o, o.getLeftExpr(), PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR);
+		boolean okR = internalCheckRelationshipOperand(o, o.getRightExpr(), PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR);
 
 		// optionally flag RtoL relationships
 		if(opName.startsWith("<")) {
@@ -1322,13 +1279,12 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		if(nameExpr == null)
 			return;
 		if(!(nameExpr instanceof StringExpression ||
-				// TODO: was LiteralString, follow up
-				nameExpr instanceof LiteralNameOrReference || nameExpr instanceof LiteralName ||
-				nameExpr instanceof VariableExpression || nameExpr instanceof AtExpression ||
-				nameExpr instanceof LiteralList || nameExpr instanceof SelectorExpression))
+			// TODO: was LiteralString, follow up
+			nameExpr instanceof LiteralNameOrReference || nameExpr instanceof LiteralName || nameExpr instanceof VariableExpression ||
+			nameExpr instanceof AtExpression || nameExpr instanceof LiteralList || nameExpr instanceof SelectorExpression))
 			acceptor.acceptError(
-				"Expression unsupported as resource name/title.", o, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION_STRING_OK);
+				"Expression unsupported as resource name/title.", o, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION_STRING_OK);
 
 		// prior to 2.7 a qualified name caused problems
 		boolean unquotedNameFlagged = false;
@@ -1336,8 +1292,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(nameExpr instanceof LiteralNameOrReference) {
 				if(((LiteralNameOrReference) nameExpr).getValue().contains("::")) {
 					acceptor.acceptError(
-						"Qualified name must be quoted.", o, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR,
-						INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNQUOTED_QUALIFIED_NAME);
+						"Qualified name must be quoted.", o, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, INSIGNIFICANT_INDEX,
+						IPPDiagnostics.ISSUE__UNQUOTED_QUALIFIED_NAME);
 					unquotedNameFlagged = true;
 				}
 			}
@@ -1346,8 +1302,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			ValidationPreference unquotedResourceTitles = advisor.unquotedResourceTitles();
 			if(unquotedResourceTitles.isWarningOrError()) {
 				warningOrError(
-					acceptor, unquotedResourceTitles, "Unquoted resource title", nameExpr,
-					IPPDiagnostics.ISSUE__UNQUOTED_QUALIFIED_NAME);
+					acceptor, unquotedResourceTitles, "Unquoted resource title", nameExpr, IPPDiagnostics.ISSUE__UNQUOTED_QUALIFIED_NAME);
 			}
 		}
 		ValidationPreference ensureFirstAdvise = advisor().ensureShouldAppearFirstInResource();
@@ -1379,8 +1334,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		if(resourceType == RESOURCE_IS_BAD) {
 			acceptor.acceptError(
 				"Resource type must be a literal name, 'class', class reference, or a resource reference.", o,
-				PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_EXPR, INSIGNIFICANT_INDEX,
-				ISSUE__RESOURCE_BAD_TYPE_FORMAT);
+				PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_EXPR, INSIGNIFICANT_INDEX, ISSUE__RESOURCE_BAD_TYPE_FORMAT);
 			// not much use checking the rest
 			return;
 		}
@@ -1388,8 +1342,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		// -- can not virtualize/export non regular resources
 		if(o.getResourceExpr() instanceof VirtualNameOrReference && resourceType != RESOURCE_IS_REGULAR) {
 			acceptor.acceptError(
-				"Only regular resources can be virtual", o, PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_EXPR,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__RESOURCE_NOT_VIRTUALIZEABLE);
+				"Only regular resources can be virtual", o, PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_EXPR, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__RESOURCE_NOT_VIRTUALIZEABLE);
 		}
 		boolean onlyOneBody = resourceType == RESOURCE_IS_DEFAULT || resourceType == RESOURCE_IS_OVERRIDE;
 		boolean titleExpected = !onlyOneBody;
@@ -1411,9 +1365,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		// check multiple bodies
 		if(onlyOneBody && o.getResourceData().size() > 1)
 			acceptor.acceptError(
-				errorStartText + "can not have multiple resource instances.", o,
-				PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_DATA, INSIGNIFICANT_INDEX,
-				ISSUE__RESOURCE_MULTIPLE_BODIES);
+				errorStartText + "can not have multiple resource instances.", o, PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_DATA,
+				INSIGNIFICANT_INDEX, ISSUE__RESOURCE_MULTIPLE_BODIES);
 
 		// rules for body:
 		// - should not have a title (deprecated for default, but not allowed
@@ -1430,8 +1383,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(titleExpected) {
 				if(!hasTitle)
 					acceptor.acceptError(
-						errorStartText + "must have a title.", body, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR,
-						INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__RESOURCE_WITHOUT_TITLE);
+						errorStartText + "must have a title.", body, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, INSIGNIFICANT_INDEX,
+						IPPDiagnostics.ISSUE__RESOURCE_WITHOUT_TITLE);
 				else {
 					// TODO: Validate the expression type
 
@@ -1444,8 +1397,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 								if(titles.contains(titleString)) {
 									acceptor.acceptError(
 										errorStartText + "redefinition of: " + titleString, body.getNameExpr(),
-										PPPackage.Literals.LITERAL_LIST__ELEMENTS, index,
-										IPPDiagnostics.ISSUE__RESOURCE_NAME_REDEFINITION);
+										PPPackage.Literals.LITERAL_LIST__ELEMENTS, index, IPPDiagnostics.ISSUE__RESOURCE_NAME_REDEFINITION);
 								}
 								else
 									titles.add(titleString);
@@ -1458,9 +1410,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 						if(titleString != null) {
 							if(titles.contains(titleString)) {
 								acceptor.acceptError(
-									errorStartText + "redefinition of: " + titleString, body,
-									PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, INSIGNIFICANT_INDEX,
-									IPPDiagnostics.ISSUE__RESOURCE_NAME_REDEFINITION);
+									errorStartText + "redefinition of: " + titleString, body, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR,
+									INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__RESOURCE_NAME_REDEFINITION);
 							}
 							else
 								titles.add(titleString);
@@ -1470,8 +1421,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			}
 			else if(hasTitle) {
 				acceptor.acceptError(
-					errorStartText + " can not have a title", body, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR,
-					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__RESOURCE_WITH_TITLE);
+					errorStartText + " can not have a title", body, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, INSIGNIFICANT_INDEX,
+					IPPDiagnostics.ISSUE__RESOURCE_WITH_TITLE);
 			}
 
 			// ensure that only resource override has AttributeAdditions
@@ -1479,10 +1430,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				for(AttributeOperation ao : body.getAttributes().getAttributes()) {
 					if("+>".equals(ao.getOp())) // instanceof AttributeAddition)
 						acceptor.acceptError(
-							errorStartText + " can not have attribute additions.", body,
-							PPPackage.Literals.RESOURCE_BODY__ATTRIBUTES,
-							body.getAttributes().getAttributes().indexOf(ao),
-							IPPDiagnostics.ISSUE__RESOURCE_WITH_ADDITIONS);
+							errorStartText + " can not have attribute additions.", body, PPPackage.Literals.RESOURCE_BODY__ATTRIBUTES,
+							body.getAttributes().getAttributes().indexOf(ao), IPPDiagnostics.ISSUE__RESOURCE_WITH_ADDITIONS);
 				}
 			}
 		}
@@ -1491,9 +1440,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		if(resourceType == RESOURCE_IS_OVERRIDE) {
 			if(isStandardAtExpression((AtExpression) o.getResourceExpr()))
 				acceptor.acceptError(
-					"Resource override can not be done with array/hash access", o,
-					PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_EXPR, INSIGNIFICANT_INDEX,
-					IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+					"Resource override can not be done with array/hash access", o, PPPackage.Literals.RESOURCE_EXPRESSION__RESOURCE_EXPR,
+					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 		}
 	}
 
@@ -1502,9 +1450,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		Expression lhs = o.getLeftExpr();
 		if(!isSELECTOR_LHS(lhs))
 			acceptor.acceptError(
-				"Not an acceptable selector entry left hand side expression. Was: " +
-						expressionTypeNameProvider.doToString(lhs), o, PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR,
-						INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+				"Not an acceptable selector entry left hand side expression. Was: " + expressionTypeNameProvider.doToString(lhs), o,
+				PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 		// TODO: check rhs is "rvalue"
 	}
 
@@ -1515,21 +1462,18 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		// -- non null lhs, and must be an acceptable lhs value for selector
 		if(lhs == null)
 			acceptor.acceptError(
-				"A selector expression must have a left expression", o,
-				PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__NULL_EXPRESSION);
+				"A selector expression must have a left expression", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR,
+				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NULL_EXPRESSION);
 		else if(!isSELECTOR_LHS(lhs))
 			acceptor.acceptError(
-				"Not an acceptable selector left hand side expression", o,
-				PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+				"Not an acceptable selector left hand side expression", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR,
+				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 
 		// -- there must be at least one parameter
 		if(o.getParameters().size() < 1)
 			acceptor.acceptError(
 				"A selector expression must have at least one right side entry", o,
-				PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__NULL_EXPRESSION);
+				PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NULL_EXPRESSION);
 
 		// -- all parameters must be SelectorEntry instances
 		// -- one of them should have LiteralDefault as left expr
@@ -1566,9 +1510,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				if(e1 == null)
 					continue;
 				if(e1 instanceof LiteralDefault) {
-					acceptor.accept(
-						severity(defaultLast), "A 'default' should be placed last", e1,
-						IPPDiagnostics.ISSUE__DEFAULT_NOT_LAST);
+					acceptor.accept(severity(defaultLast), "A 'default' should be placed last", e1, IPPDiagnostics.ISSUE__DEFAULT_NOT_LAST);
 				}
 			}
 		}
@@ -1578,8 +1520,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			ValidationPreference missingDefaultInSelector = advisor.missingDefaultInSelector();
 			if(missingDefaultInSelector.isWarningOrError())
 				acceptor.accept(
-					severity(missingDefaultInSelector), "Missing 'default' selector case", o,
-					IPPDiagnostics.ISSUE__MISSING_DEFAULT);
+					severity(missingDefaultInSelector), "Missing 'default' selector case", o, IPPDiagnostics.ISSUE__MISSING_DEFAULT);
 		}
 
 		// Check unreachable by equivalence
@@ -1612,8 +1553,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		for(Integer i : duplicates)
 			if(caseExpressions.get(i) != null)
-				acceptor.acceptError(
-					"Duplicate selector case", caseExpressions.get(i), IPPDiagnostics.ISSUE__DUPLICATE_CASE);
+				acceptor.acceptError("Duplicate selector case", caseExpressions.get(i), IPPDiagnostics.ISSUE__DUPLICATE_CASE);
 
 		// check missing comma between entries
 		final int count = o.getParameters().size();
@@ -1638,8 +1578,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(commaNode == null || !",".equals(commaNode.getText())) {
 				int expectOffset = n.getTotalOffset() + n.getTotalLength();
 				acceptor.acceptError("Missing comma.", n.getSemanticElement(),
-					// note that offset must be -1 as this ofter a hidden newline and this
-					// does not work otherwise. Any quickfix needs to adjust the offset on replacement.
+				// note that offset must be -1 as this ofter a hidden newline and this
+				// does not work otherwise. Any quickfix needs to adjust the offset on replacement.
 					expectOffset - 1, 2, IPPDiagnostics.ISSUE__MISSING_COMMA);
 			}
 		}
@@ -1650,8 +1590,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkSeparatorExpression(SeparatorExpression o) {
 		if(!advisor().allowSeparatorExpression())
 			acceptor.acceptError(
-				"The ';' expression separator is only available in Puppet version >= 3.2 --parser future. (Change target preference?)",
-				o, IPPDiagnostics.ISSUE__UNSUPPORTED_SEPARATOR);
+				"The ';' expression separator is only available in Puppet version >= 3.2 --parser future. (Change target preference?)", o,
+				IPPDiagnostics.ISSUE__UNSUPPORTED_SEPARATOR);
 	}
 
 	@Check
@@ -1664,8 +1604,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkSingleQuotedString(SingleQuotedString o) {
 		if(!isSTRING(o.getText()))
 			acceptor.acceptError(
-				"Contains illegal character(s). Probably an unescaped single quote.", o,
-				PPPackage.Literals.SINGLE_QUOTED_STRING__TEXT, IPPDiagnostics.ISSUE__NOT_STRING);
+				"Contains illegal character(s). Probably an unescaped single quote.", o, PPPackage.Literals.SINGLE_QUOTED_STRING__TEXT,
+				IPPDiagnostics.ISSUE__NOT_STRING);
 
 		IValidationAdvisor advisor = advisor();
 		ValidationPreference booleansInStringForm = advisor.booleansInStringForm();
@@ -1677,8 +1617,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				constant = constant.trim();
 				if("true".equals(constant) || "false".equals(constant))
 					acceptor.accept(
-						severity(booleansInStringForm), "This is not a boolean", o,
-						IPPDiagnostics.ISSUE__STRING_BOOLEAN, constant);
+						severity(booleansInStringForm), "This is not a boolean", o, IPPDiagnostics.ISSUE__STRING_BOOLEAN, constant);
 			}
 		}
 
@@ -1688,8 +1627,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkUnaryExpression(UnaryMinusExpression o) {
 		if(o.getExpr() == null)
 			acceptor.acceptError(
-				"An unary minus expression must have right hand side expression", o,
-				PPPackage.Literals.UNARY_EXPRESSION__EXPR, //
+				"An unary minus expression must have right hand side expression", o, PPPackage.Literals.UNARY_EXPRESSION__EXPR, //
 				INSIGNIFICANT_INDEX, //
 				IPPDiagnostics.ISSUE__NULL_EXPRESSION);
 	}
@@ -1726,8 +1664,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	private void checkVariableName(EObject o, String varName) {
 		if(!isVARIABLE(varName))
 			acceptor.acceptError(
-				"Expected to comply with Variable rule", o, PPPackage.Literals.VARIABLE_EXPRESSION__VAR_NAME,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_VARNAME);
+				"Expected to comply with Variable rule", o, PPPackage.Literals.VARIABLE_EXPRESSION__VAR_NAME, INSIGNIFICANT_INDEX,
+				IPPDiagnostics.ISSUE__NOT_VARNAME);
 	}
 
 	@Check
@@ -1750,8 +1688,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			unrecognized.append(m.group());
 		if(unrecognized.length() > 0)
 			acceptor.acceptWarning(
-				"Unrecognized escape sequence(s): " + unrecognized.toString(), o,
-				IPPDiagnostics.ISSUE__UNRECOGNIZED_ESCAPE);
+				"Unrecognized escape sequence(s): " + unrecognized.toString(), o, IPPDiagnostics.ISSUE__UNRECOGNIZED_ESCAPE);
 	}
 
 	/**
@@ -1783,8 +1720,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			for(INode n : root.getAsTreeIterable()) {
 				if(n.getGrammarElement() == grammarAccess.getML_COMMENTRule())
 					warningOrError(
-						acceptor, mlComments, "Comments using /* */ are discouraged", n,
-						IPPDiagnostics.ISSUE_UNWANTED_ML_COMMENT, Boolean.toString(n.getText().endsWith("\n")));
+						acceptor, mlComments, "Comments using /* */ are discouraged", n, IPPDiagnostics.ISSUE_UNWANTED_ML_COMMENT,
+						Boolean.toString(n.getText().endsWith("\n")));
 			}
 		}
 
@@ -1801,8 +1738,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			boolean isSep = s instanceof SeparatorExpression;
 			if(isSep && (i == 0 || prevSep)) {
 				// First is separator, or this is separator and previous was too
-				acceptor.acceptError(
-					"Empty statement", s.eContainer(), s.eContainingFeature(), i, IPPDiagnostics.ISSUE__EMPTY_STATEMENT);
+				acceptor.acceptError("Empty statement", s.eContainer(), s.eContainingFeature(), i, IPPDiagnostics.ISSUE__EMPTY_STATEMENT);
 			}
 			prevSep = isSep;
 		}
@@ -1908,8 +1844,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				// an Expression list) unless the expression is last and allowExprLast (i.e. a return value)
 				if((i + 1) >= limit && !allowExprLast) {
 					acceptor.acceptError(
-						"Not a top level expression. (Looks like a function call without arguments, use '()')",
-						s.eContainer(), s.eContainingFeature(), i, IPPDiagnostics.ISSUE__NOT_TOPLEVEL);
+						"Not a top level expression. (Looks like a function call without arguments, use '()')", s.eContainer(),
+						s.eContainingFeature(), i, IPPDiagnostics.ISSUE__NOT_TOPLEVEL);
 					// continue each_top;
 				}
 				// the next expression is consumed as a single arg, or an expr list
@@ -1919,8 +1855,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 					Expression arg = statements.get(i);
 					if(arg instanceof SeparatorExpression)
 						acceptor.acceptError(
-							"A function call without arguments must use '()')", s.eContainer(), s.eContainingFeature(),
-							i - 1, IPPDiagnostics.ISSUE__NOT_TOPLEVEL);
+							"A function call without arguments must use '()')", s.eContainer(), s.eContainingFeature(), i - 1,
+							IPPDiagnostics.ISSUE__NOT_TOPLEVEL);
 				}
 				continue each_top;
 			}
@@ -1932,8 +1868,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				continue each_top;
 
 			acceptor.acceptError(
-				"Not a top level expression. Was: " + expressionTypeNameProvider.doToString(s), s.eContainer(),
-				s.eContainingFeature(), i, IPPDiagnostics.ISSUE__NOT_TOPLEVEL);
+				"Not a top level expression. Was: " + expressionTypeNameProvider.doToString(s), s.eContainer(), s.eContainingFeature(), i,
+				IPPDiagnostics.ISSUE__NOT_TOPLEVEL);
 		}
 
 	}
@@ -1972,8 +1908,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	private boolean isFirstNonDollarLowerCase(String s) {
 		int pos = s.startsWith("$")
-				? 1
-						: 0;
+			? 1
+			: 0;
 		if(s.length() <= pos)
 			return false;
 		return Character.isLowerCase(s.charAt(pos));
@@ -2022,10 +1958,10 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		// name, type, quotedtext, variable, funccall, boolean, undef, default, or regex.
 		// Or after fix of puppet issue #5515 also hash/At
 		if(lhs instanceof StringExpression ||
-				// TODO: was LiteralString follow up
-				lhs instanceof LiteralName || lhs instanceof LiteralNameOrReference ||
-				lhs instanceof VariableExpression || lhs instanceof FunctionCall || lhs instanceof LiteralBoolean ||
-				lhs instanceof LiteralUndef || lhs instanceof LiteralRegex || lhs instanceof LiteralDefault)
+			// TODO: was LiteralString follow up
+			lhs instanceof LiteralName || lhs instanceof LiteralNameOrReference || lhs instanceof VariableExpression ||
+			lhs instanceof FunctionCall || lhs instanceof LiteralBoolean || lhs instanceof LiteralUndef || lhs instanceof LiteralRegex ||
+			lhs instanceof LiteralDefault)
 			return true;
 		if(advisor().allowHashInSelector() && lhs instanceof AtExpression)
 			return true;
@@ -2049,46 +1985,44 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	private Severity severity(ValidationPreference pref) {
 		return pref.isError()
-				? Severity.ERROR
-						: Severity.WARNING;
+			? Severity.ERROR
+			: Severity.WARNING;
 	}
 
-	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message,
-			EObject o, EAttribute feature, String issue) {
+	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message, EObject o,
+			EAttribute feature, String issue) {
 		if(validationPreference.isWarning())
 			acceptor.acceptWarning(message, o, feature, issue);
 		else if(validationPreference.isError())
 			acceptor.acceptError(message, o, feature, issue);
 	}
 
-	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message,
-			EObject o, EStructuralFeature feature, int index, String issueCode) {
+	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message, EObject o,
+			EStructuralFeature feature, int index, String issueCode) {
 		if(validationPreference.isWarning())
 			acceptor.acceptWarning(message, o, feature, index, issueCode);
 		else if(validationPreference.isError())
 			acceptor.acceptWarning(message, o, feature, index, issueCode);
 	}
 
-	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message,
-			EObject o, int offset, int length, String issue, String... data) {
+	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message, EObject o,
+			int offset, int length, String issue, String... data) {
 		if(validationPreference.isWarning())
 			acceptor.acceptWarning(message, o, offset, length, issue, data);
 		else if(validationPreference.isError())
 			acceptor.acceptError(message, o, offset, length, issue, data);
 	}
 
-	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message,
-			EObject o, String issueCode, String... data) {
+	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message, EObject o,
+			String issueCode, String... data) {
 		if(validationPreference.isWarning())
 			acceptor.acceptWarning(message, o, issueCode, data);
 		else if(validationPreference.isError())
 			acceptor.acceptError(message, o, issueCode, data);
 	}
 
-	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message,
-			INode n, String issueCode, String... data) {
-		warningOrError(
-			acceptor, validationPreference, message, n.getSemanticElement(), n.getOffset(), n.getLength(), issueCode,
-			data);
+	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message, INode n,
+			String issueCode, String... data) {
+		warningOrError(acceptor, validationPreference, message, n.getSemanticElement(), n.getOffset(), n.getLength(), issueCode, data);
 	}
 }

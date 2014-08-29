@@ -26,14 +26,12 @@ import com.google.common.collect.Lists;
 /**
  * Finds calls in a parsed ruby AST. An instance of this class can be reused,
  * but it is not threadsafe.
- *
  * Calls are found using a FQN - i.e. a sequence of module/receiver names, where
  * the last name segment is the name of the function. The search will find
  * function calls irrespective of call type (e.g. a FCallNode (where receiver is
  * implied), or CallNode where receiver is explicit. All FQN names are appended
  * to the current scope - i.e. if a call is made to X::Y::foo() in module A, it
  * will be found by a search of A::X::Y::foo().
- *
  * TODO: global references are not handled - i.e. if a call to ::X::Y::foo() is
  * made inside module A, it will be recognized (in error) as A::X::Y::foo() -
  * also see {@link ConstEvaluator}.
@@ -79,8 +77,8 @@ public class RubyCallFinder {
 
 		List<GenericCallNode> result = findCallInternal(root, true);
 		return result == null || result.size() != 1
-				? null
-						: result.get(0);
+			? null
+			: result.get(0);
 	}
 
 	private List<GenericCallNode> findCallInternal(Node root, boolean findFirst) {
@@ -145,8 +143,8 @@ public class RubyCallFinder {
 		pop(root);
 		// return a found result or null
 		return result == null || result.size() == 0
-				? null
-						: result;
+			? null
+			: result;
 	}
 
 	public List<GenericCallNode> findCalls(Node root, String... qualifiedName) {
@@ -187,8 +185,8 @@ public class RubyCallFinder {
 		int sizeY = nameStack.size();
 		try {
 			return qualifiedName.subList(sizeX - sizeY, sizeX).equals(nameStack)
-					? true
-							: false;
+				? true
+				: false;
 		}
 		catch(IndexOutOfBoundsException e) {
 			return false;
@@ -205,8 +203,8 @@ public class RubyCallFinder {
 		// match.
 		try {
 			return qualifiedName.subList(1, qualifiedName.size()).equals(nameStack)
-					? true
-							: false;
+				? true
+				: false;
 		}
 		catch(IndexOutOfBoundsException e) {
 			return false;

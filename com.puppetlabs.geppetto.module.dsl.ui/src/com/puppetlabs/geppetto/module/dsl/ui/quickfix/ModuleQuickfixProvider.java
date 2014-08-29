@@ -87,7 +87,7 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
 		if(m.find()) {
 			final String key = m.group(1);
 			acceptor.accept(issue, "Import " + key + " from Puppet Forge", "Import the missing " + key +
-					" module from the Puppet Forge repository", null, new ISemanticModification() {
+				" module from the Puppet Forge repository", null, new ISemanticModification() {
 				@Override
 				public void apply(EObject element, IModificationContext context) throws Exception {
 					IWizardDescriptor descriptor = workbench.getImportWizardRegistry().findWizard(

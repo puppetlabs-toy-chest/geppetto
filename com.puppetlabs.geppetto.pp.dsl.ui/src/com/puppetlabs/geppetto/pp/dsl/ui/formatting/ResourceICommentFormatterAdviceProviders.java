@@ -22,12 +22,10 @@ import com.google.inject.Inject;
 /**
  * A {@link Provider} of {@link IIndentationInformation} that can look up information specific to the current
  * resource.
- *
  */
 public class ResourceICommentFormatterAdviceProviders {
 
-	private abstract static class CommonCommentAdviceProvider extends
-	PlatformResourceSpecificProvider<ICommentFormatterAdvice> {
+	private abstract static class CommonCommentAdviceProvider extends PlatformResourceSpecificProvider<ICommentFormatterAdvice> {
 		@Inject
 		protected CommentPreferences commentPreferences;
 

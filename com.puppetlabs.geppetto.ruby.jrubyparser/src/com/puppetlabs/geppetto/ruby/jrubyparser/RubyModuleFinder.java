@@ -175,8 +175,8 @@ public class RubyModuleFinder {
 			// if it is the wanted module
 			if(nameStack.size() == qualifiedName.size())
 				return qualifiedName.equals(nameStack)
-						? iVisited
-								: DO_NOT_VISIT_CHILDREN;
+					? iVisited
+					: DO_NOT_VISIT_CHILDREN;
 
 			// the module's name is shorter than wanted, does it match so far?
 			// i.e. we find module a::b when we are looking for a::b::c
@@ -185,8 +185,8 @@ public class RubyModuleFinder {
 			int sizeY = nameStack.size();
 			try {
 				return qualifiedName.subList(sizeX - sizeY, sizeX).equals(nameStack)
-						? null
-								: DO_NOT_VISIT_CHILDREN;
+					? null
+					: DO_NOT_VISIT_CHILDREN;
 			}
 			catch(IndexOutOfBoundsException e) {
 				return DO_NOT_VISIT_CHILDREN;

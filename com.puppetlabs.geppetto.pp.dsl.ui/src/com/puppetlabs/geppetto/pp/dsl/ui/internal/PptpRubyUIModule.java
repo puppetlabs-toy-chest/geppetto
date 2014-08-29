@@ -25,7 +25,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpResourceUiServiceProvider;
 
 /**
  * UI Runtime module for Ruby PPTP variant.
- *
  */
 public class PptpRubyUIModule extends PptpRubyRuntimeModule {
 
@@ -54,15 +53,14 @@ public class PptpRubyUIModule extends PptpRubyRuntimeModule {
 
 	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
 		if(PlatformUI.isWorkbenchRunning())
-			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(
-				UseDefaultURIEditorOpener.class);
+			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(UseDefaultURIEditorOpener.class);
 	}
 
 	// must bind a description label provider...
 	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(
 			org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(
-				com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider.class);
+			com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider.class);
 	}
 
 }

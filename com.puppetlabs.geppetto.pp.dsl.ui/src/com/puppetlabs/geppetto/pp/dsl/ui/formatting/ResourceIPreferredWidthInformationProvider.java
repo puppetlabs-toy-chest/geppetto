@@ -20,10 +20,8 @@ import com.google.inject.Inject;
 /**
  * A {@link Provider} of {@link IIndentationInformation} that can look up information specific to the current
  * resource.
- *
  */
-public class ResourceIPreferredWidthInformationProvider extends
-PlatformResourceSpecificProvider<IPreferredMaxWidthInformation> {
+public class ResourceIPreferredWidthInformationProvider extends PlatformResourceSpecificProvider<IPreferredMaxWidthInformation> {
 	@Inject
 	private FormatterGeneralPreferences formatterPreferences;
 

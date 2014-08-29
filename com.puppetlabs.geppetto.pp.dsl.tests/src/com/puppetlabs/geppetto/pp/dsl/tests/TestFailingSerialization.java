@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.tests;
 
 /**
  * Tests for expressions not covered by separate test classes.
- *
  */
 public class TestFailingSerialization extends AbstractPuppetTests {
 	// There is currently no tests in this category

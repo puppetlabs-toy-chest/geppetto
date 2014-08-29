@@ -121,8 +121,7 @@ public class JSonResponseHandler<V> implements ResponseHandler<V> {
 		if(code >= 300) {
 			String msg;
 			try {
-				ErrorResponse errors = parseJson(
-					gson, ForgeHttpClient.getStream(response.getEntity()), ErrorResponse.class);
+				ErrorResponse errors = parseJson(gson, ForgeHttpClient.getStream(response.getEntity()), ErrorResponse.class);
 				if(errors == null)
 					msg = statusLine.getReasonPhrase();
 				else {

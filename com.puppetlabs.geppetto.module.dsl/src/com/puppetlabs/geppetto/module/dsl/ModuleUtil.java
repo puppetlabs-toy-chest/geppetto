@@ -135,8 +135,8 @@ public class ModuleUtil {
 	public List<String> getApiTags(JsonMetadata metadata) {
 		Value tags = getValue(metadata, "tags");
 		return tags instanceof JsonArray
-				? getStrings((JsonArray) tags)
-				: Collections.<String> emptyList();
+			? getStrings((JsonArray) tags)
+			: Collections.<String> emptyList();
 	}
 
 	public Object getApiValue(Value value) {

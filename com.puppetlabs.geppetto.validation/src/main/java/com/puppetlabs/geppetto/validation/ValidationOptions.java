@@ -177,7 +177,6 @@ public class ValidationOptions {
 	}
 
 	/**
-	 *
 	 * @return the value of the '<em>checkReferences</em>' attribute.
 	 */
 	public boolean isCheckReferences() {
@@ -274,8 +273,8 @@ public class ValidationOptions {
 	 */
 	public void setFileType(FileType fileType) {
 		this.fileType = fileType == null
-				? FileType.DETECT
-						: fileType;
+			? FileType.DETECT
+			: fileType;
 	}
 
 	/**

@@ -21,7 +21,6 @@ import com.google.common.collect.Lists;
 
 /**
  * Finds a class
- *
  */
 public class RubyClassFinder {
 

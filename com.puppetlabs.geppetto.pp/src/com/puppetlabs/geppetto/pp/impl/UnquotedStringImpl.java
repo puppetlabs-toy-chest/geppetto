@@ -184,18 +184,17 @@ public class UnquotedStringImpl extends StringExpressionImpl implements Unquoted
 		if(newExpression != expression) {
 			NotificationChain msgs = null;
 			if(expression != null)
-				msgs = ((InternalEObject) expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.UNQUOTED_STRING__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject) expression).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.UNQUOTED_STRING__EXPRESSION, null, msgs);
 			if(newExpression != null)
-				msgs = ((InternalEObject) newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.UNQUOTED_STRING__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject) newExpression).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.UNQUOTED_STRING__EXPRESSION, null, msgs);
 			msgs = basicSetExpression(newExpression, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.UNQUOTED_STRING__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.UNQUOTED_STRING__EXPRESSION, newExpression, newExpression));
 	}
 
 } // UnquotedStringImpl

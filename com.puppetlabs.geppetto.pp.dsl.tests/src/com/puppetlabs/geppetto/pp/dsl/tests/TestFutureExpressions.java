@@ -26,7 +26,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 
 /**
  * Expression tests using PUPPET_FUTURE as compliance level.
- *
  */
 public class TestFutureExpressions extends AbstractPuppetTests {
 	@Override

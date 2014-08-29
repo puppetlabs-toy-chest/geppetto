@@ -18,7 +18,6 @@ import com.puppetlabs.geppetto.ui.util.ResourceUtil;
 /**
  * A New Wizard for a free-form puppet project.
  * Does not create any content except the project.
- *
  */
 public class NewPuppetProjectWizard extends AbstractPuppetProjectWizard implements INewWizard {
 

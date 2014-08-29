@@ -20,7 +20,6 @@ import com.google.inject.Injector;
 
 /**
  * Executable Extension configuration for PPTP (non Ruby).
- *
  */
 public class PptpExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
@@ -41,8 +40,7 @@ public class PptpExecutableExtensionFactory extends AbstractGuiceAwareExecutable
 	 */
 	@Override
 	protected Injector getInjector() {
-		return PPActivator.getInstance().getInjector(
-			PPDSLConstants.PPTP_LANGUAGE_NAME);
+		return PPActivator.getInstance().getInjector(PPDSLConstants.PPTP_LANGUAGE_NAME);
 	}
 
 }

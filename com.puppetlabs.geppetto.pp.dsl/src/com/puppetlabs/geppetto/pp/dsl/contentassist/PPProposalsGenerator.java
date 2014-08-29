@@ -36,12 +36,10 @@ import com.google.inject.Inject;
 
 /**
  * Generator of proposals
- *
  */
 public class PPProposalsGenerator {
 	/**
 	 * compares the pronunciation difference between given reference and candidates
-	 *
 	 */
 	public static class PronunciationComparator implements Comparator<String> {
 
@@ -63,8 +61,8 @@ public class PPProposalsGenerator {
 			if(al == bl)
 				return 0;
 			return al < bl
-					? -1
-							: 1;
+				? -1
+				: 1;
 		}
 
 	}
@@ -75,8 +73,7 @@ public class PPProposalsGenerator {
 	@Inject
 	IQualifiedNameConverter converter;
 
-	protected final static EClass[] DEF_AND_TYPE_ARGUMENTS = {
-		PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
+	protected final static EClass[] DEF_AND_TYPE_ARGUMENTS = { PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
 
 	protected final static EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
 
@@ -122,8 +119,7 @@ public class PPProposalsGenerator {
 	 *            index of descriptors
 	 */
 
-	public String[] computeDistinctProposals(String currentName, List<IEObjectDescription> descs,
-			boolean upperCaseProposals) {
+	public String[] computeDistinctProposals(String currentName, List<IEObjectDescription> descs, boolean upperCaseProposals) {
 		List<String> proposals = Lists.newArrayList();
 		if(currentName.startsWith("::"))
 			return new String[0]; // can not make a global name more specific than what it already is
@@ -141,8 +137,8 @@ public class PPProposalsGenerator {
 		String[] props = proposals.toArray(new String[proposals.size()]);
 		Arrays.sort(props);
 		return upperCaseProposals
-				? toUpperCaseProposals(props)
-						: props;
+			? toUpperCaseProposals(props)
+			: props;
 	}
 
 	/**
@@ -163,8 +159,8 @@ public class PPProposalsGenerator {
 	 * @return
 	 *         array of proposals, possibly empty, but never null.
 	 */
-	public String[] computeProposals(final String currentName, Collection<IEObjectDescription> descs,
-			boolean upperCaseProposals, PPSearchPath searchPath, EClass... types) {
+	public String[] computeProposals(final String currentName, Collection<IEObjectDescription> descs, boolean upperCaseProposals,
+			PPSearchPath searchPath, EClass... types) {
 		if(currentName == null || currentName.length() < 1)
 			return new String[0];
 
@@ -191,10 +187,10 @@ public class PPProposalsGenerator {
 			String candidateMetaphone = encoder.encode(candidateName);
 			// metaphone matches are scored on the pronounciation distance
 			if(metaphoneName.equals(candidateMetaphone) //
-					||
-					candidateMetaphone.startsWith(metaphoneName) //
-					|| candidateMetaphone.endsWith(metaphoneName) //
-					)
+				||
+				candidateMetaphone.startsWith(metaphoneName) //
+				|| candidateMetaphone.endsWith(metaphoneName) //
+			)
 				tracker.addScore(StringUtils.getLevenshteinDistance(metaphoneName, candidateMetaphone), d);
 			// System.err.printf("Metaphone alike: %s == %s\n", currentName, candidateName);
 		}
@@ -217,17 +213,17 @@ public class PPProposalsGenerator {
 		// System.err.printf("%s, ", proposals[i]);
 		// System.err.println();
 		return upperCaseProposals
-				? toUpperCaseProposals(proposals)
-						: proposals;
+			? toUpperCaseProposals(proposals)
+			: proposals;
 	}
 
-	public String[] computeProposals(final String currentName, Collection<IEObjectDescription> descs,
-			PPSearchPath searchPath, EClass... types) {
+	public String[] computeProposals(final String currentName, Collection<IEObjectDescription> descs, PPSearchPath searchPath,
+			EClass... types) {
 		return computeProposals(currentName, descs, false, searchPath, types);
 	}
 
-	public Collection<String> generateAttributeCandidates(final QualifiedName currentName,
-		Collection<IEObjectDescription> descs, PPSearchPath searchPath) {
+	public Collection<String> generateAttributeCandidates(final QualifiedName currentName, Collection<IEObjectDescription> descs,
+			PPSearchPath searchPath) {
 		// find candidate names
 		if(currentName.getSegmentCount() < 2)
 			return Collections.emptySet();

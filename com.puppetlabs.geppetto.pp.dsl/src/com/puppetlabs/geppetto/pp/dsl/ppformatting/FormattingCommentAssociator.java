@@ -32,7 +32,6 @@ import com.google.inject.Inject;
 
 /**
  * Provides a mapping from semantic objects to comments before and after the object.
- *
  */
 public class FormattingCommentAssociator {
 	public static class CommentAssociations {
@@ -107,8 +106,7 @@ public class FormattingCommentAssociator {
 				currentComments.add((ILeafNode) node);
 			}
 			boolean isToken = tokenUtil.isToken(node);
-			if((node instanceof ILeafNode || isToken) && node.getStartLine() != node.getEndLine() &&
-					currentEObject != null) {
+			if((node instanceof ILeafNode || isToken) && node.getStartLine() != node.getEndLine() && currentEObject != null) {
 				// found a newline -> associating existing comments with currentEObject
 				mapping.acceptAfter(currentEObject, currentComments);
 				// addMapping(mapping, currentComments, currentEObject);

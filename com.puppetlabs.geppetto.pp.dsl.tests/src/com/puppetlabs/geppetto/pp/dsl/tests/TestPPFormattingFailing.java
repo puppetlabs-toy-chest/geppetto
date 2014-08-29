@@ -43,7 +43,6 @@ import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 
 /**
  * Triggers problems with computation of the current hidden state during sequencing.
- *
  */
 public class TestPPFormattingFailing extends AbstractPuppetTests {
 	public static class DebugFormatter extends CSSDomFormatter {
@@ -54,8 +53,7 @@ public class TestPPFormattingFailing extends AbstractPuppetTests {
 		}
 
 		@Override
-		public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext,
-				Acceptor errors) {
+		public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext, Acceptor errors) {
 			// System.err.println("TestSemanticCssFormatter.DebugFormatter");
 			// System.err.println(DomModelUtils.compactDump(dom, true));
 			return super.format(dom, regionToFormat, formattingContext, errors);
@@ -120,8 +118,7 @@ public class TestPPFormattingFailing extends AbstractPuppetTests {
 
 		public void configureIHiddenTokenSequencer(Binder binder) {
 			// bind the real HiddenTokenSequencer
-			binder.bind(IHiddenTokenSequencer.class).to(
-				com.puppetlabs.xtext.serializer.acceptor.HiddenTokenSequencer.class);
+			binder.bind(IHiddenTokenSequencer.class).to(com.puppetlabs.xtext.serializer.acceptor.HiddenTokenSequencer.class);
 			// advise it to not save / restore hidden state to trigger error
 			// binder.bind(IHiddenTokenSequencerAdvisor.class).to(NonSaveRestorHiddenStateAdvise.class);
 

@@ -19,13 +19,11 @@ import com.google.common.collect.Lists;
  * or specified character, a repeating sequence, concatenation, sub sequence and replacement methods for
  * String methods {@link #endsWith(CharSequence, String)}, {@link #indexOf(CharSequence, String, int)}, and a method
  * that splits a CharSequence into a List.
- *
  */
 public class CharSequences {
 
 	/**
 	 * A CharSequence consisting of a concatenation of two sequences
-	 *
 	 */
 	public static class Concatenation implements CharSequence {
 		private CharSequence b;
@@ -65,7 +63,6 @@ public class CharSequences {
 
 	/**
 	 * An CharSequence consisting of a sequence of the same character.
-	 *
 	 */
 	public static class Fixed implements CharSequence {
 
@@ -104,7 +101,6 @@ public class CharSequences {
 
 	/**
 	 * An CharSequence consisting of a sequence of the same character.
-	 *
 	 */
 	public static class RepeatingString implements CharSequence {
 
@@ -152,7 +148,6 @@ public class CharSequences {
 
 	/**
 	 * An CharSequence consisting of only space
-	 *
 	 */
 	public static class Spaces implements CharSequence {
 		private static String space16 = "                ";

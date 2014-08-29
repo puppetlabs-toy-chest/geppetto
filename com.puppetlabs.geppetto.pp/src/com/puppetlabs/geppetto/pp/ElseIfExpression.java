@@ -15,7 +15,6 @@ package com.puppetlabs.geppetto.pp;
  * A representation of the model object '<em><b>Else If Expression</b></em>'.
  * <!-- end-user-doc -->
  *
- *
  * @see com.puppetlabs.geppetto.pp.PPPackage#getElseIfExpression()
  * @model
  * @generated

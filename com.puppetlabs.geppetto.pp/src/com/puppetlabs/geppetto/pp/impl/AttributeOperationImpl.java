@@ -168,12 +168,12 @@ public class AttributeOperationImpl extends EObjectImpl implements AttributeOper
 				return value != null;
 			case PPPackage.ATTRIBUTE_OPERATION__KEY:
 				return KEY_EDEFAULT == null
-				? key != null
-				: !KEY_EDEFAULT.equals(key);
+					? key != null
+					: !KEY_EDEFAULT.equals(key);
 			case PPPackage.ATTRIBUTE_OPERATION__OP:
 				return OP_EDEFAULT == null
-				? op != null
-				: !OP_EDEFAULT.equals(op);
+					? op != null
+					: !OP_EDEFAULT.equals(op);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -305,18 +305,17 @@ public class AttributeOperationImpl extends EObjectImpl implements AttributeOper
 		if(newValue != value) {
 			NotificationChain msgs = null;
 			if(value != null)
-				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.ATTRIBUTE_OPERATION__VALUE, null, msgs);
+				msgs = ((InternalEObject) value).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.ATTRIBUTE_OPERATION__VALUE, null, msgs);
 			if(newValue != null)
-				msgs = ((InternalEObject) newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.ATTRIBUTE_OPERATION__VALUE, null, msgs);
+				msgs = ((InternalEObject) newValue).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.ATTRIBUTE_OPERATION__VALUE, null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.ATTRIBUTE_OPERATION__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.ATTRIBUTE_OPERATION__VALUE, newValue, newValue));
 	}
 
 	/**

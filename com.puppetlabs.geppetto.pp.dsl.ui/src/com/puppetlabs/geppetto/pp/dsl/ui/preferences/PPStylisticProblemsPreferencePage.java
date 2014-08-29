@@ -15,7 +15,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.ValidationPreferenc
 
 /**
  * A preference pane for stylistic problems
- *
  */
 public class PPStylisticProblemsPreferencePage extends AbstractPreferencePage {
 
@@ -24,22 +23,18 @@ public class PPStylisticProblemsPreferencePage extends AbstractPreferencePage {
 
 		// case and selector
 		this.addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST, "Case statement where a 'default' is not last",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST, "Case statement where a 'default' is not last", getFieldEditorParent()));
 		this.addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_SELECTOR_DEFAULT_LAST, "Selector expression where a 'default' is not last",
 			getFieldEditorParent()));
 
 		// strings and interpolation
 		this.addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED, "Strings that do not require double quoting",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED, "Strings that do not require double quoting", getFieldEditorParent()));
 		this.addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR, "Strings containing a single interpolation",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR, "Strings containing a single interpolation", getFieldEditorParent()));
 		this.addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION, "Interpolated variables without braces",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION, "Interpolated variables without braces", getFieldEditorParent()));
 
 		// Resources
 		this.addField(new ValidationPreferenceFieldEditor(
@@ -49,12 +44,10 @@ public class PPStylisticProblemsPreferencePage extends AbstractPreferencePage {
 			PPPreferenceConstants.PROBLEM_ML_COMMENTS, "Comments using /* */", getFieldEditorParent()));
 
 		this.addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, "Right to left relationships using <- or <~",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, "Right to left relationships using <- or <~", getFieldEditorParent()));
 
 		this.addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, "Resource property ensure is not stated first",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, "Resource property ensure is not stated first", getFieldEditorParent()));
 
 	}
 

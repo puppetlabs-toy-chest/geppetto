@@ -47,7 +47,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
 
 /**
  * Tests for expressions not covered by separate test classes.
- *
  */
 public class TestExpressions extends AbstractPuppetTests implements AbstractPuppetTests.SerializationTestControl {
 
@@ -55,9 +54,9 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 	// @formatter:off
 	static final String Sample_Relationship = "file { 'file1':\n" + //
-			"} -> file { 'file2':\n" + //
-			"} -> file { 'file3':\n" + //
-			"}\n";
+		"} -> file { 'file2':\n" + //
+		"} -> file { 'file3':\n" + //
+		"}\n";
 
 	static final String Sample_Assignment1 = "$x = true\n";
 
@@ -73,17 +72,17 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 	static final String Sample_If = //
 	"if $a == 1 {\n" + //
-			"  true\n" + //
-			"} else {\n" + //
-			"  false\n" + //
-			"}\n\n" + //
-			"if $a == 1 {\n" + //
-			"  true\n" + //
-			"} elsif $b < -3 {\n" + //
-			"  false\n" + //
-			"} else {\n" + //
-			"  true\n" + //
-			"}\n";
+		"  true\n" + //
+		"} else {\n" + //
+		"  false\n" + //
+		"}\n\n" + //
+		"if $a == 1 {\n" + //
+		"  true\n" + //
+		"} elsif $b < -3 {\n" + //
+		"  false\n" + //
+		"} else {\n" + //
+		"  true\n" + //
+		"}\n";
 
 	private String doubleQuote(String s) {
 		return '"' + s + '"';
@@ -238,8 +237,6 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	 * Also see {@link #test_Serialize_DoubleQuotedString_2()}
 	 *
 	 * @see #test_Serialize_DoubleQuotedString_2() for a non failing tests.
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -258,7 +255,6 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	/**
 	 * Formatter did not switch back to non hidden state after import "".
 	 * If changed to '' string it behaved differently.
-	 *
 	 */
 	@Test
 	public void test_Serialize_DqStringFollowedByDefine() throws Exception {
@@ -271,7 +267,6 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 	/**
 	 * Formatter seems to not switch back to non hidden state interpolation.
-	 *
 	 */
 	@Test
 	public void test_Serialize_DqStringInterpolation() throws Exception {
@@ -614,8 +609,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		pp.getStatements().add(ip);
 
 		tester.validate(ip).assertAll(
-			errorCode(IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION),
-			warningCode(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED));
+			errorCode(IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION), warningCode(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED));
 	}
 
 	@Test

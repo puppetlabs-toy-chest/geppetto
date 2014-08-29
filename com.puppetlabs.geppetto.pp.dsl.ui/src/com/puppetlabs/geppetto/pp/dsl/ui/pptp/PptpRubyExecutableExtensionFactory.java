@@ -40,8 +40,7 @@ public class PptpRubyExecutableExtensionFactory extends AbstractGuiceAwareExecut
 	 */
 	@Override
 	protected Injector getInjector() {
-		return PPActivator.getInstance().getInjector(
-			PPDSLConstants.PPTP_RUBY_LANGUAGE_NAME);
+		return PPActivator.getInstance().getInjector(PPDSLConstants.PPTP_RUBY_LANGUAGE_NAME);
 	}
 
 }

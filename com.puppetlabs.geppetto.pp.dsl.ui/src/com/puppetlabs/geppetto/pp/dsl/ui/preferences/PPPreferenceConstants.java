@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
 /**
  * Constants for PP Preferences
- *
  */
 public class PPPreferenceConstants {
 

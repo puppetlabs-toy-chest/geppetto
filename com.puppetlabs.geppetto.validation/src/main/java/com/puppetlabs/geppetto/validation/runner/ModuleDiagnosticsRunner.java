@@ -44,7 +44,6 @@ import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
  * Runner/Helper that can perform diagnostics/validation of metadata.json files.
- *
  */
 public class ModuleDiagnosticsRunner extends ModuleStandaloneSetup {
 	private final IModuleValidationAdvisor moduleValidationAdvisor;

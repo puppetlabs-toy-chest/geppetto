@@ -15,7 +15,6 @@ import com.google.common.base.Joiner;
 /**
  * Describes desired spacing as an {@link IFlexibleQuantity}, with the additional support to
  * describe the space quantity as breakable (the default).
- *
  */
 public class Spacing extends FlexibleQuantity {
 	private boolean breakable;

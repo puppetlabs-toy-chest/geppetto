@@ -19,9 +19,8 @@ import com.google.inject.Singleton;
 
 /**
  * <p>
- * A {@code ResourceAccessScope} acts as a provider of {@link ResourceAccess} returning an instance that has been bound
- * to the current {@link Thread}, or a default "unspecific" ResourceAccess if the ResourceAccessScope has not been
- * entered.
+ * A {@code ResourceAccessScope} acts as a provider of {@link ResourceAccess} returning an instance that has been bound to the current
+ * {@link Thread}, or a default "unspecific" ResourceAccess if the ResourceAccessScope has not been entered.
  * </p>
  * <p>
  * This works similar to how a Guice Scope works, but this implementation is NOT a guice scope.
@@ -29,7 +28,6 @@ import com.google.inject.Singleton;
  * <p>
  * When entering, care must be taken to exit the scope in a finally-clause or the result may be memory leaks
  * </p>
- *
  */
 @Singleton
 public class ResourceAccessScope implements Provider<ResourceAccess> {
@@ -80,8 +78,8 @@ public class ResourceAccessScope implements Provider<ResourceAccess> {
 	public ResourceAccess get() {
 		ResourceAccess ra = context.get();
 		return ra == null
-				? unspecific
-						: ra;
+			? unspecific
+			: ra;
 	}
 
 }

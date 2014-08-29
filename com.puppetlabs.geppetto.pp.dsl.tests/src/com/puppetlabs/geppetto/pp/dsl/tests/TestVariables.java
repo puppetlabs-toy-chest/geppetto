@@ -28,7 +28,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.PPPatternHelper;
 
 /**
  * Test validation/linking of variables.
- *
  */
 public class TestVariables extends AbstractPuppetTests implements AbstractPuppetTests.SerializationTestControl {
 
@@ -95,8 +94,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	public void test_decimalDollarVariables_notOk() throws Exception {
 		// if
 		String code = "if 'abc' == 'abc' {\n" + //
-				"notice(\"$1\")" + //
-				"}\n"; //
+			"notice(\"$1\")" + //
+			"}\n"; //
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertDiagnostic(IPPDiagnostics.ISSUE__UNKNOWN_REGEXP);
@@ -104,8 +103,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 		// case
 		code = "case 'abc' {\n" + //
-				"abc:" + "{ notice(\"$1\") }" + //
-				"}\n"; //
+			"abc:" + "{ notice(\"$1\") }" + //
+			"}\n"; //
 		r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertDiagnostic(IPPDiagnostics.ISSUE__UNKNOWN_REGEXP);
@@ -113,13 +112,12 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 		// selector
 		code = "$a = 'abc' ? {\n" + //
-				"'abc' =>" + "$1\n" + //
-				"}\n"; //
+			"'abc' =>" + "$1\n" + //
+			"}\n"; //
 		r = getResourceFromString(code);
 		AssertableDiagnostics asserter = tester.validate(r.getContents().get(0));
 		asserter.assertAll(AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__MISSING_DEFAULT));
-		resourceWarningDiagnostics(r).assertAll(
-			AssertableResourceDiagnostics.diagnostic(IPPDiagnostics.ISSUE__UNKNOWN_REGEXP));
+		resourceWarningDiagnostics(r).assertAll(AssertableResourceDiagnostics.diagnostic(IPPDiagnostics.ISSUE__UNKNOWN_REGEXP));
 		resourceErrorDiagnostics(r).assertOK();
 	}
 
@@ -127,8 +125,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	public void test_decimalDollarVariables_ok() throws Exception {
 		// if
 		String code = "if 'abc' =~ /a(b)c/ {\n" + //
-				"notice(\"$1\")" + //
-				"}\n"; //
+			"notice(\"$1\")" + //
+			"}\n"; //
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertOK();
@@ -136,8 +134,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 		// case
 		code = "case 'abc' {\n" + //
-				"/a(b)c/:" + "{ notice(\"$1\") }" + //
-				"}\n"; //
+			"/a(b)c/:" + "{ notice(\"$1\") }" + //
+			"}\n"; //
 		r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertOK();
@@ -145,8 +143,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 		// selector
 		code = "$a = 'abc' ? {\n" + //
-				"/a(b)c/ =>" + "$1\n" + //
-				"}\n"; //
+			"/a(b)c/ =>" + "$1\n" + //
+			"}\n"; //
 		r = getResourceFromString(code);
 		AssertableDiagnostics asserter = tester.validate(r.getContents().get(0));
 		asserter.assertAll(AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__MISSING_DEFAULT));
@@ -158,8 +156,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	public void test_decimalVariables_notOk() throws Exception {
 		// if
 		String code = "if 'abc' == 'abc' {\n" + //
-				"notice(\"${1}\")" + //
-				"}\n"; //
+			"notice(\"${1}\")" + //
+			"}\n"; //
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertDiagnostic(IPPDiagnostics.ISSUE__UNKNOWN_REGEXP);
@@ -167,8 +165,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 		// case
 		code = "case 'abc' {\n" + //
-				"abc:" + "{ notice(\"${1}\") }" + //
-				"}\n"; //
+			"abc:" + "{ notice(\"${1}\") }" + //
+			"}\n"; //
 		r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertDiagnostic(IPPDiagnostics.ISSUE__UNKNOWN_REGEXP);
@@ -176,8 +174,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 		// selector
 		code = "$a = 'abc' ? {\n" + //
-				"'abc' =>" + "\"${1}\"\n" + //
-				"}\n"; //
+			"'abc' =>" + "\"${1}\"\n" + //
+			"}\n"; //
 		r = getResourceFromString(code);
 		AssertableDiagnostics asserter = tester.validate(r.getContents().get(0));
 		asserter.assertAll(AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__MISSING_DEFAULT));
@@ -189,8 +187,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	public void test_decimalVariables_ok() throws Exception {
 		// if
 		String code = "if 'abc' =~ /a(b)c/ {\n" + //
-				"notice(\"${1}\")" + //
-				"}\n"; //
+			"notice(\"${1}\")" + //
+			"}\n"; //
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertOK();
@@ -198,8 +196,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 		// case
 		code = "case 'abc' {\n" + //
-				"/a(b)c/:" + "{ notice(\"${1}\") }" + //
-				"}\n"; //
+			"/a(b)c/:" + "{ notice(\"${1}\") }" + //
+			"}\n"; //
 		r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertOK();
@@ -207,8 +205,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 
 		// selector
 		code = "$a = 'abc' ? {\n" + //
-				"/a(b)c/ =>" + "\"${1}\"\n" + //
-				"}\n"; //
+			"/a(b)c/ =>" + "\"${1}\"\n" + //
+			"}\n"; //
 		r = getResourceFromString(code);
 		AssertableDiagnostics asserter = tester.validate(r.getContents().get(0));
 		asserter.assertAll(AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__MISSING_DEFAULT));
@@ -257,8 +255,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 		URI uri = makeManifestURI(1);
 		initializeResourceSet(Lists.newArrayList(uri));
 		String code = "$y = 10\n" + //
-				"$ref = $::x\n" //
-				;
+			"$ref = $::x\n" //
+		;
 		Resource r = loadResource(code, uri);
 		resolveCrossReferences(r);
 		tester.validate(r.getContents().get(0)).assertOK();
@@ -274,8 +272,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_class_CGx_Gy() throws Exception {
 		String code = "class a {\n" + //
-				"$ref = $::x\n" + //
-				"}\n"; //
+			"$ref = $::x\n" + //
+			"}\n"; //
 		;
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
@@ -291,8 +289,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_Gx_Gx() throws Exception {
 		String code = "$x = 10\n" + //
-				"$ref = $x\n" //
-				;
+			"$ref = $x\n" //
+		;
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertOK();
@@ -308,8 +306,8 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_Gx_Gy() throws Exception {
 		String code = "$y = 10\n" + //
-				"$ref = $x\n" //
-				;
+			"$ref = $x\n" //
+		;
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertDiagnostic(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE);
@@ -324,12 +322,12 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_Lx_IIPx() throws Exception {
 		String code = "class aa($x=10) {\n" + //
-				"class bb inherits aa {\n" + //
-				"class cc inherits bb {\n" + //
-				"$ref = $x\n" + //
-				"}\n" + //
-				"}\n" + //
-				"}\n"; //
+			"class bb inherits aa {\n" + //
+			"class cc inherits bb {\n" + //
+			"$ref = $x\n" + //
+			"}\n" + //
+			"}\n" + //
+			"}\n"; //
 		;
 		Resource r = loadAndLinkSingleResource(code);
 		tester.validate(r.getContents().get(0)).assertOK();
@@ -345,13 +343,13 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_Lx_IIVx() throws Exception {
 		String code = "class aa {\n" + //
-				"$x = 10\n" + //
-				"class bb inherits aa {\n" + //
-				"class cc inherits bb {\n" + //
-				"$ref = $x\n" + //
-				"}\n" + //
-				"}\n" + //
-				"}\n"; //
+			"$x = 10\n" + //
+			"class bb inherits aa {\n" + //
+			"class cc inherits bb {\n" + //
+			"$ref = $x\n" + //
+			"}\n" + //
+			"}\n" + //
+			"}\n"; //
 		;
 		// XtextResource r = getResourceFromString(code);
 		Resource r = loadAndLinkSingleResource(code);
@@ -368,10 +366,10 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_Lx_IPx() throws Exception {
 		String code = "class aa($x=10) {\n" + //
-				"class bb inherits aa {\n" + //
-				"$ref = $x\n" + //
-				"}\n" + //
-				"}\n"; //
+			"class bb inherits aa {\n" + //
+			"$ref = $x\n" + //
+			"}\n" + //
+			"}\n"; //
 		;
 		Resource r = loadAndLinkSingleResource(code);
 
@@ -388,11 +386,11 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_Lx_IVx() throws Exception {
 		String code = "class aa {\n" + //
-				"$x = 10\n" + //
-				"class bb inherits aa {\n" + //
-				"$ref = $x\n" + //
-				"}\n" + //
-				"}\n"; //
+			"$x = 10\n" + //
+			"class bb inherits aa {\n" + //
+			"$ref = $x\n" + //
+			"}\n" + //
+			"}\n"; //
 		;
 		// XtextResource r = getResourceFromString(code);
 		Resource r = loadAndLinkSingleResource(code);
@@ -409,9 +407,9 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_Lx_Lx() throws Exception {
 		String code = "class a {\n" + //
-				"$x = 10\n" + //
-				"$ref = $x\n" + //
-				"}\n"; //
+			"$x = 10\n" + //
+			"$ref = $x\n" + //
+			"}\n"; //
 		;
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
@@ -428,11 +426,11 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 	@Test
 	public void test_variable_Lx_OVx() throws Exception {
 		String code = "class a {\n" + //
-				"$x = 10\n" + //
-				"class b {\n" + //
-				"$ref = $x\n" + //
-				"}\n" + //
-				"}\n"; //
+			"$x = 10\n" + //
+			"class b {\n" + //
+			"$ref = $x\n" + //
+			"}\n" + //
+			"}\n"; //
 		XtextResource r = getResourceFromString(code);
 		tester.validate(r.getContents().get(0)).assertOK();
 		resourceWarningDiagnostics(r).assertDiagnostic(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE);

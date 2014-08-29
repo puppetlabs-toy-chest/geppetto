@@ -88,8 +88,8 @@ public class LiteralRegexImpl extends LiteralExpressionImpl implements LiteralRe
 		switch(featureID) {
 			case PPPackage.LITERAL_REGEX__VALUE:
 				return VALUE_EDEFAULT == null
-				? value != null
-				: !VALUE_EDEFAULT.equals(value);
+					? value != null
+					: !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}

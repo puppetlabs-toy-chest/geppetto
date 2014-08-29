@@ -50,8 +50,8 @@ public class ModuleInfo extends Entity {
 	public ModuleInfo(ModuleName moduleName, Version version) {
 		this.full_name = moduleName;
 		this.name = moduleName == null
-				? null
-						: moduleName.getName();
+			? null
+			: moduleName.getName();
 		this.version = version;
 	}
 
@@ -77,14 +77,14 @@ public class ModuleInfo extends Entity {
 
 	public List<Release> getReleases() {
 		return releases == null
-				? Collections.<Release> emptyList()
-						: releases;
+			? Collections.<Release> emptyList()
+			: releases;
 	}
 
 	public List<String> getTagList() {
 		return tag_list == null
-				? Collections.<String> emptyList()
-						: tag_list;
+			? Collections.<String> emptyList()
+			: tag_list;
 	}
 
 	public Version getVersion() {

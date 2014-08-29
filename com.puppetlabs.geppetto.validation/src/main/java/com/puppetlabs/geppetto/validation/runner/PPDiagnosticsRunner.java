@@ -80,7 +80,6 @@ import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 
 /**
  * Runner/Helper that can perform diagnostics/validation of PP files.
- *
  */
 public class PPDiagnosticsRunner {
 
@@ -336,8 +335,7 @@ public class PPDiagnosticsRunner {
 				URI.createFileURI(root.getAbsolutePath()), searchPath, environment, manifestDir);
 	}
 
-	private void configureTransitiveClosure(final IPath rootModule, final Multimap<String, String> restricted,
-			final MetadataInfo mi) {
+	private void configureTransitiveClosure(final IPath rootModule, final Multimap<String, String> restricted, final MetadataInfo mi) {
 		Set<MetadataInfo> processed = Sets.newHashSet();
 
 		// it can see itself
@@ -473,8 +471,7 @@ public class PPDiagnosticsRunner {
 		// An overridden manager is expected with API extensions
 		IContainer.Manager manager = resourceServiceProvider.getContainerManager();
 		if(!(manager instanceof ValidationStateBasedContainerManager))
-			throw new IllegalStateException(
-					"Guice Configuration Error: container manager must be a ValidationStateBasedContainerManager");
+			throw new IllegalStateException("Guice Configuration Error: container manager must be a ValidationStateBasedContainerManager");
 
 		return (ValidationStateBasedContainerManager) manager;
 	}
@@ -606,7 +603,6 @@ public class PPDiagnosticsRunner {
 	 *
 	 * @param uri
 	 *            uri to a .pptp resource (typically).
-	 *
 	 * @return the resource
 	 */
 	public Resource loadResource1(URI uri) {
@@ -648,8 +644,7 @@ public class PPDiagnosticsRunner {
 				//
 				final ListBasedDiagnosticConsumer consumer = new ListBasedDiagnosticConsumer();
 				IMessageAcceptor acceptor = new DiagnosticConsumerBasedMessageAcceptor(consumer);
-				resourceLinker.link(
-					((LazyLinkingResource) resource).getParseResult().getRootASTElement(), acceptor, profileThis);
+				resourceLinker.link(((LazyLinkingResource) resource).getParseResult().getRootASTElement(), acceptor, profileThis);
 				resource.getErrors().addAll(consumer.getResult(Severity.ERROR));
 				resource.getWarnings().addAll(consumer.getResult(Severity.WARNING));
 			}
@@ -678,8 +673,8 @@ public class PPDiagnosticsRunner {
 	 * @param exports
 	 * @param desc
 	 */
-	private ModuleExport searchMissing(File importingModuleDir, File moduleDir,
-			Map<IEObjectDescription, ModuleExport> exports, IEObjectDescription desc) {
+	private ModuleExport searchMissing(File importingModuleDir, File moduleDir, Map<IEObjectDescription, ModuleExport> exports,
+			IEObjectDescription desc) {
 
 		List<IEObjectDescription> matching = Lists.newArrayList();
 		for(IEObjectDescription d2 : exports.keySet()) {
@@ -710,8 +705,7 @@ public class PPDiagnosticsRunner {
 	 *
 	 * @throws Exception
 	 */
-	public void setUp(IValidationAdvisor.ComplianceLevel complianceLevel, IPotentialProblemsAdvisor problemsAdvisor)
-			throws Exception {
+	public void setUp(IValidationAdvisor.ComplianceLevel complianceLevel, IPotentialProblemsAdvisor problemsAdvisor) throws Exception {
 		// Setup with overrides
 		instance = new PPDiagnosticsSetup(complianceLevel, problemsAdvisor);
 		injector = instance.createInjectorAndDoEMFRegistration();
@@ -742,14 +736,14 @@ public class PPDiagnosticsRunner {
 	private File uri2File(URI uri) {
 
 		String path = uri.isFile()
-				? uri.toFileString()
-						: uri.path();
-				File f = pathToFileMap.get(path);
-				if(f != null)
-					return f;
-				f = new File(path);
-				pathToFileMap.put(path, f);
-				return f;
+			? uri.toFileString()
+			: uri.path();
+		File f = pathToFileMap.get(path);
+		if(f != null)
+			return f;
+		f = new File(path);
+		pathToFileMap.put(path, f);
+		return f;
 	}
 
 }

@@ -86,7 +86,6 @@ import com.google.inject.Inject;
 
 /**
  * @author henrik
- *
  */
 public class PPExpressionFormatter {
 
@@ -101,7 +100,7 @@ public class PPExpressionFormatter {
 	IFormattingContext formattingContext;
 
 	private PolymorphicDispatcher<Void> formatDispatcher = new PolymorphicDispatcher<Void>(
-			"_format", 2, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Void> get()) {
+		"_format", 2, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Void> get()) {
 		@Override
 		protected Void handleNoSuchMethod(Object... params) {
 			return null;
@@ -516,7 +515,7 @@ public class PPExpressionFormatter {
 			// if e is not a SelectorEntry, it is really a syntax error, but do something reasonable
 			doFormat(e instanceof SelectorEntry
 				? ((SelectorEntry) e).getLeftExpr()
-						: e, inner);
+				: e, inner);
 			width = inner.getWidth();
 		}
 		for(Expression e : o.getParameters()) {

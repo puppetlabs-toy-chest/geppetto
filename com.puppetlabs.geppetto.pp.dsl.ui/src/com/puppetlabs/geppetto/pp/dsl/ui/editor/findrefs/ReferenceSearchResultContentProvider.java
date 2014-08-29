@@ -47,7 +47,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReferenceSearchResultContentProvider implements ITreeContentProvider, ISearchResultListener,
-IResourceDescription.Event.Listener {
+		IResourceDescription.Event.Listener {
 
 	private class UIUpdater extends UIJob {
 
@@ -72,8 +72,7 @@ IResourceDescription.Event.Listener {
 				else if(event instanceof Reset) {
 					if(rootNodes != null && !rootNodes.isEmpty()) {
 						synchronized(viewer) {
-							viewer.remove(
-								viewer.getInput(), Iterables.toArray(rootNodes, ReferenceSearchViewTreeNode.class));
+							viewer.remove(viewer.getInput(), Iterables.toArray(rootNodes, ReferenceSearchViewTreeNode.class));
 							rootNodes = null;
 						}
 					}
@@ -115,23 +114,21 @@ IResourceDescription.Event.Listener {
 		// : sourceContainer.getEObjectURI();
 
 		final URI eObjectURI = (containerEObjectURI == null)
-				? referenceDescription.getSourceEObjectUri()
-						: containerEObjectURI;
-				IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI.trimFragment());
-				if(resourceDescription != null) {
-					ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription, isUpdateViewer);
-					ReferenceSearchViewTreeNode referenceNode = null;
-					for(IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
-						if(eObjectDescription.getEObjectURI().equals(eObjectURI)) {
-							referenceNode = new ReferenceSearchViewTreeNode(
-								resourceNode, referenceDescription, eObjectDescription);
-							break;
-						}
-					}
-					if(referenceNode == null)
-						referenceNode = new ReferenceSearchViewTreeNode(
-							resourceNode, referenceDescription, referenceDescription);
+			? referenceDescription.getSourceEObjectUri()
+			: containerEObjectURI;
+		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI.trimFragment());
+		if(resourceDescription != null) {
+			ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription, isUpdateViewer);
+			ReferenceSearchViewTreeNode referenceNode = null;
+			for(IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
+				if(eObjectDescription.getEObjectURI().equals(eObjectURI)) {
+					referenceNode = new ReferenceSearchViewTreeNode(resourceNode, referenceDescription, eObjectDescription);
+					break;
 				}
+			}
+			if(referenceNode == null)
+				referenceNode = new ReferenceSearchViewTreeNode(resourceNode, referenceDescription, referenceDescription);
+		}
 	}
 
 	@Override
@@ -161,7 +158,7 @@ IResourceDescription.Event.Listener {
 												@Override
 												public boolean apply(IReferenceDescription input) {
 													return input.getSourceEObjectUri().equals(referenceSourceURI) &&
-															input.getTargetEObjectUri().equals(referenceTargetURI);
+														input.getTargetEObjectUri().equals(referenceTargetURI);
 												}
 											}))) {
 											removedReferenceNodes.add(referenceNode);
@@ -175,9 +172,7 @@ IResourceDescription.Event.Listener {
 										viewer.remove(rootNode);
 										break;
 									}
-									viewer.remove(
-										rootNode,
-										Iterables.toArray(removedReferenceNodes, ReferenceSearchViewTreeNode.class));
+									viewer.remove(rootNode, Iterables.toArray(removedReferenceNodes, ReferenceSearchViewTreeNode.class));
 								}
 							}
 						}
@@ -195,8 +190,7 @@ IResourceDescription.Event.Listener {
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		if(parentElement instanceof ReferenceSearchViewTreeNode) {
-			return Iterables.toArray(
-				((ReferenceSearchViewTreeNode) parentElement).getChildren(), ReferenceSearchViewTreeNode.class);
+			return Iterables.toArray(((ReferenceSearchViewTreeNode) parentElement).getChildren(), ReferenceSearchViewTreeNode.class);
 		}
 		return null;
 	}
@@ -256,8 +250,7 @@ IResourceDescription.Event.Listener {
 				}
 			}
 		}
-		ReferenceSearchViewTreeNode node = new ReferenceSearchViewTreeNode(
-			null, resourceDescription, resourceDescription);
+		ReferenceSearchViewTreeNode node = new ReferenceSearchViewTreeNode(null, resourceDescription, resourceDescription);
 		rootNodes.add(node);
 		if(isUpdateViewer) {
 			viewer.add(viewer.getInput(), node);

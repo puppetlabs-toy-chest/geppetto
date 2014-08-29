@@ -25,7 +25,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 public class DeclarativeSemanticFlowLayout extends FlowLayout {
 
 	private PolymorphicDispatcher<Boolean> formatDispatcher = new PolymorphicDispatcher<Boolean>(
-			"_format", 5, 5, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
+		"_format", 5, 5, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
 		@Override
 		protected Boolean handleNoSuchMethod(Object... params) {
 			return false;
@@ -33,7 +33,7 @@ public class DeclarativeSemanticFlowLayout extends FlowLayout {
 	};
 
 	private PolymorphicDispatcher<Boolean> beforeDispatcher = new PolymorphicDispatcher<Boolean>(
-			"_before", 5, 5, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
+		"_before", 5, 5, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
 		@Override
 		protected Boolean handleNoSuchMethod(Object... params) {
 			return false;
@@ -41,7 +41,7 @@ public class DeclarativeSemanticFlowLayout extends FlowLayout {
 	};
 
 	private PolymorphicDispatcher<Boolean> afterDispatcher = new PolymorphicDispatcher<Boolean>(
-			"_after", 5, 5, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
+		"_after", 5, 5, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Boolean> get()) {
 		@Override
 		protected Boolean handleNoSuchMethod(Object... params) {
 			return false;
@@ -66,18 +66,15 @@ public class DeclarativeSemanticFlowLayout extends FlowLayout {
 		super.beforeComposite(styleSet, node, flow, context);
 	}
 
-	protected void doSemanticAfter(EObject semantic, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected void doSemanticAfter(EObject semantic, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		afterDispatcher.invoke(semantic, styleSet, node, flow, context);
 	}
 
-	protected void doSemanticBefore(EObject semantic, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected void doSemanticBefore(EObject semantic, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		beforeDispatcher.invoke(semantic, styleSet, node, flow, context);
 	}
 
-	protected boolean doSemanticFormat(EObject semantic, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean doSemanticFormat(EObject semantic, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		return formatDispatcher.invoke(semantic, styleSet, node, flow, context);
 	}
 

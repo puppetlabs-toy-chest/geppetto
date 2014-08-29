@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Composite;
 
 /**
  * A simple preference page for search path and environment
- *
  */
 public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 	private static class PPPathEditor extends PathEditor {
@@ -83,12 +82,11 @@ public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 			};
 			String[] value = new String[] { input };
 			int[] allSubdirs = new int[] { input.endsWith("/*")
-					? 1
-							: 0 };
+				? 1
+				: 0 };
 			int[] okCancel = new int[] { 1 };
 
-			dialog.prompt(
-				"Edit Path Segement", "Edit relative path", "Search all subdirectories", value, allSubdirs, okCancel);
+			dialog.prompt("Edit Path Segement", "Edit relative path", "Search all subdirectories", value, allSubdirs, okCancel);
 			if(okCancel[0] == 0)
 				return input;
 			String result = value[0].trim();
@@ -122,9 +120,7 @@ public class PPPathPreferencePage extends AbstractRebuildingPreferencePage {
 			int[] allSubdirs = new int[] { 1 };
 			int[] okCancel = new int[] { 1 };
 
-			dialog.prompt(
-				"Add Path Segement", "Enter new relative path", "Search all subdirectories", value, allSubdirs,
-				okCancel);
+			dialog.prompt("Add Path Segement", "Enter new relative path", "Search all subdirectories", value, allSubdirs, okCancel);
 			if(okCancel[0] == 0)
 				return null;
 			if(allSubdirs[0] == 0)

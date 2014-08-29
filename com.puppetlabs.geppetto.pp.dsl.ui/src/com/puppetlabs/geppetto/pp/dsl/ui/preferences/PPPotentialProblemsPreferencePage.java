@@ -15,7 +15,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.ValidationPreferenc
 
 /**
  * A preference pane for potential problems.
- *
  */
 public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 
@@ -23,22 +22,17 @@ public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 	protected void createFieldEditors() {
 
 		addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, "Interpolated hyphen without surrounding {}",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, "Interpolated hyphen without surrounding {}", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, "Strings containing \"false\" or \"true\"",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, "Strings containing \"false\" or \"true\"", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, "Missing 'default' in selector", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, "Assignment to $string",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, "Assignment to $string", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, "Assignment to $trusted",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, "Assignment to $trusted", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, "Validity not asserted until runtime",
-			getFieldEditorParent()));
+			PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, "Validity not asserted until runtime", getFieldEditorParent()));
 	}
 
 }

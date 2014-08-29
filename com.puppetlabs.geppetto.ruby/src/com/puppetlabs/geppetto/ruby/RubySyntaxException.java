@@ -17,7 +17,6 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
 /**
  * A simplified RubySyntaxException that should be thrown in operations where it
  * is expected that syntax errors are not present.
- *
  */
 public class RubySyntaxException extends Exception {
 
@@ -31,32 +30,32 @@ public class RubySyntaxException extends Exception {
 
 	public RubySyntaxException(List<IRubyIssue> issues) {
 		FOUND: {
-		for(IRubyIssue issue : issues) {
-			if(issue.isSyntaxError()) {
+			for(IRubyIssue issue : issues) {
+				if(issue.isSyntaxError()) {
+					filename = issue.getFileName();
+					line = issue.getLine();
+					message = issue.getMessage();
+					break FOUND;
+				}
+			}
+			if(issues.size() < 1) {
+				filename = "unknown";
+				line = -1;
+				message = "Can't find an error message to display!";
+			}
+			if(issues.size() == 1) {
+				IRubyIssue issue = issues.get(0);
 				filename = issue.getFileName();
-				line = issue.getLine();
+				line = -1;
 				message = issue.getMessage();
-				break FOUND;
+			}
+			else {
+				IRubyIssue issue = issues.get(0);
+				filename = issue.getFileName();
+				line = -1;
+				message = "Several non syntax errors - file is the first reported file.";
 			}
 		}
-		if(issues.size() < 1) {
-			filename = "unknown";
-			line = -1;
-			message = "Can't find an error message to display!";
-		}
-		if(issues.size() == 1) {
-			IRubyIssue issue = issues.get(0);
-			filename = issue.getFileName();
-			line = -1;
-			message = issue.getMessage();
-		}
-			else {
-			IRubyIssue issue = issues.get(0);
-			filename = issue.getFileName();
-			line = -1;
-			message = "Several non syntax errors - file is the first reported file.";
-		}
-	}
 	}
 
 	public String getFilename() {

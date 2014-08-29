@@ -48,11 +48,9 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
 	 * <p>
-	 * This method is used to initialize {@link PPTPPackage#eINSTANCE} when that field is accessed. Clients should not
-	 * invoke it directly. Instead, they should simply access that field to obtain the package. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This method is used to initialize {@link PPTPPackage#eINSTANCE} when that field is accessed. Clients should not invoke it directly.
+	 * Instead, they should simply access that field to obtain the package. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 *
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -65,8 +63,8 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 
 		// Obtain or create and register package
 		PPTPPackageImpl thePPTPPackage = (PPTPPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PPTPPackageImpl
-				? EPackage.Registry.INSTANCE.get(eNS_URI)
-				: new PPTPPackageImpl());
+			? EPackage.Registry.INSTANCE.get(eNS_URI)
+			: new PPTPPackageImpl());
 
 		isInited = true;
 
@@ -258,9 +256,8 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 	 * package
 	 * package URI value.
 	 * <p>
-	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
-	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also performs initialization
+	 * of the package, or returns the registered package, if one already exists. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 *
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#eNS_URI
@@ -838,38 +835,31 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 		metaVariableEClass.getESuperTypes().add(this.getTargetElement());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(
-			targetEntryEClass, TargetEntry.class, "TargetEntry", IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
+		initEClass(targetEntryEClass, TargetEntry.class, "TargetEntry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getTargetEntry_Description(), ecorePackage.getEString(), "description", null, 0, 1, TargetEntry.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(
-			getTargetEntry_Functions(), this.getFunction(), null, "functions", null, 0, -1, TargetEntry.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
-		initEReference(
-			getTargetEntry_Types(), this.getType(), null, "types", null, 0, -1, TargetEntry.class, !IS_TRANSIENT,
-			!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-			IS_ORDERED);
-		initEAttribute(
-			getTargetEntry_Version(), ecorePackage.getEString(), "version", null, 0, 1, TargetEntry.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(
-			getTargetEntry_TypeFragments(), this.getTypeFragment(), null, "typeFragments", null, 0, -1,
-			TargetEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(
-			getTargetEntry_MetaType(), this.getMetaType(), null, "metaType", null, 0, 1, TargetEntry.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
-		initEAttribute(
-			getTargetEntry_Label(), ecorePackage.getEString(), "label", null, 0, 1, TargetEntry.class, !IS_TRANSIENT,
+			getTargetEntry_Description(), ecorePackage.getEString(), "description", null, 0, 1, TargetEntry.class, !IS_TRANSIENT,
 			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(
-			getTargetEntry_MetaVariables(), this.getMetaVariable(), null, "metaVariables", null, 0, -1,
-			TargetEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getTargetEntry_Functions(), this.getFunction(), null, "functions", null, 0, -1, TargetEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(
+			getTargetEntry_Types(), this.getType(), null, "types", null, 0, -1, TargetEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getTargetEntry_Version(), ecorePackage.getEString(), "version", null, 0, 1, TargetEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(
+			getTargetEntry_TypeFragments(), this.getTypeFragment(), null, "typeFragments", null, 0, -1, TargetEntry.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(
+			getTargetEntry_MetaType(), this.getMetaType(), null, "metaType", null, 0, 1, TargetEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getTargetEntry_Label(), ecorePackage.getEString(), "label", null, 0, 1, TargetEntry.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(
+			getTargetEntry_MetaVariables(), this.getMetaVariable(), null, "metaVariables", null, 0, -1, TargetEntry.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(
 			puppetDistributionEClass, PuppetDistribution.class, "PuppetDistribution", !IS_ABSTRACT, !IS_INTERFACE,
@@ -877,95 +867,78 @@ public class PPTPPackageImpl extends EPackageImpl implements PPTPPackage {
 
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getFunction_RValue(), ecorePackage.getEBoolean(), "rValue", null, 0, 1, Function.class, !IS_TRANSIENT,
-			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getFunction_RValue(), ecorePackage.getEBoolean(), "rValue", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(
-			abstractTypeEClass, AbstractType.class, "AbstractType", IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
+		initEClass(abstractTypeEClass, AbstractType.class, "AbstractType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(
-			getAbstractType_EReference0(), this.getIDocumented(), null, "EReference0", null, 0, 1, AbstractType.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+			getAbstractType_EReference0(), this.getIDocumented(), null, "EReference0", null, 0, 1, AbstractType.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(
-			getAbstractType_Properties(), this.getProperty(), null, "properties", null, 0, -1, AbstractType.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+			getAbstractType_Properties(), this.getProperty(), null, "properties", null, 0, -1, AbstractType.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(
-			getAbstractType_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, AbstractType.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+			getAbstractType_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, AbstractType.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(
-			iDocumentedEClass, IDocumented.class, "IDocumented", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(iDocumentedEClass, IDocumented.class, "IDocumented", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getIDocumented_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, IDocumented.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getIDocumented_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, IDocumented.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(iNamedEClass, INamed.class, "INamed", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getINamed_Name(), ecorePackage.getEString(), "name", null, 0, 1, INamed.class, !IS_TRANSIENT, !IS_VOLATILE,
-			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getINamed_Name(), ecorePackage.getEString(), "name", null, 0, 1, INamed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(
-			targetElementEClass, TargetElement.class, "TargetElement", IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
+		initEClass(targetElementEClass, TargetElement.class, "TargetElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getTargetElement_Deprecated(), ecorePackage.getEBoolean(), "deprecated", null, 0, 1, TargetElement.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getTargetElement_Deprecated(), ecorePackage.getEBoolean(), "deprecated", null, 0, 1, TargetElement.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(
-			parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(
-			typeFragmentEClass, TypeFragment.class, "TypeFragment", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
+		initEClass(typeFragmentEClass, TypeFragment.class, "TypeFragment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getType_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, Type.class, !IS_TRANSIENT,
-			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+			getType_SuperType(), ecorePackage.getEString(), "superType", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaTypeEClass, MetaType.class, "MetaType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(
-			typeArgumentEClass, TypeArgument.class, "TypeArgument", IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
+		initEClass(typeArgumentEClass, TypeArgument.class, "TypeArgument", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(
-			getTypeArgument_Required(), ecorePackage.getEBoolean(), "required", null, 0, 1, TypeArgument.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(
-			getTypeArgument_Namevar(), ecorePackage.getEBoolean(), "namevar", null, 0, 1, TypeArgument.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(
-			nameSpaceEClass, NameSpace.class, "NameSpace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(
-			getNameSpace_Reserved(), ecorePackage.getEBoolean(), "reserved", null, 0, 1, NameSpace.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(
-			tpVariableEClass, TPVariable.class, "TPVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(
-			getTPVariable_Assignable(), ecorePackage.getEBoolean(), "assignable", null, 0, 1, TPVariable.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(
-			getTPVariable_Pattern(), ecorePackage.getEString(), "pattern", null, 0, 1, TPVariable.class, !IS_TRANSIENT,
+			getTypeArgument_Required(), ecorePackage.getEBoolean(), "required", null, 0, 1, TypeArgument.class, !IS_TRANSIENT,
 			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getTypeArgument_Namevar(), ecorePackage.getEBoolean(), "namevar", null, 0, 1, TypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nameSpaceEClass, NameSpace.class, "NameSpace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(
+			getNameSpace_Reserved(), ecorePackage.getEBoolean(), "reserved", null, 0, 1, NameSpace.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tpVariableEClass, TPVariable.class, "TPVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(
+			getTPVariable_Assignable(), ecorePackage.getEBoolean(), "assignable", null, 0, 1, TPVariable.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(
+			getTPVariable_Pattern(), ecorePackage.getEString(), "pattern", null, 0, 1, TPVariable.class, !IS_TRANSIENT, !IS_VOLATILE,
+			IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(
-			iTargetElementContainerEClass, ITargetElementContainer.class, "ITargetElementContainer", IS_ABSTRACT,
-			IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(
-			getITargetElementContainer_Contents(), this.getTargetElement(), null, "contents", null, 0, -1,
-			ITargetElementContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-			!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(
-			metaVariableEClass, MetaVariable.class, "MetaVariable", !IS_ABSTRACT, !IS_INTERFACE,
+			iTargetElementContainerEClass, ITargetElementContainer.class, "ITargetElementContainer", IS_ABSTRACT, IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);
+		initEReference(
+			getITargetElementContainer_Contents(), this.getTargetElement(), null, "contents", null, 0, -1, ITargetElementContainer.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+			IS_ORDERED);
+
+		initEClass(metaVariableEClass, MetaVariable.class, "MetaVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize data types
 		initEDataType(fileEDataType, File.class, "File", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -18,7 +18,6 @@ import com.google.inject.ImplementedBy;
 /**
  * IFormattingContext provides basic formatting information to the formatter; the indent string, the line
  * separator to use, and if the formatter should preserve whitespace or not.
- *
  */
 @ImplementedBy(DefaultFormattingContext.class)
 public interface IFormattingContext {

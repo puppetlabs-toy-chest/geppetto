@@ -46,13 +46,12 @@ public class Version implements Comparable<Version>, Serializable {
 	}
 
 	private static Version fromMatch(Matcher m) {
-		return instanceCache.cache(new Version(
-			parseInt(m.group(1)), parseInt(m.group(2)), parseInt(m.group(3)), m.group(4)));
+		return instanceCache.cache(new Version(parseInt(m.group(1)), parseInt(m.group(2)), parseInt(m.group(3)), m.group(4)));
 	}
 
 	/**
-	 * Creates a new instance from the given <code>version</code> string. This method will return <code>null</code> on
-	 * <code>null</code> input.
+	 * Creates a new instance from the given <code>version</code> string. This method will return <code>null</code> on <code>null</code>
+	 * input.
 	 *
 	 * @param version
 	 *            The version in string form
@@ -71,8 +70,8 @@ public class Version implements Comparable<Version>, Serializable {
 	}
 
 	/**
-	 * Creates a new instance from the given <code>version</code> string. This method will return <code>null</code> on
-	 * <code>null</code> or invalid input.
+	 * Creates a new instance from the given <code>version</code> string. This method will return <code>null</code> on <code>null</code> or
+	 * invalid input.
 	 *
 	 * @param version
 	 *            The version in string form
@@ -84,8 +83,8 @@ public class Version implements Comparable<Version>, Serializable {
 
 		Matcher m = VERSION_PATTERN.matcher(version);
 		return m.matches()
-				? fromMatch(m)
-						: null;
+			? fromMatch(m)
+			: null;
 	}
 
 	/**
@@ -162,7 +161,7 @@ public class Version implements Comparable<Version>, Serializable {
 		if(o instanceof Version) {
 			Version v = (Version) o;
 			return major == v.major && minor == v.minor && patch == v.patch &&
-					(preRelease == v.preRelease || preRelease != null && preRelease.equals(v.preRelease));
+				(preRelease == v.preRelease || preRelease != null && preRelease.equals(v.preRelease));
 		}
 		return false;
 	}

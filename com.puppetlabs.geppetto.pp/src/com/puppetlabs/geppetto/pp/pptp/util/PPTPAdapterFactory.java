@@ -195,8 +195,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Function <em>Function</em>}
-	 * '.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Function <em>Function</em>} '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -258,8 +257,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.MetaType <em>Meta Type</em>}
-	 * '.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.MetaType <em>Meta Type</em>} '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -322,8 +320,7 @@ public class PPTPAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Property <em>Property</em>}
-	 * '.
+	 * Creates a new adapter for an object of class '{@link com.puppetlabs.geppetto.pp.pptp.Property <em>Property</em>} '.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.

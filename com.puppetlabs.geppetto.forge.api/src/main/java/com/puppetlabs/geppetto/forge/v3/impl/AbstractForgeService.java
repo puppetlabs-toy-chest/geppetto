@@ -33,8 +33,8 @@ import com.puppetlabs.geppetto.forge.v3.Visitor;
 import com.puppetlabs.geppetto.forge.v3.model.PaginatedResult;
 
 public abstract class AbstractForgeService<T extends Entity, I> implements ForgeService<T, I> {
-	private static <T extends Entity> PaginationInfo visitPage(PaginatedResult<T> page, Visitor<T> visitor,
-			ProgressMonitor progressMonitor) throws InvocationTargetException {
+	private static <T extends Entity> PaginationInfo visitPage(PaginatedResult<T> page, Visitor<T> visitor, ProgressMonitor progressMonitor)
+			throws InvocationTargetException {
 		for(T entity : page.getResults()) {
 			if(progressMonitor.isCanceled())
 				return null;
@@ -61,8 +61,8 @@ public abstract class AbstractForgeService<T extends Entity, I> implements Forge
 	 * @see com.puppetlabs.geppetto.forge.v3.ForgeService#accept(com.puppetlabs.geppetto.forge.v3.AbstractForgeService.Query, com.puppetlabs.geppetto.forge.v3.AbstractForgeService.SortBy, boolean, com.puppetlabs.geppetto.forge.v3.AbstractForgeService.Visitor, com.puppetlabs.geppetto.forge.v3.AbstractForgeService.ProgressMonitor)
 	 */
 	@Override
-	public void accept(Query<T> query, SortBy<T> sortBy, boolean includeDeleted, Visitor<T> visitor,
-			ProgressMonitor progressMonitor) throws IOException, InvocationTargetException {
+	public void accept(Query<T> query, SortBy<T> sortBy, boolean includeDeleted, Visitor<T> visitor, ProgressMonitor progressMonitor)
+			throws IOException, InvocationTargetException {
 		if(progressMonitor == null)
 			progressMonitor = new NullProgressMonitor();
 
@@ -112,8 +112,7 @@ public abstract class AbstractForgeService<T extends Entity, I> implements Forge
 	 * @see com.puppetlabs.geppetto.forge.v3.ForgeService#list(com.puppetlabs.geppetto.forge.v3.AbstractForgeService.Query, com.puppetlabs.geppetto.forge.v3.AbstractForgeService.SortBy, com.puppetlabs.geppetto.forge.v3.AbstractForgeService.PaginationInfo, boolean)
 	 */
 	@Override
-	public PaginatedResult<T> list(Query<T> query, SortBy<T> sortBy, PaginationInfo pagination, boolean includeDeleted)
-			throws IOException {
+	public PaginatedResult<T> list(Query<T> query, SortBy<T> sortBy, PaginationInfo pagination, boolean includeDeleted) throws IOException {
 		Map<String, String> params;
 		if(includeDeleted || query != null || sortBy != null || pagination != null) {
 			params = new HashMap<String, String>();

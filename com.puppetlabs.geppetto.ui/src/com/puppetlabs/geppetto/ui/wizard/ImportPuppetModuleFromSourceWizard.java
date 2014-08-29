@@ -80,17 +80,14 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 	private static class FileLabelProvider extends LabelProvider {
 		private static final ImageDescriptor MODULE_OVL = UIPlugin.getImageDesc("obj8/puppet-7x8px.png");
 
-		private static final Image IMG_FOLDER = PlatformUI.getWorkbench().getSharedImages().getImage(
-			ISharedImages.IMG_OBJ_FOLDER);
+		private static final Image IMG_FOLDER = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FOLDER);
 
 		private static final Image IMG_OBJ_PROJECT = PlatformUI.getWorkbench().getSharedImages().getImage(
 			org.eclipse.ui.ide.IDE.SharedImages.IMG_OBJ_PROJECT);
 
-		private static final Image IMG_FILE = PlatformUI.getWorkbench().getSharedImages().getImage(
-			ISharedImages.IMG_OBJ_FILE);
+		private static final Image IMG_FILE = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FILE);
 
-		private static final Image IMG_MODULE_PROJECT = new DecorationOverlayIcon(
-			IMG_OBJ_PROJECT, MODULE_OVL, IDecoration.TOP_RIGHT).createImage();
+		private static final Image IMG_MODULE_PROJECT = new DecorationOverlayIcon(IMG_OBJ_PROJECT, MODULE_OVL, IDecoration.TOP_RIGHT).createImage();
 
 		private static final Image IMG_MODULE = new DecorationOverlayIcon(IMG_FOLDER, MODULE_OVL, IDecoration.TOP_RIGHT).createImage();
 
@@ -100,12 +97,12 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 				IFileStore curr = (IFileStore) element;
 				if(curr.fetchInfo().isDirectory()) {
 					return isModule(curr)
-							? (isProject(curr)
-									? IMG_MODULE_PROJECT
-											: IMG_MODULE)
-											: (isProject(curr)
-													? IMG_OBJ_PROJECT
-															: IMG_FOLDER);
+						? (isProject(curr)
+							? IMG_MODULE_PROJECT
+							: IMG_MODULE)
+						: (isProject(curr)
+							? IMG_OBJ_PROJECT
+							: IMG_FOLDER);
 				}
 				return IMG_FILE;
 			}
@@ -142,8 +139,7 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 
 						// Exclude the workspace itself and projects that are already
 						// in the workspace
-						IContainer wsFile = workspace.getRoot().getContainerForLocation(
-							Path.fromOSString(file.getAbsolutePath()));
+						IContainer wsFile = workspace.getRoot().getContainerForLocation(Path.fromOSString(file.getAbsolutePath()));
 						if(wsFile != null) {
 							switch(wsFile.getType()) {
 								case IResource.PROJECT:
@@ -167,9 +163,8 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 		@Override
 		public Object[] getChildren(Object parentElement) {
 			return parentElement instanceof IFileStore
-					? IDEResourceInfoUtils.listFileStores(
-						(IFileStore) parentElement, fileFilter, new NullProgressMonitor())
-						: EMPTY;
+				? IDEResourceInfoUtils.listFileStores((IFileStore) parentElement, fileFilter, new NullProgressMonitor())
+				: EMPTY;
 		}
 
 		@Override
@@ -180,8 +175,8 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 		@Override
 		public Object getParent(Object element) {
 			return element instanceof IFileStore
-					? ((IFileStore) element).getParent()
-							: null;
+				? ((IFileStore) element).getParent()
+				: null;
 		}
 
 		@Override
@@ -351,11 +346,11 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 				proposedName = ModuleName.safeName(proposedName, false);
 
 			projectNameField.setText(proposedName == null
-					? ""
-							: proposedName);
+				? ""
+				: proposedName);
 			projectNameInfoField.setText(isProject
 				? "(derived from existing .project file)"
-						: "");
+				: "");
 			validatePage();
 		}
 
@@ -383,8 +378,7 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 			}
 
 			if(!isModule(moduleRoot))
-				setMessage(
-					format("%s is not a module (contains neither metadata.json nor Modulefile)", moduleDir), WARNING);
+				setMessage(format("%s is not a module (contains neither metadata.json nor Modulefile)", moduleDir), WARNING);
 
 			IProject project = workspace.getRoot().getProject(projectName);
 			if(project.exists()) {
@@ -394,8 +388,8 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 
 			IPath modulePath = Path.fromOSString(moduleRoot.getAbsolutePath());
 			projectLocation = Platform.getLocation().equals(modulePath.removeLastSegments(1))
-					? null
-							: modulePath;
+				? null
+				: modulePath;
 			projectContainer = Path.fromOSString(projectName);
 			setPageComplete(true);
 		}

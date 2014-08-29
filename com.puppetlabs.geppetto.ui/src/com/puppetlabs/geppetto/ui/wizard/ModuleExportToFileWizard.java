@@ -94,8 +94,7 @@ public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 			try {
 				@SuppressWarnings("unchecked")
 				List<IResource> whiteCheckedResources = getWhiteCheckedResources();
-				return executeExport(new ModuleExportOperation(
-					getExportSpecs(whiteCheckedResources), getDestination(), this) {
+				return executeExport(new ModuleExportOperation(getExportSpecs(whiteCheckedResources), getDestination(), this) {
 					@Override
 					protected Forge getForge() {
 						return forge;
@@ -103,8 +102,7 @@ public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 				});
 			}
 			catch(CoreException e) {
-				ErrorDialog.openError(
-					getContainer().getShell(), DataTransferMessages.DataTransfer_exportProblems, null, // no special message
+				ErrorDialog.openError(getContainer().getShell(), DataTransferMessages.DataTransfer_exportProblems, null, // no special message
 					e.getStatus());
 				return false;
 			}
@@ -113,8 +111,8 @@ public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 		public File getDestination() {
 			String dest = Strings.trimToNull(getDestinationValue());
 			return dest == null
-					? null
-							: new File(dest);
+				? null
+				: new File(dest);
 		}
 	}
 
@@ -170,8 +168,7 @@ public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 			if(message == null)
 				message = NLS.bind(IDEWorkbenchMessages.WizardDataTransfer_exceptionMessage, exception);
 			MessageDialog.open(
-				MessageDialog.ERROR, getShell(), IDEWorkbenchMessages.WizardExportPage_internalErrorTitle, message,
-				SWT.SHEET);
+				MessageDialog.ERROR, getShell(), IDEWorkbenchMessages.WizardExportPage_internalErrorTitle, message, SWT.SHEET);
 			return false;
 		}
 
@@ -253,8 +250,8 @@ public class ModuleExportToFileWizard extends Wizard implements IExportWizard {
 		Metadata md;
 		try {
 			md = forge.createFromModuleDirectory(moduleDirectory, filter, null, new Diagnostic());
-			return md != null && md.getName() != null && md.getName().getOwner() != null &&
-					md.getName().getName() != null && md.getVersion() != null;
+			return md != null && md.getName() != null && md.getName().getOwner() != null && md.getName().getName() != null &&
+				md.getVersion() != null;
 		}
 		catch(IOException e) {
 		}

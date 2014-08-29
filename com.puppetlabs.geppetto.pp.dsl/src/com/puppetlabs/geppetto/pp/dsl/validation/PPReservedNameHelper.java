@@ -16,7 +16,6 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * Helps with reserved names.
- *
  */
 public class PPReservedNameHelper {
 

@@ -16,7 +16,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * All Known Issues (failing) Puppet Tests.
- *
  */
 @SuiteClasses({ TestFailingFormatting.class, TestFailingSerialization.class })
 @RunWith(Suite.class)

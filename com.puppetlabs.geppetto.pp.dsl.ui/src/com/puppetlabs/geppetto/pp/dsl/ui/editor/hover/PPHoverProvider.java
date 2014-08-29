@@ -56,7 +56,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz.ImagesOnFileSystemRegistry;
 /**
  * Provides Hover information - for what should there be a hover, and what (the actual content is
  * produce by {@link PPDocumentationProvider} (labels, documentation, and images).
- *
  */
 public class PPHoverProvider extends DefaultEObjectHoverProvider {
 
@@ -64,7 +63,6 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 	 * Basically a copy of the class with the same name in DefaultEObjectHoverProvider.
 	 * A complete copy required since it is not possible to access the openDeclarationAction
 	 * instance and siable it from the outside.
-	 *
 	 */
 	public class PresenterControlCreator extends AbstractReusableInformationControlCreator {
 
@@ -168,8 +166,7 @@ public class PPHoverProvider extends DefaultEObjectHoverProvider {
 	}
 
 	protected Boolean _hover(VariableExpression o) {
-		if(o.eContainer() instanceof AssignmentExpression &&
-				o.eContainingFeature() == PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR)
+		if(o.eContainer() instanceof AssignmentExpression && o.eContainingFeature() == PPPackage.Literals.BINARY_EXPRESSION__LEFT_EXPR)
 			return false;
 		return true;
 	}

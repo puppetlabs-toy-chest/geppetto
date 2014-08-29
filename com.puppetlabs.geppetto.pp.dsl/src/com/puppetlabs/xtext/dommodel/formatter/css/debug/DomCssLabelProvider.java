@@ -33,12 +33,12 @@ import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
  */
 public class DomCssLabelProvider implements IStringProvider {
 	private final PolymorphicDispatcher<String> textDispatcher = new PolymorphicDispatcher<String>(
-			"_string", 1, 1, Collections.singletonList(this), new ErrorHandler<String>() {
-				@Override
-				public String handle(Object[] params, Throwable e) {
-					return handleTextError(params, e);
-				}
-			});
+		"_string", 1, 1, Collections.singletonList(this), new ErrorHandler<String>() {
+			@Override
+			public String handle(Object[] params, Throwable e) {
+				return handleTextError(params, e);
+			}
+		});
 
 	protected String _string(AlignedSeparatorIndex o) {
 		return "alignedSeparatorIndex: " + valueString(o);

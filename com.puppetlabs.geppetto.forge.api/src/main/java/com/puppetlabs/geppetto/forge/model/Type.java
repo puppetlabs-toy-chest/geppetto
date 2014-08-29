@@ -34,8 +34,7 @@ public class Type extends NamedTypeItem {
 		if(!(o instanceof Type))
 			return false;
 		Type ot = (Type) o;
-		return super.equals(o) && properties.equals(ot.properties) && parameters.equals(ot.parameters) &&
-				providers.equals(ot.providers);
+		return super.equals(o) && properties.equals(ot.properties) && parameters.equals(ot.parameters) && providers.equals(ot.providers);
 	}
 
 	/**

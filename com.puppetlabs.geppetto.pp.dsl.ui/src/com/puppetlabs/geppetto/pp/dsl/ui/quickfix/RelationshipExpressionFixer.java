@@ -17,7 +17,6 @@ import org.eclipse.xtext.validation.Issue;
 
 /**
  * A Fixer of Relationship Expressions
- *
  */
 public class RelationshipExpressionFixer {
 
@@ -93,8 +92,7 @@ public class RelationshipExpressionFixer {
 	private void suggestReversedOperator(final Issue issue, final IssueResolutionAcceptor acceptor) {
 		// dirty solution; reverse the op
 		acceptor.accept(
-			issue, "Reverse the operation",
-			"Change the dependency to go the other direction.\nThis alters the meaning.", null,
+			issue, "Reverse the operation", "Change the dependency to go the other direction.\nThis alters the meaning.", null,
 			new ReplacingModification(issue.getOffset(), issue.getLength(), reverseRelationshipOp(issue.getData()[0])));
 	}
 

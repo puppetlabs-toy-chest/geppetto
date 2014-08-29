@@ -228,18 +228,17 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 		if(newMethodExpr != methodExpr) {
 			NotificationChain msgs = null;
 			if(methodExpr != null)
-				msgs = ((InternalEObject) methodExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.METHOD_CALL__METHOD_EXPR, null, msgs);
+				msgs = ((InternalEObject) methodExpr).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.METHOD_CALL__METHOD_EXPR, null, msgs);
 			if(newMethodExpr != null)
-				msgs = ((InternalEObject) newMethodExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.METHOD_CALL__METHOD_EXPR, null, msgs);
+				msgs = ((InternalEObject) newMethodExpr).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.METHOD_CALL__METHOD_EXPR, null, msgs);
 			msgs = basicSetMethodExpr(newMethodExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.METHOD_CALL__METHOD_EXPR, newMethodExpr, newMethodExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.METHOD_CALL__METHOD_EXPR, newMethodExpr, newMethodExpr));
 	}
 
 	/**
@@ -253,8 +252,7 @@ public class MethodCallImpl extends WithLambdaExpressionImpl implements MethodCa
 		boolean oldParenthesized = parenthesized;
 		parenthesized = newParenthesized;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.METHOD_CALL__PARENTHESIZED, oldParenthesized, parenthesized));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.METHOD_CALL__PARENTHESIZED, oldParenthesized, parenthesized));
 	}
 
 	/**

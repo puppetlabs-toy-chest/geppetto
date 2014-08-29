@@ -67,14 +67,14 @@ public class DetailedFileDiagnostic extends FileDiagnostic {
 
 	public void setLength(Integer newLength) {
 		length = newLength == null
-				? 0
-						: newLength.intValue();
+			? 0
+			: newLength.intValue();
 	}
 
 	public void setOffset(Integer newOffset) {
 		offset = newOffset == null
-				? 0
-						: newOffset.intValue();
+			? 0
+			: newOffset.intValue();
 	}
 
 }

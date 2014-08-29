@@ -15,7 +15,6 @@ import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 
 /**
  * Produces HREFs in the form of javascript function calls.
- *
  */
 public class JavascriptHrefProducer extends RelativeFileHrefProducer {
 

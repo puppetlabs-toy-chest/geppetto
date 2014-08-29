@@ -166,14 +166,14 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 		switch(featureID) {
 			case PPPackage.DEFINITION_ARGUMENT__ARG_NAME:
 				return ARG_NAME_EDEFAULT == null
-				? argName != null
-				: !ARG_NAME_EDEFAULT.equals(argName);
+					? argName != null
+					: !ARG_NAME_EDEFAULT.equals(argName);
 			case PPPackage.DEFINITION_ARGUMENT__VALUE:
 				return value != null;
 			case PPPackage.DEFINITION_ARGUMENT__OP:
 				return OP_EDEFAULT == null
-				? op != null
-				: !OP_EDEFAULT.equals(op);
+					? op != null
+					: !OP_EDEFAULT.equals(op);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -277,8 +277,7 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 		String oldArgName = argName;
 		argName = newArgName;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.DEFINITION_ARGUMENT__ARG_NAME, oldArgName, argName));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.DEFINITION_ARGUMENT__ARG_NAME, oldArgName, argName));
 	}
 
 	/**
@@ -306,18 +305,17 @@ public class DefinitionArgumentImpl extends EObjectImpl implements DefinitionArg
 		if(newValue != value) {
 			NotificationChain msgs = null;
 			if(value != null)
-				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.DEFINITION_ARGUMENT__VALUE, null, msgs);
+				msgs = ((InternalEObject) value).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.DEFINITION_ARGUMENT__VALUE, null, msgs);
 			if(newValue != null)
-				msgs = ((InternalEObject) newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.DEFINITION_ARGUMENT__VALUE, null, msgs);
+				msgs = ((InternalEObject) newValue).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.DEFINITION_ARGUMENT__VALUE, null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.DEFINITION_ARGUMENT__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.DEFINITION_ARGUMENT__VALUE, newValue, newValue));
 	}
 
 	/**

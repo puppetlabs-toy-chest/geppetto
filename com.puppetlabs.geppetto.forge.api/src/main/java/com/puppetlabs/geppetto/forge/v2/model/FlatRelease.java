@@ -112,8 +112,8 @@ public class FlatRelease extends TimestampedEntity {
 
 	public String getMetadataJSON() {
 		return metadata == null
-				? null
-						: metadata.getJson();
+			? null
+			: metadata.getJson();
 	}
 
 	/**
@@ -191,8 +191,8 @@ public class FlatRelease extends TimestampedEntity {
 	 */
 	public void setMetadataJSON(String metadataJSON) {
 		this.metadata = metadataJSON == null
-				? null
-						: new InlineJson(metadataJSON);
+			? null
+			: new InlineJson(metadataJSON);
 	}
 
 	/**

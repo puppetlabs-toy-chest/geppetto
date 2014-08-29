@@ -149,8 +149,8 @@ public class Metadata extends Entity {
 	 */
 	public Map<String, Object> getDynamicAttributes() {
 		return dynamicAttributes == null
-				? Collections.<String, Object> emptyMap()
-						: Collections.unmodifiableMap(dynamicAttributes);
+			? Collections.<String, Object> emptyMap()
+			: Collections.unmodifiableMap(dynamicAttributes);
 	}
 
 	/**

@@ -41,7 +41,7 @@ import com.google.gson.JsonSerializer;
  */
 public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata {
 	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogMetadata> implements
-	JsonSerializer<CatalogMetadata> {
+			JsonSerializer<CatalogMetadata> {
 
 		private static String getString(JsonObject jsonObj, String key) {
 			JsonElement json = jsonObj.get(key);
@@ -51,8 +51,8 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 
 			// unset values are null, not empty strings
 			return value.length() == 0
-					? null
-							: value;
+				? null
+				: value;
 		}
 
 		private static void putString(JsonObject jsonObj, String key, String value) {
@@ -62,8 +62,8 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 		}
 
 		@Override
-		public CatalogMetadata deserialize(JsonElement json, java.lang.reflect.Type typeOfT,
-				JsonDeserializationContext context) throws JsonParseException {
+		public CatalogMetadata deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
 			final CatalogMetadata result = CatalogFactory.eINSTANCE.createCatalogMetadata();
 			JsonObject jsonObj = json.getAsJsonObject();
 
@@ -72,8 +72,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 		}
 
 		@Override
-		public JsonElement serialize(CatalogMetadata src, java.lang.reflect.Type typeOfSrc,
-				JsonSerializationContext context) {
+		public JsonElement serialize(CatalogMetadata src, java.lang.reflect.Type typeOfSrc, JsonSerializationContext context) {
 			final JsonObject result = new JsonObject();
 			final CatalogMetadataImpl cat = (CatalogMetadataImpl) src;
 
@@ -141,8 +140,8 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 		switch(featureID) {
 			case CatalogPackage.CATALOG_METADATA__API_VERSION:
 				return API_VERSION_EDEFAULT == null
-				? api_version != null
-				: !API_VERSION_EDEFAULT.equals(api_version);
+					? api_version != null
+					: !API_VERSION_EDEFAULT.equals(api_version);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -212,8 +211,7 @@ public class CatalogMetadataImpl extends EObjectImpl implements CatalogMetadata 
 		String oldApi_version = api_version;
 		api_version = newApi_version;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, CatalogPackage.CATALOG_METADATA__API_VERSION, oldApi_version, api_version));
+			eNotify(new ENotificationImpl(this, Notification.SET, CatalogPackage.CATALOG_METADATA__API_VERSION, oldApi_version, api_version));
 	}
 
 	/**

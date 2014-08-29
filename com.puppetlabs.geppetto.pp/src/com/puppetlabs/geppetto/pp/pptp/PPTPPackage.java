@@ -224,8 +224,7 @@ public interface PPTPPackage extends EPackage {
 		EAttribute TYPE__SUPER_TYPE = eINSTANCE.getType_SuperType();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.MetaTypeImpl <em>Meta Type</em>}
-		 * ' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.MetaTypeImpl <em>Meta Type</em>} ' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1709,8 +1708,8 @@ public interface PPTPPackage extends EPackage {
 	EReference getAbstractType_EReference0();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getParameters
+	 * <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1722,8 +1721,8 @@ public interface PPTPPackage extends EPackage {
 	EReference getAbstractType_Parameters();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getProperties <em>Properties</em>}'.
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getProperties
+	 * <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1933,8 +1932,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getPuppetDistribution();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement <em>Target Element</em>}
-	 * '.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement <em>Target Element</em>} '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1982,8 +1980,8 @@ public interface PPTPPackage extends EPackage {
 	EAttribute getTargetEntry_Description();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getFunctions <em>Functions</em>}'.
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getFunctions
+	 * <em>Functions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2008,8 +2006,8 @@ public interface PPTPPackage extends EPackage {
 	EAttribute getTargetEntry_Label();
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaType <em>Meta Type</em>}'.
+	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaType
+	 * <em>Meta Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2021,8 +2019,8 @@ public interface PPTPPackage extends EPackage {
 	EReference getTargetEntry_MetaType();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaVariables <em>Meta Variables</em>}'.
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaVariables
+	 * <em>Meta Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2034,8 +2032,8 @@ public interface PPTPPackage extends EPackage {
 	EReference getTargetEntry_MetaVariables();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getTypeFragments <em>Type Fragments</em>}'.
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getTypeFragments
+	 * <em>Type Fragments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2047,8 +2045,8 @@ public interface PPTPPackage extends EPackage {
 	EReference getTargetEntry_TypeFragments();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getTypes <em>Types</em>}'.
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getTypes
+	 * <em>Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

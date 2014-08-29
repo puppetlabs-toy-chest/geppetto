@@ -25,7 +25,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferenceConstants;
 
 /**
  * A Puppet SearchPathProvider based on preferences.
- *
  */
 
 public class PPUISearchPathProvider extends PPSearchPathProvider {
@@ -52,10 +51,8 @@ public class PPUISearchPathProvider extends PPSearchPathProvider {
 		// get project specific preference and use them if they are enabled
 		IPreferenceStore store = preferenceStoreAccess.getContextPreferenceStore(project);
 		return PPSearchPath.fromString(
-			store.getString(PPPreferenceConstants.PUPPET_PROJECT_PATH),
-			URI.createFileURI(project.getLocation().toOSString()),
-			store.getString(PPPreferenceConstants.PUPPET_ENVIRONMENT),
-			store.getString(PPPreferenceConstants.PUPPET_MANIFEST_DIR));
+			store.getString(PPPreferenceConstants.PUPPET_PROJECT_PATH), URI.createFileURI(project.getLocation().toOSString()),
+			store.getString(PPPreferenceConstants.PUPPET_ENVIRONMENT), store.getString(PPPreferenceConstants.PUPPET_MANIFEST_DIR));
 
 	}
 }

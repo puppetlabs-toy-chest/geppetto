@@ -304,8 +304,8 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 	}
 
 	@Override
-	public <V> V postUpload(String uri, Map<String, String> stringParts, InputStream in, String mimeType,
-			String fileName, final long fileSize, Class<V> type) throws IOException {
+	public <V> V postUpload(String uri, Map<String, String> stringParts, InputStream in, String mimeType, String fileName,
+			final long fileSize, Class<V> type) throws IOException {
 		HttpPost request = new HttpPost(createV2Uri(uri));
 		configureRequest(request);
 

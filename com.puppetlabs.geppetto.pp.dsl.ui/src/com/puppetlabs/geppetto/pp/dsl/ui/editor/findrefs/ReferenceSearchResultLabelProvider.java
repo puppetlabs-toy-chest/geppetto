@@ -23,10 +23,8 @@ import com.google.inject.Inject;
 /**
  * A ReferenceSearchResultLabelProvider that provides styled text and uses an explicit PPDescriptionLabelProvider rather
  * than the global label provider (requires registration).
- *
  * TODO: Consider registering the label provider.
  * TODO: Contribute the styled string extension back to Xtext
- *
  */
 public class ReferenceSearchResultLabelProvider extends StyledCellLabelProvider {
 

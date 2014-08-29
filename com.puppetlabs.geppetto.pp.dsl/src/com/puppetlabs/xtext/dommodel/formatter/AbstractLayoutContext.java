@@ -24,7 +24,6 @@ import com.google.common.collect.Sets;
 
 /**
  * Abstract implementation of ILayoutContext
- *
  */
 public abstract class AbstractLayoutContext implements ILayoutContext {
 

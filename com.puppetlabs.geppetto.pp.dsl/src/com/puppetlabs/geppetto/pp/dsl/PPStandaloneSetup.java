@@ -48,9 +48,7 @@ public class PPStandaloneSetup extends PPStandaloneSetupGenerated {
 			registry.put(com.puppetlabs.geppetto.pp.PPPackage.eNS_URI, com.puppetlabs.geppetto.pp.PPPackage.eINSTANCE);
 
 		if(!registry.containsKey(com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eNS_URI))
-			registry.put(
-				com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eNS_URI,
-				com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eINSTANCE);
+			registry.put(com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eNS_URI, com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eINSTANCE);
 
 		Map<String, Object> factoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
 		if(!factoryMap.containsKey("pptp"))
@@ -74,14 +72,12 @@ public class PPStandaloneSetup extends PPStandaloneSetupGenerated {
 		// expects the PptpRubyResourceFactory to have been registered via a Eclipse Extension
 		// register the resource service provider (in a UI scnario this is registered by the Activator)
 		org.eclipse.xtext.resource.IResourceServiceProvider pptpRubyServiceProvider = pptpRubyInjector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put(
-			"rb", pptpRubyServiceProvider);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("rb", pptpRubyServiceProvider);
 		// register pptp
 		// Expect the pptp resource factory (a default XMI resource) to be available by default
 		// register the resource service provider (in a UI scenario this is registered by the Activator).
 		org.eclipse.xtext.resource.IResourceServiceProvider pptpServiceProvider = pptpInjector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put(
-			"pptp", pptpServiceProvider);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("pptp", pptpServiceProvider);
 	}
 
 	public Injector getPptpInjector() {

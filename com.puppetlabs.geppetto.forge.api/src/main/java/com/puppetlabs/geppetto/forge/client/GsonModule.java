@@ -58,8 +58,7 @@ public class GsonModule extends AbstractModule {
 	 */
 	public static class ChecksumsJsonAdapter implements JsonSerializer<Checksums>, JsonDeserializer<Checksums> {
 		@Override
-		public Checksums deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-				throws JsonParseException {
+		public Checksums deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			Checksums checksums = new Checksums();
 			checksums.setChecksums(deserializeChecksums(json));
 			return checksums;
@@ -108,8 +107,7 @@ public class GsonModule extends AbstractModule {
 		}
 
 		@Override
-		public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-				throws JsonParseException {
+		public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			return stringToDate(json.getAsString());
 		}
 
@@ -133,8 +131,7 @@ public class GsonModule extends AbstractModule {
 
 	public class InlineJsonAdapter implements JsonSerializer<InlineJson>, JsonDeserializer<InlineJson> {
 		@Override
-		public InlineJson deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-				throws JsonParseException {
+		public InlineJson deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			Gson gson = getGson();
 			synchronized(gson) {
 				return new InlineJson(gson.toJson(json));
@@ -153,12 +150,11 @@ public class GsonModule extends AbstractModule {
 	public static class MetadataJsonAdapter implements JsonSerializer<Metadata>, JsonDeserializer<Metadata> {
 		private static void addProperty(JsonObject obj, String key, String value) {
 			obj.addProperty(key, value == null
-					? ""
-							: value);
+				? ""
+				: value);
 		}
 
-		private static List<SupportedOS> deserializeSupportedOs(JsonElement supportedOS,
-			JsonDeserializationContext context) {
+		private static List<SupportedOS> deserializeSupportedOs(JsonElement supportedOS, JsonDeserializationContext context) {
 			if(supportedOS == null || !supportedOS.isJsonArray())
 				return Collections.emptyList();
 
@@ -190,8 +186,7 @@ public class GsonModule extends AbstractModule {
 
 		@SuppressWarnings("deprecation")
 		@Override
-		public Metadata deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-				throws JsonParseException {
+		public Metadata deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			if(!json.isJsonObject())
 				throw new JsonParseException("Expected JSON object");
 
@@ -273,8 +268,8 @@ public class GsonModule extends AbstractModule {
 			// Mandatory
 			addProperty(json, "license", src.getLicense());
 			json.addProperty("name", src.getName() == null
-					? ""
-							: src.getName().toString());
+				? ""
+				: src.getName().toString());
 			json.add("operatingsystem_support", context.serialize(src.getOperatingSystemSupport(), SUPPORTEDOS_TYPE));
 			addProperty(json, "project_page", src.getProjectPage());
 			json.add("requirements", context.serialize(src.getRequirements(), REQUIREMENTS_TYPE));
@@ -283,8 +278,8 @@ public class GsonModule extends AbstractModule {
 			json.add("tags", context.serialize(src.getTags(), STRINGS_TYPE));
 
 			json.addProperty("version", src.getVersion() == null
-					? ""
-							: src.getVersion().toString());
+				? ""
+				: src.getVersion().toString());
 			for(Map.Entry<String, Object> dynAttr : src.getDynamicAttributes().entrySet())
 				json.add(dynAttr.getKey(), context.serialize(dynAttr.getValue()));
 			return json;
@@ -293,8 +288,7 @@ public class GsonModule extends AbstractModule {
 
 	public static class VersionJsonAdapter implements JsonSerializer<Version>, JsonDeserializer<Version> {
 		@Override
-		public Version deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-				throws JsonParseException {
+		public Version deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			return Version.fromString(json.getAsString());
 		}
 
@@ -309,8 +303,7 @@ public class GsonModule extends AbstractModule {
 	 */
 	public static class VersionRangeJsonAdapter implements JsonSerializer<VersionRange>, JsonDeserializer<VersionRange> {
 		@Override
-		public VersionRange deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-				throws JsonParseException {
+		public VersionRange deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			try {
 				return VersionRange.create(json.getAsString());
 			}
@@ -370,38 +363,38 @@ public class GsonModule extends AbstractModule {
 
 	public static Boolean getBoolean(JsonElement json) {
 		return json.isJsonNull()
-				? null
-						: json.getAsBoolean();
+			? null
+			: json.getAsBoolean();
 	}
 
 	public static Date getDate(JsonElement json) {
 		return json.isJsonNull()
-				? null
-						: DateJsonAdapter.stringToDate(json.getAsString());
+			? null
+			: DateJsonAdapter.stringToDate(json.getAsString());
 	}
 
 	public static Integer getInteger(JsonElement json) {
 		return json.isJsonNull()
-				? null
-						: json.getAsInt();
+			? null
+			: json.getAsInt();
 	}
 
 	public static Long getLong(JsonElement json) {
 		return json.isJsonNull()
-				? null
-						: json.getAsLong();
+			? null
+			: json.getAsLong();
 	}
 
 	public static String getString(JsonElement json) {
 		return json.isJsonNull()
-				? null
-						: json.getAsString();
+			? null
+			: json.getAsString();
 	}
 
 	private static int hexToByte(char c) {
 		return c >= 'a'
-				? c - ('a' - 10)
-						: c - '0';
+			? c - ('a' - 10)
+			: c - '0';
 	}
 
 	private static JsonElement serializeChecksums(Map<String, byte[]> src) {

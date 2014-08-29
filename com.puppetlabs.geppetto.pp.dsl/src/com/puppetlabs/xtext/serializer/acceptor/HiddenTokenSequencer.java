@@ -48,7 +48,6 @@ import com.google.inject.Inject;
 /**
  * This is an adapted version of HiddenTokenSequencer that emits implicit white space where it is allowed.
  * Implicit WS is emitted also when an INode model is not present.
- *
  */
 public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticSequenceAcceptor {
 
@@ -187,9 +186,9 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 			if(tokenUtil.isCommentNode(node)) {
 				if(lastNonWhitespace) {
 					String wsString = commentReconcilement != null
-							? commentReconcilement.getWhitespaceBetween(prevCommentNode, node)
-									: "";
-							delegate.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, wsString), wsString, null);
+						? commentReconcilement.getWhitespaceBetween(prevCommentNode, node)
+						: "";
+					delegate.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, wsString), wsString, null);
 				}
 				delegate.acceptComment((AbstractRule) node.getGrammarElement(), node.getText(), (ILeafNode) node);
 				lastNonWhitespace = true;
@@ -281,8 +280,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 			boolean implied = impliedFrom || impliedTo;
 			int sz = stack.size();
 			implied = isImpliedWhitespace(implied, sz == 0
-					? null
-							: stack.get(sz - 1), from, to);
+				? null
+				: stack.get(sz - 1), from, to);
 			if(implied) {
 				delegate.acceptWhitespace(ws, IDomNode.IMPLIED_EMPTY_WHITESPACE, null);
 			}
@@ -302,8 +301,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 			}
 			else if(next.equals(to)) {
 				if(next instanceof ICompositeNode &&
-						(GrammarUtil.isDatatypeRuleCall(next.getGrammarElement()) ||
-								GrammarUtil.isEnumRuleCall(next.getGrammarElement()) || next.getGrammarElement() instanceof CrossReference))
+					(GrammarUtil.isDatatypeRuleCall(next.getGrammarElement()) || GrammarUtil.isEnumRuleCall(next.getGrammarElement()) || next.getGrammarElement() instanceof CrossReference))
 					while(ni.hasNext()) {
 						INode next2 = ni.next();
 						if(tokenUtil.isWhitespaceOrCommentNode(next2)) {
@@ -351,8 +349,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer2, ISyntacticS
 	}
 
 	@Override
-	public void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor,
-			Acceptor errorAcceptor, ICommentReconcilement commentReconciliator) {
+	public void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor,
+			ICommentReconcilement commentReconciliator) {
 		this.delegate = sequenceAcceptor;
 		this.lastNode = NodeModelUtils.findActualNodeFor(semanticObject);
 		this.rootNode = lastNode;

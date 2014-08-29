@@ -156,9 +156,9 @@ public class NewMetadataFileWizard extends BasicNewResourceWizard implements INe
 							if(page != null)
 								IDE.openEditor(page, file, true);
 						}
-					catch(Exception e) {
-						throw new InvocationTargetException(e);
-					}
+						catch(Exception e) {
+							throw new InvocationTargetException(e);
+						}
 				}
 			});
 
@@ -167,12 +167,10 @@ public class NewMetadataFileWizard extends BasicNewResourceWizard implements INe
 		catch(InvocationTargetException e) {
 			Throwable t = e.getTargetException();
 			if(t instanceof PartInitException)
-				DialogUtil.openError(
-					getShell(), ResourceMessages.FileResource_errorMessage, t.getMessage(), (PartInitException) t);
+				DialogUtil.openError(getShell(), ResourceMessages.FileResource_errorMessage, t.getMessage(), (PartInitException) t);
 			else if(t instanceof CoreException)
 				ErrorDialog.openError(
-					getShell(), ResourceMessages.FileResource_errorMessage, t.getMessage(),
-					((CoreException) t).getStatus());
+					getShell(), ResourceMessages.FileResource_errorMessage, t.getMessage(), ((CoreException) t).getStatus());
 			else
 				MessageDialog.openError(getShell(), ResourceMessages.FileResource_errorMessage, t.getMessage());
 		}

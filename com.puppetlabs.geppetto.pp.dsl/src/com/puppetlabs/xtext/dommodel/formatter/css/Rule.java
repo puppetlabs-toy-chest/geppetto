@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -15,10 +15,8 @@ import com.puppetlabs.xtext.dommodel.IDomNode;
 /**
  * A DOM style rule contains a selector {@link Select.Selector} (which can be compound), and
  * a {@link StyleSet}.
- *
  * A DOM style rule is typically added to a {@link DomCSS}.
  * A rule can only be added to one DomCSS (at a time).
- *
  * Note that the easiest is to use {@link Select.Selector#withStyles(IStyle...)} and related methods
  * to create Rule instances.
  */

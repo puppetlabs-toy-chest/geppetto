@@ -32,9 +32,8 @@ import com.google.inject.Provider;
  * A Dom Model Formatter driven by rules in a {@link DomCSS}.
  * <p>
  * <p>
- * This formatter is given a style sheet in the form of a {@link DomCSS}, and a {@link DomNodeLayoutFeeder} that
- * sequences the content of a node to format to instances of {@link ILayoutManager} obtained by computing the
- * {@link LayoutStyle} using the given style sheet.
+ * This formatter is given a style sheet in the form of a {@link DomCSS}, and a {@link DomNodeLayoutFeeder} that sequences the content of a
+ * node to format to instances of {@link ILayoutManager} obtained by computing the {@link LayoutStyle} using the given style sheet.
  * </p>
  * <p>
  * The intent is that this implementation works for all formatting needs. A derived class could possibly override the
@@ -59,8 +58,8 @@ public class CSSDomFormatter implements IDomModelFormatter {
 	}
 
 	@Override
-	public ReplaceRegion format(IDomNode dom, final ITextRegion regionToFormat,
-			final IFormattingContext formattingContext, final Acceptor errors) {
+	public ReplaceRegion format(IDomNode dom, final ITextRegion regionToFormat, final IFormattingContext formattingContext,
+			final Acceptor errors) {
 
 		final DomCSS css = cssProvider.get();
 		ILayoutContext layoutContext = new AbstractLayoutContext() {
@@ -121,8 +120,8 @@ public class CSSDomFormatter implements IDomModelFormatter {
 			textString = new StringBuilder(text).toString();
 
 		return new ReplaceRegion(regionToFormat == null
-				? new TextRegion(0, text.length())
-		: regionToFormat, textString);
+			? new TextRegion(0, text.length())
+			: regionToFormat, textString);
 	}
 
 	protected ITextFlow.WithText getTextFlow(IFormattingContext context) {

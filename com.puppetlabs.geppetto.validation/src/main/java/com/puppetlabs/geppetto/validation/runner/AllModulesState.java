@@ -38,14 +38,12 @@ import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter.Location;
 
 /**
  * Interface for data describing exports per Module.
- *
  */
 public class AllModulesState implements Serializable {
 
 	/**
 	 * Describes an exported class. One Export describes the class itself and a
 	 * list of Exports describe the parameters.
-	 *
 	 */
 	public static class ClassDescription {
 		private Export theClass;
@@ -82,8 +80,8 @@ public class AllModulesState implements Serializable {
 		 * The source text (if any) associated with a DefinitionArgument's value
 		 * expression. An implementation should trim the result from leading and
 		 * trailing whitespace. This is essentially the return of the sequence
-		 * of characters found in the file {@link #getFile()} starting at {@link #getStart()} and extending for
-		 * {@link #getLength()} characters
+		 * of characters found in the file {@link #getFile()} starting at {@link #getStart()} and extending for {@link #getLength()}
+		 * characters
 		 * trimmed of leading and trailing whitespace.
 		 *
 		 * @return the source text, or null if a DefinitionArgument has no
@@ -227,7 +225,7 @@ public class AllModulesState implements Serializable {
 	}
 
 	private Map<String, Export> _collectParameters(Set<String> processed, Map<String, Export> result, String className,
-		Map<String, Export> classes, Multimap<String, Export> parameters) {
+			Map<String, Export> classes, Multimap<String, Export> parameters) {
 		// if there was no parent
 		if(className == null || className.length() < 1)
 			return result;
@@ -329,8 +327,7 @@ public class AllModulesState implements Serializable {
 		}
 	}
 
-	private Map<String, Export> collectParameters(String className, Map<String, Export> classes,
-		Multimap<String, Export> parameters) {
+	private Map<String, Export> collectParameters(String className, Map<String, Export> classes, Multimap<String, Export> parameters) {
 		Map<String, Export> result = Maps.newHashMap();
 		Set<String> processed = Sets.newHashSet();
 		return _collectParameters(processed, result, className, classes, parameters);
@@ -384,8 +381,8 @@ public class AllModulesState implements Serializable {
 	 */
 	public Map<File, Multimap<File, Export>> getAmbiguityMap() {
 		return Collections.unmodifiableMap(ambiguityMap != null
-				? ambiguityMap
-						: EmptyImports); // reuse "EmptyImports"
+			? ambiguityMap
+			: EmptyImports); // reuse "EmptyImports"
 
 	}
 
@@ -440,8 +437,8 @@ public class AllModulesState implements Serializable {
 	 */
 	private Multimap<File, Export> getExportMap() {
 		return Multimaps.unmodifiableMultimap(exportMap != null
-				? exportMap
-						: EmptyExports);
+			? exportMap
+			: EmptyExports);
 	}
 
 	/**
@@ -466,8 +463,8 @@ public class AllModulesState implements Serializable {
 	 */
 	public Map<File, Multimap<File, Export>> getImportMap() {
 		return Collections.unmodifiableMap(importMap != null
-				? importMap
-						: EmptyImports);
+			? importMap
+			: EmptyImports);
 
 	}
 
@@ -485,8 +482,7 @@ public class AllModulesState implements Serializable {
 	public Iterable<Export> getParameters(Export exportedClass, Iterable<Export> visibleExports) {
 		// figure out which parameters to include
 		final List<Export> classes = Lists.newArrayList();
-		for(Export parent = exportedClass; parent != null; parent = findExportedClass(
-			parent.getParentName(), visibleExports)) {
+		for(Export parent = exportedClass; parent != null; parent = findExportedClass(parent.getParentName(), visibleExports)) {
 			if(classes.contains(parent))
 				break; // circular
 			classes.add(parent);
@@ -554,15 +550,13 @@ public class AllModulesState implements Serializable {
 
 		Multimap<File, String> result = ArrayListMultimap.create();
 		for(File moduleFile : unresolvedImports.keySet()) {
-			result.putAll(
-				moduleFile,
-				Iterables.transform(unresolvedImports.get(moduleFile), new Function<ImportedName, String>() {
+			result.putAll(moduleFile, Iterables.transform(unresolvedImports.get(moduleFile), new Function<ImportedName, String>() {
 
-					@Override
-					public String apply(ImportedName from) {
-						return from.getName();
-					}
-				}));
+				@Override
+				public String apply(ImportedName from) {
+					return from.getName();
+				}
+			}));
 		}
 		return result;
 	}

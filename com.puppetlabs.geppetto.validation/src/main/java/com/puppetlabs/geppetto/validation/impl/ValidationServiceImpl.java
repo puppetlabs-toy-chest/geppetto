@@ -73,8 +73,7 @@ public class ValidationServiceImpl implements ValidationService {
 	 * @param message
 	 * @param issueId
 	 */
-	public static void addFileDiagnostic(Diagnostic diagnostics, int severity, File file, File rootDirectory,
-			String message, String issueId) {
+	public static void addFileDiagnostic(Diagnostic diagnostics, int severity, File file, File rootDirectory, String message, String issueId) {
 
 		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(severity, UNKNOWN, message, pathToFile(
 			file.getAbsolutePath(), rootDirectory));
@@ -97,11 +96,10 @@ public class ValidationServiceImpl implements ValidationService {
 	 */
 	public static void addIssueDiagnostic(Diagnostic diagnostics, Issue issue, File processedFile, File rootDirectory) {
 		DiagnosticType type = issue.isSyntaxError()
-				? GEPPETTO_SYNTAX
-						: GEPPETTO;
+			? GEPPETTO_SYNTAX
+			: GEPPETTO;
 		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(
-			translateIssueSeverity(issue.getSeverity()), type, issue.getMessage(), relativeFile(
-				processedFile, rootDirectory));
+			translateIssueSeverity(issue.getSeverity()), type, issue.getMessage(), relativeFile(processedFile, rootDirectory));
 
 		if(!Forge.MODULEFILE_NAME.equals(processedFile.getName())) {
 			// This info pertains to metadata.json which is generated from the Modulefile
@@ -125,15 +123,14 @@ public class ValidationServiceImpl implements ValidationService {
 	 * @param rootDirectory
 	 * @param rootDirectory
 	 */
-	public static void addRubyIssueDiagnostic(Diagnostic diagnostics, IRubyIssue issue, File processedFile,
-			File rootDirectory) {
+	public static void addRubyIssueDiagnostic(Diagnostic diagnostics, IRubyIssue issue, File processedFile, File rootDirectory) {
 
 		int severity = issue.isSyntaxError()
-				? Diagnostic.ERROR
-						: Diagnostic.WARNING;
+			? Diagnostic.ERROR
+			: Diagnostic.WARNING;
 		DiagnosticType type = issue.isSyntaxError()
-				? RUBY_SYNTAX
-						: RUBY;
+			? RUBY_SYNTAX
+			: RUBY;
 
 		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(severity, type, issue.getMessage(), pathToFile(
 			issue.getFileName(), rootDirectory));
@@ -260,8 +257,7 @@ public class ValidationServiceImpl implements ValidationService {
 					validatePPFile(ppDr, diagnostics, source, source.getParentFile(), monitor);
 				}
 				catch(Exception e) {
-					addExceptionDiagnostic(
-						diagnostics, "Internal error: Exception while setting up/tearing down validation", e);
+					addExceptionDiagnostic(diagnostics, "Internal error: Exception while setting up/tearing down validation", e);
 				}
 				finally {
 					ppDr.tearDown();
@@ -276,8 +272,7 @@ public class ValidationServiceImpl implements ValidationService {
 					validateRubyFile(rubyHelper, diagnostics, source, source.getParentFile(), monitor);
 				}
 				catch(Exception e) {
-					addExceptionDiagnostic(
-						diagnostics, "Internal error: Exception while setting up/tearing down pp validation", e);
+					addExceptionDiagnostic(diagnostics, "Internal error: Exception while setting up/tearing down pp validation", e);
 				}
 				finally {
 					rubyHelper.tearDown();
@@ -339,8 +334,7 @@ public class ValidationServiceImpl implements ValidationService {
 	}
 
 	@Override
-	public void validateManifest(Diagnostic diagnostics, ValidationOptions options, File sourceFile,
-			IProgressMonitor monitor) {
+	public void validateManifest(Diagnostic diagnostics, ValidationOptions options, File sourceFile, IProgressMonitor monitor) {
 		options = new ValidationOptions(options);
 		options.setCheckLayout(false);
 		options.setCheckModuleSemantics(false);
@@ -355,8 +349,7 @@ public class ValidationServiceImpl implements ValidationService {
 	 */
 	@Override
 	@Deprecated
-	public Resource validateManifest(Diagnostic diagnostics, ValidationOptions options, String code,
-			IProgressMonitor monitor) {
+	public Resource validateManifest(Diagnostic diagnostics, ValidationOptions options, String code, IProgressMonitor monitor) {
 		return validate(diagnostics, options, code, monitor);
 	}
 
@@ -367,8 +360,7 @@ public class ValidationServiceImpl implements ValidationService {
 	 * @param source
 	 * @param parentFile
 	 */
-	private void validateMetadataJsonFile(Diagnostic diagnostics, ValidationOptions options, File f, File root,
-			IProgressMonitor monitor) {
+	private void validateMetadataJsonFile(Diagnostic diagnostics, ValidationOptions options, File f, File root, IProgressMonitor monitor) {
 		final SubMonitor ticker = SubMonitor.convert(monitor, 2);
 		worked(ticker, 1);
 		try {
@@ -395,8 +387,7 @@ public class ValidationServiceImpl implements ValidationService {
 	}
 
 	@Override
-	public BuildResult validateModule(Diagnostic diagnostics, ValidationOptions options, File moduleRoot,
-			IProgressMonitor monitor) {
+	public BuildResult validateModule(Diagnostic diagnostics, ValidationOptions options, File moduleRoot, IProgressMonitor monitor) {
 		options = new ValidationOptions(options);
 		options.setCheckLayout(true);
 		options.setCheckModuleSemantics(false);
@@ -406,8 +397,7 @@ public class ValidationServiceImpl implements ValidationService {
 		return validate(diagnostics, options, moduleRoot, monitor);
 	}
 
-	private void validatePPFile(PPDiagnosticsRunner dr, Diagnostic diagnostics, File f, File root,
-			IProgressMonitor monitor) {
+	private void validatePPFile(PPDiagnosticsRunner dr, Diagnostic diagnostics, File f, File root, IProgressMonitor monitor) {
 		final SubMonitor ticker = SubMonitor.convert(monitor, 2);
 		worked(ticker, 1);
 		try {
@@ -433,8 +423,8 @@ public class ValidationServiceImpl implements ValidationService {
 	}
 
 	@Override
-	public void validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot,
-			File factorData, File siteFile, String nodeName, IProgressMonitor monitor) {
+	public void validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot, File factorData, File siteFile,
+			String nodeName, IProgressMonitor monitor) {
 		if(diagnostics == null)
 			throw new IllegalArgumentException("diagnostics can not be null");
 		if(catalogRoot == null)
@@ -468,8 +458,7 @@ public class ValidationServiceImpl implements ValidationService {
 	}
 
 	@Override
-	public BuildResult validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot,
-			IProgressMonitor monitor) {
+	public BuildResult validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot, IProgressMonitor monitor) {
 		options = new ValidationOptions(options);
 		options.setCheckLayout(true);
 		options.setCheckModuleSemantics(true);
@@ -479,8 +468,7 @@ public class ValidationServiceImpl implements ValidationService {
 		return validate(diagnostics, options, catalogRoot, monitor);
 	}
 
-	private void validateRubyFile(RubyHelper rubyHelper, Diagnostic diagnostics, File f, File root,
-			IProgressMonitor monitor) {
+	private void validateRubyFile(RubyHelper rubyHelper, Diagnostic diagnostics, File f, File root, IProgressMonitor monitor) {
 		SubMonitor ticker = SubMonitor.convert(monitor, 1);
 		try {
 			IRubyParseResult result = rubyHelper.parse(f);

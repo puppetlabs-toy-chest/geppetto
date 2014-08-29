@@ -26,7 +26,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
  * Tests specific to reported issues using Puppet 3.0 and 3.0 validation.
  * Inherits from TestIssues to also test all validations for 2.7.
  * Override methods in this class if they should be tested a different way for 3.0.
- *
  */
 public class TestIssues3_0 extends TestIssues {
 
@@ -69,7 +68,7 @@ public class TestIssues3_0 extends TestIssues {
 			"} ~> 'x' ? {", //
 			"  'y'     => Notify[b],", //
 			"  default => Notify[c]", //
-				"}\n");
+			"}\n");
 		String code = Joiner.on("\n").join(source).toString();
 		Resource r = loadAndLinkSingleResource(code);
 		tester.validate(r.getContents().get(0)).assertOK();

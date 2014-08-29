@@ -19,8 +19,7 @@ public class TestCatalogGraph {
 		File catalogFile = TestDataProvider.getTestFile(new Path("testData/jsonCatalogs/sample1.json"));
 		InputStream catalogStream = new FileInputStream(catalogFile);
 		// Write the svg to a file:
-		FileOutputStream svgStream = new FileOutputStream(new File(
-			TestDataProvider.getTestOutputDir(), "sampleCatalog1.svg"));
+		FileOutputStream svgStream = new FileOutputStream(new File(TestDataProvider.getTestOutputDir(), "sampleCatalog1.svg"));
 
 		CatalogServices catalogServices = new CatalogServices();
 		catalogServices.produceSVGGraph("Sample catalog", catalogStream, svgStream, new NullProgressMonitor(), null);
@@ -32,8 +31,7 @@ public class TestCatalogGraph {
 		File catalogFile = TestDataProvider.getTestFile(new Path("testData/jsonCatalogs/sample2.json"));
 		InputStream catalogStream = new FileInputStream(catalogFile);
 		// Write the svg to a file:
-		FileOutputStream svgStream = new FileOutputStream(new File(
-			TestDataProvider.getTestOutputDir(), "sampleCatalog2.svg"));
+		FileOutputStream svgStream = new FileOutputStream(new File(TestDataProvider.getTestOutputDir(), "sampleCatalog2.svg"));
 
 		CatalogServices catalogServices = new CatalogServices();
 		catalogServices.produceSVGGraph("Sample catalog", catalogStream, svgStream, new NullProgressMonitor(), null);
@@ -71,13 +69,11 @@ public class TestCatalogGraph {
 		IPath rootPath = new Path("/usr/share/puppet");
 		CatalogServices catalogServices = new CatalogServices();
 		catalogServices.produceDOTDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream, new NullProgressMonitor());
 		oldCatalogStream = new FileInputStream(oldCatalogFile);
 		newCatalogStream = new FileInputStream(newCatalogFile);
 		catalogServices.produceSVGDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream, new NullProgressMonitor());
 	}
 
 	@Test
@@ -96,13 +92,11 @@ public class TestCatalogGraph {
 		IPath rootPath = new Path("/usr/share/puppet");
 		CatalogServices catalogServices = new CatalogServices();
 		catalogServices.produceDOTDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream, new NullProgressMonitor());
 		oldCatalogStream = new FileInputStream(oldCatalogFile);
 		newCatalogStream = new FileInputStream(newCatalogFile);
 		catalogServices.produceSVGDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream, new NullProgressMonitor());
 	}
 
 	@Test
@@ -121,13 +115,11 @@ public class TestCatalogGraph {
 		IPath rootPath = new Path("/usr/share/puppet");
 		CatalogServices catalogServices = new CatalogServices();
 		catalogServices.produceDOTDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream, new NullProgressMonitor());
 		oldCatalogStream = new FileInputStream(oldCatalogFile);
 		newCatalogStream = new FileInputStream(newCatalogFile);
 		catalogServices.produceSVGDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream, new NullProgressMonitor());
 	}
 
 	/**
@@ -151,13 +143,11 @@ public class TestCatalogGraph {
 		IPath rootPath = new Path("/usr/share/puppet");
 		CatalogServices catalogServices = new CatalogServices();
 		catalogServices.produceDOTDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream, new NullProgressMonitor());
 		oldCatalogStream = new FileInputStream(oldCatalogFile);
 		newCatalogStream = new FileInputStream(newCatalogFile);
 		catalogServices.produceSVGDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream, new NullProgressMonitor());
 	}
 
 	/**
@@ -181,13 +171,11 @@ public class TestCatalogGraph {
 		IPath rootPath = new Path("/usr/share/puppet");
 		CatalogServices catalogServices = new CatalogServices();
 		catalogServices.produceDOTDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, dotStream, new NullProgressMonitor());
 		oldCatalogStream = new FileInputStream(oldCatalogFile);
 		newCatalogStream = new FileInputStream(newCatalogFile);
 		catalogServices.produceSVGDeltaGraph(
-			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream,
-			new NullProgressMonitor());
+			"Sample catalog", oldCatalogStream, rootPath, newCatalogStream, rootPath, svgStream, new NullProgressMonitor());
 	}
 
 	@Test

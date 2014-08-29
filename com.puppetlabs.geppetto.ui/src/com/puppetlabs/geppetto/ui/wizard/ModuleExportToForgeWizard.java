@@ -159,18 +159,15 @@ public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 				Diagnostic diag = exportOp.getDiagnostic();
 				if(diag.getSeverity() == Diagnostic.ERROR) {
 					Exception e = diag.getException();
-					ErrorDialog.openError(
-						getContainer().getShell(), DataTransferMessages.DataTransfer_exportProblems, null, // no special message
+					ErrorDialog.openError(getContainer().getShell(), DataTransferMessages.DataTransfer_exportProblems, null, // no special message
 						UIPlugin.createStatus(IStatus.ERROR, diag.toString(), e));
 				}
 				else
-					MessageDialog.openInformation(
-						getContainer().getShell(), DataTransferMessages.DataTransfer_information, diag.toString());
+					MessageDialog.openInformation(getContainer().getShell(), DataTransferMessages.DataTransfer_information, diag.toString());
 				return result;
 			}
 			catch(CoreException e) {
-				ErrorDialog.openError(
-					getContainer().getShell(), DataTransferMessages.DataTransfer_exportProblems, null, // no special message
+				ErrorDialog.openError(getContainer().getShell(), DataTransferMessages.DataTransfer_exportProblems, null, // no special message
 					e.getStatus());
 			}
 			catch(Exception e) {
@@ -253,8 +250,7 @@ public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 				Diagnostic diag = new Diagnostic();
 				for(ExportSpec spec : getExportSpecs(whiteCheckedResources)) {
 					try {
-						Metadata md = getForge().createFromModuleDirectory(
-							spec.getModuleRoot(), spec.getFileFilter(), null, diag);
+						Metadata md = getForge().createFromModuleDirectory(spec.getModuleRoot(), spec.getFileFilter(), null, diag);
 						if(md != null) {
 							ModuleName name = md.getName();
 							if(owner == null)
@@ -338,8 +334,8 @@ public class ModuleExportToForgeWizard extends ModuleExportToFileWizard {
 			try {
 				return node.get("password", null);
 			}
-		catch(StorageException e) {
-		}
+			catch(StorageException e) {
+			}
 		return null;
 	}
 

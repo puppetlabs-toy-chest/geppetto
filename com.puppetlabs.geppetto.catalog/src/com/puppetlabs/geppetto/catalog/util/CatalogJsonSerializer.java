@@ -73,7 +73,6 @@ public class CatalogJsonSerializer {
 
 	/**
 	 * Loads a Catalog model from a catalog JSON file.
-	 *
 	 */
 	public static Catalog load(File jsonFile) throws IOException {
 		Reader reader = new BufferedReader(new FileReader(jsonFile));
@@ -89,7 +88,6 @@ public class CatalogJsonSerializer {
 
 	/**
 	 * Loads a Catalog model from a catalog JSON input stream.
-	 *
 	 */
 	public static Catalog load(InputStream jsonStream) throws IOException {
 		Reader reader = new BufferedReader(new InputStreamReader(jsonStream));
@@ -105,7 +103,6 @@ public class CatalogJsonSerializer {
 
 	/**
 	 * Loads a Catalog model from a catalog JSON string.
-	 *
 	 */
 	public static Catalog load(String jsonString) throws IOException {
 		Gson gson = getGSon();

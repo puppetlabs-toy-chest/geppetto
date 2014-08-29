@@ -16,7 +16,6 @@ import com.google.inject.Singleton;
 
 /**
  * A very simple translator of Expression type to a label.
- *
  */
 @Singleton
 public class PPExpressionTypeNameProvider implements IStringProvider {

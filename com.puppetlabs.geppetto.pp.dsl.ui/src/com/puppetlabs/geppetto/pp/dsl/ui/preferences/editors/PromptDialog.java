@@ -58,8 +58,7 @@ public class PromptDialog extends Dialog {
 	private ControlDecoration createDecorator(Text text, String message) {
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
 		controlDecoration.setDescriptionText(message);
-		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(
-			FieldDecorationRegistry.DEC_ERROR);
+		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_ERROR);
 		controlDecoration.setImage(fieldDecoration.getImage());
 		return controlDecoration;
 	}
@@ -86,8 +85,7 @@ public class PromptDialog extends Dialog {
 		return true;
 	}
 
-	public void prompt(String title, String text, String check, final String[] value, final int[] checkValue,
-			final int[] result) {
+	public void prompt(String title, String text, String check, final String[] value, final int[] checkValue, final int[] result) {
 		prompt(title, text, check, null, value, checkValue, result);
 	}
 
@@ -155,12 +153,12 @@ public class PromptDialog extends Dialog {
 			public void handleEvent(Event event) {
 				if(buttons[0] != null)
 					checkValue[0] = buttons[0].getSelection()
-					? 1
-							: 0;
+						? 1
+						: 0;
 				value[0] = valueText.getText();
 				result[0] = event.widget == buttons[1]
-						? 1
-								: 0;
+					? 1
+					: 0;
 				shell.close();
 			}
 		};

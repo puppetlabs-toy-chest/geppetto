@@ -20,7 +20,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.Spacing;
 
 /**
  * @author henrik
- *
  */
 public class EffectiveStyleAppender implements IStyleVisitor {
 

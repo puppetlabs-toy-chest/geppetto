@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.tests;
 
 /**
  * Tests for problematic formatting.
- *
  */
 public class TestFailingFormatting extends AbstractPuppetTests {
 

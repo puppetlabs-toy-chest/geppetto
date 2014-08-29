@@ -446,16 +446,14 @@ public class Validate extends AbstractForgeServiceMojo {
 			modules.add(new AbstractModule() {
 				@Override
 				protected void configure() {
-					bind(File.class).annotatedWith(Names.named(Forge.CACHE_LOCATION)).toInstance(
-						new File(cacheLocation));
+					bind(File.class).annotatedWith(Names.named(Forge.CACHE_LOCATION)).toInstance(new File(cacheLocation));
 				}
 			});
 	}
 
 	private Diagnostic convertPuppetLintDiagnostic(File moduleRoot, Issue issue) {
-		FileDiagnostic diagnostic = new FileDiagnostic(
-			getSeverity(issue), PuppetLintService.PUPPET_LINT, issue.getMessage(), new File(getRelativePath(new File(
-				moduleRoot, issue.getPath()))));
+		FileDiagnostic diagnostic = new FileDiagnostic(getSeverity(issue), PuppetLintService.PUPPET_LINT, issue.getMessage(), new File(
+			getRelativePath(new File(moduleRoot, issue.getPath()))));
 		diagnostic.setLineNumber(issue.getLineNumber());
 		return diagnostic;
 	}
@@ -500,8 +498,7 @@ public class Validate extends AbstractForgeServiceMojo {
 		return searchPath.toString();
 	}
 
-	private ValidationOptions getValidationOptions(Collection<File> moduleLocations,
-			Collection<File> importedModuleLocations) {
+	private ValidationOptions getValidationOptions(Collection<File> moduleLocations, Collection<File> importedModuleLocations) {
 		ValidationOptions options = new ValidationOptions();
 		options.setCheckLayout(checkLayout);
 		options.setCheckModuleSemantics(checkModuleSemantics);
@@ -530,8 +527,7 @@ public class Validate extends AbstractForgeServiceMojo {
 	protected void invoke(Diagnostic result) throws IOException {
 		Collection<File> moduleRoots = findModuleRoots();
 		if(moduleRoots.isEmpty()) {
-			result.addChild(new Diagnostic(
-				Diagnostic.ERROR, ValidationService.GEPPETTO, "No modules found in repository"));
+			result.addChild(new Diagnostic(Diagnostic.ERROR, ValidationService.GEPPETTO, "No modules found in repository"));
 			return;
 		}
 

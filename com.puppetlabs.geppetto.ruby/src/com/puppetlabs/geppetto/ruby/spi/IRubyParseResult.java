@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * Represents the result from a ruby parser. Currently only provides abstraction
  * of Ruby issues (syntax errors and warnings).
- *
  */
 public interface IRubyParseResult {
 	/**

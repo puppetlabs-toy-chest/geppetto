@@ -227,8 +227,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	@Override
 	public EList<Expression> getHostNames() {
 		if(hostNames == null) {
-			hostNames = new EObjectContainmentEList<Expression>(
-					Expression.class, this, PPPackage.NODE_DEFINITION__HOST_NAMES);
+			hostNames = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.NODE_DEFINITION__HOST_NAMES);
 		}
 		return hostNames;
 	}
@@ -253,8 +252,7 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 	@Override
 	public EList<Expression> getStatements() {
 		if(statements == null) {
-			statements = new EObjectContainmentEList<Expression>(
-					Expression.class, this, PPPackage.NODE_DEFINITION__STATEMENTS);
+			statements = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.NODE_DEFINITION__STATEMENTS);
 		}
 		return statements;
 	}
@@ -270,18 +268,17 @@ public class NodeDefinitionImpl extends ExpressionImpl implements NodeDefinition
 		if(newParentName != parentName) {
 			NotificationChain msgs = null;
 			if(parentName != null)
-				msgs = ((InternalEObject) parentName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.NODE_DEFINITION__PARENT_NAME, null, msgs);
+				msgs = ((InternalEObject) parentName).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.NODE_DEFINITION__PARENT_NAME, null, msgs);
 			if(newParentName != null)
-				msgs = ((InternalEObject) newParentName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.NODE_DEFINITION__PARENT_NAME, null, msgs);
+				msgs = ((InternalEObject) newParentName).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.NODE_DEFINITION__PARENT_NAME, null, msgs);
 			msgs = basicSetParentName(newParentName, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.NODE_DEFINITION__PARENT_NAME, newParentName, newParentName));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.NODE_DEFINITION__PARENT_NAME, newParentName, newParentName));
 	}
 
 } // NodeDefinitionImpl

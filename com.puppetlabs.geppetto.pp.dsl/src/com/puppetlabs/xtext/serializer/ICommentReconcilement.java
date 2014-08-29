@@ -42,8 +42,7 @@ public interface ICommentReconcilement {
 
 	/**
 	 * Return true, if the given (comment) node is a node that will be reconciled (and thus not included in its
-	 * "non reconciled" position unless this reconcilement says so by returning it in
-	 * {@link #commentNodesFor(INode, INode, INode)}).
+	 * "non reconciled" position unless this reconcilement says so by returning it in {@link #commentNodesFor(INode, INode, INode)}).
 	 *
 	 * @param node
 	 *            - the node to check if it is reconciled or not

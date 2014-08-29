@@ -18,13 +18,12 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * Manages the Comment related formatter preferences.
- *
  */
 public class CommentPreferences extends AbstractPreferenceData {
 	public static final String FORMATTER_COMMENTS_ID = "com.puppetlabs.geppetto.pp.dsl.PP.formatter.comments";
 
 	public static final String FORMATTER_COMMENTS_USE_PROJECT_SETTINGS = FORMATTER_COMMENTS_ID + "." +
-			PPPreferenceConstants.USE_PROJECT_SETTINGS;
+		PPPreferenceConstants.USE_PROJECT_SETTINGS;
 
 	public static final String FORMATTER_COMMENTS_BANNERS = "formatCommentBanners";
 
@@ -60,8 +59,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 	}
 
 	/**
-	 * Returns how <i>homogeneous</i> special lines (other than banners) should be aligned in the context of the given
-	 * {@code IResource}.
+	 * Returns how <i>homogeneous</i> special lines (other than banners) should be aligned in the context of the given {@code IResource}.
 	 *
 	 * @return true, if line should be flush left
 	 */
@@ -126,8 +124,7 @@ public class CommentPreferences extends AbstractPreferenceData {
 	}
 
 	/**
-	 * Returns if embedded sequences of $ ... $ should be verbatim or not in the context of the given resource
-	 * {@code IResource}.
+	 * Returns if embedded sequences of $ ... $ should be verbatim or not in the context of the given resource {@code IResource}.
 	 *
 	 * @return true if text between $ should be verbatim
 	 */

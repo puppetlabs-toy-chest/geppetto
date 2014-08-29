@@ -15,7 +15,6 @@ package com.puppetlabs.geppetto.pp.pptp;
  * A representation of the model object '<em><b>Type Fragment</b></em>'.
  * <!-- end-user-doc -->
  *
- *
  * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getTypeFragment()
  * @model
  * @generated

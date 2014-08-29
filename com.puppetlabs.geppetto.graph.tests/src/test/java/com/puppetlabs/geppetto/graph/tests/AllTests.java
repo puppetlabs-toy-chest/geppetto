@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * All Puppet Validation Tests.
- *
  */
 // @fmtOff
 @SuiteClasses({

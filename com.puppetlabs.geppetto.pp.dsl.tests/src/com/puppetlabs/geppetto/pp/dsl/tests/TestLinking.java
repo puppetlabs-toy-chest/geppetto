@@ -22,7 +22,6 @@ import org.junit.Test;
 
 /**
  * Test validation/linking of variables.
- *
  */
 public class TestLinking extends AbstractPuppetTests {
 
@@ -64,9 +63,9 @@ public class TestLinking extends AbstractPuppetTests {
 	@Test
 	public void test_appendShouldCreateVariable() throws Exception {
 		String code1 = "$arr2 = ['a']\n" + //
-				"class foo {\n" + //
-				"$arr2 += ['b', 'c']\n" + //
-				"}\n";
+			"class foo {\n" + //
+			"$arr2 += ['b', 'c']\n" + //
+			"}\n";
 
 		String code2 = "$arr = $foo::arr2\n"; //
 
@@ -91,12 +90,12 @@ public class TestLinking extends AbstractPuppetTests {
 	@Test
 	public void test_link_A_Inherits_B_andVar() throws Exception {
 		String code1 = "class a {\n" + //
-				"$x = 10\n" + //
-				"}\n";
+			"$x = 10\n" + //
+			"}\n";
 
 		String code2 = "class b inherits a {\n" + //
-				"$ref = $x\n" + //
-				"}\n"; //
+			"$ref = $x\n" + //
+			"}\n"; //
 		;
 		// XtextResource r = getResourceFromString(code);
 		List<Resource> resources = loadAndLinkResources(code1, code2);

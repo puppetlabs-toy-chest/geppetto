@@ -235,8 +235,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 	@Override
 	public EList<TargetElement> getContents() {
 		if(contents == null) {
-			contents = new EObjectContainmentEList<TargetElement>(
-				TargetElement.class, this, PPTPPackage.NAME_SPACE__CONTENTS);
+			contents = new EObjectContainmentEList<TargetElement>(TargetElement.class, this, PPTPPackage.NAME_SPACE__CONTENTS);
 		}
 		return contents;
 	}
@@ -263,8 +262,7 @@ public class NameSpaceImpl extends TargetElementImpl implements NameSpace {
 		boolean oldReserved = reserved;
 		reserved = newReserved;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.NAME_SPACE__RESERVED, oldReserved, reserved));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.NAME_SPACE__RESERVED, oldReserved, reserved));
 	}
 
 	/**

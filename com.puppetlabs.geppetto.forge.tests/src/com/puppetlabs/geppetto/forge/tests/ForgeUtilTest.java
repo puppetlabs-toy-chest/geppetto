@@ -38,14 +38,11 @@ public class ForgeUtilTest extends AbstractForgeTest {
 
 	private static void assertExcludesMatch(String name) {
 		assertTrue(
-			"The name '" + name + "' does not match default excludes pattern",
-			FileUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
+			"The name '" + name + "' does not match default excludes pattern", FileUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
 	}
 
 	private static void assertNotExcludesMatch(String name) {
-		assertFalse(
-			"The name '" + name + "' matches default excludes pattern",
-			FileUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
+		assertFalse("The name '" + name + "' matches default excludes pattern", FileUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
 	}
 
 	private Forge fixture = null;
@@ -70,8 +67,7 @@ public class ForgeUtilTest extends AbstractForgeTest {
 			finally {
 				StreamUtil.close(input);
 			}
-			assertTrue(
-				"Archive doesn't contain the expected top folder", new File(unpackFolder, archiveName).isDirectory());
+			assertTrue("Archive doesn't contain the expected top folder", new File(unpackFolder, archiveName).isDirectory());
 		}
 		catch(IOException e) {
 			fail(e.getMessage());

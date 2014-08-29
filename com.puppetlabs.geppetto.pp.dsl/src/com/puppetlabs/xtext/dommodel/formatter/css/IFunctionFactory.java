@@ -19,7 +19,6 @@ import com.google.inject.ImplementedBy;
 
 /**
  * Interface for commonly used functions in Dom based formatting.
- *
  */
 @ImplementedBy(FunctionFactory.class)
 public interface IFunctionFactory {

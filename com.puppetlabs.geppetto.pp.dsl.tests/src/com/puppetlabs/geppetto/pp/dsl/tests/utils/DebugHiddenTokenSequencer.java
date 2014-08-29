@@ -18,7 +18,6 @@ import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 
 /**
  * A DebugSequenceAcceptor that implements IHiddenTokenSequencer.
- *
  */
 public class DebugHiddenTokenSequencer extends DebugSequenceAcceptor implements IHiddenTokenSequencer {
 

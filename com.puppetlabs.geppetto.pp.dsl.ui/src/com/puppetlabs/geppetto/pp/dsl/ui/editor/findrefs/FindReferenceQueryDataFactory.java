@@ -42,7 +42,6 @@ public class FindReferenceQueryDataFactory {
 
 	/**
 	 * Provides the label at the top of the search result page
-	 *
 	 */
 	public static class QueryLabelProvider {
 		@Inject

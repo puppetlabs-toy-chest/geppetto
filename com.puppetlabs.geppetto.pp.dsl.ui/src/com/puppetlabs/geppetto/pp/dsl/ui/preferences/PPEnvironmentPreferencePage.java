@@ -15,7 +15,6 @@ import org.eclipse.jface.preference.StringFieldEditor;
 /**
  * A simple preference page for selection of puppet target.
  * This is also the puppet root preference pane.
- *
  */
 public class PPEnvironmentPreferencePage extends AbstractRebuildingPreferencePage {
 	private static final String PAGE_ID = "com.puppetlabs.geppetto.pp.dsl.PP.environment";

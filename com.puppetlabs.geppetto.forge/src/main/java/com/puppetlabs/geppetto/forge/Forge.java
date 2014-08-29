@@ -72,8 +72,8 @@ public interface Forge {
 	 *         the reason.
 	 * @throws IOException
 	 */
-	File build(File moduleSource, File destination, FileFilter filter, Metadata[] resultingMetadata,
-			byte[][] resultingMD5, Diagnostic result) throws IOException;
+	File build(File moduleSource, File destination, FileFilter filter, Metadata[] resultingMetadata, byte[][] resultingMD5,
+			Diagnostic result) throws IOException;
 
 	/**
 	 * List modified files in an installed module
@@ -109,12 +109,11 @@ public interface Forge {
 	 * @return The extracted metadata
 	 * @throws IOException
 	 */
-	Metadata createFromModuleDirectory(File moduleDirectory, FileFilter filter, File[] extractedFrom, Diagnostic result)
-			throws IOException;
+	Metadata createFromModuleDirectory(File moduleDirectory, FileFilter filter, File[] extractedFrom, Diagnostic result) throws IOException;
 
 	/**
-	 * Scan for valid directories containing a &quot;metadata.json&quot; or other files recognized by injected
-	 * {@link MetadataExtractor metadata extractors} using the provided <tt>filter</tt> to discriminate unwanted files.
+	 * Scan for valid directories containing a &quot;metadata.json&quot; or other files recognized by injected {@link MetadataExtractor
+	 * metadata extractors} using the provided <tt>filter</tt> to discriminate unwanted files.
 	 * A directory that contains such a file will not be scanned in turn.
 	 *
 	 * @param modulesRoot
@@ -193,7 +192,6 @@ public interface Forge {
 	 * Parse a Modulefile and create a Metadata instance from the result. The parser <i>will not evaluate</i> actual
 	 * ruby code. It
 	 * just parses the code and extracts values from the resulting AST.
-	 *
 	 *
 	 * @param moduleFile
 	 *            The file to parse

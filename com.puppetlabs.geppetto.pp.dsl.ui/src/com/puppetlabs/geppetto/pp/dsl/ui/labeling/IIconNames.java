@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.labeling;
 
 /**
  * File names of icons.
- *
  */
 public interface IIconNames {
 

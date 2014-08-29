@@ -38,7 +38,6 @@ import com.google.common.collect.Maps;
 
 /**
  * Produces a Catalog graph in DOT format.
- *
  */
 public class CatalogGraphProducer extends AbstractCatalogGraphProducer implements CatalogGraphStyles {
 
@@ -75,8 +74,7 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 		boolean hasParameters = sortedProperties.length > 0;
 		boolean hasFooter = r.getFile() != null;
 		if(hasParameters || hasFooter)
-			labelRows.add(getStyles().labelRow(
-				"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
+			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
 
 		labelRows.add(getStyles().labelRow(STYLE_ResourceTitleRow, //
 			getStyles().labelCell(STYLE_ResourceTitleCell, builder.toString(), Span.colSpan(3))));
@@ -85,11 +83,9 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 		// Rendering of separator line fails in graphviz 2.28 with an error
 		// labelRows.add(getStyles().rowSeparator());
 		if(hasParameters || hasFooter) {
-			labelRows.add(getStyles().labelRow(
-				"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
+			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
 			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("HRCell", "", Span.colSpan(3))));
-			labelRows.add(getStyles().labelRow(
-				"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
+			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
 		}
 		// parameters
 		for(CatalogResourceParameter a : sortedProperties) {
@@ -97,25 +93,25 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 
 			// output file contents as "DATA" as we can't fit the entire contents into a cell.
 			List<String> values = "content".equals(aName)
-					? Lists.newArrayList("DATA")
-							: a.getValue();
-					builder = new StringBuilder();
-					for(String v : values) {
-						builder.append(v);
-						builder.append(" ");
-					}
-					// remove trailing space
-					builder.deleteCharAt(builder.length() - 1);
-					String value = builder.toString();
+				? Lists.newArrayList("DATA")
+				: a.getValue();
+			builder = new StringBuilder();
+			for(String v : values) {
+				builder.append(v);
+				builder.append(" ");
+			}
+			// remove trailing space
+			builder.deleteCharAt(builder.length() - 1);
+			String value = builder.toString();
 
-					labelRows.add(getStyles().labelRow(STYLE_ResourcePropertyRow, //
-						getStyles().labelCell(STYLE_ResourcePropertyName, a.getName()), //
-						getStyles().labelCell(STYLE_ResourcePropertyValue, DOUBLE_RIGHT_ARROW + value, Span.colSpan(2)) //
-							));
+			labelRows.add(getStyles().labelRow(STYLE_ResourcePropertyRow, //
+				getStyles().labelCell(STYLE_ResourcePropertyName, a.getName()), //
+				getStyles().labelCell(STYLE_ResourcePropertyValue, DOUBLE_RIGHT_ARROW + value, Span.colSpan(2)) //
+			));
 
-					int tmpWidth = a.getName().length() + value.length() + 2;
-					if(tmpWidth > width)
-						width = tmpWidth;
+			int tmpWidth = a.getName().length() + value.length() + 2;
+			if(tmpWidth > width)
+				width = tmpWidth;
 		}
 
 		// A footer with filename[line]
@@ -139,8 +135,7 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 			}
 
 			if(hasParameters)
-				labelRows.add(getStyles().labelRow(
-					"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
+				labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
 			int line = -1;
 			try {
 				line = Integer.valueOf(r.getLine());
@@ -153,19 +148,18 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 				getStyles().labelCell(STYLE_ResourceFileInfoCell, builder.toString(), Span.colSpan(3)).withStyles(//
 					getStyles().tooltip(tooltip), //
 					getStyles().href(getHrefProducer().hrefToManifest(new Path(r.getFile()), root, line)) //
-						)) //
-					);
+				)) //
+			);
 		}
 		else if(hasParameters) {
 			// add a bit of padding at the bottom if there is no footer
-			labelRows.add(getStyles().labelRow(
-				"RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
+			labelRows.add(getStyles().labelRow("RowSeparator", getStyles().labelCell("SpacingCell", "", Span.colSpan(3))));
 		}
 
 		return StyleSet.withStyle(//
-			getStyles().labelFormat(//
-				getStyles().labelTable(STYLE_ResourceTable, //
-					labelRows.toArray(new LabelRow[labelRows.size()]))));
+		getStyles().labelFormat(//
+			getStyles().labelTable(STYLE_ResourceTable, //
+				labelRows.toArray(new LabelRow[labelRows.size()]))));
 
 	}
 
@@ -195,7 +189,6 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 
 	/**
 	 * Produces the graph data structure (RootGraph, Vertexes, Edges).
-	 *
 	 */
 	private RootGraph produceRootGraph(ICancel cancel, Catalog catalog, String catalogName, final IPath root) {
 
@@ -224,8 +217,7 @@ public class CatalogGraphProducer extends AbstractCatalogGraphProducer implement
 
 		for(CatalogResource r : catalog.getResources()) {
 			final Vertex source = resourceVertexMap.get(r);
-			for(CatalogResourceParameter p : Iterables.filter(
-				getParameterIterable(r), Predicates.not(regularParameterPredicate))) {
+			for(CatalogResourceParameter p : Iterables.filter(getParameterIterable(r), Predicates.not(regularParameterPredicate))) {
 				String aName = p.getName();
 				String style = null;
 				if("subscribe".equals(aName))

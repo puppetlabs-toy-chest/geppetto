@@ -21,7 +21,6 @@ import org.eclipse.xtext.serializer.sequencer.HiddenTokenSequencer;
  * The default HiddenTokenSequencer only generates a default empty WS if there is
  * an attached node model.
  * TODO: ISSUE report this issue
- *
  */
 public class HiddenTokenSequencerForDom extends HiddenTokenSequencer {
 
@@ -29,8 +28,7 @@ public class HiddenTokenSequencerForDom extends HiddenTokenSequencer {
 	protected List<INode> getHiddenNodesBetween(INode from, INode to) {
 		List<INode> result = super.getHiddenNodesBetween(from, to);
 		if(result == null) {
-			delegate.acceptWhitespace(
-				hiddenTokenHelper.getWhitespaceRuleFor(null, ""), IDomNode.IMPLIED_EMPTY_WHITESPACE, null);
+			delegate.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), IDomNode.IMPLIED_EMPTY_WHITESPACE, null);
 		}
 		return result;
 	}

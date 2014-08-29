@@ -75,7 +75,7 @@ public class PPReferenceQuery implements ISearchQuery {
 		finder.findAllReferences(queryData, localContextProvider, searchResult, monitor);
 		searchResult.finish();
 		return (monitor.isCanceled())
-				? Status.CANCEL_STATUS
-						: Status.OK_STATUS;
+			? Status.CANCEL_STATUS
+			: Status.OK_STATUS;
 	}
 }

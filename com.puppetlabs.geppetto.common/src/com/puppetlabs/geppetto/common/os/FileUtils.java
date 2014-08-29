@@ -110,9 +110,8 @@ public class FileUtils {
 			if(OsUtil.unixCopy(source, destDir))
 				return;
 
-			throw new UnsupportedOperationException(
-				"Sorry. Not possible to copy symlinks on Windows. This is the link: '" + source.getAbsolutePath() +
-					'\'');
+			throw new UnsupportedOperationException("Sorry. Not possible to copy symlinks on Windows. This is the link: '" +
+				source.getAbsolutePath() + '\'');
 		}
 		InputStream in = new FileInputStream(source);
 		try {
@@ -142,14 +141,14 @@ public class FileUtils {
 		}
 	}
 
-	public static void cpR(File source, File destDir, FileFilter fileFilter, boolean createTop,
-			boolean includeEmptyFolders) throws IOException {
+	public static void cpR(File source, File destDir, FileFilter fileFilter, boolean createTop, boolean includeEmptyFolders)
+			throws IOException {
 		String name = source.getName();
 		boolean isSymlink = isSymlink(source);
 
 		File[] children = isSymlink
-				? null
-						: source.listFiles(fileFilter);
+			? null
+			: source.listFiles(fileFilter);
 
 		if(children == null) {
 			// File or symlink.
@@ -218,8 +217,8 @@ public class FileUtils {
 			if(Files_readSymbolicLink != null) {
 				Object target = Files_readSymbolicLink.invoke(null, File_toPath.invoke(file));
 				return target == null
-						? null
-								: target.toString();
+					? null
+					: target.toString();
 			}
 		}
 		catch(Exception e) {

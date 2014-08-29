@@ -52,8 +52,7 @@ public class PPTypeInfo {
 
 	public final Map<String, Entry> parameters;
 
-	public PPTypeInfo(String typeName, String documentation, Map<String, Entry> properties,
-			Map<String, Entry> parameters) {
+	public PPTypeInfo(String typeName, String documentation, Map<String, Entry> properties, Map<String, Entry> parameters) {
 		this.typeName = typeName;
 		this.documentation = new RubyDocProcessor().asHTML(documentation);
 		if(properties == null)

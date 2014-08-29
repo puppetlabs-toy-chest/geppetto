@@ -25,12 +25,12 @@ public class AutoEditPreferencePage extends AbstractPreferencePage {
 		//
 		addField(new CheckBoxGroupFieldEditor(//
 			PPPreferenceConstants.AUTO_EDIT_STRATEGY, "Automatically Complete:", 1, new String[][] {
-					{ "[ ]", String.valueOf(PPPreferencesHelper.AUTO_INSERT_BRACKETS) }, //
-					{ "{ }", String.valueOf(PPPreferencesHelper.AUTO_INSERT_BRACES) }, //
-					{ "( )", String.valueOf(PPPreferencesHelper.AUTO_INSERT_PARENTHESES) }, //
-					{ "\" \"", String.valueOf(PPPreferencesHelper.AUTO_INSERT_DQ) }, //
-					{ "' '", String.valueOf(PPPreferencesHelper.AUTO_INSERT_SQ) }, //
-					{ "/* */", String.valueOf(PPPreferencesHelper.AUTO_INSERT_COMMENT) }, //
+				{ "[ ]", String.valueOf(PPPreferencesHelper.AUTO_INSERT_BRACKETS) }, //
+				{ "{ }", String.valueOf(PPPreferencesHelper.AUTO_INSERT_BRACES) }, //
+				{ "( )", String.valueOf(PPPreferencesHelper.AUTO_INSERT_PARENTHESES) }, //
+				{ "\" \"", String.valueOf(PPPreferencesHelper.AUTO_INSERT_DQ) }, //
+				{ "' '", String.valueOf(PPPreferencesHelper.AUTO_INSERT_SQ) }, //
+				{ "/* */", String.valueOf(PPPreferencesHelper.AUTO_INSERT_COMMENT) }, //
 			}, getFieldEditorParent(), true) {
 			@Override
 			protected String calculateResult(String[][] settings) {
@@ -85,8 +85,7 @@ public class AutoEditPreferencePage extends AbstractPreferencePage {
 			}
 		});
 
-		BooleanFieldEditor completeBlocks = new BooleanFieldEditor(
-			PPPreferenceConstants.AUTO_EDIT_COMPLETE_COMPOUND_BLOCKS, //
+		BooleanFieldEditor completeBlocks = new BooleanFieldEditor(PPPreferenceConstants.AUTO_EDIT_COMPLETE_COMPOUND_BLOCKS, //
 			"Automatically complete opened (), {}, [] blocks.", //
 			getFieldEditorParent());
 		addField(completeBlocks);

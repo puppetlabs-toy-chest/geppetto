@@ -15,7 +15,6 @@ package com.puppetlabs.geppetto.pp.pptp;
  * A representation of the model object '<em><b>Parameter</b></em>'.
  * <!-- end-user-doc -->
  *
- *
  * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getParameter()
  * @model
  * @generated

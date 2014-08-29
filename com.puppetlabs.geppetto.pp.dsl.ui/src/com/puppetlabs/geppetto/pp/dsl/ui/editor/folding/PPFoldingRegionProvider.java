@@ -30,20 +30,17 @@ import com.google.common.collect.Lists;
 
 /**
  * A folding RegionProvider that provides folding of sequence of SL Comment
- *
  */
 public class PPFoldingRegionProvider extends DefaultFoldingRegionProvider {
 	private static final Logger log = Logger.getLogger(PPFoldingRegionProvider.class);
 
 	@Override
-	protected void computeCommentFolding(IXtextDocument xtextDocument,
-			IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+	protected void computeCommentFolding(IXtextDocument xtextDocument, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
 		computeMLCommentFolding(xtextDocument, foldingRegionAcceptor);
 		computeSLCommentFolding(xtextDocument, foldingRegionAcceptor);
 	}
 
-	protected void computeMLCommentFolding(IXtextDocument xtextDocument,
-			IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+	protected void computeMLCommentFolding(IXtextDocument xtextDocument, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
 		try {
 			ITypedRegion[] typedRegions = xtextDocument.computePartitioning(
 				IDocumentExtension3.DEFAULT_PARTITIONING, 0, xtextDocument.getLength(), false);
@@ -84,8 +81,7 @@ public class PPFoldingRegionProvider extends DefaultFoldingRegionProvider {
 	 * @param xtextDocument
 	 * @param foldingRegionAcceptor
 	 */
-	private void computeSLCommentFolding(IXtextDocument xtextDocument,
-			IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+	private void computeSLCommentFolding(IXtextDocument xtextDocument, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
 		try {
 			ITypedRegion[] typedRegions = xtextDocument.computePartitioning(
 				IDocumentExtension3.DEFAULT_PARTITIONING, 0, xtextDocument.getLength(), false);

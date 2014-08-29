@@ -20,7 +20,6 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 
 /**
  * This is the preference pane for break and alignment formatting.
- *
  */
 public class PPBreakAndAlignPreferencePage extends AbstractPreferencePage {
 
@@ -32,9 +31,8 @@ public class PPBreakAndAlignPreferencePage extends AbstractPreferencePage {
 			"Align Class and Definition Parameters", getFieldEditorParent());
 		addField(definitionParameters);
 
-		EnumPreferenceFieldEditor lists = new EnumPreferenceFieldEditor(
-			WhenToApply.class, BreakAndAlignPreferences.FORMATTER_ALIGN_LISTS, //
-			"Align List Elements", getFieldEditorParent());
+		EnumPreferenceFieldEditor lists = new EnumPreferenceFieldEditor(WhenToApply.class, BreakAndAlignPreferences.FORMATTER_ALIGN_LISTS, //
+		"Align List Elements", getFieldEditorParent());
 		addField(lists);
 
 		EnumPreferenceFieldEditor hashes = new EnumPreferenceFieldEditor(
@@ -62,14 +60,12 @@ public class PPBreakAndAlignPreferencePage extends AbstractPreferencePage {
 			getFieldEditorParent());
 		addField(compactCase);
 
-		BooleanFieldEditor compactResource = new BooleanFieldEditor(
-			BreakAndAlignPreferences.FORMATTER_COMPACT_RESOURCES, //
+		BooleanFieldEditor compactResource = new BooleanFieldEditor(BreakAndAlignPreferences.FORMATTER_COMPACT_RESOURCES, //
 			"Compact Resources when possible", //
 			getFieldEditorParent());
 		addField(compactResource);
 
-		BooleanFieldEditor alignAssignments = new BooleanFieldEditor(
-			BreakAndAlignPreferences.FORMATTER_ALIGN_ASSIGNMENTS, //
+		BooleanFieldEditor alignAssignments = new BooleanFieldEditor(BreakAndAlignPreferences.FORMATTER_ALIGN_ASSIGNMENTS, //
 			"Align Assignments on = and +=", //
 			getFieldEditorParent());
 		addField(alignAssignments);

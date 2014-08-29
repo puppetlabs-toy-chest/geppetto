@@ -22,7 +22,6 @@ import com.google.inject.Inject;
 
 /**
  * A container manager that allows visible containers to be obtained from a container handle.
- *
  */
 public class ValidationStateBasedContainerManager extends StateBasedContainerManager {
 	@Inject
@@ -45,7 +44,6 @@ public class ValidationStateBasedContainerManager extends StateBasedContainerMan
 	 * min requirement on Xtext 2.3, the implementation of this class can be simplified by removing this method and
 	 * instead calling the public getState(IResourceDescription) on the superclass, and also removing the extra injected
 	 * private {@link #stateProvider} in this class.
-	 *
 	 * TODO: See https://am0.cloudsmith.com/bugzilla/show_bug.cgi?id=2614 and comment above.
 	 *
 	 * @param resourceDescriptions

@@ -231,7 +231,7 @@ public class Module extends TimestampedEntity {
 	 */
 	public void setTags(List<String> tags) {
 		this.tags = tags == null
-				? Collections.<String> emptyList()
-						: tags;
+			? Collections.<String> emptyList()
+			: tags;
 	}
 }

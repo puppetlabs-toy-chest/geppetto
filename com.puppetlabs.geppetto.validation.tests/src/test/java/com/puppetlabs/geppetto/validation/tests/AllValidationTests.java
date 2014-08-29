@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * All Puppet Validation Tests.
- *
  */
 @RunWith(Suite.class)
 @SuiteClasses({

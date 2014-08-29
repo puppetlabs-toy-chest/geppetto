@@ -162,8 +162,8 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 		switch(featureID) {
 			case PPPackage.DEFINITION__CLASS_NAME:
 				return CLASS_NAME_EDEFAULT == null
-				? className != null
-				: !CLASS_NAME_EDEFAULT.equals(className);
+					? className != null
+					: !CLASS_NAME_EDEFAULT.equals(className);
 			case PPPackage.DEFINITION__ARGUMENTS:
 				return arguments != null;
 			case PPPackage.DEFINITION__STATEMENTS:
@@ -260,8 +260,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 	@Override
 	public EList<Expression> getStatements() {
 		if(statements == null) {
-			statements = new EObjectContainmentEList<Expression>(
-					Expression.class, this, PPPackage.DEFINITION__STATEMENTS);
+			statements = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.DEFINITION__STATEMENTS);
 		}
 		return statements;
 	}
@@ -277,18 +276,17 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 		if(newArguments != arguments) {
 			NotificationChain msgs = null;
 			if(arguments != null)
-				msgs = ((InternalEObject) arguments).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.DEFINITION__ARGUMENTS, null, msgs);
+				msgs = ((InternalEObject) arguments).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.DEFINITION__ARGUMENTS, null, msgs);
 			if(newArguments != null)
-				msgs = ((InternalEObject) newArguments).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.DEFINITION__ARGUMENTS, null, msgs);
+				msgs = ((InternalEObject) newArguments).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.DEFINITION__ARGUMENTS, null, msgs);
 			msgs = basicSetArguments(newArguments, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.DEFINITION__ARGUMENTS, newArguments, newArguments));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.DEFINITION__ARGUMENTS, newArguments, newArguments));
 	}
 
 	/**
@@ -302,8 +300,7 @@ public class DefinitionImpl extends ExpressionImpl implements Definition {
 		String oldClassName = className;
 		className = newClassName;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.DEFINITION__CLASS_NAME, oldClassName, className));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.DEFINITION__CLASS_NAME, oldClassName, className));
 	}
 
 	/**

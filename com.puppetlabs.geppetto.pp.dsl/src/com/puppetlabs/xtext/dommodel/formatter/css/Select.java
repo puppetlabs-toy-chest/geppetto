@@ -27,13 +27,11 @@ import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
 
 /**
  * Style Select is used to produce a configured Selector.
- *
  */
 public class Select {
 
 	/**
 	 * A compound rule, where all rules must be satisfied.
-	 *
 	 */
 	public static class And extends Selector {
 		private int specificity = 0;
@@ -156,8 +154,8 @@ public class Select {
 			}
 			// match if all containment rules where satisfied
 			return (matchCount == selectors.length)
-					? true
-							: false;
+				? true
+				: false;
 		}
 
 		@Override
@@ -172,8 +170,7 @@ public class Select {
 	}
 
 	/**
-	 * A selector that is useful when debugging matching (wrap a real selector and set a breakpoint in
-	 * {@link #matches(IDomNode)}.
+	 * A selector that is useful when debugging matching (wrap a real selector and set a breakpoint in {@link #matches(IDomNode)}.
 	 */
 	public static class DebugSelector extends Selector {
 		private Selector wrappedSelector;
@@ -257,7 +254,6 @@ public class Select {
 	/**
 	 * The next to most specific selector that matches anything.
 	 * Should be combined with And selector to make the and specificity very high.
-	 *
 	 */
 	public static class Important extends Selector {
 
@@ -287,7 +283,6 @@ public class Select {
 
 	/**
 	 * The most specific selector that matches on a instance using ==.
-	 *
 	 */
 	public static class Instance extends Selector {
 		private final IDomNode node;
@@ -327,7 +322,6 @@ public class Select {
 
 	/**
 	 * Matches IDomNodes on NodeType, style classifier, and id.
-	 *
 	 */
 	public static class NodeSelector extends Selector {
 
@@ -449,8 +443,8 @@ public class Select {
 			if(styleClass != null)
 				this.matchingClassifiers.addAll(styleClass);
 			this.matchingId = id != null
-					? id
-							: NoIdMatch;
+				? id
+				: NoIdMatch;
 		}
 
 		@Override
@@ -543,7 +537,6 @@ public class Select {
 	 * Negates a selector and increases the specificity by one.
 	 * e.g. selection of not(a) is more important than selection of just a.
 	 * Not does not select a null node.
-	 *
 	 */
 	public static class Not extends Selector {
 		private Selector selector;
@@ -585,7 +578,6 @@ public class Select {
 
 	/**
 	 * A NullSelector is only useful in a NullRule. It matches nothing.
-	 *
 	 */
 	public static class NullSelector extends Selector {
 
@@ -612,7 +604,6 @@ public class Select {
 
 	/**
 	 * Applies the delegate selector to the parent of the node being matched.
-	 *
 	 */
 	public static class ParentSelector extends Selector {
 		private Selector parentSelector;
@@ -740,7 +731,6 @@ public class Select {
 
 	/**
 	 * A Selector matching on semantic information
-	 *
 	 */
 	public static class SemanticSelector extends Selector {
 		private EClass eClass;
@@ -774,13 +764,13 @@ public class Select {
 			if(node == null)
 				return false;
 			EObject semantic = nearest
-					? node.getNearestSemanticObject()
-							: node.getSemanticObject();
-					if(semantic == null)
-						return false;
-					if(instance)
-						return eClass.isInstance(semantic);
-					return eClass.isSuperTypeOf(semantic.eClass());
+				? node.getNearestSemanticObject()
+				: node.getSemanticObject();
+			if(semantic == null)
+				return false;
+			if(instance)
+				return eClass.isInstance(semantic);
+			return eClass.isSuperTypeOf(semantic.eClass());
 		}
 
 		@Override
@@ -791,11 +781,11 @@ public class Select {
 			builder.append(", ");
 			builder.append(nearest
 				? "nearest"
-						: "assigned");
+				: "assigned");
 			builder.append(", ");
 			builder.append(instance
 				? "instance"
-						: "typeof");
+				: "typeof");
 			builder.append(")");
 			return builder.toString();
 		}
@@ -803,7 +793,6 @@ public class Select {
 
 	/**
 	 * Applies the delegate selector to the successor of the matching node.
-	 *
 	 */
 	public static class SuccessorSelector extends Selector {
 		private Selector successorSelector;
@@ -843,7 +832,6 @@ public class Select {
 
 	/**
 	 * Selects matching text.
-	 *
 	 */
 	public static class Text extends Selector {
 		private final String text;

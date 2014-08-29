@@ -34,8 +34,8 @@ public class TestDataProvider {
 			String basedirProp = System.getProperty("basedir");
 			if(basedirProp == null) {
 				try {
-					File testData = Guice.createInjector(CommonModuleProvider.getCommonModule()).getInstance(
-						BundleAccess.class).getFileFromClassBundle(TestDataProvider.class, "testData");
+					File testData = Guice.createInjector(CommonModuleProvider.getCommonModule()).getInstance(BundleAccess.class).getFileFromClassBundle(
+						TestDataProvider.class, "testData");
 					if(testData == null || !testData.isDirectory())
 						fail("Unable to determine basedir");
 					basedir = testData.getParentFile();

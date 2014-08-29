@@ -97,7 +97,7 @@ public class Dependency extends Entity {
 	 */
 	public boolean matches(Metadata metadata) {
 		return safeEquals(name, metadata.getName()) &&
-				(version_requirement == null || version_requirement.isIncluded(metadata.getVersion()));
+			(version_requirement == null || version_requirement.isIncluded(metadata.getVersion()));
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class Dependency extends Entity {
 	 */
 	public boolean matches(Release release) {
 		return safeEquals(name, release.getFullName()) &&
-				(version_requirement == null || version_requirement.isIncluded(release.getVersion()));
+			(version_requirement == null || version_requirement.isIncluded(release.getVersion()));
 	}
 
 	/**

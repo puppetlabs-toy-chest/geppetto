@@ -36,8 +36,8 @@ public class EclipseBundleAccess implements BundleAccess {
 		try {
 			URL resourceURL = FileLocator.find(bundle, new Path(bundleRelativeResourcePath), null);
 			return resourceURL == null
-					? null
-							: getResourceAsFile(resourceURL);
+				? null
+				: getResourceAsFile(resourceURL);
 		}
 		catch(Exception e) {
 			throw new IllegalStateException("Failed to convert resource URL to URI", e);

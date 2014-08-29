@@ -27,8 +27,7 @@ public abstract class AbstractMetadataExtractor implements MetadataExtractor {
 	}
 
 	@Override
-	public Metadata parseMetadata(File moduleDirectory, FileFilter filter, File[] extractedFrom, Diagnostic result)
-			throws IOException {
+	public Metadata parseMetadata(File moduleDirectory, FileFilter filter, File[] extractedFrom, Diagnostic result) throws IOException {
 		File metadataFile = new File(moduleDirectory, getPrimarySource());
 		if(extractedFrom != null)
 			extractedFrom[0] = metadataFile;

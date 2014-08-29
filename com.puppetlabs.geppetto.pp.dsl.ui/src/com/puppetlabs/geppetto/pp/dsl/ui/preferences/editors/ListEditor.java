@@ -36,8 +36,7 @@ import org.eclipse.swt.widgets.Widget;
  * adding and removing values, and Up and Down buttons to adjust
  * the order of elements in the list.
  * <p>
- * Subclasses must implement the <code>parseString</code>, <code>createList</code>, and <code>getNewInputObject</code>
- * framework methods.
+ * Subclasses must implement the <code>parseString</code>, <code>createList</code>, and <code>getNewInputObject</code> framework methods.
  * </p>
  */
 public abstract class ListEditor extends FieldEditor {
@@ -504,12 +503,10 @@ public abstract class ListEditor extends FieldEditor {
 
 	/**
 	 * Invoked when the selection in the list has changed.
-	 *
 	 * <p>
-	 * The default implementation of this method utilizes the selection index and the size of the list to toggle the
-	 * enablement of the up, down and remove buttons.
+	 * The default implementation of this method utilizes the selection index and the size of the list to toggle the enablement of the up,
+	 * down and remove buttons.
 	 * </p>
-	 *
 	 * <p>
 	 * Sublcasses may override.
 	 * </p>
@@ -562,8 +559,8 @@ public abstract class ListEditor extends FieldEditor {
 		setPresentsDefaultValue(false);
 		int index = list.getSelectionIndex();
 		int target = up
-				? index - 1
-						: index + 1;
+			? index - 1
+			: index + 1;
 
 		if(index >= 0) {
 			String[] selection = list.getSelection();

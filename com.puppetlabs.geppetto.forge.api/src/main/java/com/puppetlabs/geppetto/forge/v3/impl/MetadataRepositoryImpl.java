@@ -73,7 +73,7 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 					nextDep: for(Dependency dep : r.getDependencies()) {
 						for(Dependency haveDep : allDeps) {
 							if(haveDep.getName().equals(dep.getName()) &&
-									haveDep.getVersionRequirement().isAsRestrictiveAs(dep.getVersionRequirement()))
+								haveDep.getVersionRequirement().isAsRestrictiveAs(dep.getVersionRequirement()))
 								continue nextDep;
 						}
 						addedDependenciesCollector.add(dep);
@@ -132,8 +132,8 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 			other.addIfAllMatch(allRequirements, relMap, addedDependenciesCollector);
 			Collection<Metadata> releases = relMap.values();
 			return releases.isEmpty()
-					? null
-							: new Resolution(allRequirements, relMap.values());
+				? null
+				: new Resolution(allRequirements, relMap.values());
 		}
 	}
 
@@ -147,8 +147,7 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 	private Releases releases;
 
 	@Override
-	public Collection<Metadata> deepResolve(Dependency dependency, Set<Dependency> unresolvedCollector)
-			throws IOException {
+	public Collection<Metadata> deepResolve(Dependency dependency, Set<Dependency> unresolvedCollector) throws IOException {
 		Map<ModuleName, Resolution> resolutionCollector = new HashMap<ModuleName, Resolution>();
 
 		Set<Dependency> seen = new HashSet<Dependency>();
@@ -178,8 +177,7 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 		return pruned;
 	}
 
-	private void prune(Dependency dependency, Set<Dependency> seen, Collection<Metadata> releases,
-			Collection<Metadata> pruned) {
+	private void prune(Dependency dependency, Set<Dependency> seen, Collection<Metadata> releases, Collection<Metadata> pruned) {
 		if(!seen.add(dependency))
 			return;
 
@@ -207,8 +205,8 @@ public class MetadataRepositoryImpl implements MetadataRepository {
 		}
 		int sz = rlist.size();
 		Metadata[] releaseArray = sz == 0
-				? emptyReleaseArray
-						: rlist.toArray(new Metadata[sz]);
+			? emptyReleaseArray
+			: rlist.toArray(new Metadata[sz]);
 		releasesPerModule.put(fullName, releaseArray);
 		return releaseArray;
 	}

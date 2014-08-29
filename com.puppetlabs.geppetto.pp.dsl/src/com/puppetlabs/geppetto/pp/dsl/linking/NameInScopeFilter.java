@@ -22,7 +22,6 @@ import com.google.common.collect.Iterators;
 
 /**
  * Iterable filter for searching for a name up the scope chain.
- *
  */
 public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 	public static interface Match {
@@ -30,21 +29,18 @@ public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 		public static final SearchStrategy EQUALS = new SearchStrategy();
 
 		/** Compare using equals, find all that match */
-		public static final SearchStrategy ALL_EQUALS = new SearchStrategy(
-			EnumSet.complementOf(EnumSet.of(SearchType.EXISTS)));
+		public static final SearchStrategy ALL_EQUALS = new SearchStrategy(EnumSet.complementOf(EnumSet.of(SearchType.EXISTS)));
 
 		/** Compare using starts with, find all that match. */
 		public static final SearchStrategy STARTS_WITH = new SearchStrategy(
 			SearchType.GLOBAL, SearchType.INHERITED, SearchType.OUTER_SCOPES);
 
-		public static final SearchStrategy NO_OUTER = new SearchStrategy(
-			SearchType.EQUALS, SearchType.GLOBAL, SearchType.INHERITED);
+		public static final SearchStrategy NO_OUTER = new SearchStrategy(SearchType.EQUALS, SearchType.GLOBAL, SearchType.INHERITED);
 
 		public static final SearchStrategy NO_OUTER_EXISTS = new SearchStrategy(
 			SearchType.EQUALS, SearchType.EXISTS, SearchType.GLOBAL, SearchType.INHERITED);
 
-		public static final SearchStrategy NO_OUTER_STARTS_WITH = new SearchStrategy(
-			SearchType.GLOBAL, SearchType.INHERITED);
+		public static final SearchStrategy NO_OUTER_STARTS_WITH = new SearchStrategy(SearchType.GLOBAL, SearchType.INHERITED);
 	}
 
 	public static class NameInScopePredicate implements Predicate<IEObjectDescription> {
@@ -58,12 +54,12 @@ public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 
 		final EClass[] eclasses;
 
-		public NameInScopePredicate(boolean absolute, SearchStrategy matchingStrategy, QualifiedName name,
-				QualifiedName scopeName, EClass[] eclasses) {
+		public NameInScopePredicate(boolean absolute, SearchStrategy matchingStrategy, QualifiedName name, QualifiedName scopeName,
+				EClass[] eclasses) {
 			this.absolute = absolute;
 			this.scopeName = scopeName == null
-					? QualifiedName.EMPTY
-							: scopeName;
+				? QualifiedName.EMPTY
+				: scopeName;
 			this.name = name;
 			this.eclasses = eclasses;
 			this.matchStrategy = matchingStrategy;
@@ -116,8 +112,7 @@ public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 
 				// commonPart+requestedName == candidate (i.e. wanted "c::d" in scope "a::b" - check "a::b::c::d"
 				if(matchStrategy.matchStartsWith())
-					return candidateName.startsWith(scopeName.skipLast(scopeName.getSegmentCount() - commonCount).append(
-						name));
+					return candidateName.startsWith(scopeName.skipLast(scopeName.getSegmentCount() - commonCount).append(name));
 				return scopeName.skipLast(scopeName.getSegmentCount() - commonCount).append(name).equals(candidateName);
 			}
 		}
@@ -139,8 +134,7 @@ public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 					return false;
 
 			// the last segment in query, must be the start of the corresponding segment in candidate or be empty
-			if(!("".equals(query.getLastSegment()) || candidate.getSegment(query.getSegmentCount() - 1).startsWith(
-				query.getLastSegment())))
+			if(!("".equals(query.getLastSegment()) || candidate.getSegment(query.getSegmentCount() - 1).startsWith(query.getLastSegment())))
 				return false;
 			return true;
 		}
@@ -213,13 +207,13 @@ public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 
 	final private NameInScopePredicate filter;
 
-	NameInScopeFilter(SearchStrategy matchingStrategy, Iterable<IEObjectDescription> unfiltered, QualifiedName name,
-		QualifiedName scope, EClass[] eclasses) {
+	NameInScopeFilter(SearchStrategy matchingStrategy, Iterable<IEObjectDescription> unfiltered, QualifiedName name, QualifiedName scope,
+			EClass[] eclasses) {
 		boolean absolute = name.getSegmentCount() > 0 && "".equals(name.getSegment(0));
 		this.unfiltered = unfiltered;
 		filter = new NameInScopePredicate(absolute, matchingStrategy, absolute
 			? name.skipFirst(1)
-					: name, scope, eclasses);
+			: name, scope, eclasses);
 	}
 
 	@Override

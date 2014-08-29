@@ -17,7 +17,6 @@ import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * An interface for accepting messages.
- *
  */
 public interface IMessageAcceptor {
 
@@ -56,8 +55,8 @@ public interface IMessageAcceptor {
 	 * @param issueData
 	 *            optional data associated with the issue
 	 */
-	public void accept(Severity severity, String message, EObject source, EStructuralFeature feature, int index,
-			String issueCode, String... issueData);
+	public void accept(Severity severity, String message, EObject source, EStructuralFeature feature, int index, String issueCode,
+			String... issueData);
 
 	/**
 	 * Generate an error message for the given location in text.
@@ -70,8 +69,7 @@ public interface IMessageAcceptor {
 	 * @param issueCode
 	 * @param issueData
 	 */
-	void accept(Severity severity, String message, EObject source, int textOffset, int textLength, String issueCode,
-			String[] issueData);
+	void accept(Severity severity, String message, EObject source, int textOffset, int textLength, String issueCode, String[] issueData);
 
 	/**
 	 * The same as calling {@link #accept(Severity, String, EObject, EStructuralFeature, int, String, String...)} with
@@ -113,8 +111,7 @@ public interface IMessageAcceptor {
 	 *
 	 * @see #accept(Severity, String, EObject, EStructuralFeature, int, String, String...)
 	 */
-	public void acceptError(String message, EObject source, EStructuralFeature feature, int index, String issueCode,
-			String... issueData);
+	public void acceptError(String message, EObject source, EStructuralFeature feature, int index, String issueCode, String... issueData);
 
 	/**
 	 * Generates an error for a location determined by 'feature of source'. <br/>
@@ -122,10 +119,8 @@ public interface IMessageAcceptor {
 	 * {@link #INSIGNIFICANT_INDEX}.
 	 *
 	 * @see #accept(Severity, String, EObject, EStructuralFeature, int, String, String...)
-	 *
 	 */
-	public void acceptError(String message, EObject source, EStructuralFeature feature, String issueCode,
-			String... issueData);
+	public void acceptError(String message, EObject source, EStructuralFeature feature, String issueCode, String... issueData);
 
 	/**
 	 * Generate an error message for the given location in text.
@@ -138,8 +133,7 @@ public interface IMessageAcceptor {
 	 * @param issueCode
 	 * @param issueData
 	 */
-	void acceptError(String message, EObject source, int textOffset, int textLength, String issueCode,
-			String... issueData);
+	void acceptError(String message, EObject source, int textOffset, int textLength, String issueCode, String... issueData);
 
 	/**
 	 * Generates an error for a location determined by source's eContainer and eContainingFeature. <br/>
@@ -153,7 +147,6 @@ public interface IMessageAcceptor {
 
 	/**
 	 * Generates an error for a location determined by source's eContainer and eContainingFeature.
-	 *
 	 * The same as calling {@link #acceptError(String, EObject, EStructuralFeature, int, String, String...)} with
 	 * source.eContainer(),
 	 * source.eContainingFeature(), {@link #indexOfSourceInParent(EObject)} instead of just source.
@@ -174,8 +167,7 @@ public interface IMessageAcceptor {
 	 *
 	 * @see #accept(Severity, String, EObject, EStructuralFeature, int, String, String...)
 	 */
-	public void acceptWarning(String message, EObject source, EStructuralFeature feature, int index, String issueCode,
-			String... issueData);
+	public void acceptWarning(String message, EObject source, EStructuralFeature feature, int index, String issueCode, String... issueData);
 
 	/**
 	 * Generates a warning for a location determined by 'feature of source'. <br/>
@@ -184,8 +176,7 @@ public interface IMessageAcceptor {
 	 *
 	 * @see #accept(Severity, String, EObject, EStructuralFeature, int, String, String...)
 	 */
-	public void acceptWarning(String message, EObject source, EStructuralFeature feature, String issueCode,
-			String... issueData);
+	public void acceptWarning(String message, EObject source, EStructuralFeature feature, String issueCode, String... issueData);
 
 	/**
 	 * Generate a warning message for the given location in text.
@@ -198,8 +189,7 @@ public interface IMessageAcceptor {
 	 * @param issueCode
 	 * @param issueData
 	 */
-	void acceptWarning(String message, EObject source, int textOffset, int textLength, String issueCode,
-			String... issueData);
+	void acceptWarning(String message, EObject source, int textOffset, int textLength, String issueCode, String... issueData);
 
 	/**
 	 * Generates a warning for a location determined by source's eContainer and eContainingFeature. <br/>
@@ -213,7 +203,6 @@ public interface IMessageAcceptor {
 
 	/**
 	 * Generates a warning for a location determined by source's eContainer and eContainingFeature.
-	 *
 	 * The same as calling {@link #acceptWarning(String, EObject, EStructuralFeature, int, String, String...)} with
 	 * source.eContainer(),
 	 * source.eContainingFeature(), {@link #indexOfSourceInParent(EObject)} instead of just source.

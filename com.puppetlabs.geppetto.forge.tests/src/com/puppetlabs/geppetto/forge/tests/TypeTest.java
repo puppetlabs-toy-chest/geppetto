@@ -54,8 +54,7 @@ public class TypeTest extends AbstractForgeTest {
 			assertEquals("Expected 1 providers", 1, fixture.getProviders().size());
 			assertEquals("Unexpected provider name", "a2mod", fixture.getProviders().get(0).getName());
 			assertEquals(
-				"Unexpected provider doc", "Manage Apache 2 modules on Debian and Ubuntu",
-				fixture.getProviders().get(0).getDocumentation());
+				"Unexpected provider doc", "Manage Apache 2 modules on Debian and Ubuntu", fixture.getProviders().get(0).getDocumentation());
 		}
 		catch(IOException e) {
 			fail(e.getMessage());

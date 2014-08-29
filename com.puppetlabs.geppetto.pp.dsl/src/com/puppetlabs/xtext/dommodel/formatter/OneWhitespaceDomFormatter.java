@@ -21,7 +21,6 @@ import org.eclipse.xtext.util.TextRegion;
 
 /**
  * A Dom Model Formatter that ensures a single whitespace between tokens.
- *
  */
 public class OneWhitespaceDomFormatter implements IDomModelFormatter {
 
@@ -35,8 +34,7 @@ public class OneWhitespaceDomFormatter implements IDomModelFormatter {
 	}
 
 	@Override
-	public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext,
-			Acceptor errors) {
+	public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext, Acceptor errors) {
 
 		hasStarted = false;
 		wsWritten = false;
@@ -48,14 +46,12 @@ public class OneWhitespaceDomFormatter implements IDomModelFormatter {
 		return new ReplaceRegion(regionToFormat, text);
 	}
 
-	protected void formatComposite(IDomNode node, ITextRegion regionToFormat, IFormattingContext formattingContext,
-			StringBuilder builder) {
+	protected void formatComposite(IDomNode node, ITextRegion regionToFormat, IFormattingContext formattingContext, StringBuilder builder) {
 		for(IDomNode n : node.getChildren())
 			internalFormat(n, regionToFormat, formattingContext, builder);
 	}
 
-	protected void formatLeaf(IDomNode node, ITextRegion regionToFormat, IFormattingContext formattingContext,
-			StringBuilder builder) {
+	protected void formatLeaf(IDomNode node, ITextRegion regionToFormat, IFormattingContext formattingContext, StringBuilder builder) {
 
 		if(DomModelUtils.isWhitespace(node)) {
 			if(formattingContext.isWhitespacePreservation()) {
@@ -79,8 +75,7 @@ public class OneWhitespaceDomFormatter implements IDomModelFormatter {
 		wsWritten = false;
 	}
 
-	protected void internalFormat(IDomNode node, ITextRegion regionToFormat, IFormattingContext formattingContext,
-			StringBuilder builder) {
+	protected void internalFormat(IDomNode node, ITextRegion regionToFormat, IFormattingContext formattingContext, StringBuilder builder) {
 		if(node.isLeaf())
 			formatLeaf(node, regionToFormat, formattingContext, builder);
 		else

@@ -29,7 +29,6 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * Simple decorator for error and warning (right now hacking/testing).
- *
  */
 public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator {
 
@@ -129,21 +128,19 @@ public class AggregateErrorLabelDecorator implements ILightweightLabelDecorator 
 	}
 
 	private ImageDescriptor getErrorImageDescriptor() {
-		ImageDescriptor result = PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(
-			ISharedImages.IMG_DEC_FIELD_ERROR);
+		ImageDescriptor result = PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_DEC_FIELD_ERROR);
 		// TODO: remove workaround see https://bugs.eclipse.org/bugs/show_bug.cgi?id=304397
 		return result != null
-				? result
-						: JFaceResources.getImageRegistry().getDescriptor("org.eclipse.jface.fieldassist.IMG_DEC_FIELD_ERROR");
+			? result
+			: JFaceResources.getImageRegistry().getDescriptor("org.eclipse.jface.fieldassist.IMG_DEC_FIELD_ERROR");
 	}
 
 	private ImageDescriptor getWarningImageDescriptor() {
-		ImageDescriptor result = PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(
-			ISharedImages.IMG_DEC_FIELD_WARNING);
+		ImageDescriptor result = PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_DEC_FIELD_WARNING);
 		// TODO: remove workaround see https://bugs.eclipse.org/bugs/show_bug.cgi?id=304397
 		return result != null
-				? result
-						: JFaceResources.getImageRegistry().getDescriptor("org.eclipse.jface.fieldassist.IMG_DEC_FIELD_WARNING");
+			? result
+			: JFaceResources.getImageRegistry().getDescriptor("org.eclipse.jface.fieldassist.IMG_DEC_FIELD_WARNING");
 	}
 
 	/*

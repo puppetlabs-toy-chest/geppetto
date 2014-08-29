@@ -31,7 +31,6 @@ import com.google.inject.Inject;
 
 /**
  * Utilities for a IDomModel
- *
  */
 public class DomModelUtils {
 
@@ -120,8 +119,7 @@ public class DomModelUtils {
 		return result.toString();
 	}
 
-	private static void compactDump(IDomNode node, boolean showHidden, String prefix, Appendable result)
-			throws IOException {
+	private static void compactDump(IDomNode node, boolean showHidden, String prefix, Appendable result) throws IOException {
 		if(node == null) {
 			result.append("null");
 			return;
@@ -268,16 +266,12 @@ public class DomModelUtils {
 
 	/**
 	 * This method converts a node to text.
-	 *
 	 * Leading and trailing text from hidden tokens (whitespace/comments) is removed. Text from hidden tokens that is
 	 * surrounded by text from non-hidden tokens is summarized to a single whitespace.
-	 *
 	 * The preferred use case of this method is to convert the {@link ICompositeNode} that has been created for a data
 	 * type rule to text.
-	 *
 	 * This is also the recommended way to convert a node to text if you want to invoke
 	 * {@link org.eclipse.xtext.conversion.IValueConverterService#toValue(String, String, INode)}
-	 *
 	 */
 	public static String getTokenText(IDomNode node) {
 		if(node.isLeaf())
@@ -433,8 +427,7 @@ public class DomModelUtils {
 		if(n == null)
 			return -1;
 		int offsetOfNode = node.getNode().getTotalOffset();
-		return offsetOfNode -
-				Math.max(0, 1 + CharSequences.lastIndexOf(n.getRootNode().getText(), lineDelimiter, offsetOfNode - 1));
+		return offsetOfNode - Math.max(0, 1 + CharSequences.lastIndexOf(n.getRootNode().getText(), lineDelimiter, offsetOfNode - 1));
 	}
 
 	public static IDomNode previousLeaf(IDomNode node) {

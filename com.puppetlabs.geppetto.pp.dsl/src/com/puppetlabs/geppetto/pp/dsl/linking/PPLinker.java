@@ -22,7 +22,6 @@ import com.google.inject.Inject;
  * This implementation should be used when the PP additions should be performed once as part of linking.
  * (As is the case when running standalone/runtime only). This class should not be used for PP when participating
  * in the ui where a PPResource (in the ui package) and its PPResourceFactory should be used instead.
- *
  */
 
 public class PPLinker extends LazyLinker {

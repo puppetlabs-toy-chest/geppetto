@@ -25,7 +25,6 @@ import com.google.inject.Singleton;
 /**
  * A FunctionFactory producing values that are dynamically produced when applying a style to
  * an {@link IDomNode}.
- *
  */
 @Singleton
 public class FunctionFactory implements IFunctionFactory {
@@ -132,7 +131,7 @@ public class FunctionFactory implements IFunctionFactory {
 				return oneSpace;
 			String text = n.getText();
 			if(text == null || text.length() == 0 || n.getNodeType() != NodeType.COMMENT ||
-					!WHITESPACE_PATTERN.matcher(text.subSequence(text.length() - 1, text.length())).matches())
+				!WHITESPACE_PATTERN.matcher(text.subSequence(text.length() - 1, text.length())).matches())
 				return oneSpace;
 			return noSpace;
 		}
@@ -145,7 +144,7 @@ public class FunctionFactory implements IFunctionFactory {
 		public LineBreaks apply(IDomNode from) {
 			IDomNode n = DomModelUtils.previousLeaf(from);
 			if(n == null || n.getNodeType() != NodeType.COMMENT ||
-					!n.getStyleClassifiers().contains(NodeClassifier.LINESEPARATOR_TERMINATED))
+				!n.getStyleClassifiers().contains(NodeClassifier.LINESEPARATOR_TERMINATED))
 				return oneLine;
 			return noLineUnlessPresent;
 		}
@@ -158,7 +157,7 @@ public class FunctionFactory implements IFunctionFactory {
 		public LineBreaks apply(IDomNode from) {
 			IDomNode n = DomModelUtils.nextLeaf(from);
 			if(n == null || n.getNodeType() != NodeType.COMMENT ||
-					!n.getStyleClassifiers().contains(NodeClassifier.LINESEPARATOR_TERMINATED))
+				!n.getStyleClassifiers().contains(NodeClassifier.LINESEPARATOR_TERMINATED))
 				return oneLine;
 			return noLineUnlessPresent;
 		}
@@ -171,7 +170,7 @@ public class FunctionFactory implements IFunctionFactory {
 		public Spacing apply(IDomNode from) {
 			IDomNode n = DomModelUtils.nextLeaf(from);
 			if(n == null || n.getNodeType() != NodeType.COMMENT ||
-					!n.getStyleClassifiers().contains(NodeClassifier.LINESEPARATOR_TERMINATED))
+				!n.getStyleClassifiers().contains(NodeClassifier.LINESEPARATOR_TERMINATED))
 				return noSpace;
 			return oneSpace;
 		}

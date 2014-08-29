@@ -203,8 +203,7 @@ public class ResourceExpressionImpl extends ExpressionImpl implements ResourceEx
 	@Override
 	public EList<ResourceBody> getResourceData() {
 		if(resourceData == null) {
-			resourceData = new EObjectContainmentEList<ResourceBody>(
-					ResourceBody.class, this, PPPackage.RESOURCE_EXPRESSION__RESOURCE_DATA);
+			resourceData = new EObjectContainmentEList<ResourceBody>(ResourceBody.class, this, PPPackage.RESOURCE_EXPRESSION__RESOURCE_DATA);
 		}
 		return resourceData;
 	}

@@ -184,18 +184,17 @@ public class ParenthesisedExpressionImpl extends ExpressionImpl implements Paren
 		if(newExpr != expr) {
 			NotificationChain msgs = null;
 			if(expr != null)
-				msgs = ((InternalEObject) expr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.PARENTHESISED_EXPRESSION__EXPR, null, msgs);
+				msgs = ((InternalEObject) expr).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.PARENTHESISED_EXPRESSION__EXPR, null, msgs);
 			if(newExpr != null)
-				msgs = ((InternalEObject) newExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.PARENTHESISED_EXPRESSION__EXPR, null, msgs);
+				msgs = ((InternalEObject) newExpr).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.PARENTHESISED_EXPRESSION__EXPR, null, msgs);
 			msgs = basicSetExpr(newExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.PARENTHESISED_EXPRESSION__EXPR, newExpr, newExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.PARENTHESISED_EXPRESSION__EXPR, newExpr, newExpr));
 	}
 
 } // ParenthesisedExpressionImpl

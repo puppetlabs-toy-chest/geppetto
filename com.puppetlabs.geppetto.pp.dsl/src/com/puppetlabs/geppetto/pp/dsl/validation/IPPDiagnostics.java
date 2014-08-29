@@ -13,7 +13,6 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 /**
  * Interface declaring diagnostic codess.
  * These can be used for association of quick fixes with errors and warnings.
- *
  */
 public interface IPPDiagnostics {
 	public static final String ISSUE_PREFIX = "com.puppetlabs.geppetto.pp.dsl.validation.issue.";
@@ -94,8 +93,7 @@ public interface IPPDiagnostics {
 	/**
 	 * with proposals.
 	 */
-	public static final String ISSUE__UNKNOWN_FUNCTION_REFERENCE_PROP = ISSUE__UNKNOWN_FUNCTION_REFERENCE +
-			ISSUE_PROPOSAL_SUFFIX;
+	public static final String ISSUE__UNKNOWN_FUNCTION_REFERENCE_PROP = ISSUE__UNKNOWN_FUNCTION_REFERENCE + ISSUE_PROPOSAL_SUFFIX;
 
 	public static final String ISSUE__NOT_RVALUE = ISSUE_PREFIX + "NotRightValue";
 
@@ -110,8 +108,7 @@ public interface IPPDiagnostics {
 	/**
 	 * with proposals
 	 */
-	public static final String ISSUE__RESOURCE_UNKNOWN_PROPERTY_PROP = ISSUE__RESOURCE_UNKNOWN_PROPERTY +
-			ISSUE_PROPOSAL_SUFFIX;
+	public static final String ISSUE__RESOURCE_UNKNOWN_PROPERTY_PROP = ISSUE__RESOURCE_UNKNOWN_PROPERTY + ISSUE_PROPOSAL_SUFFIX;
 
 	public static final String ISSUE__RESOURCE_AMBIGUOUS_REFERENCE = ISSUE_PREFIX + "AmbigousReference";
 
@@ -129,8 +126,7 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__RESOURCE_DEPRECATED_NAME_ALIAS = ISSUE_PREFIX + "ResourceDeprecatedNameAlias";
 
-	public static final String ISSUE__RESOURCE_DUPLICATE_NAME_PARAMETER = ISSUE_PREFIX +
-			"ResourceDuplicateNameParameter";
+	public static final String ISSUE__RESOURCE_DUPLICATE_NAME_PARAMETER = ISSUE_PREFIX + "ResourceDuplicateNameParameter";
 
 	public static final String ISSUE__CIRCULAR_INHERITENCE = ISSUE_PREFIX + "CircularInheritence";
 

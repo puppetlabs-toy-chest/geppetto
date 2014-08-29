@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
  * <ul>
  * <li>Puppet specific tab-size. (Note that the editor configuration always has convert tab to spaces turned on).</li>
  * </ul>
- *
  */
 public class PPSourceViewerConfiguration extends XtextSourceViewerConfiguration {
 

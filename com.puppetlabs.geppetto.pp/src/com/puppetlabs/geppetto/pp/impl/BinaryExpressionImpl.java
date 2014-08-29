@@ -239,18 +239,17 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 		if(newLeftExpr != leftExpr) {
 			NotificationChain msgs = null;
 			if(leftExpr != null)
-				msgs = ((InternalEObject) leftExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.BINARY_EXPRESSION__LEFT_EXPR, null, msgs);
+				msgs = ((InternalEObject) leftExpr).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.BINARY_EXPRESSION__LEFT_EXPR, null, msgs);
 			if(newLeftExpr != null)
-				msgs = ((InternalEObject) newLeftExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.BINARY_EXPRESSION__LEFT_EXPR, null, msgs);
+				msgs = ((InternalEObject) newLeftExpr).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.BINARY_EXPRESSION__LEFT_EXPR, null, msgs);
 			msgs = basicSetLeftExpr(newLeftExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.BINARY_EXPRESSION__LEFT_EXPR, newLeftExpr, newLeftExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.BINARY_EXPRESSION__LEFT_EXPR, newLeftExpr, newLeftExpr));
 	}
 
 	/**
@@ -264,18 +263,17 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 		if(newRightExpr != rightExpr) {
 			NotificationChain msgs = null;
 			if(rightExpr != null)
-				msgs = ((InternalEObject) rightExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, null, msgs);
+				msgs = ((InternalEObject) rightExpr).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, null, msgs);
 			if(newRightExpr != null)
-				msgs = ((InternalEObject) newRightExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, null, msgs);
+				msgs = ((InternalEObject) newRightExpr).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, null, msgs);
 			msgs = basicSetRightExpr(newRightExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, newRightExpr, newRightExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.BINARY_EXPRESSION__RIGHT_EXPR, newRightExpr, newRightExpr));
 	}
 
 } // BinaryExpressionImpl

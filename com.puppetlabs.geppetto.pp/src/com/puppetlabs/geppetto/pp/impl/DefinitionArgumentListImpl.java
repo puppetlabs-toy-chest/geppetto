@@ -158,7 +158,7 @@ public class DefinitionArgumentListImpl extends EObjectImpl implements Definitio
 	public EList<DefinitionArgument> getArguments() {
 		if(arguments == null) {
 			arguments = new EObjectContainmentEList<DefinitionArgument>(
-					DefinitionArgument.class, this, PPPackage.DEFINITION_ARGUMENT_LIST__ARGUMENTS);
+				DefinitionArgument.class, this, PPPackage.DEFINITION_ARGUMENT_LIST__ARGUMENTS);
 		}
 		return arguments;
 	}

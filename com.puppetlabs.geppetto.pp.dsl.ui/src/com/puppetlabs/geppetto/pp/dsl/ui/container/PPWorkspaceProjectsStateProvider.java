@@ -18,7 +18,6 @@ import com.google.inject.Provider;
 
 /**
  * A Provider of PPWorkspaceProjectsState
- *
  */
 public class PPWorkspaceProjectsStateProvider implements Provider<IAllContainersState> {
 

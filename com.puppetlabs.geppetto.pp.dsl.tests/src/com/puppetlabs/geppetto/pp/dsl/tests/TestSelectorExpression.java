@@ -29,7 +29,6 @@ import org.junit.Test;
 
 /**
  * Tests validation and serialization of SelectorExpression
- *
  */
 public class TestSelectorExpression extends AbstractPuppetTests {
 	// @formatter:off

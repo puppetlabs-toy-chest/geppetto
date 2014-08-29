@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.IPath;
 
 /**
  * A HREF provider that does not provide any links.
- *
  */
 public class EmptyStringHrefProducer implements IHrefProducer {
 

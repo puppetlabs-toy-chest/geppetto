@@ -19,11 +19,10 @@ import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 /**
  * Extends the IHiddenTokenSequencer with initialization that includes
  * an ICommentReconciliator.
- *
  */
 public interface IHiddenTokenSequencer2 extends IHiddenTokenSequencer {
 
-	void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor,
-			ISerializationDiagnostic.Acceptor errorAcceptor, ICommentReconcilement commentReconciliator);
+	void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor, ISerializationDiagnostic.Acceptor errorAcceptor,
+			ICommentReconcilement commentReconciliator);
 
 }

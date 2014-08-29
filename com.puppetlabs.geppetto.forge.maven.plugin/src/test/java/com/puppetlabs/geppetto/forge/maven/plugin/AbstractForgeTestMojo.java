@@ -157,7 +157,7 @@ public class AbstractForgeTestMojo {
 					parameterConfiguration = new Xpp3Dom(parameterConfiguration, parameter.getName());
 
 					if(StringUtils.isEmpty(parameterConfiguration.getAttribute("implementation")) &&
-							StringUtils.isNotEmpty(parameter.getImplementation())) {
+						StringUtils.isNotEmpty(parameter.getImplementation())) {
 						parameterConfiguration.setAttribute("implementation", parameter.getImplementation());
 					}
 					finalConfiguration.addChild(parameterConfiguration);
@@ -226,8 +226,7 @@ public class AbstractForgeTestMojo {
 					PlexusContainer pc = getContainer();
 					pluginDescriptor = new PluginDescriptorBuilder().build(interpolationFilterReader);
 					Artifact artifact = pc.lookup(RepositorySystem.class).createArtifact(
-						pluginDescriptor.getGroupId(), pluginDescriptor.getArtifactId(), pluginDescriptor.getVersion(),
-							".jar");
+						pluginDescriptor.getGroupId(), pluginDescriptor.getArtifactId(), pluginDescriptor.getVersion(), ".jar");
 					artifact.setFile(getBasedir());
 					pluginDescriptor.setClassRealm(pc.getContainerRealm());
 					pluginDescriptor.setPluginArtifact(artifact);
@@ -263,8 +262,7 @@ public class AbstractForgeTestMojo {
 		return new File(getBasedir(), path);
 	}
 
-	protected Mojo lookupConfiguredMojo(MavenSession session, MojoExecution execution) throws Exception,
-	ComponentConfigurationException {
+	protected Mojo lookupConfiguredMojo(MavenSession session, MojoExecution execution) throws Exception, ComponentConfigurationException {
 
 		Mojo mojo = getPluginManager().getConfiguredMojo(Mojo.class, session, execution);
 		if(mojo instanceof AbstractForgeMojo)

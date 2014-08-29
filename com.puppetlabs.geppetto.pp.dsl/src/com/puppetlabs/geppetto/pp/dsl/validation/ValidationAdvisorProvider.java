@@ -14,16 +14,14 @@ import com.google.inject.Provider;
 
 /**
  * A parameterized provider of validation advisor.
- *
  */
 public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements Provider<IValidationAdvisor> {
-	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(
-		IValidationAdvisor.ComplianceLevel level) {
+	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(IValidationAdvisor.ComplianceLevel level) {
 		return new ValidationAdvisorProvider<T>(level, null);
 	}
 
-	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(
-		IValidationAdvisor.ComplianceLevel level, IPotentialProblemsAdvisor problemsAdvisor) {
+	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(IValidationAdvisor.ComplianceLevel level,
+			IPotentialProblemsAdvisor problemsAdvisor) {
 		return new ValidationAdvisorProvider<T>(level, problemsAdvisor);
 	}
 
@@ -38,14 +36,13 @@ public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements 
 
 	/**
 	 * Provides an IValidatioNAdvisor configured from the ComplianceLevel and (optional) ProblemsAdvisor
-	 *
 	 * If the problems advisor is null, an instance of {@link DefaultPotentialProblemsAdvisor} is used.
 	 */
 	@Override
 	public IValidationAdvisor get() {
 		return level.createValidationAdvisor(problemsAdvisor != null
-				? problemsAdvisor
-						: new DefaultPotentialProblemsAdvisor());
+			? problemsAdvisor
+			: new DefaultPotentialProblemsAdvisor());
 	}
 
 }

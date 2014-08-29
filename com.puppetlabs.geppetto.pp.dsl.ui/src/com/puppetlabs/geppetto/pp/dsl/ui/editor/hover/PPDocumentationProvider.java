@@ -43,12 +43,11 @@ import com.google.inject.Inject;
 
 /**
  * Provider of documentation for PP semantic objects/references.
- *
  */
 public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 
 	private PolymorphicDispatcher<String> documentationDispatcher = new PolymorphicDispatcher<String>(
-			"_document", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
+		"_document", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
 		@Override
 		protected String handleNoSuchMethod(Object... params) {
 			return null;
@@ -56,7 +55,7 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 	};
 
 	private PolymorphicDispatcher<Image> imageDispatcher = new PolymorphicDispatcher<Image>(
-			"_image", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Image> get()) {
+		"_image", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<Image> get()) {
 		@Override
 		protected Image handleNoSuchMethod(Object... params) {
 			return null;
@@ -64,7 +63,7 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 	};
 
 	private PolymorphicDispatcher<String> labelDispatcher = new PolymorphicDispatcher<String>(
-			"_label", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
+		"_label", 1, 2, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String> get()) {
 		@Override
 		protected String handleNoSuchMethod(Object... params) {
 			return null;
@@ -72,8 +71,7 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 	};
 
 	private PolymorphicDispatcher<IEObjectDescription> xrefDispatcher = new PolymorphicDispatcher<IEObjectDescription>(
-			"_xref", 1, 1, Collections.singletonList(this),
-			PolymorphicDispatcher.NullErrorHandler.<IEObjectDescription> get()) {
+		"_xref", 1, 1, Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<IEObjectDescription> get()) {
 		@Override
 		protected IEObjectDescription handleNoSuchMethod(Object... params) {
 			return null;
@@ -184,8 +182,8 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 			return null;
 		String result = documentationDispatcher.invoke(o);
 		return result == null && o instanceof EObject
-				? documentationDispatcher.invoke(((EObject) o).eContainingFeature(), o)
-						: result;
+			? documentationDispatcher.invoke(((EObject) o).eContainingFeature(), o)
+			: result;
 	}
 
 	private IEObjectDescription getCrossReference(EObject o) {
@@ -264,8 +262,8 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 			return null;
 		Image result = imageDispatcher.invoke(o);
 		return result == null && o instanceof EObject
-				? imageDispatcher.invoke(((EObject) o).eContainingFeature(), o)
-						: result;
+			? imageDispatcher.invoke(((EObject) o).eContainingFeature(), o)
+			: result;
 
 	}
 
@@ -283,12 +281,12 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 				result = CharSequences.concatenate(result, n.getText());
 
 			ICommentContainerInformation in = (nodes.size() == 1 && nodes.get(0).getGrammarElement() == ga.getML_COMMENTRule())
-					? commentConfiguration.getContainerInformation(CommentType.Multiline)
-							: (commentConfiguration.getContainerInformation(CommentType.SingleLine));
+				? commentConfiguration.getContainerInformation(CommentType.Multiline)
+				: (commentConfiguration.getContainerInformation(CommentType.SingleLine));
 
-					CommentProcessor cpr = new CommentProcessor();
-					CommentText comment = cpr.separateCommentFromContainer(result, in, "\n"); // TODO: cheating on line separator
-					return new RubyDocProcessor().asHTML(comment.getLines());
+			CommentProcessor cpr = new CommentProcessor();
+			CommentText comment = cpr.separateCommentFromContainer(result, in, "\n"); // TODO: cheating on line separator
+			return new RubyDocProcessor().asHTML(comment.getLines());
 
 		}
 		return null;
@@ -309,8 +307,8 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 			return null;
 		String result = labelDispatcher.invoke(o);
 		return result == null && o instanceof EObject
-				? labelDispatcher.invoke(((EObject) o).eContainingFeature(), o)
-						: result;
+			? labelDispatcher.invoke(((EObject) o).eContainingFeature(), o)
+			: result;
 
 	}
 

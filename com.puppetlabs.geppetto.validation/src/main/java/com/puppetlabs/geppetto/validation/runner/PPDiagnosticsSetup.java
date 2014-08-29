@@ -22,7 +22,6 @@ import com.google.inject.Injector;
 
 /**
  * Setup of PP runtime with overrides for validation service.
- *
  */
 public class PPDiagnosticsSetup extends PPStandaloneSetup {
 
@@ -30,8 +29,7 @@ public class PPDiagnosticsSetup extends PPStandaloneSetup {
 
 	private IPotentialProblemsAdvisor problemsAdvisor;
 
-	public PPDiagnosticsSetup(IValidationAdvisor.ComplianceLevel complianceLevel,
-			IPotentialProblemsAdvisor problemsAdvisor) {
+	public PPDiagnosticsSetup(IValidationAdvisor.ComplianceLevel complianceLevel, IPotentialProblemsAdvisor problemsAdvisor) {
 		this.complianceLevel = complianceLevel;
 		this.problemsAdvisor = problemsAdvisor;
 

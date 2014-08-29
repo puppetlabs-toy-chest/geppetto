@@ -40,8 +40,8 @@ public class AnnotatedLink extends Entity {
 	 */
 	public HalLink getLink() {
 		return _links == null
-				? null
-						: _links.getSelf();
+			? null
+			: _links.getSelf();
 	}
 
 	/**

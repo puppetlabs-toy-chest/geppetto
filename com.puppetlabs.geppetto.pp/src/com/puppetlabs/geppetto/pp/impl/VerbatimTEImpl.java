@@ -88,8 +88,8 @@ public class VerbatimTEImpl extends TextExpressionImpl implements VerbatimTE {
 		switch(featureID) {
 			case PPPackage.VERBATIM_TE__TEXT:
 				return TEXT_EDEFAULT == null
-				? text != null
-				: !TEXT_EDEFAULT.equals(text);
+					? text != null
+					: !TEXT_EDEFAULT.equals(text);
 		}
 		return super.eIsSet(featureID);
 	}

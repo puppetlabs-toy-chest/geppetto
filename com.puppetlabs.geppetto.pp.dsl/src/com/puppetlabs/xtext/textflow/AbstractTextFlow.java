@@ -19,7 +19,6 @@ import com.google.inject.Inject;
 
 /**
  * An abstract implementation of an ITextFlow.
- *
  */
 public abstract class AbstractTextFlow implements ITextFlow {
 
@@ -58,8 +57,8 @@ public abstract class AbstractTextFlow implements ITextFlow {
 
 		indentSize = indentationString.length();
 		indentChar = indentSize == 0
-				? ' '
-						: indentationString.charAt(0);
+			? ' '
+			: indentationString.charAt(0);
 		if(indentSize > 0) {
 			for(int i = 0; i < indentSize; i++)
 				if(indentationString.charAt(i) != indentChar)

@@ -14,7 +14,7 @@ public class ModuleDescriptionLabelProvider extends org.eclipse.xtext.ui.label.D
 	//	String text(IEObjectDescription ele) {
 	//	   return ele.getName().toString();
 	//	}
-	//	 
+	//
 	//  String image(IEObjectDescription ele) {
 	//     return ele.getEClass().getName() + ".gif";
 	//  }

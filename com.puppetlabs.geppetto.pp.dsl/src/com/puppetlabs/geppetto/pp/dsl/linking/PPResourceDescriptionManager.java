@@ -25,15 +25,13 @@ import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
 
 /**
  * Overrides the default to provide a PPResourceDescription instead of the default
- *
  */
 public class PPResourceDescriptionManager extends DefaultResourceDescriptionManager {
 	@Inject
 	private IFolderDiscriminator folderDiscriminator;
 
 	@Override
-	protected IResourceDescription internalGetResourceDescription(Resource resource,
-			IDefaultResourceDescriptionStrategy strategy) {
+	protected IResourceDescription internalGetResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		return new PPResourceDescription(resource, strategy, getCache());
 
 	}
@@ -41,14 +39,14 @@ public class PPResourceDescriptionManager extends DefaultResourceDescriptionMana
 	@Override
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
 		return folderDiscriminator.isExcluded(candidate.getURI())
-				? false
-						: super.isAffected(deltas, candidate, context);
+			? false
+			: super.isAffected(deltas, candidate, context);
 	}
 
 	@Override
 	protected boolean isAffected(Collection<QualifiedName> importedNames, IResourceDescription description) {
 		return description == null || folderDiscriminator.isExcluded(description.getURI())
-				? false
-						: super.isAffected(importedNames, description);
+			? false
+			: super.isAffected(importedNames, description);
 	}
 }

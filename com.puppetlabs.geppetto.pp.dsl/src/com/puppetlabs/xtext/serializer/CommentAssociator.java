@@ -45,10 +45,10 @@ import com.google.inject.Provider;
  * <li>Scans the given input INode for semantic positions and comment sequences</li>
  * <li>Makes lexical default associations based on comment type, position and linebreaks</li>
  * <li>Refines the decisions based on association with grammar punctuation.</li>
- * <li>Decodes left / right associations, as well as associations to left -1 position (for element before punctuation).
- * Supporting right + 1 is left as an exercise.</li>
- * <li>Transforms the decisions into a series of {@code Predicate<INode, INode, INode> } that expects to be applied with
- * the nodes 'preceding', 'from', 'to' as described by {@link ICommentReconcilement}.</li>
+ * <li>Decodes left / right associations, as well as associations to left -1 position (for element before punctuation). Supporting right + 1
+ * is left as an exercise.</li>
+ * <li>Transforms the decisions into a series of {@code Predicate<INode, INode, INode> } that expects to be applied with the nodes
+ * 'preceding', 'from', 'to' as described by {@link ICommentReconcilement}.</li>
  * <li>Produces an {@link ICommentReconcilement} based on the predicates</li>
  * </ul>
  * </p>
@@ -56,8 +56,7 @@ import com.google.inject.Provider;
  * The left/right associations of a comment sequence CS is done with these rules:
  * <ul>
  * <li>A CS that ends with a SL comment associates to the left, unless the CS only has whitespace on its left.</li>
- * <li>A CS that ends with a NL (for grammars where comment terminal contains trailing WS/NL) is handled as a CS ending
- * with SL.</li>
+ * <li>A CS that ends with a NL (for grammars where comment terminal contains trailing WS/NL) is handled as a CS ending with SL.</li>
  * <li>All other CS associate to the right</li>
  * <li>A left association to a <i>list separator</i> associates to the element preceding the separator</li>
  * <li>A right association to a <i>right punctuation</i> is changed to a left association</li>
@@ -66,14 +65,13 @@ import com.google.inject.Provider;
  * <p>
  * The implementation is generic, but makes assumptions about the grammar:
  * <ul>
- * <li>All comma keywords are interpreted as <i>list separators</i> and cause left association to skip to the preceding
- * element.</li>
+ * <li>All comma keywords are interpreted as <i>list separators</i> and cause left association to skip to the preceding element.</li>
  * <li>A set of right punctuation keywords <code>,;:)}]</code> cause a right association to be changed to left.</li>
  * </ul>
  * <p>
- * A specialized implementation can easily override these. Customization can also easily be made by overriding the
- * method {@link #computeLanguageSpecificAssociations(CommentSemanticSequence)} is which is called last, thus allowing
- * any association already made to be changed.
+ * A specialized implementation can easily override these. Customization can also easily be made by overriding the method
+ * {@link #computeLanguageSpecificAssociations(CommentSemanticSequence)} is which is called last, thus allowing any association already made
+ * to be changed.
  * </p>
  */
 public class CommentAssociator {
@@ -160,7 +158,6 @@ public class CommentAssociator {
 
 	/**
 	 * Describes a sequence of CommentAssociationEntry, with housekeeping/lookup logic.
-	 *
 	 */
 	public static class CommentSemanticSequence implements Iterable<CommentAssociationEntry> {
 		private List<CommentAssociationEntry> sequence = Lists.newArrayList();
@@ -229,7 +226,6 @@ public class CommentAssociator {
 	/**
 	 * Describes a "semantic position" based on a semantic object (a "token owner") and
 	 * the two leaf nodes "first" / "last" (identical for leaf positions).
-	 *
 	 */
 	public static class Semantic extends CommentAssociationEntry {
 		private EObject semantic;
@@ -275,7 +271,7 @@ public class CommentAssociator {
 				Comments c = (Comments) e;
 				builder.append("Comments(").append(c.isRight()
 					? "->"
-							: "<-").append(" ").append(c.getSkipCount());
+					: "<-").append(" ").append(c.getSkipCount());
 				if(c.isFirstOnLine())
 					builder.append(" <fol>");
 				builder.append("): ");
@@ -327,8 +323,7 @@ public class CommentAssociator {
 	 * @param commentConfigurationProvider
 	 */
 	@Inject
-	public CommentAssociator(TokenUtil tokenUtil,
-			Provider<ICommentConfiguration<CommentType>> commentConfigurationProvider) {
+	public CommentAssociator(TokenUtil tokenUtil, Provider<ICommentConfiguration<CommentType>> commentConfigurationProvider) {
 		this.tokenUtil = tokenUtil;
 		this.commentConfiguration = commentConfigurationProvider.get();
 	}
@@ -419,8 +414,7 @@ public class CommentAssociator {
 					INode lastNode = commentNodes.get(commentNodes.size() - 1);
 					// SL comments by definition end the line (even if they lexically do not contain a NL in some grammar).
 					// For other types of comments, they may end with NL, and should then be treated the same way.
-					if(commentConfiguration.classify(lastNode) == CommentType.SingleLine ||
-							lastNode.getText().endsWith("\n"))
+					if(commentConfiguration.classify(lastNode) == CommentType.SingleLine || lastNode.getText().endsWith("\n"))
 						c.setDirectionLeft();
 				}
 			}
@@ -429,10 +423,10 @@ public class CommentAssociator {
 
 	/**
 	 * <p>
-	 * This implementation associates comment sequences that are left associative with the +1 preceding semantic element
-	 * if the immediately preceding semantic element is a <i>list separator</i> (see {@link #isListSeparator(Semantic)},
-	 * and modifies a right associative sequence to left, if the immediately following semantic element is a right
-	 * punctuation as determined by {@link #isRightPunctuation(Semantic)}.
+	 * This implementation associates comment sequences that are left associative with the +1 preceding semantic element if the immediately
+	 * preceding semantic element is a <i>list separator</i> (see {@link #isListSeparator(Semantic)}, and modifies a right associative
+	 * sequence to left, if the immediately following semantic element is a right punctuation as determined by
+	 * {@link #isRightPunctuation(Semantic)}.
 	 * </p>
 	 * <p>
 	 * This means that given:
@@ -469,8 +463,7 @@ public class CommentAssociator {
 	 * Creates a CommentSemanticSequence for the root node. This sequence is a flattened list of
 	 * semantic positions and comment sequences. All comment sequences are associated with what follows (by default).
 	 */
-	protected CommentSemanticSequence createSequence(ICompositeNode rootNode,
-			ICommentConfiguration<CommentType> commentConfiguration) {
+	protected CommentSemanticSequence createSequence(ICompositeNode rootNode, ICommentConfiguration<CommentType> commentConfiguration) {
 		CommentSemanticSequence sequence = new CommentSemanticSequence();
 		List<INode> currentComments = Lists.newArrayList();
 
@@ -594,8 +587,7 @@ public class CommentAssociator {
 	 * @param semantic
 	 * @return
 	 */
-	protected Predicate<Triple<INode, INode, INode>> getPredicateLeftSkipOne(final Semantic semantic,
-		final Semantic punctuation) {
+	protected Predicate<Triple<INode, INode, INode>> getPredicateLeftSkipOne(final Semantic semantic, final Semantic punctuation) {
 		// This if for: <semantic> (preceding/first), <punctuation> (from/second), <comment> <unknown> (to/third)
 
 		return new Predicate<Triple<INode, INode, INode>>() {
@@ -689,8 +681,7 @@ public class CommentAssociator {
 		return ge instanceof Keyword && ",;}])".contains(node.getText());
 	}
 
-	protected List<Pair<Predicate<Triple<INode, INode, INode>>, List<INode>>> toPredicates(
-		CommentSemanticSequence sequence) {
+	protected List<Pair<Predicate<Triple<INode, INode, INode>>, List<INode>>> toPredicates(CommentSemanticSequence sequence) {
 		List<CommentAssociationEntry> entries = sequence.getEntryList();
 		List<Pair<Predicate<Triple<INode, INode, INode>>, List<INode>>> result = Lists.newArrayList();
 		for(int i = 0; i < entries.size(); i++) {
@@ -707,12 +698,10 @@ public class CommentAssociator {
 						result.add(Tuples.create(getPredicateLeft(sequence.getPrecedingSemantic(i, 0)), c.getComments()));
 					else if(c.getSkipCount() == 1)
 						result.add(Tuples.create(
-							getPredicateLeftSkipOne(
-								sequence.getPrecedingSemantic(i, 1), sequence.getPrecedingSemantic(i, 0)),
-								c.getComments()));
+							getPredicateLeftSkipOne(sequence.getPrecedingSemantic(i, 1), sequence.getPrecedingSemantic(i, 0)),
+							c.getComments()));
 					else
-						throw new UnsupportedOperationException(
-								"left associated comment and skip count > 1 not supported");
+						throw new UnsupportedOperationException("left associated comment and skip count > 1 not supported");
 				}
 			}
 		}

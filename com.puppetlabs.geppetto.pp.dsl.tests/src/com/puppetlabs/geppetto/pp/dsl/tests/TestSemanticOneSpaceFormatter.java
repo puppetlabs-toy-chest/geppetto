@@ -33,13 +33,11 @@ import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 /**
  * Tests the OneSpace Semantic Formatter.
  * (This is not the most important formatter, and there are only a few smoke tests).
- *
  */
 public class TestSemanticOneSpaceFormatter extends AbstractPuppetTests {
 	public static class DebugFormatter extends OneWhitespaceDomFormatter {
 		@Override
-		public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext,
-				Acceptor errors) {
+		public ReplaceRegion format(IDomNode dom, ITextRegion regionToFormat, IFormattingContext formattingContext, Acceptor errors) {
 			// System.err.println(DomModelUtils.compactDump(dom, true));
 			return super.format(dom, regionToFormat, formattingContext, errors);
 		}

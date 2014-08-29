@@ -80,14 +80,13 @@ class ForgeServiceImpl implements ForgeService {
 	private Forge forgeUtil;
 
 	@Override
-	public Collection<File> downloadDependencies(Iterable<Metadata> metadatas, File importedModulesDir,
-		Diagnostic result) throws IOException {
+	public Collection<File> downloadDependencies(Iterable<Metadata> metadatas, File importedModulesDir, Diagnostic result)
+			throws IOException {
 		Set<Dependency> unresolvedCollector = new HashSet<Dependency>();
 		Set<Metadata> releasesToDownload = resolveDependencies(metadatas, unresolvedCollector);
 		for(Dependency unresolved : unresolvedCollector)
 			result.addChild(new Diagnostic(WARNING, FORGE, String.format(
-				"Unable to resolve dependency: %s:%s", unresolved.getName(),
-				unresolved.getVersionRequirement().toString())));
+				"Unable to resolve dependency: %s:%s", unresolved.getName(), unresolved.getVersionRequirement().toString())));
 
 		if(!releasesToDownload.isEmpty()) {
 			importedModulesDir.mkdirs();
@@ -117,19 +116,16 @@ class ForgeServiceImpl implements ForgeService {
 	}
 
 	@Override
-	public Metadata install(Metadata release, File destination, boolean destinationIncludesTopFolder, boolean force)
-			throws IOException {
-		return install(
-			release.getName(), VersionRange.exact(release.getVersion()), destination, destinationIncludesTopFolder,
-			force);
+	public Metadata install(Metadata release, File destination, boolean destinationIncludesTopFolder, boolean force) throws IOException {
+		return install(release.getName(), VersionRange.exact(release.getVersion()), destination, destinationIncludesTopFolder, force);
 	}
 
 	@Override
-	public Metadata install(ModuleName moduleName, VersionRange range, File destination,
-			boolean destinationIncludesTopFolder, boolean force) throws IOException {
+	public Metadata install(ModuleName moduleName, VersionRange range, File destination, boolean destinationIncludesTopFolder, boolean force)
+			throws IOException {
 		if(moduleService == null || cache == null)
 			throw new UnsupportedOperationException(
-					"Unable to install since no module service is configured. Was a serviceURL provided in the preferences?");
+				"Unable to install since no module service is configured. Was a serviceURL provided in the preferences?");
 
 		Module module = moduleService.get(moduleName);
 		List<AbbrevRelease> releases = module.getReleases();
@@ -139,12 +135,11 @@ class ForgeServiceImpl implements ForgeService {
 		AbbrevRelease best = null;
 		for(AbbrevRelease release : releases)
 			if((best == null || release.getVersion().compareTo(best.getVersion()) > 0) &&
-					(range == null || range.isIncluded(release.getVersion())))
+				(range == null || range.isIncluded(release.getVersion())))
 				best = release;
 
 		if(best == null)
-			throw new FileNotFoundException("No releases matching '" + range + "' found for module '" + moduleName +
-					'\'');
+			throw new FileNotFoundException("No releases matching '" + range + "' found for module '" + moduleName + '\'');
 
 		if(!destinationIncludesTopFolder)
 			// Use module name as the default
@@ -169,24 +164,22 @@ class ForgeServiceImpl implements ForgeService {
 	public void publish(File moduleArchive, boolean dryRun, Diagnostic result) throws IOException {
 		if(v2ReleaseService == null)
 			throw new UnsupportedOperationException(
-					"Unable to publish since no release service is configured. Was a serviceURL provided in the preferences?");
+				"Unable to publish since no release service is configured. Was a serviceURL provided in the preferences?");
 
 		Metadata metadata = forgeUtil.getMetadataFromPackage(moduleArchive);
 		if(metadata == null)
 			throw new ForgeException("No \"metadata.json\" found in archive: " + moduleArchive.getAbsolutePath());
 
 		if(metadata.getName() == null)
-			throw new ForgeException("The \"metadata.json\" found in archive: " + moduleArchive.getAbsolutePath() +
-					" has no name");
+			throw new ForgeException("The \"metadata.json\" found in archive: " + moduleArchive.getAbsolutePath() + " has no name");
 
 		if(metadata.getVersion() == null)
-			throw new ForgeException("The \"metadata.json\" found in archive: " + moduleArchive.getAbsolutePath() +
-					" has no version");
+			throw new ForgeException("The \"metadata.json\" found in archive: " + moduleArchive.getAbsolutePath() + " has no version");
 
 		try {
 			if(metadataRepo.resolve(metadata.getName(), metadata.getVersion()) != null)
 				throw new AlreadyPublishedException("Module " + metadata.getName() + ':' + metadata.getVersion() +
-						" has already been published");
+					" has already been published");
 		}
 		catch(HttpResponseException e) {
 			// A SC_NOT_FOUND can be expected and is OK.
@@ -196,17 +189,15 @@ class ForgeServiceImpl implements ForgeService {
 
 		if(dryRun) {
 			result.addChild(new Diagnostic(INFO, PUBLISHER, "Module file " + moduleArchive.getName() +
-					" would have been uploaded (but wasn't since this is a dry run)"));
+				" would have been uploaded (but wasn't since this is a dry run)"));
 			return;
 		}
 
 		InputStream gzInput = new FileInputStream(moduleArchive);
 		try {
 			ModuleName name = metadata.getName();
-			v2ReleaseService.create(
-				name.getOwner(), name.getName(), "Published using GitHub trigger", gzInput, moduleArchive.length());
-			result.addChild(new Diagnostic(INFO, PUBLISHER, "Module file " + moduleArchive.getName() +
-					" has been uploaded"));
+			v2ReleaseService.create(name.getOwner(), name.getName(), "Published using GitHub trigger", gzInput, moduleArchive.length());
+			result.addChild(new Diagnostic(INFO, PUBLISHER, "Module file " + moduleArchive.getName() + " has been uploaded"));
 		}
 		finally {
 			StreamUtil.close(gzInput);
@@ -234,21 +225,18 @@ class ForgeServiceImpl implements ForgeService {
 				result.addChild(new Diagnostic(ERROR, PUBLISHER, e.getMessage()));
 			}
 			catch(Exception e) {
-				result.addChild(new ExceptionDiagnostic(ERROR, PUBLISHER, "Unable to publish module " +
-						builtModule.getName(), e));
+				result.addChild(new ExceptionDiagnostic(ERROR, PUBLISHER, "Unable to publish module " + builtModule.getName(), e));
 			}
 			return;
 		}
 
 		if(noPublishingMade) {
-			result.addChild(new Diagnostic(
-				INFO, PUBLISHER, "All modules have already been published at their current version"));
+			result.addChild(new Diagnostic(INFO, PUBLISHER, "All modules have already been published at their current version"));
 		}
 	}
 
 	@Override
-	public Set<Metadata> resolveDependencies(Iterable<Metadata> metadatas, Set<Dependency> unresolvedCollector)
-			throws IOException {
+	public Set<Metadata> resolveDependencies(Iterable<Metadata> metadatas, Set<Dependency> unresolvedCollector) throws IOException {
 		// Resolve missing dependencies
 		Set<Dependency> deps = new HashSet<Dependency>();
 		for(Metadata metadata : metadatas)
@@ -271,7 +259,7 @@ class ForgeServiceImpl implements ForgeService {
 		if(!deps.isEmpty()) {
 			if(metadataRepo == null)
 				throw new UnsupportedOperationException(
-						"Unable to resolve dependencies since no forge service is configured. Was a serviceURL provided in the preferences?");
+					"Unable to resolve dependencies since no forge service is configured. Was a serviceURL provided in the preferences?");
 
 			for(Dependency dep : deps)
 				releasesToDownload.addAll(metadataRepo.deepResolve(dep, unresolvedCollector));

@@ -15,7 +15,6 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 
 /**
  * Preference Page for Save Actions
- *
  */
 public class PPSaveActionsPreferencePage extends AbstractPreferencePage {
 

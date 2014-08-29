@@ -27,8 +27,7 @@ public class ModuleUtilsTest extends AbstractForgeTest {
 	@Test
 	public void loadModule() {
 		try {
-			Metadata md = getForgeUtil().createFromModuleDirectory(
-				getTestData("puppetlabs-apache"), null, null, new Diagnostic());
+			Metadata md = getForgeUtil().createFromModuleDirectory(getTestData("puppetlabs-apache"), null, null, new Diagnostic());
 			assertEquals("Unexpected module name", ModuleName.fromString("puppetlabs-apache"), md.getName());
 		}
 		catch(IOException e) {
@@ -39,8 +38,7 @@ public class ModuleUtilsTest extends AbstractForgeTest {
 	@Test
 	public void loadModule2() {
 		try {
-			Metadata md = getForgeUtil().createFromModuleDirectory(
-				getTestData("DavidSchmitt-collectd"), null, null, new Diagnostic());
+			Metadata md = getForgeUtil().createFromModuleDirectory(getTestData("DavidSchmitt-collectd"), null, null, new Diagnostic());
 			assertEquals("Unexpected module name", ModuleName.fromString("davidschmitt-collectd"), md.getName());
 		}
 		catch(IOException e) {
@@ -51,8 +49,7 @@ public class ModuleUtilsTest extends AbstractForgeTest {
 	@Test
 	public void loadModule3() {
 		try {
-			Metadata md = getForgeUtil().createFromModuleDirectory(
-				getTestData("bobsh-iptables"), null, null, new Diagnostic());
+			Metadata md = getForgeUtil().createFromModuleDirectory(getTestData("bobsh-iptables"), null, null, new Diagnostic());
 			assertEquals("Unexpected module name", ModuleName.fromString("bobsh/iptables"), md.getName());
 		}
 		catch(IOException e) {
@@ -63,8 +60,7 @@ public class ModuleUtilsTest extends AbstractForgeTest {
 	@Test
 	public void loadModule4() {
 		try {
-			Metadata md = getForgeUtil().createFromModuleDirectory(
-				getTestData("ghoneycutt-rsync"), null, null, new Diagnostic());
+			Metadata md = getForgeUtil().createFromModuleDirectory(getTestData("ghoneycutt-rsync"), null, null, new Diagnostic());
 			assertEquals("Unexpected module name", ModuleName.fromString("ghoneycutt-RSync"), md.getName());
 		}
 		catch(IOException e) {
@@ -75,8 +71,7 @@ public class ModuleUtilsTest extends AbstractForgeTest {
 	@Test
 	public void loadModule5() {
 		try {
-			Metadata md = getForgeUtil().createFromModuleDirectory(
-				getTestData("lab42-common"), null, null, new Diagnostic());
+			Metadata md = getForgeUtil().createFromModuleDirectory(getTestData("lab42-common"), null, null, new Diagnostic());
 			assertEquals("Unexpected module name", ModuleName.fromString("lab42-common"), md.getName());
 		}
 		catch(IOException e) {

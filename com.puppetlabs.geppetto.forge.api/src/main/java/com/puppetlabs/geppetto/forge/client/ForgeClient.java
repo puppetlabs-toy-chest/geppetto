@@ -185,8 +185,8 @@ public interface ForgeClient {
 	 * @return
 	 * @throws IOException
 	 */
-	<V> V postUpload(String uri, Map<String, String> stringParts, InputStream in, String mimeType, String fileName,
-			long fileSize, Class<V> type) throws IOException;
+	<V> V postUpload(String uri, Map<String, String> stringParts, InputStream in, String mimeType, String fileName, long fileSize,
+			Class<V> type) throws IOException;
 
 	/**
 	 * Put to URI

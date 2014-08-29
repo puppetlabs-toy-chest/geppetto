@@ -21,12 +21,10 @@ import org.eclipse.xtext.formatting.impl.MatcherState;
 
 /**
  * Unused, but useful as a replacement when debugging (change to public and include in module).
- *
  */
 class PPMatcherProvider extends ElementMatcherProvider {
 
-	protected static class PPTransitionMatcher<T extends IElementPattern> extends TransitionMatcher<T> implements
-	IElementMatcher<T> {
+	protected static class PPTransitionMatcher<T extends IElementPattern> extends TransitionMatcher<T> implements IElementMatcher<T> {
 		public PPTransitionMatcher(IGrammarAccess grammar, MatcherNFAProvider nfaProvider, Iterable<T> patterns) {
 			super(grammar, nfaProvider, patterns);
 		}

@@ -29,21 +29,19 @@ import com.google.inject.Singleton;
  * This specialization of the PreferenceStoreAccessImpl makes use of a ProjectAwareScopedPreferenceStore
  * to deal with writing project scope preferences and to deliver events from instance and project scopes
  * at all times since project scope does not have to have any values set.
- *
  */
 @Singleton
 public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 	@Inject
 	private AbstractUIPlugin plugin;
 
-	private IScopeContext[] instanceAndConfigurationScopes = new IScopeContext[] {
-			InstanceScope.INSTANCE, ConfigurationScope.INSTANCE };
+	private IScopeContext[] instanceAndConfigurationScopes = new IScopeContext[] { InstanceScope.INSTANCE, ConfigurationScope.INSTANCE };
 
 	@Override
 	public IPreferenceStore getContextPreferenceStore(Object context) {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] { //
-				getReadableAndWritablePreferenceStore(context), //
+			getReadableAndWritablePreferenceStore(context), //
 				plugin.getPreferenceStore(), //
 				EditorsUI.getPreferenceStore() });
 	}
@@ -52,7 +50,7 @@ public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 	public IPreferenceStore getPreferenceStore() {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] { //
-				getWritablePreferenceStore(), //
+			getWritablePreferenceStore(), //
 				plugin.getPreferenceStore(), //
 				EditorsUI.getPreferenceStore() });
 	}
@@ -71,10 +69,8 @@ public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		}
 		if(context instanceof IProject) {
 			ProjectScope projectScope = new ProjectScope((IProject) context);
-			ProjectAwareScopedPreferenceStore result = new ProjectAwareScopedPreferenceStore(
-				projectScope, getQualifier());
-			result.setSearchContexts(new IScopeContext[] {
-					projectScope, InstanceScope.INSTANCE, ConfigurationScope.INSTANCE });
+			ProjectAwareScopedPreferenceStore result = new ProjectAwareScopedPreferenceStore(projectScope, getQualifier());
+			result.setSearchContexts(new IScopeContext[] { projectScope, InstanceScope.INSTANCE, ConfigurationScope.INSTANCE });
 			return result;
 		}
 		return getWritablePreferenceStore();
@@ -83,8 +79,7 @@ public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 	@Override
 	public IPreferenceStore getWritablePreferenceStore() {
 		lazyInitialize();
-		ProjectAwareScopedPreferenceStore result = new ProjectAwareScopedPreferenceStore(
-			InstanceScope.INSTANCE, getQualifier());
+		ProjectAwareScopedPreferenceStore result = new ProjectAwareScopedPreferenceStore(InstanceScope.INSTANCE, getQualifier());
 		result.setSearchContexts(instanceAndConfigurationScopes);
 		return result;
 	}
@@ -97,10 +92,8 @@ public class PPPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		}
 		if(context instanceof IProject) {
 			ProjectScope projectScope = new ProjectScope((IProject) context);
-			ProjectAwareScopedPreferenceStore result = new ProjectAwareScopedPreferenceStore(
-				projectScope, getQualifier());
-			result.setSearchContexts(new IScopeContext[] {
-					projectScope, InstanceScope.INSTANCE, ConfigurationScope.INSTANCE });
+			ProjectAwareScopedPreferenceStore result = new ProjectAwareScopedPreferenceStore(projectScope, getQualifier());
+			result.setSearchContexts(new IScopeContext[] { projectScope, InstanceScope.INSTANCE, ConfigurationScope.INSTANCE });
 			return result;
 		}
 		return getWritablePreferenceStore();

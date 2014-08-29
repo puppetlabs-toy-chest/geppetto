@@ -179,12 +179,12 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 		switch(featureID) {
 			case PPTPPackage.TARGET_ELEMENT__NAME:
 				return NAME_EDEFAULT == null
-						? name != null
-						: !NAME_EDEFAULT.equals(name);
+					? name != null
+					: !NAME_EDEFAULT.equals(name);
 			case PPTPPackage.TARGET_ELEMENT__DOCUMENTATION:
 				return DOCUMENTATION_EDEFAULT == null
-						? documentation != null
-						: !DOCUMENTATION_EDEFAULT.equals(documentation);
+					? documentation != null
+					: !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case PPTPPackage.TARGET_ELEMENT__DEPRECATED:
 				return deprecated != DEPRECATED_EDEFAULT;
 		}
@@ -290,8 +290,7 @@ public abstract class TargetElementImpl extends EObjectImpl implements TargetEle
 		boolean oldDeprecated = deprecated;
 		deprecated = newDeprecated;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.TARGET_ELEMENT__DEPRECATED, oldDeprecated, deprecated));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.TARGET_ELEMENT__DEPRECATED, oldDeprecated, deprecated));
 	}
 
 	/**

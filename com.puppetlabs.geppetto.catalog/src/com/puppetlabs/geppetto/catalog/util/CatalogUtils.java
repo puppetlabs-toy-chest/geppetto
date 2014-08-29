@@ -17,7 +17,6 @@ import com.puppetlabs.geppetto.catalog.Catalog;
 
 /**
  * Performs various services for catalogs.
- *
  */
 public class CatalogUtils {
 

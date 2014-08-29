@@ -28,40 +28,33 @@ import org.eclipse.xtext.util.ITextRegion;
  * <li>{@link #format(IDomNode, ITextFlow, ILayoutContext)}</li>
  * <li>{@link #afterComposite(StyleSet, IDomNode, ITextFlow, ILayoutContext)}</li>
  * </ul>
- *
- *
  */
 public interface ILayoutManager extends ILayout {
 
 	public interface ILayoutContext extends IFormattingContext {
 		/**
-		 *
 		 * @return the style sheet to use
 		 */
 		public DomCSS getCSS();
 
 		/**
-		 *
 		 * @return where any errors should be emitted
 		 */
 		public Acceptor getErrorAcceptor();
 
 		/**
-		 *
 		 * @return the indentation information to use
 		 */
 		@Override
 		public IIndentationInformation getIndentationInformation();
 
 		/**
-		 *
 		 * @return the line separator information to use
 		 */
 		@Override
 		public ILineSeparatorInformation getLineSeparatorInformation();
 
 		/**
-		 *
 		 * @return the text region to format (or null for "everything").
 		 */
 		public ITextRegion getRegionToFormat();
@@ -75,7 +68,6 @@ public interface ILayoutManager extends ILayout {
 		public boolean isConsumed(IDomNode node);
 
 		/**
-		 *
 		 * @return true if existing (non implied) white space should be preserved
 		 */
 		@Override

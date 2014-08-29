@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 /**
  * Interface for performing save actions.
- *
  */
 public interface ISaveActions {
 	public void perform(SourceViewerConfiguration sourceViewerConfiguration, ISourceViewer sourceViewer, IResource r,

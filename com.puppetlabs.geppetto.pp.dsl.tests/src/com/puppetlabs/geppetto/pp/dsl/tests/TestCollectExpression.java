@@ -23,7 +23,6 @@ import org.junit.Test;
 
 /**
  * Tests the Puppet Collect Expression.
- *
  */
 public class TestCollectExpression extends AbstractPuppetTests {
 
@@ -183,7 +182,6 @@ public class TestCollectExpression extends AbstractPuppetTests {
  * User <| name == Luke |>
  * ::User <| lastName == Skywalker |>
  * A::User::B <| name != Darth |>
- *
  * User <| name == Luke and (occupation == jedi or occupation == pilot) |> {
  * duties +> rakeLeaves,
  * newThing => someValue,
@@ -193,6 +191,5 @@ public class TestCollectExpression extends AbstractPuppetTests {
  * newThing => someValue,
  * someList => [1, 2, 3, foo, class],
  * someHash => { name => bar, type => wtf },
- *
  * }
  */

@@ -40,7 +40,6 @@ import com.google.inject.Provider;
 
 /**
  * A sub layout handler for AssignmentExpression that optionally cluster-aligns a sequence of assignments.
- *
  */
 public class AssignmentLayout {
 
@@ -83,13 +82,11 @@ public class AssignmentLayout {
 		thePlusEqualSign = grammarAccess.getAppendExpressionAccess().getPlusSignEqualsSignKeyword_1_1();
 	}
 
-	protected boolean _format(AppendExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(AppendExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		return commonFormat(styleSet, node, flow, context);
 	}
 
-	protected boolean _format(AssignmentExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow,
-			ILayoutContext context) {
+	protected boolean _format(AssignmentExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		return commonFormat(styleSet, node, flow, context);
 	}
 
@@ -177,21 +174,21 @@ public class AssignmentLayout {
 	 * @param doCompaction
 	 * @return
 	 */
-	private void markupWidths(List<IDomNode> equalSignNodes, List<Integer> widths, int availableWidth,
-			IntegerCluster clusters, boolean doAlignment, boolean containsAppend) {
+	private void markupWidths(List<IDomNode> equalSignNodes, List<Integer> widths, int availableWidth, IntegerCluster clusters,
+			boolean doAlignment, boolean containsAppend) {
 		// assign widths and alignment to the fat comma nodes
 		int opW = containsAppend
-				? 2
-						: 1;
+			? 2
+			: 1;
 		for(int i = 0; i < equalSignNodes.size(); i++) {
 			IDomNode c = equalSignNodes.get(i);
 			int w = widths.get(i);
 			int mw = doAlignment
-					? clusters.clusterMax(w)
-							: w;
-					if(doAlignment)
-						c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
-							styles.width(opW + mw - w)));
+				? clusters.clusterMax(w)
+				: w;
+			if(doAlignment)
+				c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
+					styles.width(opW + mw - w)));
 		}
 	}
 }

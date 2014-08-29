@@ -24,23 +24,23 @@ import com.google.common.collect.Range;
  * IntegerCluster utility that implements a simplistic hierarchical clustering algorithm.
  * </p>
  * <p>
- * This class solves the problem; given a series of integers find the smallest number of clusters (of a given min-max
- * inclusive range of values) such that no range is wider than a given max.
+ * This class solves the problem; given a series of integers find the smallest number of clusters (of a given min-max inclusive range of
+ * values) such that no range is wider than a given max.
  * </p>
  * <p>
- * If all values are within the given max, one cluster is produces, and if no two values are closer than max, then there
- * will be as many clusters as there are unique values in the observed set of values.
+ * If all values are within the given max, one cluster is produces, and if no two values are closer than max, then there will be as many
+ * clusters as there are unique values in the observed set of values.
  * </p>
  * <p>
- * The algorithm orders the set of observed values into an set of clusters of 0 size (min = max = value), and searches
- * for the two adjacent clusters that produce the smallest resulting cluster if merged. If the smallest available merge
- * is bigger than the max, the work is done. If the range is smaller than the max, the merged cluster replaces the two
- * inputs. The algorithm now loops back to check for the next two adjacent clusters with the smallest distance.
+ * The algorithm orders the set of observed values into an set of clusters of 0 size (min = max = value), and searches for the two adjacent
+ * clusters that produce the smallest resulting cluster if merged. If the smallest available merge is bigger than the max, the work is done.
+ * If the range is smaller than the max, the merged cluster replaces the two inputs. The algorithm now loops back to check for the next two
+ * adjacent clusters with the smallest distance.
  * </p>
  * <p>
- * The implementation is primarily intended for a fairly small number of observations/clusters as the final step of
- * mapping observations to clusters search (binary search) for a cluster per value. To use this class with larger data
- * sets, it would be better to keep a map from observations to clusters.
+ * The implementation is primarily intended for a fairly small number of observations/clusters as the final step of mapping observations to
+ * clusters search (binary search) for a cluster per value. To use this class with larger data sets, it would be better to keep a map from
+ * observations to clusters.
  * </p>
  */
 public class IntegerCluster {

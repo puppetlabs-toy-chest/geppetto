@@ -62,8 +62,8 @@ public class TarUtils {
 		boolean catchData(String fileName, InputStream fileData) throws IOException;
 	}
 
-	private static void append(File file, FileFilter filter, int baseNameLen, String addedTopFolder,
-			TarArchiveOutputStream tarOut) throws IOException {
+	private static void append(File file, FileFilter filter, int baseNameLen, String addedTopFolder, TarArchiveOutputStream tarOut)
+			throws IOException {
 
 		String name = file.getAbsolutePath();
 		if(name.length() <= baseNameLen)
@@ -130,8 +130,8 @@ public class TarUtils {
 		pack(sourceFolder, output, null, includeTopFolder, null);
 	}
 
-	public static void pack(File sourceFolder, OutputStream output, FileFilter filter, boolean includeTopFolder,
-			String addedTopFolder) throws IOException {
+	public static void pack(File sourceFolder, OutputStream output, FileFilter filter, boolean includeTopFolder, String addedTopFolder)
+			throws IOException {
 		TarArchiveOutputStream tarOut = new TarArchiveOutputStream(output);
 		tarOut.setLongFileMode(TarArchiveOutputStream.LONGFILE_POSIX);
 		String absName = sourceFolder.getAbsolutePath();
@@ -147,8 +147,7 @@ public class TarUtils {
 		}
 	}
 
-	private static void registerChmodFile(Map<File, Map<Integer, List<String>>> chmodMap, File dir, Integer mode,
-			String file) {
+	private static void registerChmodFile(Map<File, Map<Integer, List<String>>> chmodMap, File dir, Integer mode, String file) {
 		getFileList(chmodMap, dir, mode).add(file);
 	}
 
@@ -179,12 +178,10 @@ public class TarUtils {
 	 *            of the archive. The archive must consist of one single folder and nothing else
 	 *            in order for this to work.
 	 * @param fileCatcher
-	 *            Used when specific files should be picked from the archive without writing them to disk. Can be
-	 *            <tt>null</tt>.
+	 *            Used when specific files should be picked from the archive without writing them to disk. Can be <tt>null</tt>.
 	 * @throws IOException
 	 */
-	public static void unpack(InputStream source, File targetFolder, boolean skipTopFolder, FileCatcher fileCatcher)
-			throws IOException {
+	public static void unpack(InputStream source, File targetFolder, boolean skipTopFolder, FileCatcher fileCatcher) throws IOException {
 		String topFolderName = null;
 		Map<File, Map<Integer, List<String>>> chmodMap = new HashMap<File, Map<Integer, List<String>>>();
 		TarArchiveInputStream in = new TarArchiveInputStream(source);

@@ -19,12 +19,10 @@ import com.google.common.collect.Multimap;
 
 /**
  * Computes the containers state
- *
  */
 public class ValidationContainersStateFactory {
 
-	public IAllContainersState getContainersState(List<String> handles, Multimap<String, URI> uris,
-			Multimap<String, String> restricted) {
+	public IAllContainersState getContainersState(List<String> handles, Multimap<String, URI> uris, Multimap<String, String> restricted) {
 		ValidationAllContainersState containersState = new ValidationAllContainersState();
 		containersState.configure(handles, uris, restricted);
 		return containersState;

@@ -34,7 +34,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
 
 /**
  * An XtextBuilderParticipant for Puppet.
- *
  */
 public class PPBuilderParticipant implements IXtextBuilderParticipant {
 	private static List<PPTask> getTaskList(Resource r) {
@@ -62,8 +61,8 @@ public class PPBuilderParticipant implements IXtextBuilderParticipant {
 			for(PPTask task : taskList) {
 				IMarker m = file.createMarker(PPUiConstants.PUPPET_TASK_MARKER_TYPE);
 				int prio = task.isImportant()
-						? IMarker.PRIORITY_HIGH
-								: IMarker.PRIORITY_NORMAL;
+					? IMarker.PRIORITY_HIGH
+					: IMarker.PRIORITY_NORMAL;
 				m.setAttribute(IMarker.MESSAGE, task.getMsg());
 				m.setAttribute(IMarker.PRIORITY, prio);
 				m.setAttribute(IMarker.LINE_NUMBER, task.getLine());

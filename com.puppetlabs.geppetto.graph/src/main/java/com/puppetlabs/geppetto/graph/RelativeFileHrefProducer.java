@@ -16,7 +16,6 @@ import org.eclipse.core.runtime.IPath;
 
 /**
  * Producer of HREF attribute consisting of file path relative to root + url parameters.
- *
  */
 public class RelativeFileHrefProducer extends AbstractHrefProducer {
 

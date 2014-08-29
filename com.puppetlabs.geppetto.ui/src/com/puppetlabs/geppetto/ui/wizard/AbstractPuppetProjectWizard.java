@@ -52,8 +52,8 @@ public abstract class AbstractPuppetProjectWizard extends Wizard implements IWor
 			if(super.validatePage()) {
 				IPath locationPath = getLocationPath();
 				projectLocation = Platform.getLocation().equals(locationPath)
-						? null
-								: locationPath;
+					? null
+					: locationPath;
 				projectContainer = getProjectHandle().getFullPath();
 				return true;
 			}
@@ -90,7 +90,7 @@ public abstract class AbstractPuppetProjectWizard extends Wizard implements IWor
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setDefaultPageImageDescriptor(UIPlugin.getImageDesc("full/wizban/NewPuppetProject.png")); //$NON-NLS-1$
-		setWindowTitle(UIPlugin.getLocalString(getWizardWindowTitleKey())); 
+		setWindowTitle(UIPlugin.getLocalString(getWizardWindowTitleKey()));
 	}
 
 	protected abstract void initializeProjectContents(IProgressMonitor monitor) throws Exception;
@@ -136,8 +136,8 @@ public abstract class AbstractPuppetProjectWizard extends Wizard implements IWor
 						}
 
 						project = ResourceUtil.createProject(
-							projectContainer, URI.createFileURI(projectDir.getAbsolutePath()),
-							Collections.<IProject> emptyList(), monitor.newChild(1));
+							projectContainer, URI.createFileURI(projectDir.getAbsolutePath()), Collections.<IProject> emptyList(),
+							monitor.newChild(1));
 
 						initializeProjectContents(monitor.newChild(80));
 					}

@@ -56,7 +56,6 @@ import com.google.inject.Inject;
 
 /**
  * Highlighting for puppet.
- *
  */
 public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 	private static class ZeroLengthFilteredAcceptorWrapper implements IHighlightedPositionAcceptor {
@@ -105,13 +104,13 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 	private AbstractRule ruleUnionNameOrReference;
 
 	private final PolymorphicDispatcher<Void> highlightDispatcher = new PolymorphicDispatcher<Void>(
-			"highlight", 2, 2, Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<Void>() {
-				@Override
-				public Void handle(Object[] params, Throwable e) {
-					handleError(params, e);
-					return null;
-				}
-			});
+		"highlight", 2, 2, Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<Void>() {
+			@Override
+			public Void handle(Object[] params, Throwable e) {
+				handleError(params, e);
+				return null;
+			}
+		});
 
 	@Inject
 	public PPSemanticHighlightingCalculator(IGrammarAccess grammarAccess) {
@@ -134,8 +133,7 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 			if(n instanceof ICompositeNode) {
 				for(INode n2 : ((ICompositeNode) n).getLeafNodes()) {
 					if(n2.getGrammarElement() instanceof Keyword)
-						acceptor.addPosition(
-							n2.getOffset(), n2.getLength(), DefaultHighlightingConfiguration.DEFAULT_ID);
+						acceptor.addPosition(n2.getOffset(), n2.getLength(), DefaultHighlightingConfiguration.DEFAULT_ID);
 				}
 			}
 		}
@@ -188,8 +186,7 @@ public class PPSemanticHighlightingCalculator implements ISemanticHighlightingCa
 					expr = ((ParenthesisedExpression) expr).getExpr();
 					if(expr instanceof LiteralNameOrReference)
 						acceptor.addPosition(
-							o.getOffset(), ((LiteralNameOrReference) expr).getValue().length() + 3,
-							PPHighlightConfiguration.VARIABLE_ID);
+							o.getOffset(), ((LiteralNameOrReference) expr).getValue().length() + 3, PPHighlightConfiguration.VARIABLE_ID);
 
 				}
 			}

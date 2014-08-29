@@ -52,8 +52,7 @@ public class ResourceILineSeparatorProvider extends PlatformResourceSpecificProv
 		if(r != null) {
 			final IPreferencesService prefs = Platform.getPreferencesService();
 			IScopeContext[] scopeContext = new IScopeContext[] { new ProjectScope(r.getProject()) };
-			String lineSeparator = prefs.getString(
-				Platform.PI_RUNTIME, Platform.PREF_LINE_SEPARATOR, null, scopeContext);
+			String lineSeparator = prefs.getString(Platform.PI_RUNTIME, Platform.PREF_LINE_SEPARATOR, null, scopeContext);
 			if(lineSeparator != null)
 				return lineSeparator;
 			// line delimiter in workspace preference

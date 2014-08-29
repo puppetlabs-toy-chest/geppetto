@@ -17,7 +17,6 @@ import org.junit.Test;
 
 /**
  * Tests formatting utility classes.
- *
  */
 public class TestFormatterUtils {
 
@@ -31,8 +30,7 @@ public class TestFormatterUtils {
 
 		assertEquals("Expected number of clusters", 2, cluster.getClusterCount());
 		for(int i = 0; i < values.length; i++)
-			assertEquals(
-				"Expecte max of cluster is not correct for: " + i, expectedClusterMax[i], cluster.clusterMax(values[i]));
+			assertEquals("Expecte max of cluster is not correct for: " + i, expectedClusterMax[i], cluster.clusterMax(values[i]));
 
 	}
 
@@ -46,8 +44,7 @@ public class TestFormatterUtils {
 
 		assertEquals("Expected number of clusters", 1, cluster.getClusterCount());
 		for(int i = 0; i < values.length; i++)
-			assertEquals(
-				"Expecte max of cluster is not correct for: " + i, expectedClusterMax[i], cluster.clusterMax(values[i]));
+			assertEquals("Expecte max of cluster is not correct for: " + i, expectedClusterMax[i], cluster.clusterMax(values[i]));
 
 	}
 
@@ -61,8 +58,7 @@ public class TestFormatterUtils {
 
 		assertEquals("Expected number of clusters", 3, cluster.getClusterCount());
 		for(int i = 0; i < values.length; i++)
-			assertEquals(
-				"Expecte max of cluster is not correct for: " + i, expectedClusterMax[i], cluster.clusterMax(values[i]));
+			assertEquals("Expecte max of cluster is not correct for: " + i, expectedClusterMax[i], cluster.clusterMax(values[i]));
 
 	}
 
@@ -76,8 +72,7 @@ public class TestFormatterUtils {
 
 		assertEquals("Expected number of clusters", 3, cluster.getClusterCount());
 		for(int i = 0; i < values.length; i++)
-			assertEquals(
-				"Expecte max of cluster is not correct for: " + i, expectedClusterMax[i], cluster.clusterMax(values[i]));
+			assertEquals("Expecte max of cluster is not correct for: " + i, expectedClusterMax[i], cluster.clusterMax(values[i]));
 
 	}
 }

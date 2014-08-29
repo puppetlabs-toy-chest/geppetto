@@ -30,7 +30,6 @@ import com.google.inject.Inject;
 /**
  * A PP specific hyperlink helper, that can find references using CrossReferenceAdapter instead of / in addition to
  * eReferences.
- *
  */
 public class PPHyperlinkHelper extends HyperlinkHelper {
 
@@ -61,8 +60,7 @@ public class PPHyperlinkHelper extends HyperlinkHelper {
 
 	}
 
-	public void createHyperlinksTo(XtextResource from, Region region, IEObjectDescription to,
-			IHyperlinkAcceptor acceptor) {
+	public void createHyperlinksTo(XtextResource from, Region region, IEObjectDescription to, IHyperlinkAcceptor acceptor) {
 		if(!isAcceptableTarget(to))
 			return;
 		final URIConverter uriConverter = from.getResourceSet().getURIConverter();

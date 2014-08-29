@@ -80,9 +80,7 @@ import com.puppetlabs.graph.style.labels.LabelRow;
  * of the given set of non null fields. It is up to the user of this data to decide how to represent multiple
  * edges, although it is suggested that a combination of resolved/implied is to be treated as "normal", and
  * unresolved/implied as "unresolved", if a dependency was not stated there may be only "implied" edges.
- *
  * For all unresolved references (not found anywhere), the edge leads to a "null" {@link ModuleEdge}.
- *
  */
 public class DependencyDataCalculator implements DependencyGraphStyles, DependencyGraphProducer {
 
@@ -126,8 +124,8 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 			this(from, to, type, d, null, null, null);
 		}
 
-		public ModuleEdge(ModuleNodeData from, ModuleNodeData to, EdgeType type, Dependency d,
-				Iterable<Export> imported, Iterable<String> unresolved, Collection<Export> ambiguities) {
+		public ModuleEdge(ModuleNodeData from, ModuleNodeData to, EdgeType type, Dependency d, Iterable<Export> imported,
+				Iterable<String> unresolved, Collection<Export> ambiguities) {
 			this.from = from;
 			this.to = to;
 			this.edgeType = type;
@@ -144,8 +142,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 		 * @param type
 		 * @param imported
 		 */
-		public ModuleEdge(ModuleNodeData from, ModuleNodeData to, EdgeType type, Iterable<Export> imported,
-				Collection<Export> ambiguities) {
+		public ModuleEdge(ModuleNodeData from, ModuleNodeData to, EdgeType type, Iterable<Export> imported, Collection<Export> ambiguities) {
 			this(from, to, type, null, imported, null, ambiguities);
 		}
 
@@ -165,7 +162,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 		public static ModuleNodeData existing(ModuleName name, Version version, boolean isNode, String href) {
 			return new ModuleNodeData(name, version, isNode
 				? ModuleType.PPNODE
-						: ModuleType.MODULE, href);
+				: ModuleType.MODULE, href);
 		}
 
 		/**
@@ -310,8 +307,8 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 		String aId = idOfVertex(a);
 		String hrefForEdge = null;
 		String bId = b == null || b == pptpNode
-				? ""
-						: idOfVertex(b);
+			? ""
+			: idOfVertex(b);
 		boolean splitEdge = elements.length > 1;
 		if(b == null)
 			hrefForEdge = hrefProducer.hrefForEdgeToUnresolved(aId, splitEdge);
@@ -348,7 +345,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 	 * @return
 	 */
 	public Map<File, ModuleNodeData> calculateDependencyData(File root, Multimap<ModuleName, MetadataInfo> moduleData,
-		AllModulesState exportData) {
+			AllModulesState exportData) {
 
 		// create node data for all existing modules and check if there are ambiguities
 		Multimap<ModuleName, ModuleNodeData> processedModules = ArrayListMultimap.create();
@@ -392,8 +389,8 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 						b = ModuleNodeData.unresolved(name);
 						// need to generate one that can not be found if name is null
 						moduleNodeData.put(name == null
-								? ModuleName.create("no", "name", false)
-										: name, b);
+							? ModuleName.create("no", "name", false)
+							: name, b);
 					}
 				}
 				else {
@@ -426,10 +423,9 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 			Multimap<File, Export> ambiguitiesForFile = ambiguities.get(fromFile);
 			for(File toFile : m.keySet()) {
 				createImportEdge(
-					file2Module(fromFile, fileIndex), file2Module(toFile, fileIndex), m.get(toFile),
-					ambiguitiesForFile != null
-					? ambiguitiesForFile.get(toFile)
-							: null);
+					file2Module(fromFile, fileIndex), file2Module(toFile, fileIndex), m.get(toFile), ambiguitiesForFile != null
+						? ambiguitiesForFile.get(toFile)
+						: null);
 			}
 		}
 
@@ -453,8 +449,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 		return classesFor(edge.from, edge.to);
 	}
 
-	private void createImportEdge(ModuleNodeData from, ModuleNodeData to, Iterable<Export> imported,
-			Collection<Export> ambiguities) {
+	private void createImportEdge(ModuleNodeData from, ModuleNodeData to, Iterable<Export> imported, Collection<Export> ambiguities) {
 		moduleEdges.add(new ModuleEdge(from, to, EdgeType.IMPLIED, imported, ambiguities));
 
 	}
@@ -484,8 +479,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 		Vertex edgeVertex = null;
 		if(me.imported != null) {
 			edgeVertex = new Vertex("", STYLE_CLASS_IMPORTS);
-			edgeVertex.setStyles(labelStyleForImported(me.imported, me.ambiguities).add(
-				StyleSet.withStyle(styles.tooltip(tooltipString))));
+			edgeVertex.setStyles(labelStyleForImported(me.imported, me.ambiguities).add(StyleSet.withStyle(styles.tooltip(tooltipString))));
 			me.setVertex(edgeVertex);
 		}
 		else {
@@ -513,10 +507,10 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 		String label = builder.toString();
 
 		String style = mnd.exists()
-				? (mnd.isAmbiguous())
-						? STYLE_CLASS_AMBIGUOUSLY_RESOLVED_MODULE
-								: STYLE_CLASS_RESOLVED_MODULE
-								: STYLE_CLASS_UNRESOLVED_MODULE;
+			? (mnd.isAmbiguous())
+				? STYLE_CLASS_AMBIGUOUSLY_RESOLVED_MODULE
+				: STYLE_CLASS_RESOLVED_MODULE
+			: STYLE_CLASS_UNRESOLVED_MODULE;
 		Vertex v = new Vertex(label, style);
 		v.setStyles(styles.href(mnd.href));
 		v.putUserData(IFunctionFactory.ID_KEY, idOfVertex(mnd));
@@ -526,8 +520,8 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 
 	private Vertex createVertexForPPNodeNode(ModuleNodeData mnd) {
 		String label = mnd.name == null
-				? ""
-						: mnd.name.toString();
+			? ""
+			: mnd.name.toString();
 		// no version (user is not aware of one).
 		String style = STYLE_CLASS_PPNODE_MODULE;
 		Vertex v = new Vertex(label, style);
@@ -550,11 +544,11 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 		for(ModuleNodeData m : moduleNodeData.values()) {
 			System.err.printf("module %s(%s) = %s\n", m.name, m.version, m.exists()
 				? "exists"
-						: "missing");
+				: "missing");
 			for(ModuleNodeData to : m.outgoing.keySet()) {
 				System.err.printf("    -> %s\n", to != null
-						? to.name
-								: "null 'to'");
+					? to.name
+					: "null 'to'");
 				for(ModuleEdge edge : m.outgoing.get(to)) {
 					System.err.printf("        %s, ", edge.edgeType);
 					if(edge.imported != null)
@@ -582,8 +576,8 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 			return pptpNode;
 		ModuleNodeData mnd = _file2Module(f, index);
 		return mnd != null
-				? mnd
-						: nonModularNode;
+			? mnd
+			: nonModularNode;
 	}
 
 	public String getVersionLabel(ModuleEdge edge) {
@@ -646,19 +640,18 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 				continue;
 			}
 			final boolean ambiguous = ambiguities == null
-					? false
-							: ambiguities.contains(a);
+				? false
+				: ambiguities.contains(a);
 			labelRows.add(styles.labelRow(STYLE__IMPORT_ROW, //
 				styles.labelCell( //
 					ambiguous
-					? STYLE__IMPORT_AMBIGUOUS_NAME_CELL
-							: STYLE__IMPORT_NAME_CELL, //
-							a.getName()).withStyle(//
-								styles.href(toHREF_URL(a))), //
-								styles.labelCell(STYLE__IMPORT_TYPE_CELL, labelOfType(a.getEClass()))));
+						? STYLE__IMPORT_AMBIGUOUS_NAME_CELL
+						: STYLE__IMPORT_NAME_CELL, //
+					a.getName()).withStyle(//
+					styles.href(toHREF_URL(a))), //
+				styles.labelCell(STYLE__IMPORT_TYPE_CELL, labelOfType(a.getEClass()))));
 		}
-		return StyleSet.withStyle(styles.labelFormat(styles.labelTable(
-			STYLE__IMPORT_TABLE, labelRows.toArray(new LabelRow[0]))));
+		return StyleSet.withStyle(styles.labelFormat(styles.labelTable(STYLE__IMPORT_TABLE, labelRows.toArray(new LabelRow[0]))));
 
 	}
 
@@ -680,10 +673,9 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 				styles.labelCell(STYLE__UNRESOLVED_NAME_CELL, a).withStyle( //
 					styles.href(toHREF_UNRESOLVED(me.from.name, a))) //
 
-					));
+			));
 		}
-		return StyleSet.withStyle(styles.labelFormat(styles.labelTable(
-			STYLE__IMPORT_TABLE, labelRows.toArray(new LabelRow[0]))));
+		return StyleSet.withStyle(styles.labelFormat(styles.labelTable(STYLE__IMPORT_TABLE, labelRows.toArray(new LabelRow[0]))));
 
 	}
 
@@ -702,8 +694,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 	}
 
 	@Override
-	public void produceGraph(ICancel cancel, String title, File[] roots, OutputStream output, BuildResult buildResult,
-			Diagnostic chain) {
+	public void produceGraph(ICancel cancel, String title, File[] roots, OutputStream output, BuildResult buildResult, Diagnostic chain) {
 		if(title == null)
 			title = "Module Dependencies";
 
@@ -712,7 +703,6 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 	}
 
 	/**
-	 *
 	 * @param root
 	 * @param moduleData
 	 *            Name -> 0* MetadataInfo representing one version of a module with given name
@@ -844,7 +834,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 				if(count == 2 && resolved == 1 && implied == 1) {
 					Edge e1 = new Edge("", STYLE_EDGE__IMPORT, a.getVertex(), edges.get(1).getVertex());
 					Edge e2 = new Edge(getVersionLabel(edges.get(0)), STYLE_EDGE__RESOLVED_DEP, //
-						edges.get(1).getVertex(), b.getVertex());
+					edges.get(1).getVertex(), b.getVertex());
 					g.addEdge(e1, e2);
 					addTooltip(tooltipString, e1, e2);
 					addStyleClasses(styleClasses, e1, e2);
@@ -875,9 +865,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 					else {
 						if(edges.get(0).from != edges.get(0).to) { // skip self references
 							Edge e1 = new Edge("", STYLE_EDGE__IMPORT, a.getVertex(), edges.get(0).getVertex());
-							Edge e2 = new Edge(
-								"implicit", STYLE_EDGE__IMPLIED_DEP, edges.get(0).getVertex(),
-								edges.get(0).to.getVertex());
+							Edge e2 = new Edge("implicit", STYLE_EDGE__IMPLIED_DEP, edges.get(0).getVertex(), edges.get(0).to.getVertex());
 							g.addEdge(e1, e2);
 							addTooltip(tooltipString, e1, e2);
 							addStyleClasses(styleClasses, e1, e2);
@@ -891,7 +879,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 					Edge e1 = new Edge("", STYLE_EDGE__IMPORT, a.getVertex(), edges.get(1).getVertex());
 					String label = "implicit\\nunresolved\\n" + getVersionLabel(edges.get(0));
 					Edge e2 = new Edge(label, STYLE_EDGE__UNRESOLVED_IMPLIED_DEP, //
-						edges.get(1).getVertex(), edges.get(1).to.getVertex());
+					edges.get(1).getVertex(), edges.get(1).to.getVertex());
 					g.addEdge(e1, e2);
 					addTooltip(tooltipString, e1, e2);
 					addStyleClasses(styleClasses, e1, e2);
@@ -904,7 +892,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 					if(edges.get(0).to.exists()) {
 						String label = "unresolved\\n" + getVersionLabel(edges.get(0));
 						Edge e1 = new Edge(label, STYLE_EDGE__UNRESOLVED_IMPLIED_DEP, //
-							a.getVertex(), b.getVertex());
+						a.getVertex(), b.getVertex());
 						g.addEdge(e1);
 						addTooltip(tooltipString, e1);
 						addStyleClasses(styleClasses, e1);
@@ -915,7 +903,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 					else {
 						String label = "unresolved\\n" + getVersionLabel(edges.get(0));
 						Edge e1 = new Edge(label, STYLE_EDGE__UNRESOLVED_DEP, //
-							a.getVertex(), b.getVertex());
+						a.getVertex(), b.getVertex());
 						g.addEdge(e1);
 						addTooltip(tooltipString, e1);
 						addStyleClasses(styleClasses, e1);
@@ -927,7 +915,7 @@ public class DependencyDataCalculator implements DependencyGraphStyles, Dependen
 				// (nothing is imported from B)
 				else if(count == 1 && resolved == 1) {
 					Edge e1 = new Edge(getVersionLabel(edges.get(0)), STYLE_EDGE__RESOLVED_DEP, //
-						a.getVertex(), b.getVertex());
+					a.getVertex(), b.getVertex());
 					g.addEdge(e1);
 					addTooltip(tooltipString, e1);
 					addStyleClasses(styleClasses, e1);

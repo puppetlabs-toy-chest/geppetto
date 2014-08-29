@@ -24,8 +24,8 @@ public class ModuleHover extends DispatchingEObjectTextHover {
 		if(first instanceof Keyword) {
 			lastCreatorProvider = hoverProvider.getHoverInfo(first, textViewer, hoverRegion);
 			return lastCreatorProvider == null
-					? null
-							: lastCreatorProvider.getInfo();
+				? null
+				: lastCreatorProvider.getInfo();
 		}
 		return super.getHoverInfo(first, textViewer, hoverRegion);
 	}
@@ -35,7 +35,7 @@ public class ModuleHover extends DispatchingEObjectTextHover {
 		ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
 		EObject ge = node.getGrammarElement();
 		return ge instanceof Keyword
-				? Tuples.<EObject, IRegion> create(ge, new Region(node.getOffset(), node.getLength()))
-						: super.getXtextElementAt(resource, offset);
+			? Tuples.<EObject, IRegion> create(ge, new Region(node.getOffset(), node.getLength()))
+			: super.getXtextElementAt(resource, offset);
 	}
 }

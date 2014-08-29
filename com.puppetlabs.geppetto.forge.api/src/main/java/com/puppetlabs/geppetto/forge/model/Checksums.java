@@ -26,8 +26,8 @@ public class Checksums extends Entity {
 	 */
 	public Map<String, byte[]> getChecksums() {
 		return checksums == null
-				? Collections.<String, byte[]> emptyMap()
-						: Collections.unmodifiableMap(checksums);
+			? Collections.<String, byte[]> emptyMap()
+			: Collections.unmodifiableMap(checksums);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Checksums extends Entity {
 	 */
 	public void setChecksums(Map<String, byte[]> checksums) {
 		this.checksums = (checksums == null || checksums.isEmpty())
-				? null
-						: new HashMap<String, byte[]>(checksums);
+			? null
+			: new HashMap<String, byte[]>(checksums);
 	}
 }

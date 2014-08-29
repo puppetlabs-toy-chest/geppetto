@@ -34,8 +34,8 @@ public class ModuleLabelProvider extends DefaultEObjectLabelProvider {
 
 	public Object text(final JsonDependency dependency) {
 		return moduleUtil.isResolved(dependency)
-				? text(moduleUtil.getReferencedModule(dependency))
-				: moduleUtil.getName(moduleUtil.getReferencedModule(dependency));
+			? text(moduleUtil.getReferencedModule(dependency))
+			: moduleUtil.getName(moduleUtil.getReferencedModule(dependency));
 	}
 
 	public String text(final JsonMetadata metadata) {

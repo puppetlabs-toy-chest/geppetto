@@ -179,8 +179,8 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 		if(buildDir == null) {
 			Build build = session.getCurrentProject().getBuild();
 			String buildDirStr = build == null
-					? null
-							: build.getDirectory();
+				? null
+				: build.getDirectory();
 			if(buildDirStr == null)
 				buildDir = new File(getBasedir(), "target");
 			else {
@@ -231,11 +231,11 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 			try {
 				return getForgeUtil().loadJSONMetadata(mdJson);
 			}
-		catch(Exception e) {
-			// We don't want metadata.json diagnostics at this point since xtext validation
-			// will provide them later
-			return null;
-		}
+			catch(Exception e) {
+				// We don't want metadata.json diagnostics at this point since xtext validation
+				// will provide them later
+				return null;
+			}
 
 		File moduleFile = new File(moduleDirectory, Forge.MODULEFILE_NAME);
 		if(moduleFile.exists())

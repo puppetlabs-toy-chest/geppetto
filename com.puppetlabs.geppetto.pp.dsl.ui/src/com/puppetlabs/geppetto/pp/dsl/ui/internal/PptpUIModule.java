@@ -20,7 +20,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpResourceUiServiceProvider;
 
 /**
  * @author henrik
- *
  */
 public class PptpUIModule extends PptpRuntimeModule {
 
@@ -31,15 +30,14 @@ public class PptpUIModule extends PptpRuntimeModule {
 
 	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
 		if(PlatformUI.isWorkbenchRunning())
-			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(
-				LanguageSpecificURIEditorOpener.class);
+			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(LanguageSpecificURIEditorOpener.class);
 	}
 
 	// must bind a description label provider...
 	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(
 			org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(
-				com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider.class);
+			com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider.class);
 	}
 
 }

@@ -55,8 +55,8 @@ public class ExtLinkedFileHelper {
 		}
 		IResource[] resources = untitledFolder.members();
 		int result = resources.length > 0
-				? 1
-						: 0;
+			? 1
+			: 0;
 		for(IResource r : resources) {
 			// tied to format "untitled-n"
 			int dash = r.getName().indexOf("-");
@@ -64,8 +64,8 @@ public class ExtLinkedFileHelper {
 				continue;
 			int sequence = Integer.valueOf(r.getName().substring(dash + 1, r.getName().length() - 3));
 			result = sequence > result
-					? sequence
-							: result;
+				? sequence
+				: result;
 		}
 		return result + 1;
 	}
@@ -100,8 +100,8 @@ public class ExtLinkedFileHelper {
 				int firstFree = getFirstFreeUntitled(project);
 				IFolder untitledFolder = project.getFolder("untitled");
 				String fileName = "untitled" + (firstFree > 1
-						? "-" + Integer.toString(firstFree)
-								: "") + ".b3";
+					? "-" + Integer.toString(firstFree)
+					: "") + ".b3";
 				linkFile = untitledFolder.getFile(fileName);
 			}
 			else {

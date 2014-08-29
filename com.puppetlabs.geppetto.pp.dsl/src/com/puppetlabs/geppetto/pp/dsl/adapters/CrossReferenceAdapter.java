@@ -23,7 +23,6 @@ import com.google.common.collect.Lists;
 /**
  * The ResourcePropertiesAdapter associates an {@link IEObjectDescription} to an EObject.
  * A list is maintained to help when a resolution is ambiguous.
- *
  */
 public class CrossReferenceAdapter extends AdapterImpl {
 

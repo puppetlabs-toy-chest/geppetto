@@ -19,7 +19,6 @@ import com.google.common.base.Predicate;
  * A Predicate that checks a monitor for cancellation and reports one unit worked per comparison.
  *
  * @param <T>
- *
  */
 public abstract class CancelablePredicate<T> implements Predicate<T> {
 	private final IProgressMonitor monitor;
@@ -47,8 +46,7 @@ public abstract class CancelablePredicate<T> implements Predicate<T> {
 	}
 
 	/**
-	 * Should be implemented to do what {@link Predicate#apply(Object)} normally does. Is called from
-	 * {@link #apply(Object)}.
+	 * Should be implemented to do what {@link Predicate#apply(Object)} normally does. Is called from {@link #apply(Object)}.
 	 *
 	 * @param input
 	 * @return

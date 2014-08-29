@@ -20,7 +20,6 @@ import org.eclipse.ui.part.FileEditorInput;
 
 /**
  * Matches unlinked and linked files.
- *
  */
 public class ExtLinkedXtextEditorMatchingStrategy implements IEditorMatchingStrategy {
 

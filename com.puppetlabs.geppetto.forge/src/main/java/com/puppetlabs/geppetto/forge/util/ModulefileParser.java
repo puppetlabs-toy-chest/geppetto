@@ -102,16 +102,15 @@ public abstract class ModulefileParser {
 
 	protected Dependency createDependency(String name, String versionRequirement, SourcePosition pos) {
 		Dependency dep = new DependencyWithPosition(
-			pos.getStartOffset(), pos.getEndOffset() - pos.getStartOffset(), pos.getStartLine(),
-			new File(pos.getFile()));
+			pos.getStartOffset(), pos.getEndOffset() - pos.getStartOffset(), pos.getStartLine(), new File(pos.getFile()));
 		dep.setName(createModuleName(name, true, pos));
 		if(versionRequirement != null)
 			try {
 				dep.setVersionRequirement(VersionRange.create(versionRequirement));
 			}
-		catch(IllegalArgumentException e) {
-			addError(pos, getBadVersionRangeMessage(e));
-		}
+			catch(IllegalArgumentException e) {
+				addError(pos, getBadVersionRangeMessage(e));
+			}
 		return dep;
 	}
 
@@ -151,8 +150,8 @@ public abstract class ModulefileParser {
 
 	protected String getBadNameMessage(IllegalArgumentException e, boolean dependency) {
 		String pfx = dependency
-				? "A dependency "
-						: "A module ";
+			? "A dependency "
+			: "A module ";
 		return pfx + e.getMessage();
 	}
 
@@ -182,8 +181,8 @@ public abstract class ModulefileParser {
 					break;
 				default:
 					addError(argNode.getPosition(), "Unexpected ruby code. Node type was: " + (argNode == null
-					? "null"
-							: argNode.getClass().getSimpleName()));
+						? "null"
+						: argNode.getClass().getSimpleName()));
 			}
 		}
 		return stringArgs;
@@ -263,8 +262,7 @@ public abstract class ModulefileParser {
 
 		if(file != null) {
 			if(!nameSeen || fullName != null && (fullName.getOwner() == null || fullName.getName() == null)) {
-				diagnostics.addChild(new FileDiagnostic(
-					ERROR, PACKAGE, "A full name (user-module) must be specified", file));
+				diagnostics.addChild(new FileDiagnostic(ERROR, PACKAGE, "A full name (user-module) must be specified", file));
 			}
 
 			if(!versionSeen) {

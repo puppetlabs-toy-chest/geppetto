@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Abstract Type</b></em>'.
  * <!-- end-user-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
@@ -35,8 +34,7 @@ public interface AbstractType extends TargetElement {
 	 * Returns the value of the '<em><b>EReference0</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>EReference0</em>' reference isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>EReference0</em>' reference isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *
@@ -53,8 +51,8 @@ public interface AbstractType extends TargetElement {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.pptp.Parameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear, there really should be more
-	 * of a description here...
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *
@@ -70,8 +68,8 @@ public interface AbstractType extends TargetElement {
 	 * The list contents are of type {@link com.puppetlabs.geppetto.pp.pptp.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear, there really should be more
-	 * of a description here...
+	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *

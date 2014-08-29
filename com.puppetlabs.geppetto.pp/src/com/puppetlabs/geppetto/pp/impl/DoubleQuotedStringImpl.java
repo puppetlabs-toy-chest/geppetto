@@ -156,7 +156,7 @@ public class DoubleQuotedStringImpl extends StringExpressionImpl implements Doub
 	public EList<TextExpression> getStringPart() {
 		if(stringPart == null) {
 			stringPart = new EObjectContainmentEList<TextExpression>(
-					TextExpression.class, this, PPPackage.DOUBLE_QUOTED_STRING__STRING_PART);
+				TextExpression.class, this, PPPackage.DOUBLE_QUOTED_STRING__STRING_PART);
 		}
 		return stringPart;
 	}

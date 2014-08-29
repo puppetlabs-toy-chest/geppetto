@@ -33,20 +33,19 @@ import com.google.inject.Inject;
  * A Move-then-Fold Comment Formatting Strategy.
  * </p>
  * <p>
- * A comment that fits at the current position (after internal formatting by the {@link CommentProcessor} is appended to
- * the given {@link ITextFlow} output at its original position. If the comment does not fit, it is moved to the next
- * line. If, on the next line, it fits at the effective indent (the indent of future output) the effective indent will
- * be used, else if the comment fits at the same indent as its original line, this position is used. Finally, if the
- * comment does not fit after having been moved, it is folded to fit and it is positioned at the effective indent.
+ * A comment that fits at the current position (after internal formatting by the {@link CommentProcessor} is appended to the given
+ * {@link ITextFlow} output at its original position. If the comment does not fit, it is moved to the next line. If, on the next line, it
+ * fits at the effective indent (the indent of future output) the effective indent will be used, else if the comment fits at the same indent
+ * as its original line, this position is used. Finally, if the comment does not fit after having been moved, it is folded to fit and it is
+ * positioned at the effective indent.
  * </p>
- *
  * <p>
  * Folding only takes place if there is a space to the left of the preferred max width position.
  * </p>
  * <p>
- * Comment formatting is performed in accordance with the configuration's {@link ICommentConfiguration}, and it is
- * expected that the implementation is {@code ICommentConfiguration<{@link CommentType}>}. If not, an error message is
- * logged, and comments are output without any formatting.
+ * Comment formatting is performed in accordance with the configuration's {@link ICommentConfiguration}, and it is expected that the
+ * implementation is {@code ICommentConfiguration<{@link CommentType}>}. If not, an error message is logged, and comments are output
+ * without any formatting.
  * </p>
  */
 public class MoveThenFoldCommentLayout extends AbstractLayout {
@@ -54,8 +53,7 @@ public class MoveThenFoldCommentLayout extends AbstractLayout {
 	@Inject
 	protected ICommentConfiguration<CommentType> commentConfiguration;
 
-	protected List<IDomNode> collectCommentSequence(IDomNode dom, ILayoutContext context,
-		ICommentContainerInformation commentConfiguration) {
+	protected List<IDomNode> collectCommentSequence(IDomNode dom, ILayoutContext context, ICommentContainerInformation commentConfiguration) {
 		List<IDomNode> result = Lists.newArrayList();
 		result.add(dom);
 		if(!commentConfiguration.isSLStyle()) {
@@ -138,8 +136,8 @@ public class MoveThenFoldCommentLayout extends AbstractLayout {
 	 *            description of the container of the comment text
 	 * @param advice
 	 */
-	protected void formatComment(StyleSet styleSet, List<IDomNode> nodes, ITextFlow output,
-			ILayoutContext layoutContext, ICommentContainerInformation commentContext, ICommentFormatterAdvice advice) {
+	protected void formatComment(StyleSet styleSet, List<IDomNode> nodes, ITextFlow output, ILayoutContext layoutContext,
+			ICommentContainerInformation commentContext, ICommentFormatterAdvice advice) {
 		// How much space is left?
 		int maxWidth = output.getPreferredMaxWidth();
 		int current = output.getAppendLinePosition();
@@ -155,8 +153,8 @@ public class MoveThenFoldCommentLayout extends AbstractLayout {
 		final int pos_effectiveIndent = output.getIndentation() * indentationSize;
 		// number of wanted empty trailing lines in output (min and max)
 		final int trailing = commentContext.isSLStyle()
-				? 0
-						: 1;
+			? 0
+			: 1;
 		final int maxTrailing = 1;
 
 		// set up extraction context (use 0 if there was no INode model)
@@ -189,11 +187,10 @@ public class MoveThenFoldCommentLayout extends AbstractLayout {
 
 				// re-format for effective indent
 				formatted = cpr.formatComment(
-					//
+				//
 					comment, //
 					pos0Context, //
-					new CommentFormattingOptions(advice, maxWidth - pos_effectiveIndent, trailing, maxTrailing),
-					layoutContext);
+					new CommentFormattingOptions(advice, maxWidth - pos_effectiveIndent, trailing, maxTrailing), layoutContext);
 			}
 			else {
 				// re-format for the available space (hanging at current position)
@@ -212,11 +209,10 @@ public class MoveThenFoldCommentLayout extends AbstractLayout {
 
 					// re-format for the effective indent position space
 					formatted = cpr.formatComment(
-						//
+					//
 						comment, //
 						pos0Context, //
-						new CommentFormattingOptions(advice, maxWidth - pos_effectiveIndent, trailing, maxTrailing),
-						layoutContext);
+						new CommentFormattingOptions(advice, maxWidth - pos_effectiveIndent, trailing, maxTrailing), layoutContext);
 				}
 			}
 			output.appendText(CharSequences.trimLeft(formatted.getText())); // , true);

@@ -156,8 +156,7 @@ public abstract class ExpressionBlockImpl extends ExpressionImpl implements Expr
 	@Override
 	public EList<Expression> getStatements() {
 		if(statements == null) {
-			statements = new EObjectContainmentEList<Expression>(
-					Expression.class, this, PPPackage.EXPRESSION_BLOCK__STATEMENTS);
+			statements = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.EXPRESSION_BLOCK__STATEMENTS);
 		}
 		return statements;
 	}

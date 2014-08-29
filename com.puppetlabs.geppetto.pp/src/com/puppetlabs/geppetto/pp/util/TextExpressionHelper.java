@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * Helps with TextExpressions in interpolated Strings.
- *
  */
 public class TextExpressionHelper {
 

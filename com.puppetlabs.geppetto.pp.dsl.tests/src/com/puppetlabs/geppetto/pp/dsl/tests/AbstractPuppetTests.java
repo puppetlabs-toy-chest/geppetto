@@ -89,8 +89,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 				@Override
 				public XtextResourceSet get() {
 					XtextResourceSet resourceSet = new SynchronizedXtextResourceSet();
-					resourceSet.getResource(
-						PuppetTarget.forComplianceLevel(getComplianceLevel(), false).getPlatformURI(), true);
+					resourceSet.getResource(PuppetTarget.forComplianceLevel(getComplianceLevel(), false).getPlatformURI(), true);
 					return resourceSet;
 				}
 			};
@@ -129,8 +128,9 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 	 * @param instance
 	 */
 	protected void assertInstanceOf(String message, Class<?> expected, Object instance) {
-		assertTrue(message + ": expected instanceof: " + expected.getSimpleName() + " got: " +
-				instance.getClass().getSimpleName(), expected.isAssignableFrom(instance.getClass()));
+		assertTrue(
+			message + ": expected instanceof: " + expected.getSimpleName() + " got: " + instance.getClass().getSimpleName(),
+			expected.isAssignableFrom(instance.getClass()));
 	}
 
 	protected AttributeOperation createAttributeAddition(String name, Expression value) {
@@ -171,8 +171,8 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		for(int i = 0; i < keyValPairs.length; i++) {
 			AttributeOperation ao = pf.createAttributeOperation();
 			ao.setOp(additive
-					? "+>"
-					: "=>");
+				? "+>"
+				: "=>");
 			if(!(keyValPairs[i] instanceof String))
 				throw new IllegalArgumentException("Bad test spec, key not a String");
 			ao.setKey((String) (keyValPairs[i++]));
@@ -206,8 +206,8 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		return createResourceBody(false, title, keyValPairs);
 	}
 
-	protected ResourceExpression createResourceExpression(boolean exported, boolean virtual, boolean additive,
-			String type, Expression title, Object... keyValPairs) {
+	protected ResourceExpression createResourceExpression(boolean exported, boolean virtual, boolean additive, String type,
+			Expression title, Object... keyValPairs) {
 
 		ResourceExpression re = pf.createResourceExpression();
 
@@ -230,8 +230,8 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		return re;
 	}
 
-	protected ResourceExpression createResourceExpression(boolean exported, boolean virtual, boolean additive,
-			String type, String title, Object... keyValPairs) {
+	protected ResourceExpression createResourceExpression(boolean exported, boolean virtual, boolean additive, String type, String title,
+			Object... keyValPairs) {
 		SingleQuotedString titleExpr = null;
 		if(title != null) {
 			titleExpr = pf.createSingleQuotedString();
@@ -240,8 +240,8 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		return createResourceExpression(exported, virtual, additive, type, titleExpr, keyValPairs);
 	}
 
-	protected ResourceExpression createResourceExpression(boolean virtual, boolean additive, String type,
-			Expression title, Object... keyValPairs) {
+	protected ResourceExpression createResourceExpression(boolean virtual, boolean additive, String type, Expression title,
+			Object... keyValPairs) {
 		return createResourceExpression(false, virtual, additive, type, title, keyValPairs);
 	}
 
@@ -250,13 +250,11 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		return createResourceExpression(false, virtual, additive, type, title, keyValPairs);
 	}
 
-	protected ResourceExpression createResourceExpression(boolean additive, String type, Expression title,
-			Object... keyValPairs) {
+	protected ResourceExpression createResourceExpression(boolean additive, String type, Expression title, Object... keyValPairs) {
 		return createResourceExpression(false, additive, type, title, keyValPairs);
 	}
 
-	protected ResourceExpression createResourceExpression(boolean additive, String type, String title,
-			Object... keyValPairs) {
+	protected ResourceExpression createResourceExpression(boolean additive, String type, String title, Object... keyValPairs) {
 		return createResourceExpression(false, additive, type, title, keyValPairs);
 	}
 
@@ -286,13 +284,11 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		return v;
 	}
 
-	protected ResourceExpression createVirtualExportedResourceExpression(String type, Expression title,
-			Object... keyValPairs) {
+	protected ResourceExpression createVirtualExportedResourceExpression(String type, Expression title, Object... keyValPairs) {
 		return createResourceExpression(true, true, false, type, title, keyValPairs);
 	}
 
-	protected ResourceExpression createVirtualExportedResourceExpression(String type, String title,
-			Object... keyValPairs) {
+	protected ResourceExpression createVirtualExportedResourceExpression(String type, String title, Object... keyValPairs) {
 		return createResourceExpression(true, true, false, type, title, keyValPairs);
 	}
 
@@ -342,8 +338,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 		for(Resource r : resourceSet.getResources())
 			containerToURIMap.put(container, r.getURI());
 
-		IAllContainersState containersState = factory.getContainersState(
-			Lists.newArrayList(container), containerToURIMap);
+		IAllContainersState containersState = factory.getContainersState(Lists.newArrayList(container), containerToURIMap);
 		resourceSet.eAdapters().add(new DelegatingIAllContainerAdapter(containersState));
 	}
 

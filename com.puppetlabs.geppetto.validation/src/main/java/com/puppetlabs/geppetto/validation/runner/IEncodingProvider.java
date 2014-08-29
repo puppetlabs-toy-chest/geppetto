@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 
 /**
  * A provider of encodings for files.
- *
  */
 public interface IEncodingProvider {
 

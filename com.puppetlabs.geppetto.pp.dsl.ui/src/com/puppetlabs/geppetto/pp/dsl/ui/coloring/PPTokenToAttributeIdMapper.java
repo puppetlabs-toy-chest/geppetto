@@ -22,8 +22,7 @@ public class PPTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMa
 
 		// treat, 'true', 'false' differently
 
-		if(tokenName.equals("'true'") || tokenName.equals("'false'") || tokenName.equals("'default'") ||
-				tokenName.equals("'undef'")) {
+		if(tokenName.equals("'true'") || tokenName.equals("'false'") || tokenName.equals("'default'") || tokenName.equals("'undef'")) {
 			return PPHighlightConfiguration.LITERAL_KW_ID;
 		}
 		if(tokenName.equals("'\"'"))

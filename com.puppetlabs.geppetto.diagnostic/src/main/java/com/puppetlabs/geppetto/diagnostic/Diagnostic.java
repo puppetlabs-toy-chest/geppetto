@@ -30,8 +30,8 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	 */
 	public static String getSeverityString(int severity) {
 		return severity >= 0 && severity < severityStrings.length
-				? severityStrings[severity]
-						: format("UNKNOWN(%d)", severity);
+			? severityStrings[severity]
+			: format("UNKNOWN(%d)", severity);
 	}
 
 	public static final DiagnosticType CHAIN = new DiagnosticType("CHAIN", Diagnostic.class.getName());
@@ -121,8 +121,8 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 	public List<Diagnostic> getChildren() {
 		return children == null
-				? Collections.<Diagnostic> emptyList()
-						: children;
+			? Collections.<Diagnostic> emptyList()
+			: children;
 	}
 
 	public String getErrorText() {
@@ -190,8 +190,8 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	}
 
 	/**
-	 * Returns the result of calling {{@link #appendLocationLabel(StringBuilder, boolean)} on a StringBuilder or
-	 * <tt>null</tt> if no location label is present.
+	 * Returns the result of calling {{@link #appendLocationLabel(StringBuilder, boolean)} on a StringBuilder or <tt>null</tt> if no
+	 * location label is present.
 	 *
 	 * @param withOffsets
 	 *            Flag that indicates if offsets from the beginning of file are of interest (can be used for
@@ -202,8 +202,8 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	public String getLocationLabel(boolean withOffsets) {
 		StringBuilder bld = new StringBuilder();
 		return appendLocationLabel(bld, withOffsets)
-				? bld.toString()
-						: null;
+			? bld.toString()
+			: null;
 	}
 
 	/**
@@ -327,8 +327,8 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 			bld.append(' ');
 
 		String resourcePath = getFile() == null
-				? null
-						: getFile().getPath();
+			? null
+			: getFile().getPath();
 
 		if(getMessage() == null && resourcePath == null) {
 			if(children == null) {

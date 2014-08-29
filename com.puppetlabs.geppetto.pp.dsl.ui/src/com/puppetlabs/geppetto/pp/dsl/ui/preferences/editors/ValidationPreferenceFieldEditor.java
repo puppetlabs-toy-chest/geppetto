@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.Composite;
 
 /**
  * A field editor for a ValidationPreference
- *
  */
 public class ValidationPreferenceFieldEditor extends ComboFieldEditor {
 	private static final String[][] entryNamesAndValues = new String[][] {

@@ -15,7 +15,6 @@ import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * Adapts INode to IDomNode
- *
  */
 public class NodeModelDomNodes {
 	// public class NodeModelCompositeNode extends NodeModelNode {

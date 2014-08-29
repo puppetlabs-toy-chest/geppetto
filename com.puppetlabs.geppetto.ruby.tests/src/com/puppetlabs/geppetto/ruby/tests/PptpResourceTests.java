@@ -104,8 +104,7 @@ public class PptpResourceTests {
 
 	@Test
 	public void testFunctionResource3WoRegistry() throws IOException {
-		doFunctionResource(
-			"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest3.rb", "echotest3", false);
+		doFunctionResource("testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest3.rb", "echotest3", false);
 	}
 
 	@Test
@@ -117,17 +116,14 @@ public class PptpResourceTests {
 
 		Parameter nameEntry = findParameter(type, "name");
 		assertNotNull("Should have found a parameter called 'name'", nameEntry);
-		assertEquals(
-			"Should have found a description of 'name'", "<p>Description of name</p>", nameEntry.getDocumentation());
+		assertEquals("Should have found a description of 'name'", "<p>Description of name</p>", nameEntry.getDocumentation());
 
 		Parameter ensure = findParameter(type, "ensure");
 		assertNotNull("Should have found a parameter called 'ensure'", ensure);
 
 		Property weightEntry = findProperty(type, "weight");
 		assertNotNull("Should have found a property called 'weight'", weightEntry);
-		assertEquals(
-			"Should have found a description of 'weight'", "<p>Description of weight</p>",
-			weightEntry.getDocumentation());
+		assertEquals("Should have found a description of 'weight'", "<p>Description of weight</p>", weightEntry.getDocumentation());
 
 		Property emptyEntry = findProperty(type, "empty");
 		assertNotNull("Should have found a property called 'weight'", emptyEntry);
@@ -142,8 +138,7 @@ public class PptpResourceTests {
 		Property extra1 = findProperty(tf, "extra1");
 		assertNotNull("Should have found extra1", extra1);
 
-		tf = doTypeFragmentResource(
-			"testData/mock-puppet-distro/puppet-2.6.2_0/lib/puppet/type/mocktype/extra2.rb", "mocktype");
+		tf = doTypeFragmentResource("testData/mock-puppet-distro/puppet-2.6.2_0/lib/puppet/type/mocktype/extra2.rb", "mocktype");
 		assertEquals("Should have found one property", 1, tf.getProperties().size());
 		Property extra2 = findProperty(tf, "extra2");
 		assertNotNull("Should have found extra2", extra2);

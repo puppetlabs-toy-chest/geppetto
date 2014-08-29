@@ -42,10 +42,8 @@ public interface ValidationService {
 	 * Performs validation and reports diagnostics for all files given by source under the control of options. If a set
 	 * of examinedFiles is given the diagnostics reported is limited to this set. An empty set is the same as reporting
 	 * diagnostics for all files in source.
-	 *
 	 * The options may be null, in which case a syntax check is performed on everything in the intersection of source
 	 * and examinedFiles.
-	 *
 	 * The examinedFiles may contain individual regular files or directories. Directories in examinedFiles are validated
 	 * as modules. One special case is when examinedFiles contains the source and source is a Directory - this is
 	 * interpreted as source is a PUPPET-ROOT, and that validation for everything in the non-modules part is wanted (and
@@ -118,8 +116,7 @@ public interface ValidationService {
 	 * @param monitor
 	 *            Monitor where progress is reported. Also used as cancellation mechanism
 	 */
-	BuildResult validateModule(Diagnostic diagnostics, ValidationOptions options, File moduleDirectory,
-			IProgressMonitor monitor);
+	BuildResult validateModule(Diagnostic diagnostics, ValidationOptions options, File moduleDirectory, IProgressMonitor monitor);
 
 	/**
 	 * Performs static com.puppetlabs.geppetto.validation and catalog production for a given node, it's factor data, a
@@ -140,8 +137,8 @@ public interface ValidationService {
 	 * @param monitor
 	 *            Monitor where progress is reported. Also used as cancellation mechanism
 	 */
-	void validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot, File factorData,
-			File siteFile, String nodeName, IProgressMonitor monitor);
+	void validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot, File factorData, File siteFile,
+			String nodeName, IProgressMonitor monitor);
 
 	/**
 	 * Statically validates all modules contained in a catalog (a directory of Puppet modules). The file parameter is a
@@ -156,7 +153,6 @@ public interface ValidationService {
 	 * @param monitor
 	 *            Monitor where progress is reported. Also used as cancellation mechanism
 	 */
-	BuildResult validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot,
-			IProgressMonitor monitor);
+	BuildResult validateRepository(Diagnostic diagnostics, ValidationOptions options, File catalogRoot, IProgressMonitor monitor);
 
 }

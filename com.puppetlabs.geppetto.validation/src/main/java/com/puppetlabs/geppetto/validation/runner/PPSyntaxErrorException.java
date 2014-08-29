@@ -15,10 +15,8 @@ import org.eclipse.xtext.parser.IParseResult;
 /**
  * SyntaxErrorException thrown with more information about syntax error(s)
  * detected when doing low level parsing of puppet source.
- *
  * To investigate the actual error, get the parse result, and drill down into
  * the nodes returned from {@link IParseResult#getSyntaxErrors()}.
- *
  */
 public class PPSyntaxErrorException extends Exception {
 

@@ -140,8 +140,8 @@ public class Release extends AbbrevRelease {
 
 	public String getMetadataJSON() {
 		return metadata == null
-				? null
-						: metadata.getJson();
+			? null
+			: metadata.getJson();
 	}
 
 	/**
@@ -163,8 +163,8 @@ public class Release extends AbbrevRelease {
 	 */
 	public List<String> getTags() {
 		return tags == null
-				? Collections.<String> emptyList()
-						: Collections.unmodifiableList(tags);
+			? Collections.<String> emptyList()
+			: Collections.unmodifiableList(tags);
 	}
 
 	/**
@@ -244,8 +244,8 @@ public class Release extends AbbrevRelease {
 	 */
 	public void setMetadataJSON(String metadataJSON) {
 		this.metadata = metadataJSON == null
-				? null
-						: new InlineJson(metadataJSON);
+			? null
+			: new InlineJson(metadataJSON);
 	}
 
 	/**

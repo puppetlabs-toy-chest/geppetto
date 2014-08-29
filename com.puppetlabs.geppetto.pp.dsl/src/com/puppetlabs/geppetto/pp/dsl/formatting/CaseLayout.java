@@ -37,7 +37,6 @@ import com.google.inject.Provider;
 
 /**
  * A sub layout handler for CaseExpression and Case
- *
  */
 public class CaseLayout {
 
@@ -115,8 +114,7 @@ public class CaseLayout {
 					//
 					continuedFlow.appendBreak();
 					continuedFlow.getIndentation();
-					availableWidth = currentMaxWidth - (continuedFlow.getIndentation() + 1) *
-							continuedFlow.getIndentSize();
+					availableWidth = currentMaxWidth - (continuedFlow.getIndentation() + 1) * continuedFlow.getIndentSize();
 				}
 				// used to measure output of formatted case values
 				// adjust its width to available width (and do not mark items consumed in the given context)
@@ -145,8 +143,7 @@ public class CaseLayout {
 				feeder.sequence(n, continuedFlow, dlc);
 			}
 		}
-		List<Integer> remainingWidths = markupWidths(
-			colonNodes, widths, availableWidth, clusters, doCompaction, doAlignment);
+		List<Integer> remainingWidths = markupWidths(colonNodes, widths, availableWidth, clusters, doCompaction, doAlignment);
 
 		if(doCompaction && allCompactable)
 			markupCompact(colonNodes, remainingWidths, context);
@@ -164,9 +161,7 @@ public class CaseLayout {
 			DelegatingLayoutContext caseStatementContext = new DelegatingLayoutContext(context, remainingWidths.get(i));
 			TextFlow caseStatementFlow = new TextFlow(caseStatementContext);
 			if(statements != null)
-				feeder.sequence(
-					statements, caseStatementFlow, caseStatementContext, new SkipInitialWhitespacePredicate(),
-					alwaysFalse);
+				feeder.sequence(statements, caseStatementFlow, caseStatementContext, new SkipInitialWhitespacePredicate(), alwaysFalse);
 			// only 1 line high and did not overflow
 			if(!(caseStatementFlow.getHeight() <= 1 && caseStatementFlow.getWidthOfLastLine() <= remainingWidths.get(i))) {
 				return false;
@@ -207,25 +202,25 @@ public class CaseLayout {
 	 * @param doCompaction
 	 * @return
 	 */
-	private List<Integer> markupWidths(List<IDomNode> colonNodes, List<Integer> widths, int availableWidth,
-		IntegerCluster clusters, boolean doCompaction, boolean doAlignment) {
+	private List<Integer> markupWidths(List<IDomNode> colonNodes, List<Integer> widths, int availableWidth, IntegerCluster clusters,
+			boolean doCompaction, boolean doAlignment) {
 		// assign widths and alignment to the colon nodes
 		// compute available width for remainder if all cases are compactable
 		List<Integer> remainingWidths = doCompaction
-				? Lists.<Integer> newArrayList()
-						: null;
-				for(int i = 0; i < colonNodes.size(); i++) {
-					IDomNode c = colonNodes.get(i);
-					int w = widths.get(i);
-					int mw = doAlignment
-							? clusters.clusterMax(w)
-									: w;
-							if(doAlignment)
-								c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
-									styles.width(1 + mw - w)));
-							if(doCompaction)
-								remainingWidths.add(availableWidth - mw - 6); // 6 = ": { " +" }"
-				}
-				return remainingWidths;
+			? Lists.<Integer> newArrayList()
+			: null;
+		for(int i = 0; i < colonNodes.size(); i++) {
+			IDomNode c = colonNodes.get(i);
+			int w = widths.get(i);
+			int mw = doAlignment
+				? clusters.clusterMax(w)
+				: w;
+			if(doAlignment)
+				c.getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), //
+					styles.width(1 + mw - w)));
+			if(doCompaction)
+				remainingWidths.add(availableWidth - mw - 6); // 6 = ": { " +" }"
+		}
+		return remainingWidths;
 	}
 }

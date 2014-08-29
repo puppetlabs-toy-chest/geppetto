@@ -16,7 +16,6 @@ import org.eclipse.core.runtime.IPath;
 
 /**
  * Produces HREF strings in absolute file path format.
- *
  */
 public class AbsoluteFileHrefProducer extends AbstractHrefProducer {
 

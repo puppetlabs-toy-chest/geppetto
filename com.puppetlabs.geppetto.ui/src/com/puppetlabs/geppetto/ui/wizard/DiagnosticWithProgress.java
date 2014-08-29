@@ -47,8 +47,7 @@ public class DiagnosticWithProgress extends Diagnostic {
 
 	private int remainingOnCurrentTask;
 
-	public DiagnosticWithProgress(IProgressMonitor parentMonitor, int ticksInParent, List<String> subtaskNames,
-			int msPerTask) {
+	public DiagnosticWithProgress(IProgressMonitor parentMonitor, int ticksInParent, List<String> subtaskNames, int msPerTask) {
 		ticksPerTask = msPerTask / 100; // We tick 10 times per second
 		monitor = new SubProgressMonitor(parentMonitor, ticksInParent);
 		monitor.beginTask(null, subtaskNames.size() * ticksPerTask);

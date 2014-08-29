@@ -223,12 +223,12 @@ public class FunctionImpl extends EObjectImpl implements Function {
 		switch(featureID) {
 			case PPTPPackage.FUNCTION__DOCUMENTATION:
 				return DOCUMENTATION_EDEFAULT == null
-						? documentation != null
-						: !DOCUMENTATION_EDEFAULT.equals(documentation);
+					? documentation != null
+					: !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case PPTPPackage.FUNCTION__NAME:
 				return NAME_EDEFAULT == null
-						? name != null
-						: !NAME_EDEFAULT.equals(name);
+					? name != null
+					: !NAME_EDEFAULT.equals(name);
 			case PPTPPackage.FUNCTION__DEPRECATED:
 				return deprecated != DEPRECATED_EDEFAULT;
 			case PPTPPackage.FUNCTION__RVALUE:
@@ -353,8 +353,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 		boolean oldDeprecated = deprecated;
 		deprecated = newDeprecated;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.FUNCTION__DEPRECATED, oldDeprecated, deprecated));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.FUNCTION__DEPRECATED, oldDeprecated, deprecated));
 	}
 
 	/**
@@ -368,8 +367,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 		String oldDocumentation = documentation;
 		documentation = newDocumentation;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.FUNCTION__DOCUMENTATION, oldDocumentation, documentation));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.FUNCTION__DOCUMENTATION, oldDocumentation, documentation));
 	}
 
 	/**

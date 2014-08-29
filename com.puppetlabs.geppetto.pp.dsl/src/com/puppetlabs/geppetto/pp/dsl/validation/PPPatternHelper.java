@@ -18,7 +18,6 @@ import com.google.inject.Singleton;
 /**
  * Helper patterns for puppet
  * (hint: http://www.regexplanet.com/simple/index.html for interactive testing of java regex).
- *
  */
 // terminal NAME : ('0'..'9' | 'a'..'z') EXT_WORD_CHAR* ;
 // terminal CLASS_NAME : (('a'..'z') EXT_WORD_CHAR*)? ('::' ('a'..'z') EXT_WORD_CHAR*)+;

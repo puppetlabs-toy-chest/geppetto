@@ -184,18 +184,17 @@ public class ExpressionTEImpl extends TextExpressionImpl implements ExpressionTE
 		if(newExpression != expression) {
 			NotificationChain msgs = null;
 			if(expression != null)
-				msgs = ((InternalEObject) expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.EXPRESSION_TE__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject) expression).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.EXPRESSION_TE__EXPRESSION, null, msgs);
 			if(newExpression != null)
-				msgs = ((InternalEObject) newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.EXPRESSION_TE__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject) newExpression).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.EXPRESSION_TE__EXPRESSION, null, msgs);
 			msgs = basicSetExpression(newExpression, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.EXPRESSION_TE__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.EXPRESSION_TE__EXPRESSION, newExpression, newExpression));
 	}
 
 } // ExpressionTEImpl

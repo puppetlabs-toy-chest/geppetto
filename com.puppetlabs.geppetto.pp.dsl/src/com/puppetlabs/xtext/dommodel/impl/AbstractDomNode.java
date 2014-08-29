@@ -25,7 +25,6 @@ import com.google.common.collect.Sets;
 
 /**
  * Abstract implementation of IDomNode
- *
  */
 public abstract class AbstractDomNode implements IDomNode {
 	private static class ParentIterator implements Iterator<IDomNode> {

@@ -15,7 +15,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * Puppet Qualified Name Converter defines the separator '::'
- *
  */
 public class PPQualifiedNameConverter extends IQualifiedNameConverter.DefaultImpl {
 	private static final String separator = "::";
@@ -41,6 +40,6 @@ public class PPQualifiedNameConverter extends IQualifiedNameConverter.DefaultImp
 			return QualifiedName.EMPTY;
 		return super.toQualifiedName(qualifiedNameAsString.startsWith("$")
 			? qualifiedNameAsString.substring(1)
-					: qualifiedNameAsString);
+			: qualifiedNameAsString);
 	}
 }

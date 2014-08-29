@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
  * Helper for some of the icons.
- *
  */
 public class PPPluginImages {
 
@@ -130,8 +129,7 @@ public class PPPluginImages {
 
 	public static final ImageDescriptor DESC_MARK_OCCURRENCES = create(PATH_LCL, "mark_occurrences.gif");
 
-	public static final ImageDescriptor DESC_MARK_OCCURRENCES_DISABLED = create(
-		PATH_LCL_DISABLED, "mark_occurrences.gif");
+	public static final ImageDescriptor DESC_MARK_OCCURRENCES_DISABLED = create(PATH_LCL_DISABLED, "mark_occurrences.gif");
 
 	private static boolean imagesInitialized;
 

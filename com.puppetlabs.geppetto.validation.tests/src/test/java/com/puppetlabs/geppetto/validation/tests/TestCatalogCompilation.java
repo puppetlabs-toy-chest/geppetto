@@ -27,8 +27,7 @@ public class TestCatalogCompilation {
 		File factsFile = TestDataProvider.getTestFile("testData/test-node-facts.yaml");
 
 		PuppetCatalogCompilerRunner compiler = new PuppetCatalogCompilerRunner();
-		int result = compiler.compileCatalog(
-			manifest, modulePath, "test-node", factsFile, SubMonitor.convert(null, 10000));
+		int result = compiler.compileCatalog(manifest, modulePath, "test-node", factsFile, SubMonitor.convert(null, 10000));
 		assertEquals("Should have 0 exit status", 0, result);
 		List<CatalogDiagnostic> diagnostics = compiler.getDiagnostics();
 		assertEquals("Should have found n diagnostics", 0, diagnostics.size());

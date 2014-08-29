@@ -20,7 +20,7 @@ package com.puppetlabs.xtext.textflow;
  * 123456
  * 123456789
  *   123
- *
+ * 
  * ---
  * </pre>
  * <p>
@@ -52,7 +52,6 @@ package com.puppetlabs.xtext.textflow;
  * </tr>
  * </table>
  * </p>
- *
  */
 public interface IMetrics {
 	/**
@@ -76,8 +75,8 @@ public interface IMetrics {
 
 	/**
 	 * <p>
-	 * Produces the minimum amount of lines to present the content in the flow. A value of 0 is returned if the flow is
-	 * empty. The last line counts even if not terminated with a line break.
+	 * Produces the minimum amount of lines to present the content in the flow. A value of 0 is returned if the flow is empty. The last line
+	 * counts even if not terminated with a line break.
 	 * </p>
 	 * <p>
 	 * As an example the result for both <code>"abc\n123"</code> and <code>"abc\n123\n" is 2.

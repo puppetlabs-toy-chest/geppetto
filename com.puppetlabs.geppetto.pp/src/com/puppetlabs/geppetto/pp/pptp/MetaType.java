@@ -15,7 +15,6 @@ package com.puppetlabs.geppetto.pp.pptp;
  * A representation of the model object '<em><b>Meta Type</b></em>'.
  * <!-- end-user-doc -->
  *
- *
  * @see com.puppetlabs.geppetto.pp.pptp.PPTPPackage#getMetaType()
  * @model
  * @generated

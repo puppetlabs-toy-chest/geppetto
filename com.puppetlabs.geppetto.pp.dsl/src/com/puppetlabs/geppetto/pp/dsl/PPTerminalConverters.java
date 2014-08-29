@@ -34,8 +34,8 @@ public class PPTerminalConverters extends AbstractDeclarativeValueConverterServi
 			@Override
 			public String toString(Boolean value) {
 				return value.booleanValue()
-						? "@"
-								: "";
+					? "@"
+					: "";
 			}
 
 			@Override
@@ -63,8 +63,8 @@ public class PPTerminalConverters extends AbstractDeclarativeValueConverterServi
 				if(Strings.isEmpty(string))
 					throw new ValueConverterException("Could not convert empty string to boolean", node, null);
 				return new Boolean(string).equals(Boolean.TRUE)
-						? Boolean.TRUE
-								: Boolean.FALSE;
+					? Boolean.TRUE
+					: Boolean.FALSE;
 			}
 
 		};
@@ -81,8 +81,8 @@ public class PPTerminalConverters extends AbstractDeclarativeValueConverterServi
 			@Override
 			public String toString(Boolean value) {
 				return value.booleanValue()
-						? "("
-								: "";
+					? "("
+					: "";
 			}
 
 			@Override

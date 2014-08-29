@@ -26,12 +26,10 @@ import org.junit.Test;
 
 /**
  * Tests Literals
- *
  */
 public class TestLiterals extends AbstractPuppetTests {
 
-	public final static String[] validNames = {
-		"file", "File", "::File", "A::B::C", "class", "::or", "a::or", "::or-or" };
+	public final static String[] validNames = { "file", "File", "::File", "A::B::C", "class", "::or", "a::or", "::or-or" };
 
 	public final static String[] invalidNames = { "if", "else", "%#", "define:" };
 
@@ -113,8 +111,7 @@ public class TestLiterals extends AbstractPuppetTests {
 		EObject expr = pm.getStatements().get(0);
 		assertInstanceOf("Should be ResourceExpression", ResourceExpression.class, expr);
 		ResourceExpression resourceExpression = (ResourceExpression) expr;
-		assertInstanceOf(
-			"Should be LiteralNameOrReference", LiteralNameOrReference.class, resourceExpression.getResourceExpr());
+		assertInstanceOf("Should be LiteralNameOrReference", LiteralNameOrReference.class, resourceExpression.getResourceExpr());
 		LiteralNameOrReference name = (LiteralNameOrReference) resourceExpression.getResourceExpr();
 		assertEquals("Literal should be same as input", "File", name.getValue());
 
@@ -123,8 +120,7 @@ public class TestLiterals extends AbstractPuppetTests {
 	@Test
 	public void test_Validate_LiteralNameOrReference_NotOk() {
 		final String[] keywords = {
-				"and", "or", "case", "default", "define", "import", "if", "elsif", "else", "inherits", "node", "in",
-				"undef", "true", "false" };
+			"and", "or", "case", "default", "define", "import", "if", "elsif", "else", "inherits", "node", "in", "undef", "true", "false" };
 		for(String s : keywords) {
 			LiteralNameOrReference n = createNameOrReference(s);
 			tester.validator().checkLiteralNameOrReference(n);

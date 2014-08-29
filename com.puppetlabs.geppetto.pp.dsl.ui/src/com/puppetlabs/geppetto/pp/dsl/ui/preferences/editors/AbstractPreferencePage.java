@@ -49,16 +49,14 @@ import com.google.inject.name.Named;
  * This is a reworked implementation the class with the same name in org.eclipse.xtext.ui.editor.preferences.
  * This implementation works with a {@link ProjectAwareScopedPreferenceStore} as oppoes to the
  * ScopedPreferenceStore used by Xtext < 2.3, and FixedScopedPreferenceStore used in Xtext > 2.3.
- *
  * <p>
  * The following changes have been made:
  * <ul>
- * <li>'useProjectSettings' is now stored in the project preference store as opposed to the project meta-data stored in
- * the workspace. This is done so that import of a project automatically gets the intended 'useProjectSettings'.</li>
+ * <li>'useProjectSettings' is now stored in the project preference store as opposed to the project meta-data stored in the workspace. This
+ * is done so that import of a project automatically gets the intended 'useProjectSettings'.</li>
  * </ul>
  */
-public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
-IWorkbenchPropertyPage {
+public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage, IWorkbenchPropertyPage {
 
 	private static final Logger log = Logger.getLogger(AbstractPreferencePage.class);
 
@@ -205,8 +203,7 @@ IWorkbenchPropertyPage {
 		boolean isUseProjectSettings = useProjectSettingsButton.getSelection();
 		link.setEnabled(!isUseProjectSettings);
 		if(!isUseProjectSettings) {
-			setSearchContexts(
-				getPreferenceStore(), new IScopeContext[] { new InstanceScope(), new ConfigurationScope() });
+			setSearchContexts(getPreferenceStore(), new IScopeContext[] { new InstanceScope(), new ConfigurationScope() });
 		}
 		else {
 			// copy instance values to project specific values
@@ -290,8 +287,8 @@ IWorkbenchPropertyPage {
 
 	/**
 	 * Sets the given search scopes in the preference store.
-	 * This implementation requires use of {@link ProjectAwareScopedPreferenceStore} - see
-	 * {@link PPPreferenceStoreAccess} and its binding in the UI
+	 * This implementation requires use of {@link ProjectAwareScopedPreferenceStore} - see {@link PPPreferenceStoreAccess} and its binding
+	 * in the UI
 	 * module.
 	 *
 	 * @param store

@@ -15,7 +15,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.Alignment;
 /**
  * An ICommentContainerInformation describes a "comment container", comment start/end, and repeating tokens, as well
  * as its start offset on the line (since this affects parsing of certain types of comments).
- *
  * Also see the concrete implementations {@link JavaSLCommentContainer}, {@link JavaLikeMLCommentContainer},
  * {@link JavaDocLikeCommentContainer},
  * and {@link HashSLCommentContainer}.
@@ -125,8 +124,7 @@ public interface ICommentContainerInformation {
 
 	}
 
-	public static class JavaLikeMLCommentContainer extends
-	ICommentContainerInformation.AbstractCommentContainerInformation {
+	public static class JavaLikeMLCommentContainer extends ICommentContainerInformation.AbstractCommentContainerInformation {
 
 		public JavaLikeMLCommentContainer() {
 
@@ -214,15 +212,13 @@ public interface ICommentContainerInformation {
 
 	/**
 	 * <p>
-	 * Marker interface for an ICommentContainerInformation that is Opaque - i.e. it is unknown how to extract the
-	 * comment text from its surrounding container. The only possible "formatting" is to output the verbatim comment
-	 * container and text.
+	 * Marker interface for an ICommentContainerInformation that is Opaque - i.e. it is unknown how to extract the comment text from its
+	 * surrounding container. The only possible "formatting" is to output the verbatim comment container and text.
 	 * </p>
 	 * <p>
 	 * Calling any of the informational methods on a class implementing this interface will result in an a
-	 * {@code UnsupportedOperationException}. It is legal to create instances with {@code new} or via the factory
-	 * {@link #create(int)} method. It is also possible to obtain the {@link #getLeftPosition()}.
-	 *
+	 * {@code UnsupportedOperationException}. It is legal to create instances with {@code new} or via the factory {@link #create(int)}
+	 * method. It is also possible to obtain the {@link #getLeftPosition()}.
 	 */
 	public interface Unknown {
 	}
@@ -262,8 +258,7 @@ public interface ICommentContainerInformation {
 
 		@Override
 		public boolean isSLStyle() {
-			throw new UnsupportedOperationException(
-					"An Unknown comment container does not know if it is SL style or not.");
+			throw new UnsupportedOperationException("An Unknown comment container does not know if it is SL style or not.");
 		}
 
 	}

@@ -34,7 +34,6 @@ import org.junit.Test;
 
 /**
  * Tests Literals
- *
  */
 public class TestDoubleQuotedString extends AbstractPuppetTests {
 
@@ -122,8 +121,7 @@ public class TestDoubleQuotedString extends AbstractPuppetTests {
 		assertTrue("List first entry should be VerbatimTE", t.get(0) instanceof VerbatimTE);
 		assertEquals("First element should be 'before'", "before", ((VerbatimTE) t.get(0)).getText());
 
-		assertTrue(
-			"Second element should be a LiteralNameOrReference", isExprClass(t.get(1), LiteralNameOrReference.class));
+		assertTrue("Second element should be a LiteralNameOrReference", isExprClass(t.get(1), LiteralNameOrReference.class));
 		assertTrue("Third element should be VertimTE", t.get(2) instanceof VerbatimTE);
 		assertEquals("Third element should be '/after'", "/after", ((VerbatimTE) t.get(2)).getText());
 
@@ -214,7 +212,6 @@ public class TestDoubleQuotedString extends AbstractPuppetTests {
 
 	/**
 	 * Formatter seems to not switch back to non hidden state interpolation.
-	 *
 	 */
 	@Test
 	public void test_Serialize_DqStringInterpolation() throws Exception {

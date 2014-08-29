@@ -37,7 +37,6 @@ import com.google.inject.Inject;
 
 /**
  * Provides handling of documentation comments.
- *
  */
 public class DocumentationAssociator {
 	private final PPGrammarAccess ga;
@@ -90,8 +89,8 @@ public class DocumentationAssociator {
 			return null;
 		ResourceDocumentationAdapter adapter = ResourceDocumentationAdapterFactory.eINSTANCE.adapt(r);
 		return adapter != null
-				? adapter.get(semantic)
-						: null;
+			? adapter.get(semantic)
+			: null;
 
 	}
 
@@ -120,7 +119,6 @@ public class DocumentationAssociator {
 	/**
 	 * Links comment nodes to classes listed in {@link #documentable} by collecting them in an
 	 * adapter (for later processing by formatter/styler).
-	 *
 	 */
 	public void linkDocumentation(EObject model) {
 		// clear stored tasks
@@ -165,8 +163,7 @@ public class DocumentationAssociator {
 				if(commentSequence.size() > 0) {
 					if(grammarElement == mlRule)
 						commentSequence.clear();
-					else if(grammarElement == slRule &&
-							commentSequence.get(commentSequence.size() - 1).getGrammarElement() == mlRule)
+					else if(grammarElement == slRule && commentSequence.get(commentSequence.size() - 1).getGrammarElement() == mlRule)
 						commentSequence.clear();
 				}
 				commentSequence.add(x);
@@ -187,8 +184,7 @@ public class DocumentationAssociator {
 				// check that a comment inside a structure (i.e. starts after the start of the structure)
 				// is not mistaken as following
 				EObject commentSemantic = NodeModelUtils.findActualSemanticObjectFor(x);
-				if(commentSemantic == semantic &&
-						x.getOffset() > NodeModelUtils.findActualNodeFor(semantic).getOffset())
+				if(commentSemantic == semantic && x.getOffset() > NodeModelUtils.findActualNodeFor(semantic).getOffset())
 					continue;
 				found: {
 					for(Class<?> clazz : documentable) {
@@ -235,7 +231,7 @@ public class DocumentationAssociator {
 			int endIndex = commentText.indexOf("\n", firstTagIndex);
 			String msg = commentText.substring(firstTagIndex, endIndex < 0
 				? commentText.length()
-						: endIndex);
+				: endIndex);
 
 			// trim ending */ from message if ML comment?
 			msg = msg.trim(); // remove trailing spaces (there can be to leading)
@@ -256,37 +252,37 @@ public class DocumentationAssociator {
 			String taskMsg = msg;
 			boolean isImportant = msg.contains("!");
 			String checkForBang = isImportant
-					? msg.replace('!', ' ').trim()
-							: msg;
-					if(checkForBang.length() <= firstTagLength) {
-						// System.out.println("EMPTY TODO MSG");
-						// scan backwards from tag start
-						String allText = node.getRootNode().getText();
-						int offset = node.getOffset() + firstTagIndex + firstTagLength - 1;
-						StringBuilder builder = new StringBuilder();
-						for(int o = offset; o >= 0; o--) {
-							char c = allText.charAt(o);
-							if(c == '\n')
-								break;
-							builder.append(c);
-						}
-						builder.reverse();
-						taskMsg = builder.toString();
-						taskMsg = taskMsg.trim();
-					}
-					// increase lines seen by those that were passed between previous found and this.
-					for(int i = previousTagIndex; i < firstTagIndex; i++)
-						if(commentText.charAt(i) == '\n')
-							line++;
+				? msg.replace('!', ' ').trim()
+				: msg;
+			if(checkForBang.length() <= firstTagLength) {
+				// System.out.println("EMPTY TODO MSG");
+				// scan backwards from tag start
+				String allText = node.getRootNode().getText();
+				int offset = node.getOffset() + firstTagIndex + firstTagLength - 1;
+				StringBuilder builder = new StringBuilder();
+				for(int o = offset; o >= 0; o--) {
+					char c = allText.charAt(o);
+					if(c == '\n')
+						break;
+					builder.append(c);
+				}
+				builder.reverse();
+				taskMsg = builder.toString();
+				taskMsg = taskMsg.trim();
+			}
+			// increase lines seen by those that were passed between previous found and this.
+			for(int i = previousTagIndex; i < firstTagIndex; i++)
+				if(commentText.charAt(i) == '\n')
+					line++;
 
-					PPTask task = new PPTask(taskMsg, line, node.getOffset() + firstTagIndex, msg.length(), isImportant);
-					taskList.add(task);
+			PPTask task = new PPTask(taskMsg, line, node.getOffset() + firstTagIndex, msg.length(), isImportant);
+			taskList.add(task);
 
-					if(endIndex < 0)
-						return; // done, no more tags could be found
+			if(endIndex < 0)
+				return; // done, no more tags could be found
 
-					startPos = endIndex + 1;
-					previousTagIndex = firstTagIndex;
+			startPos = endIndex + 1;
+			previousTagIndex = firstTagIndex;
 		}
 	}
 

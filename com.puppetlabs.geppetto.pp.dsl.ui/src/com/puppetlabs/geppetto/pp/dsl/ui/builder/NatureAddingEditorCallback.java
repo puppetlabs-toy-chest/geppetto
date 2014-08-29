@@ -23,7 +23,7 @@ public class NatureAddingEditorCallback extends ValidatingEditorCallback {
 		super.afterCreatePartControl(editor);
 		IResource resource = editor.getResource();
 		if(resource != null && resource.getProject().isAccessible() && !resource.getProject().isHidden() &&
-				!ToggleNatureAction.hasNature(resource.getProject())) {
+			!ToggleNatureAction.hasNature(resource.getProject())) {
 			ToggleNatureAction.toggleNature(resource.getProject());
 		}
 	}

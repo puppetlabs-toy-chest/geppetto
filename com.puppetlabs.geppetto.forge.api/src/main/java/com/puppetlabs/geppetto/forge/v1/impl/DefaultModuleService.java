@@ -46,8 +46,8 @@ public class DefaultModuleService implements ModuleService {
 		List<ModuleInfo> modules = null;
 		try {
 			modules = forgeClient.getV1(Constants.COMMAND_GROUP_MODULES, keyword == null
-					? null
-							: Collections.singletonMap("q", keyword), LIST_MODULE_INFO);
+				? null
+				: Collections.singletonMap("q", keyword), LIST_MODULE_INFO);
 		}
 		catch(HttpResponseException e) {
 			if(e.getStatusCode() != HttpStatus.SC_NOT_FOUND)

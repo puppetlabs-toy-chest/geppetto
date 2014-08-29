@@ -22,7 +22,6 @@ import com.google.inject.Inject;
 /**
  * A {@link Provider} of {@link IBreakAndAlignAdvice} that can look up information specific to the current
  * resource.
- *
  */
 public class ResourceIBreakAndAlignAdviceProvider extends PlatformResourceSpecificProvider<IBreakAndAlignAdvice> {
 	@Inject

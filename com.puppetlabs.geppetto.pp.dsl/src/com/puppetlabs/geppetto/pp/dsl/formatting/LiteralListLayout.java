@@ -31,13 +31,12 @@ import com.google.inject.Inject;
  * Performs semantic layout on a LiteralList in combination with text-fit check.
  * </p>
  * <p>
- * if the LiteralList list does not fit on the same line, line breaks are added to the whitespace after all commas
- * except the optional end comma.
+ * if the LiteralList list does not fit on the same line, line breaks are added to the whitespace after all commas except the optional end
+ * comma.
  * </p>
- *
  * <p>
- * The styling is assigned to the nodes directly to override all other rule based styling. Indentation is expected to be
- * handled by default rules.
+ * The styling is assigned to the nodes directly to override all other rule based styling. Indentation is expected to be handled by default
+ * rules.
  * </p>
  */
 public class LiteralListLayout extends AbstractListLayout {
@@ -58,8 +57,7 @@ public class LiteralListLayout extends AbstractListLayout {
 	}
 
 	@Override
-	protected void markup(IDomNode node, final boolean breakAndAlign, final int clusterWidth, ITextFlow flow,
-			ILayoutContext context) {
+	protected void markup(IDomNode node, final boolean breakAndAlign, final int clusterWidth, ITextFlow flow, ILayoutContext context) {
 
 		Iterator<IDomNode> itor = node.treeIterator();
 

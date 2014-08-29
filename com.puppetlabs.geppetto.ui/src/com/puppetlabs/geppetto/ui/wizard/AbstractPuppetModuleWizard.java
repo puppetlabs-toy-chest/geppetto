@@ -132,8 +132,7 @@ public abstract class AbstractPuppetModuleWizard extends AbstractPuppetProjectWi
 					ResourceUtil.openEditor(metadataFile);
 				}
 				catch(PartInitException partInitException) {
-					MessageDialog.openError(
-						getShell(), UIPlugin.getLocalString("_UI_OpenEditor_title"), partInitException.getMessage()); //$NON-NLS-1$
+					MessageDialog.openError(getShell(), UIPlugin.getLocalString("_UI_OpenEditor_title"), partInitException.getMessage()); //$NON-NLS-1$
 				}
 			}
 			return true;

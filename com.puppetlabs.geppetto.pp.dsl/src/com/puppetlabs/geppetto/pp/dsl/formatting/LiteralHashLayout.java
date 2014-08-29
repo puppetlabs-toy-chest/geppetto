@@ -63,8 +63,7 @@ public class LiteralHashLayout extends AbstractListLayout {
 	private void assignAlignmentAndWidths(Map<IDomNode, Integer> operatorNodes, IntegerCluster cluster) {
 		for(Entry<IDomNode, Integer> entry : operatorNodes.entrySet()) {
 			int w = entry.getValue();
-			entry.getKey().getStyles().add(
-				StyleSet.withStyles(styles.align(Alignment.right), styles.width(2 + cluster.clusterMax(w) - w)));
+			entry.getKey().getStyles().add(StyleSet.withStyles(styles.align(Alignment.right), styles.width(2 + cluster.clusterMax(w) - w)));
 		}
 
 	}
@@ -85,8 +84,7 @@ public class LiteralHashLayout extends AbstractListLayout {
 	}
 
 	@Override
-	protected void markup(IDomNode node, final boolean breakAndAlign, final int clusterWidth, ITextFlow flow,
-			ILayoutContext context) {
+	protected void markup(IDomNode node, final boolean breakAndAlign, final int clusterWidth, ITextFlow flow, ILayoutContext context) {
 
 		Iterator<IDomNode> itor = node.treeIterator();
 		Map<IDomNode, Integer> operatorNodes = Maps.newHashMap();

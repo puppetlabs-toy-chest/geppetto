@@ -88,8 +88,8 @@ public class InterpolatedVariableImpl extends ExpressionImpl implements Interpol
 		switch(featureID) {
 			case PPPackage.INTERPOLATED_VARIABLE__VAR_NAME:
 				return VAR_NAME_EDEFAULT == null
-				? varName != null
-				: !VAR_NAME_EDEFAULT.equals(varName);
+					? varName != null
+					: !VAR_NAME_EDEFAULT.equals(varName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,8 +159,7 @@ public class InterpolatedVariableImpl extends ExpressionImpl implements Interpol
 		String oldVarName = varName;
 		varName = newVarName;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.INTERPOLATED_VARIABLE__VAR_NAME, oldVarName, varName));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.INTERPOLATED_VARIABLE__VAR_NAME, oldVarName, varName));
 	}
 
 	/**

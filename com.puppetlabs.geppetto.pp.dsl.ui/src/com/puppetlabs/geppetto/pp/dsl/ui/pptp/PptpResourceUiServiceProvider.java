@@ -17,7 +17,6 @@ import com.google.inject.Inject;
 
 /**
  * @author henrik
- *
  */
 public class PptpResourceUiServiceProvider extends DefaultResourceUIServiceProvider {
 

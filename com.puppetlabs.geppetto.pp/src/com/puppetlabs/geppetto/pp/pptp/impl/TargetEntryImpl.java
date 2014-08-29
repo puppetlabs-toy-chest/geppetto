@@ -285,24 +285,24 @@ public abstract class TargetEntryImpl extends EObjectImpl implements TargetEntry
 				return contents != null && !contents.isEmpty();
 			case PPTPPackage.TARGET_ENTRY__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null
-						? description != null
-						: !DESCRIPTION_EDEFAULT.equals(description);
+					? description != null
+					: !DESCRIPTION_EDEFAULT.equals(description);
 			case PPTPPackage.TARGET_ENTRY__FUNCTIONS:
 				return functions != null && !functions.isEmpty();
 			case PPTPPackage.TARGET_ENTRY__TYPES:
 				return types != null && !types.isEmpty();
 			case PPTPPackage.TARGET_ENTRY__VERSION:
 				return VERSION_EDEFAULT == null
-						? version != null
-						: !VERSION_EDEFAULT.equals(version);
+					? version != null
+					: !VERSION_EDEFAULT.equals(version);
 			case PPTPPackage.TARGET_ENTRY__TYPE_FRAGMENTS:
 				return typeFragments != null && !typeFragments.isEmpty();
 			case PPTPPackage.TARGET_ENTRY__META_TYPE:
 				return metaType != null;
 			case PPTPPackage.TARGET_ENTRY__LABEL:
 				return LABEL_EDEFAULT == null
-						? label != null
-						: !LABEL_EDEFAULT.equals(label);
+					? label != null
+					: !LABEL_EDEFAULT.equals(label);
 			case PPTPPackage.TARGET_ENTRY__META_VARIABLES:
 				return metaVariables != null && !metaVariables.isEmpty();
 		}
@@ -415,8 +415,7 @@ public abstract class TargetEntryImpl extends EObjectImpl implements TargetEntry
 	@Override
 	public EList<TargetElement> getContents() {
 		if(contents == null) {
-			contents = new EObjectContainmentEList<TargetElement>(
-				TargetElement.class, this, PPTPPackage.TARGET_ENTRY__CONTENTS);
+			contents = new EObjectContainmentEList<TargetElement>(TargetElement.class, this, PPTPPackage.TARGET_ENTRY__CONTENTS);
 		}
 		return contents;
 	}
@@ -477,8 +476,7 @@ public abstract class TargetEntryImpl extends EObjectImpl implements TargetEntry
 	@Override
 	public EList<MetaVariable> getMetaVariables() {
 		if(metaVariables == null) {
-			metaVariables = new EObjectContainmentEList<MetaVariable>(
-				MetaVariable.class, this, PPTPPackage.TARGET_ENTRY__META_VARIABLES);
+			metaVariables = new EObjectContainmentEList<MetaVariable>(MetaVariable.class, this, PPTPPackage.TARGET_ENTRY__META_VARIABLES);
 		}
 		return metaVariables;
 	}
@@ -492,8 +490,7 @@ public abstract class TargetEntryImpl extends EObjectImpl implements TargetEntry
 	@Override
 	public EList<TypeFragment> getTypeFragments() {
 		if(typeFragments == null) {
-			typeFragments = new EObjectContainmentEList<TypeFragment>(
-				TypeFragment.class, this, PPTPPackage.TARGET_ENTRY__TYPE_FRAGMENTS);
+			typeFragments = new EObjectContainmentEList<TypeFragment>(TypeFragment.class, this, PPTPPackage.TARGET_ENTRY__TYPE_FRAGMENTS);
 		}
 		return typeFragments;
 	}
@@ -534,8 +531,7 @@ public abstract class TargetEntryImpl extends EObjectImpl implements TargetEntry
 		String oldDescription = description;
 		description = newDescription;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.TARGET_ENTRY__DESCRIPTION, oldDescription, description));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.TARGET_ENTRY__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -563,18 +559,17 @@ public abstract class TargetEntryImpl extends EObjectImpl implements TargetEntry
 		if(newMetaType != metaType) {
 			NotificationChain msgs = null;
 			if(metaType != null)
-				msgs = ((InternalEObject) metaType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-						PPTPPackage.TARGET_ENTRY__META_TYPE, null, msgs);
+				msgs = ((InternalEObject) metaType).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPTPPackage.TARGET_ENTRY__META_TYPE, null, msgs);
 			if(newMetaType != null)
-				msgs = ((InternalEObject) newMetaType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-						PPTPPackage.TARGET_ENTRY__META_TYPE, null, msgs);
+				msgs = ((InternalEObject) newMetaType).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPTPPackage.TARGET_ENTRY__META_TYPE, null, msgs);
 			msgs = basicSetMetaType(newMetaType, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.TARGET_ENTRY__META_TYPE, newMetaType, newMetaType));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.TARGET_ENTRY__META_TYPE, newMetaType, newMetaType));
 	}
 
 	/**
@@ -588,8 +583,7 @@ public abstract class TargetEntryImpl extends EObjectImpl implements TargetEntry
 		String oldVersion = version;
 		version = newVersion;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.TARGET_ENTRY__VERSION, oldVersion, version));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.TARGET_ENTRY__VERSION, oldVersion, version));
 	}
 
 	/**

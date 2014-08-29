@@ -15,16 +15,13 @@ package com.puppetlabs.xtext.textflow;
  * Interface for a flow of text.
  * </p>
  * <p>
- * This interface extends {@link Appendable} to allow an ITextFlow to be a direct receiver of output from a
- * {@link java.util.Formatter}.
+ * This interface extends {@link Appendable} to allow an ITextFlow to be a direct receiver of output from a {@link java.util.Formatter}.
  * </p>
- *
  */
 public interface ITextFlow extends Appendable, IMetrics {
 
 	/**
 	 * Interface for an ITextFlow that can append its content as individual calls to an output flow.
-	 *
 	 */
 	public interface Recording extends ITextFlow {
 
@@ -45,7 +42,6 @@ public interface ITextFlow extends Appendable, IMetrics {
 
 	/**
 	 * Interface for an ITextFlow capable of representing its contents as formatted text.
-	 *
 	 */
 	public interface WithText extends ITextFlow {
 
@@ -111,9 +107,8 @@ public interface ITextFlow extends Appendable, IMetrics {
 
 	/**
 	 * <p>
-	 * Appends the given string to the flow. The text may contain line separators, but each line is subject to
-	 * indentation. If the given string has leading whitespace this should most likely be removed first (see
-	 * {@link Strings#removeLeadingWhitespace(String)}).
+	 * Appends the given string to the flow. The text may contain line separators, but each line is subject to indentation. If the given
+	 * string has leading whitespace this should most likely be removed first (see {@link Strings#removeLeadingWhitespace(String)}).
 	 * </p>
 	 * <p>
 	 * To output text verbatim, see {@link #appendText(CharSequence, boolean)}.
@@ -186,7 +181,6 @@ public interface ITextFlow extends Appendable, IMetrics {
 	int getIndentSize();
 
 	/**
-	 *
 	 * @return the allowed max width in number of characters before automatic wrapping kicks in.
 	 */
 	public int getPreferredMaxWidth();
@@ -239,8 +233,7 @@ public interface ITextFlow extends Appendable, IMetrics {
 
 	/**
 	 * <p>
-	 * Sets the additional increment to use when a line is auto wrapped (does not fit on current line). The default is
-	 * 1.
+	 * Sets the additional increment to use when a line is auto wrapped (does not fit on current line). The default is 1.
 	 * </p>
 	 *
 	 * @param count

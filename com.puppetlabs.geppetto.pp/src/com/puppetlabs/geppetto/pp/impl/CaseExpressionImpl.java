@@ -230,18 +230,17 @@ public class CaseExpressionImpl extends ExpressionImpl implements CaseExpression
 		if(newSwitchExpr != switchExpr) {
 			NotificationChain msgs = null;
 			if(switchExpr != null)
-				msgs = ((InternalEObject) switchExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.CASE_EXPRESSION__SWITCH_EXPR, null, msgs);
+				msgs = ((InternalEObject) switchExpr).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.CASE_EXPRESSION__SWITCH_EXPR, null, msgs);
 			if(newSwitchExpr != null)
-				msgs = ((InternalEObject) newSwitchExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.CASE_EXPRESSION__SWITCH_EXPR, null, msgs);
+				msgs = ((InternalEObject) newSwitchExpr).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.CASE_EXPRESSION__SWITCH_EXPR, null, msgs);
 			msgs = basicSetSwitchExpr(newSwitchExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.CASE_EXPRESSION__SWITCH_EXPR, newSwitchExpr, newSwitchExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.CASE_EXPRESSION__SWITCH_EXPR, newSwitchExpr, newSwitchExpr));
 	}
 
 } // CaseExpressionImpl

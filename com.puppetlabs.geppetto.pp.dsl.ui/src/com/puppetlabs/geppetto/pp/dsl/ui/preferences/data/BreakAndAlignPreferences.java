@@ -18,13 +18,11 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * Manages the Break and Align related formatter preferences.
- *
  */
 public class BreakAndAlignPreferences extends AbstractPreferenceData {
 	public static final String FORMATTER_ALIGN_ID = "com.puppetlabs.geppetto.pp.dsl.PP.formatter.align";
 
-	public static final String FORMATTER_ALIGN_USE_PROJECT_SETTINGS = FORMATTER_ALIGN_ID + "." +
-			PPPreferenceConstants.USE_PROJECT_SETTINGS;
+	public static final String FORMATTER_ALIGN_USE_PROJECT_SETTINGS = FORMATTER_ALIGN_ID + "." + PPPreferenceConstants.USE_PROJECT_SETTINGS;
 
 	public static final String FORMATTER_ALIGN_DEFINITION_PARAMS = "formatAlignDefinitionParams";
 
@@ -79,8 +77,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 	 * @return when definition parameter lists should be aligned
 	 */
 	public WhenToApplyForDefinition getDefinitionParametersAdvice() {
-		return getEnum(
-			WhenToApplyForDefinition.class, FORMATTER_ALIGN_DEFINITION_PARAMS, WhenToApplyForDefinition.OnOverflow);
+		return getEnum(WhenToApplyForDefinition.class, FORMATTER_ALIGN_DEFINITION_PARAMS, WhenToApplyForDefinition.OnOverflow);
 	}
 
 	/**
@@ -90,8 +87,7 @@ public class BreakAndAlignPreferences extends AbstractPreferenceData {
 	 * @return when definition parameter lists should be aligned
 	 */
 	public WhenToApplyForDefinition getDefinitionParametersAdvice(IResource r) {
-		return getContextualEnum(
-			r, WhenToApplyForDefinition.class, FORMATTER_ALIGN_DEFINITION_PARAMS, WhenToApplyForDefinition.OnOverflow);
+		return getContextualEnum(r, WhenToApplyForDefinition.class, FORMATTER_ALIGN_DEFINITION_PARAMS, WhenToApplyForDefinition.OnOverflow);
 	}
 
 	/**

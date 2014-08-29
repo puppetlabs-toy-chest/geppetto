@@ -56,8 +56,7 @@ import com.google.gson.reflect.TypeToken;
  * @generated
  */
 public class CatalogImpl extends TaggableImpl implements Catalog {
-	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<Catalog> implements
-	JsonSerializer<Catalog> {
+	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<Catalog> implements JsonSerializer<Catalog> {
 
 		private static CatalogMetadata getMetadata(JsonObject jsonObj, String key, JsonDeserializationContext context) {
 			JsonElement json = jsonObj.get(key);
@@ -76,8 +75,8 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 
 			// unset values are null, not empty strings
 			return value.length() == 0
-					? null
-							: value;
+				? null
+				: value;
 		}
 
 		private static void putString(JsonObject jsonObj, String key, String value) {
@@ -167,8 +166,8 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 
 			docResult.add("data", result);
 			if(cat.getMetadata() != null)
-				docResult.add("metadata", new CatalogMetadataImpl.JsonAdapter().serialize(
-					cat.getMetadata(), CatalogMetadataImpl.class, context));
+				docResult.add(
+					"metadata", new CatalogMetadataImpl.JsonAdapter().serialize(cat.getMetadata(), CatalogMetadataImpl.class, context));
 
 			return docResult;
 		}
@@ -347,12 +346,12 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 		switch(featureID) {
 			case CatalogPackage.CATALOG__NAME:
 				return NAME_EDEFAULT == null
-				? name != null
-				: !NAME_EDEFAULT.equals(name);
+					? name != null
+					: !NAME_EDEFAULT.equals(name);
 			case CatalogPackage.CATALOG__VERSION:
 				return VERSION_EDEFAULT == null
-				? version != null
-				: !VERSION_EDEFAULT.equals(version);
+					? version != null
+					: !VERSION_EDEFAULT.equals(version);
 			case CatalogPackage.CATALOG__RESOURCES:
 				return resources != null && !resources.isEmpty();
 			case CatalogPackage.CATALOG__CLASSES:
@@ -501,8 +500,7 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 	@Override
 	public EList<CatalogResource> getResources() {
 		if(resources == null) {
-			resources = new EObjectContainmentEList<CatalogResource>(
-					CatalogResource.class, this, CatalogPackage.CATALOG__RESOURCES);
+			resources = new EObjectContainmentEList<CatalogResource>(CatalogResource.class, this, CatalogPackage.CATALOG__RESOURCES);
 		}
 		return resources;
 	}
@@ -529,18 +527,17 @@ public class CatalogImpl extends TaggableImpl implements Catalog {
 		if(newMetadata != metadata) {
 			NotificationChain msgs = null;
 			if(metadata != null)
-				msgs = ((InternalEObject) metadata).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					CatalogPackage.CATALOG__METADATA, null, msgs);
+				msgs = ((InternalEObject) metadata).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - CatalogPackage.CATALOG__METADATA, null, msgs);
 			if(newMetadata != null)
-				msgs = ((InternalEObject) newMetadata).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					CatalogPackage.CATALOG__METADATA, null, msgs);
+				msgs = ((InternalEObject) newMetadata).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - CatalogPackage.CATALOG__METADATA, null, msgs);
 			msgs = basicSetMetadata(newMetadata, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, CatalogPackage.CATALOG__METADATA, newMetadata, newMetadata));
+			eNotify(new ENotificationImpl(this, Notification.SET, CatalogPackage.CATALOG__METADATA, newMetadata, newMetadata));
 	}
 
 	/**

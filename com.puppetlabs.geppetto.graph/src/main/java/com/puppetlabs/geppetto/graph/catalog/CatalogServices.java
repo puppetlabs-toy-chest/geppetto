@@ -35,7 +35,6 @@ import com.google.inject.Injector;
  * <li>Produce a SVG graph of a Puppet Catalog</li>
  * <li>Produce a SVG graph of the difference of two Puppet Catalogs</li>
  * </ul>
- *
  */
 public class CatalogServices {
 
@@ -51,8 +50,8 @@ public class CatalogServices {
 
 	public CatalogServices(GraphHrefType graphHrefType, String prefix) {
 		this(graphHrefType == null
-				? GraphHrefType.JS.getHrefProducerClass()
-						: graphHrefType.getHrefProducerClass(), prefix);
+			? GraphHrefType.JS.getHrefProducerClass()
+			: graphHrefType.getHrefProducerClass(), prefix);
 	}
 
 	@Deprecated
@@ -73,9 +72,8 @@ public class CatalogServices {
 	 * @param root
 	 *            - the root for files listed as source files in the catalog
 	 */
-	public void produceDOTDeltaGraph(String catalogName, InputStream oldCatalogStream, IPath oldRoot,
-			InputStream newCatalogStream, IPath newRoot, OutputStream dotStream, IProgressMonitor monitor)
-					throws IOException {
+	public void produceDOTDeltaGraph(String catalogName, InputStream oldCatalogStream, IPath oldRoot, InputStream newCatalogStream,
+			IPath newRoot, OutputStream dotStream, IProgressMonitor monitor) throws IOException {
 		final SubMonitor ticker = SubMonitor.convert(monitor, 1000);
 		CatalogDeltaGraphProducer graphProducer = injector.getInstance(CatalogDeltaGraphProducer.class);
 		Catalog oldCatalog = CatalogJsonSerializer.load(oldCatalogStream);
@@ -86,13 +84,13 @@ public class CatalogServices {
 	}
 
 	@Deprecated
-	public void produceDOTGraph(String catalogName, InputStream catalogStream, OutputStream dotStream,
-			IProgressMonitor monitor) throws IOException {
+	public void produceDOTGraph(String catalogName, InputStream catalogStream, OutputStream dotStream, IProgressMonitor monitor)
+			throws IOException {
 		produceDOTGraph(catalogName, catalogStream, dotStream, monitor, null);
 	}
 
-	public void produceDOTGraph(String catalogName, InputStream catalogStream, OutputStream dotStream,
-			IProgressMonitor monitor, IPath root) throws IOException {
+	public void produceDOTGraph(String catalogName, InputStream catalogStream, OutputStream dotStream, IProgressMonitor monitor, IPath root)
+			throws IOException {
 		final SubMonitor ticker = SubMonitor.convert(monitor, 1000);
 		CatalogGraphProducer graphProducer = injector.getInstance(CatalogGraphProducer.class);
 		ICancel cancel = new ProgressMonitorCancelIndicator(ticker.newChild(IProgressMonitor.UNKNOWN), 1000);
@@ -119,9 +117,8 @@ public class CatalogServices {
 	 * @param root
 	 *            - the root for files listed as source files in the catalog
 	 */
-	public void produceSVGDeltaGraph(String catalogName, InputStream oldCatalogStream, IPath oldRoot,
-			InputStream newCatalogStream, IPath newRoot, OutputStream svgStream, IProgressMonitor monitor)
-					throws IOException {
+	public void produceSVGDeltaGraph(String catalogName, InputStream oldCatalogStream, IPath oldRoot, InputStream newCatalogStream,
+			IPath newRoot, OutputStream svgStream, IProgressMonitor monitor) throws IOException {
 		final SubMonitor ticker = SubMonitor.convert(monitor, 2000);
 		CatalogDeltaGraphProducer graphProducer = injector.getInstance(CatalogDeltaGraphProducer.class);
 		Catalog oldCatalog = CatalogJsonSerializer.load(oldCatalogStream);
@@ -133,17 +130,17 @@ public class CatalogServices {
 
 		graphProducer.produceGraph(cancel, catalogName, oldCatalog, oldRoot, newCatalog, newRoot, out);
 		graphProducer.getSVGProducer().produceSVG(out.toInputStream(false), svgStream, false, //
-			ticker.newChild(IProgressMonitor.UNKNOWN));
+		ticker.newChild(IProgressMonitor.UNKNOWN));
 	}
 
 	@Deprecated
-	public void produceSVGGraph(String catalogName, InputStream catalogStream, OutputStream svgStream,
-			IProgressMonitor monitor) throws IOException {
+	public void produceSVGGraph(String catalogName, InputStream catalogStream, OutputStream svgStream, IProgressMonitor monitor)
+			throws IOException {
 		produceSVGGraph(catalogName, catalogStream, svgStream, monitor, null);
 	}
 
-	public void produceSVGGraph(String catalogName, InputStream catalogStream, OutputStream svgStream,
-			IProgressMonitor monitor, IPath root) throws IOException {
+	public void produceSVGGraph(String catalogName, InputStream catalogStream, OutputStream svgStream, IProgressMonitor monitor, IPath root)
+			throws IOException {
 		final SubMonitor ticker = SubMonitor.convert(monitor, 2000);
 		CatalogGraphProducer graphProducer = injector.getInstance(CatalogGraphProducer.class);
 		ICancel cancel = new ProgressMonitorCancelIndicator(ticker.newChild(IProgressMonitor.UNKNOWN), 1000);
@@ -152,6 +149,6 @@ public class CatalogServices {
 		ByteArrayOutputStream2 out = new ByteArrayOutputStream2();
 		graphProducer.produceGraph(cancel, catalog, catalogName, out, root);
 		graphProducer.getSVGProducer().produceSVG(out.toInputStream(false), svgStream, false, //
-			ticker.newChild(IProgressMonitor.UNKNOWN));
+		ticker.newChild(IProgressMonitor.UNKNOWN));
 	}
 }

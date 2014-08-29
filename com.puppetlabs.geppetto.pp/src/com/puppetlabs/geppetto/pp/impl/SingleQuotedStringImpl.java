@@ -88,8 +88,8 @@ public class SingleQuotedStringImpl extends StringExpressionImpl implements Sing
 		switch(featureID) {
 			case PPPackage.SINGLE_QUOTED_STRING__TEXT:
 				return TEXT_EDEFAULT == null
-				? text != null
-				: !TEXT_EDEFAULT.equals(text);
+					? text != null
+					: !TEXT_EDEFAULT.equals(text);
 		}
 		return super.eIsSet(featureID);
 	}

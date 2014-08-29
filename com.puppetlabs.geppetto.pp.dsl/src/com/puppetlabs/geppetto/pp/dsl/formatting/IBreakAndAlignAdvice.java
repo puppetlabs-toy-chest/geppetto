@@ -14,7 +14,6 @@ import com.google.inject.ImplementedBy;
 
 /**
  * Formatting advisor for breaks and alignments
- *
  */
 @ImplementedBy(IBreakAndAlignAdvice.Default.class)
 public interface IBreakAndAlignAdvice {

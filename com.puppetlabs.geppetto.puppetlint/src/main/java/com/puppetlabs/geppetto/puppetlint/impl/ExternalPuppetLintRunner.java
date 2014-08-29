@@ -98,8 +98,7 @@ public class ExternalPuppetLintRunner implements PuppetLintRunner {
 			String path = m.group(3);
 			if(path.startsWith("./") || path.startsWith(".\\"))
 				path = path.substring(2);
-			issues.add(new PuppetLintIssue(
-				path, Severity.valueOf(m.group(1)), m.group(2), m.group(5), Integer.parseInt(m.group(4))));
+			issues.add(new PuppetLintIssue(path, Severity.valueOf(m.group(1)), m.group(2), m.group(5), Integer.parseInt(m.group(4))));
 		}
 		return issues;
 	}

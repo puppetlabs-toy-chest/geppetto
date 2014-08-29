@@ -244,8 +244,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	@Override
 	public EList<Parameter> getParameters() {
 		if(parameters == null) {
-			parameters = new EObjectContainmentEList<Parameter>(
-				Parameter.class, this, PPTPPackage.ABSTRACT_TYPE__PARAMETERS);
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, PPTPPackage.ABSTRACT_TYPE__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -259,8 +258,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 	@Override
 	public EList<Property> getProperties() {
 		if(properties == null) {
-			properties = new EObjectContainmentEList<Property>(
-				Property.class, this, PPTPPackage.ABSTRACT_TYPE__PROPERTIES);
+			properties = new EObjectContainmentEList<Property>(Property.class, this, PPTPPackage.ABSTRACT_TYPE__PROPERTIES);
 		}
 		return properties;
 	}
@@ -276,8 +274,7 @@ public abstract class AbstractTypeImpl extends TargetElementImpl implements Abst
 		IDocumented oldEReference0 = eReference0;
 		eReference0 = newEReference0;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPTPPackage.ABSTRACT_TYPE__EREFERENCE0, oldEReference0, eReference0));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPTPPackage.ABSTRACT_TYPE__EREFERENCE0, oldEReference0, eReference0));
 	}
 
 } // AbstractTypeImpl

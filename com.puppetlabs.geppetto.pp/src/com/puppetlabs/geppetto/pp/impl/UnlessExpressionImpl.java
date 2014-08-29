@@ -268,8 +268,7 @@ public class UnlessExpressionImpl extends ExpressionImpl implements UnlessExpres
 	@Override
 	public EList<Expression> getThenStatements() {
 		if(thenStatements == null) {
-			thenStatements = new EObjectContainmentEList<Expression>(
-					Expression.class, this, PPPackage.UNLESS_EXPRESSION__THEN_STATEMENTS);
+			thenStatements = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.UNLESS_EXPRESSION__THEN_STATEMENTS);
 		}
 		return thenStatements;
 	}
@@ -285,18 +284,17 @@ public class UnlessExpressionImpl extends ExpressionImpl implements UnlessExpres
 		if(newCondExpr != condExpr) {
 			NotificationChain msgs = null;
 			if(condExpr != null)
-				msgs = ((InternalEObject) condExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.UNLESS_EXPRESSION__COND_EXPR, null, msgs);
+				msgs = ((InternalEObject) condExpr).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.UNLESS_EXPRESSION__COND_EXPR, null, msgs);
 			if(newCondExpr != null)
-				msgs = ((InternalEObject) newCondExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.UNLESS_EXPRESSION__COND_EXPR, null, msgs);
+				msgs = ((InternalEObject) newCondExpr).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.UNLESS_EXPRESSION__COND_EXPR, null, msgs);
 			msgs = basicSetCondExpr(newCondExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.UNLESS_EXPRESSION__COND_EXPR, newCondExpr, newCondExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.UNLESS_EXPRESSION__COND_EXPR, newCondExpr, newCondExpr));
 	}
 
 	/**

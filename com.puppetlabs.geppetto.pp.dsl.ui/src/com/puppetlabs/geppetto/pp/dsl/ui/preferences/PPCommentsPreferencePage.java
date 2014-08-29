@@ -19,7 +19,6 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 
 /**
  * This is the puppet preference pane for comment formatting.
- *
  */
 public class PPCommentsPreferencePage extends AbstractPreferencePage {
 
@@ -35,23 +34,21 @@ public class PPCommentsPreferencePage extends AbstractPreferencePage {
 		addField(formatMLEditor);
 
 		EnumPreferenceFieldEditor commentTextEditor = new EnumPreferenceFieldEditor(
-			CommentTextAdvice.class, CommentPreferences.FORMATTER_COMMENTS_TEXT, "When comment text is too wide",
-			getFieldEditorParent());
+			CommentTextAdvice.class, CommentPreferences.FORMATTER_COMMENTS_TEXT, "When comment text is too wide", getFieldEditorParent());
 		addField(commentTextEditor);
 
 		EnumPreferenceFieldEditor bannerLinesEditor = new EnumPreferenceFieldEditor(
-			BannerAdvice.class, CommentPreferences.FORMATTER_COMMENTS_BANNERS, "When 'banner line' is too wide",
-			getFieldEditorParent());
+			BannerAdvice.class, CommentPreferences.FORMATTER_COMMENTS_BANNERS, "When 'banner line' is too wide", getFieldEditorParent());
 		addField(bannerLinesEditor);
 
 		BooleanFieldEditor alignSpecialLeft = new BooleanFieldEditor(
-			CommentPreferences.FORMATTER_COMMENTS_SPECIAL_LINES_ALIGNMENT,
-			"Place special lines ('--', '++', ...) left", getFieldEditorParent());
+			CommentPreferences.FORMATTER_COMMENTS_SPECIAL_LINES_ALIGNMENT, "Place special lines ('--', '++', ...) left",
+			getFieldEditorParent());
 		addField(alignSpecialLeft);
 
 		BooleanFieldEditor doubleDollarVerbatim = new BooleanFieldEditor(
-			CommentPreferences.FORMATTER_COMMENTS_VERBATIM_DOUBLEDOLLAR,
-			"Spaces in text between two '$' are non-breaking", getFieldEditorParent());
+			CommentPreferences.FORMATTER_COMMENTS_VERBATIM_DOUBLEDOLLAR, "Spaces in text between two '$' are non-breaking",
+			getFieldEditorParent());
 		addField(doubleDollarVerbatim);
 	}
 

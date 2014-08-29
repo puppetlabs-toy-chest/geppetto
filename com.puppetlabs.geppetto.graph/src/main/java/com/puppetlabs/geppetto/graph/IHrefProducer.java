@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.IPath;
 
 /**
  * Interface for Object to HREF.
- *
  */
 public interface IHrefProducer {
 	/**
@@ -45,7 +44,6 @@ public interface IHrefProducer {
 	 * A href for an edge from idFrom to idTo.
 	 *
 	 * @param splitEdge
-	 *
 	 * @return
 	 */
 	public String hrefForEdge(String idFrom, String idTo, boolean splitEdge);
@@ -61,7 +59,6 @@ public interface IHrefProducer {
 	 * A href for an edge from idFrom to an unresolved module
 	 *
 	 * @param splitEdge
-	 *
 	 * @return
 	 */
 	public String hrefForEdgeToUnresolved(String idFrom, boolean splitEdge);

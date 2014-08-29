@@ -17,7 +17,6 @@ import com.puppetlabs.geppetto.common.annotations.Nullable;
 /**
  * Producer of HREF attribute suitable for github (e.g. https://github.com/owner/proj/branch/<file>#Lnn).
  * The prefix "https://github.com/<ownder>/<repo>/<branch>/" should be set as the Configurable prefix.
- *
  */
 public class GithubURLHrefProducer extends RelativeFileHrefProducer {
 	@Inject(optional = true)

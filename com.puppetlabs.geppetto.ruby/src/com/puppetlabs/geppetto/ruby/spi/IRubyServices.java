@@ -24,7 +24,6 @@ import com.puppetlabs.geppetto.ruby.RubySyntaxException;
  * The interface for a ruby service that provides parsing (to produce syntax
  * errors and warnings), and puppet specific parsing services such as finding
  * custom functions and types.
- *
  */
 public interface IRubyServices {
 
@@ -85,8 +84,7 @@ public interface IRubyServices {
 	 */
 	public List<PPTypeInfo> getTypePropertiesInfo(File file) throws IOException, RubySyntaxException;
 
-	public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException,
-	RubySyntaxException;
+	public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException, RubySyntaxException;
 
 	/**
 	 * Indicates if this is a real service or one that produces no results.

@@ -16,7 +16,6 @@ import com.puppetlabs.geppetto.graph.IHrefProducer;
 
 /**
  * Configuration for DependencyGraph.
- *
  */
 public class DependencyGraphModule extends FixedSVGGraphModule {
 	public DependencyGraphModule(Class<? extends IHrefProducer> hrefProducerClass, String urlPrefix) {

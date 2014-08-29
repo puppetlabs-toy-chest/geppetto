@@ -32,14 +32,12 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 * org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String[])
 	 */
 	@Override
-	public abstract void accept(Severity severity, String message, EObject source, EStructuralFeature feature,
-			int index, String issueCode, String... issueData);
+	public abstract void accept(Severity severity, String message, EObject source, EStructuralFeature feature, int index, String issueCode,
+			String... issueData);
 
 	@Override
 	public void accept(Severity severity, String message, EObject source, String issueCode, String... issueData) {
-		accept(
-			severity, message, source.eContainer(), source.eContainingFeature(), indexOfSourceInParent(source),
-			issueCode, issueData);
+		accept(severity, message, source.eContainer(), source.eContainingFeature(), indexOfSourceInParent(source), issueCode, issueData);
 	}
 
 	/*
@@ -58,8 +56,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 * org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void acceptError(String message, EObject source, EStructuralFeature feature, int index, String issueCode,
-			String... issueData) {
+	public void acceptError(String message, EObject source, EStructuralFeature feature, int index, String issueCode, String... issueData) {
 		accept(Severity.ERROR, message, source, feature, index, issueCode, issueData);
 	}
 
@@ -70,8 +67,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 * org.eclipse.emf.ecore.EStructuralFeature, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void acceptError(String message, EObject source, EStructuralFeature feature, String issueCode,
-			String... issueData) {
+	public void acceptError(String message, EObject source, EStructuralFeature feature, String issueCode, String... issueData) {
 		acceptError(message, source, feature, INSIGNIFICANT_INDEX, issueCode, issueData);
 	}
 
@@ -82,8 +78,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 * org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void acceptError(String message, EObject source, int textOffset, int length, String issueCode,
-			String... issueData) {
+	public void acceptError(String message, EObject source, int textOffset, int length, String issueCode, String... issueData) {
 		accept(Severity.ERROR, message, source, textOffset, length, issueCode, issueData);
 	}
 
@@ -106,9 +101,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 */
 	@Override
 	public void acceptError(String message, EObject source, String issueCode, String... issueData) {
-		acceptError(
-			message, source.eContainer(), source.eContainingFeature(), indexOfSourceInParent(source), issueCode,
-			issueData);
+		acceptError(message, source.eContainer(), source.eContainingFeature(), indexOfSourceInParent(source), issueCode, issueData);
 	}
 
 	/*
@@ -129,8 +122,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 * org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String[])
 	 */
 	@Override
-	public void acceptWarning(String message, EObject source, EStructuralFeature feature, int index, String issueCode,
-			String... issueData) {
+	public void acceptWarning(String message, EObject source, EStructuralFeature feature, int index, String issueCode, String... issueData) {
 		accept(Severity.WARNING, message, source, feature, index, issueCode, issueData);
 	}
 
@@ -141,8 +133,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 * org.eclipse.emf.ecore.EStructuralFeature, java.lang.String, java.lang.String[])
 	 */
 	@Override
-	public void acceptWarning(String message, EObject source, EStructuralFeature feature, String issueCode,
-			String... issueData) {
+	public void acceptWarning(String message, EObject source, EStructuralFeature feature, String issueCode, String... issueData) {
 		acceptWarning(message, source, feature, INSIGNIFICANT_INDEX, issueCode, issueData);
 
 	}
@@ -154,8 +145,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 * org.eclipse.emf.ecore.EStructuralFeature, int, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void acceptWarning(String message, EObject source, int textOffset, int length, String issueCode,
-			String... issueData) {
+	public void acceptWarning(String message, EObject source, int textOffset, int length, String issueCode, String... issueData) {
 		accept(Severity.WARNING, message, source, textOffset, length, issueCode, issueData);
 	}
 
@@ -178,9 +168,7 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 	 */
 	@Override
 	public void acceptWarning(String message, EObject source, String issueCode, String... issueData) {
-		acceptWarning(
-			message, source.eContainer(), source.eContainingFeature(), indexOfSourceInParent(source), issueCode,
-			issueData);
+		acceptWarning(message, source.eContainer(), source.eContainingFeature(), indexOfSourceInParent(source), issueCode, issueData);
 	}
 
 	/*

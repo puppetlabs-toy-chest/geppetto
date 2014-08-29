@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.Composite;
 
 /**
  * A field editor for a ValidationPreference
- *
  */
 public class EnumPreferenceFieldEditor extends ComboFieldEditor {
 	// private static final String[][] entryNamesAndValues = new String[][] {
@@ -31,8 +30,7 @@ public class EnumPreferenceFieldEditor extends ComboFieldEditor {
 		return entryNamesAndValues;
 	}
 
-	public <T extends Enum<T>> EnumPreferenceFieldEditor(Class<T> enumType, String name, String labelText,
-		Composite parent) {
+	public <T extends Enum<T>> EnumPreferenceFieldEditor(Class<T> enumType, String name, String labelText, Composite parent) {
 		super(name, labelText, getEntryNamesAndValues(enumType), parent);
 
 	}

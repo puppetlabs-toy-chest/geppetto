@@ -59,8 +59,8 @@ public class PaginatedResult<T extends Entity> extends Entity {
 	 */
 	public List<T> getResults() {
 		return results == null
-				? Collections.<T> emptyList()
-						: Collections.unmodifiableList(results);
+			? Collections.<T> emptyList()
+			: Collections.unmodifiableList(results);
 	}
 
 	/**

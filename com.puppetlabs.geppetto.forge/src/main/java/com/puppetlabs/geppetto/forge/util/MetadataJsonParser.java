@@ -29,8 +29,7 @@ import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
 
 public abstract class MetadataJsonParser extends JsonPositionalParser {
-	public static final DiagnosticType METADATA_JSON = new DiagnosticType(
-		"METADATA_JSON", MetadataJsonParser.class.getName());
+	public static final DiagnosticType METADATA_JSON = new DiagnosticType("METADATA_JSON", MetadataJsonParser.class.getName());
 
 	protected abstract void call(CallSymbol key, int line, int offset, int length, List<JElement> arguments);
 
@@ -90,8 +89,8 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 
 	protected String getBadNameMessage(IllegalArgumentException e, boolean dependency) {
 		String pfx = dependency
-				? "A dependency "
-						: "A module ";
+			? "A dependency "
+			: "A module ";
 		return pfx + e.getMessage();
 	}
 
@@ -151,9 +150,7 @@ public abstract class MetadataJsonParser extends JsonPositionalParser {
 				if(args instanceof JArray)
 					call(symbol, entry.getLine(), entry.getOffset(), entry.getLength(), ((JArray) args).getValues());
 				else
-					call(
-						symbol, entry.getLine(), entry.getOffset(), entry.getLength(),
-						Collections.singletonList(entry.getElement()));
+					call(symbol, entry.getLine(), entry.getOffset(), entry.getLength(), Collections.singletonList(entry.getElement()));
 			}
 			catch(IllegalArgumentException e) {
 				handleDynamicAttribute(entry, chain);

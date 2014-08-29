@@ -86,12 +86,11 @@ public class PathEditor extends ListEditor {
 		PromptDialog dialog = new PromptDialog(getShell(), SWT.SHEET);
 		String[] value = new String[] { input };
 		int[] allSubdirs = new int[] { input.endsWith("/*")
-				? 1
-						: 0 };
+			? 1
+			: 0 };
 		int[] okCancel = new int[] { 1 };
 
-		dialog.prompt(
-			"Edit Path Segement", "Edit relative path", "Search all subdirectories", value, allSubdirs, okCancel);
+		dialog.prompt("Edit Path Segement", "Edit relative path", "Search all subdirectories", value, allSubdirs, okCancel);
 		if(okCancel[0] == 0)
 			return input;
 		if(allSubdirs[0] == 0)

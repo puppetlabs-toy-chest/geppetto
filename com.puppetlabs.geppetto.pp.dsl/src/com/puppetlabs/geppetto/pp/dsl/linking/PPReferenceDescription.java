@@ -17,7 +17,6 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 
 /**
  * Describes a reference from a source in a container to a target.
- *
  */
 public class PPReferenceDescription implements IReferenceDescription {
 
@@ -31,8 +30,7 @@ public class PPReferenceDescription implements IReferenceDescription {
 	 * @param targetDescriptor
 	 *            - the target descriptor
 	 */
-	public static PPReferenceDescription create(URI sourceReference, IEObjectDescription sourceContainer,
-			IEObjectDescription target) {
+	public static PPReferenceDescription create(URI sourceReference, IEObjectDescription sourceContainer, IEObjectDescription target) {
 		return new PPReferenceDescription(sourceReference, sourceContainer, target);
 
 	}
@@ -52,8 +50,7 @@ public class PPReferenceDescription implements IReferenceDescription {
 	 */
 	private IEObjectDescription targetReference;
 
-	public PPReferenceDescription(URI sourceReference, IEObjectDescription sourceContainer,
-			IEObjectDescription targetReference) {
+	public PPReferenceDescription(URI sourceReference, IEObjectDescription sourceContainer, IEObjectDescription targetReference) {
 		this.sourceReference = sourceReference;
 		this.sourceContainer = sourceContainer;
 		this.targetReference = targetReference;

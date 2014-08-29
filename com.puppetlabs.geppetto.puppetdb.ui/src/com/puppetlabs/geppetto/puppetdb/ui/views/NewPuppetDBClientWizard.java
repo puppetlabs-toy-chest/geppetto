@@ -120,8 +120,8 @@ public class NewPuppetDBClientWizard extends Wizard implements INewWizard {
 			@Override
 			String getMessage() {
 				return badFile
-						? UIPlugin.getLocalString("_UI_InvalidFileName", getValue().getAbsolutePath())
-								: super.getMessage();
+					? UIPlugin.getLocalString("_UI_InvalidFileName", getValue().getAbsolutePath())
+					: super.getMessage();
 			}
 
 			@Override

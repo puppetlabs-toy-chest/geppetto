@@ -123,14 +123,14 @@ public abstract class ModuleExportOperation implements IRunnableWithProgress {
 				if(monitor.isCanceled())
 					throw new OperationCanceledException();
 				try {
-					getForge().build(
-						spec.getModuleRoot(), destination, spec.getFileFilter(), null, null, diagWithProgress);
+					getForge().build(spec.getModuleRoot(), destination, spec.getFileFilter(), null, null, diagWithProgress);
 					diagWithProgress.taskDone();
 				}
 				catch(IOException e) {
-					errorTable.add(UIPlugin.createStatus(IStatus.ERROR, NLS.bind(
-						DataTransferMessages.DataTransfer_errorExporting, spec.getModuleRoot().getAbsoluteFile(),
-						e.getMessage()), e));
+					errorTable.add(UIPlugin.createStatus(
+						IStatus.ERROR,
+						NLS.bind(DataTransferMessages.DataTransfer_errorExporting, spec.getModuleRoot().getAbsoluteFile(), e.getMessage()),
+						e));
 				}
 			}
 			diagWithProgress.done();

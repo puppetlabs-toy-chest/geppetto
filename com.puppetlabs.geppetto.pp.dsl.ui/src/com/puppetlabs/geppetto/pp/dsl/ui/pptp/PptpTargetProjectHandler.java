@@ -43,7 +43,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelperProvider
 /**
  * Handler of the hidden puppet target project.
  * Is used to check the state of the workspace and all projects with puppet nature.
- *
  */
 @Singleton
 public class PptpTargetProjectHandler {
@@ -104,9 +103,9 @@ public class PptpTargetProjectHandler {
 			try {
 				oldTargetProject.delete(true, monitor);
 			}
-		catch(CoreException e) {
-			// ignore
-		}
+			catch(CoreException e) {
+				// ignore
+			}
 
 		IProject targetProject = workspace.getRoot().getProject(PPUiConstants.PPTP_TARGET_PROJECT_NAME);
 

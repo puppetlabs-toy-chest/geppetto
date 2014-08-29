@@ -241,18 +241,17 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 		if(newAttributes != attributes) {
 			NotificationChain msgs = null;
 			if(attributes != null)
-				msgs = ((InternalEObject) attributes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.RESOURCE_BODY__ATTRIBUTES, null, msgs);
+				msgs = ((InternalEObject) attributes).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.RESOURCE_BODY__ATTRIBUTES, null, msgs);
 			if(newAttributes != null)
-				msgs = ((InternalEObject) newAttributes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.RESOURCE_BODY__ATTRIBUTES, null, msgs);
+				msgs = ((InternalEObject) newAttributes).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.RESOURCE_BODY__ATTRIBUTES, null, msgs);
 			msgs = basicSetAttributes(newAttributes, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.RESOURCE_BODY__ATTRIBUTES, newAttributes, newAttributes));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.RESOURCE_BODY__ATTRIBUTES, newAttributes, newAttributes));
 	}
 
 	/**
@@ -266,18 +265,17 @@ public class ResourceBodyImpl extends EObjectImpl implements ResourceBody {
 		if(newNameExpr != nameExpr) {
 			NotificationChain msgs = null;
 			if(nameExpr != null)
-				msgs = ((InternalEObject) nameExpr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.RESOURCE_BODY__NAME_EXPR, null, msgs);
+				msgs = ((InternalEObject) nameExpr).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.RESOURCE_BODY__NAME_EXPR, null, msgs);
 			if(newNameExpr != null)
-				msgs = ((InternalEObject) newNameExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.RESOURCE_BODY__NAME_EXPR, null, msgs);
+				msgs = ((InternalEObject) newNameExpr).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.RESOURCE_BODY__NAME_EXPR, null, msgs);
 			msgs = basicSetNameExpr(newNameExpr, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.RESOURCE_BODY__NAME_EXPR, newNameExpr, newNameExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.RESOURCE_BODY__NAME_EXPR, newNameExpr, newNameExpr));
 	}
 
 } // ResourceBodyImpl

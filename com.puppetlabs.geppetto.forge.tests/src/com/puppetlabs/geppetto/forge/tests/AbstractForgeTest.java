@@ -89,8 +89,7 @@ public class AbstractForgeTest {
 				@Override
 				protected void configure() {
 					try {
-						bind(File.class).annotatedWith(named(Forge.CACHE_LOCATION)).toInstance(
-							getTestOutputFolder("cachefolder", true));
+						bind(File.class).annotatedWith(named(Forge.CACHE_LOCATION)).toInstance(getTestOutputFolder("cachefolder", true));
 					}
 					catch(IOException e) {
 						fail(e.getMessage());

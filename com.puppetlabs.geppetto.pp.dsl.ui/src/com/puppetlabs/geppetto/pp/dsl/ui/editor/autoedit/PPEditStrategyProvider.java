@@ -28,7 +28,6 @@ import com.google.inject.Inject;
 
 /**
  * Overrides the default to make auto matching/insert configurable.
- *
  */
 public class PPEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 
@@ -114,8 +113,7 @@ public class PPEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 		// Note that in case you have two string literals following each other directly, the deletion strategy wouldn't apply.
 		// One could add the same strategy for the STRING partition in addition to solve this
 		acceptor.accept(partitionDeletion.newInstance("\"", "\""), IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(
-			partitionEndSkippingEditStrategy.get(), TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
+		acceptor.accept(partitionEndSkippingEditStrategy.get(), TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
 	}
 
 	@Override
@@ -154,8 +152,7 @@ public class PPEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 		// Note that in case you have two string literals following each other directly, the deletion strategy wouldn't apply.
 		// One could add the same strategy for the STRING partition in addition to solve this
 		acceptor.accept(partitionDeletion.newInstance("\"", "\""), IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(
-			partitionEndSkippingEditStrategy.get(), TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
+		acceptor.accept(partitionEndSkippingEditStrategy.get(), TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
 	}
 
 	@Override

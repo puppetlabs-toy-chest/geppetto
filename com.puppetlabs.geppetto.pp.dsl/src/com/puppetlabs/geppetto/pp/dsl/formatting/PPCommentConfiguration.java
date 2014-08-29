@@ -20,7 +20,6 @@ import com.google.inject.name.Named;
 
 /**
  * Overrides default comment configuration with a '#' based single line comment container.
- *
  */
 public class PPCommentConfiguration extends ICommentConfiguration.Default {
 	public static final String SL_FORMATTER_ADVICE_NAME = "SL_ADVICE";

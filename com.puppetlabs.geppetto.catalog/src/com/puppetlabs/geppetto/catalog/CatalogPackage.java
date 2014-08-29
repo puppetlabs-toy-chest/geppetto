@@ -692,8 +692,8 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalog_Classes();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.catalog.Catalog#getEdges <em>Edges</em>}'.
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.catalog.Catalog#getEdges <em>Edges</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -705,8 +705,8 @@ public interface CatalogPackage extends EPackage {
 	EReference getCatalog_Edges();
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link com.puppetlabs.geppetto.catalog.Catalog#getMetadata <em>Metadata</em>}'.
+	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.catalog.Catalog#getMetadata <em>Metadata</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -718,8 +718,7 @@ public interface CatalogPackage extends EPackage {
 	EReference getCatalog_Metadata();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.Catalog#getName <em>Name</em>}
-	 * '.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.catalog.Catalog#getName <em>Name</em>} '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -731,8 +730,8 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalog_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.catalog.Catalog#getResources <em>Resources</em>}'.
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.catalog.Catalog#getResources
+	 * <em>Resources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -878,8 +877,7 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResource_Line();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link com.puppetlabs.geppetto.catalog.CatalogResource#getParameters
+	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.catalog.CatalogResource#getParameters
 	 * <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -943,8 +941,7 @@ public interface CatalogPackage extends EPackage {
 	EClass getCatalogResourceParameter();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute ' {@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -956,8 +953,8 @@ public interface CatalogPackage extends EPackage {
 	EAttribute getCatalogResourceParameter_Name();
 
 	/**
-	 * Returns the meta object for the attribute list '
-	 * {@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute list ' {@link com.puppetlabs.geppetto.catalog.CatalogResourceParameter#getValue
+	 * <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

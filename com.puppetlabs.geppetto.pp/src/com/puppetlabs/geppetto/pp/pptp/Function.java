@@ -14,7 +14,6 @@ package com.puppetlabs.geppetto.pp.pptp;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Function</b></em>'.
  * <!-- end-user-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,8 +30,7 @@ public interface Function extends IDocumented, TargetElement {
 	 * Returns the value of the '<em><b>RValue</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>RValue</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>RValue</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 *

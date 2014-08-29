@@ -20,7 +20,6 @@ import com.google.common.collect.Lists;
 
 /**
  * Describes information about Rakefiles.
- *
  */
 public class RakefileInfo {
 	public static class Rakefile {
@@ -29,7 +28,6 @@ public class RakefileInfo {
 		private List<Raketask> tasks;
 
 		/**
-		 *
 		 * @param path
 		 *            - relative path from "root"
 		 */
@@ -69,7 +67,6 @@ public class RakefileInfo {
 
 	/**
 	 * Describes one rake task.
-	 *
 	 */
 	public static class Raketask {
 		private String name;

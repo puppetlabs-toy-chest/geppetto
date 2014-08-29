@@ -19,7 +19,6 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 
 /**
  * Implementation of an {@link ISearchPathProvider} that returns a path based on a default path.
- *
  */
 @Singleton
 public class PPSearchPathProvider implements ISearchPathProvider, IConfigurableProvider {

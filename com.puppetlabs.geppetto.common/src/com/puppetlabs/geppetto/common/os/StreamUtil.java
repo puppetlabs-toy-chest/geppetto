@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -77,8 +77,8 @@ public class StreamUtil {
 
 		public String toString(Charset charset) {
 			return count == 0
-					? ""
-							: new String(buf, 0, count, charset);
+				? ""
+				: new String(buf, 0, count, charset);
 		}
 	}
 

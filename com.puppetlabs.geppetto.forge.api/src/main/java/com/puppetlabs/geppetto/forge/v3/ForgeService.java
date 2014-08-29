@@ -91,15 +91,13 @@ public interface ForgeService<T extends Entity, I> {
 
 	/**
 	 * <p>
-	 * Let the given <code>visitor</code> visit all entities that matches the given <code>query</code> in the order
-	 * given by <code>orderBy</code>. If a <code>progressMonitor</code> is provided, then it is initialized to the total
-	 * number of entries and it's expected that the visitor consumes one work unit on each visit. The visitor may also
-	 * use the monitor to cancel the iteration.
+	 * Let the given <code>visitor</code> visit all entities that matches the given <code>query</code> in the order given by
+	 * <code>orderBy</code>. If a <code>progressMonitor</code> is provided, then it is initialized to the total number of entries and it's
+	 * expected that the visitor consumes one work unit on each visit. The visitor may also use the monitor to cancel the iteration.
 	 * </p>
 	 * <p>
-	 * If the <code>progressMonitor</code> parameter is <code>null</code> then an instance of
-	 * {@link NullProgressMonitor} will be created. Hence, the visitor can rely on that the monitor will never be
-	 * <code>null</code> and that it can always be used for cancellation
+	 * If the <code>progressMonitor</code> parameter is <code>null</code> then an instance of {@link NullProgressMonitor} will be created.
+	 * Hence, the visitor can rely on that the monitor will never be <code>null</code> and that it can always be used for cancellation
 	 * </p>
 	 *
 	 * @param query
@@ -114,8 +112,8 @@ public interface ForgeService<T extends Entity, I> {
 	 *            Monitor that can be used for canceling the iteration and to report progress
 	 * @throws IOException
 	 */
-	void accept(Query<T> query, SortBy<T> sortBy, boolean includeDeleted, Visitor<T> visitor,
-			ProgressMonitor progressMonitor) throws IOException, InvocationTargetException;
+	void accept(Query<T> query, SortBy<T> sortBy, boolean includeDeleted, Visitor<T> visitor, ProgressMonitor progressMonitor)
+			throws IOException, InvocationTargetException;
 
 	/**
 	 * Retrieve the entity that corresponds to the given <code>id</code>.
@@ -123,7 +121,6 @@ public interface ForgeService<T extends Entity, I> {
 	 * @param id
 	 *            The id of the wanted entity
 	 * @return The entity that matches the <code>id</code> or <code>null</code> if no such entry could be found.
-	 *
 	 * @throws IOException
 	 */
 	T get(I id) throws IOException;
@@ -134,14 +131,13 @@ public interface ForgeService<T extends Entity, I> {
 	 * @param uri
 	 *            The uri of the wanted entity
 	 * @return The entity that matches the <code>id</code> or <code>null</code> if no such entry could be found.
-	 *
 	 * @throws IOException
 	 */
 	T get(URI uri) throws IOException;
 
 	/**
-	 * Returns a paginated result that corresponds to the given <code>query</code>, <code>sortBy</code>, and
-	 * <code>paginationInfo</code>. New pagination info for the next and previous page can be obtained from
+	 * Returns a paginated result that corresponds to the given <code>query</code>, <code>sortBy</code>, and <code>paginationInfo</code>.
+	 * New pagination info for the next and previous page can be obtained from
 	 * the returned result.
 	 *
 	 * @param query
@@ -155,8 +151,7 @@ public interface ForgeService<T extends Entity, I> {
 	 * @return
 	 * @throws IOException
 	 */
-	PaginatedResult<T> list(Query<T> query, SortBy<T> sortBy, PaginationInfo pagination, boolean includeDeleted)
-			throws IOException;
+	PaginatedResult<T> list(Query<T> query, SortBy<T> sortBy, PaginationInfo pagination, boolean includeDeleted) throws IOException;
 
 	/**
 	 * Returns result that corresponds to the given <code>query</code> and <code>sortBy</code>.

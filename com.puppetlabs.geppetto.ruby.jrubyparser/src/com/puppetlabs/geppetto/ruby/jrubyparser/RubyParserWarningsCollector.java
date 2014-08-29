@@ -106,8 +106,8 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 		@Override
 		public String getIdString() {
 			return id == null
-					? "jruby.syntax.error"
-					: id.toString();
+				? "jruby.syntax.error"
+				: id.toString();
 		}
 
 		@Override

@@ -18,7 +18,6 @@ import com.google.inject.Inject;
 /**
  * A provider of IFormattingContext that by default using {@link ResourceAwareFormattingContext#get()} produces
  * a non whitespace preserving context, as opposed to {@link ResourceAwareFormattingContext#getWhitespacePreserving()}.
- *
  * <p>
  * Note that this Provider does <i>not</i> implement <code>com.google.inject.Provider&lt;IFormattingContext&gt;</code>
  * </p>
@@ -31,7 +30,6 @@ public class ResourceAwareFormattingContext {
 
 		/**
 		 * Provides a non whitespace preserving (i.e. "formatting") IFormattingContext
-		 *
 		 */
 		@Override
 		public IFormattingContext create(EObject semantic) {

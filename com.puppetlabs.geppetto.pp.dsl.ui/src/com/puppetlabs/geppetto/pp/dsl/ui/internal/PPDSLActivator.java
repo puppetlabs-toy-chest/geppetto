@@ -46,7 +46,6 @@ import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
 
 /**
  * Adds support for PPTP Ruby by creating injectors and caching them using a language key
- *
  */
 public class PPDSLActivator extends PPActivator {
 	public static PPDSLActivator getDefault() {
@@ -77,8 +76,7 @@ public class PPDSLActivator extends PPActivator {
 
 	private static final Logger logger = Logger.getLogger(PPDSLActivator.class);
 
-	private static final QualifiedName LAST_BUILDER_VERSION = new QualifiedName(
-		"com.puppetlabs.geppetto.dsl.ui", "builder.version");
+	private static final QualifiedName LAST_BUILDER_VERSION = new QualifiedName("com.puppetlabs.geppetto.dsl.ui", "builder.version");
 
 	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
 
@@ -202,7 +200,7 @@ public class PPDSLActivator extends PPActivator {
 
 							// Rebuild if a project was added, removed, or changed its open status
 							if(delta.getResource() instanceof IProject &&
-									((delta.getKind() & (ADDED | REMOVED)) != 0 || (delta.getKind() & IResourceDelta.CHANGED) != 0 &&
+								((delta.getKind() & (ADDED | REMOVED)) != 0 || (delta.getKind() & IResourceDelta.CHANGED) != 0 &&
 									(delta.getFlags() & IResourceDelta.OPEN) != 0)) {
 								done = true;
 								getPPInjector().getInstance(RebuildChecker.class).triggerBuild();

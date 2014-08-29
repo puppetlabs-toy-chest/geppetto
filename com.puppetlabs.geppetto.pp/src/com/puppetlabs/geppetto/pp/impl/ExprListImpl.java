@@ -156,8 +156,7 @@ public class ExprListImpl extends ExpressionImpl implements ExprList {
 	@Override
 	public EList<Expression> getExpressions() {
 		if(expressions == null) {
-			expressions = new EObjectContainmentEList<Expression>(
-					Expression.class, this, PPPackage.EXPR_LIST__EXPRESSIONS);
+			expressions = new EObjectContainmentEList<Expression>(Expression.class, this, PPPackage.EXPR_LIST__EXPRESSIONS);
 		}
 		return expressions;
 	}

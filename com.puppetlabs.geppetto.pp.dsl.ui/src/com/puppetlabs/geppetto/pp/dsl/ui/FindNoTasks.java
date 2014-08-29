@@ -22,7 +22,6 @@ import org.eclipse.xtext.tasks.Task;
 /**
  * A ITaskFinder implementation that finds no tasks. Geppetto has its own way of detecting
  * tasks.
- *
  * TODO: Implement a proper {@link ITaskParser}
  *
  * @See PPTask

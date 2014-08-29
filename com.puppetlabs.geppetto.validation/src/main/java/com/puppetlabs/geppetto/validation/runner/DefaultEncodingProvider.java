@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 
 /**
  * A default implementation of IEncodingProvider that always returns UTF-8
- *
  */
 public class DefaultEncodingProvider implements IEncodingProvider {
 

@@ -67,6 +67,5 @@ public interface MetadataExtractor {
 	 * @throws IOException
 	 *             if extraction failed
 	 */
-	Metadata parseMetadata(File moduleDir, FileFilter filter, File[] extractedFrom, Diagnostic result)
-			throws IOException;
+	Metadata parseMetadata(File moduleDir, FileFilter filter, File[] extractedFrom, Diagnostic result) throws IOException;
 }

@@ -51,7 +51,6 @@ import com.google.inject.Inject;
  * - Calls that pass a data object and an index
  * - Initialization (the Serializer calls init depending on implementation class).
  * Suggest adding init(EObject context, EObject semantic) to ISequenceAcceptor.
- *
  */
 public class DomModelSequenceAdapter implements ISequenceAcceptor {
 
@@ -94,8 +93,7 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	 *      java.lang.String, org.eclipse.emf.ecore.EObject, int, org.eclipse.xtext.nodemodel.ICompositeNode)
 	 */
 	@Override
-	public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, String token, EObject value, int index,
-			ICompositeNode node) {
+	public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, String token, EObject value, int index, ICompositeNode node) {
 		addCompositeNodeToCurrent(GrammarUtil.containingCrossReference(datatypeRC), token, node, DATATYPE, //
 			NodeClassifier.CROSSREF, NodeClassifier.ASSIGNED);
 	}
@@ -126,8 +124,7 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	 *      java.lang.String, org.eclipse.emf.ecore.EObject, int, org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
-	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index,
-			ILeafNode node) {
+	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index, ILeafNode node) {
 		addLeafNodeToCurrent(GrammarUtil.containingCrossReference(terminalRC), token, node, TERMINAL, //
 			NodeClassifier.CROSSREF, NodeClassifier.ASSIGNED);
 	}
@@ -143,8 +140,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedEnum(org.eclipse.xtext.RuleCall,
-	 *      java.lang.String, java.lang.Object, int, org.eclipse.xtext.nodemodel.ICompositeNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor#acceptAssignedEnum(org.eclipse.xtext.RuleCall, java.lang.String,
+	 *      java.lang.Object, int, org.eclipse.xtext.nodemodel.ICompositeNode)
 	 */
 	@Override
 	public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
@@ -170,8 +167,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	/**
-	 * @see org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor#acceptComment(org.eclipse.xtext.AbstractRule,
-	 *      java.lang.String, org.eclipse.xtext.nodemodel.ILeafNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor#acceptComment(org.eclipse.xtext.AbstractRule, java.lang.String,
+	 *      org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
 	public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
@@ -250,8 +247,8 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 	 * TODO: When the ILeafNode is null, it is not possible to know if this is HIDDEN or not.
 	 * Currently, HIDDEN is set if node is null, else this is controlled by node.isHidden().
 	 *
-	 * @see org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor#acceptWhitespace(org.eclipse.xtext.AbstractRule,
-	 *      java.lang.String, org.eclipse.xtext.nodemodel.ILeafNode)
+	 * @see org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor#acceptWhitespace(org.eclipse.xtext.AbstractRule, java.lang.String,
+	 *      org.eclipse.xtext.nodemodel.ILeafNode)
 	 */
 	@Override
 	public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
@@ -276,8 +273,7 @@ public class DomModelSequenceAdapter implements ISequenceAcceptor {
 		return result;
 	}
 
-	protected BaseDomNode addLeafNodeToCurrent(EObject rule, String token, ILeafNode node, NodeType nodeType,
-			Object... classifiers) {
+	protected BaseDomNode addLeafNodeToCurrent(EObject rule, String token, ILeafNode node, NodeType nodeType, Object... classifiers) {
 		BaseDomNode result = new LeafDomNode();
 		result.setText(token);
 		result.setNode(node);

@@ -20,7 +20,6 @@ import com.google.common.collect.Maps;
  * Evaluates (a limited set of) Ruby constant expressions. TODO: Colon3Node
  * (i.e. name relative to global root) not handled - as FQN are returned as list
  * of String there is currently no marker if it is relative or absolute.
- *
  */
 public class ConstEvaluator extends AbstractJRubyVisitor {
 	private List<String> addAll(List<String> a, List<String> b) {

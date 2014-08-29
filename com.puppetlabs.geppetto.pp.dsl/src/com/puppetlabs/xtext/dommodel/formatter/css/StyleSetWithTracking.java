@@ -15,7 +15,6 @@ import java.util.Map;
 
 /**
  * A StyleSet that allows tracking of the source of each style.
- *
  */
 public class StyleSetWithTracking extends StyleSet {
 	protected Rule source;
@@ -35,8 +34,8 @@ public class StyleSetWithTracking extends StyleSet {
 
 	public Rule getStyleSource(IStyle<?> x) {
 		return sourceMap == null
-				? null
-						: sourceMap.get(x.getClass());
+			? null
+			: sourceMap.get(x.getClass());
 	}
 
 	@Override

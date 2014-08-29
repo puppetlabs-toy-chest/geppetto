@@ -49,9 +49,9 @@ public class LoadingResourceAccess implements PPReferenceFinder.ILocalResourceAc
 					try {
 						return work.exec(resourceSet);
 					}
-				catch(Exception e) {
-					throw new WrappedException(e);
-				}
+					catch(Exception e) {
+						throw new WrappedException(e);
+					}
 			}
 		}
 		return null;

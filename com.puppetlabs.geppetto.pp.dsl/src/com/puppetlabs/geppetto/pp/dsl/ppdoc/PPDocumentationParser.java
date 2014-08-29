@@ -38,15 +38,15 @@ import com.google.inject.Inject;
  * <li>definitions with hanging idents - [label] or label::</li>
  * </ul>
  * <p>
- * Note that parsing is simplistic and combinations of bold/italic/fixed will be shown in the "outermost" style i.e.
- * *_text_* is shown with only bold, and not (bold+italic). (Somewhat untested, so there could be some surprising
- * results). Also unsupported is the use of bold/italic/fixed in headers.
+ * Note that parsing is simplistic and combinations of bold/italic/fixed will be shown in the "outermost" style i.e. *_text_* is shown with
+ * only bold, and not (bold+italic). (Somewhat untested, so there could be some surprising results). Also unsupported is the use of
+ * bold/italic/fixed in headers.
  * </p>
  * <p>
- * The parser produces a list of {@link DocNode} instances, where each node holds a sequence of the text, an offset (in
- * the text document), a length, and a style int. The result also contains the "comment parts" (i.e. '/' '*' '#' and
- * whitespace) that are not considered part of the documentation text. These nodes have the style HIDDEN. To get only
- * the documentation text, simply concatenate all non HIDDEN nodes. Node text contains NL.
+ * The parser produces a list of {@link DocNode} instances, where each node holds a sequence of the text, an offset (in the text document),
+ * a length, and a style int. The result also contains the "comment parts" (i.e. '/' '*' '#' and whitespace) that are not considered part of
+ * the documentation text. These nodes have the style HIDDEN. To get only the documentation text, simply concatenate all non HIDDEN nodes.
+ * Node text contains NL.
  * </p>
  */
 public class PPDocumentationParser {
@@ -261,8 +261,8 @@ public class PPDocumentationParser {
 		Matcher matcher = mlCommentTail.matcher(allText);
 		matcher.find();
 		int tail = matcher.start();
-		final DocNode endNode = new DocNode(
-			node.getOffset() + tail, allText.length() - tail, HIDDEN, allText.substring(tail, allText.length()));
+		final DocNode endNode = new DocNode(node.getOffset() + tail, allText.length() - tail, HIDDEN, allText.substring(
+			tail, allText.length()));
 
 		allText = allText.substring(start + 2, tail);
 

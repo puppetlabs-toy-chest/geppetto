@@ -111,8 +111,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 		classReference = newClassReference;
 		if(eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(
-				this, Notification.SET, PPPackage.COLLECT_EXPRESSION__CLASS_REFERENCE, oldClassReference,
-				newClassReference);
+				this, Notification.SET, PPPackage.COLLECT_EXPRESSION__CLASS_REFERENCE, oldClassReference, newClassReference);
 			if(msgs == null)
 				msgs = notification;
 			else
@@ -307,8 +306,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.COLLECT_EXPRESSION__ATTRIBUTES, newAttributes, newAttributes));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.COLLECT_EXPRESSION__ATTRIBUTES, newAttributes, newAttributes));
 	}
 
 	/**
@@ -333,8 +331,7 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 		}
 		else if(eNotificationRequired())
 			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.COLLECT_EXPRESSION__CLASS_REFERENCE, newClassReference,
-				newClassReference));
+				this, Notification.SET, PPPackage.COLLECT_EXPRESSION__CLASS_REFERENCE, newClassReference, newClassReference));
 	}
 
 	/**
@@ -348,18 +345,17 @@ public class CollectExpressionImpl extends ExpressionImpl implements CollectExpr
 		if(newQuery != query) {
 			NotificationChain msgs = null;
 			if(query != null)
-				msgs = ((InternalEObject) query).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.COLLECT_EXPRESSION__QUERY, null, msgs);
+				msgs = ((InternalEObject) query).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.COLLECT_EXPRESSION__QUERY, null, msgs);
 			if(newQuery != null)
-				msgs = ((InternalEObject) newQuery).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.COLLECT_EXPRESSION__QUERY, null, msgs);
+				msgs = ((InternalEObject) newQuery).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.COLLECT_EXPRESSION__QUERY, null, msgs);
 			msgs = basicSetQuery(newQuery, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.COLLECT_EXPRESSION__QUERY, newQuery, newQuery));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.COLLECT_EXPRESSION__QUERY, newQuery, newQuery));
 	}
 
 } // CollectExpressionImpl

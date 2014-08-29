@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -44,8 +44,8 @@ public class StyleFactory implements IStyleFactory {
 		@Override
 		public T getValue(IDomNode ge) {
 			return function != null
-					? function.apply(ge)
-							: value;
+				? function.apply(ge)
+				: value;
 		}
 
 		@Override
@@ -60,15 +60,15 @@ public class StyleFactory implements IStyleFactory {
 		@Override
 		public boolean supports(NodeType type) {
 			return types == null
-					? true
-							: types.contains(type);
+				? true
+				: types.contains(type);
 		}
 
 		@Override
 		public boolean supports(Set<NodeType> types) {
 			return types == null
-					? true
-							: this.types.containsAll(types);
+				? true
+				: this.types.containsAll(types);
 		}
 	}
 
@@ -372,8 +372,7 @@ public class StyleFactory implements IStyleFactory {
 	}
 
 	@Override
-	public LineBreakStyle lineBreaks(int min, int normal, int max, boolean acceptCommentEndingWithBreak,
-			boolean acceptExisting) {
+	public LineBreakStyle lineBreaks(int min, int normal, int max, boolean acceptCommentEndingWithBreak, boolean acceptExisting) {
 		return new LineBreakStyle(new LineBreaks(min, normal, max, acceptCommentEndingWithBreak, acceptExisting));
 	}
 

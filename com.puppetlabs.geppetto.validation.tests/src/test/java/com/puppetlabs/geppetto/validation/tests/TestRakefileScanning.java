@@ -30,24 +30,21 @@ public class TestRakefileScanning extends AbstractValidationTest {
 	public void configuration() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/simple/"));
 		assertTrue("CONFIGURATION ERROR: Testdata directory must exist", root.exists());
-		assertTrue(
-			"CONFIGURATION ERROR: Testdata directory must be a directory: check test config!", root.isDirectory());
+		assertTrue("CONFIGURATION ERROR: Testdata directory must be a directory: check test config!", root.isDirectory());
 		File theRakefile = new File(root, "a/Rakefile");
 		assertTrue("CONFIGURATION ERROR: Testdata a/Rakefile must exist: check test config!", theRakefile.exists());
 
 		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
-		assertTrue(
-			"CONFIGURATION ERROR:: Configuration should include ruby services!!", result.isRubyServicesAvailable());
+		assertTrue("CONFIGURATION ERROR:: Configuration should include ruby services!!", result.isRubyServicesAvailable());
 	}
 
 	@Test
 	public void configurationOfFiles() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/simple/"));
 		assertTrue("CONFIGURATION ERROR: Testdata directory must exist", root.exists());
-		assertTrue(
-			"CONFIGURATION ERROR: Testdata directory must be a directory: check test config!", root.isDirectory());
+		assertTrue("CONFIGURATION ERROR: Testdata directory must be a directory: check test config!", root.isDirectory());
 		File theRakefile = new File(root, "a/Rakefile");
 		assertTrue("CONFIGURATION ERROR: Testdata a/Rakefile must exist: check test config!", theRakefile.exists());
 	}
@@ -85,8 +82,7 @@ public class TestRakefileScanning extends AbstractValidationTest {
 		RakefileInfo rakefileInfo = result.getRakefileInfo();
 		assertEquals("Should have found a rakefile", 1, rakefileInfo.getRakefiles().size());
 		Rakefile rakefile = rakefileInfo.getRakefiles().get(0);
-		assertEquals(
-			"Should have a relative path of smoketest/Rakefile", "smoketest/Rakefile", rakefile.getPath().toString());
+		assertEquals("Should have a relative path of smoketest/Rakefile", "smoketest/Rakefile", rakefile.getPath().toString());
 		assertEquals("Should have found 4 tasks", 5, rakefile.getTasks().size());
 		assertTask(rakefile.getTasks().get(0), "test0", "");
 		assertTask(rakefile.getTasks().get(1), "test1", "");
@@ -115,9 +111,7 @@ public class TestRakefileScanning extends AbstractValidationTest {
 		assertTask(rakefile.getTasks().get(2), "spec_task", "");
 		assertTask(rakefile.getTasks().get(3), "build", "Build package");
 		assertTask(rakefile.getTasks().get(4), "test:integration", "Run the full integration test suite (slow!)");
-		assertTask(
-			rakefile.getTasks().get(5), "test:check",
-				"Make sure some of the rspec-puppet directories/files are in place");
+		assertTask(rakefile.getTasks().get(5), "test:check", "Make sure some of the rspec-puppet directories/files are in place");
 		assertTask(rakefile.getTasks().get(6), "test:cucumber", "");
 		assertTask(rakefile.getTasks().get(7), "test:spec", "");
 

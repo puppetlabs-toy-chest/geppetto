@@ -30,17 +30,16 @@ import com.puppetlabs.geppetto.validation.runner.BuildResult;
  * and LINE is either a line number (starting with 1) or '-' if line number is
  * not available, and where OFFSET (character count from start of file), and
  * LENGTH are included if set.
- *
  */
 public class TextualValidationResultFormatter implements IValidationResultFormatter {
 
 	@Override
 	public void format(BuildResult buildResult, BasicDiagnostic diagnostics, OutputStream out) {
 		PrintStream p = out instanceof PrintStream
-				? (PrintStream) out
-						: new PrintStream(out);
-				formatDignostics(diagnostics, p);
-				p.flush();
+			? (PrintStream) out
+			: new PrintStream(out);
+		formatDignostics(diagnostics, p);
+		p.flush();
 	}
 
 	/**

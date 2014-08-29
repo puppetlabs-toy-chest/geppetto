@@ -20,7 +20,6 @@ import org.eclipse.xtext.util.ITextRegion;
 /**
  * A delegating Layout Context that can override the max width in the delegate, and that does not mark
  * consumed items as consumed in the delegate.
- *
  */
 public class DelegatingLayoutContext extends AbstractLayoutContext {
 

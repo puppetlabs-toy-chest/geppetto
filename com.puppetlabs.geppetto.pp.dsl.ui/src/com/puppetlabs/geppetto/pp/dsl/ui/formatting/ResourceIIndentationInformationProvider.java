@@ -21,7 +21,6 @@ import com.google.inject.Inject;
 /**
  * A {@link Provider} of {@link IIndentationInformation} that can look up information specific to the current
  * resource.
- *
  */
 public class ResourceIIndentationInformationProvider extends PlatformResourceSpecificProvider<IIndentationInformation> {
 	@Inject

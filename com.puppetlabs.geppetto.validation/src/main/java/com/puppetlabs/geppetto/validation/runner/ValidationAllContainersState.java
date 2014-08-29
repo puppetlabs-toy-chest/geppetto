@@ -23,7 +23,6 @@ import com.google.common.collect.Multimaps;
 /**
  * This specialization of the default {@link ResourceSetBasedAllContainersState} adds the ability to use more than a
  * single container.
- *
  */
 public class ValidationAllContainersState extends ResourceSetBasedAllContainersState {
 
@@ -39,8 +38,7 @@ public class ValidationAllContainersState extends ResourceSetBasedAllContainersS
 		throw new UnsupportedOperationException("Call configure with 3 arguments instead");
 	}
 
-	public void configure(List<String> containers, Multimap<String, URI> container2Uris,
-			Multimap<String, String> restrictedVisibility) {
+	public void configure(List<String> containers, Multimap<String, URI> container2Uris, Multimap<String, String> restrictedVisibility) {
 		super.configure(containers, container2Uris);
 		this.restricted = ArrayListMultimap.create(restrictedVisibility);
 	}

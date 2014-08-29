@@ -26,8 +26,7 @@ public class PuppetFunctionTests {
 
 	@Test
 	public void testParseFunctionInNestedModules() throws Exception {
-		File aRubyFile = TestDataProvider.getTestFile(new Path(
-				"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest.rb"));
+		File aRubyFile = TestDataProvider.getTestFile(new Path("testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {
@@ -44,8 +43,7 @@ public class PuppetFunctionTests {
 
 	@Test
 	public void testParseFunctionInQualifiedNamedModule() throws Exception {
-		File aRubyFile = TestDataProvider.getTestFile(new Path(
-				"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest2.rb"));
+		File aRubyFile = TestDataProvider.getTestFile(new Path("testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest2.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {
@@ -63,8 +61,7 @@ public class PuppetFunctionTests {
 
 	@Test
 	public void testParseFunctionWithFullyQualifiedName() throws Exception {
-		File aRubyFile = TestDataProvider.getTestFile(new Path(
-				"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest3.rb"));
+		File aRubyFile = TestDataProvider.getTestFile(new Path("testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest3.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {
@@ -83,7 +80,7 @@ public class PuppetFunctionTests {
 	@Test
 	public void testParseFunctionWithoutRtypeOrDoc() throws Exception {
 		File aRubyFile = TestDataProvider.getTestFile(new Path(
-				"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/nodoc-nortype-function.rb"));
+			"testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/nodoc-nortype-function.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {

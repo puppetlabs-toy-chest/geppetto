@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Puppet Labs
  */
@@ -32,8 +32,8 @@ public class OsUtil {
 
 		int result = runProcess(dir, concat("chgrp", group, filenames));
 		if(result != 0)
-			throw new IOException("Unable to change group of " + enumerateToString(filenames) + " to " + group +
-				" in " + dir.getAbsolutePath());
+			throw new IOException("Unable to change group of " + enumerateToString(filenames) + " to " + group + " in " +
+				dir.getAbsolutePath());
 		return true;
 	}
 
@@ -46,8 +46,8 @@ public class OsUtil {
 		String modeStr = String.format("%o", Integer.valueOf(mode));
 		int result = runProcess(dir, concat("chmod", modeStr, filenames));
 		if(result != 0)
-			throw new IOException("Unable to change mode of " + enumerateToString(filenames) + " to " + modeStr +
-				" in " + dir.getAbsolutePath());
+			throw new IOException("Unable to change mode of " + enumerateToString(filenames) + " to " + modeStr + " in " +
+				dir.getAbsolutePath());
 
 		return true;
 	}
@@ -57,8 +57,8 @@ public class OsUtil {
 			return false;
 		int result = runProcess(dir, concat("chown", owner, filenames));
 		if(result != 0)
-			throw new IOException("Unable to change owner of " + enumerateToString(filenames) + " to " + owner +
-				" in " + dir.getAbsolutePath());
+			throw new IOException("Unable to change owner of " + enumerateToString(filenames) + " to " + owner + " in " +
+				dir.getAbsolutePath());
 
 		return true;
 	}
@@ -164,8 +164,7 @@ public class OsUtil {
 		return sb.toString();
 	}
 
-	private static void find(File file, Pattern pattern, int limit, List<File> found, Set<File> visited)
-			throws IOException {
+	private static void find(File file, Pattern pattern, int limit, List<File> found, Set<File> visited) throws IOException {
 		if(visited.contains(file))
 			throw new IOException("Circular file structure detected");
 

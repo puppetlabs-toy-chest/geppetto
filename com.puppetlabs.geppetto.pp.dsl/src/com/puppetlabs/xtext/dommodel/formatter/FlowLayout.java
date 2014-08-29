@@ -36,13 +36,11 @@ import com.google.inject.name.Named;
  * A Dom Model Formatter driven by rules in a {@link DomCSS}.
  * </p>
  * <p>
- * If there are no rules for spacing and line breaks in the style sheet produced by the given domProvider, default rules
- * for "one space" and "no line break" will be used. This makes this formatter function as a "one space formatter" in
- * the default case.
+ * If there are no rules for spacing and line breaks in the style sheet produced by the given domProvider, default rules for "one space" and
+ * "no line break" will be used. This makes this formatter function as a "one space formatter" in the default case.
  * </p>
  * <p>
- * Comment formatting is performed by delegating to an instance of {@link ILayout} that is bound to the name
- * {@value #COMMENT_LAYOUT_NAME}.
+ * Comment formatting is performed by delegating to an instance of {@link ILayout} that is bound to the name {@value #COMMENT_LAYOUT_NAME}.
  * </p>
  */
 public class FlowLayout extends AbstractLayoutManager implements ILayoutManager {
@@ -68,8 +66,7 @@ public class FlowLayout extends AbstractLayoutManager implements ILayoutManager 
 		RegionMatch match = intersect(node, context);
 		if(match.isInside()) {
 			if(match.isContained() && !context.isWhitespacePreservation()) {
-				Preconditions.checkState(
-					commentLayout != null, "setCommentLayout(ILayout) must have been called first.");
+				Preconditions.checkState(commentLayout != null, "setCommentLayout(ILayout) must have been called first.");
 				commentLayout.format(styleSet, node, output, context);
 			}
 			else
@@ -110,8 +107,8 @@ public class FlowLayout extends AbstractLayoutManager implements ILayoutManager 
 		final int textLength = text.length();
 		final Integer widthObject = styleSet.getStyleValue(WidthStyle.class, node);
 		final int width = widthObject == null
-				? textLength
-						: widthObject.intValue();
+			? textLength
+			: widthObject.intValue();
 		final int diff = width - textLength;
 
 		switch(alignment) {
@@ -140,8 +137,7 @@ public class FlowLayout extends AbstractLayoutManager implements ILayoutManager 
 				else {
 					// use first non word char as default
 					// right align in the given width
-					int separatorIndex = styleSet.getStyleValue(
-						AlignedSeparatorIndex.class, node, functions.firstNonWordChar());
+					int separatorIndex = styleSet.getStyleValue(AlignedSeparatorIndex.class, node, functions.firstNonWordChar());
 					if(separatorIndex > -1)
 						output.appendSpaces(width - separatorIndex).appendText(text);
 					else

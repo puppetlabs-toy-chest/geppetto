@@ -56,7 +56,6 @@ import com.google.inject.Inject;
 
 /**
  * Provides labels for a EObjects.
- *
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIconNames {
@@ -207,8 +206,8 @@ public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIco
 
 	private String nullSafeString(String s) {
 		return s == null
-				? ""
-						: s;
+			? ""
+			: s;
 	}
 
 	StyledString text(AtExpression o) {
@@ -305,8 +304,8 @@ public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIco
 	String text(PuppetManifest ele) {
 		String s = ele.eResource().getURI().lastSegment();
 		return Strings.isEmpty(s)
-				? "<unnamed>"
-						: URI.decode(s);
+			? "<unnamed>"
+			: URI.decode(s);
 	}
 
 	StyledString text(ResourceBody ele) {
@@ -358,8 +357,8 @@ public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIco
 
 			case ClassifierAdapter.RESOURCE_IS_REGULAR:
 				typeLabel.append(" : Resource" + (bodyListSize > 1
-						? "s"
-								: ""), StyledString.DECORATIONS_STYLER);
+					? "s"
+					: ""), StyledString.DECORATIONS_STYLER);
 				break;
 		}
 		label.append(typeLabel);

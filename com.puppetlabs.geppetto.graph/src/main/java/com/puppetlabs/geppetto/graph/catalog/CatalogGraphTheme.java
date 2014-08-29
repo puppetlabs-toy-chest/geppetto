@@ -31,7 +31,6 @@ import com.google.inject.Singleton;
 
 /**
  * Extends the default style theme with catalog graph specifics.
- *
  */
 @Singleton
 public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraphStyles {
@@ -78,8 +77,8 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 			styles.fontSize(8), //
 			styles.shape(NodeShape.rectangle), //
 			styles.href("")
-			// styles.id(functions.idClassReplacer()) //
-				));
+		// styles.id(functions.idClassReplacer()) //
+		));
 
 		// vertex representing a CatalogResource
 		Collections.addAll(rules, Select.vertex(STYLE_MissingResource).withStyles(//
@@ -89,64 +88,63 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 			styles.shapeBrush(LineType.solid, 1, true, true), //
 			styles.fillColor(ERROR_COLOR), //
 			styles.color("#ffffff") //
-			// styles.id(functions.idClassReplacer()) //
-				));
+		// styles.id(functions.idClassReplacer()) //
+		));
 
 		// vertex representing an ADDED CatalogResource
 		Collections.addAll(rules, Select.vertex(Lists.newArrayList(STYLE_Resource, STYLE_Added)).withStyles(//
 			styles.color(ADDED_COLOR), //
 			styles.lineColor(ADDED_COLOR) //
-				));
+		));
 		// vertex representing a REMOVED CatalogResource
 		Collections.addAll(rules, Select.vertex(Lists.newArrayList(STYLE_Resource, STYLE_Removed)).withStyles(//
 			styles.color(REMOVED_COLOR), //
 			styles.lineColor(REMOVED_COLOR), //
 			styles.shapeBrush(LineType.dotted, 1.0, false, true) //
-				));
+		));
 		// vertex representing a MODIFIED CatalogResource
 		Collections.addAll(rules, Select.vertex(Lists.newArrayList(STYLE_Resource, STYLE_Modified)).withStyles(//
 			styles.lineColor(MODIFIED_COLOR) //
-			// styles.shapeBrush(LineType.dashed, 1.0, false, true), //
-			// styles.shape(NodeShape.Msquare)//
-				));
+		// styles.shapeBrush(LineType.dashed, 1.0, false, true), //
+		// styles.shape(NodeShape.Msquare)//
+		));
 
 		// -- LABEL STYLES
 		Collections.addAll(rules, Select.table(STYLE_ResourceTable).withStyles(//
 			styles.rendered(true), // The resource table is always rendered
 			styles.align(Alignment.left) //
-				));
+		));
 
 		// Resource Title (bigger and with a bit of distance)
-		Collections.addAll(
-			rules, //
+		Collections.addAll(rules, //
 			Select.and(Select.containment(Select.table(STYLE_ResourceTable)), Select.cell(STYLE_ResourceTitleCell)).withStyles(//
 				// styles.color(COLOR__DARKEST_GREY), //
 				// styles.cellPadding(5), //
 				styles.align(Alignment.left) //
-					));
+			));
 
 		// Title color
 		Collections.addAll(rules, Select.cell(STYLE_ResourceTitleCell).withStyles(//
 			styles.fontSize(8), //
 			styles.color(COLOR__ALMOST_BLACK) //
-				));
+		));
 
 		// Tweak the title color if it's vertex is added, removed, or modified
 		Collections.addAll(rules, //
 			Select.and(Select.containment(Select.vertex(Lists.newArrayList(STYLE_Resource, STYLE_Modified))), //
 				Select.cell(STYLE_ResourceTitleCell)).withStyles(//
-					styles.color(MODIFIED_COLOR) //
-						));
+				styles.color(MODIFIED_COLOR) //
+			));
 		Collections.addAll(rules, //
 			Select.and(Select.containment(Select.vertex(Lists.newArrayList(STYLE_Resource, STYLE_Removed))), //
 				Select.cell(STYLE_ResourceTitleCell)).withStyles(//
-					styles.color(REMOVED_COLOR) //
-						));
+				styles.color(REMOVED_COLOR) //
+			));
 		Collections.addAll(rules, //
 			Select.and(Select.containment(Select.vertex(Lists.newArrayList(STYLE_Resource, STYLE_Added))), //
 				Select.cell(STYLE_ResourceTitleCell)).withStyles(//
-					styles.color(ADDED_COLOR) //
-						));
+				styles.color(ADDED_COLOR) //
+			));
 
 		Collections.addAll(rules, Select.cell(STYLE_ResourcePropertyName).withStyles(//
 			styles.fontSize(8), //
@@ -154,7 +152,7 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 			styles.align(Alignment.left),//
 			styles.cellSpacing(0), //
 			styles.cellPadding(0) //
-				));
+		));
 
 		// Value color
 		Collections.addAll(rules, Select.cell(STYLE_ResourcePropertyValue).withStyles(//
@@ -164,16 +162,15 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 			styles.align(Alignment.left),//
 			styles.cellSpacing(0), //
 			styles.cellPadding(0) //
-				));
+		));
 
 		// Resource Footer with file and line info
-		Collections.addAll(
-			rules, //
+		Collections.addAll(rules, //
 			Select.and(Select.containment(Select.table(STYLE_ResourceTable)), Select.cell(STYLE_ResourceFileInfoCell)).withStyles(//
 				styles.fontSize(7), //
 				styles.color(COLOR__MID_GREY), //
 				styles.align(Alignment.left) //
-					));
+			));
 
 		// A Row that acts like a HR separator line
 		Collections.addAll(rules, //
@@ -183,7 +180,7 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 				styles.cellPadding(0), //
 				// styles.width(100), //
 				styles.align(Alignment.center) //
-					));
+			));
 
 		// A Row that acts like a space separator line
 		Collections.addAll(rules, //
@@ -192,7 +189,7 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 				styles.cellPadding(3), //
 				// styles.width(100), //
 				styles.align(Alignment.center) //
-					));
+			));
 
 		// cells in CatalogResource tables should be left adjusted
 		Collections.addAll(rules, //
@@ -217,21 +214,19 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 			styles.fontSize(8), //
 			styles.color("#ffffff"), //
 			styles.align(Alignment.center) //
-				));
-		Collections.addAll(
-			rules, Select.cell(Lists.newArrayList(STYLE_ResourcePropertyMarker, STYLE_Added)).withStyles(//
-				// styles.backgroundColor(ADDED_COLOR), //
-				styles.color(ADDED_COLOR), //
-				styles.align(Alignment.text), //
-				styles.verticalAlign(VerticalAlignment.middle) //
-					));
-		Collections.addAll(
-			rules, Select.cell(Lists.newArrayList(STYLE_ResourcePropertyMarker, STYLE_Removed)).withStyles(//
-				// styles.backgroundColor(REMOVED_COLOR), //
-				styles.color(REMOVED_COLOR), //
-				styles.align(Alignment.text), //
-				styles.verticalAlign(VerticalAlignment.middle) //
-					));
+		));
+		Collections.addAll(rules, Select.cell(Lists.newArrayList(STYLE_ResourcePropertyMarker, STYLE_Added)).withStyles(//
+			// styles.backgroundColor(ADDED_COLOR), //
+			styles.color(ADDED_COLOR), //
+			styles.align(Alignment.text), //
+			styles.verticalAlign(VerticalAlignment.middle) //
+		));
+		Collections.addAll(rules, Select.cell(Lists.newArrayList(STYLE_ResourcePropertyMarker, STYLE_Removed)).withStyles(//
+			// styles.backgroundColor(REMOVED_COLOR), //
+			styles.color(REMOVED_COLOR), //
+			styles.align(Alignment.text), //
+			styles.verticalAlign(VerticalAlignment.middle) //
+		));
 
 		// ---EDGE STYLES
 
@@ -239,8 +234,8 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 		Collections.addAll(rules, Select.edge(STYLE_ResourceEdge).withStyles(//
 			styles.arrowHead(Arrow.vee), //
 			styles.weight(3.0) // Bring it close to resource
-			// styles.id(functions.idClassReplacer()) //
-				));
+		// styles.id(functions.idClassReplacer()) //
+		));
 
 		// Removed edge
 		Collections.addAll(rules, Select.edge(STYLE_Removed).withStyles(//
@@ -248,31 +243,31 @@ public class CatalogGraphTheme extends DefaultStyleTheme implements CatalogGraph
 			styles.lineColor(REMOVED_COLOR), //
 			styles.lineBrush(LineType.dotted, 1.0), //
 			styles.weight(0.0) // Should not affect layout too much
-			// styles.id(functions.idClassReplacer()) //
-				));
+		// styles.id(functions.idClassReplacer()) //
+		));
 
 		// Added edge
 		Collections.addAll(rules, Select.edge(STYLE_Added).withStyles(//
 			styles.color(ADDED_COLOR), //
 			styles.lineColor(ADDED_COLOR) //
-				));
+		));
 
 		// Edge to missing resource
 		Collections.addAll(rules, //
 			Select.between(Select.any(), Select.vertex(STYLE_MissingResource)).withStyles(//
 				styles.color(ERROR_COLOR), //
 				styles.lineColor(ERROR_COLOR) //
-					));
+			));
 
 		// Edge to removed resource, where edge is not removed
 		Collections.addAll(rules, //
 			Select.and( //
 				Select.not(Select.edge(STYLE_Removed)), //
 				Select.between(Select.any(), Select.vertex(STYLE_Removed))//
-					).withStyles(//
-						styles.color(ERROR_COLOR), //
-						styles.lineColor(ERROR_COLOR) //
-							));
+			).withStyles(//
+				styles.color(ERROR_COLOR), //
+				styles.lineColor(ERROR_COLOR) //
+			));
 		return rules;
 	}
 }

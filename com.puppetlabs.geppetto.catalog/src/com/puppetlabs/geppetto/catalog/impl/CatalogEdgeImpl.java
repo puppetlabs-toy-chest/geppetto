@@ -41,8 +41,7 @@ import com.google.gson.JsonSerializer;
  * @generated
  */
 public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
-	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogEdge> implements
-	JsonSerializer<CatalogEdge> {
+	public static class JsonAdapter extends CatalogJsonSerializer.ContainerDeserializer<CatalogEdge> implements JsonSerializer<CatalogEdge> {
 
 		private static String getString(JsonObject jsonObj, String key) {
 			JsonElement json = jsonObj.get(key);
@@ -52,8 +51,8 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 
 			// unset values are null, not empty strings
 			return value.length() == 0
-					? null
-							: value;
+				? null
+				: value;
 		}
 
 		private static void putString(JsonObject jsonObj, String key, String value) {
@@ -63,8 +62,8 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 		}
 
 		@Override
-		public CatalogEdge deserialize(JsonElement json, java.lang.reflect.Type typeOfT,
-				JsonDeserializationContext context) throws JsonParseException {
+		public CatalogEdge deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
 			final CatalogEdge result = CatalogFactory.eINSTANCE.createCatalogEdge();
 			JsonObject jsonObj = json.getAsJsonObject();
 
@@ -167,12 +166,12 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 		switch(featureID) {
 			case CatalogPackage.CATALOG_EDGE__TARGET:
 				return TARGET_EDEFAULT == null
-				? target != null
-				: !TARGET_EDEFAULT.equals(target);
+					? target != null
+					: !TARGET_EDEFAULT.equals(target);
 			case CatalogPackage.CATALOG_EDGE__SOURCE:
 				return SOURCE_EDEFAULT == null
-				? source != null
-				: !SOURCE_EDEFAULT.equals(source);
+					? source != null
+					: !SOURCE_EDEFAULT.equals(source);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -259,8 +258,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 		String oldSource = source;
 		source = newSource;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, CatalogPackage.CATALOG_EDGE__SOURCE, oldSource, source));
+			eNotify(new ENotificationImpl(this, Notification.SET, CatalogPackage.CATALOG_EDGE__SOURCE, oldSource, source));
 	}
 
 	/**
@@ -274,8 +272,7 @@ public class CatalogEdgeImpl extends EObjectImpl implements CatalogEdge {
 		String oldTarget = target;
 		target = newTarget;
 		if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, CatalogPackage.CATALOG_EDGE__TARGET, oldTarget, target));
+			eNotify(new ENotificationImpl(this, Notification.SET, CatalogPackage.CATALOG_EDGE__TARGET, oldTarget, target));
 	}
 
 	/**

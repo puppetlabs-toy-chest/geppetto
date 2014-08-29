@@ -15,7 +15,6 @@ import com.puppetlabs.geppetto.graph.IHrefProducer;
 
 /**
  * Configuration for CatalogGraph.
- *
  */
 public class CatalogGraphModule extends FixedSVGGraphModule {
 	public CatalogGraphModule(Class<? extends IHrefProducer> hrefProducerClass, String urlPrefix) {

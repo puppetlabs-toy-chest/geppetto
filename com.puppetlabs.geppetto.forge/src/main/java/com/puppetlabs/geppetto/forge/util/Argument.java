@@ -38,13 +38,13 @@ public class Argument {
 	@Override
 	public String toString() {
 		return value == null
-				? "null"
-						: value.toString();
+			? "null"
+			: value.toString();
 	}
 
 	public String toStringOrNull() {
 		return value == null
-				? null
-						: value.toString();
+			? null
+			: value.toString();
 	}
 }

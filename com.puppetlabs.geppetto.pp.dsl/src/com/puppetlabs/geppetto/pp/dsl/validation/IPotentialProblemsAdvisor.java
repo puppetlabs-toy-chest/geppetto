@@ -12,7 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 
 /**
  * An interface for potential problems preferences.
- *
  */
 public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 
@@ -56,7 +55,6 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	/**
 	 * How to validate hyphens in non brace enclosed interpolations. In < 2.7 interpolation stops at a hyphen, but
 	 * not in 2.7. Thus when using 2.6 code in 2.7 or vice versa, the result is different.
-	 *
 	 */
 	public ValidationPreference interpolatedNonBraceEnclosedHyphens();
 
@@ -72,7 +70,6 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 
 	/**
 	 * How to validate a literal resource title. Style guide says they should be single quoted.
-	 *
 	 */
 	public ValidationPreference unquotedResourceTitles();
 

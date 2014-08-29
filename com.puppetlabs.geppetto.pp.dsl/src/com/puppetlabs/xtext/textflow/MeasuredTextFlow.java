@@ -16,7 +16,6 @@ import com.google.inject.Inject;
 
 /**
  * A text flow that measures the appended content but that does not contain the actual text.
- *
  */
 public class MeasuredTextFlow extends AbstractTextFlow {
 
@@ -87,14 +86,14 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 		numberOfBreaks += count;
 		maxWidth = Math.max(maxWidth, currentLineWidth);
 		lastLineWidth = currentLineWidth == 0
-				? lastLineWidth
-						: currentLineWidth;
+			? lastLineWidth
+			: currentLineWidth;
 		currentLineWidth = 0;
 
 		// verbatim break simply means, no indentation
 		pendingIndent = verbatim
-				? 0
-						: indent;
+			? 0
+			: indent;
 		return this;
 	}
 
@@ -158,15 +157,15 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	public int getAppendLinePosition() {
 		if(lastWasBreak > 0)
 			return pendingIndent + (currentRun == null
-			? 0
-					: currentRun.length());
+				? 0
+				: currentRun.length());
 		return currentLineWidth + getRunWidth();
 	}
 
 	protected CharSequence getCurrentRun() {
 		return currentRun == null
-				? ""
-						: currentRun;
+			? ""
+			: currentRun;
 	}
 
 	@Override
@@ -174,8 +173,8 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 		// if there is pending text, then the lastWasBreak is pending and not at the end at all
 		// report as 0
 		return currentRun != null
-				? 0
-						: lastWasBreak;
+			? 0
+			: lastWasBreak;
 	}
 
 	@Override
@@ -198,8 +197,8 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 
 	private int getRunWidth() {
 		return currentRun == null
-				? 0
-						: currentRun.length();
+			? 0
+			: currentRun.length();
 	}
 
 	@Override
@@ -207,8 +206,8 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 		// break only, or break + unprocessed
 		if(lastWasBreak > 0)
 			return Math.max(maxWidth, currentRun == null
-			? 0
-					: currentRun.length() + pendingIndent);
+				? 0
+				: currentRun.length() + pendingIndent);
 
 		// something else than break processed, but there can be unprocessed
 		return Math.max(maxWidth, currentLineWidth + getRunWidth());
@@ -218,8 +217,8 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	public int getWidthOfLastLine() {
 		if(lastWasBreak > 0)
 			return currentRun == null
-			? lastLineWidth
-					: pendingIndent + currentRun.length();
+				? lastLineWidth
+				: pendingIndent + currentRun.length();
 		return currentLineWidth + getRunWidth();
 	}
 
@@ -234,8 +233,7 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	}
 
 	/**
-	 * This implementation buffers non-breakable sequences and performs auto line wrapping if <code>verbatim</code> is
-	 * <code>false</code>.
+	 * This implementation buffers non-breakable sequences and performs auto line wrapping if <code>verbatim</code> is <code>false</code>.
 	 * When output is <i>verbatim</i> pending output is flushed, and new output is immediately processed, and no
 	 * automatic line wrapping will take place.
 	 */
@@ -298,8 +296,8 @@ public class MeasuredTextFlow extends AbstractTextFlow {
 	protected boolean shouldLineBeWrapped(CharSequence s) {
 		final int textLength = s.length();
 		final int pos = lastWasBreak > 0
-				? pendingIndent // indent for preceding break
-						: currentLineWidth;
+			? pendingIndent // indent for preceding break
+			: currentLineWidth;
 		int unwrappedWidth = textLength + pos;
 		if(unwrappedWidth > getPreferredMaxWidth()) {
 			if(!(lastWasBreak > 0 || lastWasSpace))

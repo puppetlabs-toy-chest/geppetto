@@ -28,7 +28,6 @@ import com.google.common.collect.ImmutableSet;
 
 /**
  * An interface for Facter.
- *
  */
 public interface Facter {
 
@@ -149,7 +148,7 @@ public interface Facter {
 			"netmask_", "The netmask for a specific network interface (from the list in the $interfaces fact).",// {NETWORK INTERFACE}
 			"network_", "The network for a specific network interface (from the list in the $interfaces fact).",// {NETWORK INTERFACE}
 			"processor", "One fact for each processor, with processor info." // {NUMBER}
-				);
+		);
 
 		private static String EC2DOC = "See EC2 documentation";
 

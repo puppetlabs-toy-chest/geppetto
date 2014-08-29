@@ -15,7 +15,6 @@ import com.google.common.collect.Multimap;
 
 /**
  * Provides access to any build result produced by "validation" (which should really be renamed to "build").
- *
  */
 public class BuildResult {
 

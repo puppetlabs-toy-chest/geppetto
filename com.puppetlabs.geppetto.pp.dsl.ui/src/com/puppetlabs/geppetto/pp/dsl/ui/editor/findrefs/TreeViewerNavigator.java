@@ -56,8 +56,8 @@ public class TreeViewerNavigator {
 		TreeItem nextItem = null;
 		if(selection.length > 0) {
 			nextItem = forward
-					? selection[0]
-							: selection[selection.length - 1];
+				? selection[0]
+				: selection[selection.length - 1];
 		}
 		return nextItem;
 	}
@@ -164,8 +164,8 @@ public class TreeViewerNavigator {
 			return null;
 		}
 		return forward
-				? siblings[index + 1]
-						: siblings[index - 1];
+			? siblings[index + 1]
+			: siblings[index - 1];
 	}
 
 	private TreeItem[] getSiblings(TreeItem currentItem) {

@@ -23,8 +23,8 @@ public class FileDiagnostic extends Diagnostic {
 
 	public FileDiagnostic(int severity, DiagnosticType type, String message, File file) {
 		super(severity, type, message == null
-				? null
-						: message.trim());
+			? null
+			: message.trim());
 		this.file = file;
 	}
 
@@ -41,7 +41,6 @@ public class FileDiagnostic extends Diagnostic {
 	/**
 	 * File is a reference to a relative or absolute file, or is empty/null if
 	 * the diagnostic is not file related.
-	 *
 	 * All diagnostic relating to files given (directly or contained) in the
 	 * calls to the ValidationService will be reported with path's relative to
 	 * the given root, or in the case of a single file, the leaf part of the
@@ -50,7 +49,6 @@ public class FileDiagnostic extends Diagnostic {
 	 * (e.g. system libraries or general configuration files).
 	 *
 	 * @return the value of the '<em>file</em>' attribute.
-	 *
 	 *         Also see #node.
 	 */
 	@Override

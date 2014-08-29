@@ -85,8 +85,8 @@ public abstract class ModuleExportToForgeOperation extends ModuleExportOperation
 						result.addChild(new Diagnostic(Diagnostic.ERROR, PUBLISHER, e.getMessage()));
 					}
 					catch(Exception e) {
-						result.addChild(new ExceptionDiagnostic(
-							Diagnostic.ERROR, PUBLISHER, "Unable to publish module " + builtModule.getName(), e));
+						result.addChild(new ExceptionDiagnostic(Diagnostic.ERROR, PUBLISHER, "Unable to publish module " +
+							builtModule.getName(), e));
 					}
 					return;
 				}

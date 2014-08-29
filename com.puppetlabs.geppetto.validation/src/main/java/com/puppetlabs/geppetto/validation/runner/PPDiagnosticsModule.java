@@ -25,7 +25,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
 
 /**
  * Provides bindings for the PPDiagnostician.
- *
  */
 public class PPDiagnosticsModule extends PPRuntimeModule {
 
@@ -33,8 +32,7 @@ public class PPDiagnosticsModule extends PPRuntimeModule {
 
 	private final IPotentialProblemsAdvisor problemsAdvisor;
 
-	public PPDiagnosticsModule(IValidationAdvisor.ComplianceLevel complianceLevel,
-			IPotentialProblemsAdvisor problemsAdvisor) {
+	public PPDiagnosticsModule(IValidationAdvisor.ComplianceLevel complianceLevel, IPotentialProblemsAdvisor problemsAdvisor) {
 		this.complicanceLevel = complianceLevel;
 		this.problemsAdvisor = problemsAdvisor;
 	}

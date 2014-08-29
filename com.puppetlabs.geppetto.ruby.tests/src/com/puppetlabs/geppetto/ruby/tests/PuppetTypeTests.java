@@ -25,8 +25,7 @@ public class PuppetTypeTests {
 
 	@Test
 	public void testParseFunctionInNestedModules() throws Exception {
-		File aRubyFile = TestDataProvider.getTestFile(new Path(
-				"testData/pp-modules-ruby/module-x/lib/puppet/type/thing.rb"));
+		File aRubyFile = TestDataProvider.getTestFile(new Path("testData/pp-modules-ruby/module-x/lib/puppet/type/thing.rb"));
 		RubyHelper helper = new RubyHelper();
 		helper.setUp();
 		try {
@@ -39,15 +38,12 @@ public class PuppetTypeTests {
 
 			PPTypeInfo.Entry nameEntry = info.getParameters().get("name");
 			assertNotNull("Should have found a parameter called 'name'", nameEntry);
-			assertEquals(
-				"Should have found a description of 'name'", "<p>Description of name</p>", nameEntry.getDocumentation());
+			assertEquals("Should have found a description of 'name'", "<p>Description of name</p>", nameEntry.getDocumentation());
 
 			// TODO: check "ensure"
 			PPTypeInfo.Entry weightEntry = info.getProperties().get("weight");
 			assertNotNull("Should have found a property called 'weight'", weightEntry);
-			assertEquals(
-				"Should have found a description of 'weight'", "<p>Description of weight</p>",
-				weightEntry.getDocumentation());
+			assertEquals("Should have found a description of 'weight'", "<p>Description of weight</p>", weightEntry.getDocumentation());
 
 			PPTypeInfo.Entry emptyEntry = info.getProperties().get("empty");
 			assertNotNull("Should have found a property called 'weight'", emptyEntry);

@@ -184,18 +184,17 @@ public class HostClassDefinitionImpl extends DefinitionImpl implements HostClass
 		if(newParent != parent) {
 			NotificationChain msgs = null;
 			if(parent != null)
-				msgs = ((InternalEObject) parent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.HOST_CLASS_DEFINITION__PARENT, null, msgs);
+				msgs = ((InternalEObject) parent).eInverseRemove(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.HOST_CLASS_DEFINITION__PARENT, null, msgs);
 			if(newParent != null)
-				msgs = ((InternalEObject) newParent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE -
-					PPPackage.HOST_CLASS_DEFINITION__PARENT, null, msgs);
+				msgs = ((InternalEObject) newParent).eInverseAdd(
+					this, EOPPOSITE_FEATURE_BASE - PPPackage.HOST_CLASS_DEFINITION__PARENT, null, msgs);
 			msgs = basicSetParent(newParent, msgs);
 			if(msgs != null)
 				msgs.dispatch();
 		}
 		else if(eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, PPPackage.HOST_CLASS_DEFINITION__PARENT, newParent, newParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, PPPackage.HOST_CLASS_DEFINITION__PARENT, newParent, newParent));
 	}
 
 } // HostClassDefinitionImpl

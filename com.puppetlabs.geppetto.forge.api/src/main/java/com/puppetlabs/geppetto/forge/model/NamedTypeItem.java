@@ -54,7 +54,6 @@ public class NamedTypeItem extends Entity {
 	/**
 	 * @param documentation
 	 *            Documentation for the property
-	 *
 	 */
 	public void setDocumentation(String documentation) {
 		this.doc = trimToNull(documentation);

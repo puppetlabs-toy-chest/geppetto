@@ -68,8 +68,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 				count++;
 				assertEquals("There should be only 1 restricted container (a node)", 1, count);
 
-				numberOfClasses = Iterables.size(allModuleReferences.getClasses(allModuleReferences.getVisibleExports(new File(
-					f))));
+				numberOfClasses = Iterables.size(allModuleReferences.getClasses(allModuleReferences.getVisibleExports(new File(f))));
 				assertEquals("There should be 47 exported classes", 47, numberOfClasses);
 
 				// dumpExports(allModuleReferences.getVisibleExports(new
@@ -152,8 +151,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 				count++;
 				assertEquals("There should be only 1 restricted container (a node)", 1, count);
 
-				numberOfClasses = Iterables.size(allModuleReferences.getClasses(allModuleReferences.getVisibleExports(new File(
-					f))));
+				numberOfClasses = Iterables.size(allModuleReferences.getClasses(allModuleReferences.getVisibleExports(new File(f))));
 				assertEquals("There should be 47 exported classes", 47, numberOfClasses);
 
 				// dumpExports(allModuleReferences.getVisibleExports(new
@@ -220,8 +218,7 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 				count++;
 				assertEquals("There should be only 1 restricted container (a node)", 1, count);
 
-				numberOfClasses = Iterables.size(allModuleReferences.getClasses(allModuleReferences.getVisibleExports(new File(
-					f))));
+				numberOfClasses = Iterables.size(allModuleReferences.getClasses(allModuleReferences.getVisibleExports(new File(f))));
 				assertEquals("There should be 47 exported classes", 47, numberOfClasses);
 
 				// dumpExports(allModuleReferences.getVisibleExports(new

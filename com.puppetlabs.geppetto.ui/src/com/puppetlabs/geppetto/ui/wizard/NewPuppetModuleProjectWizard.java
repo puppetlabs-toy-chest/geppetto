@@ -18,7 +18,6 @@ import com.puppetlabs.geppetto.forge.model.ModuleName;
 
 /**
  * @author thhal
- *
  */
 public class NewPuppetModuleProjectWizard extends AbstractPuppetModuleWizard implements INewWizard {
 	protected class PuppetModuleCreationPage extends PuppetProjectCreationPage {

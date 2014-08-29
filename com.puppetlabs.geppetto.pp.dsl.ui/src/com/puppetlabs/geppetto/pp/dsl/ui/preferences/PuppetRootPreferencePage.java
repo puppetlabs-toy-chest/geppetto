@@ -15,7 +15,6 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.FolderFilterEditor;
 
 /**
  * A simple preference page for search path and environment
- *
  */
 public class PuppetRootPreferencePage extends AbstractRebuildingPreferencePage {
 

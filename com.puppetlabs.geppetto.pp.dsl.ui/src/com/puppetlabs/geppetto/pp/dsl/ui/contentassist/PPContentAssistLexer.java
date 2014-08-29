@@ -22,7 +22,6 @@ import com.puppetlabs.geppetto.pp.dsl.lexer.PPOverridingLexer;
  * This is required as the content assist lexer is injected with a provider that requires it to be
  * an instance of the "contentassist.antlr.internal.Lexer" class - hence it is impossible to use the
  * PPOverridingLexer directly.
- *
  */
 public class PPContentAssistLexer extends org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer {
 

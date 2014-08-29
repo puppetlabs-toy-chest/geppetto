@@ -33,7 +33,6 @@ import com.google.inject.Inject;
 
 /**
  * Classifies PP model objects.
- *
  */
 public class PPClassifier {
 	@Inject

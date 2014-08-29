@@ -31,16 +31,13 @@ import com.google.common.collect.Maps;
 /**
  * Finds Rakefile task creations in a parsed ruby AST. An instance of this class can be reused,
  * but it is not threadsafe.
- *
  * TODO: text from CallFinder - change this
- *
  * Calls are found using a FQN - i.e. a sequence of module/receiver names, where
  * the last name segment is the name of the function. The search will find
  * function calls irrespective of call type (e.g. a FCallNode (where receiver is
  * implied), or CallNode where receiver is explicit. All FQN names are appended
  * to the current scope - i.e. if a call is made to X::Y::foo() in module A, it
  * will be found by a search of A::X::Y::foo().
- *
  * TODO: global references are not handled - i.e. if a call to ::X::Y::foo() is
  * made inside module A, it will be recognized (in error) as A::X::Y::foo() -
  * also see {@link ConstEvaluator}.
@@ -100,28 +97,28 @@ public class RubyRakefileTaskFinder {
 
 	private void findTasksInternal(Node root, Map<String, String> resultMap) {
 		SEARCH: {
-		switch(root.getNodeType()) {
-			case MODULENODE:
-				lastDesc = ""; // not valid now
+			switch(root.getNodeType()) {
+				case MODULENODE:
+					lastDesc = ""; // not valid now
 
-				break SEARCH; // don't know what to do when user declares a module
+					break SEARCH; // don't know what to do when user declares a module
 
-			case CLASSNODE:
-				lastDesc = ""; // not valid now
+				case CLASSNODE:
+					lastDesc = ""; // not valid now
 
-				// don't know what to do when user declares a class, any calls to
-				// create tasks could be inside a loop etc. Just impossible to figure out
-				break SEARCH;
-
-			case CALLNODE:
-				// don't know yet what the calls look like - if they are calls to "do" with
-				// the interesting part on the left
-				// or what...
-				//
-				// CallNode callNode = (CallNode) root;
-				if(!processCallNode((CallNode) root, resultMap))
+					// don't know what to do when user declares a class, any calls to
+					// create tasks could be inside a loop etc. Just impossible to figure out
 					break SEARCH;
-				break;
+
+				case CALLNODE:
+					// don't know yet what the calls look like - if they are calls to "do" with
+					// the interesting part on the left
+					// or what...
+					//
+					// CallNode callNode = (CallNode) root;
+					if(!processCallNode((CallNode) root, resultMap))
+						break SEARCH;
+					break;
 
 				// if(!callNode.getName().equals(qualifiedName.get(0)))
 				// break SEARCH;
@@ -132,27 +129,27 @@ public class RubyRakefileTaskFinder {
 				// push(root); // push it again
 				// break; // continue search inside the function
 
-			case FCALLNODE:
-				// Don't know what the interesting calls look like
-				if(!processFCallNode((FCallNode) root, resultMap))
-					break SEARCH;
-				break;
+				case FCALLNODE:
+					// Don't know what the interesting calls look like
+					if(!processFCallNode((FCallNode) root, resultMap))
+						break SEARCH;
+					break;
 				// FCallNode fcallNode = (FCallNode) root;
 				// if(!fcallNode.getName().equals(qualifiedName.get(0)))
 				// break SEARCH;
 				// if(inWantedScope())
 				// return Lists.newArrayList(new GenericCallNode(fcallNode));
 				// break; // continue search inside the function
-			default:
-				break;
-		}
+				default:
+					break;
+			}
 
-		for(Node n : root.childNodes()) {
-			if(n.getNodeType() == NodeType.NEWLINENODE)
-				n = ((NewlineNode) n).getNextNode();
-			findTasksInternal(n, resultMap);
-		}
-	} // SEARCH
+			for(Node n : root.childNodes()) {
+				if(n.getNodeType() == NodeType.NEWLINENODE)
+					n = ((NewlineNode) n).getNextNode();
+				findTasksInternal(n, resultMap);
+			}
+		} // SEARCH
 
 	}
 

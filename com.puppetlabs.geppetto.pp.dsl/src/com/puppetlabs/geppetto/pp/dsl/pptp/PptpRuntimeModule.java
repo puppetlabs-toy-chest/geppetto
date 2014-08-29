@@ -22,7 +22,6 @@ import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 
 /**
  * A runtime module for PPTP generic model.
- *
  */
 public class PptpRuntimeModule extends AbstractGenericResourceRuntimeModule {
 

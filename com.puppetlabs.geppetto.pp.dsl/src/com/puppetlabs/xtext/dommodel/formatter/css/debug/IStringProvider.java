@@ -12,7 +12,6 @@ package com.puppetlabs.xtext.dommodel.formatter.css.debug;
 
 /**
  * A provider of string (label) for objects.
- *
  */
 public interface IStringProvider {
 

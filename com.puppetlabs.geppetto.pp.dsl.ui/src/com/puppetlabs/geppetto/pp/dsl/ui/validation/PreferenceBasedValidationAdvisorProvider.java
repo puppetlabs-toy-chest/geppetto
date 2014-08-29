@@ -18,10 +18,8 @@ import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 
 /**
  * A provider of validation advisor controlled by user preferences.
- *
  */
-public class PreferenceBasedValidationAdvisorProvider<T extends IValidationAdvisor> implements
-Provider<IValidationAdvisor> {
+public class PreferenceBasedValidationAdvisorProvider<T extends IValidationAdvisor> implements Provider<IValidationAdvisor> {
 	public static <T extends IValidationAdvisor> PreferenceBasedValidationAdvisorProvider<T> create() {
 		return new PreferenceBasedValidationAdvisorProvider<T>();
 	}
@@ -34,7 +32,6 @@ Provider<IValidationAdvisor> {
 
 	@Override
 	public IValidationAdvisor get() {
-		return preferencesProvider.get().getValidationComplianceLevel().createValidationAdvisor(
-			potentialProblemsAdvisorProvider.get());
+		return preferencesProvider.get().getValidationComplianceLevel().createValidationAdvisor(potentialProblemsAdvisorProvider.get());
 	}
 }

@@ -213,7 +213,7 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 			if(validationAdvisor.getModulefileExists() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExists()), Forge.FORGE,
-						"Modulefile is deprecated. Using metadata.json"));
+					"Modulefile is deprecated. Using metadata.json"));
 		}
 		else {
 			if(validationAdvisor.getModulefileExistsAndIsUsed() != IGNORE)
@@ -230,7 +230,7 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 			}
 			catch(IOException e) {
 				diag.addChild(new ExceptionDiagnostic(Diagnostic.ERROR, Forge.FORGE, "Unable to create metadata.json from Modulefile: " +
-						e.getMessage(), e));
+					e.getMessage(), e));
 			}
 		}
 		createResourceMarkers(moduleFile, diag);

@@ -14,7 +14,6 @@ import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
 
 /**
  * A visitor for IStyle
- *
  */
 public interface IStyleVisitor {
 

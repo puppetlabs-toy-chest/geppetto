@@ -92,8 +92,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 	}
 
 	@Override
-	public void complete_ResourceBody(EObject model, RuleCall ruleCall, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
+	public void complete_ResourceBody(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// TODO Auto-generated method stub
 		// System.err.println("complete_ResourceBody");
 		super.complete_ResourceBody(model, ruleCall, context, acceptor);
@@ -125,8 +124,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 		// (The list of variables is obtained by suggesting varName for a VariableExpression.)
 		//
 		String prefix = context.getPrefix();
-		if("".equals(prefix) && context.getLastCompleteNode() != null &&
-				context.getLastCompleteNode().getText().startsWith("$"))
+		if("".equals(prefix) && context.getLastCompleteNode() != null && context.getLastCompleteNode().getText().startsWith("$"))
 			prefix = "$";
 		if(!prefix.startsWith("$")) {
 			StyledString description = new StyledString("$");
@@ -137,8 +135,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 	}
 
 	@Override
-	public void completeAssignment(Assignment assignment, ContentAssistContext contentAssistContext,
-			ICompletionProposalAcceptor acceptor) {
+	public void completeAssignment(Assignment assignment, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		// // DEBUG PRINTOUT
 		// ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 		// String methodName = "complete" + Strings.toFirstUpper(parserRule.getName()) + "_" +
@@ -172,7 +169,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 			// If the current caret position is after the end of the key (+1), do not offer any values
 			String key = ((AttributeOperation) model).getKey();
 			if(key != null && key.length() > 0 //
-					&& context.getOffset() > NodeModelUtils.getNode(model).getOffset() + key.length())
+				&& context.getOffset() > NodeModelUtils.getNode(model).getOffset() + key.length())
 				return;
 
 		}
@@ -303,16 +300,15 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 	}
 
 	@Override
-	public void completeAttributeOperations_Attributes(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void completeAttributeOperations_Attributes(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
 		// TODO Auto-generated method stub
 		// System.err.println("completeAttributeOperations_Attributes");
 		super.completeAttributeOperations_Attributes(model, assignment, context, acceptor);
 	}
 
 	@Override
-	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
-			ICompletionProposalAcceptor acceptor) {
+	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		// System.err.println("completeKeyword('" + keyword.getValue() + "')");
 		// if(keyword.getValue().equals("+>"))
 		// System.err.println("Oy !!!");
@@ -330,16 +326,14 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 			String name = converter.toString(d.getQualifiedName());
 			StyledString styledDescription = new StyledString(name);
 			styledDescription.append(typeSuffix(d));
-			acceptor.accept(createCompletionProposal(
-				name, styledDescription, descriptionLabelProvider.getImage(d), context));
+			acceptor.accept(createCompletionProposal(name, styledDescription, descriptionLabelProvider.getImage(d), context));
 		}
 		// acceptor.accept(createCompletionProposal(converter.toString(d.getQualifiedName()), context));
 
 	}
 
 	@Override
-	public void completeRuleCall(RuleCall ruleCall, ContentAssistContext contentAssistContext,
-			ICompletionProposalAcceptor acceptor) {
+	public void completeRuleCall(RuleCall ruleCall, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		// // DEBUG OUTPUT
 		// AbstractRule calledRule = ruleCall.getRule();
 		// String methodName = "complete_" + calledRule.getName();
@@ -444,7 +438,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 				// get the fqn (skip the '$') of the name to complete
 				QualifiedName fqn = converter.toQualifiedName(prefix.substring(bracedInput
 					? 0
-							: 1));
+					: 1));
 
 				// turn global references '::x' into non global
 				if(fqn.getSegmentCount() > 1 && fqn.getSegment(0).length() == 0)
@@ -489,8 +483,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 					// Investigate if meta parameters should be included at all as variables
 					//
 					// If a Parameter, and is Type::name - use only name, display "meta-parameter" (i.e. parameters "inherited" by all types).
-					if(fqn.getSegmentCount() > 1 && d.getEClass() == PPTPPackage.Literals.PARAMETER &&
-							"Type".equals(fqn.getFirstSegment())) {
+					if(fqn.getSegmentCount() > 1 && d.getEClass() == PPTPPackage.Literals.PARAMETER && "Type".equals(fqn.getFirstSegment())) {
 						b.append(fqn.getSegment(1));
 						// TODO: description "meta-parameter" should be provided by description label provider
 						// description = "meta-parameter";
@@ -512,7 +505,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 					// since $ is in icon, not needed in description (just makes it more difficult to read).
 					StyledString styledDescription = new StyledString(b.substring(bracedInput
 						? 0
-								: 1));
+						: 1));
 					styledDescription.append(typeSuffix(d));
 					ConfigurableCompletionProposal proposal = doCreateProposal(
 						b.toString(), styledDescription, image, getPriorityHelper().getDefaultPriority(), context);
@@ -532,10 +525,8 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 	/**
 	 * Remove variables/entries that are not yet initialized. These are the values
 	 * defined in the same name and type if the variable is contained in a definition argument
-	 *
 	 * <p>
-	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or
-	 * x are disqualified.
+	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or x are disqualified.
 	 *
 	 * @param descs
 	 * @param o
@@ -572,10 +563,8 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 	/**
 	 * Remove variables/entries that are not yet initialized. These are the values
 	 * defined in the same name and type if the variable is contained in a definition argument
-	 *
 	 * <p>
-	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or
-	 * x are disqualified.
+	 * e.g. in define selfref($selfa = $selfref::selfa, $selfb=$selfa::x) { $x=10 } none of the references to selfa, or x are disqualified.
 	 *
 	 * @param descs
 	 * @param o
@@ -623,8 +612,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 		EPackage epkg = element.getEClass().getEPackage();
 		StyledString bld = new StyledString();
 		if(epkg == PPTPPackage.eINSTANCE || epkg == PPPackage.eINSTANCE) {
-			bld.append(
-				" : " + descriptionLabelProvider.getClassLabel(element.getEClass()), StyledString.DECORATIONS_STYLER);
+			bld.append(" : " + descriptionLabelProvider.getClassLabel(element.getEClass()), StyledString.DECORATIONS_STYLER);
 			bld.append(" - " + element.getEObjectURI().lastSegment(), StyledString.QUALIFIER_STYLER);
 			return bld;
 		}

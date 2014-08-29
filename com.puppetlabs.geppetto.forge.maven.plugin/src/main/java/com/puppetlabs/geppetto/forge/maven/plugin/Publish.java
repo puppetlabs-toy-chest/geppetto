@@ -110,8 +110,7 @@ public class Publish extends AbstractForgeServiceMojo {
 			File builtModulesDir = new File(getBuildDir(), "builtModules");
 			builtModules = builtModulesDir.listFiles();
 			if(builtModules == null || builtModules.length == 0) {
-				result.addChild(new Diagnostic(ERROR, PUBLISHER, "Unable find any packaged modules in " +
-						builtModulesDir.getAbsolutePath()));
+				result.addChild(new Diagnostic(ERROR, PUBLISHER, "Unable find any packaged modules in " + builtModulesDir.getAbsolutePath()));
 				return;
 			}
 		}
