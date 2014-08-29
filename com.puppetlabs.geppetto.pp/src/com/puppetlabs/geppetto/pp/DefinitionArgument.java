@@ -79,8 +79,7 @@ public interface DefinitionArgument extends EObject {
 	Expression getValue();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getArgName <em>Arg Name</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getArgName <em>Arg Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -104,8 +103,7 @@ public interface DefinitionArgument extends EObject {
 	void setOp(String value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getValue <em>Value</em>}' containment
-	 * reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

@@ -63,8 +63,8 @@ public interface ParameterizedExpression extends Expression {
 	EList<Expression> getParameters();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ParameterizedExpression#getLeftExpr <em>Left Expr</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ParameterizedExpression#getLeftExpr <em>Left Expr</em>}' containment
+	 * reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

@@ -45,8 +45,7 @@ public interface IDocumented extends EObject {
 	String getDocumentation();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.IDocumented#getDocumentation
-	 * <em>Documentation</em>}' attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.IDocumented#getDocumentation <em>Documentation</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

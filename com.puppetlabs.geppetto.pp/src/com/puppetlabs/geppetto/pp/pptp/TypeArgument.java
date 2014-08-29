@@ -60,8 +60,7 @@ public interface TypeArgument extends TargetElement {
 	boolean isRequired();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument#isNamevar <em>Namevar</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument#isNamevar <em>Namevar</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -73,8 +72,7 @@ public interface TypeArgument extends TargetElement {
 	void setNamevar(boolean value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument#isRequired <em>Required</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument#isRequired <em>Required</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

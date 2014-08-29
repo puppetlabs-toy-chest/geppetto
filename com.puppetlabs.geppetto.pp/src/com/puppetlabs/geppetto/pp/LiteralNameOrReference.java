@@ -43,8 +43,7 @@ public interface LiteralNameOrReference extends LiteralExpression {
 	String getValue();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.LiteralNameOrReference#getValue <em>Value</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.LiteralNameOrReference#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

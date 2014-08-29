@@ -78,8 +78,7 @@ public interface CollectExpression extends Expression {
 	ICollectQuery getQuery();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getAttributes <em>Attributes</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getAttributes <em>Attributes</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -91,8 +90,8 @@ public interface CollectExpression extends Expression {
 	void setAttributes(AttributeOperations value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getClassReference
-	 * <em>Class Reference</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getClassReference <em>Class Reference</em>}' containment
+	 * reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -104,8 +103,7 @@ public interface CollectExpression extends Expression {
 	void setClassReference(Expression value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getQuery <em>Query</em>}' containment
-	 * reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CollectExpression#getQuery <em>Query</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

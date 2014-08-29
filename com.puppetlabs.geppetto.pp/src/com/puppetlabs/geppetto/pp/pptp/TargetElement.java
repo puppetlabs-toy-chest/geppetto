@@ -44,8 +44,7 @@ public interface TargetElement extends INamed, IDocumented {
 	boolean isDeprecated();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement#isDeprecated <em>Deprecated</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement#isDeprecated <em>Deprecated</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

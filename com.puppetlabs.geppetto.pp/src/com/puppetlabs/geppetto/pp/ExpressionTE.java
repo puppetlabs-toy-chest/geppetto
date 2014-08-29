@@ -43,8 +43,7 @@ public interface ExpressionTE extends TextExpression {
 	Expression getExpression();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ExpressionTE#getExpression <em>Expression</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ExpressionTE#getExpression <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

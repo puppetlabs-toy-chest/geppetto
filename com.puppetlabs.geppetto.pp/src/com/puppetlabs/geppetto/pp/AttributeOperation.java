@@ -103,8 +103,7 @@ public interface AttributeOperation extends EObject {
 	void setOp(String value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getValue <em>Value</em>}' containment
-	 * reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

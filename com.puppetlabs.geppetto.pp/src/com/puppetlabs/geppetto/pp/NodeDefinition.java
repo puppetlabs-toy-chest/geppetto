@@ -81,8 +81,7 @@ public interface NodeDefinition extends Expression {
 	EList<Expression> getStatements();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.NodeDefinition#getParentName <em>Parent Name</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.NodeDefinition#getParentName <em>Parent Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

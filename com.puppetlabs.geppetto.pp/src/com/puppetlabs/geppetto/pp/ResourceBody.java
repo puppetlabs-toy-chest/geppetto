@@ -62,8 +62,7 @@ public interface ResourceBody extends EObject {
 	Expression getNameExpr();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ResourceBody#getAttributes <em>Attributes</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ResourceBody#getAttributes <em>Attributes</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -75,8 +74,7 @@ public interface ResourceBody extends EObject {
 	void setAttributes(AttributeOperations value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ResourceBody#getNameExpr <em>Name Expr</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ResourceBody#getNameExpr <em>Name Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

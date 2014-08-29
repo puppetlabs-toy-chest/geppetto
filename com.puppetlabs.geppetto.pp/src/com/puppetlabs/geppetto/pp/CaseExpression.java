@@ -62,8 +62,7 @@ public interface CaseExpression extends Expression {
 	Expression getSwitchExpr();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CaseExpression#getSwitchExpr <em>Switch Expr</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.CaseExpression#getSwitchExpr <em>Switch Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

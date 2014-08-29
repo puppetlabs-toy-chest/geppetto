@@ -64,8 +64,8 @@ public interface ResourceExpression extends Expression {
 	Expression getResourceExpr();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ResourceExpression#getResourceExpr
-	 * <em>Resource Expr</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ResourceExpression#getResourceExpr <em>Resource Expr</em>}' containment
+	 * reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

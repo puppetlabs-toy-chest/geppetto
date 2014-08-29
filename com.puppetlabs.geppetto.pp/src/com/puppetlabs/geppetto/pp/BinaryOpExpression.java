@@ -43,8 +43,7 @@ public interface BinaryOpExpression extends BinaryExpression {
 	String getOpName();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryOpExpression#getOpName <em>Op Name</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryOpExpression#getOpName <em>Op Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

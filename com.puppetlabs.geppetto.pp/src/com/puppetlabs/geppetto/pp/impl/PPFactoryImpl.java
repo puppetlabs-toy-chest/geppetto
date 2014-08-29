@@ -114,7 +114,7 @@ public class PPFactoryImpl extends EFactoryImpl implements PPFactory {
 	 */
 	public static PPFactory init() {
 		try {
-			PPFactory thePPFactory = (PPFactory) EPackage.Registry.INSTANCE.getEFactory("http://www.puppetlabs.com/geppetto/1.0.0/PP");
+			PPFactory thePPFactory = (PPFactory) EPackage.Registry.INSTANCE.getEFactory(PPPackage.eNS_URI);
 			if(thePPFactory != null) {
 				return thePPFactory;
 			}

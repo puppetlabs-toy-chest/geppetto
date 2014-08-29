@@ -167,8 +167,7 @@ public interface TargetEntry extends ITargetElementContainer {
 	String getVersion();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getDescription <em>Description</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getDescription <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -192,8 +191,7 @@ public interface TargetEntry extends ITargetElementContainer {
 	void setLabel(String value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaType <em>Meta Type</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaType <em>Meta Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -205,8 +203,7 @@ public interface TargetEntry extends ITargetElementContainer {
 	void setMetaType(MetaType value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getVersion <em>Version</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getVersion <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

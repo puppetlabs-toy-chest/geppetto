@@ -81,8 +81,7 @@ public interface AbstractType extends TargetElement {
 	EList<Property> getProperties();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getEReference0 <em>EReference0</em>}'
-	 * reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getEReference0 <em>EReference0</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

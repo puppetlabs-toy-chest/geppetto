@@ -48,8 +48,7 @@ public interface PPTPPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetEntryImpl
-		 * <em>Target Entry</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetEntryImpl <em>Target Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -132,8 +131,8 @@ public interface PPTPPackage extends EPackage {
 		EReference TARGET_ENTRY__META_VARIABLES = eINSTANCE.getTargetEntry_MetaVariables();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.PuppetDistributionImpl
-		 * <em>Puppet Distribution</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.PuppetDistributionImpl <em>Puppet Distribution</em>}
+		 * ' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -144,8 +143,7 @@ public interface PPTPPackage extends EPackage {
 		EClass PUPPET_DISTRIBUTION = eINSTANCE.getPuppetDistribution();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.FunctionImpl <em>Function</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.FunctionImpl <em>Function</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -165,8 +163,7 @@ public interface PPTPPackage extends EPackage {
 		EAttribute FUNCTION__RVALUE = eINSTANCE.getFunction_RValue();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.AbstractTypeImpl
-		 * <em>Abstract Type</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.AbstractTypeImpl <em>Abstract Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -224,7 +221,7 @@ public interface PPTPPackage extends EPackage {
 		EAttribute TYPE__SUPER_TYPE = eINSTANCE.getType_SuperType();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.MetaTypeImpl <em>Meta Type</em>} ' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.MetaTypeImpl <em>Meta Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -235,8 +232,7 @@ public interface PPTPPackage extends EPackage {
 		EClass META_TYPE = eINSTANCE.getMetaType();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeArgumentImpl
-		 * <em>Type Argument</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -265,8 +261,7 @@ public interface PPTPPackage extends EPackage {
 		EAttribute TYPE_ARGUMENT__NAMEVAR = eINSTANCE.getTypeArgument_Namevar();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.NameSpaceImpl
-		 * <em>Name Space</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.NameSpaceImpl <em>Name Space</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -286,8 +281,7 @@ public interface PPTPPackage extends EPackage {
 		EAttribute NAME_SPACE__RESERVED = eINSTANCE.getNameSpace_Reserved();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TPVariableImpl
-		 * <em>TP Variable</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TPVariableImpl <em>TP Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -337,8 +331,7 @@ public interface PPTPPackage extends EPackage {
 		EReference ITARGET_ELEMENT_CONTAINER__CONTENTS = eINSTANCE.getITargetElementContainer_Contents();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.MetaVariableImpl
-		 * <em>Meta Variable</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.MetaVariableImpl <em>Meta Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -349,8 +342,7 @@ public interface PPTPPackage extends EPackage {
 		EClass META_VARIABLE = eINSTANCE.getMetaVariable();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.IDocumented <em>IDocumented</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.IDocumented <em>IDocumented</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -390,8 +382,7 @@ public interface PPTPPackage extends EPackage {
 		EAttribute INAMED__NAME = eINSTANCE.getINamed_Name();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetElementImpl
-		 * <em>Target Element</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetElementImpl <em>Target Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -411,8 +402,7 @@ public interface PPTPPackage extends EPackage {
 		EAttribute TARGET_ELEMENT__DEPRECATED = eINSTANCE.getTargetElement_Deprecated();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.PropertyImpl <em>Property</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.PropertyImpl <em>Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -423,8 +413,7 @@ public interface PPTPPackage extends EPackage {
 		EClass PROPERTY = eINSTANCE.getProperty();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.ParameterImpl
-		 * <em>Parameter</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.ParameterImpl <em>Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -435,8 +424,7 @@ public interface PPTPPackage extends EPackage {
 		EClass PARAMETER = eINSTANCE.getParameter();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeFragmentImpl
-		 * <em>Type Fragment</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeFragmentImpl <em>Type Fragment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -496,8 +484,8 @@ public interface PPTPPackage extends EPackage {
 	PPTPPackage eINSTANCE = com.puppetlabs.geppetto.pp.pptp.impl.PPTPPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.ITargetElementContainer
-	 * <em>ITarget Element Container</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.ITargetElementContainer <em>ITarget Element Container</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -528,8 +516,7 @@ public interface PPTPPackage extends EPackage {
 	int ITARGET_ELEMENT_CONTAINER_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetEntryImpl <em>Target Entry</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetEntryImpl <em>Target Entry</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -540,8 +527,7 @@ public interface PPTPPackage extends EPackage {
 	int TARGET_ENTRY = 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.PuppetDistributionImpl
-	 * <em>Puppet Distribution</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.PuppetDistributionImpl <em>Puppet Distribution</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -875,8 +861,7 @@ public interface PPTPPackage extends EPackage {
 	int INAMED_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetElementImpl
-	 * <em>Target Element</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TargetElementImpl <em>Target Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -927,8 +912,7 @@ public interface PPTPPackage extends EPackage {
 	int TARGET_ELEMENT_FEATURE_COUNT = INAMED_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.AbstractTypeImpl <em>Abstract Type</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.AbstractTypeImpl <em>Abstract Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1009,8 +993,7 @@ public interface PPTPPackage extends EPackage {
 	int ABSTRACT_TYPE_FEATURE_COUNT = TARGET_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeArgumentImpl <em>Type Argument</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1234,8 +1217,7 @@ public interface PPTPPackage extends EPackage {
 	int PARAMETER_FEATURE_COUNT = TYPE_ARGUMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeFragmentImpl <em>Type Fragment</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TypeFragmentImpl <em>Type Fragment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1477,8 +1459,7 @@ public interface PPTPPackage extends EPackage {
 	int META_TYPE_FEATURE_COUNT = ABSTRACT_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.NameSpaceImpl <em>Name Space</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.NameSpaceImpl <em>Name Space</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1549,8 +1530,7 @@ public interface PPTPPackage extends EPackage {
 	int NAME_SPACE_FEATURE_COUNT = TARGET_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TPVariableImpl <em>TP Variable</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.TPVariableImpl <em>TP Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1621,8 +1601,7 @@ public interface PPTPPackage extends EPackage {
 	int TP_VARIABLE_FEATURE_COUNT = TARGET_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.MetaVariableImpl <em>Meta Variable</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.pptp.impl.MetaVariableImpl <em>Meta Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1695,8 +1674,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getAbstractType();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getEReference0
-	 * <em>EReference0</em>}'.
+	 * Returns the meta object for the reference '{@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getEReference0 <em>EReference0</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1708,7 +1686,7 @@ public interface PPTPPackage extends EPackage {
 	EReference getAbstractType_EReference0();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getParameters
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getParameters
 	 * <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1721,7 +1699,7 @@ public interface PPTPPackage extends EPackage {
 	EReference getAbstractType_Parameters();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getProperties
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.pptp.AbstractType#getProperties
 	 * <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1757,8 +1735,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getFunction();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.Function#isRValue
-	 * <em>RValue</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.Function#isRValue <em>RValue</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1817,8 +1794,8 @@ public interface PPTPPackage extends EPackage {
 	EAttribute getINamed_Name();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.pptp.ITargetElementContainer
-	 * <em>ITarget Element Container</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.pptp.ITargetElementContainer <em>ITarget Element Container</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1875,8 +1852,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getNameSpace();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.NameSpace#isReserved
-	 * <em>Reserved</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.NameSpace#isReserved <em>Reserved</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1920,8 +1896,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getProperty();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.pptp.PuppetDistribution
-	 * <em>Puppet Distribution</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.pptp.PuppetDistribution <em>Puppet Distribution</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1932,7 +1907,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getPuppetDistribution();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement <em>Target Element</em>} '.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement <em>Target Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1943,8 +1918,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getTargetElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement#isDeprecated
-	 * <em>Deprecated</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TargetElement#isDeprecated <em>Deprecated</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1967,8 +1941,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getTargetEntry();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getDescription
-	 * <em>Description</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1980,7 +1953,7 @@ public interface PPTPPackage extends EPackage {
 	EAttribute getTargetEntry_Description();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getFunctions
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getFunctions
 	 * <em>Functions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1993,8 +1966,7 @@ public interface PPTPPackage extends EPackage {
 	EReference getTargetEntry_Functions();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getLabel
-	 * <em>Label</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2006,7 +1978,7 @@ public interface PPTPPackage extends EPackage {
 	EAttribute getTargetEntry_Label();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaType
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaType
 	 * <em>Meta Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2019,7 +1991,7 @@ public interface PPTPPackage extends EPackage {
 	EReference getTargetEntry_MetaType();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaVariables
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getMetaVariables
 	 * <em>Meta Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2032,7 +2004,7 @@ public interface PPTPPackage extends EPackage {
 	EReference getTargetEntry_MetaVariables();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getTypeFragments
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getTypeFragments
 	 * <em>Type Fragments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2045,7 +2017,7 @@ public interface PPTPPackage extends EPackage {
 	EReference getTargetEntry_TypeFragments();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getTypes
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getTypes
 	 * <em>Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2058,8 +2030,7 @@ public interface PPTPPackage extends EPackage {
 	EReference getTargetEntry_Types();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getVersion
-	 * <em>Version</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TargetEntry#getVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2082,8 +2053,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getTPVariable();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TPVariable#isAssignable
-	 * <em>Assignable</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TPVariable#isAssignable <em>Assignable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2095,8 +2065,7 @@ public interface PPTPPackage extends EPackage {
 	EAttribute getTPVariable_Assignable();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TPVariable#getPattern
-	 * <em>Pattern</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TPVariable#getPattern <em>Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2119,8 +2088,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.Type#getSuperType
-	 * <em>Super Type</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.Type#getSuperType <em>Super Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2143,8 +2111,7 @@ public interface PPTPPackage extends EPackage {
 	EClass getTypeArgument();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument#isNamevar
-	 * <em>Namevar</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument#isNamevar <em>Namevar</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2156,8 +2123,7 @@ public interface PPTPPackage extends EPackage {
 	EAttribute getTypeArgument_Namevar();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument#isRequired
-	 * <em>Required</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.pptp.TypeArgument#isRequired <em>Required</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

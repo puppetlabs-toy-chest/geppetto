@@ -43,8 +43,7 @@ public interface VariableExpression extends Expression {
 	String getVarName();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.VariableExpression#getVarName <em>Var Name</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.VariableExpression#getVarName <em>Var Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

@@ -43,8 +43,7 @@ public interface Lambda extends ExpressionBlock {
 	DefinitionArgumentList getArguments();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.Lambda#getArguments <em>Arguments</em>}' containment
-	 * reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.Lambda#getArguments <em>Arguments</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

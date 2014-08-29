@@ -43,8 +43,7 @@ public interface WithLambdaExpression extends ParameterizedExpression {
 	Lambda getLambda();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.WithLambdaExpression#getLambda <em>Lambda</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.WithLambdaExpression#getLambda <em>Lambda</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

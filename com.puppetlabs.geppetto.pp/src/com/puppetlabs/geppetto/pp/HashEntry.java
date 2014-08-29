@@ -74,8 +74,7 @@ public interface HashEntry extends EObject {
 	void setKey(Expression value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.HashEntry#getValue <em>Value</em>}' containment
-	 * reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.HashEntry#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

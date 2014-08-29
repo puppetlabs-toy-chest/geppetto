@@ -81,8 +81,7 @@ public interface UnlessExpression extends Expression {
 	EList<Expression> getThenStatements();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.UnlessExpression#getCondExpr <em>Cond Expr</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.UnlessExpression#getCondExpr <em>Cond Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -94,8 +93,8 @@ public interface UnlessExpression extends Expression {
 	void setCondExpr(Expression value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.UnlessExpression#getElseStatement
-	 * <em>Else Statement</em>}' containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.UnlessExpression#getElseStatement <em>Else Statement</em>}' containment
+	 * reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

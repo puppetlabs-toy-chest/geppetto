@@ -61,8 +61,7 @@ public interface MethodCall extends WithLambdaExpression {
 	boolean isParenthesized();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.MethodCall#getMethodExpr <em>Method Expr</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.MethodCall#getMethodExpr <em>Method Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -74,8 +73,7 @@ public interface MethodCall extends WithLambdaExpression {
 	void setMethodExpr(Expression value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.MethodCall#isParenthesized <em>Parenthesized</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.MethodCall#isParenthesized <em>Parenthesized</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

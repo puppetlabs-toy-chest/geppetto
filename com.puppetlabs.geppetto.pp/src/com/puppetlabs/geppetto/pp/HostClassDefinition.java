@@ -43,8 +43,7 @@ public interface HostClassDefinition extends Definition {
 	LiteralExpression getParent();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.HostClassDefinition#getParent <em>Parent</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.HostClassDefinition#getParent <em>Parent</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

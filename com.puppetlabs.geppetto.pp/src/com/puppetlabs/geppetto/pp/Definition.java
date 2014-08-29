@@ -80,8 +80,7 @@ public interface Definition extends Expression {
 	EList<Expression> getStatements();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.Definition#getArguments <em>Arguments</em>}' containment
-	 * reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.Definition#getArguments <em>Arguments</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

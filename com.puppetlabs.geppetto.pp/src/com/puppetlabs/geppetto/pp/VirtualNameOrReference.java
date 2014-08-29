@@ -60,8 +60,7 @@ public interface VirtualNameOrReference extends LiteralExpression {
 	boolean isExported();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference#isExported <em>Exported</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference#isExported <em>Exported</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -73,8 +72,7 @@ public interface VirtualNameOrReference extends LiteralExpression {
 	void setExported(boolean value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference#getValue <em>Value</em>}'
-	 * attribute.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

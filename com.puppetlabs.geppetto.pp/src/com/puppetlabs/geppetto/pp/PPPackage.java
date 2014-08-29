@@ -47,8 +47,7 @@ public interface PPPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.PuppetManifestImpl
-		 * <em>Puppet Manifest</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.PuppetManifestImpl <em>Puppet Manifest</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -59,8 +58,7 @@ public interface PPPackage extends EPackage {
 		EClass PUPPET_MANIFEST = eINSTANCE.getPuppetManifest();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionImpl <em>Expression</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionImpl <em>Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -71,8 +69,7 @@ public interface PPPackage extends EPackage {
 		EClass EXPRESSION = eINSTANCE.getExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ResourceBodyImpl
-		 * <em>Resource Body</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ResourceBodyImpl <em>Resource Body</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -101,8 +98,8 @@ public interface PPPackage extends EPackage {
 		EReference RESOURCE_BODY__NAME_EXPR = eINSTANCE.getResourceBody_NameExpr();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationImpl
-		 * <em>Attribute Operation</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationImpl <em>Attribute Operation</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -140,8 +137,8 @@ public interface PPPackage extends EPackage {
 		EAttribute ATTRIBUTE_OPERATION__OP = eINSTANCE.getAttributeOperation_Op();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationsImpl
-		 * <em>Attribute Operations</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationsImpl <em>Attribute Operations</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -161,8 +158,7 @@ public interface PPPackage extends EPackage {
 		EReference ATTRIBUTE_OPERATIONS__ATTRIBUTES = eINSTANCE.getAttributeOperations_Attributes();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.ICollectQuery <em>ICollect Query</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.ICollectQuery <em>ICollect Query</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -173,8 +169,8 @@ public interface PPPackage extends EPackage {
 		EClass ICOLLECT_QUERY = eINSTANCE.getICollectQuery();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VirtualCollectQueryImpl
-		 * <em>Virtual Collect Query</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VirtualCollectQueryImpl <em>Virtual Collect Query</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -185,8 +181,8 @@ public interface PPPackage extends EPackage {
 		EClass VIRTUAL_COLLECT_QUERY = eINSTANCE.getVirtualCollectQuery();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExportedCollectQueryImpl
-		 * <em>Exported Collect Query</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExportedCollectQueryImpl <em>Exported Collect Query</em>}
+		 * ' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -197,8 +193,8 @@ public interface PPPackage extends EPackage {
 		EClass EXPORTED_COLLECT_QUERY = eINSTANCE.getExportedCollectQuery();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.HostClassDefinitionImpl
-		 * <em>Host Class Definition</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.HostClassDefinitionImpl <em>Host Class Definition</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -218,8 +214,7 @@ public interface PPPackage extends EPackage {
 		EReference HOST_CLASS_DEFINITION__PARENT = eINSTANCE.getHostClassDefinition_Parent();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionImpl <em>Definition</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionImpl <em>Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -258,8 +253,7 @@ public interface PPPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionArgumentListImpl
-		 * <em>Definition Argument List</em>}'
-		 * class.
+		 * <em>Definition Argument List</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -279,8 +273,8 @@ public interface PPPackage extends EPackage {
 		EReference DEFINITION_ARGUMENT_LIST__ARGUMENTS = eINSTANCE.getDefinitionArgumentList_Arguments();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionArgumentImpl
-		 * <em>Definition Argument</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionArgumentImpl <em>Definition Argument</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -318,8 +312,7 @@ public interface PPPackage extends EPackage {
 		EAttribute DEFINITION_ARGUMENT__OP = eINSTANCE.getDefinitionArgument_Op();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.CaseExpressionImpl
-		 * <em>Case Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.CaseExpressionImpl <em>Case Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -377,8 +370,7 @@ public interface PPPackage extends EPackage {
 		EReference CASE__VALUES = eINSTANCE.getCase_Values();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.IfExpressionImpl
-		 * <em>If Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.IfExpressionImpl <em>If Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -416,8 +408,8 @@ public interface PPPackage extends EPackage {
 		EReference IF_EXPRESSION__ELSE_STATEMENT = eINSTANCE.getIfExpression_ElseStatement();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralExpressionImpl
-		 * <em>Literal Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralExpressionImpl <em>Literal Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -429,8 +421,7 @@ public interface PPPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralNameOrReferenceImpl
-		 * <em>Literal Name Or Reference</em>}'
-		 * class.
+		 * <em>Literal Name Or Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -450,8 +441,8 @@ public interface PPPackage extends EPackage {
 		EAttribute LITERAL_NAME_OR_REFERENCE__VALUE = eINSTANCE.getLiteralNameOrReference_Value();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ResourceExpressionImpl
-		 * <em>Resource Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ResourceExpressionImpl <em>Resource Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -480,8 +471,7 @@ public interface PPPackage extends EPackage {
 		EReference RESOURCE_EXPRESSION__RESOURCE_DATA = eINSTANCE.getResourceExpression_ResourceData();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ImportExpressionImpl
-		 * <em>Import Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ImportExpressionImpl <em>Import Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -501,8 +491,7 @@ public interface PPPackage extends EPackage {
 		EReference IMPORT_EXPRESSION__VALUES = eINSTANCE.getImportExpression_Values();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralListImpl
-		 * <em>Literal List</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralListImpl <em>Literal List</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -522,8 +511,7 @@ public interface PPPackage extends EPackage {
 		EReference LITERAL_LIST__ELEMENTS = eINSTANCE.getLiteralList_Elements();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralHashImpl
-		 * <em>Literal Hash</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralHashImpl <em>Literal Hash</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -543,8 +531,7 @@ public interface PPPackage extends EPackage {
 		EReference LITERAL_HASH__ELEMENTS = eINSTANCE.getLiteralHash_Elements();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.HashEntryImpl <em>Hash Entry</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.HashEntryImpl <em>Hash Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -573,8 +560,7 @@ public interface PPPackage extends EPackage {
 		EReference HASH_ENTRY__VALUE = eINSTANCE.getHashEntry_Value();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralBooleanImpl
-		 * <em>Literal Boolean</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralBooleanImpl <em>Literal Boolean</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -594,8 +580,7 @@ public interface PPPackage extends EPackage {
 		EAttribute LITERAL_BOOLEAN__VALUE = eINSTANCE.getLiteralBoolean_Value();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralUndefImpl
-		 * <em>Literal Undef</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralUndefImpl <em>Literal Undef</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -606,8 +591,7 @@ public interface PPPackage extends EPackage {
 		EClass LITERAL_UNDEF = eINSTANCE.getLiteralUndef();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralDefaultImpl
-		 * <em>Literal Default</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralDefaultImpl <em>Literal Default</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -618,8 +602,7 @@ public interface PPPackage extends EPackage {
 		EClass LITERAL_DEFAULT = eINSTANCE.getLiteralDefault();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralRegexImpl
-		 * <em>Literal Regex</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralRegexImpl <em>Literal Regex</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -639,8 +622,7 @@ public interface PPPackage extends EPackage {
 		EAttribute LITERAL_REGEX__VALUE = eINSTANCE.getLiteralRegex_Value();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralNameImpl
-		 * <em>Literal Name</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralNameImpl <em>Literal Name</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -660,8 +642,8 @@ public interface PPPackage extends EPackage {
 		EAttribute LITERAL_NAME__VALUE = eINSTANCE.getLiteralName_Value();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VariableExpressionImpl
-		 * <em>Variable Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VariableExpressionImpl <em>Variable Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -682,8 +664,7 @@ public interface PPPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.RelationshipExpressionImpl
-		 * <em>Relationship Expression</em>}'
-		 * class.
+		 * <em>Relationship Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -694,8 +675,8 @@ public interface PPPackage extends EPackage {
 		EClass RELATIONSHIP_EXPRESSION = eINSTANCE.getRelationshipExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AssignmentExpressionImpl
-		 * <em>Assignment Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AssignmentExpressionImpl <em>Assignment Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -706,8 +687,7 @@ public interface PPPackage extends EPackage {
 		EClass ASSIGNMENT_EXPRESSION = eINSTANCE.getAssignmentExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AppendExpressionImpl
-		 * <em>Append Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AppendExpressionImpl <em>Append Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -718,8 +698,7 @@ public interface PPPackage extends EPackage {
 		EClass APPEND_EXPRESSION = eINSTANCE.getAppendExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.OrExpressionImpl
-		 * <em>Or Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.OrExpressionImpl <em>Or Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -730,8 +709,7 @@ public interface PPPackage extends EPackage {
 		EClass OR_EXPRESSION = eINSTANCE.getOrExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AndExpressionImpl
-		 * <em>And Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AndExpressionImpl <em>And Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -742,8 +720,8 @@ public interface PPPackage extends EPackage {
 		EClass AND_EXPRESSION = eINSTANCE.getAndExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.RelationalExpressionImpl
-		 * <em>Relational Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.RelationalExpressionImpl <em>Relational Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -754,8 +732,8 @@ public interface PPPackage extends EPackage {
 		EClass RELATIONAL_EXPRESSION = eINSTANCE.getRelationalExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.EqualityExpressionImpl
-		 * <em>Equality Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.EqualityExpressionImpl <em>Equality Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -766,8 +744,7 @@ public interface PPPackage extends EPackage {
 		EClass EQUALITY_EXPRESSION = eINSTANCE.getEqualityExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ShiftExpressionImpl
-		 * <em>Shift Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ShiftExpressionImpl <em>Shift Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -778,8 +755,8 @@ public interface PPPackage extends EPackage {
 		EClass SHIFT_EXPRESSION = eINSTANCE.getShiftExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AdditiveExpressionImpl
-		 * <em>Additive Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AdditiveExpressionImpl <em>Additive Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -791,8 +768,7 @@ public interface PPPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.MultiplicativeExpressionImpl
-		 * <em>Multiplicative Expression</em>}'
-		 * class.
+		 * <em>Multiplicative Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -803,8 +779,8 @@ public interface PPPackage extends EPackage {
 		EClass MULTIPLICATIVE_EXPRESSION = eINSTANCE.getMultiplicativeExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.MatchingExpressionImpl
-		 * <em>Matching Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.MatchingExpressionImpl <em>Matching Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -815,8 +791,7 @@ public interface PPPackage extends EPackage {
 		EClass MATCHING_EXPRESSION = eINSTANCE.getMatchingExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.InExpressionImpl
-		 * <em>In Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.InExpressionImpl <em>In Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -827,8 +802,7 @@ public interface PPPackage extends EPackage {
 		EClass IN_EXPRESSION = eINSTANCE.getInExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AtExpressionImpl
-		 * <em>At Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.AtExpressionImpl <em>At Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -839,8 +813,8 @@ public interface PPPackage extends EPackage {
 		EClass AT_EXPRESSION = eINSTANCE.getAtExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.CollectExpressionImpl
-		 * <em>Collect Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.CollectExpressionImpl <em>Collect Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -878,8 +852,8 @@ public interface PPPackage extends EPackage {
 		EReference COLLECT_EXPRESSION__ATTRIBUTES = eINSTANCE.getCollectExpression_Attributes();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.SelectorExpressionImpl
-		 * <em>Selector Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.SelectorExpressionImpl <em>Selector Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -890,8 +864,7 @@ public interface PPPackage extends EPackage {
 		EClass SELECTOR_EXPRESSION = eINSTANCE.getSelectorExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.SelectorEntryImpl
-		 * <em>Selector Entry</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.SelectorEntryImpl <em>Selector Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -902,8 +875,7 @@ public interface PPPackage extends EPackage {
 		EClass SELECTOR_ENTRY = eINSTANCE.getSelectorEntry();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.FunctionCallImpl
-		 * <em>Function Call</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.FunctionCallImpl <em>Function Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -914,8 +886,8 @@ public interface PPPackage extends EPackage {
 		EClass FUNCTION_CALL = eINSTANCE.getFunctionCall();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.BinaryOpExpressionImpl
-		 * <em>Binary Op Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.BinaryOpExpressionImpl <em>Binary Op Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -935,8 +907,7 @@ public interface PPPackage extends EPackage {
 		EAttribute BINARY_OP_EXPRESSION__OP_NAME = eINSTANCE.getBinaryOpExpression_OpName();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.BinaryExpressionImpl
-		 * <em>Binary Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -966,8 +937,7 @@ public interface PPPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ParameterizedExpressionImpl
-		 * <em>Parameterized Expression</em>}'
-		 * class.
+		 * <em>Parameterized Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -996,8 +966,7 @@ public interface PPPackage extends EPackage {
 		EReference PARAMETERIZED_EXPRESSION__PARAMETERS = eINSTANCE.getParameterizedExpression_Parameters();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.NodeDefinitionImpl
-		 * <em>Node Definition</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.NodeDefinitionImpl <em>Node Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1035,8 +1004,7 @@ public interface PPPackage extends EPackage {
 		EReference NODE_DEFINITION__STATEMENTS = eINSTANCE.getNodeDefinition_Statements();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryExpressionImpl
-		 * <em>Unary Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1056,8 +1024,8 @@ public interface PPPackage extends EPackage {
 		EReference UNARY_EXPRESSION__EXPR = eINSTANCE.getUnaryExpression_Expr();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryMinusExpressionImpl
-		 * <em>Unary Minus Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryMinusExpressionImpl <em>Unary Minus Expression</em>}
+		 * ' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1068,8 +1036,8 @@ public interface PPPackage extends EPackage {
 		EClass UNARY_MINUS_EXPRESSION = eINSTANCE.getUnaryMinusExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryNotExpressionImpl
-		 * <em>Unary Not Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryNotExpressionImpl <em>Unary Not Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1080,8 +1048,7 @@ public interface PPPackage extends EPackage {
 		EClass UNARY_NOT_EXPRESSION = eINSTANCE.getUnaryNotExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionBlockImpl
-		 * <em>Expression Block</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionBlockImpl <em>Expression Block</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1101,8 +1068,7 @@ public interface PPPackage extends EPackage {
 		EReference EXPRESSION_BLOCK__STATEMENTS = eINSTANCE.getExpressionBlock_Statements();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ElseExpressionImpl
-		 * <em>Else Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ElseExpressionImpl <em>Else Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1113,8 +1079,7 @@ public interface PPPackage extends EPackage {
 		EClass ELSE_EXPRESSION = eINSTANCE.getElseExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ElseIfExpressionImpl
-		 * <em>Else If Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ElseIfExpressionImpl <em>Else If Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1126,8 +1091,7 @@ public interface PPPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VirtualNameOrReferenceImpl
-		 * <em>Virtual Name Or Reference</em>}'
-		 * class.
+		 * <em>Virtual Name Or Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1157,8 +1121,7 @@ public interface PPPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ParenthesisedExpressionImpl
-		 * <em>Parenthesised Expression</em>}'
-		 * class.
+		 * <em>Parenthesised Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1178,8 +1141,7 @@ public interface PPPackage extends EPackage {
 		EReference PARENTHESISED_EXPRESSION__EXPR = eINSTANCE.getParenthesisedExpression_Expr();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExprListImpl <em>Expr List</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExprListImpl <em>Expr List</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1199,8 +1161,8 @@ public interface PPPackage extends EPackage {
 		EReference EXPR_LIST__EXPRESSIONS = eINSTANCE.getExprList_Expressions();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.DoubleQuotedStringImpl
-		 * <em>Double Quoted String</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.DoubleQuotedStringImpl <em>Double Quoted String</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1220,8 +1182,8 @@ public interface PPPackage extends EPackage {
 		EReference DOUBLE_QUOTED_STRING__STRING_PART = eINSTANCE.getDoubleQuotedString_StringPart();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.SingleQuotedStringImpl
-		 * <em>Single Quoted String</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.SingleQuotedStringImpl <em>Single Quoted String</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1241,8 +1203,7 @@ public interface PPPackage extends EPackage {
 		EAttribute SINGLE_QUOTED_STRING__TEXT = eINSTANCE.getSingleQuotedString_Text();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.StringExpressionImpl
-		 * <em>String Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.StringExpressionImpl <em>String Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1253,8 +1214,7 @@ public interface PPPackage extends EPackage {
 		EClass STRING_EXPRESSION = eINSTANCE.getStringExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnquotedStringImpl
-		 * <em>Unquoted String</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnquotedStringImpl <em>Unquoted String</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1274,8 +1234,7 @@ public interface PPPackage extends EPackage {
 		EReference UNQUOTED_STRING__EXPRESSION = eINSTANCE.getUnquotedString_Expression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.IQuotedString <em>IQuoted String</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.IQuotedString <em>IQuoted String</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1286,8 +1245,8 @@ public interface PPPackage extends EPackage {
 		EClass IQUOTED_STRING = eINSTANCE.getIQuotedString();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.InterpolatedVariableImpl
-		 * <em>Interpolated Variable</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.InterpolatedVariableImpl <em>Interpolated Variable</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1307,8 +1266,7 @@ public interface PPPackage extends EPackage {
 		EAttribute INTERPOLATED_VARIABLE__VAR_NAME = eINSTANCE.getInterpolatedVariable_VarName();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.TextExpressionImpl
-		 * <em>Text Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.TextExpressionImpl <em>Text Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1319,8 +1277,7 @@ public interface PPPackage extends EPackage {
 		EClass TEXT_EXPRESSION = eINSTANCE.getTextExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VerbatimTEImpl <em>Verbatim TE</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VerbatimTEImpl <em>Verbatim TE</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1340,8 +1297,7 @@ public interface PPPackage extends EPackage {
 		EAttribute VERBATIM_TE__TEXT = eINSTANCE.getVerbatimTE_Text();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionTEImpl
-		 * <em>Expression TE</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionTEImpl <em>Expression TE</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1361,8 +1317,7 @@ public interface PPPackage extends EPackage {
 		EReference EXPRESSION_TE__EXPRESSION = eINSTANCE.getExpressionTE_Expression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VariableTEImpl <em>Variable TE</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.VariableTEImpl <em>Variable TE</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1382,8 +1337,7 @@ public interface PPPackage extends EPackage {
 		EAttribute VARIABLE_TE__VAR_NAME = eINSTANCE.getVariableTE_VarName();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralClassImpl
-		 * <em>Literal Class</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralClassImpl <em>Literal Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1394,8 +1348,7 @@ public interface PPPackage extends EPackage {
 		EClass LITERAL_CLASS = eINSTANCE.getLiteralClass();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnlessExpressionImpl
-		 * <em>Unless Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.UnlessExpressionImpl <em>Unless Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1465,8 +1418,7 @@ public interface PPPackage extends EPackage {
 		EClass NAMED_ACCESS_EXPRESSION = eINSTANCE.getNamedAccessExpression();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.MethodCallImpl <em>Method Call</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.MethodCallImpl <em>Method Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1495,8 +1447,8 @@ public interface PPPackage extends EPackage {
 		EReference METHOD_CALL__METHOD_EXPR = eINSTANCE.getMethodCall_MethodExpr();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.WithLambdaExpressionImpl
-		 * <em>With Lambda Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.WithLambdaExpressionImpl <em>With Lambda Expression</em>}
+		 * ' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1516,8 +1468,7 @@ public interface PPPackage extends EPackage {
 		EReference WITH_LAMBDA_EXPRESSION__LAMBDA = eINSTANCE.getWithLambdaExpression_Lambda();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.JavaLambdaImpl <em>Java Lambda</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.JavaLambdaImpl <em>Java Lambda</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1537,8 +1488,7 @@ public interface PPPackage extends EPackage {
 		EAttribute JAVA_LAMBDA__FARROW = eINSTANCE.getJavaLambda_Farrow();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.RubyLambdaImpl <em>Ruby Lambda</em>}'
-		 * class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.RubyLambdaImpl <em>Ruby Lambda</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1549,8 +1499,8 @@ public interface PPPackage extends EPackage {
 		EClass RUBY_LAMBDA = eINSTANCE.getRubyLambda();
 
 		/**
-		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.SeparatorExpressionImpl
-		 * <em>Separator Expression</em>}' class.
+		 * The meta object literal for the '{@link com.puppetlabs.geppetto.pp.impl.SeparatorExpressionImpl <em>Separator Expression</em>}'
+		 * class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 *
@@ -1620,7 +1570,7 @@ public interface PPPackage extends EPackage {
 	int EXPRESSION_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionBlockImpl <em>Expression Block</em>} ' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionBlockImpl <em>Expression Block</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1651,8 +1601,7 @@ public interface PPPackage extends EPackage {
 	int EXPRESSION_BLOCK_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.PuppetManifestImpl <em>Puppet Manifest</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.PuppetManifestImpl <em>Puppet Manifest</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1683,8 +1632,7 @@ public interface PPPackage extends EPackage {
 	int PUPPET_MANIFEST_FEATURE_COUNT = EXPRESSION_BLOCK_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ResourceBodyImpl <em>Resource Body</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ResourceBodyImpl <em>Resource Body</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1725,8 +1673,7 @@ public interface PPPackage extends EPackage {
 	int RESOURCE_BODY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationImpl
-	 * <em>Attribute Operation</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationImpl <em>Attribute Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1777,8 +1724,7 @@ public interface PPPackage extends EPackage {
 	int ATTRIBUTE_OPERATION_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationsImpl
-	 * <em>Attribute Operations</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AttributeOperationsImpl <em>Attribute Operations</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1830,7 +1776,7 @@ public interface PPPackage extends EPackage {
 	int ICOLLECT_QUERY_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryExpressionImpl <em>Unary Expression</em>} ' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1861,8 +1807,7 @@ public interface PPPackage extends EPackage {
 	int UNARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.VirtualCollectQueryImpl
-	 * <em>Virtual Collect Query</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.VirtualCollectQueryImpl <em>Virtual Collect Query</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1893,8 +1838,7 @@ public interface PPPackage extends EPackage {
 	int VIRTUAL_COLLECT_QUERY_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ExportedCollectQueryImpl
-	 * <em>Exported Collect Query</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ExportedCollectQueryImpl <em>Exported Collect Query</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -1925,8 +1869,7 @@ public interface PPPackage extends EPackage {
 	int EXPORTED_COLLECT_QUERY_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.HostClassDefinitionImpl
-	 * <em>Host Class Definition</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.HostClassDefinitionImpl <em>Host Class Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2038,8 +1981,8 @@ public interface PPPackage extends EPackage {
 	int HOST_CLASS_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionArgumentListImpl
-	 * <em>Definition Argument List</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionArgumentListImpl <em>Definition Argument List</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2070,8 +2013,7 @@ public interface PPPackage extends EPackage {
 	int DEFINITION_ARGUMENT_LIST_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionArgumentImpl
-	 * <em>Definition Argument</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.DefinitionArgumentImpl <em>Definition Argument</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2122,8 +2064,7 @@ public interface PPPackage extends EPackage {
 	int DEFINITION_ARGUMENT_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.CaseExpressionImpl <em>Case Expression</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.CaseExpressionImpl <em>Case Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2205,8 +2146,7 @@ public interface PPPackage extends EPackage {
 	int CASE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.IfExpressionImpl <em>If Expression</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.IfExpressionImpl <em>If Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2257,8 +2197,7 @@ public interface PPPackage extends EPackage {
 	int IF_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralExpressionImpl
-	 * <em>Literal Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralExpressionImpl <em>Literal Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2279,8 +2218,8 @@ public interface PPPackage extends EPackage {
 	int LITERAL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralNameOrReferenceImpl
-	 * <em>Literal Name Or Reference</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralNameOrReferenceImpl <em>Literal Name Or Reference</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2311,8 +2250,7 @@ public interface PPPackage extends EPackage {
 	int LITERAL_NAME_OR_REFERENCE_FEATURE_COUNT = LITERAL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ResourceExpressionImpl
-	 * <em>Resource Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ResourceExpressionImpl <em>Resource Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2353,8 +2291,7 @@ public interface PPPackage extends EPackage {
 	int RESOURCE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ImportExpressionImpl
-	 * <em>Import Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ImportExpressionImpl <em>Import Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2488,8 +2425,7 @@ public interface PPPackage extends EPackage {
 	int HASH_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralBooleanImpl <em>Literal Boolean</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralBooleanImpl <em>Literal Boolean</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2520,8 +2456,7 @@ public interface PPPackage extends EPackage {
 	int LITERAL_BOOLEAN_FEATURE_COUNT = LITERAL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralUndefImpl <em>Literal Undef</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralUndefImpl <em>Literal Undef</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2542,8 +2477,7 @@ public interface PPPackage extends EPackage {
 	int LITERAL_UNDEF_FEATURE_COUNT = LITERAL_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralDefaultImpl <em>Literal Default</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralDefaultImpl <em>Literal Default</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2564,8 +2498,7 @@ public interface PPPackage extends EPackage {
 	int LITERAL_DEFAULT_FEATURE_COUNT = LITERAL_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralRegexImpl <em>Literal Regex</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralRegexImpl <em>Literal Regex</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2627,8 +2560,7 @@ public interface PPPackage extends EPackage {
 	int LITERAL_NAME_FEATURE_COUNT = LITERAL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.VariableExpressionImpl
-	 * <em>Variable Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.VariableExpressionImpl <em>Variable Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2659,8 +2591,7 @@ public interface PPPackage extends EPackage {
 	int VARIABLE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.BinaryExpressionImpl
-	 * <em>Binary Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2701,8 +2632,7 @@ public interface PPPackage extends EPackage {
 	int BINARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.BinaryOpExpressionImpl
-	 * <em>Binary Op Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.BinaryOpExpressionImpl <em>Binary Op Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2753,8 +2683,8 @@ public interface PPPackage extends EPackage {
 	int BINARY_OP_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.RelationshipExpressionImpl
-	 * <em>Relationship Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.RelationshipExpressionImpl <em>Relationship Expression</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2805,8 +2735,7 @@ public interface PPPackage extends EPackage {
 	int RELATIONSHIP_EXPRESSION_FEATURE_COUNT = BINARY_OP_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AssignmentExpressionImpl
-	 * <em>Assignment Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AssignmentExpressionImpl <em>Assignment Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2847,8 +2776,7 @@ public interface PPPackage extends EPackage {
 	int ASSIGNMENT_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AppendExpressionImpl
-	 * <em>Append Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AppendExpressionImpl <em>Append Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2889,8 +2817,7 @@ public interface PPPackage extends EPackage {
 	int APPEND_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.OrExpressionImpl <em>Or Expression</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.OrExpressionImpl <em>Or Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2931,8 +2858,7 @@ public interface PPPackage extends EPackage {
 	int OR_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AndExpressionImpl <em>And Expression</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AndExpressionImpl <em>And Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -2973,8 +2899,7 @@ public interface PPPackage extends EPackage {
 	int AND_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.RelationalExpressionImpl
-	 * <em>Relational Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.RelationalExpressionImpl <em>Relational Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3025,8 +2950,7 @@ public interface PPPackage extends EPackage {
 	int RELATIONAL_EXPRESSION_FEATURE_COUNT = BINARY_OP_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.EqualityExpressionImpl
-	 * <em>Equality Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.EqualityExpressionImpl <em>Equality Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3077,7 +3001,7 @@ public interface PPPackage extends EPackage {
 	int EQUALITY_EXPRESSION_FEATURE_COUNT = BINARY_OP_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ShiftExpressionImpl <em>Shift Expression</em>} ' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ShiftExpressionImpl <em>Shift Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3128,8 +3052,7 @@ public interface PPPackage extends EPackage {
 	int SHIFT_EXPRESSION_FEATURE_COUNT = BINARY_OP_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AdditiveExpressionImpl
-	 * <em>Additive Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AdditiveExpressionImpl <em>Additive Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3180,8 +3103,8 @@ public interface PPPackage extends EPackage {
 	int ADDITIVE_EXPRESSION_FEATURE_COUNT = BINARY_OP_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.MultiplicativeExpressionImpl
-	 * <em>Multiplicative Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.MultiplicativeExpressionImpl <em>Multiplicative Expression</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3232,8 +3155,7 @@ public interface PPPackage extends EPackage {
 	int MULTIPLICATIVE_EXPRESSION_FEATURE_COUNT = BINARY_OP_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.MatchingExpressionImpl
-	 * <em>Matching Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.MatchingExpressionImpl <em>Matching Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3284,8 +3206,7 @@ public interface PPPackage extends EPackage {
 	int MATCHING_EXPRESSION_FEATURE_COUNT = BINARY_OP_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.InExpressionImpl <em>In Expression</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.InExpressionImpl <em>In Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3336,8 +3257,8 @@ public interface PPPackage extends EPackage {
 	int IN_EXPRESSION_FEATURE_COUNT = BINARY_OP_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ParameterizedExpressionImpl
-	 * <em>Parameterized Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ParameterizedExpressionImpl <em>Parameterized Expression</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3378,8 +3299,7 @@ public interface PPPackage extends EPackage {
 	int PARAMETERIZED_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AtExpressionImpl <em>At Expression</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.AtExpressionImpl <em>At Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3420,8 +3340,7 @@ public interface PPPackage extends EPackage {
 	int AT_EXPRESSION_FEATURE_COUNT = PARAMETERIZED_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.CollectExpressionImpl
-	 * <em>Collect Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.CollectExpressionImpl <em>Collect Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3472,8 +3391,7 @@ public interface PPPackage extends EPackage {
 	int COLLECT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.SelectorExpressionImpl
-	 * <em>Selector Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.SelectorExpressionImpl <em>Selector Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3514,8 +3432,7 @@ public interface PPPackage extends EPackage {
 	int SELECTOR_EXPRESSION_FEATURE_COUNT = PARAMETERIZED_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.SelectorEntryImpl <em>Selector Entry</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.SelectorEntryImpl <em>Selector Entry</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3556,8 +3473,7 @@ public interface PPPackage extends EPackage {
 	int SELECTOR_ENTRY_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.WithLambdaExpressionImpl
-	 * <em>With Lambda Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.WithLambdaExpressionImpl <em>With Lambda Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3608,8 +3524,7 @@ public interface PPPackage extends EPackage {
 	int WITH_LAMBDA_EXPRESSION_FEATURE_COUNT = PARAMETERIZED_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.FunctionCallImpl <em>Function Call</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.FunctionCallImpl <em>Function Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3660,8 +3575,7 @@ public interface PPPackage extends EPackage {
 	int FUNCTION_CALL_FEATURE_COUNT = WITH_LAMBDA_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.NodeDefinitionImpl <em>Node Definition</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.NodeDefinitionImpl <em>Node Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3712,8 +3626,7 @@ public interface PPPackage extends EPackage {
 	int NODE_DEFINITION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryMinusExpressionImpl
-	 * <em>Unary Minus Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryMinusExpressionImpl <em>Unary Minus Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3744,8 +3657,7 @@ public interface PPPackage extends EPackage {
 	int UNARY_MINUS_EXPRESSION_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryNotExpressionImpl
-	 * <em>Unary Not Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnaryNotExpressionImpl <em>Unary Not Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3776,8 +3688,7 @@ public interface PPPackage extends EPackage {
 	int UNARY_NOT_EXPRESSION_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ElseExpressionImpl <em>Else Expression</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ElseExpressionImpl <em>Else Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3808,8 +3719,7 @@ public interface PPPackage extends EPackage {
 	int ELSE_EXPRESSION_FEATURE_COUNT = EXPRESSION_BLOCK_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ElseIfExpressionImpl
-	 * <em>Else If Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ElseIfExpressionImpl <em>Else If Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3860,8 +3770,8 @@ public interface PPPackage extends EPackage {
 	int ELSE_IF_EXPRESSION_FEATURE_COUNT = IF_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.VirtualNameOrReferenceImpl
-	 * <em>Virtual Name Or Reference</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.VirtualNameOrReferenceImpl <em>Virtual Name Or Reference</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3902,8 +3812,8 @@ public interface PPPackage extends EPackage {
 	int VIRTUAL_NAME_OR_REFERENCE_FEATURE_COUNT = LITERAL_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ParenthesisedExpressionImpl
-	 * <em>Parenthesised Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ParenthesisedExpressionImpl <em>Parenthesised Expression</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3965,8 +3875,7 @@ public interface PPPackage extends EPackage {
 	int EXPR_LIST_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.StringExpressionImpl
-	 * <em>String Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.StringExpressionImpl <em>String Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -3987,8 +3896,7 @@ public interface PPPackage extends EPackage {
 	int STRING_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.DoubleQuotedStringImpl
-	 * <em>Double Quoted String</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.DoubleQuotedStringImpl <em>Double Quoted String</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4019,8 +3927,7 @@ public interface PPPackage extends EPackage {
 	int DOUBLE_QUOTED_STRING_FEATURE_COUNT = STRING_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.SingleQuotedStringImpl
-	 * <em>Single Quoted String</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.SingleQuotedStringImpl <em>Single Quoted String</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4051,8 +3958,7 @@ public interface PPPackage extends EPackage {
 	int SINGLE_QUOTED_STRING_FEATURE_COUNT = STRING_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnquotedStringImpl <em>Unquoted String</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnquotedStringImpl <em>Unquoted String</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4104,8 +4010,7 @@ public interface PPPackage extends EPackage {
 	int IQUOTED_STRING_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.InterpolatedVariableImpl
-	 * <em>Interpolated Variable</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.InterpolatedVariableImpl <em>Interpolated Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4136,8 +4041,7 @@ public interface PPPackage extends EPackage {
 	int INTERPOLATED_VARIABLE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.TextExpressionImpl <em>Text Expression</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.TextExpressionImpl <em>Text Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4189,8 +4093,7 @@ public interface PPPackage extends EPackage {
 	int VERBATIM_TE_FEATURE_COUNT = TEXT_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionTEImpl <em>Expression TE</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.ExpressionTEImpl <em>Expression TE</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4252,8 +4155,7 @@ public interface PPPackage extends EPackage {
 	int VARIABLE_TE_FEATURE_COUNT = TEXT_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralClassImpl <em>Literal Class</em>}'
-	 * class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.LiteralClassImpl <em>Literal Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4274,8 +4176,7 @@ public interface PPPackage extends EPackage {
 	int LITERAL_CLASS_FEATURE_COUNT = LITERAL_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnlessExpressionImpl
-	 * <em>Unless Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.UnlessExpressionImpl <em>Unless Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4367,8 +4268,8 @@ public interface PPPackage extends EPackage {
 	int LAMBDA_FEATURE_COUNT = EXPRESSION_BLOCK_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.NamedAccessExpressionImpl
-	 * <em>Named Access Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.NamedAccessExpressionImpl <em>Named Access Expression</em>}'
+	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4572,8 +4473,7 @@ public interface PPPackage extends EPackage {
 	int RUBY_LAMBDA_FEATURE_COUNT = LAMBDA_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.SeparatorExpressionImpl
-	 * <em>Separator Expression</em>}' class.
+	 * The meta object id for the '{@link com.puppetlabs.geppetto.pp.impl.SeparatorExpressionImpl <em>Separator Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4594,8 +4494,7 @@ public interface PPPackage extends EPackage {
 	int SEPARATOR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AdditiveExpression
-	 * <em>Additive Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AdditiveExpression <em>Additive Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4617,7 +4516,7 @@ public interface PPPackage extends EPackage {
 	EClass getAndExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AppendExpression <em>Append Expression</em>} '.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AppendExpression <em>Append Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4628,8 +4527,7 @@ public interface PPPackage extends EPackage {
 	EClass getAppendExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AssignmentExpression
-	 * <em>Assignment Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AssignmentExpression <em>Assignment Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4651,8 +4549,7 @@ public interface PPPackage extends EPackage {
 	EClass getAtExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AttributeOperation
-	 * <em>Attribute Operation</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AttributeOperation <em>Attribute Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4663,8 +4560,7 @@ public interface PPPackage extends EPackage {
 	EClass getAttributeOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getKey
-	 * <em>Key</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getKey <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4676,8 +4572,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getAttributeOperation_Key();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getOp
-	 * <em>Op</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getOp <em>Op</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4689,7 +4584,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getAttributeOperation_Op();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.AttributeOperation#getValue <em>Value</em>}
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.AttributeOperation#getValue <em>Value</em>}
 	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4702,8 +4597,7 @@ public interface PPPackage extends EPackage {
 	EReference getAttributeOperation_Value();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AttributeOperations
-	 * <em>Attribute Operations</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.AttributeOperations <em>Attribute Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4714,7 +4608,7 @@ public interface PPPackage extends EPackage {
 	EClass getAttributeOperations();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.AttributeOperations#getAttributes
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.AttributeOperations#getAttributes
 	 * <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4727,7 +4621,7 @@ public interface PPPackage extends EPackage {
 	EReference getAttributeOperations_Attributes();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.BinaryExpression <em>Binary Expression</em>} '.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.BinaryExpression <em>Binary Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4738,7 +4632,7 @@ public interface PPPackage extends EPackage {
 	EClass getBinaryExpression();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.BinaryExpression#getLeftExpr
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getLeftExpr
 	 * <em>Left Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4751,7 +4645,7 @@ public interface PPPackage extends EPackage {
 	EReference getBinaryExpression_LeftExpr();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.BinaryExpression#getRightExpr
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getRightExpr
 	 * <em>Right Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4764,8 +4658,7 @@ public interface PPPackage extends EPackage {
 	EReference getBinaryExpression_RightExpr();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.BinaryOpExpression
-	 * <em>Binary Op Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.BinaryOpExpression <em>Binary Op Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4776,8 +4669,7 @@ public interface PPPackage extends EPackage {
 	EClass getBinaryOpExpression();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.BinaryOpExpression#getOpName
-	 * <em>Op Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.BinaryOpExpression#getOpName <em>Op Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4800,8 +4692,8 @@ public interface PPPackage extends EPackage {
 	EClass getCase();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.Case#getStatements
-	 * <em>Statements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.Case#getStatements <em>Statements</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4813,8 +4705,7 @@ public interface PPPackage extends EPackage {
 	EReference getCase_Statements();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.Case#getValues
-	 * <em>Values</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.Case#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4837,8 +4728,8 @@ public interface PPPackage extends EPackage {
 	EClass getCaseExpression();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.CaseExpression#getCases
-	 * <em>Cases</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.CaseExpression#getCases <em>Cases</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4850,7 +4741,7 @@ public interface PPPackage extends EPackage {
 	EReference getCaseExpression_Cases();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.CaseExpression#getSwitchExpr
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.CaseExpression#getSwitchExpr
 	 * <em>Switch Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4863,8 +4754,7 @@ public interface PPPackage extends EPackage {
 	EReference getCaseExpression_SwitchExpr();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.CollectExpression
-	 * <em>Collect Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.CollectExpression <em>Collect Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4875,7 +4765,7 @@ public interface PPPackage extends EPackage {
 	EClass getCollectExpression();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.CollectExpression#getAttributes
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.CollectExpression#getAttributes
 	 * <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4888,7 +4778,7 @@ public interface PPPackage extends EPackage {
 	EReference getCollectExpression_Attributes();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.CollectExpression#getClassReference
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.CollectExpression#getClassReference
 	 * <em>Class Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4901,8 +4791,7 @@ public interface PPPackage extends EPackage {
 	EReference getCollectExpression_ClassReference();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.CollectExpression#getQuery <em>Query</em>}
-	 * '.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.CollectExpression#getQuery <em>Query</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4925,8 +4814,8 @@ public interface PPPackage extends EPackage {
 	EClass getDefinition();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.Definition#getArguments
-	 * <em>Arguments</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.Definition#getArguments <em>Arguments</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4938,8 +4827,7 @@ public interface PPPackage extends EPackage {
 	EReference getDefinition_Arguments();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.Definition#getClassName
-	 * <em>Class Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.Definition#getClassName <em>Class Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4951,7 +4839,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getDefinition_ClassName();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.Definition#getStatements
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.Definition#getStatements
 	 * <em>Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4964,8 +4852,7 @@ public interface PPPackage extends EPackage {
 	EReference getDefinition_Statements();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.DefinitionArgument
-	 * <em>Definition Argument</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.DefinitionArgument <em>Definition Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4976,8 +4863,7 @@ public interface PPPackage extends EPackage {
 	EClass getDefinitionArgument();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getArgName
-	 * <em>Arg Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getArgName <em>Arg Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -4989,8 +4875,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getDefinitionArgument_ArgName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getOp
-	 * <em>Op</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getOp <em>Op</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5002,7 +4887,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getDefinitionArgument_Op();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.DefinitionArgument#getValue <em>Value</em>}
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.DefinitionArgument#getValue <em>Value</em>}
 	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5015,8 +4900,7 @@ public interface PPPackage extends EPackage {
 	EReference getDefinitionArgument_Value();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.DefinitionArgumentList
-	 * <em>Definition Argument List</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.DefinitionArgumentList <em>Definition Argument List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5027,7 +4911,7 @@ public interface PPPackage extends EPackage {
 	EClass getDefinitionArgumentList();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.DefinitionArgumentList#getArguments
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.DefinitionArgumentList#getArguments
 	 * <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5040,8 +4924,7 @@ public interface PPPackage extends EPackage {
 	EReference getDefinitionArgumentList_Arguments();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.DoubleQuotedString
-	 * <em>Double Quoted String</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.DoubleQuotedString <em>Double Quoted String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5052,7 +4935,7 @@ public interface PPPackage extends EPackage {
 	EClass getDoubleQuotedString();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.DoubleQuotedString#getStringPart
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.DoubleQuotedString#getStringPart
 	 * <em>String Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5076,8 +4959,7 @@ public interface PPPackage extends EPackage {
 	EClass getElseExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ElseIfExpression
-	 * <em>Else If Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ElseIfExpression <em>Else If Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5088,8 +4970,7 @@ public interface PPPackage extends EPackage {
 	EClass getElseIfExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.EqualityExpression
-	 * <em>Equality Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.EqualityExpression <em>Equality Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5100,8 +4981,7 @@ public interface PPPackage extends EPackage {
 	EClass getEqualityExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ExportedCollectQuery
-	 * <em>Exported Collect Query</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ExportedCollectQuery <em>Exported Collect Query</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5134,7 +5014,7 @@ public interface PPPackage extends EPackage {
 	EClass getExpressionBlock();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.ExpressionBlock#getStatements
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.ExpressionBlock#getStatements
 	 * <em>Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5158,7 +5038,7 @@ public interface PPPackage extends EPackage {
 	EClass getExpressionTE();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.ExpressionTE#getExpression
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.ExpressionTE#getExpression
 	 * <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5182,7 +5062,7 @@ public interface PPPackage extends EPackage {
 	EClass getExprList();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.ExprList#getExpressions
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.ExprList#getExpressions
 	 * <em>Expressions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5217,8 +5097,7 @@ public interface PPPackage extends EPackage {
 	EClass getHashEntry();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.HashEntry#getKey
-	 * <em>Key</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.HashEntry#getKey <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5230,8 +5109,7 @@ public interface PPPackage extends EPackage {
 	EReference getHashEntry_Key();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.HashEntry#getValue
-	 * <em>Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.HashEntry#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5243,8 +5121,7 @@ public interface PPPackage extends EPackage {
 	EReference getHashEntry_Value();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.HostClassDefinition
-	 * <em>Host Class Definition</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.HostClassDefinition <em>Host Class Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5255,7 +5132,7 @@ public interface PPPackage extends EPackage {
 	EClass getHostClassDefinition();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.HostClassDefinition#getParent
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.HostClassDefinition#getParent
 	 * <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5290,8 +5167,8 @@ public interface PPPackage extends EPackage {
 	EClass getIfExpression();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.IfExpression#getCondExpr
-	 * <em>Cond Expr</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.IfExpression#getCondExpr <em>Cond Expr</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5303,8 +5180,8 @@ public interface PPPackage extends EPackage {
 	EReference getIfExpression_CondExpr();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.IfExpression#getElseStatement
-	 * <em>Else Statement</em>} '.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.IfExpression#getElseStatement
+	 * <em>Else Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5316,7 +5193,7 @@ public interface PPPackage extends EPackage {
 	EReference getIfExpression_ElseStatement();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.IfExpression#getThenStatements
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.IfExpression#getThenStatements
 	 * <em>Then Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5329,7 +5206,7 @@ public interface PPPackage extends EPackage {
 	EReference getIfExpression_ThenStatements();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ImportExpression <em>Import Expression</em>} '.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ImportExpression <em>Import Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5340,7 +5217,7 @@ public interface PPPackage extends EPackage {
 	EClass getImportExpression();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.ImportExpression#getValues
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.ImportExpression#getValues
 	 * <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5364,8 +5241,7 @@ public interface PPPackage extends EPackage {
 	EClass getInExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.InterpolatedVariable
-	 * <em>Interpolated Variable</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.InterpolatedVariable <em>Interpolated Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5376,8 +5252,7 @@ public interface PPPackage extends EPackage {
 	EClass getInterpolatedVariable();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.InterpolatedVariable#getVarName
-	 * <em>Var Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.InterpolatedVariable#getVarName <em>Var Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5411,7 +5286,7 @@ public interface PPPackage extends EPackage {
 	EClass getJavaLambda();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.JavaLambda#isFarrow <em>Farrow</em>} '.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.JavaLambda#isFarrow <em>Farrow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5434,8 +5309,7 @@ public interface PPPackage extends EPackage {
 	EClass getLambda();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.Lambda#getArguments
-	 * <em>Arguments</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.Lambda#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5458,8 +5332,7 @@ public interface PPPackage extends EPackage {
 	EClass getLiteralBoolean();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.LiteralBoolean#isValue
-	 * <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.LiteralBoolean#isValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5493,8 +5366,7 @@ public interface PPPackage extends EPackage {
 	EClass getLiteralDefault();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.LiteralExpression
-	 * <em>Literal Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.LiteralExpression <em>Literal Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5516,7 +5388,7 @@ public interface PPPackage extends EPackage {
 	EClass getLiteralHash();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.LiteralHash#getElements
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.LiteralHash#getElements
 	 * <em>Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5540,7 +5412,7 @@ public interface PPPackage extends EPackage {
 	EClass getLiteralList();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.LiteralList#getElements
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.LiteralList#getElements
 	 * <em>Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5564,7 +5436,7 @@ public interface PPPackage extends EPackage {
 	EClass getLiteralName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.LiteralName#getValue <em>Value</em>} '.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.LiteralName#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5576,8 +5448,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getLiteralName_Value();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.LiteralNameOrReference
-	 * <em>Literal Name Or Reference</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.LiteralNameOrReference <em>Literal Name Or Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5588,8 +5459,7 @@ public interface PPPackage extends EPackage {
 	EClass getLiteralNameOrReference();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.LiteralNameOrReference#getValue
-	 * <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.LiteralNameOrReference#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5612,8 +5482,7 @@ public interface PPPackage extends EPackage {
 	EClass getLiteralRegex();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.LiteralRegex#getValue
-	 * <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.LiteralRegex#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5636,8 +5505,7 @@ public interface PPPackage extends EPackage {
 	EClass getLiteralUndef();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.MatchingExpression
-	 * <em>Matching Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.MatchingExpression <em>Matching Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5659,7 +5527,7 @@ public interface PPPackage extends EPackage {
 	EClass getMethodCall();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.MethodCall#getMethodExpr
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.MethodCall#getMethodExpr
 	 * <em>Method Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5672,8 +5540,7 @@ public interface PPPackage extends EPackage {
 	EReference getMethodCall_MethodExpr();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.MethodCall#isParenthesized
-	 * <em>Parenthesized</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.MethodCall#isParenthesized <em>Parenthesized</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5685,8 +5552,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getMethodCall_Parenthesized();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.MultiplicativeExpression
-	 * <em>Multiplicative Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.MultiplicativeExpression <em>Multiplicative Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5697,8 +5563,7 @@ public interface PPPackage extends EPackage {
 	EClass getMultiplicativeExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.NamedAccessExpression
-	 * <em>Named Access Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.NamedAccessExpression <em>Named Access Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5720,8 +5585,8 @@ public interface PPPackage extends EPackage {
 	EClass getNodeDefinition();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.NodeDefinition#getHostNames
-	 * <em>Host Names</em>} '.
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.NodeDefinition#getHostNames
+	 * <em>Host Names</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5733,7 +5598,7 @@ public interface PPPackage extends EPackage {
 	EReference getNodeDefinition_HostNames();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.NodeDefinition#getParentName
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.NodeDefinition#getParentName
 	 * <em>Parent Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5746,8 +5611,8 @@ public interface PPPackage extends EPackage {
 	EReference getNodeDefinition_ParentName();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.NodeDefinition#getStatements
-	 * <em>Statements</em>} '.
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.NodeDefinition#getStatements
+	 * <em>Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5770,8 +5635,7 @@ public interface PPPackage extends EPackage {
 	EClass getOrExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ParameterizedExpression
-	 * <em>Parameterized Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ParameterizedExpression <em>Parameterized Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5782,7 +5646,7 @@ public interface PPPackage extends EPackage {
 	EClass getParameterizedExpression();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.ParameterizedExpression#getLeftExpr
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.ParameterizedExpression#getLeftExpr
 	 * <em>Left Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5795,7 +5659,7 @@ public interface PPPackage extends EPackage {
 	EReference getParameterizedExpression_LeftExpr();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.ParameterizedExpression#getParameters
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.ParameterizedExpression#getParameters
 	 * <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5808,8 +5672,7 @@ public interface PPPackage extends EPackage {
 	EReference getParameterizedExpression_Parameters();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ParenthesisedExpression
-	 * <em>Parenthesised Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ParenthesisedExpression <em>Parenthesised Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5820,7 +5683,7 @@ public interface PPPackage extends EPackage {
 	EClass getParenthesisedExpression();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.ParenthesisedExpression#getExpr
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.ParenthesisedExpression#getExpr
 	 * <em>Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5854,8 +5717,7 @@ public interface PPPackage extends EPackage {
 	EClass getPuppetManifest();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.RelationalExpression
-	 * <em>Relational Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.RelationalExpression <em>Relational Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5866,8 +5728,7 @@ public interface PPPackage extends EPackage {
 	EClass getRelationalExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.RelationshipExpression
-	 * <em>Relationship Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.RelationshipExpression <em>Relationship Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5889,7 +5750,7 @@ public interface PPPackage extends EPackage {
 	EClass getResourceBody();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.ResourceBody#getAttributes
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.ResourceBody#getAttributes
 	 * <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5902,8 +5763,8 @@ public interface PPPackage extends EPackage {
 	EReference getResourceBody_Attributes();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.ResourceBody#getNameExpr
-	 * <em>Name Expr</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.ResourceBody#getNameExpr <em>Name Expr</em>}
+	 * '.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5915,8 +5776,7 @@ public interface PPPackage extends EPackage {
 	EReference getResourceBody_NameExpr();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ResourceExpression
-	 * <em>Resource Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.ResourceExpression <em>Resource Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5927,7 +5787,7 @@ public interface PPPackage extends EPackage {
 	EClass getResourceExpression();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.ResourceExpression#getResourceData
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.ResourceExpression#getResourceData
 	 * <em>Resource Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5940,7 +5800,7 @@ public interface PPPackage extends EPackage {
 	EReference getResourceExpression_ResourceData();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.ResourceExpression#getResourceExpr
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.ResourceExpression#getResourceExpr
 	 * <em>Resource Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5975,8 +5835,7 @@ public interface PPPackage extends EPackage {
 	EClass getSelectorEntry();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.SelectorExpression
-	 * <em>Selector Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.SelectorExpression <em>Selector Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -5987,8 +5846,7 @@ public interface PPPackage extends EPackage {
 	EClass getSelectorExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.SeparatorExpression
-	 * <em>Separator Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.SeparatorExpression <em>Separator Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6010,8 +5868,7 @@ public interface PPPackage extends EPackage {
 	EClass getShiftExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.SingleQuotedString
-	 * <em>Single Quoted String</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.SingleQuotedString <em>Single Quoted String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6022,8 +5879,7 @@ public interface PPPackage extends EPackage {
 	EClass getSingleQuotedString();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.SingleQuotedString#getText
-	 * <em>Text</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.SingleQuotedString#getText <em>Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6035,7 +5891,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getSingleQuotedString_Text();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.StringExpression <em>String Expression</em>} '.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.StringExpression <em>String Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6068,8 +5924,7 @@ public interface PPPackage extends EPackage {
 	EClass getUnaryExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.UnaryExpression#getExpr
-	 * <em>Expr</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.UnaryExpression#getExpr <em>Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6081,8 +5936,7 @@ public interface PPPackage extends EPackage {
 	EReference getUnaryExpression_Expr();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.UnaryMinusExpression
-	 * <em>Unary Minus Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.UnaryMinusExpression <em>Unary Minus Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6093,8 +5947,7 @@ public interface PPPackage extends EPackage {
 	EClass getUnaryMinusExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.UnaryNotExpression
-	 * <em>Unary Not Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.UnaryNotExpression <em>Unary Not Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6105,7 +5958,7 @@ public interface PPPackage extends EPackage {
 	EClass getUnaryNotExpression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.UnlessExpression <em>Unless Expression</em>} '.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.UnlessExpression <em>Unless Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6116,7 +5969,7 @@ public interface PPPackage extends EPackage {
 	EClass getUnlessExpression();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.UnlessExpression#getCondExpr
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.UnlessExpression#getCondExpr
 	 * <em>Cond Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6129,7 +5982,7 @@ public interface PPPackage extends EPackage {
 	EReference getUnlessExpression_CondExpr();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.UnlessExpression#getElseStatement
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.UnlessExpression#getElseStatement
 	 * <em>Else Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6142,7 +5995,7 @@ public interface PPPackage extends EPackage {
 	EReference getUnlessExpression_ElseStatement();
 
 	/**
-	 * Returns the meta object for the containment reference list ' {@link com.puppetlabs.geppetto.pp.UnlessExpression#getThenStatements
+	 * Returns the meta object for the containment reference list '{@link com.puppetlabs.geppetto.pp.UnlessExpression#getThenStatements
 	 * <em>Then Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6166,7 +6019,7 @@ public interface PPPackage extends EPackage {
 	EClass getUnquotedString();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.UnquotedString#getExpression
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.UnquotedString#getExpression
 	 * <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6179,8 +6032,7 @@ public interface PPPackage extends EPackage {
 	EReference getUnquotedString_Expression();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.VariableExpression
-	 * <em>Variable Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.VariableExpression <em>Variable Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6191,8 +6043,7 @@ public interface PPPackage extends EPackage {
 	EClass getVariableExpression();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.VariableExpression#getVarName
-	 * <em>Var Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.VariableExpression#getVarName <em>Var Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6215,8 +6066,7 @@ public interface PPPackage extends EPackage {
 	EClass getVariableTE();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.VariableTE#getVarName
-	 * <em>Var Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.VariableTE#getVarName <em>Var Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6251,8 +6101,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getVerbatimTE_Text();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.VirtualCollectQuery
-	 * <em>Virtual Collect Query</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.VirtualCollectQuery <em>Virtual Collect Query</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6263,8 +6112,7 @@ public interface PPPackage extends EPackage {
 	EClass getVirtualCollectQuery();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference
-	 * <em>Virtual Name Or Reference</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference <em>Virtual Name Or Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6275,8 +6123,7 @@ public interface PPPackage extends EPackage {
 	EClass getVirtualNameOrReference();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference#isExported
-	 * <em>Exported</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference#isExported <em>Exported</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6288,8 +6135,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getVirtualNameOrReference_Exported();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference#getValue
-	 * <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.puppetlabs.geppetto.pp.VirtualNameOrReference#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6301,8 +6147,7 @@ public interface PPPackage extends EPackage {
 	EAttribute getVirtualNameOrReference_Value();
 
 	/**
-	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.WithLambdaExpression
-	 * <em>With Lambda Expression</em>}'.
+	 * Returns the meta object for class '{@link com.puppetlabs.geppetto.pp.WithLambdaExpression <em>With Lambda Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -6313,7 +6158,7 @@ public interface PPPackage extends EPackage {
 	EClass getWithLambdaExpression();
 
 	/**
-	 * Returns the meta object for the containment reference ' {@link com.puppetlabs.geppetto.pp.WithLambdaExpression#getLambda
+	 * Returns the meta object for the containment reference '{@link com.puppetlabs.geppetto.pp.WithLambdaExpression#getLambda
 	 * <em>Lambda</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

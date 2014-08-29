@@ -60,8 +60,7 @@ public interface BinaryExpression extends Expression {
 	Expression getRightExpr();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getLeftExpr <em>Left Expr</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getLeftExpr <em>Left Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
@@ -73,8 +72,7 @@ public interface BinaryExpression extends Expression {
 	void setLeftExpr(Expression value);
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getRightExpr <em>Right Expr</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.BinaryExpression#getRightExpr <em>Right Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *

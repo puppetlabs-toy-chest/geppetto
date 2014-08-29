@@ -43,8 +43,7 @@ public interface ParenthesisedExpression extends Expression {
 	Expression getExpr();
 
 	/**
-	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ParenthesisedExpression#getExpr <em>Expr</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link com.puppetlabs.geppetto.pp.ParenthesisedExpression#getExpr <em>Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 *
