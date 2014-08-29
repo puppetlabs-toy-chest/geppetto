@@ -21,7 +21,6 @@ import com.puppetlabs.geppetto.pp.LiteralName;
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.LiteralUndef;
 import com.puppetlabs.geppetto.pp.SingleQuotedString;
-import com.puppetlabs.geppetto.pp.util.TextExpressionHelper;
 
 /**
  * Evaluates constant string expressions. Returns null if expression was not a constant string.

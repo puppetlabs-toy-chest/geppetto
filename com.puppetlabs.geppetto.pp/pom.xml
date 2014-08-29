@@ -11,7 +11,7 @@
 	<name>Geppetto PP Model</name>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src-gen</sourceDirectory>
 	</build>
 
 	<dependencies>

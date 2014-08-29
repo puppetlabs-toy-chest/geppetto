@@ -10,12 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.linking;
 
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.COLLECTOR_IS_REGULAR;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_BAD;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_CLASSPARAMS;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_DEFAULT;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_OVERRIDE;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_REGULAR;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.COLLECTOR_IS_REGULAR;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_BAD;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_CLASSPARAMS;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_DEFAULT;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_OVERRIDE;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_REGULAR;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -27,8 +27,8 @@ import com.puppetlabs.geppetto.pp.LiteralClass;
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.ResourceExpression;
 import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.validation.PPPatternHelper;
 
 /**

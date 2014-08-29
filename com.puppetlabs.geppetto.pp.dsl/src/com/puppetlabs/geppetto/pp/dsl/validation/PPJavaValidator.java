@@ -10,11 +10,11 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.validation;
 
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_BAD;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_CLASSPARAMS;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_DEFAULT;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_OVERRIDE;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_REGULAR;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_BAD;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_CLASSPARAMS;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_DEFAULT;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_OVERRIDE;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_REGULAR;
 
 import java.util.Collections;
 import java.util.List;
@@ -114,16 +114,16 @@ import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
 import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.eval.PPExpressionEquivalenceCalculator;
 import com.puppetlabs.geppetto.pp.dsl.eval.PPStringConstantEvaluator;
 import com.puppetlabs.geppetto.pp.dsl.eval.PPTypeEvaluator;
+import com.puppetlabs.geppetto.pp.dsl.eval.TextExpressionHelper;
 import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPClassifier;
 import com.puppetlabs.geppetto.pp.dsl.linking.ValidationBasedMessageAcceptor;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
-import com.puppetlabs.geppetto.pp.util.TextExpressionHelper;
 
 public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagnostics {
 	/**

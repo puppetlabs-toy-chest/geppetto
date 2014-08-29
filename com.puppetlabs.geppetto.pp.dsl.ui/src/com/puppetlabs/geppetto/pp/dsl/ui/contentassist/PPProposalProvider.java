@@ -10,8 +10,8 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.contentassist;
 
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_CLASSPARAMS;
-import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_OVERRIDE;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_CLASSPARAMS;
+import static com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter.RESOURCE_IS_OVERRIDE;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -42,8 +42,8 @@ import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.ResourceBody;
 import com.puppetlabs.geppetto.pp.ResourceExpression;
 import com.puppetlabs.geppetto.pp.StringExpression;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.eval.PPStringConstantEvaluator;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPFinder;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPFinder.SearchResult;

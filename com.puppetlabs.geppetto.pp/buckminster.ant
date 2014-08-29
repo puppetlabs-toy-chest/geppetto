@@ -1,0 +1,28 @@
+<project default="ecore2java">
+	<dirname file="${ant.file}" property="project.dir" />
+	<basename file="${project.dir}" property="project.name" />
+
+	<target name="ecore2java">
+		<emf.Ecore2Java
+			model="${project.dir}/model/PPTP.ecore"
+			genModel="${project.dir}/model/PPTP.genmodel"
+			reconcileGenModel="reload"
+			modelProject="${project.name}"
+			modelProjectFragmentPath="src-gen"
+			modelPluginID="${project.name}"
+			generateJavaCode="true">
+			<arg line="-validateModel true" />
+		</emf.Ecore2Java>
+
+		<emf.Ecore2Java
+			model="${project.dir}/model/PP.ecore"
+			genModel="${project.dir}/model/PP.genmodel"
+			reconcileGenModel="reload"
+			modelProject="${project.name}"
+			modelProjectFragmentPath="src-gen"
+			modelPluginID="${project.name}"
+			generateJavaCode="true">
+			<arg line="-validateModel true" />
+		</emf.Ecore2Java>
+	</target>
+</project>

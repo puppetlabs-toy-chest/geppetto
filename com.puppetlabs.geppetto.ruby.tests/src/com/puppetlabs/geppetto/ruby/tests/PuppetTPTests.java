@@ -36,7 +36,6 @@ import org.junit.Test;
 import com.puppetlabs.geppetto.common.os.OsUtil;
 import com.puppetlabs.geppetto.common.os.StreamUtil;
 import com.puppetlabs.geppetto.forge.util.TarUtils;
-import com.puppetlabs.geppetto.pp.facter.Facter.Facter1_6;
 import com.puppetlabs.geppetto.pp.pptp.AbstractType;
 import com.puppetlabs.geppetto.pp.pptp.Function;
 import com.puppetlabs.geppetto.pp.pptp.Parameter;
@@ -45,6 +44,7 @@ import com.puppetlabs.geppetto.pp.pptp.TargetEntry;
 import com.puppetlabs.geppetto.pp.pptp.Type;
 import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
 import com.puppetlabs.geppetto.ruby.RubyHelper;
+import com.puppetlabs.geppetto.ruby.tests.Facter.Facter1_6;
 
 public class PuppetTPTests {
 

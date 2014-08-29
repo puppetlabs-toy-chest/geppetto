@@ -40,7 +40,6 @@ import com.puppetlabs.geppetto.pp.UnaryMinusExpression;
 import com.puppetlabs.geppetto.pp.UnaryNotExpression;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
-import com.puppetlabs.geppetto.pp.util.TextExpressionHelper;
 
 /**
  * Evaluates Type of an expression.

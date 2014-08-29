@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2013 Puppet Labs, Inc. and other contributors, as listed below.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Puppet Labs&#xA;"
-    modelDirectory="/com.puppetlabs.geppetto.pp/src" editDirectory="" editorDirectory=""
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2013 Puppet Labs, Inc. and other contributors, as listed below.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Puppet Labs"
+    modelDirectory="/com.puppetlabs.geppetto.pp/src-gen" editDirectory="" editorDirectory=""
     modelPluginID="com.puppetlabs.geppetto.pp" templateDirectory="" modelName="PP"
     modelPluginClass="" editPluginClass="com.puppetlabs.geppetto.pp.provider.PuppetEditPlugin"
     editorPluginClass="com.puppetlabs.geppetto.pp.presentation.PuppetEditorPlugin"
     codeFormatting="true" testsDirectory="" testSuiteClass="com.puppetlabs.geppetto.pp.tests.PuppetAllTests"
-    complianceLevel="6.0" copyrightFields="false" editPluginID="com.puppetlabs.geppetto.pp.edit"
-    editorPluginID="com.puppetlabs.geppetto.pp.edit" language="" classNamePattern="">
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    editPluginID="com.puppetlabs.geppetto.pp.edit" editorPluginID="com.puppetlabs.geppetto.pp.edit"
+    language="" classNamePattern="">
+  <foreignModel>PP.ecore</foreignModel>
   <genPackages prefix="PP" basePackage="com.puppetlabs.geppetto" disposableProviderFactory="true"
       ecorePackage="PP.ecore#/">
     <genClasses ecoreClass="PP.ecore#//PuppetManifest"/>
@@ -176,6 +178,23 @@
     <genClasses ecoreClass="PP.ecore#//UnlessExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//UnlessExpression/condExpr"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//UnlessExpression/thenStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//UnlessExpression/elseStatement"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="PP.ecore#//Lambda">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//Lambda/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="PP.ecore#//NamedAccessExpression"/>
+    <genClasses ecoreClass="PP.ecore#//MethodCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PP.ecore#//MethodCall/parenthesized"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//MethodCall/methodExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="PP.ecore#//WithLambdaExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//WithLambdaExpression/lambda"/>
+    </genClasses>
+    <genClasses ecoreClass="PP.ecore#//JavaLambda">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PP.ecore#//JavaLambda/farrow"/>
+    </genClasses>
+    <genClasses ecoreClass="PP.ecore#//RubyLambda"/>
+    <genClasses ecoreClass="PP.ecore#//SeparatorExpression"/>
   </genPackages>
 </genmodel:GenModel>

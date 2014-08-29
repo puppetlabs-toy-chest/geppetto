@@ -16,23 +16,16 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated PP -->
       <package
             uri="http://www.puppetlabs.com/geppetto/1.0.0/PP"
-            class="com.puppetlabs.geppetto.pp.PPPackage"
-            genModel="model/PP.genmodel"/>
-      <package
-            class="com.puppetlabs.geppetto.pp.pptp.PPTPPackage"
-            genModel="model/PPTP.genmodel"
-            uri="http://www.puppetlabs.com/geppetto/1.0.0/PPTP">
-      </package>
+            class="com.puppetlabs.geppetto.pp.PPPackage"/>
    </extension>
-
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated PPTP -->
       <package
             uri="http://www.puppetlabs.com/geppetto/1.0.0/PPTP"
-            class="com.puppetlabs.geppetto.pp.pptp.PPTPPackage"
-            genModel="model/PPTP.genmodel"/>
+            class="com.puppetlabs.geppetto.pp.pptp.PPTPPackage"/>
    </extension>
 
 </plugin>

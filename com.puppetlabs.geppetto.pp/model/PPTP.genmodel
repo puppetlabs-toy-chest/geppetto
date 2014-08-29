@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2013 Puppet Labs, Inc. and other contributors, as listed below.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Puppet Labs&#xA;"
-    modelDirectory="/com.puppetlabs.geppetto.pp/src" editDirectory="" editorDirectory=""
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2013 Puppet Labs, Inc. and other contributors, as listed below.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Puppet Labs"
+    modelDirectory="/com.puppetlabs.geppetto.pp/src-gen" editDirectory="" editorDirectory=""
     modelPluginID="com.puppetlabs.geppetto.pp" modelName="PPTP" editPluginClass="com.puppetlabs.geppetto.pp.provider.PuppetEditPlugin"
     codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
     copyrightFields="false">
@@ -10,23 +9,24 @@
   <genPackages prefix="PPTP" basePackage="com.puppetlabs.geppetto.pp" disposableProviderFactory="true"
       ecorePackage="PPTP.ecore#/">
     <genDataTypes ecoreDataType="PPTP.ecore#//File"/>
-    <genClasses ecoreClass="PPTP.ecore#//PuppetTarget">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//PuppetTarget/entries"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="PPTP.ecore#//TargetEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetEntry/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetEntry/file"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/types"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetEntry/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/typeFragments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/metaType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetEntry/label"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/metaVariables"/>
     </genClasses>
     <genClasses ecoreClass="PPTP.ecore#//PuppetDistribution"/>
-    <genClasses ecoreClass="PPTP.ecore#//RubyDirectory"/>
-    <genClasses ecoreClass="PPTP.ecore#//Predefined"/>
     <genClasses ecoreClass="PPTP.ecore#//Function">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//Function/rValue"/>
     </genClasses>
-    <genClasses ecoreClass="PPTP.ecore#//Type">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PPTP.ecore#//Type/EReference0"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//Type/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//Type/parameters"/>
+    <genClasses image="false" ecoreClass="PPTP.ecore#//AbstractType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PPTP.ecore#//AbstractType/EReference0"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//AbstractType/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//AbstractType/parameters"/>
     </genClasses>
     <genClasses image="false" ecoreClass="PPTP.ecore#//IDocumented">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//IDocumented/documentation"/>
@@ -34,12 +34,30 @@
     <genClasses image="false" ecoreClass="PPTP.ecore#//INamed">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//INamed/name"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="PPTP.ecore#//TargetElement"/>
-    <genClasses ecoreClass="PPTP.ecore#//Property">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//Property/required"/>
+    <genClasses image="false" ecoreClass="PPTP.ecore#//TargetElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetElement/deprecated"/>
     </genClasses>
-    <genClasses ecoreClass="PPTP.ecore#//Parameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//Parameter/required"/>
+    <genClasses ecoreClass="PPTP.ecore#//Property"/>
+    <genClasses ecoreClass="PPTP.ecore#//Parameter"/>
+    <genClasses ecoreClass="PPTP.ecore#//TypeFragment"/>
+    <genClasses ecoreClass="PPTP.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//Type/superType"/>
     </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//MetaType"/>
+    <genClasses image="false" ecoreClass="PPTP.ecore#//TypeArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TypeArgument/required"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TypeArgument/namevar"/>
+    </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//NameSpace">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//NameSpace/reserved"/>
+    </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//TPVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TPVariable/assignable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TPVariable/pattern"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="PPTP.ecore#//ITargetElementContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//ITargetElementContainer/contents"/>
+    </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//MetaVariable"/>
   </genPackages>
 </genmodel:GenModel>

@@ -49,8 +49,8 @@ import com.puppetlabs.geppetto.pp.TextExpression;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
 import com.puppetlabs.geppetto.pp.pptp.Function;
 
