@@ -149,6 +149,55 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	}
 
 	@Test
+	public void test_Regexp_Array() throws Exception {
+		String code = "$x = [/foo/, /bar/]";
+		XtextResource r = getResourceFromString(code);
+		resourceErrorDiagnostics(r).assertOK();
+	}
+
+	@Test
+	public void test_Regexp_Assign() throws Exception {
+		String code = "$x = /foo/";
+		XtextResource r = getResourceFromString(code);
+		resourceErrorDiagnostics(r).assertOK();
+	}
+
+	@Test
+	public void test_Regexp_CallParam() throws Exception {
+		String code = "my_func(/foo/, 'string')";
+		XtextResource r = getResourceFromStringAndExpect(code, 1);
+		resourceErrorDiagnostics(r).assertDiagnostic(IPPDiagnostics.ISSUE__UNKNOWN_FUNCTION_REFERENCE);
+	}
+
+	@Test
+	public void test_Regexp_Equals() throws Exception {
+		String code = "$x = /foo/\n$eq = $x == /foo/";
+		XtextResource r = getResourceFromString(code);
+		resourceErrorDiagnostics(r).assertOK();
+	}
+
+	@Test
+	public void test_Regexp_Hash() throws Exception {
+		String code = "$x = { pattern => /foo/ }";
+		XtextResource r = getResourceFromString(code);
+		resourceErrorDiagnostics(r).assertOK();
+	}
+
+	@Test
+	public void test_Regexp_NotEquals() throws Exception {
+		String code = "$x = /foo/\n$neq = $x != /foo/";
+		XtextResource r = getResourceFromString(code);
+		resourceErrorDiagnostics(r).assertOK();
+	}
+
+	@Test
+	public void test_Regexp_Selector() throws Exception {
+		String code = "$x = $y ? /foo/ => 'Match to foo'";
+		XtextResource r = getResourceFromString(code);
+		resourceErrorDiagnostics(r).assertOK();
+	}
+
+	@Test
 	public void test_Serialize_AppendExpression() {
 		PuppetManifest pp = pf.createPuppetManifest();
 		AppendExpression ae = pf.createAppendExpression();
