@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import com.puppetlabs.geppetto.semver.Version;
 import org.junit.Test;
+
+import com.puppetlabs.geppetto.semver.Version;
 
 /**
  * Unit tests for Version.

@@ -12,6 +12,10 @@ package com.puppetlabs.xtext.dommodel.formatter.css.debug;
 
 import java.util.Collections;
 
+import org.eclipse.xtext.util.Exceptions;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
+
 import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
 import com.puppetlabs.xtext.dommodel.formatter.css.IStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.AlignedSeparatorIndex;
@@ -24,9 +28,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.SpacingStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.StyleNameStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.TokenTextStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.WidthStyle;
-import org.eclipse.xtext.util.Exceptions;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 
 /**
  * A label provider for debugging labels.

@@ -10,10 +10,10 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.internal;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
 import org.eclipse.ui.IStartup;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
 
 /**
  * Checks the workspace state.

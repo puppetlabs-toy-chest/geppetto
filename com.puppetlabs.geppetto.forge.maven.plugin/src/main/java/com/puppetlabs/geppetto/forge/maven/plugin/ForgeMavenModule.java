@@ -13,10 +13,10 @@ package com.puppetlabs.geppetto.forge.maven.plugin;
 import java.io.FileFilter;
 
 import org.apache.maven.project.MavenProject;
-import com.puppetlabs.geppetto.forge.MetadataExtractor;
-import com.puppetlabs.geppetto.forge.impl.ForgeModule;
 
 import com.google.inject.multibindings.Multibinder;
+import com.puppetlabs.geppetto.forge.MetadataExtractor;
+import com.puppetlabs.geppetto.forge.impl.ForgeModule;
 
 public class ForgeMavenModule extends ForgeModule {
 	private final FileFilter fileFilter;

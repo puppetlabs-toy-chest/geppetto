@@ -10,13 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.pptp;
 
-import com.puppetlabs.geppetto.injectable.eclipse.AbstractGuiceAwareExecutableExtensionFactory;
-import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
-
 import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
+import com.puppetlabs.geppetto.injectable.eclipse.AbstractGuiceAwareExecutableExtensionFactory;
+import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
 
 /**
  * Executable Extension configuration for PPTP (non Ruby).

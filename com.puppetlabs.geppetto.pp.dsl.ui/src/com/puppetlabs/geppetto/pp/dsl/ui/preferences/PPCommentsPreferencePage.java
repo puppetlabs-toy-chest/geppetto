@@ -10,12 +10,13 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
+import org.eclipse.jface.preference.BooleanFieldEditor;
+
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.CommentPreferences;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.EnumPreferenceFieldEditor;
 import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice.BannerAdvice;
 import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice.CommentTextAdvice;
-import org.eclipse.jface.preference.BooleanFieldEditor;
 
 /**
  * This is the puppet preference pane for comment formatting.

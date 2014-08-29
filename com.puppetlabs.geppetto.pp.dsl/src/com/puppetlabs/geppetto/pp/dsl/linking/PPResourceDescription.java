@@ -14,9 +14,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapterFactory;
-import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
-import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapterFactory;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -36,6 +33,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Provider;
+import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
+import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapterFactory;
 
 /**
  * A ResourceDescription for PP that adds specially imported names via resource adapter.

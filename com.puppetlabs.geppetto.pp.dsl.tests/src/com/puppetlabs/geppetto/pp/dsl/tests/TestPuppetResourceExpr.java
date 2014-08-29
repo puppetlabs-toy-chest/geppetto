@@ -10,6 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
+import org.eclipse.xtext.resource.XtextResource;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.pp.AdditiveExpression;
 import com.puppetlabs.geppetto.pp.AssignmentExpression;
 import com.puppetlabs.geppetto.pp.AtExpression;
@@ -25,11 +31,6 @@ import com.puppetlabs.geppetto.pp.SelectorExpression;
 import com.puppetlabs.geppetto.pp.SingleQuotedString;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
-import org.eclipse.xtext.resource.XtextResource;
-import org.junit.Test;
 
 /**
  * Tests Puppet ResourceExpression

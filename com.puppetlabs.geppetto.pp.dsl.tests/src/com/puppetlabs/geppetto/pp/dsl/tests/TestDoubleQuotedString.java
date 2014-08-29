@@ -15,6 +15,13 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.XtextResource;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.pp.DoubleQuotedString;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.ExpressionTE;
@@ -25,12 +32,6 @@ import com.puppetlabs.geppetto.pp.TextExpression;
 import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.XtextResource;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Tests Literals

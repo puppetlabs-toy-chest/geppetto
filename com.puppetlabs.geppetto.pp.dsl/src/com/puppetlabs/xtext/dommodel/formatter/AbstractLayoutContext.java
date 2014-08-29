@@ -12,15 +12,15 @@ package com.puppetlabs.xtext.dommodel.formatter;
 
 import java.util.Set;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
-import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
-import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.Sets;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
+import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
 
 /**
  * Abstract implementation of ILayoutContext

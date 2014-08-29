@@ -10,10 +10,11 @@
  */
 package com.puppetlabs.geppetto.pp.impl;
 
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.TextExpression;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.TextExpression;
 
 /**
  * <!-- begin-user-doc -->

@@ -10,13 +10,14 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
+import org.eclipse.jface.preference.BooleanFieldEditor;
+
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice.WhenToApply;
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice.WhenToApplyForDefinition;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.BreakAndAlignPreferences;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.EnumPreferenceFieldEditor;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.IntegerFieldEditor;
-import org.eclipse.jface.preference.BooleanFieldEditor;
 
 /**
  * This is the preference pane for break and alignment formatting.

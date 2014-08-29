@@ -12,6 +12,9 @@ package com.puppetlabs.geppetto.graph.catalog;
 
 import java.util.Collections;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.catalog.CatalogFactory;
 import com.puppetlabs.geppetto.catalog.CatalogResource;
 import com.puppetlabs.geppetto.catalog.CatalogResourceParameter;
@@ -21,10 +24,6 @@ import com.puppetlabs.graph.dot.DotRenderer;
 import com.puppetlabs.graph.elements.Vertex;
 import com.puppetlabs.graph.graphcss.GraphCSS;
 import com.puppetlabs.graph.style.IStyleFactory;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
 
 /**
  * Functionality common to Catalog Graph producers.

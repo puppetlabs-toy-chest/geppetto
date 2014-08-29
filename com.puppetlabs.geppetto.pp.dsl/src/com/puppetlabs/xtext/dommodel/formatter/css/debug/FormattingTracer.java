@@ -12,16 +12,15 @@ package com.puppetlabs.xtext.dommodel.formatter.css.debug;
 
 import java.util.Map;
 
+import com.google.common.collect.MapMaker;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import com.puppetlabs.geppetto.common.tracer.IStringProvider;
 import com.puppetlabs.geppetto.common.tracer.ITracer;
 import com.puppetlabs.geppetto.common.util.BundleAccess;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
-
-import com.google.common.collect.MapMaker;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 /**
  * The FormattingTracer is a singleton that performs tracing if the debug option "debug/formatter" is

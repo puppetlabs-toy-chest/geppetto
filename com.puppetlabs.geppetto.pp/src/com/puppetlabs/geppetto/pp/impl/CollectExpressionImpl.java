@@ -10,16 +10,17 @@
  */
 package com.puppetlabs.geppetto.pp.impl;
 
-import com.puppetlabs.geppetto.pp.AttributeOperations;
-import com.puppetlabs.geppetto.pp.CollectExpression;
-import com.puppetlabs.geppetto.pp.Expression;
-import com.puppetlabs.geppetto.pp.ICollectQuery;
-import com.puppetlabs.geppetto.pp.PPPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import com.puppetlabs.geppetto.pp.AttributeOperations;
+import com.puppetlabs.geppetto.pp.CollectExpression;
+import com.puppetlabs.geppetto.pp.Expression;
+import com.puppetlabs.geppetto.pp.ICollectQuery;
+import com.puppetlabs.geppetto.pp.PPPackage;
 
 /**
  * <!-- begin-user-doc -->

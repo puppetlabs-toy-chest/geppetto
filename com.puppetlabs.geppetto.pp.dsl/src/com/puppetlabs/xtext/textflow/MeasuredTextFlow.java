@@ -10,9 +10,8 @@
  */
 package com.puppetlabs.xtext.textflow;
 
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-
 import com.google.inject.Inject;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 
 /**
  * A text flow that measures the appended content but that does not contain the actual text.

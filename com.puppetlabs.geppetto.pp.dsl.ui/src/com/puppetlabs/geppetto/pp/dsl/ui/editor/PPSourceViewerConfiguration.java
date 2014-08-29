@@ -10,9 +10,10 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.FormatterGeneralPreferences;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
+
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.FormatterGeneralPreferences;
 
 /**
  * Overrides the XtextSourceViewerConfiguratio to provide:

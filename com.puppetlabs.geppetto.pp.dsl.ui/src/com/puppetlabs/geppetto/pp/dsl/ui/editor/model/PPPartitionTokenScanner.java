@@ -10,8 +10,9 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.model;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.autoedit.PPTokenTypeToPartionMapper;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
+
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.autoedit.PPTokenTypeToPartionMapper;
 
 /**
  * A Paritioning token scanner that merges String partitions (since they are represented by a sequence of tokens in PP

@@ -20,9 +20,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapterFactory;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPReferenceDescription;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.util.CancelablePredicate;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
@@ -47,6 +44,9 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPReferenceDescription;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.util.CancelablePredicate;
 
 /**
  * This is a to a large part a copy of the ReferenceFinder in the corresponding package in Xtext, modified to search

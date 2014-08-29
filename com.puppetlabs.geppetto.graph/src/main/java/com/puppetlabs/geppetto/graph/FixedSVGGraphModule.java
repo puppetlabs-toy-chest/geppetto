@@ -10,15 +10,14 @@
  */
 package com.puppetlabs.geppetto.graph;
 
+import com.google.inject.Singleton;
+import com.google.inject.name.Names;
 import com.puppetlabs.graph.DefaultGraphModule;
 import com.puppetlabs.graph.dot.DotRenderer;
 import com.puppetlabs.graph.graphviz.IGraphviz;
 import com.puppetlabs.graph.graphviz.SVGFixerOutputStream;
 import com.puppetlabs.graph.graphviz.SVGFixerOutputStreamFilterFactory;
 import com.puppetlabs.graph.utils.IOutputStreamFilterFactory;
-
-import com.google.inject.Singleton;
-import com.google.inject.name.Names;
 
 /**
  * Configuration for Graph Producers that produce DOT output suitable for SVG post processing.

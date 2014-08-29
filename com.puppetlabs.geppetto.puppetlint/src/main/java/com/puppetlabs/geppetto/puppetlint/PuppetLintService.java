@@ -10,11 +10,10 @@
  */
 package com.puppetlabs.geppetto.puppetlint;
 
-import com.puppetlabs.geppetto.diagnostic.DiagnosticType;
-import com.puppetlabs.geppetto.puppetlint.impl.ExternalModule;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.puppetlabs.geppetto.diagnostic.DiagnosticType;
+import com.puppetlabs.geppetto.puppetlint.impl.ExternalModule;
 
 /**
  * A service that enables files and folders to be examined by <a href="http://http://puppet-lint.com/">puppet-lint</a>.

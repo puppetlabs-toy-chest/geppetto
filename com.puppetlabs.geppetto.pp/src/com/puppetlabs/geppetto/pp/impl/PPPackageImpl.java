@@ -10,6 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.puppetlabs.geppetto.pp.AdditiveExpression;
 import com.puppetlabs.geppetto.pp.AndExpression;
 import com.puppetlabs.geppetto.pp.AppendExpression;
@@ -89,11 +95,6 @@ import com.puppetlabs.geppetto.pp.VerbatimTE;
 import com.puppetlabs.geppetto.pp.VirtualCollectQuery;
 import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
 import com.puppetlabs.geppetto.pp.WithLambdaExpression;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

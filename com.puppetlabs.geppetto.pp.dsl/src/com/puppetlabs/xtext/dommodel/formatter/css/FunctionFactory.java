@@ -14,13 +14,12 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.base.Function;
+import com.google.inject.Singleton;
 import com.puppetlabs.xtext.dommodel.DomModelUtils;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.IDomNode.NodeClassifier;
 import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
-
-import com.google.common.base.Function;
-import com.google.inject.Singleton;
 
 /**
  * A FunctionFactory producing values that are dynamically produced when applying a style to

@@ -10,11 +10,12 @@
  */
 package com.puppetlabs.xtext.serializer.acceptor;
 
-import com.puppetlabs.xtext.serializer.ICommentReconcilement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
+
+import com.puppetlabs.xtext.serializer.ICommentReconcilement;
 
 /**
  * Extends the IHiddenTokenSequencer with initialization that includes

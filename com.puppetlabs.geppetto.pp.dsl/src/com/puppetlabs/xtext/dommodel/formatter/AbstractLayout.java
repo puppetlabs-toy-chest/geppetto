@@ -10,12 +10,11 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter;
 
+import com.google.inject.Inject;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.RegionMatch;
 import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
 import com.puppetlabs.xtext.dommodel.formatter.css.debug.FormattingTracer;
-
-import com.google.inject.Inject;
 
 /**
  * Abstract implementation of the most basic layout interface.

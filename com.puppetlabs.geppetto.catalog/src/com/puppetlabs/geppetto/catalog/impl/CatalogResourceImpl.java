@@ -13,11 +13,6 @@ package com.puppetlabs.geppetto.catalog.impl;
 import java.util.Collection;
 import java.util.Map;
 
-import com.puppetlabs.geppetto.catalog.CatalogFactory;
-import com.puppetlabs.geppetto.catalog.CatalogPackage;
-import com.puppetlabs.geppetto.catalog.CatalogResource;
-import com.puppetlabs.geppetto.catalog.CatalogResourceParameter;
-import com.puppetlabs.geppetto.catalog.util.CatalogJsonSerializer;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -35,6 +30,11 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
+import com.puppetlabs.geppetto.catalog.CatalogFactory;
+import com.puppetlabs.geppetto.catalog.CatalogPackage;
+import com.puppetlabs.geppetto.catalog.CatalogResource;
+import com.puppetlabs.geppetto.catalog.CatalogResourceParameter;
+import com.puppetlabs.geppetto.catalog.util.CatalogJsonSerializer;
 
 /**
  * <!-- begin-user-doc -->

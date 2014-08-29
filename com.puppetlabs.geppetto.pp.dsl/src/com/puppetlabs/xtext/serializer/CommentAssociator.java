@@ -15,9 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration;
-import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration.CommentType;
-import com.puppetlabs.xtext.textflow.CharSequences;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
@@ -37,6 +34,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration;
+import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration.CommentType;
+import com.puppetlabs.xtext.textflow.CharSequences;
 
 /**
  * <p>

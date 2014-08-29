@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.serializer.ICommentReconcilement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
@@ -44,6 +42,8 @@ import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.serializer.ICommentReconcilement;
 
 /**
  * This is an adapted version of HiddenTokenSequencer that emits implicit white space where it is allowed.

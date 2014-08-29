@@ -16,18 +16,18 @@ import java.io.OutputStream;
 import java.util.concurrent.CancellationException;
 import java.util.zip.GZIPOutputStream;
 
-import com.puppetlabs.graph.ICancel;
-import com.puppetlabs.graph.graphviz.GraphvizFormat;
-import com.puppetlabs.graph.graphviz.GraphvizLayout;
-import com.puppetlabs.graph.graphviz.IGraphviz;
-import com.puppetlabs.graph.graphviz.IGraphviz.SVGOutputFilter;
-import com.puppetlabs.graph.utils.IOutputStreamFilterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.puppetlabs.graph.ICancel;
+import com.puppetlabs.graph.graphviz.GraphvizFormat;
+import com.puppetlabs.graph.graphviz.GraphvizLayout;
+import com.puppetlabs.graph.graphviz.IGraphviz;
+import com.puppetlabs.graph.graphviz.IGraphviz.SVGOutputFilter;
+import com.puppetlabs.graph.utils.IOutputStreamFilterFactory;
 
 /**
  * A service facade for Graphviz SVG production that configures a Guice injector and performs

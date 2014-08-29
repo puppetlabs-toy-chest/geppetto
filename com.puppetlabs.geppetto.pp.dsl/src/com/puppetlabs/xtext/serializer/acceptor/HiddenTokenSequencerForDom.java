@@ -12,9 +12,10 @@ package com.puppetlabs.xtext.serializer.acceptor;
 
 import java.util.List;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.sequencer.HiddenTokenSequencer;
+
+import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * Class that fixes issue where a model without node model is serialized.

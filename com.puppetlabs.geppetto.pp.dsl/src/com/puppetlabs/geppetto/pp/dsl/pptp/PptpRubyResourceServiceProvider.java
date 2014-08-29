@@ -1,8 +1,9 @@
 package com.puppetlabs.geppetto.pp.dsl.pptp;
 
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.generic.GenericResourceServiceProvider;
+
+import com.puppetlabs.geppetto.ruby.resource.PptpRubyResource;
 
 /**
  * An IResourceServiceProvider for PPTP Ruby.

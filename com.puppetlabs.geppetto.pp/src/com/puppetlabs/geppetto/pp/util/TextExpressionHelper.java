@@ -13,6 +13,8 @@ package com.puppetlabs.geppetto.pp.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
+
 import com.puppetlabs.geppetto.pp.DoubleQuotedString;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.ExpressionTE;
@@ -22,7 +24,6 @@ import com.puppetlabs.geppetto.pp.TextExpression;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
-import org.eclipse.emf.common.util.EList;
 
 /**
  * Helps with TextExpressions in interpolated Strings.

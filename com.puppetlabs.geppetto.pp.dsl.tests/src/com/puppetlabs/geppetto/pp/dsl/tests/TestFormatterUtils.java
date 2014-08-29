@@ -12,8 +12,9 @@ package com.puppetlabs.geppetto.pp.dsl.tests;
 
 import static org.junit.Assert.assertEquals;
 
-import com.puppetlabs.geppetto.common.stats.IntegerCluster;
 import org.junit.Test;
+
+import com.puppetlabs.geppetto.common.stats.IntegerCluster;
 
 /**
  * Tests formatting utility classes.

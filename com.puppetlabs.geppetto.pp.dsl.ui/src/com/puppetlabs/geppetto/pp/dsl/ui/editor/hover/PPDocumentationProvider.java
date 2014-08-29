@@ -13,6 +13,15 @@ package com.puppetlabs.geppetto.pp.dsl.ui.editor.hover;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.Definition;
 import com.puppetlabs.geppetto.pp.HostClassDefinition;
 import com.puppetlabs.geppetto.pp.NodeDefinition;
@@ -31,15 +40,6 @@ import com.puppetlabs.xtext.dommodel.formatter.comments.CommentProcessor.Comment
 import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration.CommentType;
 import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentContainerInformation;
 import com.puppetlabs.xtext.textflow.CharSequences;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
-
-import com.google.inject.Inject;
 
 /**
  * Provider of documentation for PP semantic objects/references.

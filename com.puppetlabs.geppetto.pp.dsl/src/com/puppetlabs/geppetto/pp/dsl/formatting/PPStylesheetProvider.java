@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.formatting;
 
+import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout.ResourceStyle;
 import com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout.StatementStyle;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
@@ -22,9 +24,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.IStyleFactory;
 import com.puppetlabs.xtext.dommodel.formatter.css.Select;
 import com.puppetlabs.xtext.dommodel.formatter.css.Select.Selector;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
-
-import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
 
 /**
  * Provides the style sheet for PP.

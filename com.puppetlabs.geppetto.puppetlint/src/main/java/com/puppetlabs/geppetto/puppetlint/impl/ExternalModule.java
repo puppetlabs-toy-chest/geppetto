@@ -10,9 +10,8 @@
  */
 package com.puppetlabs.geppetto.puppetlint.impl;
 
-import com.puppetlabs.geppetto.puppetlint.PuppetLintRunner;
-
 import com.google.inject.AbstractModule;
+import com.puppetlabs.geppetto.puppetlint.PuppetLintRunner;
 
 /**
  * @author thhal

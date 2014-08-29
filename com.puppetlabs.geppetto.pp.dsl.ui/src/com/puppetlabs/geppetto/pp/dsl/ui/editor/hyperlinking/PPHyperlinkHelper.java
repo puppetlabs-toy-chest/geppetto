@@ -12,8 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.editor.hyperlinking;
 
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.dsl.linking.PPObjectAtOffsetHelper;
-import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jface.text.Region;
@@ -26,6 +24,8 @@ import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 import org.eclipse.xtext.util.TextRegion;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPObjectAtOffsetHelper;
+import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider;
 
 /**
  * A PP specific hyperlink helper, that can find references using CrossReferenceAdapter instead of / in addition to

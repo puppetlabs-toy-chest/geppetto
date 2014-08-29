@@ -10,11 +10,6 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.linking;
 
-import com.puppetlabs.geppetto.pp.Definition;
-import com.puppetlabs.geppetto.pp.DefinitionArgument;
-import com.puppetlabs.geppetto.pp.HostClassDefinition;
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.VariableExpression;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -23,6 +18,11 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.Definition;
+import com.puppetlabs.geppetto.pp.DefinitionArgument;
+import com.puppetlabs.geppetto.pp.HostClassDefinition;
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.VariableExpression;
 
 /**
  * A Puppet Qualified Name provider.

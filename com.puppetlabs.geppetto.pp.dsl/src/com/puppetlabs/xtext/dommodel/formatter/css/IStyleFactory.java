@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter.css;
 
+import com.google.common.base.Function;
+import com.google.inject.ImplementedBy;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.AlignmentStyle;
@@ -22,9 +24,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.StyleNameStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.TokenTextStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.VerbatimStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.WidthStyle;
-
-import com.google.common.base.Function;
-import com.google.inject.ImplementedBy;
 
 /**
  * A Factory for basic DOM styling - see {@link IStyle}.

@@ -10,7 +10,6 @@
  */
 package com.puppetlabs.xtext.ui.resource;
 
-import com.puppetlabs.xtext.resource.ResourceAccess;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
@@ -22,6 +21,7 @@ import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.puppetlabs.xtext.resource.ResourceAccess;
 
 /**
  * An Eclipse Platform based {@link Provider} implementation making use of the {@link ResourceContext} to provide

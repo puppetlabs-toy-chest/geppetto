@@ -12,8 +12,9 @@ package com.puppetlabs.geppetto.graph;
 
 import java.util.concurrent.CancellationException;
 
-import com.puppetlabs.graph.ICancel;
 import org.eclipse.core.runtime.IProgressMonitor;
+
+import com.puppetlabs.graph.ICancel;
 
 /**
  * An ICancel adapter for Eclipse IProgressMonitor, that in addition to checking for

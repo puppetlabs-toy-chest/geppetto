@@ -13,9 +13,6 @@ package com.puppetlabs.geppetto.ruby.tests;
 
 import java.util.Map;
 
-import com.puppetlabs.geppetto.ruby.RubyHelper;
-import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,6 +20,10 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+
+import com.puppetlabs.geppetto.ruby.RubyHelper;
+import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
+import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 
 /**
  * All Puppet Tests.

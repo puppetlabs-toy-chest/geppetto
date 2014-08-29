@@ -13,6 +13,17 @@ package com.puppetlabs.geppetto.pp.dsl.ppformatting;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.serializer.sequencer.IContextFinder;
+import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.AndExpression;
 import com.puppetlabs.geppetto.pp.AppendExpression;
 import com.puppetlabs.geppetto.pp.AssignmentExpression;
@@ -72,17 +83,6 @@ import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 import com.puppetlabs.xtext.textflow.ITextFlow;
 import com.puppetlabs.xtext.textflow.MeasuredTextFlow;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.serializer.sequencer.IContextFinder;
-import org.eclipse.xtext.util.EmfFormatter;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
-
-import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 
 /**
  * @author henrik

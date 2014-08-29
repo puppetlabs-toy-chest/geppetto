@@ -10,9 +10,11 @@
  */
 package com.puppetlabs.xtext.formatting;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
+
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
 
 // TODO: Fix where @Nullable comes from
 //import com.google.inject.internal.Nullable;

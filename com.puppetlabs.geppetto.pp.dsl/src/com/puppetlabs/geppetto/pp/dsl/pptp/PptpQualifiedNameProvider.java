@@ -10,6 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.pptp;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.pptp.Function;
 import com.puppetlabs.geppetto.pp.pptp.MetaVariable;
 import com.puppetlabs.geppetto.pp.pptp.NameSpace;
@@ -17,12 +23,6 @@ import com.puppetlabs.geppetto.pp.pptp.Parameter;
 import com.puppetlabs.geppetto.pp.pptp.Property;
 import com.puppetlabs.geppetto.pp.pptp.PuppetDistribution;
 import com.puppetlabs.geppetto.pp.pptp.TPVariable;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
-
-import com.google.inject.Inject;
 
 /**
  * A Puppet Qualified Name provider.

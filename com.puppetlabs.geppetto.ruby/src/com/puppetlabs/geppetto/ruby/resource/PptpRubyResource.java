@@ -16,6 +16,9 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+
 import com.puppetlabs.geppetto.pp.pptp.Function;
 import com.puppetlabs.geppetto.pp.pptp.MetaType;
 import com.puppetlabs.geppetto.pp.pptp.PPTPFactory;
@@ -29,8 +32,6 @@ import com.puppetlabs.geppetto.ruby.RubyHelper;
 import com.puppetlabs.geppetto.ruby.RubySyntaxException;
 import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
 import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 
 /**
  * A Resource that loads .rb files containing Puppet "target platform"

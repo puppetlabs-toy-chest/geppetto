@@ -15,6 +15,13 @@ package com.puppetlabs.geppetto.pp.dsl.ui.outline;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+
+import com.google.common.collect.Lists;
 import com.puppetlabs.geppetto.pp.AppendExpression;
 import com.puppetlabs.geppetto.pp.Definition;
 import com.puppetlabs.geppetto.pp.Expression;
@@ -24,13 +31,6 @@ import com.puppetlabs.geppetto.pp.NodeDefinition;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
 import com.puppetlabs.geppetto.pp.ResourceBody;
 import com.puppetlabs.geppetto.pp.ResourceExpression;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-
-import com.google.common.collect.Lists;
 
 /**
  * customization of the default outline structure

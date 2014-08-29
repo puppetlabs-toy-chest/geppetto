@@ -10,10 +10,10 @@
  */
 package com.puppetlabs.geppetto.pp.pptp.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import com.puppetlabs.geppetto.pp.pptp.MetaVariable;
 import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

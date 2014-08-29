@@ -10,9 +10,10 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.pptp;
 
-import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+
+import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
 
 /**
  * A runtime module for PPTP RUBY model.

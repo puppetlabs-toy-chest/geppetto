@@ -18,13 +18,12 @@ import java.util.Map.Entry;
 
 import junit.framework.ComparisonFailure;
 
-import com.puppetlabs.geppetto.diagnostic.DetailedFileDiagnostic;
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
-
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.puppetlabs.geppetto.diagnostic.DetailedFileDiagnostic;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
 
 /**
  * Helper class making it easier to assert content of a BasicDiagnostic

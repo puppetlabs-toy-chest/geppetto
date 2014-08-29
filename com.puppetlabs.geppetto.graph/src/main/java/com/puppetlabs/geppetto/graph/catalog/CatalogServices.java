@@ -14,6 +14,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.puppetlabs.geppetto.catalog.Catalog;
 import com.puppetlabs.geppetto.catalog.util.CatalogJsonSerializer;
 import com.puppetlabs.geppetto.graph.EmptyStringHrefProducer;
@@ -22,12 +28,6 @@ import com.puppetlabs.geppetto.graph.IHrefProducer;
 import com.puppetlabs.geppetto.graph.ProgressMonitorCancelIndicator;
 import com.puppetlabs.graph.ICancel;
 import com.puppetlabs.graph.utils.ByteArrayOutputStream2;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubMonitor;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 /**
  * Catalog Services provides services that:

@@ -12,10 +12,6 @@ package com.puppetlabs.geppetto.pp.impl;
 
 import java.util.Collection;
 
-import com.puppetlabs.geppetto.pp.Definition;
-import com.puppetlabs.geppetto.pp.DefinitionArgumentList;
-import com.puppetlabs.geppetto.pp.Expression;
-import com.puppetlabs.geppetto.pp.PPPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -24,6 +20,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.puppetlabs.geppetto.pp.Definition;
+import com.puppetlabs.geppetto.pp.DefinitionArgumentList;
+import com.puppetlabs.geppetto.pp.Expression;
+import com.puppetlabs.geppetto.pp.PPPackage;
 
 /**
  * <!-- begin-user-doc -->

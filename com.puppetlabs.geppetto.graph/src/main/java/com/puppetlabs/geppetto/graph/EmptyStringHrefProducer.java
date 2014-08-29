@@ -12,11 +12,11 @@ package com.puppetlabs.geppetto.graph;
 
 import java.io.File;
 
+import org.eclipse.core.runtime.IPath;
+
 import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 import com.puppetlabs.geppetto.validation.runner.MetadataInfo;
-
-import org.eclipse.core.runtime.IPath;
 
 /**
  * A HREF provider that does not provide any links.

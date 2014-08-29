@@ -10,8 +10,8 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter.context;
 
-import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 
 import com.google.inject.ImplementedBy;
 

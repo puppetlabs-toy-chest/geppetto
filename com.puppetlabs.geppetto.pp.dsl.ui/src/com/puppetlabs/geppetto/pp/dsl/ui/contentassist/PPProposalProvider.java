@@ -16,20 +16,6 @@ import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_
 import java.util.List;
 import java.util.ListIterator;
 
-import com.puppetlabs.geppetto.pp.AssignmentExpression;
-import com.puppetlabs.geppetto.pp.AttributeOperation;
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.ResourceBody;
-import com.puppetlabs.geppetto.pp.ResourceExpression;
-import com.puppetlabs.geppetto.pp.StringExpression;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter;
-import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapterFactory;
-import com.puppetlabs.geppetto.pp.dsl.eval.PPStringConstantEvaluator;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPFinder;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPFinder.SearchResult;
-import com.puppetlabs.geppetto.pp.dsl.ui.labeling.IIconNames;
-import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider;
-import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -50,6 +36,20 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.AssignmentExpression;
+import com.puppetlabs.geppetto.pp.AttributeOperation;
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.ResourceBody;
+import com.puppetlabs.geppetto.pp.ResourceExpression;
+import com.puppetlabs.geppetto.pp.StringExpression;
+import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter;
+import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.eval.PPStringConstantEvaluator;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPFinder;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPFinder.SearchResult;
+import com.puppetlabs.geppetto.pp.dsl.ui.labeling.IIconNames;
+import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant

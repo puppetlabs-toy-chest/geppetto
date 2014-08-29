@@ -12,17 +12,16 @@ package com.puppetlabs.xtext.dommodel.formatter;
 
 import java.util.Collection;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.LayoutManagerStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.dommodel.formatter.css.debug.FormattingTracer;
 import com.puppetlabs.xtext.textflow.ITextFlow;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * <p>

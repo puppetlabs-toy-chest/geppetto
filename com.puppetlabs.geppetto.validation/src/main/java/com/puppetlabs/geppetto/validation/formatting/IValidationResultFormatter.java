@@ -12,8 +12,9 @@ package com.puppetlabs.geppetto.validation.formatting;
 
 import java.io.OutputStream;
 
-import com.puppetlabs.geppetto.validation.runner.BuildResult;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+
+import com.puppetlabs.geppetto.validation.runner.BuildResult;
 
 /**
  * Interface for formatting of validation/build result.

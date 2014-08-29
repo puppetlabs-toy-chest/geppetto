@@ -12,6 +12,8 @@ package com.puppetlabs.geppetto.pp.dsl.eval;
 
 import java.util.Collections;
 
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
 import com.puppetlabs.geppetto.pp.DoubleQuotedString;
 import com.puppetlabs.geppetto.pp.LiteralBoolean;
 import com.puppetlabs.geppetto.pp.LiteralDefault;
@@ -20,7 +22,6 @@ import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.LiteralUndef;
 import com.puppetlabs.geppetto.pp.SingleQuotedString;
 import com.puppetlabs.geppetto.pp.util.TextExpressionHelper;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * Evaluates constant string expressions. Returns null if expression was not a constant string.

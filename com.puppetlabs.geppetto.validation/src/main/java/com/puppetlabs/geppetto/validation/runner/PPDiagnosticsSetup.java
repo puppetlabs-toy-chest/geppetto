@@ -12,13 +12,12 @@ package com.puppetlabs.geppetto.validation.runner;
 
 import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.puppetlabs.geppetto.pp.dsl.PPStandaloneSetup;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 /**
  * Setup of PP runtime with overrides for validation service.

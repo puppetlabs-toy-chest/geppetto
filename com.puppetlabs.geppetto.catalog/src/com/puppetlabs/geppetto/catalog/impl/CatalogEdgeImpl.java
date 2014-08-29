@@ -10,10 +10,6 @@
  */
 package com.puppetlabs.geppetto.catalog.impl;
 
-import com.puppetlabs.geppetto.catalog.CatalogEdge;
-import com.puppetlabs.geppetto.catalog.CatalogFactory;
-import com.puppetlabs.geppetto.catalog.CatalogPackage;
-import com.puppetlabs.geppetto.catalog.util.CatalogJsonSerializer;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -25,6 +21,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.puppetlabs.geppetto.catalog.CatalogEdge;
+import com.puppetlabs.geppetto.catalog.CatalogFactory;
+import com.puppetlabs.geppetto.catalog.CatalogPackage;
+import com.puppetlabs.geppetto.catalog.util.CatalogJsonSerializer;
 
 /**
  * <!-- begin-user-doc -->

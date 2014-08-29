@@ -10,10 +10,11 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
+import org.eclipse.jface.preference.BooleanFieldEditor;
+
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.FormatterGeneralPreferences;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.IntegerFieldEditor;
-import org.eclipse.jface.preference.BooleanFieldEditor;
 
 /**
  * This is the puppet root preference pane for formatting preferences as well as the editor pane for

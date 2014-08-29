@@ -13,7 +13,6 @@ package com.puppetlabs.geppetto.ruby.jrubyparser;
 import java.util.List;
 import java.util.Map;
 
-import com.puppetlabs.geppetto.ruby.PPTypeInfo;
 import org.jrubyparser.ast.BlockAcceptingNode;
 import org.jrubyparser.ast.BlockNode;
 import org.jrubyparser.ast.BlockPassNode;
@@ -31,6 +30,7 @@ import org.jrubyparser.ast.VCallNode;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.puppetlabs.geppetto.ruby.PPTypeInfo;
 
 /**
  * Find puppet resource type definition(s) in a ruby file.

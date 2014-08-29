@@ -10,13 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.formatting;
 
-import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration;
-import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentContainerInformation;
-import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice;
-
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
+import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration;
+import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentContainerInformation;
+import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice;
 
 /**
  * Overrides default comment configuration with a '#' based single line comment container.

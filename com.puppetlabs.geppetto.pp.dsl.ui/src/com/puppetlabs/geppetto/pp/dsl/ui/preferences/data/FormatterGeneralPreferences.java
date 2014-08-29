@@ -10,12 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences.data;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferenceConstants;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 
 import com.google.inject.Singleton;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferenceConstants;
 
 /**
  * Manages the Formatter General preferences.

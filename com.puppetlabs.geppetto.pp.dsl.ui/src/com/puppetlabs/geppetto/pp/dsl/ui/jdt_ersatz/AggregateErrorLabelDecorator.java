@@ -10,7 +10,6 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResource;
@@ -26,6 +25,8 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPDSLActivator;
 
 /**
  * Simple decorator for error and warning (right now hacking/testing).

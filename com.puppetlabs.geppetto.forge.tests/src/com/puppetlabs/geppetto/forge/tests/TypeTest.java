@@ -15,11 +15,11 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import com.puppetlabs.geppetto.forge.model.Type;
-import com.puppetlabs.geppetto.forge.util.Types;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import com.puppetlabs.geppetto.forge.model.Type;
+import com.puppetlabs.geppetto.forge.util.Types;
 
 public class TypeTest extends AbstractForgeTest {
 	private Type fixture = null;

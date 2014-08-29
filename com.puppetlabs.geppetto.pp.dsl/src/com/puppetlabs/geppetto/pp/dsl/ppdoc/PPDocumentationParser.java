@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 
 /**
  * Provides parsing of puppet documentation.

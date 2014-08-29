@@ -10,13 +10,13 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter.comments;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.inject.ImplementedBy;
+import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * <p>

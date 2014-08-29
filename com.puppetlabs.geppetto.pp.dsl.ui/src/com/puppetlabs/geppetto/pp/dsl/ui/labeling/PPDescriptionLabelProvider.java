@@ -12,9 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.labeling;
 
 import java.util.Iterator;
 
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPQualifiedNameConverter;
-import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
@@ -30,6 +27,9 @@ import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPQualifiedNameConverter;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.

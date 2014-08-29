@@ -15,11 +15,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
+import org.eclipse.core.runtime.Path;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.ruby.RubyHelper;
 import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
 import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
-import org.eclipse.core.runtime.Path;
-import org.junit.Test;
 
 public class SmokeTest {
 

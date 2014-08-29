@@ -14,8 +14,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.search;
 
 import java.util.Collection;
 
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ui.dialogs.SearchPattern;
@@ -29,6 +27,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 
 @ImplementedBy(IPPEObjectSearch.Default.class)
 public interface IPPEObjectSearch {

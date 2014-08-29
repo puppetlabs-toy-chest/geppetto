@@ -10,11 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences.data;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.jface.preference.IPreferenceStore;
+
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice.WhenToApply;
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice.WhenToApplyForDefinition;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferenceConstants;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * Manages the Break and Align related formatter preferences.

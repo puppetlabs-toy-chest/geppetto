@@ -10,11 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences.data;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.jface.preference.IPreferenceStore;
+
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferenceConstants;
 import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice.BannerAdvice;
 import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentFormatterAdvice.CommentTextAdvice;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * Manages the Comment related formatter preferences.

@@ -16,6 +16,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.puppetlabs.geppetto.catalog.Catalog;
 import com.puppetlabs.geppetto.catalog.CatalogEdge;
 import com.puppetlabs.geppetto.catalog.CatalogResource;
@@ -28,13 +35,6 @@ import com.puppetlabs.graph.graphcss.GraphCSS;
 import com.puppetlabs.graph.graphcss.StyleSet;
 import com.puppetlabs.graph.style.Span;
 import com.puppetlabs.graph.style.labels.LabelRow;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
-
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * Produces a Catalog graph in DOT format.

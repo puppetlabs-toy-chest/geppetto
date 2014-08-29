@@ -10,11 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.impl;
 
-import com.puppetlabs.geppetto.pp.InterpolatedVariable;
-import com.puppetlabs.geppetto.pp.PPPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import com.puppetlabs.geppetto.pp.InterpolatedVariable;
+import com.puppetlabs.geppetto.pp.PPPackage;
 
 /**
  * <!-- begin-user-doc -->

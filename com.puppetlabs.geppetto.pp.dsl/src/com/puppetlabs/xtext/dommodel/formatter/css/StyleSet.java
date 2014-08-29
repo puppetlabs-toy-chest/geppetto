@@ -15,10 +15,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
+import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * A set of styles.

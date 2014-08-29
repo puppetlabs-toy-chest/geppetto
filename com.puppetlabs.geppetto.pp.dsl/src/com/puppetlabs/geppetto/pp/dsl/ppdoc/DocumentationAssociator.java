@@ -12,17 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.ppdoc;
 
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.Definition;
-import com.puppetlabs.geppetto.pp.HostClassDefinition;
-import com.puppetlabs.geppetto.pp.NodeDefinition;
-import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.adapters.ResourceDocumentationAdapter;
-import com.puppetlabs.geppetto.pp.dsl.adapters.ResourceDocumentationAdapterFactory;
-import com.puppetlabs.geppetto.pp.dsl.adapters.ResourcePropertiesAdapter;
-import com.puppetlabs.geppetto.pp.dsl.adapters.ResourcePropertiesAdapterFactory;
-import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPTask;
-import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.IGrammarAccess;
@@ -34,6 +23,17 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.Definition;
+import com.puppetlabs.geppetto.pp.HostClassDefinition;
+import com.puppetlabs.geppetto.pp.NodeDefinition;
+import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ResourceDocumentationAdapter;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ResourceDocumentationAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ResourcePropertiesAdapter;
+import com.puppetlabs.geppetto.pp.dsl.adapters.ResourcePropertiesAdapterFactory;
+import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPTask;
+import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 
 /**
  * Provides handling of documentation comments.

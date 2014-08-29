@@ -7,11 +7,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.core.runtime.SubMonitor;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.validation.ValidationService;
 import com.puppetlabs.geppetto.validation.runner.PuppetCatalogCompilerRunner;
 import com.puppetlabs.geppetto.validation.runner.PuppetCatalogCompilerRunner.CatalogDiagnostic;
-import org.eclipse.core.runtime.SubMonitor;
-import org.junit.Test;
 
 public class TestCatalogCompilerRunner {
 

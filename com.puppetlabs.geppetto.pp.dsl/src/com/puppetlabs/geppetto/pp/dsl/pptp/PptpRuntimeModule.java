@@ -10,15 +10,16 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.pptp;
 
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
+
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPQualifiedNameConverter;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceDescriptionStrategy;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPathProvider;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
-import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 
 /**
  * A runtime module for PPTP generic model.

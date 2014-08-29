@@ -16,10 +16,11 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import com.puppetlabs.geppetto.semver.Version;
-import com.puppetlabs.geppetto.semver.VersionRange;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.puppetlabs.geppetto.semver.Version;
+import com.puppetlabs.geppetto.semver.VersionRange;
 
 /**
  * Unit tests for VersionRange.

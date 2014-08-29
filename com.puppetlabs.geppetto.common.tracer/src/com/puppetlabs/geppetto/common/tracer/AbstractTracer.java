@@ -10,10 +10,9 @@
  */
 package com.puppetlabs.geppetto.common.tracer;
 
-import com.puppetlabs.geppetto.common.util.BundleAccess;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.puppetlabs.geppetto.common.util.BundleAccess;
 
 /**
  * Provides the base functionality for a tracer - configuring it based on the option.

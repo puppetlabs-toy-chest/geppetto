@@ -19,12 +19,6 @@ import java.util.Set;
 
 import org.apache.commons.codec.language.DoubleMetaphone;
 import org.apache.commons.lang.StringUtils;
-import com.puppetlabs.geppetto.common.score.ScoreKeeper;
-import com.puppetlabs.geppetto.common.score.ScoreKeeper.ScoreEntry;
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
-import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -33,6 +27,12 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.common.score.ScoreKeeper;
+import com.puppetlabs.geppetto.common.score.ScoreKeeper.ScoreEntry;
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 
 /**
  * Generator of proposals

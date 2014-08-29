@@ -17,8 +17,9 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 
-import com.puppetlabs.geppetto.common.util.BundleAccess;
 import org.eclipse.core.runtime.IPath;
+
+import com.puppetlabs.geppetto.common.util.BundleAccess;
 
 public class TestDataProvider {
 

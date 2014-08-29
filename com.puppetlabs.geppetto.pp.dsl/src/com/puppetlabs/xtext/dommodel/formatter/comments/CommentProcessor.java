@@ -14,12 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 import com.puppetlabs.xtext.dommodel.formatter.css.Alignment;
 import com.puppetlabs.xtext.textflow.CharSequences;
 import com.puppetlabs.xtext.textflow.TextFlow;
-
-import com.google.common.collect.Lists;
 
 /**
  * <p>

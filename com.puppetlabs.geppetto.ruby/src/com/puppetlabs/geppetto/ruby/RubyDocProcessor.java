@@ -13,13 +13,13 @@ package com.puppetlabs.geppetto.ruby;
 import java.util.Collections;
 import java.util.List;
 
-import com.puppetlabs.geppetto.common.CharSequences;
-import com.puppetlabs.geppetto.ruby.RubyDocProcessor.RubyDocLexer.HeadingToken;
-import com.puppetlabs.geppetto.ruby.RubyDocProcessor.RubyDocLexer.Token;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.puppetlabs.geppetto.common.CharSequences;
+import com.puppetlabs.geppetto.ruby.RubyDocProcessor.RubyDocLexer.HeadingToken;
+import com.puppetlabs.geppetto.ruby.RubyDocProcessor.RubyDocLexer.Token;
 
 /**
  * A better Ruby Doc parser

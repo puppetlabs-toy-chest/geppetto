@@ -12,10 +12,11 @@ package com.puppetlabs.xtext.textflow;
 
 import java.io.IOException;
 
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.util.Exceptions;
 
 import com.google.inject.Inject;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 
 /**
  * <p>

@@ -13,6 +13,10 @@ package com.puppetlabs.xtext.dommodel.formatter;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.AbstractElement;
+
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.common.stats.IntegerCluster;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
@@ -21,10 +25,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.ITextFlow;
 import com.puppetlabs.xtext.textflow.MeasuredTextFlow;
-import org.eclipse.xtext.AbstractElement;
-
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
  * Layout Utility functions

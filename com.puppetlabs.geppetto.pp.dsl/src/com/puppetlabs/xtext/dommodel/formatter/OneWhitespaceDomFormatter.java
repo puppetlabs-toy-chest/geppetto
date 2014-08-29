@@ -10,14 +10,15 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter;
 
-import com.puppetlabs.xtext.dommodel.DomModelUtils;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
+
+import com.puppetlabs.xtext.dommodel.DomModelUtils;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 
 /**
  * A Dom Model Formatter that ensures a single whitespace between tokens.

@@ -19,16 +19,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Iterator;
 
-import com.puppetlabs.geppetto.catalog.Catalog;
-import com.puppetlabs.geppetto.catalog.CatalogEdge;
-import com.puppetlabs.geppetto.catalog.CatalogResource;
-import com.puppetlabs.geppetto.catalog.CatalogResourceParameter;
-import com.puppetlabs.geppetto.catalog.impl.CatalogEdgeImpl;
-import com.puppetlabs.geppetto.catalog.impl.CatalogImpl;
-import com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl;
-import com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl;
-import com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl;
-import com.puppetlabs.geppetto.common.os.StreamUtil;
 import org.eclipse.emf.common.util.EList;
 
 import com.google.gson.Gson;
@@ -40,6 +30,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
+import com.puppetlabs.geppetto.catalog.Catalog;
+import com.puppetlabs.geppetto.catalog.CatalogEdge;
+import com.puppetlabs.geppetto.catalog.CatalogResource;
+import com.puppetlabs.geppetto.catalog.CatalogResourceParameter;
+import com.puppetlabs.geppetto.catalog.impl.CatalogEdgeImpl;
+import com.puppetlabs.geppetto.catalog.impl.CatalogImpl;
+import com.puppetlabs.geppetto.catalog.impl.CatalogMetadataImpl;
+import com.puppetlabs.geppetto.catalog.impl.CatalogResourceImpl;
+import com.puppetlabs.geppetto.catalog.impl.CatalogResourceParameterImpl;
+import com.puppetlabs.geppetto.common.os.StreamUtil;
 
 public class CatalogJsonSerializer {
 

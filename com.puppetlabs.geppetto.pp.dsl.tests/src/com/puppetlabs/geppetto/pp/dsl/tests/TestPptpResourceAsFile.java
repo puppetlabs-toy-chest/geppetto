@@ -17,11 +17,12 @@ import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.eclipse.emf.common.util.URI;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.common.util.BundleAccess;
 import com.puppetlabs.geppetto.pp.dsl.target.PptpResourceUtil;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
-import org.eclipse.emf.common.util.URI;
-import org.junit.Test;
 
 public class TestPptpResourceAsFile extends AbstractPuppetTests {
 

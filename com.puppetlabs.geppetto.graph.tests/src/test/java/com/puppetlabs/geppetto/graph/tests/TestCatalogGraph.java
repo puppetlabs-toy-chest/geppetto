@@ -5,11 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import com.puppetlabs.geppetto.graph.catalog.CatalogServices;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.junit.Test;
+
+import com.puppetlabs.geppetto.graph.catalog.CatalogServices;
 
 public class TestCatalogGraph {
 

@@ -14,6 +14,25 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.BidiTreeIterable;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.util.Exceptions;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.AttributeOperation;
 import com.puppetlabs.geppetto.pp.CollectExpression;
 import com.puppetlabs.geppetto.pp.Expression;
@@ -34,25 +53,6 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPTask;
 import com.puppetlabs.geppetto.pp.dsl.ppdoc.PPDocumentationParser;
 import com.puppetlabs.geppetto.pp.dsl.ppdoc.PPDocumentationParser.DocNode;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.nodemodel.BidiTreeIterable;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.util.Exceptions;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
-
-import com.google.inject.Inject;
 
 /**
  * Highlighting for puppet.

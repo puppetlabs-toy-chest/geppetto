@@ -13,6 +13,12 @@ package com.puppetlabs.geppetto.pp.dsl.eval;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
 import com.puppetlabs.geppetto.pp.DoubleQuotedString;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.ExpressionTE;
@@ -30,11 +36,6 @@ import com.puppetlabs.geppetto.pp.UnquotedString;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * @author henrik

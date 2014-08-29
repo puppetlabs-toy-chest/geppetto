@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.pp.AndExpression;
 import com.puppetlabs.geppetto.pp.AttributeOperations;
 import com.puppetlabs.geppetto.pp.CollectExpression;
@@ -19,7 +21,6 @@ import com.puppetlabs.geppetto.pp.OrExpression;
 import com.puppetlabs.geppetto.pp.ParenthesisedExpression;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
 import com.puppetlabs.geppetto.pp.VirtualCollectQuery;
-import org.junit.Test;
 
 /**
  * Tests the Puppet Collect Expression.

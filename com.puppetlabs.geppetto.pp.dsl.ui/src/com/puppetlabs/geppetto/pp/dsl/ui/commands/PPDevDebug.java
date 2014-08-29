@@ -12,22 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.commands;
 
 import java.io.IOException;
 
-import com.puppetlabs.geppetto.common.tracer.ITracer;
-import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
-import com.puppetlabs.xtext.dommodel.DomModelUtils;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.CSSDomFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.DomNodeLayoutFeeder;
-import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory.FormattingOption;
-import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
-import com.puppetlabs.xtext.resource.ResourceAccessScope;
-import com.puppetlabs.xtext.serializer.DomBasedSerializer;
-import com.puppetlabs.xtext.textflow.ITextFlow.WithText;
-import com.puppetlabs.xtext.textflow.TextFlowWithDebugRecording;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -57,6 +41,22 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
+import com.puppetlabs.geppetto.common.tracer.ITracer;
+import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator;
+import com.puppetlabs.xtext.dommodel.DomModelUtils;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.CSSDomFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.DomNodeLayoutFeeder;
+import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory.FormattingOption;
+import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
+import com.puppetlabs.xtext.resource.ResourceAccessScope;
+import com.puppetlabs.xtext.serializer.DomBasedSerializer;
+import com.puppetlabs.xtext.textflow.ITextFlow.WithText;
+import com.puppetlabs.xtext.textflow.TextFlowWithDebugRecording;
 
 /**
  * A command to use for development debugging purposes.

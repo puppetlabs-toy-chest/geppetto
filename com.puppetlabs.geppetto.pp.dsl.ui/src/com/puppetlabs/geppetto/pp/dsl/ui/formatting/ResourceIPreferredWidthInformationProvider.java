@@ -10,12 +10,13 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.formatting;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.xtext.formatting.IIndentationInformation;
+
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.FormatterGeneralPreferences;
 import com.puppetlabs.xtext.formatting.IPreferredMaxWidthInformation;
 import com.puppetlabs.xtext.ui.resource.PlatformResourceSpecificProvider;
-import org.eclipse.core.resources.IResource;
-
-import com.google.inject.Inject;
 
 /**
  * A {@link Provider} of {@link IIndentationInformation} that can look up information specific to the current

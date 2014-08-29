@@ -14,6 +14,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.emf.ecore.EObject;
+
+import com.google.common.collect.Maps;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.puppetlabs.geppetto.common.stats.IntegerCluster;
 import com.puppetlabs.geppetto.pp.DefinitionArgument;
 import com.puppetlabs.geppetto.pp.DefinitionArgumentList;
@@ -28,11 +33,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.Alignment;
 import com.puppetlabs.xtext.dommodel.formatter.css.IStyleFactory;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.ITextFlow;
-import org.eclipse.emf.ecore.EObject;
-
-import com.google.common.collect.Maps;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * <p>

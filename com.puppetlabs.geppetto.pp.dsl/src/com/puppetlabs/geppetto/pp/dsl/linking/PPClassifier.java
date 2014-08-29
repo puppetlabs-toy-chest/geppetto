@@ -17,6 +17,9 @@ import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_
 import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_OVERRIDE;
 import static com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter.RESOURCE_IS_REGULAR;
 
+import org.eclipse.emf.ecore.EObject;
+
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.AtExpression;
 import com.puppetlabs.geppetto.pp.CollectExpression;
 import com.puppetlabs.geppetto.pp.Expression;
@@ -27,9 +30,6 @@ import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
 import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter;
 import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.validation.PPPatternHelper;
-import org.eclipse.emf.ecore.EObject;
-
-import com.google.inject.Inject;
 
 /**
  * Classifies PP model objects.

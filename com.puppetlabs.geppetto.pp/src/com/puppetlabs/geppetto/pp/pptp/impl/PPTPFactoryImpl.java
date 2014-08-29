@@ -12,16 +12,25 @@ package com.puppetlabs.geppetto.pp.pptp.impl;
 
 import java.io.File;
 
-import com.puppetlabs.geppetto.pp.pptp.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.puppetlabs.geppetto.pp.pptp.Function;
+import com.puppetlabs.geppetto.pp.pptp.MetaType;
+import com.puppetlabs.geppetto.pp.pptp.MetaVariable;
+import com.puppetlabs.geppetto.pp.pptp.NameSpace;
+import com.puppetlabs.geppetto.pp.pptp.PPTPFactory;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
+import com.puppetlabs.geppetto.pp.pptp.Parameter;
+import com.puppetlabs.geppetto.pp.pptp.Property;
+import com.puppetlabs.geppetto.pp.pptp.PuppetDistribution;
+import com.puppetlabs.geppetto.pp.pptp.TPVariable;
+import com.puppetlabs.geppetto.pp.pptp.Type;
+import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
 
 /**
  * <!-- begin-user-doc -->

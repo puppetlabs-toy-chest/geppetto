@@ -15,9 +15,6 @@ package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 import java.util.Iterator;
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceDescription;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceSearchResultEvents.Added;
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceSearchResultEvents.Reset;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -42,6 +39,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceDescription;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceSearchResultEvents.Added;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceSearchResultEvents.Reset;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

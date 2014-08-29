@@ -10,9 +10,8 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.validation;
 
-import com.puppetlabs.geppetto.common.tracer.IStringProvider;
-
 import com.google.inject.Singleton;
+import com.puppetlabs.geppetto.common.tracer.IStringProvider;
 
 /**
  * A very simple translator of Expression type to a label.

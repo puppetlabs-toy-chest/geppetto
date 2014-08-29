@@ -10,14 +10,14 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.formatting;
 
+import org.eclipse.core.resources.IResource;
+
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice;
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice.WhenToApply;
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice.WhenToApplyForDefinition;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.data.BreakAndAlignPreferences;
 import com.puppetlabs.xtext.ui.resource.PlatformResourceSpecificProvider;
-import org.eclipse.core.resources.IResource;
-
-import com.google.inject.Inject;
 
 /**
  * A {@link Provider} of {@link IBreakAndAlignAdvice} that can look up information specific to the current

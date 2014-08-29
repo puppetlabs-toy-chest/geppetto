@@ -16,15 +16,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.puppetlabs.geppetto.pp.pptp.PPTPFactory;
-import com.puppetlabs.geppetto.pp.pptp.PuppetDistribution;
-import com.puppetlabs.geppetto.pp.pptp.TPVariable;
-import com.puppetlabs.geppetto.pp.pptp.TargetEntry;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 import com.google.common.collect.ImmutableSet;
+import com.puppetlabs.geppetto.pp.pptp.PPTPFactory;
+import com.puppetlabs.geppetto.pp.pptp.PuppetDistribution;
+import com.puppetlabs.geppetto.pp.pptp.TPVariable;
+import com.puppetlabs.geppetto.pp.pptp.TargetEntry;
 
 /**
  * An interface for Facter.

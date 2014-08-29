@@ -12,6 +12,10 @@ package com.puppetlabs.geppetto.pp.dsl.tests;
 
 import java.io.StringReader;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.IParseResult;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.LiteralRegex;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
@@ -20,9 +24,6 @@ import com.puppetlabs.geppetto.pp.SingleQuotedString;
 import com.puppetlabs.geppetto.pp.dsl.parser.antlr.PPParser;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.IParseResult;
-import org.junit.Test;
 
 /**
  * Tests Literals

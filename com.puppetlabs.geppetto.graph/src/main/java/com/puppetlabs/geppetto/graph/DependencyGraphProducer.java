@@ -13,13 +13,13 @@ package com.puppetlabs.geppetto.graph;
 import java.io.File;
 import java.io.OutputStream;
 
+import com.google.common.collect.Multimap;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.validation.runner.AllModulesState;
 import com.puppetlabs.geppetto.validation.runner.BuildResult;
 import com.puppetlabs.geppetto.validation.runner.MetadataInfo;
 import com.puppetlabs.graph.ICancel;
-import com.google.common.collect.Multimap;
 
 /**
  * Producer of dot graphs

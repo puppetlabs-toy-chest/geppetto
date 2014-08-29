@@ -7,13 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import com.puppetlabs.geppetto.pp.pptp.AbstractType;
-import com.puppetlabs.geppetto.pp.pptp.Function;
-import com.puppetlabs.geppetto.pp.pptp.Parameter;
-import com.puppetlabs.geppetto.pp.pptp.Property;
-import com.puppetlabs.geppetto.pp.pptp.Type;
-import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -21,6 +14,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.junit.Test;
+
+import com.puppetlabs.geppetto.pp.pptp.AbstractType;
+import com.puppetlabs.geppetto.pp.pptp.Function;
+import com.puppetlabs.geppetto.pp.pptp.Parameter;
+import com.puppetlabs.geppetto.pp.pptp.Property;
+import com.puppetlabs.geppetto.pp.pptp.Type;
+import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
+import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 
 public class PptpResourceTests {
 	private void doFunctionResource(String path, String functionName) throws IOException {

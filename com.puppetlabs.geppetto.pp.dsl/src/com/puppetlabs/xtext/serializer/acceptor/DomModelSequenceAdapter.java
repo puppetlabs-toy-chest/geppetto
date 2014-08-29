@@ -21,21 +21,13 @@ import static com.puppetlabs.xtext.dommodel.IDomNode.NodeType.WHITESPACE;
 
 import java.util.List;
 
-import com.puppetlabs.xtext.dommodel.DomModelUtils;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.IDomNode.NodeClassifier;
-import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
-import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration;
-import com.puppetlabs.xtext.dommodel.impl.BaseDomNode;
-import com.puppetlabs.xtext.dommodel.impl.CompositeDomNode;
-import com.puppetlabs.xtext.dommodel.impl.LeafDomNode;
-import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
@@ -45,6 +37,14 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.puppetlabs.xtext.dommodel.DomModelUtils;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.IDomNode.NodeClassifier;
+import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
+import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration;
+import com.puppetlabs.xtext.dommodel.impl.BaseDomNode;
+import com.puppetlabs.xtext.dommodel.impl.CompositeDomNode;
+import com.puppetlabs.xtext.dommodel.impl.LeafDomNode;
 
 /**
  * TODO: (list of things to discuss)

@@ -12,6 +12,13 @@ package com.puppetlabs.geppetto.pp.dsl.formatting;
 
 import java.util.List;
 
+import org.eclipse.xtext.RuleCall;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.puppetlabs.geppetto.common.stats.IntegerCluster;
 import com.puppetlabs.geppetto.pp.CaseExpression;
 import com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout.StatementStyle;
@@ -27,13 +34,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.ITextFlow;
 import com.puppetlabs.xtext.textflow.MeasuredTextFlow;
 import com.puppetlabs.xtext.textflow.TextFlow;
-import org.eclipse.xtext.RuleCall;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * A sub layout handler for CaseExpression and Case

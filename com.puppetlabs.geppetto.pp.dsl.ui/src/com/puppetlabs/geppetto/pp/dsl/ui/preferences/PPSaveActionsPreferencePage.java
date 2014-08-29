@@ -10,8 +10,9 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 import org.eclipse.jface.preference.BooleanFieldEditor;
+
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 
 /**
  * Preference Page for Save Actions

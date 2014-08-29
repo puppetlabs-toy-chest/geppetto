@@ -12,10 +12,9 @@ package com.puppetlabs.xtext.dommodel.formatter.css;
 
 import java.util.Set;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-
 import com.google.common.base.Function;
 import com.google.inject.ImplementedBy;
+import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * Interface for commonly used functions in Dom based formatting.

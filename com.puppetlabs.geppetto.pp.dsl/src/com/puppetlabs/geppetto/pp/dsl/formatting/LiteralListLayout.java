@@ -12,6 +12,10 @@ package com.puppetlabs.geppetto.pp.dsl.formatting;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.LiteralList;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess.LiteralListElements;
@@ -21,10 +25,6 @@ import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
 import com.puppetlabs.xtext.dommodel.formatter.css.IStyleFactory;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.ITextFlow;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
-
-import com.google.inject.Inject;
 
 /**
  * <p>

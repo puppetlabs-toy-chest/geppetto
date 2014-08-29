@@ -10,12 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.linking;
 
-import com.puppetlabs.geppetto.pp.dsl.ppdoc.DocumentationAssociator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.ppdoc.DocumentationAssociator;
 
 /**
  * Adds handling of documentation comments and linking of resources.

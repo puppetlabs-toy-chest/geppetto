@@ -1,6 +1,5 @@
 package com.puppetlabs.geppetto.ui.wizard;
 
-import com.puppetlabs.geppetto.ui.UIPlugin;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -15,6 +14,8 @@ import org.eclipse.ui.internal.ide.DialogUtil;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.wizards.newresource.ResourceMessages;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
+
+import com.puppetlabs.geppetto.ui.UIPlugin;
 
 /**
  * This is a sample new wizard. Its role is to create a new file

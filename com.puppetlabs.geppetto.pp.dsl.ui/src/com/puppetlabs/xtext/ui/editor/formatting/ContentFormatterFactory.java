@@ -12,13 +12,6 @@ package com.puppetlabs.xtext.ui.editor.formatting;
 
 import java.util.Iterator;
 
-import com.puppetlabs.geppetto.pp.dsl.validation.PPValidationUtils;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory.FormattingOption;
-import com.puppetlabs.xtext.resource.ResourceAccessScope;
-import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -41,6 +34,13 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.puppetlabs.geppetto.pp.dsl.validation.PPValidationUtils;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory.FormattingOption;
+import com.puppetlabs.xtext.resource.ResourceAccessScope;
+import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 
 public class ContentFormatterFactory implements IContentFormatterFactory {
 

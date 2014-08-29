@@ -12,6 +12,8 @@ package com.puppetlabs.xtext.dommodel.formatter.comments;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.puppetlabs.xtext.dommodel.DomModelUtils;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.RegionMatch;
@@ -24,9 +26,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.CharSequences;
 import com.puppetlabs.xtext.textflow.ITextFlow;
 import com.puppetlabs.xtext.textflow.TextFlow;
-
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
  * <p>

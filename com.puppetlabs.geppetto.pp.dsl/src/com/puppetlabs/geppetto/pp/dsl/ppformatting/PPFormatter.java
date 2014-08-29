@@ -12,13 +12,14 @@ package com.puppetlabs.geppetto.pp.dsl.ppformatting;
 
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.util.Pair;
+
+import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 
 /**
  * This class contains custom formatting description.

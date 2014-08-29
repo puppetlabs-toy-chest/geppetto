@@ -10,8 +10,8 @@
  */
 package com.puppetlabs.geppetto.validation.runner;
 
-import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.google.common.collect.Multimap;
+import com.puppetlabs.geppetto.forge.model.ModuleName;
 
 /**
  * Provides access to any build result produced by "validation" (which should really be renamed to "build").

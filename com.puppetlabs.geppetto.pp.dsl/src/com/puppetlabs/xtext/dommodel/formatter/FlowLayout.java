@@ -10,10 +10,14 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter;
 
+import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.IDomNode.NodeClassifier;
 import com.puppetlabs.xtext.dommodel.RegionMatch;
 import com.puppetlabs.xtext.dommodel.formatter.css.Alignment;
+import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
 import com.puppetlabs.xtext.dommodel.formatter.css.IFunctionFactory;
 import com.puppetlabs.xtext.dommodel.formatter.css.LineBreaks;
 import com.puppetlabs.xtext.dommodel.formatter.css.Spacing;
@@ -26,10 +30,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.VerbatimStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.WidthStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.ITextFlow;
-
-import com.google.common.base.Preconditions;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * <p>

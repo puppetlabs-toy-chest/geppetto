@@ -7,8 +7,9 @@
  *******************************************************************************/
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPPluginImages;
 import org.eclipse.jface.action.Action;
+
+import com.puppetlabs.geppetto.pp.dsl.ui.internal.PPPluginImages;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

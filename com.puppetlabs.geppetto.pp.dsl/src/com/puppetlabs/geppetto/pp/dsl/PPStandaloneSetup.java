@@ -12,9 +12,6 @@ package com.puppetlabs.geppetto.pp.dsl;
 
 import java.util.Map;
 
-import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRubyRuntimeModule;
-import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRuntimeModule;
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,6 +19,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRubyRuntimeModule;
+import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRuntimeModule;
+import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 
 /**
  * Initialization support for running Xtext languages

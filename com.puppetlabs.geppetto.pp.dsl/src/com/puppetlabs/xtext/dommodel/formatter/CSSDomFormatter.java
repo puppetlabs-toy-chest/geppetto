@@ -10,12 +10,8 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
-import com.puppetlabs.xtext.textflow.ITextFlow;
-import com.puppetlabs.xtext.textflow.TextFlow;
+import javax.swing.LayoutStyle;
+
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
@@ -26,6 +22,12 @@ import org.eclipse.xtext.util.TextRegion;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
+import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
+import com.puppetlabs.xtext.textflow.ITextFlow;
+import com.puppetlabs.xtext.textflow.TextFlow;
 
 /**
  * <p>

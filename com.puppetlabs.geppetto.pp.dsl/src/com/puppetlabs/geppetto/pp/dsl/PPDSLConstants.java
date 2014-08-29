@@ -10,6 +10,11 @@
  */
 package com.puppetlabs.geppetto.pp.dsl;
 
+import org.eclipse.xtext.resource.IEObjectDescription;
+
+import com.puppetlabs.geppetto.pp.DefinitionArgument;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPTask;
+
 /**
  * Constants for PP DSL
  */

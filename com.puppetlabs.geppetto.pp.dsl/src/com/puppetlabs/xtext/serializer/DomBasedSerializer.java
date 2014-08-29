@@ -16,15 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.puppetlabs.xtext.dommodel.DomModelUtils;
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
-import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory.FormattingOption;
-import com.puppetlabs.xtext.resource.ResourceAccessScope;
-import com.puppetlabs.xtext.serializer.acceptor.DomModelSequenceAdapter;
-import com.puppetlabs.xtext.serializer.acceptor.IHiddenTokenSequencer2;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
@@ -49,6 +40,15 @@ import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 
 import com.google.inject.Inject;
+import com.puppetlabs.xtext.dommodel.DomModelUtils;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.IDomModelFormatter;
+import com.puppetlabs.xtext.dommodel.formatter.comments.ICommentConfiguration;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContextFactory.FormattingOption;
+import com.puppetlabs.xtext.resource.ResourceAccessScope;
+import com.puppetlabs.xtext.serializer.acceptor.DomModelSequenceAdapter;
+import com.puppetlabs.xtext.serializer.acceptor.IHiddenTokenSequencer2;
 
 /**
  * Extends Serializer and modifies the API (ITokenStream based formatting/output not supported).

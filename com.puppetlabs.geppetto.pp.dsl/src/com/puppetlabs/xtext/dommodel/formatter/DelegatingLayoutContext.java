@@ -10,12 +10,13 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter;
 
-import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
-import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.util.ITextRegion;
+
+import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
+import com.puppetlabs.xtext.dommodel.formatter.css.DomCSS;
 
 /**
  * A delegating Layout Context that can override the max width in the delegate, and that does not mark

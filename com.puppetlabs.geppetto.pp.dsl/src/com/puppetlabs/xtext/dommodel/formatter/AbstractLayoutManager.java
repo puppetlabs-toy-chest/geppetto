@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter;
 
+import org.eclipse.xtext.util.Strings;
+
 import com.puppetlabs.xtext.dommodel.DomModelUtils;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.IDomNode.NodeClassifier;
@@ -22,7 +24,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.LayoutManagerSty
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.CharSequences;
 import com.puppetlabs.xtext.textflow.ITextFlow;
-import org.eclipse.xtext.util.Strings;
 
 /**
  * Abstract implementation of ILayoutManaager

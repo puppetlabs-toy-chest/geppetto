@@ -14,10 +14,11 @@ package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.PathEditor;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.PromptDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.PathEditor;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.PromptDialog;
 
 /**
  * A simple preference page for search path and environment

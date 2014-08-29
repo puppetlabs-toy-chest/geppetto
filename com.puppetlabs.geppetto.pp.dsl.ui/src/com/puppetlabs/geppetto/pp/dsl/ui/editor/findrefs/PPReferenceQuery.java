@@ -12,7 +12,6 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceFinder.IPPQueryData;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -21,6 +20,7 @@ import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceFinder.IPPQueryData;
 
 /**
  * Adaption of class with similar name in Xtext. Adapted to PP linking based on IEObjectDescription.

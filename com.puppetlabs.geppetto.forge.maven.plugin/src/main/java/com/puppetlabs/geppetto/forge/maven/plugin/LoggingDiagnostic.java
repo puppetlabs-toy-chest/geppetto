@@ -12,8 +12,9 @@ package com.puppetlabs.geppetto.forge.maven.plugin;
 
 import java.io.File;
 
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import org.slf4j.Logger;
+
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 
 /**
  */

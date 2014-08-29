@@ -10,10 +10,9 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter.css;
 
-import com.puppetlabs.xtext.dommodel.IDomNode.NodeClassifier;
-
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.puppetlabs.xtext.dommodel.IDomNode.NodeClassifier;
 
 /**
  * This Provider of a {@link DomCSS} style sheet provides styling rules that are not tied to a particular

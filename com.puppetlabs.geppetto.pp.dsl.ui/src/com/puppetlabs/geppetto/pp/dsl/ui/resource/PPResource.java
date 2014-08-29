@@ -10,10 +10,6 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.resource;
 
-import com.puppetlabs.geppetto.pp.dsl.linking.DiagnosticConsumerBasedMessageAcceptor;
-import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
-import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceLinker;
-import com.puppetlabs.geppetto.pp.dsl.ppdoc.DocumentationAssociator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -24,6 +20,11 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.linking.DiagnosticConsumerBasedMessageAcceptor;
+import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPLinker;
+import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceLinker;
+import com.puppetlabs.geppetto.pp.dsl.ppdoc.DocumentationAssociator;
 
 /**
  * A PP Resource that performs PP specific linking when the resource is loaded (the first time), and

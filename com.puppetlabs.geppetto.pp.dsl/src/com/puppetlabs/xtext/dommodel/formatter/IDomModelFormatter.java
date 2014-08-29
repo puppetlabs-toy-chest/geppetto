@@ -12,11 +12,12 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
+
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 
 // TODO: Fix next import
 // import com.sun.istack.internal.Nullable;

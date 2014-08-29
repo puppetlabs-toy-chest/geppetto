@@ -10,9 +10,8 @@
  */
 package com.puppetlabs.geppetto.injectable;
 
-import com.puppetlabs.geppetto.injectable.eclipse.impl.EclipseCommonModule;
-
 import com.google.inject.Module;
+import com.puppetlabs.geppetto.injectable.eclipse.impl.EclipseCommonModule;
 
 public class CommonModuleProvider {
 	/**

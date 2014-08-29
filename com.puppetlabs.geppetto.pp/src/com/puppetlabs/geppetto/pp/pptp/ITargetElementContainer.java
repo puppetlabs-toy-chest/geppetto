@@ -11,7 +11,6 @@
 package com.puppetlabs.geppetto.pp.pptp;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

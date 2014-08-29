@@ -16,11 +16,11 @@ import static java.util.Collections.singleton;
 
 import java.util.Set;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceFinder.IPPQueryData;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 import com.google.common.base.Predicate;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceFinder.IPPQueryData;
 
 public class PPReferenceQueryData implements IPPQueryData {
 

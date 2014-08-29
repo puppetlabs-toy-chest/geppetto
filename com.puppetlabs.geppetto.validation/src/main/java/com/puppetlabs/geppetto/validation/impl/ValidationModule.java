@@ -1,8 +1,7 @@
 package com.puppetlabs.geppetto.validation.impl;
 
-import com.puppetlabs.geppetto.validation.ValidationService;
-
 import com.google.inject.AbstractModule;
+import com.puppetlabs.geppetto.validation.ValidationService;
 
 public class ValidationModule extends AbstractModule {
 

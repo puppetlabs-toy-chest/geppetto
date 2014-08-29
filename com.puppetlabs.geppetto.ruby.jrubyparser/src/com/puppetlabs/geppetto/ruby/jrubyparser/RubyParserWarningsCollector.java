@@ -13,12 +13,12 @@ package com.puppetlabs.geppetto.ruby.jrubyparser;
 import java.util.Collections;
 import java.util.List;
 
-import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
 import org.jrubyparser.IRubyWarnings;
 import org.jrubyparser.SourcePosition;
 import org.jrubyparser.lexer.SyntaxException;
 
 import com.google.common.collect.Lists;
+import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
 
 /**
  * Collects warnings and errors from JRubyParser callbacks

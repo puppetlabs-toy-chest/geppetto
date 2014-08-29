@@ -13,9 +13,6 @@ package com.puppetlabs.geppetto.pp.dsl.ppformatting;
 import java.io.IOException;
 import java.io.Writer;
 
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-import com.puppetlabs.xtext.textflow.ITextFlow;
-import com.puppetlabs.xtext.textflow.TextFlow;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -24,6 +21,9 @@ import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.Inject;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
+import com.puppetlabs.xtext.textflow.ITextFlow;
+import com.puppetlabs.xtext.textflow.TextFlow;
 
 /**
  * An {@link ISerializer} using a handwritten formatter for PP.

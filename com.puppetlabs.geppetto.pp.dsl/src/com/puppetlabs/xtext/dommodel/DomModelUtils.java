@@ -13,6 +13,15 @@ package com.puppetlabs.xtext.dommodel;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.inject.Inject;
 import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
 import com.puppetlabs.xtext.dommodel.formatter.css.IStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
@@ -20,14 +29,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleSetWithTracking;
 import com.puppetlabs.xtext.dommodel.formatter.css.debug.EffectiveStyleAppender;
 import com.puppetlabs.xtext.dommodel.formatter.css.debug.FormattingTracer;
 import com.puppetlabs.xtext.textflow.CharSequences;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
-
-import com.google.common.base.Joiner;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.inject.Inject;
 
 /**
  * Utilities for a IDomModel

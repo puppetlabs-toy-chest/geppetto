@@ -10,8 +10,9 @@
  */
 package com.puppetlabs.xtext.dommodel.impl;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
 import org.eclipse.xtext.nodemodel.INode;
+
+import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * Adapts INode to IDomNode

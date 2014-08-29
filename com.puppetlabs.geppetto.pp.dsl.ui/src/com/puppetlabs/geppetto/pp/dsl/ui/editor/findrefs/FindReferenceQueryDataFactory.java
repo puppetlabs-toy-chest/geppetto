@@ -17,7 +17,6 @@ import static java.util.Collections.singleton;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceFinder.IPPQueryData;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
@@ -34,6 +33,7 @@ import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs.PPReferenceFinder.IPPQueryData;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

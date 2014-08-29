@@ -15,17 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import com.puppetlabs.geppetto.pp.DefinitionArgument;
-import com.puppetlabs.geppetto.pp.Expression;
-import com.puppetlabs.geppetto.pp.HostClassDefinition;
-import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
-import com.puppetlabs.geppetto.pp.PPPackage;
-import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapterFactory;
-import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
-import com.puppetlabs.geppetto.pp.pptp.Parameter;
-import com.puppetlabs.geppetto.pp.pptp.TPVariable;
-import com.puppetlabs.geppetto.pp.pptp.TargetElement;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -42,6 +31,17 @@ import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.DefinitionArgument;
+import com.puppetlabs.geppetto.pp.Expression;
+import com.puppetlabs.geppetto.pp.HostClassDefinition;
+import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
+import com.puppetlabs.geppetto.pp.PPPackage;
+import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapterFactory;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
+import com.puppetlabs.geppetto.pp.pptp.Parameter;
+import com.puppetlabs.geppetto.pp.pptp.TPVariable;
+import com.puppetlabs.geppetto.pp.pptp.TargetElement;
 
 /**
  * Overrides the default description strategy to provide the super class name for element

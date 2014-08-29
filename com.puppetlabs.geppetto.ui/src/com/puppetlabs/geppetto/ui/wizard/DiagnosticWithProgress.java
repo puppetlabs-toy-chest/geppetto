@@ -15,10 +15,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubProgressMonitor;
+
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 
 /**
  */

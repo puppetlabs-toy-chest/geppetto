@@ -10,6 +10,9 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
+import org.junit.Test;
+
 import com.puppetlabs.geppetto.pp.AdditiveExpression;
 import com.puppetlabs.geppetto.pp.FunctionCall;
 import com.puppetlabs.geppetto.pp.LiteralBoolean;
@@ -24,8 +27,6 @@ import com.puppetlabs.geppetto.pp.SelectorExpression;
 import com.puppetlabs.geppetto.pp.SingleQuotedString;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
-import org.junit.Test;
 
 /**
  * Tests validation and serialization of SelectorExpression

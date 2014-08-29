@@ -10,8 +10,9 @@
  */
 package com.puppetlabs.geppetto.pp.adapters;
 
-import com.puppetlabs.geppetto.pp.pptp.Type;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+
+import com.puppetlabs.geppetto.pp.pptp.Type;
 
 /**
  * The resolution info adapter associates an instance of ResolutionInfo with a (weak) key.

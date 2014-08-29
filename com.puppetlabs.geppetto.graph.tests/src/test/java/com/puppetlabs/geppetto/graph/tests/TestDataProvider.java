@@ -15,11 +15,11 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 
-import com.puppetlabs.geppetto.common.util.BundleAccess;
-import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
 import org.eclipse.core.runtime.IPath;
 
 import com.google.inject.Guice;
+import com.puppetlabs.geppetto.common.util.BundleAccess;
+import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
 
 public class TestDataProvider {
 

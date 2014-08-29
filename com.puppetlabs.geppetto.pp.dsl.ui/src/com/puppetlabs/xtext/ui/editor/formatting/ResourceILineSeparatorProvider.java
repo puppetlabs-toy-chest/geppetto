@@ -10,14 +10,15 @@
  */
 package com.puppetlabs.xtext.ui.editor.formatting;
 
-import org.eclipse.xtext.formatting.ILineSeparatorInformation;
-import com.puppetlabs.xtext.ui.resource.PlatformResourceSpecificProvider;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
+
+import com.puppetlabs.xtext.ui.resource.PlatformResourceSpecificProvider;
 
 /**
  * A @ link ResourceScoped} {@link Provider} of {@link ILinkSeparatorInformation} that finds the

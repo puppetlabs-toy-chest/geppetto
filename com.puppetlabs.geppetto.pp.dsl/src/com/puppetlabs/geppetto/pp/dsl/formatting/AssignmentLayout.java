@@ -13,6 +13,15 @@ package com.puppetlabs.geppetto.pp.dsl.formatting;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Keyword;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.puppetlabs.geppetto.common.stats.IntegerCluster;
 import com.puppetlabs.geppetto.pp.AppendExpression;
 import com.puppetlabs.geppetto.pp.AssignmentExpression;
@@ -28,15 +37,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.WidthStyle;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.ITextFlow;
 import com.puppetlabs.xtext.textflow.TextFlow;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Keyword;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * A sub layout handler for AssignmentExpression that optionally cluster-aligns a sequence of assignments.

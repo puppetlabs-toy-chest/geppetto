@@ -10,9 +10,10 @@
  */
 package com.puppetlabs.geppetto.pp.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.VirtualCollectQuery;
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

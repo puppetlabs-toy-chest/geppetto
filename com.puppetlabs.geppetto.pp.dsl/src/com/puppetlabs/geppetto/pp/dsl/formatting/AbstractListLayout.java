@@ -10,17 +10,17 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.formatting;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice.WhenToApply;
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.formatter.DomNodeLayoutFeeder;
 import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager.ILayoutContext;
 import com.puppetlabs.xtext.dommodel.formatter.LayoutUtils;
 import com.puppetlabs.xtext.textflow.ITextFlow;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
-
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author henrik

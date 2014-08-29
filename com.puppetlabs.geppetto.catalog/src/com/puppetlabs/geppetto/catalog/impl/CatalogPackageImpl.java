@@ -10,6 +10,12 @@
  */
 package com.puppetlabs.geppetto.catalog.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.puppetlabs.geppetto.catalog.Catalog;
 import com.puppetlabs.geppetto.catalog.CatalogEdge;
 import com.puppetlabs.geppetto.catalog.CatalogFactory;
@@ -18,13 +24,6 @@ import com.puppetlabs.geppetto.catalog.CatalogPackage;
 import com.puppetlabs.geppetto.catalog.CatalogResource;
 import com.puppetlabs.geppetto.catalog.CatalogResourceParameter;
 import com.puppetlabs.geppetto.catalog.Taggable;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

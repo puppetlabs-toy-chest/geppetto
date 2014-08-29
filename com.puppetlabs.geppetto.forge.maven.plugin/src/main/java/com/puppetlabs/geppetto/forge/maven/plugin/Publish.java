@@ -22,10 +22,10 @@ import java.util.Properties;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.forge.client.OAuthModule;
 
 import com.google.inject.Module;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.forge.client.OAuthModule;
 
 /**
  * Goal which performs basic validation.

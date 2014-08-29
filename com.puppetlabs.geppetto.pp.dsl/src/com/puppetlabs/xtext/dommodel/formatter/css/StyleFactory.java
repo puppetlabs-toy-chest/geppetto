@@ -12,13 +12,12 @@ package com.puppetlabs.xtext.dommodel.formatter.css;
 
 import java.util.Set;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
-import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
-
 import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.IDomNode.NodeType;
+import com.puppetlabs.xtext.dommodel.formatter.ILayoutManager;
 
 /**
  * An IStyleFacory implementation for Xtext IDomNode

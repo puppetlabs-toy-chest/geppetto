@@ -10,7 +10,10 @@
  */
 package com.puppetlabs.geppetto.pp.util;
 
-import com.puppetlabs.geppetto.pp.*;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
+
 import com.puppetlabs.geppetto.pp.AdditiveExpression;
 import com.puppetlabs.geppetto.pp.AndExpression;
 import com.puppetlabs.geppetto.pp.AppendExpression;
@@ -44,7 +47,10 @@ import com.puppetlabs.geppetto.pp.IfExpression;
 import com.puppetlabs.geppetto.pp.ImportExpression;
 import com.puppetlabs.geppetto.pp.InExpression;
 import com.puppetlabs.geppetto.pp.InterpolatedVariable;
+import com.puppetlabs.geppetto.pp.JavaLambda;
+import com.puppetlabs.geppetto.pp.Lambda;
 import com.puppetlabs.geppetto.pp.LiteralBoolean;
+import com.puppetlabs.geppetto.pp.LiteralClass;
 import com.puppetlabs.geppetto.pp.LiteralDefault;
 import com.puppetlabs.geppetto.pp.LiteralExpression;
 import com.puppetlabs.geppetto.pp.LiteralHash;
@@ -54,7 +60,9 @@ import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.LiteralRegex;
 import com.puppetlabs.geppetto.pp.LiteralUndef;
 import com.puppetlabs.geppetto.pp.MatchingExpression;
+import com.puppetlabs.geppetto.pp.MethodCall;
 import com.puppetlabs.geppetto.pp.MultiplicativeExpression;
+import com.puppetlabs.geppetto.pp.NamedAccessExpression;
 import com.puppetlabs.geppetto.pp.NodeDefinition;
 import com.puppetlabs.geppetto.pp.OrExpression;
 import com.puppetlabs.geppetto.pp.PPPackage;
@@ -65,8 +73,10 @@ import com.puppetlabs.geppetto.pp.RelationalExpression;
 import com.puppetlabs.geppetto.pp.RelationshipExpression;
 import com.puppetlabs.geppetto.pp.ResourceBody;
 import com.puppetlabs.geppetto.pp.ResourceExpression;
+import com.puppetlabs.geppetto.pp.RubyLambda;
 import com.puppetlabs.geppetto.pp.SelectorEntry;
 import com.puppetlabs.geppetto.pp.SelectorExpression;
+import com.puppetlabs.geppetto.pp.SeparatorExpression;
 import com.puppetlabs.geppetto.pp.ShiftExpression;
 import com.puppetlabs.geppetto.pp.SingleQuotedString;
 import com.puppetlabs.geppetto.pp.StringExpression;
@@ -74,15 +84,14 @@ import com.puppetlabs.geppetto.pp.TextExpression;
 import com.puppetlabs.geppetto.pp.UnaryExpression;
 import com.puppetlabs.geppetto.pp.UnaryMinusExpression;
 import com.puppetlabs.geppetto.pp.UnaryNotExpression;
+import com.puppetlabs.geppetto.pp.UnlessExpression;
 import com.puppetlabs.geppetto.pp.UnquotedString;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
 import com.puppetlabs.geppetto.pp.VirtualCollectQuery;
 import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.Switch;
+import com.puppetlabs.geppetto.pp.WithLambdaExpression;
 
 /**
  * <!-- begin-user-doc -->

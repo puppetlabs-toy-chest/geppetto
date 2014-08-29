@@ -12,6 +12,8 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter.css;
 
+import com.puppetlabs.xtext.dommodel.formatter.css.StyleFactory.AlignedSeparatorIndex;
+
 /**
  * Describes Horizontal Alignment
  */

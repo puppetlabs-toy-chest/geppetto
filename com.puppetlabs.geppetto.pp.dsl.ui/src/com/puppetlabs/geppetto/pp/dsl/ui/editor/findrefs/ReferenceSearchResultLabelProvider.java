@@ -12,13 +12,13 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.editor.findrefs;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.graphics.Image;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider;
 
 /**
  * A ReferenceSearchResultLabelProvider that provides styled text and uses an explicit PPDescriptionLabelProvider rather

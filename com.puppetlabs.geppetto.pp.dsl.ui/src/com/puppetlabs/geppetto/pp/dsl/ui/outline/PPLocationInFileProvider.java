@@ -10,11 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.outline;
 
-import com.puppetlabs.geppetto.pp.PPPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
+
+import com.puppetlabs.geppetto.pp.PPPackage;
 
 /**
  * Used to define the significant "short" locations for outline relevant elements.

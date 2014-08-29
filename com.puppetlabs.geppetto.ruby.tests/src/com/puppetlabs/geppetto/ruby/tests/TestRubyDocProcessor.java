@@ -14,11 +14,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import com.puppetlabs.geppetto.ruby.RubyDocProcessorSimple;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.puppetlabs.geppetto.ruby.RubyDocProcessorSimple;
 
 /**
  * @author henrik

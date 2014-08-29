@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.puppetlabs.graph.graphcss.IFunctionFactory;
 import com.puppetlabs.graph.graphcss.Rule;
 import com.puppetlabs.graph.graphcss.Select;
@@ -24,10 +27,6 @@ import com.puppetlabs.graph.style.LineType;
 import com.puppetlabs.graph.style.NodeShape;
 import com.puppetlabs.graph.style.VerticalAlignment;
 import com.puppetlabs.graph.style.themes.DefaultStyleTheme;
-
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 /**
  * Extends the default style theme with catalog graph specifics.

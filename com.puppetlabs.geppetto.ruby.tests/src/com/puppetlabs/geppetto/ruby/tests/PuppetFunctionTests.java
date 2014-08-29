@@ -17,10 +17,11 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 
-import com.puppetlabs.geppetto.ruby.PPFunctionInfo;
-import com.puppetlabs.geppetto.ruby.RubyHelper;
 import org.eclipse.core.runtime.Path;
 import org.junit.Test;
+
+import com.puppetlabs.geppetto.ruby.PPFunctionInfo;
+import com.puppetlabs.geppetto.ruby.RubyHelper;
 
 public class PuppetFunctionTests {
 

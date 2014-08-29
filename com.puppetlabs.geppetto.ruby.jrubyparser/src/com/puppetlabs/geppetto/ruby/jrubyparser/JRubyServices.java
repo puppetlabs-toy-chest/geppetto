@@ -19,14 +19,6 @@ import java.io.Reader;
 import java.util.List;
 import java.util.Map;
 
-import com.puppetlabs.geppetto.common.os.StreamUtil;
-import com.puppetlabs.geppetto.ruby.PPFunctionInfo;
-import com.puppetlabs.geppetto.ruby.PPTypeInfo;
-import com.puppetlabs.geppetto.ruby.RubySyntaxException;
-import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
-import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
-import com.puppetlabs.geppetto.ruby.spi.IRubyServices;
-import com.puppetlabs.geppetto.ruby.spi.IRubyServicesFactory;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.jrubyparser.CompatVersion;
@@ -43,6 +35,14 @@ import org.jrubyparser.parser.Ruby19Parser;
 import org.jrubyparser.parser.RubyParser;
 
 import com.google.common.collect.Lists;
+import com.puppetlabs.geppetto.common.os.StreamUtil;
+import com.puppetlabs.geppetto.ruby.PPFunctionInfo;
+import com.puppetlabs.geppetto.ruby.PPTypeInfo;
+import com.puppetlabs.geppetto.ruby.RubySyntaxException;
+import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
+import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
+import com.puppetlabs.geppetto.ruby.spi.IRubyServices;
+import com.puppetlabs.geppetto.ruby.spi.IRubyServicesFactory;
 
 public class JRubyServices implements IRubyServices {
 

@@ -12,11 +12,12 @@ package com.puppetlabs.xtext.dommodel.formatter;
 
 import java.util.Collections;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
 import com.puppetlabs.xtext.dommodel.IDomNode;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.ITextFlow;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  *

@@ -12,6 +12,9 @@ package com.puppetlabs.geppetto.pp.dsl.eval;
 
 import java.util.Collections;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
+
 import com.puppetlabs.geppetto.pp.AdditiveExpression;
 import com.puppetlabs.geppetto.pp.AndExpression;
 import com.puppetlabs.geppetto.pp.AtExpression;
@@ -38,8 +41,6 @@ import com.puppetlabs.geppetto.pp.UnaryNotExpression;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
 import com.puppetlabs.geppetto.pp.util.TextExpressionHelper;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * Evaluates Type of an expression.

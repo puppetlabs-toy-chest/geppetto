@@ -14,6 +14,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.pp.AppendExpression;
 import com.puppetlabs.geppetto.pp.AssignmentExpression;
 import com.puppetlabs.geppetto.pp.AttributeOperations;
@@ -54,18 +66,6 @@ import com.puppetlabs.xtext.dommodel.formatter.css.IStyleFactory;
 import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import com.puppetlabs.xtext.textflow.ITextFlow;
 import com.puppetlabs.xtext.textflow.MeasuredTextFlow;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
 
 /**
  * Semantic layouts for PP

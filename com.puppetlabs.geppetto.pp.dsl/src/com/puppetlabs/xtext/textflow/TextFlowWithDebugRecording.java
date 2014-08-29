@@ -12,10 +12,9 @@ package com.puppetlabs.xtext.textflow;
 
 import java.util.List;
 
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 
 /**
  * An implementation of ITextFlow that records and measures the appended content.

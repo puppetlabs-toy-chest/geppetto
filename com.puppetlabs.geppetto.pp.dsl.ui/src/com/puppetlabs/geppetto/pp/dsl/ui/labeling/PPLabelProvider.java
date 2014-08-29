@@ -12,6 +12,22 @@ package com.puppetlabs.geppetto.pp.dsl.ui.labeling;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.preference.JFacePreferences;
+import org.eclipse.jface.resource.ColorRegistry;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.graphics.TextStyle;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.AppendExpression;
 import com.puppetlabs.geppetto.pp.AtExpression;
 import com.puppetlabs.geppetto.pp.Definition;
@@ -37,22 +53,6 @@ import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapter;
 import com.puppetlabs.geppetto.pp.adapters.ClassifierAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
 import com.puppetlabs.geppetto.pp.pptp.Function;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.preference.JFacePreferences;
-import org.eclipse.jface.resource.ColorRegistry;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.StyledString.Styler;
-import org.eclipse.swt.graphics.TextStyle;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
-import org.eclipse.xtext.util.Strings;
-
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
  * Provides labels for a EObjects.

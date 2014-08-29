@@ -15,13 +15,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.puppetlabs.xtext.dommodel.IDomNode;
+import com.puppetlabs.xtext.dommodel.formatter.css.StyleSet;
 
 /**
  * Abstract implementation of IDomNode

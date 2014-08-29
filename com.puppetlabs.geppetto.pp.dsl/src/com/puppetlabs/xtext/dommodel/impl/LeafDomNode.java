@@ -12,9 +12,8 @@ package com.puppetlabs.xtext.dommodel.impl;
 
 import java.util.Iterator;
 
-import com.puppetlabs.xtext.dommodel.IDomNode;
-
 import com.google.common.collect.Iterators;
+import com.puppetlabs.xtext.dommodel.IDomNode;
 
 /**
  * A Leaf DomNode

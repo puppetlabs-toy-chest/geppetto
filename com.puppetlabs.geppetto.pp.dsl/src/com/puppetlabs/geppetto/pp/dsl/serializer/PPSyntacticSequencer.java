@@ -2,14 +2,14 @@ package com.puppetlabs.geppetto.pp.dsl.serializer;
 
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.ResourceBody;
-import com.puppetlabs.geppetto.pp.ResourceExpression;
-import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 
 import com.google.inject.Inject;
+import com.puppetlabs.geppetto.pp.ResourceBody;
+import com.puppetlabs.geppetto.pp.ResourceExpression;
+import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 
 public class PPSyntacticSequencer extends AbstractPPSyntacticSequencer {
 	@Inject

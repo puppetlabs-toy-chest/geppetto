@@ -2,6 +2,11 @@ package com.puppetlabs.geppetto.pp.dsl.serializer;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
+
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.AttributeOperation;
 import com.puppetlabs.geppetto.pp.AttributeOperations;
 import com.puppetlabs.geppetto.pp.Expression;
@@ -12,11 +17,6 @@ import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess.AttributeOperationsElements;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess.LiteralListElements;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess.SelectorExpressionElements;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-
-import com.google.inject.Inject;
 
 public class PPSemanticSequencer extends AbstractPPSemanticSequencer {
 

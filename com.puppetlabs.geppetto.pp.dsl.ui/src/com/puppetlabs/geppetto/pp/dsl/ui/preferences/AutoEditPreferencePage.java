@@ -10,9 +10,10 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.xtext.ui.editor.preferences.fields.CheckBoxGroupFieldEditor;
+
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 
 /**
  * A Preference pane for auto edit settings (insert of matches pairs [] {} () ...)

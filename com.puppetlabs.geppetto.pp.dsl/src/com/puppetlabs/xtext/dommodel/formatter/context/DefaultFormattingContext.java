@@ -10,7 +10,6 @@
  */
 package com.puppetlabs.xtext.dommodel.formatter.context;
 
-import com.puppetlabs.xtext.formatting.IPreferredMaxWidthInformation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
@@ -18,6 +17,7 @@ import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.puppetlabs.xtext.formatting.IPreferredMaxWidthInformation;
 
 /**
  * <p>

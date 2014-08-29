@@ -13,9 +13,8 @@ package com.puppetlabs.xtext.textflow;
 import java.io.IOException;
 import java.util.List;
 
-import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
-
 import com.google.inject.Inject;
+import com.puppetlabs.xtext.dommodel.formatter.context.IFormattingContext;
 
 /**
  * An abstract implementation of an ITextFlow.

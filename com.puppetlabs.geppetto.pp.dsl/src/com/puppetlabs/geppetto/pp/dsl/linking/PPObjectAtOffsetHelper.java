@@ -12,9 +12,9 @@ package com.puppetlabs.geppetto.pp.dsl.linking;
 
 import java.util.List;
 
-import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -25,6 +25,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
+
+import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapterFactory;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

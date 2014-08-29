@@ -17,10 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.puppetlabs.geppetto.common.os.FileUtils;
-import com.puppetlabs.geppetto.forge.model.NamedTypeItem;
-import com.puppetlabs.geppetto.forge.model.Type;
-
 import org.jrubyparser.ast.BlockAcceptingNode;
 import org.jrubyparser.ast.CallNode;
 import org.jrubyparser.ast.Colon2ConstNode;
@@ -34,6 +30,10 @@ import org.jrubyparser.ast.NodeType;
 import org.jrubyparser.ast.RootNode;
 import org.jrubyparser.ast.StrNode;
 import org.jrubyparser.ast.SymbolNode;
+
+import com.puppetlabs.geppetto.common.os.FileUtils;
+import com.puppetlabs.geppetto.forge.model.NamedTypeItem;
+import com.puppetlabs.geppetto.forge.model.Type;
 
 /**
  * @author thhal
