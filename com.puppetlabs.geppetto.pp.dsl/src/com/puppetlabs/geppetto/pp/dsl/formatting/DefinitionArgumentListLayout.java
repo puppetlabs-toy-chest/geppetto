@@ -155,8 +155,8 @@ public class DefinitionArgumentListLayout {
 				// spaceAfterEndComma.getStyles().add(StyleSet.withStyles(styles.oneLineBreak()));
 				//
 				// }
-				else if(ge == grammarAccess.getDefinitionArgumentAccess().getOpEqualsSignGreaterThanSignKeyword_1_0_1_0() ||
-					ge == grammarAccess.getDefinitionArgumentAccess().getOpEqualsSignKeyword_1_0_0_0()) {
+				else if(ge == grammarAccess.getDefinitionArgumentAccess().getOpEqualsSignGreaterThanSignKeyword_2_0_1_0() ||
+					ge == grammarAccess.getDefinitionArgumentAccess().getOpEqualsSignKeyword_2_0_0_0()) {
 					EObject semantic = n.getParent().getSemanticObject();
 					if(semantic != null && semantic instanceof DefinitionArgument) {
 						DefinitionArgument da = (DefinitionArgument) semantic;

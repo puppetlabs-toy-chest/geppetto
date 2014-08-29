@@ -14,6 +14,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.puppetlabs.geppetto.pp.DefinitionArgument;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPTask;
+import com.puppetlabs.geppetto.pp.pptp.PuppetType;
 
 /**
  * Constants for PP DSL
@@ -46,6 +47,11 @@ public interface PPDSLConstants {
 	 * Property key for Resource Properties. This key should refer to a Collection of {@link PPTask}.
 	 */
 	public static final String RESOURCE_PROPERTY__TASK_LIST = "com.puppetlabs.geppetto.pp.dsl.resource.taskList";
+
+	/**
+	 * Property key for Puppet Types. This key should refer to a Map of String => {@link PuppetType} associations.
+	 */
+	public static final String RESOURCE_PROPERTY__TYPE_MAP = "com.puppetlabs.geppetto.pp.dsl.resource.typeMap";
 
 	/**
 	 * If present in an {@link IEObjectDescription} for a PPTP Parameter data and set to true, then this

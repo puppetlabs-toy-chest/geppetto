@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pptp:PuppetDistribution xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pptp="http://www.puppetlabs.com/geppetto/1.0.0/PPTP" description="Puppet Types" version="1.0.0" label="Types">
+  <contents xsi:type="pptp:PuppetType" name="any" documentation="&lt;p>Represents the abstract type &quot;any instance&quot;.&lt;/p>" abstract="true"/>
+  <contents xsi:type="pptp:PuppetType" name="array" documentation="&lt;p>&lt;code>Array&lt;/code> represents an ordered collection of elements of type &lt;code>V&lt;/code>, optionally constrained in size by the integer range parameters &lt;em>from&lt;/em> and &lt;em>to&lt;/em>.&lt;/p>" superTypes="//@contents.7 //@contents.6">
+    <parameters name="V" documentation="The element type." required="true" type="//@contents.23"/>
+    <parameters name="from" documentation="Lower bound of array size constraint." type="//@contents.12"/>
+    <parameters name="to" documentation="Upper bound of array size constraint." type="//@contents.12"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="boolean" documentation="&lt;p>The types of the boolean expressions &lt;code>true&lt;/code> and &lt;code>false&lt;/code>.&lt;/p>" superTypes="//@contents.19"/>
+  <contents xsi:type="pptp:PuppetType" name="callable" documentation="&lt;p>&lt;code>Callable&lt;/code> is the type of callable elements; functions and lambdas. The &lt;code>Callable&lt;/code> type will typically not be used literally in the Puppet Language until there is support for functions written in the Puppet Language. &lt;code>Callable&lt;/code> is of importance for those who write functions in Ruby and want to type check lambdas that are given as arguments to functions in Ruby. They are also important in error messages when communicating why a given set of arguments do not match a signature.&lt;/p>" superTypes="//@contents.0">
+    <parameters name="params" documentation="The list of call parameter types." type="//@contents.23" varargs="true"/>
+    <parameters name="min" documentation="Minimum number of arguments. A min &lt; size(params) means that the difference is optional." type="//@contents.12" acceptDefault="true"/>
+    <parameters name="max" documentation="Maximum number of arguments. A max > size(params) means that the last type repeats until the given max cap number of arguments" type="//@contents.12" acceptDefault="true"/>
+    <parameters name="block_type" documentation="An optional Callable type that describes the block type." type="//@contents.23">
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.3"/>
+    </parameters>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="catalogEntry" documentation="&lt;p>Represents the abstract notion of &quot;something that is an entry in a puppet catalog&quot;. Its subtypes are &lt;code>Resource&lt;/code>, and &lt;code>Class&lt;/code>.&lt;/p>" abstract="true" superTypes="//@contents.0"/>
+  <contents xsi:type="pptp:PuppetType" name="class" documentation="&lt;p>Represents a Puppet (Host) Class. The &lt;code>Class&lt;/code> type is parameterized with the name of the class (&lt;code>String&lt;/code>, or Qualified Name).&lt;/p>" superTypes="//@contents.4">
+    <parameters name="class_name" documentation="The name of the class. If multiple class names are given, an &lt;code>Array&lt;/code> of parameterized &lt;code>Class&lt;/code> types is produced." required="true" type="//@contents.25" varargs="true">
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.20"/>
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.23">
+        <parameters xsi:type="pptp:TypeValue" value="//@contents.5"/>
+      </parameters>
+    </parameters>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="collection" documentation="&lt;p>A Collection is the common type for &lt;code>Array&lt;/code> and &lt;code>Hash&lt;/code> (and subtypes &lt;code>Tuple&lt;/code> and &lt;code>Struct&lt;/code>), it may optionally be parameterized with a size constraint (&lt;code>from&lt;/code> a min size to a &lt;code>max&lt;/code> size). The &lt;code>to&lt;/code> and &lt;code>from&lt;/code> parameters  are the same as for an &lt;code>Integer&lt;/code> range. The size constraint can also be specified with a single &lt;code>Integer&lt;/code> range parameter.&lt;/p>" abstract="true" superTypes="//@contents.0">
+    <parameters name="from" documentation="Lower bound of size constraint." type="//@contents.12"/>
+    <parameters name="to" documentation="Upper bound of size constraint." type="//@contents.12"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="data" documentation="&lt;q>Represents the abstract notion of &quot;data&quot;, its subtypes are &lt;code>Scalar&lt;/code>, and &lt;code>Array[Data]&lt;/code> or &lt;code>Hash[Scalar, Data]&lt;/code>. Further, arrays and hashes may be empty and contain &lt;code>Undef&lt;/code>. A hash element key may not be &lt;code>Undef&lt;/code>.&lt;/p>" abstract="true" superTypes="//@contents.0"/>
+  <contents xsi:type="pptp:PuppetType" name="default" documentation="&lt;p>The type of the expression &lt;code>default&lt;/code> is &lt;code>Default&lt;/code>. The &lt;code>Default&lt;/code> type is used to signal special behavior for various expressions in the language.&lt;/p>" superTypes="//@contents.0"/>
+  <contents xsi:type="pptp:PuppetType" name="enum" documentation="&lt;p>Represents all strings that are equal to one of the string type parameters given to the &lt;code>Enum&lt;/code> type.&lt;/p>" superTypes="//@contents.20">
+    <parameters name="strings" documentation="An enumerable set of string values. At least one string must be provided." required="true" type="//@contents.20" varargs="true"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="float" documentation="&lt;p>Represents a range of &lt;em>inexact&lt;/em> real number values. The default is the range +/- infinity.&lt;/p>" superTypes="//@contents.13">
+    <parameters name="from" documentation="The lower bound of the numeric range. Default is -Infinity." required="true" type="//@contents.13" acceptDefault="true"/>
+    <parameters name="to" documentation="The upper bound of the numeric range. Default is -Infinity." type="//@contents.13" acceptDefault="true"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="hash" documentation="&lt;p>&lt;code>Hash&lt;/code> represents an unordered collection of associations between a key (of &lt;code>K&lt;/code> type), and a value (of &lt;code>V&lt;/code> type), optionally constrained in size by the integer range parameters &lt;em>from&lt;/em> and &lt;em>to&lt;/em>.&lt;/p>" superTypes="//@contents.6 //@contents.7">
+    <parameters name="K" documentation="The type of the keys." required="true" type="//@contents.23"/>
+    <parameters name="V" documentation="The type of the values." type="//@contents.23"/>
+    <parameters name="from" documentation="Lower bound of size constraint." type="//@contents.12"/>
+    <parameters name="to" documentation="Upper bound of size constraint." type="//@contents.12"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="integer" documentation="&lt;p>Represents a range optional of integral numeric value. The default is the range +/- Infinity.&lt;/p>" superTypes="//@contents.13">
+    <parameters name="from" documentation="The lower bound of the integer range. Default is -Infinity" required="true" type="//@contents.12" acceptDefault="true"/>
+    <parameters name="to" documentation="The upper bound of the integer range. Default is -Infinity" type="//@contents.12" acceptDefault="true"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="numeric" documentation="&lt;p>Represents the abstract notion of &quot;number&quot;, its subtypes are &lt;code>Integer&lt;/code>, and &lt;code>Float&lt;/code>.&lt;/p>" abstract="true" superTypes="//@contents.19"/>
+  <contents xsi:type="pptp:PuppetType" name="optional" documentation="&lt;p>The &lt;code>Optional&lt;/code> type is parameterized with a single type. It represents the given type or Undef. An unparameterized &lt;code>Optional&lt;/code> represents nothing.&lt;/p>" superTypes="//@contents.0">
+    <parameters name="T" documentation="The type to make optional." required="true" type="//@contents.23"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="pattern" documentation="&lt;p>Represents all strings that match any of the given patterns (typically one pattern is used). The type parameters can be a string expression, literal regular expressions, &lt;code>Pattern&lt;/code> type, or &lt;code>Regexp&lt;/code> type (or a mix).&lt;/p>" superTypes="//@contents.20">
+    <parameters name="patterns" documentation="A string expression, literal expression, &lt;code>Pattern&lt;/code> type, or &lt;code>Regexp&lt;/code> type (or a mix)." required="true" type="//@contents.25" varargs="true">
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.20"/>
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.16"/>
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.23">
+        <parameters xsi:type="pptp:TypeValue" value="//@contents.15"/>
+      </parameters>
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.23">
+        <parameters xsi:type="pptp:TypeValue" value="//@contents.16"/>
+      </parameters>
+    </parameters>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="regexp" documentation="&lt;p>An unparameterized &lt;code>Regexp&lt;/code> describes the set of all regular expressions. A parameterized &lt;code>Regexp&lt;/code> describe the very narrow set of source expression identical regular expressions.&lt;/p>" superTypes="//@contents.19">
+    <parameters name="pattern" documentation="A string expression pr a regular expression pattern." required="true" type="//@contents.25">
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.20"/>
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.16"/>
+    </parameters>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="resource" documentation="&lt;p>Represents a &lt;em>Puppet Resource&lt;/em> (a resource managed by Puppet).&lt;/p>" superTypes="//@contents.4">
+    <parameters name="type_name" documentation="An Expression evaluating to a &lt;code>Resource&lt;/code> type, or a &lt;code>String&lt;/code> containing the name of the resource type (case insensitive)" required="true" type="//@contents.25">
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.20"/>
+      <parameters xsi:type="pptp:TypeValue" value="//@contents.23">
+        <parameters xsi:type="pptp:TypeValue" value="//@contents.17"/>
+      </parameters>
+    </parameters>
+    <parameters name="title" documentation="An optional list of titles where each title is an expression evaluating to a &lt;code>String&lt;/code> representing the title of a resource." type="//@contents.20" varargs="true"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="runtime" documentation="&lt;p>Represents a type in the platform's type system. The type parameter T must be of &lt;code>String&lt;/code> type and contain a valid string representation of the Ruby type. The referenced type does not have to exist; it is still a reference to a type (albeit a currently not existing type). The type must exist when operations are performed on the type (i.e. must be loadable).&lt;/p>" superTypes="//@contents.0">
+    <parameters name="runtime_name" documentation="The name of the runtime (currently only 'Ruby')" required="true" type="//@contents.20"/>
+    <parameters name="T" documentation="must be of &lt;code>String&lt;/code> type and contain a valid string representation of the runtime (e.g. Ruby) type." type="//@contents.20"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="scalar" documentation="&lt;p>Represents the abstract notion of &quot;value&quot;, its subtypes are &lt;code>Numeric&lt;/code>, &lt;code>String&lt;/code> (including subtypes &lt;code>Pattern&lt;/code>, and &lt;code>Enum&lt;/code>), &lt;code>Boolean&lt;/code>, and &lt;code>Regexp&lt;/code>.&lt;/p>" abstract="true" superTypes="//@contents.7 //@contents.0"/>
+  <contents xsi:type="pptp:PuppetType" name="string" documentation="&lt;p>Represents a sequence of Unicode characters up to a maximum length of 2^31-1 (the maximum non negative 32 bit value).&lt;/p>" superTypes="//@contents.19">
+    <parameters name="from" documentation="The lower bound of the string length. Default is -Infinity" required="true" type="//@contents.12" acceptDefault="true"/>
+    <parameters name="to" documentation="The upper bound of the string length. Default is -Infinity" type="//@contents.12" acceptDefault="true"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="struct" namedParameters="true" documentation="&lt;p>The &lt;code>Struct&lt;/code> type fully specifies the content of a &lt;code>Hash&lt;/code>. The type is parameterized with a hash where the keys must be non empty strings, and the values must be types.&lt;/p>" superTypes="//@contents.11">
+    <parameters name="hash" documentation="A hash where the keys must be non empty strings, and the values must be types." required="true" namevar="true" type="//@contents.23" varargs="true"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="tuple" documentation="&lt;p>The &lt;code>Tuple&lt;/code> type fully specifies the content of an &lt;code>Array&lt;/code>. It is to &lt;code>Array&lt;/code> what &lt;code>Struct&lt;/code> is to &lt;code>Hash&lt;/code>, with entries identified by their position instead of by name. A variable number of optional and trailing entries can also be specified.&lt;/p>" superTypes="//@contents.1">
+    <parameters name="types" documentation="A list of types. One for each element in the tuple." required="true" type="//@contents.23" varargs="true"/>
+    <parameters name="from" documentation="Minimum number of elements. A from &lt; size(types) means that the difference is optional." type="//@contents.12" acceptDefault="true"/>
+    <parameters name="to" documentation="Maximum number of elements. A to > size(types) means that the last type repeats until the given max cap number of elements." type="//@contents.12" acceptDefault="true"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="type" documentation="&lt;p>&lt;code>Type&lt;/code> is the type of types. It is parameterized by the type e.g the type of &lt;code>String&lt;/code> is &lt;code>Type[String]&lt;/code>. Consequently, the type of &lt;code>Type[String]&lt;/code> is &lt;code>Type[Type[String]]&lt;/code>, and so on until infinity.&lt;/p>" superTypes="//@contents.0">
+    <parameters name="T" documentation="The type that the type represents." required="true" type="//@contents.23"/>
+  </contents>
+  <contents xsi:type="pptp:PuppetType" name="undef" documentation="&lt;p>Represents the notion of &quot;missing value&quot;. &lt;code>Undef&lt;/code> is the type of the expression &lt;code>undef&lt;/code>.&lt;/p>" superTypes="//@contents.0 //@contents.19"/>
+  <contents xsi:type="pptp:PuppetType" name="variant" documentation="&lt;p>A &lt;code>Variant&lt;/code> type represents a disjunct set of types. (Other terms used for this in other languages are Discrimination Union, Disjoint Union, Variant Record, Tagged Union).&lt;/p>" superTypes="//@contents.0">
+    <parameters name="types" documentation="The list of types that this variant represents." required="true" type="//@contents.23" varargs="true"/>
+  </contents>
+</pptp:PuppetDistribution>

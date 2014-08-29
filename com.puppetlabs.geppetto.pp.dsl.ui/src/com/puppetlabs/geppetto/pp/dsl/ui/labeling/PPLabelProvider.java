@@ -322,7 +322,8 @@ public class PPLabelProvider extends DefaultEObjectLabelProvider implements IIco
 		StyledString label = new StyledString();
 
 		Object name = doGetText(ele.getResourceExpr());
-		appendStyled(label, name);
+		if(name != null)
+			appendStyled(label, name);
 
 		final EList<ResourceBody> bodyList = ele.getResourceData();
 		final int bodyListSize = bodyList.size();

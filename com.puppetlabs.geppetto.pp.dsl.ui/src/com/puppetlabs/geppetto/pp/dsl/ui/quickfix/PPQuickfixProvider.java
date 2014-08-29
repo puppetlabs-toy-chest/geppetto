@@ -300,7 +300,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 		return result.toString();
 	}
 
-	@Fix(IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE_PROP)
+	@Fix(IPPDiagnostics.ISSUE__UNKNOWN_CLASS_PROP)
 	public void findClosestClassName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		proposeDataAsChangeTo(issue, acceptor);
 	}
@@ -312,6 +312,16 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_PROPERTY_PROP)
 	public void findClosestParameters(final Issue issue, IssueResolutionAcceptor acceptor) {
+		proposeDataAsChangeTo(issue, acceptor);
+	}
+
+	@Fix(IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE_PROP)
+	public void findClosestResourceTypeName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		proposeDataAsChangeTo(issue, acceptor);
+	}
+
+	@Fix(IPPDiagnostics.ISSUE__UNKNOWN_TYPE_PROP)
+	public void findClosestTypeName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		proposeDataAsChangeTo(issue, acceptor);
 	}
 
@@ -433,7 +443,7 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 			"Change the name to '" + tmp + "'", null, new ReplacingModification(issue.getOffset(), issue.getLength(), tmp));
 	}
 
-	@Fix(IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE)
+	@Fix(IPPDiagnostics.ISSUE__AMBIGUOUS_REFERENCE)
 	public void makeReferenceAbsolute(final Issue issue, IssueResolutionAcceptor acceptor) {
 		String data[] = issue.getData();
 		if(data == null)

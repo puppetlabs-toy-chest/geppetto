@@ -148,6 +148,11 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public boolean allowSeparatorExpression();
 
 	/**
+	 * @return wether or not type definitions are allowed (introduced in Puppet 4.x)
+	 */
+	public boolean allowTypeDefinitions();
+
+	/**
 	 * The "unless" statement was added in Puppet 3.0.
 	 *
 	 * @return

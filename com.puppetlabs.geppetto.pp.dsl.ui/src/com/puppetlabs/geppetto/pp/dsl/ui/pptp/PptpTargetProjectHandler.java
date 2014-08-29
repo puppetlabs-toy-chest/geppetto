@@ -56,6 +56,19 @@ public class PptpTargetProjectHandler {
 	private final static Logger log = Logger.getLogger(PptpTargetProjectHandler.class);
 
 	/**
+	 * @param prefix
+	 * @param monitor
+	 */
+	private void clearTargetPrefix(IProject targetProject, String prefix, IProgressMonitor monitor) throws CoreException {
+		// delete all prefix-* resources already there (either none, or some other/older .pptp)
+		// this makes it possible to keep several that are not managed
+		for(IResource r : targetProject.members()) {
+			if(r.getName().startsWith(prefix))
+				r.delete(IResource.FORCE | IResource.ALWAYS_DELETE_PROJECT_CONTENT, monitor);
+		}
+	}
+
+	/**
 	 * Ensures that all projects with the PuppetNature has a dependency on the project
 	 * defining the target platform.
 	 * Calls {@link #ensureTargetProjectConfiguration()} if the target project is not created.
@@ -99,62 +112,70 @@ public class PptpTargetProjectHandler {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		// While developing, keep this here to enable removal of hidden project in safe way
 		IProject oldTargetProject = workspace.getRoot().getProject(PPUiConstants.OLD_PPTP_TARGET_PROJECT_NAME);
-		if(oldTargetProject.exists())
+		SubMonitor submon = SubMonitor.convert(monitor, 60);
+		try {
+			if(oldTargetProject.exists())
+				try {
+					oldTargetProject.delete(true, submon.newChild(10));
+				}
+				catch(CoreException e) {
+					// ignore
+				}
+
+			IProject targetProject = workspace.getRoot().getProject(PPUiConstants.PPTP_TARGET_PROJECT_NAME);
+
+			// make sure project exists
+			if(!targetProject.exists()) {
+				try {
+					// TODO: Aaaargh: hidden projects are not built, needs to be hidden by using a name starting with "."
+					// create (and hide it), and set natures
+					// If not hidden this way, it may be displayed (and there is a race with setting it hidden
+					// using setHidden(true). This avoids the race.
+					// targetProject.create(null, IResource.HIDDEN, monitor);
+					targetProject.create(submon.newChild(10));
+				}
+				catch(CoreException e) {
+					log.error("Could not create target platform project.", e);
+					return;
+				}
+			}
+
+			// make sure project is open
 			try {
-				oldTargetProject.delete(true, monitor);
+				if(!targetProject.isAccessible())
+					targetProject.open(submon.newChild(10));
 			}
 			catch(CoreException e) {
-				// ignore
+				log.error("Could not open target project!", e);
 			}
 
-		IProject targetProject = workspace.getRoot().getProject(PPUiConstants.PPTP_TARGET_PROJECT_NAME);
-
-		// make sure project exists
-		if(!targetProject.exists()) {
+			// make sure it is configured with the correct natures
 			try {
-				// TODO: Aaaargh: hidden projects are not built, needs to be hidden by using a name starting with "."
-				// create (and hide it), and set natures
-				// If not hidden this way, it may be displayed (and there is a race with setting it hidden
-				// using setHidden(true). This avoids the race.
-				// targetProject.create(null, IResource.HIDDEN, monitor);
-				targetProject.create(monitor);
+				targetProject.setHidden(false);
+				IProjectDescription desc = targetProject.getDescription();
+				desc.setNatureIds(new String[] { XtextProjectHelper.NATURE_ID, PPUiConstants.PUPPET_NATURE_ID });
+				targetProject.setDescription(desc, submon.newChild(10));
 			}
 			catch(CoreException e) {
-				log.error("Could not create target platform project.", e);
-				return;
+				log.error("Failed to configure target project", e);
 			}
-		}
 
-		// make sure project is open
-		try {
-			if(!targetProject.isAccessible())
-				targetProject.open(monitor);
-		}
-		catch(CoreException e) {
-			log.error("Could not open target project!", e);
-		}
+			PuppetTarget target;
 
-		// make sure it is configured with the correct natures
-		try {
-			targetProject.setHidden(false);
-			IProjectDescription desc = targetProject.getDescription();
-			desc.setNatureIds(new String[] { XtextProjectHelper.NATURE_ID, PPUiConstants.PUPPET_NATURE_ID });
-			targetProject.setDescription(desc, monitor);
+			try {
+				target = preferenceHelper.get().getPuppetTarget();
+			}
+			catch(IllegalArgumentException e) {
+				log.error(e.getMessage());
+				target = PuppetTarget.getDefault();
+			}
+			sync(targetProject, target.getPlatformURI(), "puppet-", submon.newChild(10));
+			sync(targetProject, target.getTypesURI(), "types-", submon.newChild(10));
+			sync(targetProject, PptpResourceUtil.getFacter_1_6(), "facter-", submon.newChild(10));
 		}
-		catch(CoreException e) {
-			log.error("Failed to configure target project", e);
+		finally {
+			monitor.done();
 		}
-
-		URI uri;
-		try {
-			uri = preferenceHelper.get().getPuppetTarget().getPlatformURI();
-		}
-		catch(IllegalArgumentException e) {
-			log.error(e.getMessage());
-			uri = PuppetTarget.getDefault().getPlatformURI();
-		}
-		sync(targetProject, uri, "puppet-", monitor);
-		sync(targetProject, PptpResourceUtil.getFacter_1_6(), "facter-", monitor);
 	}
 
 	public void initializePuppetTargetProject() {
@@ -189,29 +210,29 @@ public class PptpTargetProjectHandler {
 		job.schedule();
 	}
 
-	private void sync(IProject targetProject, URI uri, String prefix, IProgressMonitor monitor) {
+	private void sync(IProject targetProject, URI uri, String prefix, SubMonitor monitor) {
 		// get a handle to the wanted target platform (.pptp) file from preferences
 		//
+		monitor.setWorkRemaining(40);
 		try {
-			targetProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-			File pptpFile = bundleAccess.getResourceAsFile(new URL(uri.toString()));
-			IFile targetFile = targetProject.getFile(pptpFile.getName());
-			if(targetFile.exists()) {
-				if(pptpFile.lastModified() > targetFile.getLocalTimeStamp()) {
-					targetFile.delete(IResource.FORCE | IResource.ALWAYS_DELETE_PROJECT_CONTENT, monitor);
-					targetFile.refreshLocal(IResource.DEPTH_ZERO, monitor);
-					targetFile.create(new FileInputStream(pptpFile), true, monitor);
-				}
-			}
+			targetProject.refreshLocal(IResource.DEPTH_INFINITE, monitor.newChild(10));
+			if(uri == null)
+				clearTargetPrefix(targetProject, prefix, monitor.newChild(10));
 			else {
-				// delete all prefix-* resources already there (either none, or some other/older .pptp)
-				// this makes it possible to keep several that are not managed
-				for(IResource r : targetProject.members()) {
-					if(r.getName().startsWith(prefix))
-						r.delete(IResource.FORCE | IResource.ALWAYS_DELETE_PROJECT_CONTENT, monitor);
+				File pptpFile = bundleAccess.getResourceAsFile(new URL(uri.toString()));
+				IFile targetFile = targetProject.getFile(pptpFile.getName());
+				if(targetFile.exists()) {
+					if(pptpFile.lastModified() > targetFile.getLocalTimeStamp()) {
+						targetFile.delete(IResource.FORCE | IResource.ALWAYS_DELETE_PROJECT_CONTENT, monitor.newChild(10));
+						targetFile.refreshLocal(IResource.DEPTH_ZERO, monitor.newChild(10));
+						targetFile.create(new FileInputStream(pptpFile), true, monitor.newChild(10));
+					}
 				}
-				InputStream inputStream = new FileInputStream(pptpFile);
-				targetFile.create(inputStream, true, monitor);
+				else {
+					clearTargetPrefix(targetProject, prefix, monitor.newChild(10));
+					InputStream inputStream = new FileInputStream(pptpFile);
+					targetFile.create(inputStream, true, monitor.newChild(10));
+				}
 			}
 		}
 		catch(IOException e) {

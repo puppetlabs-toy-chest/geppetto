@@ -423,7 +423,9 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 			"File", NOTITLE, "owner", createValue("0777"), "group", createValue("0666"), "other", createValue("0555"));
 		// swap the created LiteralNameOrReference for an AtExpression with faulty leftExpr
 		reRef = pf.createAtExpression();
-		reRef.setLeftExpr(pf.createLiteralDefault());
+		LiteralNameOrReference noRef = pf.createLiteralNameOrReference();
+		noRef.setValue("::foo");
+		reRef.setLeftExpr(noRef);
 		re.setResourceExpr(reRef);
 		// add a parameter (use of a default here is just because it requires no further value setting :)
 		reRef.getParameters().add(pf.createLiteralDefault());

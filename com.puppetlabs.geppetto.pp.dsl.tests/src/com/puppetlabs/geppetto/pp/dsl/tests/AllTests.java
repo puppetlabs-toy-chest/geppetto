@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestWsAndComments.class,
 	TestPuppetResourceExpr.class,
 	TestLiterals.class,
+	TestTypes.class,
 	TestExpressions.class,
 	TestFutureExpressions.class,
 	TestCollectExpression.class,

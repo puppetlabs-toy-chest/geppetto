@@ -41,6 +41,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//DefinitionArgumentList/arguments"/>
     </genClasses>
     <genClasses ecoreClass="PP.ecore#//DefinitionArgument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PP.ecore#//DefinitionArgument/puppetType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PP.ecore#//DefinitionArgument/argName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//DefinitionArgument/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PP.ecore#//DefinitionArgument/op"/>

@@ -77,7 +77,7 @@ import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Raketask;
 public class DirectoryValidator {
 	private static boolean isOnPath(File f, PPSearchPath searchPath) {
 
-		return -1 != searchPath.searchIndexOf(URI.createFileURI(f.getPath()));
+		return searchPath.searchIndexOf(URI.createFileURI(f.getPath())) >= 0;
 	}
 
 	private static final String NAME_OF_DIR_WITH_RESTRICTED_SCOPE = "roles";

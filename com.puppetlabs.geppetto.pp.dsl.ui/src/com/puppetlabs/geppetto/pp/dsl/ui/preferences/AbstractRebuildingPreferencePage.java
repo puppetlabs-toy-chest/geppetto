@@ -10,12 +10,11 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 
-import com.puppetlabs.geppetto.pp.dsl.ui.builder.PPBuildJob;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 
 /**
@@ -23,6 +22,9 @@ import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferenceP
  * changed, and if so, triggers a clean build of the project.
  */
 public abstract class AbstractRebuildingPreferencePage extends AbstractPreferencePage {
+
+	@Inject
+	private RebuildChecker rebuildChecker;
 
 	private IPropertyChangeListener rebuildListener;
 
@@ -50,7 +52,7 @@ public abstract class AbstractRebuildingPreferencePage extends AbstractPreferenc
 					@Override
 					public void propertyChange(PropertyChangeEvent event) {
 						if(getPreferenceId().equals(event.getProperty()))
-							new PPBuildJob((IProject) getElement()).schedule();
+							rebuildChecker.triggerBuild();
 					}
 				};
 			}

@@ -114,6 +114,10 @@ public class PPSearchPath {
 		return new PPSearchPath(p, rootDirectory);
 	}
 
+	public static final int NOT_FOUND = -2;
+
+	public static final int FOUND_IN_TPTP = -1;
+
 	public static final String DEFAULT_MANIFEST_DIR = "manifests"; //$NON-NLS-1$
 
 	public static final String DEFAULT_PUPPET_ENVIRONMENT = "production"; //$NON-NLS-1$
@@ -167,28 +171,26 @@ public class PPSearchPath {
 	}
 
 	/**
-	 * Computes the path position of the given URI, or -1 if not found.
-	 * The pptp is always on the search path with index 0. TODO: This is wrong!
-	 * It is only the distro path that is on 0, other pptp contributions are subject to filtering (i.e.
-	 * ruby code).
+	 * Computes the path position of the given URI, or {@link #NOT_FOUND} if not found. Things contributed by the
+	 * distribution will be on index 0 except pptp contributions that use the negative index {@link #FOUND_IN_TPTP}.
 	 *
 	 * @param uri
-	 * @return search path index or -1 if not found
+	 *            The URI to search for
+	 * @return search path index >= 0 or one of the negative values {@link #FOUND_IN_TPTP} or {@link #NOT_FOUND}
 	 */
 	public int searchIndexOf(URI uri) {
 		String uriPath = uri.path();
 		IPath p = new Path(uriPath);
 		if("pptp".equals(p.getFileExtension()))
-			return 0; // All pptp are searched first - ALWAYS
+			return FOUND_IN_TPTP; // All pptp are searched first - ALWAYS
 		if(uri.isPlatformResource())
 			p = p.removeFirstSegments(2);
 		for(int idx = 0; idx < searchPath.size(); idx++) {
 			IPath q = searchPath.get(idx);
 			if(isMatch(p, q))
 				return idx + 1;
-
 		}
-		return -1;
+		return NOT_FOUND;
 	}
 
 	@Override

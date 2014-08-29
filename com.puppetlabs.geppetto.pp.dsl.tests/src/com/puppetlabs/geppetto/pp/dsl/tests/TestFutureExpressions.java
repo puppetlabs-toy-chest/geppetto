@@ -10,7 +10,7 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
-import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.junit.Test;
 
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
@@ -47,7 +47,7 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 	@Test
 	public void test_Parse_MatchingExpression() throws Exception {
 		String code = "$::a =~ Array[Integer]\n";
-		XtextResource r = getResourceFromString(code);
+		Resource r = loadAndLinkSingleResource(code);
 		String s = serialize(r.getContents().get(0));
 		assertEquals("serialization should produce same result", code, s);
 	}

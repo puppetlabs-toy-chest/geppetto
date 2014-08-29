@@ -11,6 +11,7 @@
 package com.puppetlabs.geppetto.pp.dsl.adapters;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.puppetlabs.geppetto.pp.pptp.Type;
 
@@ -35,6 +36,14 @@ public class ClassifierAdapter extends AdapterImpl {
 
 	public static final int COLLECTOR_IS_REGULAR = 5;
 
+	public static final int CLASS_REFERENCE = 6;
+
+	public static final int PUPPET_TYPE = 7;
+
+	public static final int RESOURCE_TYPE = 8;
+
+	public static final int USER_DEFINED_RESOURCE_TYPE = 9;
+
 	// Default size seems to be 10 slots - which is overkill
 	private int classifier = UNKNOWN;
 
@@ -42,11 +51,7 @@ public class ClassifierAdapter extends AdapterImpl {
 
 	private String resourceTypeName;
 
-	/**
-	 * Type of this parameter is determined by usage (typically an xtext.IEObjectDescription) but it
-	 * is determined by a linking service.
-	 */
-	private Object targetObjectDescription;
+	private IEObjectDescription targetObjectDescription;
 
 	/**
 	 * Gets a Type set in the adapter for the given key, or null if no type have been
@@ -70,7 +75,7 @@ public class ClassifierAdapter extends AdapterImpl {
 		return resourceTypeName;
 	}
 
-	public Object getTargetObjectDescription() {
+	public IEObjectDescription getTargetObjectDescription() {
 		return targetObjectDescription;
 	}
 
@@ -117,9 +122,9 @@ public class ClassifierAdapter extends AdapterImpl {
 
 	/**
 	 * @param targetObjectDescription
-	 *            - typically an Xtext IEObjectDescription referencing a link target
+	 *            - an Xtext IEObjectDescription referencing a link target
 	 */
-	public void setTargetObject(Object targetObjectDescription) {
+	public void setTargetObject(IEObjectDescription targetObjectDescription) {
 		this.targetObjectDescription = targetObjectDescription;
 	}
 

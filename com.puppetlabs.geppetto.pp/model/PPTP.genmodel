@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2013 Puppet Labs, Inc. and other contributors, as listed below.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Puppet Labs"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2013 Puppet Labs, Inc. and other contributors, as listed below.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Puppet Labs&#xA;"
     modelDirectory="/com.puppetlabs.geppetto.pp/src-gen" editDirectory="" editorDirectory=""
     modelPluginID="com.puppetlabs.geppetto.pp" modelName="PPTP" editPluginClass="com.puppetlabs.geppetto.pp.provider.PuppetEditPlugin"
     codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
@@ -59,5 +59,30 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//ITargetElementContainer/contents"/>
     </genClasses>
     <genClasses ecoreClass="PPTP.ecore#//MetaVariable"/>
+    <genClasses ecoreClass="PPTP.ecore#//PuppetType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//PuppetType/abstract"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//PuppetType/parameters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PPTP.ecore#//PuppetType/superTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//PuppetTypeParameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PPTP.ecore#//PuppetTypeParameter/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//PuppetTypeParameter/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//PuppetTypeParameter/acceptDefault"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//PuppetTypeParameter/varargs"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="PPTP.ecore#//ParameterValue">
+      <genOperations ecoreOperation="PPTP.ecore#//ParameterValue/getParameterValue"/>
+    </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//StringValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//StringValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//TypeReferenceValue"/>
+    <genClasses ecoreClass="PPTP.ecore#//IntegerValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//IntegerValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//TypeValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PPTP.ecore#//TypeValue/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TypeValue/parameters"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
