@@ -41,8 +41,7 @@ import java.util.HashMap;
   private boolean isReAcceptable() {
   	if(singleQuotedString || doubleQuotedString)
   		return false;
-  	// accept after ',' 'node', '{','}, '=~', '!~'
-  	switch(lastSignificantToken) {
+   	switch(lastSignificantToken) {
   		// NOTE: Must manually make sure these refer to the correct KEYWORD numbers
   		case KW_COMMA       : // ','
   		case KW_NODE        : // 'node'
@@ -51,6 +50,13 @@ import java.util.HashMap;
   		case KW_MATCHES     : // '=~'
   		case KW_NOT_MATCHES : // '!~'
   		case KW_INHERITS    : // 'inherits'
+  		case KW_FARROW      : // '=>'
+  		case KW_LBRACK      : // '['
+  		case KW_LPAR        : // '('
+  		case KW_QMARK       : // '?'
+  		case KW_EQ          : // '='
+  		case KW_EQUALS      : // '=='
+  		case KW_NOT_EQ      : // '!='
   		case 0 : // nothing seen before, used when serializing
   			return true;
   		default:
