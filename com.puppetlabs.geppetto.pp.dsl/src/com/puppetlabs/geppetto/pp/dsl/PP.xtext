@@ -521,10 +521,8 @@ LiteralHash returns pp::LiteralHash
 		'}' 
 	;
 
-// Use LiteralNameOrString to get different literals (to preserve quotes) as opposed to just the token value.
-// TODO: Check constraints on LiteralNameOrString is ${name::name} allowed ?
 HashEntry returns pp::HashEntry
-	: key = LiteralNameOrString '=>'  value = AssignmentExpression
+	: key = AssignmentExpression '=>'  value = AssignmentExpression
 	;
 
 // TODO: Check constraints on LiteralNameOrString is ${name::name} allowed ?
