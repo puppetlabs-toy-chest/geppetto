@@ -61,6 +61,7 @@
     <genClasses ecoreClass="PPTP.ecore#//MetaVariable"/>
     <genClasses ecoreClass="PPTP.ecore#//PuppetType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//PuppetType/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//PuppetType/namedParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//PuppetType/parameters"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PPTP.ecore#//PuppetType/superTypes"/>
     </genClasses>
@@ -70,13 +71,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//PuppetTypeParameter/acceptDefault"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//PuppetTypeParameter/varargs"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="PPTP.ecore#//ParameterValue">
-      <genOperations ecoreOperation="PPTP.ecore#//ParameterValue/getParameterValue"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="PPTP.ecore#//ParameterValue"/>
     <genClasses ecoreClass="PPTP.ecore#//StringValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//StringValue/value"/>
     </genClasses>
     <genClasses ecoreClass="PPTP.ecore#//TypeReferenceValue"/>
+    <genClasses ecoreClass="PPTP.ecore#//FloatValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//FloatValue/value"/>
+    </genClasses>
     <genClasses ecoreClass="PPTP.ecore#//IntegerValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//IntegerValue/value"/>
     </genClasses>
@@ -84,5 +86,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PPTP.ecore#//TypeValue/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TypeValue/parameters"/>
     </genClasses>
+    <genClasses ecoreClass="PPTP.ecore#//RegexpValue"/>
+    <genClasses ecoreClass="PPTP.ecore#//NamedTypeValue"/>
   </genPackages>
 </genmodel:GenModel>

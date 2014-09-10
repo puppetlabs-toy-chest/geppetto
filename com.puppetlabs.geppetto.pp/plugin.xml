@@ -25,7 +25,6 @@
       <!-- @generated PPTP -->
       <package
             uri="http://www.puppetlabs.com/geppetto/1.0.0/PPTP"
-            class="com.puppetlabs.geppetto.pp.pptp.PPTPPackage"
-            genModel="model/PPTP.genmodel"/>
+            class="com.puppetlabs.geppetto.pp.pptp.PPTPPackage"/>
    </extension>
 </plugin>

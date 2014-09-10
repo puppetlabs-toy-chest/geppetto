@@ -228,7 +228,7 @@ public class PPProposalProvider extends AbstractPPProposalProvider {
 
 				// Either a default setting Type { } or instance type { }, in both cases propose all properties and parameters
 				// including meta
-				IEObjectDescription desc = (IEObjectDescription) adapter.getTargetObjectDescription();
+				IEObjectDescription desc = adapter.getTargetObjectDescription();
 				if(desc != null) {
 					// the type is known
 					// which attribute(s) are we trying to find.
