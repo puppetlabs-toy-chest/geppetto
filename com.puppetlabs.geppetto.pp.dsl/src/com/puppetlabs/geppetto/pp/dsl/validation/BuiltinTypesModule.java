@@ -747,19 +747,19 @@ public class BuiltinTypesModule extends AbstractModule {
 			return false;
 		}
 
-		private boolean compareTypes(TypeValue a, TypeValue b) {
-			if(!a.getValue().getName().equals(b.getValue().getName()))
+		private boolean compareTypes(TypeValue expected, TypeValue actual) {
+			if(!expected.getValue().getName().equals(actual.getValue().getName()))
 				return false;
 
-			List<ParameterValue> argsA = a.getParameters();
-			List<ParameterValue> argsB = b.getParameters();
-			if(argsA.size() != argsB.size())
+			List<ParameterValue> expectedArgs = expected.getParameters();
+			List<ParameterValue> actualArgs = actual.getParameters();
+			if(expectedArgs.size() > actualArgs.size())
 				return false;
 
-			nextA: for(ParameterValue argA : argsA) {
-				for(ParameterValue argB : argsB)
-					if(compareParams(argA, argB))
-						continue nextA;
+			nextExpected: for(ParameterValue expectedArg : expectedArgs) {
+				for(ParameterValue actualArg : actualArgs)
+					if(compareParams(expectedArg, actualArg))
+						continue nextExpected;
 				return false;
 			}
 			return true;

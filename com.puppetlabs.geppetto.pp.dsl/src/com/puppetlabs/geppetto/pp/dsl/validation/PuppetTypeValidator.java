@@ -512,19 +512,17 @@ public class PuppetTypeValidator {
 
 	public void getParameters(AtExpression expr, List<ParameterValue> paramValues, boolean useNamedParameters)
 			throws ParameterizedTypeCreationException {
-		List<Expression> params = expr.getParameters();
+		List<? extends EObject> params = expr.getParameters();
 		if(useNamedParameters) {
 			if(params.size() != 1)
 				throw new ParameterizedTypeCreationException("Expected exactly one parameter");
-			Expression hash = params.get(0);
+			EObject hash = params.get(0);
 			if(!(hash instanceof LiteralHash))
 				throw new ParameterizedTypeCreationException("Expected parameter to be a hash literal");
-			for(HashEntry entry : ((LiteralHash) hash).getElements())
-				paramValues.add(getParameter(entry));
+			params = ((LiteralHash) hash).getElements();
 		}
-		else
-			for(Expression param : expr.getParameters())
-				paramValues.add(getParameter(param));
+		for(EObject param : params)
+			paramValues.add(getParameter(param));
 	}
 
 	public IEObjectDescription getReferencedObject(EObject expr) {
