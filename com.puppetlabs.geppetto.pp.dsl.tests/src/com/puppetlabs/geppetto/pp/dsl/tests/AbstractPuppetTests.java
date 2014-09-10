@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -36,6 +38,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -89,7 +92,11 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 				@Override
 				public XtextResourceSet get() {
 					XtextResourceSet resourceSet = new SynchronizedXtextResourceSet();
-					resourceSet.getResource(PuppetTarget.forComplianceLevel(getComplianceLevel(), false).getPlatformURI(), true);
+					PuppetTarget target = PuppetTarget.forComplianceLevel(getComplianceLevel(), false);
+					resourceSet.getResource(target.getPlatformURI(), true);
+					URI typesURI = target.getTypesURI();
+					if(typesURI != null)
+						resourceSet.getResource(typesURI, true);
 					return resourceSet;
 				}
 			};
@@ -298,6 +305,15 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 
 	protected ResourceExpression createVirtualResourceExpression(String type, String title, Object... keyValPairs) {
 		return createResourceExpression(true, false, type, title, keyValPairs);
+	}
+
+	protected AssertableResourceDiagnostics diagnostics(ListBasedDiagnosticConsumer c) {
+		List<Diagnostic> warnings = c.getResult(Severity.WARNING);
+		List<Diagnostic> errors = c.getResult(Severity.ERROR);
+		List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> sum = Lists.newArrayListWithCapacity(errors.size() + warnings.size());
+		sum.addAll(warnings);
+		sum.addAll(errors);
+		return new AssertableResourceDiagnostics(sum);
 	}
 
 	protected ComplianceLevel getComplianceLevel() {

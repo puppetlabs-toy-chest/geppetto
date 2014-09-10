@@ -179,7 +179,7 @@ public class PPProposalsGenerator {
 				continue;
 			}
 			// filter based on path visibility
-			if(searchPath.searchIndexOf(d) == -1)
+			if(searchPath.searchIndexOf(d) == PPSearchPath.NOT_FOUND)
 				continue; // not visible according to path
 
 			String candidateName = converter.toString(d.getName());
@@ -244,7 +244,7 @@ public class PPProposalsGenerator {
 			// find all that start with className and are properties or parameters
 			// also find the class/definition itself (possibly ambiguous).
 			for(IEObjectDescription d : descs) {
-				if(searchPath.searchIndexOf(d) == -1)
+				if(searchPath.searchIndexOf(d) == PPSearchPath.NOT_FOUND)
 					continue; // not visible
 				EClass ec = d.getEClass();
 				QualifiedName name = d.getName();

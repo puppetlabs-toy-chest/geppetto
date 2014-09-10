@@ -78,7 +78,6 @@ import com.puppetlabs.geppetto.pp.JavaLambda;
 import com.puppetlabs.geppetto.pp.Lambda;
 import com.puppetlabs.geppetto.pp.LiteralBoolean;
 import com.puppetlabs.geppetto.pp.LiteralDefault;
-import com.puppetlabs.geppetto.pp.LiteralExpression;
 import com.puppetlabs.geppetto.pp.LiteralHash;
 import com.puppetlabs.geppetto.pp.LiteralList;
 import com.puppetlabs.geppetto.pp.LiteralName;
@@ -114,11 +113,13 @@ import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.VariableTE;
 import com.puppetlabs.geppetto.pp.VerbatimTE;
 import com.puppetlabs.geppetto.pp.VirtualNameOrReference;
+import com.puppetlabs.geppetto.pp.dsl.StringUtils;
 import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapter;
 import com.puppetlabs.geppetto.pp.dsl.adapters.ClassifierAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.eval.PPExpressionEquivalenceCalculator;
 import com.puppetlabs.geppetto.pp.dsl.eval.PPStringConstantEvaluator;
 import com.puppetlabs.geppetto.pp.dsl.eval.PPTypeEvaluator;
+import com.puppetlabs.geppetto.pp.dsl.eval.PPTypeEvaluator.PPType;
 import com.puppetlabs.geppetto.pp.dsl.eval.TextExpressionHelper;
 import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPClassifier;
@@ -249,6 +250,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Inject
 	private PPExpressionEquivalenceCalculator eqCalculator;
+
+	@Inject
+	private PuppetTypeValidator typeValidator;
 
 	/**
 	 * Classes accepted as top level statements in a pp manifest.
@@ -410,20 +414,18 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	 */
 	@Check
 	public void checkAtExpression(AtExpression o) {
-		if(!isStandardAtExpression(o)) {
-			checkAtExpressionAsResourceReference(o);
+		boolean standard = isStandardAtExpression(o);
+		Expression leftExpr = o.getLeftExpr();
+		if(leftExpr == null) {
+			acceptor.acceptError(
+				"Expression left of [] is required", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
+				standard
+					? IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION
+					: IPPDiagnostics.ISSUE__RESOURCE_REFERENCE_NO_REFERENCE);
 			return;
 		}
 
-		// Puppet grammar At expression is VARIABLE[expr]([expr])? (i.e. only one nested level).
-		//
-		final Expression leftExpr = o.getLeftExpr();
-		if(leftExpr == null)
-			acceptor.acceptError(
-				"Expression left of [] is required", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
-		else if(!(leftExpr instanceof VariableExpression || (leftExpr instanceof LiteralNameOrReference && isFirstNameInTE((LiteralNameOrReference) leftExpr)))) {
-			// then, the leftExpression *must* be an AtExpression with a leftExpr being a variable
+		if(standard) {
 			if(leftExpr instanceof AtExpression) {
 				// older versions limited access to two levels.
 				if(!advisor().allowMoreThan2AtInSequence()) {
@@ -437,79 +439,148 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 							IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 				}
 			}
-			else {
-				acceptor.acceptError(
-					"Expression left of [] must be a variable.", leftExpr, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR,
-					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+			checkAtParamsDefault(o);
+		}
+		else {
+			PPType type = typeEvaluator.type(leftExpr);
+			switch(type) {
+				case ARRAY:
+					checkAtParamsForIndex(o, type, true);
+					break;
+				case VOID:
+				case BOOLEAN:
+				case DEFAULT:
+				case FLOAT:
+				case INTEGER:
+				case NUMERIC:
+				case REGEXP:
+				case UNDEF:
+					String tn = type.getPuppetTypeName();
+					StringBuilder bld = new StringBuilder("Operator '[]' is not applicable to a");
+					if(StringUtils.startsWithWovel(tn))
+						bld.append('n');
+					bld.append(' ');
+					bld.append(tn);
+					acceptor.acceptError(bld.toString(), o, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+					break;
+				case HASH:
+					checkAtParamsDefault(o);
+					break;
+
+				case TYPE:
+					if(advisor().allowTypeDefinitions() && leftExpr instanceof LiteralNameOrReference)
+						typeValidator.checkTypeParameters(((LiteralNameOrReference) leftExpr).getValue(), o, false, acceptor);
+					else
+						checkAtParamsDefault(o);
+					break;
+
+				case RESOURCE_TYPE:
+				case USER_DEFINED_RESOURCE_TYPE:
+					if(advisor().allowTypeDefinitions() && leftExpr instanceof LiteralNameOrReference)
+						// Short form for type declaration of class or resource, i.e.
+						// File[<params>] => Type[File[<params - first param>]]
+						typeValidator.checkTypeParameters("resource", o, true, acceptor);
+					else
+						checkAtParamsDefault(o);
+					break;
+
+				case CLASS:
+					checkAtParamsDefault(o);
+					break;
+
+				case UNQUOTED_STRING:
+					if(leftExpr instanceof LiteralNameOrReference) {
+						String name = ((LiteralNameOrReference) leftExpr).getValue();
+						boolean isname = isNAME(name);
+						if(!isCLASSREF(name)) {
+							if(!isname)
+								acceptor.acceptError(
+									"A resource reference must start with a [(deprecated) name, or] class reference.", o,
+									PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
+									IPPDiagnostics.ISSUE__NOT_CLASSREF);
+							else
+								acceptor.acceptWarning(
+									"A resource reference uses deprecated form. Should start with upper case letter.", o,
+									PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
+									IPPDiagnostics.ISSUE__DEPRECATED_REFERENCE);
+						}
+						if(o.getParameters().size() < 1)
+							acceptor.acceptError(
+								"A resource reference  must have at least one expression in list.", o,
+								PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX,
+								IPPDiagnostics.ISSUE__RESOURCE_REFERENCE_NO_PARAMETERS);
+					}
+					else
+						checkAtParamsForIndex(o, type, false);
+					break;
+				case STRING:
+					checkAtParamsForIndex(o, type, false);
+					break;
+				default:
+					acceptor.acceptError(
+						"Expression left of [] must be a variable.", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR,
+						INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+					checkAtParamsDefault(o);
 			}
 		}
-		// -- check that there is exactly one parameter expression (the key)
-		switch(o.getParameters().size()) {
+	}
+
+	/**
+	 * Check that we have exactly one parameter of arbitrary type
+	 */
+	private void checkAtParamsDefault(AtExpression expr) {
+		switch(expr.getParameters().size()) {
 			case 0:
 				acceptor.acceptError(
-					"Key/index expression is required", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX,
+					"Key/index expression is required", expr, PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX,
 					IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION);
 				break;
 			case 1:
 				break; // ok
 			default:
 				acceptor.acceptError(
-					"Multiple expressions are not allowed", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS,
+					"Multiple expressions are not allowed", expr, PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS,
 					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 		}
-		// // TODO: Check for valid expressions (don't know if any expression is acceptable)
-		// for(Expression expr : o.getParameters()) {
-		// //
-		// }
 	}
 
 	/**
-	 * Checks that an AtExpression that acts as a ResourceReference is valid.
-	 *
-	 * @param resourceRef
-	 * @param errorStartText
+	 * Check that we have one positional integer or a from-to integer range
 	 */
-	public void checkAtExpressionAsResourceReference(AtExpression resourceRef) {
-		final String errorStartText = "A resource reference";
-		Expression leftExpr = resourceRef.getLeftExpr();
-		if(leftExpr == null)
+	private void checkAtParamsForIndex(AtExpression expr, PPType type, boolean wovel) {
+		EList<Expression> parameters = expr.getParameters();
+		int len = parameters.size();
+		if(len < 1 || len > 2)
 			acceptor.acceptError(
-				errorStartText + " must start with a name or referece (was null).", resourceRef,
-				PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__RESOURCE_REFERENCE_NO_REFERENCE);
-		else {
-			String name = leftExpr instanceof LiteralNameOrReference
-				? ((LiteralNameOrReference) leftExpr).getValue()
-				: null;
-			boolean isref = isCLASSREF(name);
-			boolean isname = isNAME(name);
-			if(!isref) {
-				if(!isname)
+				type.getPuppetTypeName() + " supports [] with one or two arguments. Got " + len, expr,
+				PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+
+		for(Expression param : parameters) {
+			PPType paramType = typeEvaluator.type(param);
+			switch(paramType) {
+				case DYNAMIC:
+				case NUMERIC:
+				case INTEGER:
+				case INTEGER_STRING:
+				case DYNAMIC_STRING:
+					// Can evaluate to Integer, so OK.
+					break;
+				default:
+					StringBuilder bld = new StringBuilder();
+					bld.append('A');
+					if(wovel)
+						bld.append('n');
+					bld.append(' ');
+					bld.append(type.getPuppetTypeName());
+					bld.append("[] cannot use ");
+					if(paramType == PPType.FLOAT_STRING)
+						paramType = PPType.FLOAT; // Would be auto converted
+					bld.append(paramType.getPuppetTypeName());
+					bld.append(" where Integer is expected");
 					acceptor.acceptError(
-						errorStartText + " must start with a [(deprecated) name, or] class reference.", resourceRef,
-						PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_CLASSREF);
-				else
-					acceptor.acceptWarning(
-						errorStartText + " uses deprecated form of reference. Should start with upper case letter.", resourceRef,
-						PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR, INSIGNIFICANT_INDEX,
-						IPPDiagnostics.ISSUE__DEPRECATED_REFERENCE);
+						bld.toString(), expr, PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX,
+						IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 			}
-
-		}
-		if(resourceRef.getParameters().size() < 1)
-			acceptor.acceptError(
-				errorStartText + " must have at least one expression in list.", resourceRef,
-				PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__RESOURCE_REFERENCE_NO_PARAMETERS);
-
-		// TODO: Possibly check valid expressions in the list, there are probably many illegal constructs valid in Puppet grammar
-		// TODO: Handle all relaxations in the puppet model/grammar
-		for(Expression expr : resourceRef.getParameters()) {
-			if(expr instanceof LiteralRegex)
-				acceptor.acceptError(
-					errorStartText + " invalid resource reference parameter expression type.", resourceRef,
-					PPPackage.Literals.PARAMETERIZED_EXPRESSION__PARAMETERS, resourceRef.getParameters().indexOf(expr),
-					IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 		}
 	}
 
@@ -783,6 +854,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			acceptor.acceptError(
 				"Must be an assignment operator '=' (not definition '=>')", o, PPPackage.Literals.DEFINITION_ARGUMENT__OP,
 				IPPDiagnostics.ISSUE__NOT_ASSIGNMENT_OP);
+
 		// -- RHS should be a rvalue
 		internalCheckRvalueExpression(o.getValue());
 	}
@@ -795,6 +867,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		EList<DefinitionArgument> arguments = o.getArguments();
 		for(DefinitionArgument arg : arguments) {
 			String s = arg.getArgName();
+			if(s == null)
+				continue;
+
 			if(s.startsWith("$"))
 				s = s.substring(1);
 			if(seen.contains(s)) {
@@ -1033,17 +1108,17 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkLiteralNameOrReference(LiteralNameOrReference o) {
-		final String varName = o.getValue();
+		String varName = o.getValue();
+		if(EcoreUtil2.getContainerOfType(o, ExpressionTE.class) != null) {
+			// Interpolated name. Treat a literal name expression e.g. "${literalName}" as if it was "${$literalname}"
+			checkVariableName(o, '$' + varName);
+			return;
+		}
+
 		if(isKEYWORD(varName)) {
 			acceptor.acceptError(
 				"Reserved word.", o, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, INSIGNIFICANT_INDEX,
 				IPPDiagnostics.ISSUE__RESERVED_WORD);
-			return;
-		}
-
-		if(EcoreUtil2.getContainerOfType(o, ExpressionTE.class) != null) {
-			// Interpolated name. Treat a literal name expression e.g. "${literalName}" as if it was "${$literalname}"
-			checkVariableName(o, '$' + varName);
 			return;
 		}
 
@@ -1090,11 +1165,19 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 				}
 
-				if(!(rhs instanceof LiteralExpression || rhs instanceof StringExpression || rhs instanceof VariableExpression || rhs instanceof InterpolatedVariable)) {
+				// @fmtOff
+				if(!(
+					rhs instanceof LiteralRegex
+				 || rhs instanceof LiteralNameOrReference
+				 || rhs instanceof StringExpression
+				 || rhs instanceof VariableExpression
+				 || rhs instanceof InterpolatedVariable
+				 || rhs instanceof AtExpression && ((AtExpression) rhs).getLeftExpr() instanceof LiteralNameOrReference))
 					acceptor.acceptError(
 						"Right expression must be a regular expression, string, type, or variable", o,
-						PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
-				}
+						PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR, INSIGNIFICANT_INDEX,
+						IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+				// @fmtOn
 			}
 		}
 		checkOperator(o, "=~", "!~");

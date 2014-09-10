@@ -45,7 +45,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setFileType(FileType.MODULE_ROOT);
 
 		vs.validate(chain, options, root, SubMonitor.convert(null));
-		assertContainsIssue(chain, IPPDiagnostics.ISSUE__RESOURCE_AMBIGUOUS_REFERENCE);
+		assertContainsIssue(chain, IPPDiagnostics.ISSUE__AMBIGUOUS_REFERENCE);
 		assertTrue(
 			"Message text should contain a relative reference",
 			chain.getChildren().get(0).getMessage().startsWith("Ambiguous reference to: 'fluff' found in: 1 resource [") &&
@@ -354,13 +354,14 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertErrors(
-			//
+		//
 			asserter.messageFragment("Unknown class: 'generic'"), //
 			asserter.messageFragment("Unknown class: 'pam'"), //
 			asserter.messageFragment("Unknown class: 'ssh'"), //
 			asserter.messageFragment("Unknown class: 'svn'"), //
 			asserter.messageFragment("Unknown resource type: 'pam::accesslogin'"), //
-			asserter.messageFragment("Unknown resource type: 'svn::checkout'"),
+			asserter.messageFragment("Unknown resource type: 'svn::checkout'"), //
+			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_TYPE), //
 			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE).greedy(), //
 			asserter.messageFragment("Missing comma."));
 	}

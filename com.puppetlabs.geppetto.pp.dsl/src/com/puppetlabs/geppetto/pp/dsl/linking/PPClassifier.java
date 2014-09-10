@@ -39,17 +39,23 @@ public class PPClassifier {
 	private PPPatternHelper patternHelper;
 
 	private void _classify(CollectExpression o) {
-		int resourceType = RESOURCE_IS_BAD; // unknown at this point
+		int classifier = RESOURCE_IS_BAD; // unknown at this point
 		final Expression resourceExpr = o.getClassReference();
 		String resourceTypeName = null;
 		if(resourceExpr instanceof LiteralNameOrReference) {
-			resourceType = COLLECTOR_IS_REGULAR;
+			classifier = COLLECTOR_IS_REGULAR;
 			resourceTypeName = ((LiteralNameOrReference) resourceExpr).getValue();
 		}
 		ClassifierAdapter adapter = ClassifierAdapterFactory.eINSTANCE.adapt(o);
-		adapter.setClassifier(resourceType);
+		adapter.setClassifier(classifier);
 		adapter.setResourceType(null); // unresolved
 		adapter.setResourceTypeName(resourceTypeName);
+	}
+
+	private void _classify(LiteralNameOrReference o) {
+		ClassifierAdapter adapter = ClassifierAdapterFactory.eINSTANCE.adapt(o);
+		adapter.setResourceType(null); // unresolved
+		adapter.setResourceTypeName(o.getValue());
 	}
 
 	/**
@@ -62,7 +68,7 @@ public class PPClassifier {
 		// Use of class reference is deprecated
 		// classname : NAME | "class" | CLASSNAME
 
-		int resourceType = RESOURCE_IS_BAD; // unknown at this point
+		int classifier = RESOURCE_IS_BAD; // unknown at this point
 		final Expression resourceExpr = o.getResourceExpr();
 		String resourceTypeName = null;
 
@@ -79,22 +85,22 @@ public class PPClassifier {
 		}
 		if(resourceTypeName != null) {
 			if("class".equals(resourceTypeName))
-				resourceType = RESOURCE_IS_CLASSPARAMS;
+				classifier = RESOURCE_IS_CLASSPARAMS;
 			else if(patternHelper.isCLASSREF(resourceTypeName))
-				resourceType = RESOURCE_IS_DEFAULT;
+				classifier = RESOURCE_IS_DEFAULT;
 			else if(patternHelper.isNAME(resourceTypeName) || patternHelper.isCLASSNAME(resourceTypeName))
-				resourceType = RESOURCE_IS_REGULAR;
+				classifier = RESOURCE_IS_REGULAR;
 			// else the resource is BAD
 		}
 		else if(resourceExpr instanceof AtExpression) {
-			resourceType = RESOURCE_IS_OVERRIDE;
+			classifier = RESOURCE_IS_OVERRIDE;
 			AtExpression at = (AtExpression) resourceExpr;
 			Expression left = at.getLeftExpr();
 			if(left instanceof LiteralNameOrReference)
 				resourceTypeName = ((LiteralNameOrReference) left).getValue();
 		}
 		else if(resourceExpr instanceof CollectExpression) {
-			resourceType = RESOURCE_IS_OVERRIDE;
+			classifier = RESOURCE_IS_OVERRIDE;
 			CollectExpression collect = (CollectExpression) resourceExpr;
 			Expression classReference = collect.getClassReference();
 			if(classReference instanceof LiteralNameOrReference)
@@ -106,7 +112,7 @@ public class PPClassifier {
 		 * resource, and its typeName (what it is a reference to).
 		 */
 		ClassifierAdapter adapter = ClassifierAdapterFactory.eINSTANCE.adapt(o);
-		adapter.setClassifier(resourceType);
+		adapter.setClassifier(classifier);
 		adapter.setResourceType(null);
 		adapter.setResourceTypeName(resourceTypeName);
 
@@ -119,6 +125,7 @@ public class PPClassifier {
 			_classify((ResourceExpression) o);
 		else if(o instanceof CollectExpression)
 			_classify((CollectExpression) o);
+		else if(o instanceof LiteralNameOrReference) // Will only be classified when o is a puppet type name
+			_classify((LiteralNameOrReference) o);
 	}
-
 }

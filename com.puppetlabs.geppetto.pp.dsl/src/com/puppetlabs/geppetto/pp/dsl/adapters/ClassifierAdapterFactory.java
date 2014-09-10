@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.adapters;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -34,6 +36,19 @@ public class ClassifierAdapterFactory extends AdapterFactoryImpl {
 		synchronized(target) {
 			return type.cast(super.adapt(target, type));
 		}
+	}
+
+	public ClassifierAdapter adaptOrNull(EObject target) {
+		if(target != null) {
+			List<Adapter> adapters = target.eAdapters();
+			int idx = adapters.size();
+			while(--idx >= 0) {
+				Adapter adapter = adapters.get(idx);
+				if(adapter instanceof ClassifierAdapter)
+					return (ClassifierAdapter) adapter;
+			}
+		}
+		return null;
 	}
 
 	@Override

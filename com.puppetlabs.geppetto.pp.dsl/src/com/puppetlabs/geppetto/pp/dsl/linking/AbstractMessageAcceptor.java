@@ -25,6 +25,21 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
  */
 public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 
+	/**
+	 * @return the index of source in its containing feature, or {@link #INSIGNIFICANT_INDEX} if containing feature is
+	 *         not indexed.
+	 */
+	public static int indexOfSourceInParent(EObject source) {
+		EObject container = source.eContainer();
+		if(container == null)
+			throw new IllegalArgumentException("source is not contained");
+		EStructuralFeature feature = source.eContainingFeature();
+		if(!feature.isMany())
+			return INSIGNIFICANT_INDEX;
+		List<?> featurelist = (List<?>) container.eGet(feature);
+		return ECollections.indexOf(featurelist, source, 0);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -198,20 +213,5 @@ public abstract class AbstractMessageAcceptor implements IMessageAcceptor {
 			return parserNode;
 		}
 		return null;
-	}
-
-	/**
-	 * @return the index of source in its containing feature, or {@link #INSIGNIFICANT_INDEX} if containing feature is
-	 *         not indexed.
-	 */
-	private int indexOfSourceInParent(EObject source) {
-		EObject container = source.eContainer();
-		if(container == null)
-			throw new IllegalArgumentException("source is not contained");
-		EStructuralFeature feature = source.eContainingFeature();
-		if(!feature.isMany())
-			return INSIGNIFICANT_INDEX;
-		List<?> featurelist = (List<?>) container.eGet(feature);
-		return ECollections.indexOf(featurelist, source, 0);
 	}
 }

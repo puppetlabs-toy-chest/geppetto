@@ -30,10 +30,13 @@ import com.puppetlabs.geppetto.pp.dsl.adapters.CrossReferenceAdapter;
 import com.puppetlabs.geppetto.pp.dsl.adapters.ResourceDocumentationAdapter;
 import com.puppetlabs.geppetto.pp.dsl.adapters.ResourceDocumentationAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.formatting.PPCommentConfiguration;
+import com.puppetlabs.geppetto.pp.dsl.pptp.PptpPrinter;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
 import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider;
 import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPLabelProvider;
 import com.puppetlabs.geppetto.pp.pptp.IDocumented;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
+import com.puppetlabs.geppetto.pp.pptp.PuppetType;
 import com.puppetlabs.geppetto.ruby.RubyDocProcessor;
 import com.puppetlabs.xtext.dommodel.formatter.comments.CommentProcessor;
 import com.puppetlabs.xtext.dommodel.formatter.comments.CommentProcessor.CommentText;
@@ -83,6 +86,9 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 
 	@Inject
 	protected PPLabelProvider labelProvider;
+
+	@Inject
+	private PptpPrinter pptpPrinter;
 
 	// protected String _document(AttributeOperation o) {
 	// return getCrossReferenceDocumentation(o);
@@ -215,32 +221,29 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 	}
 
 	private Image getCrossReferenceImage(EObject o) {
-		List<IEObjectDescription> xrefs = CrossReferenceAdapter.get(o);
-		if(xrefs == null)
-			return null;
-		if(xrefs.size() > 1) {
-			return null;
-		}
-		if(xrefs.size() == 0) {
-			return null;
-		}
-		IEObjectDescription ref = xrefs.get(0);
-		return descriptionLabelProvider.getImage(ref);
+		IEObjectDescription ref = getCrossReference(o);
+		return ref == null
+			? null
+			: descriptionLabelProvider.getImage(ref);
 	}
 
 	private String getCrossReferenceLabel(EObject o) {
-		List<IEObjectDescription> xrefs = CrossReferenceAdapter.get(o);
-		if(xrefs == null)
+		IEObjectDescription ref = getCrossReference(o);
+		if(ref == null)
 			return null;
-		if(xrefs.size() > 1) {
-			return null;
-		}
-		if(xrefs.size() == 0) {
-			return null;
-		}
-		IEObjectDescription ref = xrefs.get(0);
-		return descriptionLabelProvider.getText(ref);
 
+		if(PPTPPackage.Literals.PUPPET_TYPE.isSuperTypeOf(ref.getEClass())) {
+			// We want a slightly different label and we must resolve here
+			// or loose access to the resource
+			EObject x = ref.getEObjectOrProxy();
+			if(x.eIsProxy())
+				x = EcoreUtil.resolve(x, o);
+			StringBuilder bld = new StringBuilder();
+			pptpPrinter.append((PuppetType) x, false, bld);
+			bld.append(" : Puppet Type");
+			return bld.toString();
+		}
+		return descriptionLabelProvider.getText(ref);
 	}
 
 	/**

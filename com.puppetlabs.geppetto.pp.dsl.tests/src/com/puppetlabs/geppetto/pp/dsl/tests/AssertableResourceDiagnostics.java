@@ -129,7 +129,7 @@ public class AssertableResourceDiagnostics {
 
 	public void assertOK() {
 		if(diag.size() != 0)
-			fail("There are expected to be no diagnostics.");
+			fail("There are expected to be no diagnostics. First found was " + diag.get(0).getMessage());
 	}
 
 	public void fail(String message) {

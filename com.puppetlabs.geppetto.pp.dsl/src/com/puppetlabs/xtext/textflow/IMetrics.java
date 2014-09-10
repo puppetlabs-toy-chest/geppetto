@@ -20,7 +20,7 @@ package com.puppetlabs.xtext.textflow;
  * 123456
  * 123456789
  *   123
- * 
+ *
  * ---
  * </pre>
  * <p>

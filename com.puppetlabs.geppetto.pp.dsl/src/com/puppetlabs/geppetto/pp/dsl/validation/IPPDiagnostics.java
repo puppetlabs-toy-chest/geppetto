@@ -110,7 +110,7 @@ public interface IPPDiagnostics {
 	 */
 	public static final String ISSUE__RESOURCE_UNKNOWN_PROPERTY_PROP = ISSUE__RESOURCE_UNKNOWN_PROPERTY + ISSUE_PROPOSAL_SUFFIX;
 
-	public static final String ISSUE__RESOURCE_AMBIGUOUS_REFERENCE = ISSUE_PREFIX + "AmbigousReference";
+	public static final String ISSUE__AMBIGUOUS_REFERENCE = ISSUE_PREFIX + "AmbigousReference";
 
 	public static final String ISSUE__MISSING_COMMA = ISSUE_PREFIX + "MissingComma";
 
@@ -193,6 +193,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__RESERVED_NAME = ISSUE_PREFIX + "ReservedName";
 
+	public static final String ISSUE__RESERVED_TYPE_NAME = ISSUE_PREFIX + "ReservedTypeName";
+
 	public static final String ISSUE__RESOURCE_DUPLICATE_ATTRIBUTE = ISSUE_PREFIX + "DuplicateAttribute";
 
 	public static final String ISSUE__ASSIGNMENT_TO_VAR_NAMED_STRING = ISSUE_PREFIX + "AssignmentToVarNamedString";
@@ -221,4 +223,19 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__IMPORT_IS_DEPRECATED = ISSUE_PREFIX + "ImportIsDeprecated";
 
+	public static final String ISSUE__TYPES_NOT_ALLOWED = ISSUE_PREFIX + "TypesNotAllowed";
+
+	public static final String ISSUE__NOT_TYPEREF = ISSUE_PREFIX + "NotTypeReference";
+
+	public static final String ISSUE__INVALID_TYPE_REFERENCE = ISSUE_PREFIX + "InvalidTypeReference";
+
+	public static final String ISSUE__UNKNOWN_CLASS = ISSUE_PREFIX + "UnknownClass";
+
+	public static final String ISSUE__UNKNOWN_CLASS_PROP = ISSUE__UNKNOWN_CLASS + ISSUE_PROPOSAL_SUFFIX;
+
+	public static final String ISSUE__UNKNOWN_TYPE = ISSUE_PREFIX + "UnknownType";
+
+	public static final String ISSUE__UNKNOWN_TYPE_PROP = ISSUE__UNKNOWN_TYPE + ISSUE_PROPOSAL_SUFFIX;
+
+	public static final String ISSUE__TYPE_CONSTRAINT_NOT_FULFILLED = "TypeConstraintNotFulfilled";
 }

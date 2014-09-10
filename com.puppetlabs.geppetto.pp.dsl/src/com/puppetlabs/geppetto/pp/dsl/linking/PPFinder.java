@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
@@ -56,10 +58,12 @@ import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.ResourceBody;
 import com.puppetlabs.geppetto.pp.VariableExpression;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
+import com.puppetlabs.geppetto.pp.dsl.StringUtils;
 import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
 import com.puppetlabs.geppetto.pp.dsl.linking.NameInScopeFilter.Match;
 import com.puppetlabs.geppetto.pp.dsl.linking.NameInScopeFilter.SearchStrategy;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
+import com.puppetlabs.geppetto.pp.dsl.validation.PuppetTypeValidator;
 import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
 
 /**
@@ -125,11 +129,11 @@ public class PPFinder {
 	private final static EClass[] DEF_AND_TYPE_ARGUMENTS = { PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
 
 	// Note that order is important
-	private final static EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
+	static final EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
 
-	private static final EClass[] FUNC = { PPTPPackage.Literals.FUNCTION };
+	static final EClass[] FUNC = { PPTPPackage.Literals.FUNCTION };
 
-	private final static EClass[] CLASS_AND_TYPE = { PPPackage.Literals.HOST_CLASS_DEFINITION,
+	final static EClass[] CLASS_AND_TYPE = { PPPackage.Literals.HOST_CLASS_DEFINITION,
 	// PPTPPackage.Literals.TYPE
 	};
 
@@ -146,7 +150,7 @@ public class PPFinder {
 
 	private PPSearchPath searchPath;
 
-	private Multimap<String, IEObjectDescription> exportedPerLastSegment;
+	private final Multimap<String, IEObjectDescription> exportedPerLastSegment = ArrayListMultimap.create();
 
 	/**
 	 * Access to the 'pp' services (container management and more).
@@ -172,7 +176,7 @@ public class PPFinder {
 	 * index for a particular resource. This special provider is obtained here.
 	 */
 	@Inject
-	private org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider indexProvider;
+	private ResourceDescriptionsProvider indexProvider;
 
 	/**
 	 * Access to runtime configurable debug trace.
@@ -181,39 +185,46 @@ public class PPFinder {
 	@Named(PPDSLConstants.PP_DEBUG_LINKER)
 	private ITracer tracer;
 
+	@Inject
+	private PuppetTypeValidator typeValidator;
+
 	private Map<String, IEObjectDescription> metaCache;
 
 	private Map<String, IEObjectDescription> metaVarCache;
 
-	private List<IEObjectDescription> exportedPatternVariables;
+	private final List<IEObjectDescription> exportedPatternVariables = Lists.newArrayList();
 
 	private void buildExportedObjectsIndex(IResourceDescription descr, IResourceDescriptions descriptionIndex) {
 		// The current (possibly dirty) exported resources
 		IResourceDescription dirty = resourceServiceProvider.getResourceDescriptionManager().getResourceDescription(resource);
 		String pathToCurrent = resource.getURI().path();
 
-		Multimap<String, IEObjectDescription> map = ArrayListMultimap.create();
-		List<IEObjectDescription> patternedVariables = Lists.newArrayList();
+		exportedPerLastSegment.clear();
+		exportedPatternVariables.clear();
+
 		// add all (possibly dirty in global index)
 		// check for empty qualified names which may be present in case of syntax errors / while editing etc.
 		// empty names are simply skipped (they can not be found anyway).
 		//
 		for(IEObjectDescription d : dirty.getExportedObjects())
 			if(d.getQualifiedName().getSegmentCount() >= 1)
-				map.put(d.getQualifiedName().getLastSegment(), d);
+				exportedPerLastSegment.put(d.getQualifiedName().getLastSegment(), d);
+
 		// add all from global index, except those for current resource
+		EClass builtInTypeClass = PPTPPackage.Literals.PUPPET_TYPE;
 		for(IEObjectDescription d : getExportedObjects(descr, descriptionIndex))
 			if(!d.getEObjectURI().path().equals(pathToCurrent) && d.getQualifiedName().getSegmentCount() >= 1) {
 				// patterned based names are exceptional
 				if(d.getUserData(PPDSLConstants.VARIABLE_PATTERN) != null) {
-					patternedVariables.add(d);
+					exportedPatternVariables.add(d);
 				}
 				else {
-					map.put(d.getQualifiedName().getLastSegment(), d);
+					String name = d.getQualifiedName().getLastSegment();
+					exportedPerLastSegment.put(name, d);
+					if(d.getEClass() == builtInTypeClass)
+						typeValidator.configureValidator(name, d);
 				}
 			}
-		exportedPerLastSegment = map;
-		exportedPatternVariables = patternedVariables;
 	}
 
 	private void cacheMetaParameters(EObject scopeDetermeningObject) {
@@ -247,15 +258,15 @@ public class PPFinder {
 
 	public void configure(Resource r) {
 		resource = r;
+		manager = resourceServiceProvider.getContainerManager();
+		searchPath = searchPathProvider.get(r);
+
 		IResourceDescriptions descriptionIndex = indexProvider.getResourceDescriptions(resource);
 		IResourceDescription descr = descriptionIndex.getResourceDescription(resource.getURI());
 
 		// Happens during start/clean in some state
-		if(descr == null)
-			return;
-		manager = resourceServiceProvider.getContainerManager();
-		buildExportedObjectsIndex(descr, descriptionIndex);
-		searchPath = searchPathProvider.get(r);
+		if(descr != null)
+			buildExportedObjectsIndex(descr, descriptionIndex);
 	}
 
 	/**
@@ -318,17 +329,16 @@ public class PPFinder {
 	 * @return A description of the found variable or <code>null</code> if it could not be found.
 	 */
 	private IEObjectDescription findDefinitionArgument(DefinitionArgumentList args, String name) {
-		for(DefinitionArgument arg : args.getArguments()) {
-			String argName = arg.getArgName();
-			if(argName.regionMatches(1, name, 0, name.length()))
-				return EObjectDescription.create(argName, arg.getValue());
-		}
+		if(args != null)
+			for(DefinitionArgument arg : args.getArguments()) {
+				String argName = arg.getArgName();
+				if(argName != null && argName.regionMatches(1, name, 0, name.length()))
+					return EObjectDescription.create(argName, arg);
+			}
 		return null;
 	}
 
 	public SearchResult findDefinitions(EObject scopeDetermeningResource, PPImportedNamesAdapter importedNames) {
-		// make all segments initial char lower case (if references is to the type itself - eg. 'File' instead of
-		// 'file', or 'Aa::Bb' instead of 'aa::bb'
 		QualifiedName fqn2 = QualifiedName.EMPTY;
 
 		// TODO: Note that order is important, TYPE has higher precedence and should be used for linking
@@ -338,6 +348,11 @@ public class PPFinder {
 	}
 
 	public SearchResult findDefinitions(EObject scopeDetermeningResource, String name, PPImportedNamesAdapter importedNames) {
+		return findDefinitions(scopeDetermeningResource, name, importedNames, DEF_AND_TYPE);
+	}
+
+	public SearchResult findDefinitions(EObject scopeDetermeningResource, String name, PPImportedNamesAdapter importedNames,
+			EClass... validClasses) {
 		if(name == null)
 			throw new IllegalArgumentException("name is null");
 		QualifiedName fqn = converter.toQualifiedName(name);
@@ -345,13 +360,13 @@ public class PPFinder {
 		// 'file', or 'Aa::Bb' instead of 'aa::bb'
 		QualifiedName fqn2 = QualifiedName.EMPTY;
 		for(int i = 0; i < fqn.getSegmentCount(); i++)
-			fqn2 = fqn2.append(toInitialLowerCase(fqn.getSegment(i)));
+			fqn2 = fqn2.append(StringUtils.toInitialLowerCase(fqn.getSegment(i)));
 		// fqn2 = fqn.skipLast(1).append(toInitialLowerCase(fqn.getLastSegment()));
 
 		// TODO: Note that order is important, TYPE has higher precedence and should be used for linking
 		// This used to work when list was iterated per type, not it is iterated once with type check
 		// first - thus if a definition is found before a type, it is earlier in the list.
-		return findExternal(scopeDetermeningResource, fqn2, importedNames, Match.EQUALS, DEF_AND_TYPE);
+		return findExternal(scopeDetermeningResource, fqn2, importedNames, Match.EQUALS, validClasses);
 	}
 
 	private SearchResult findExternal(EObject scopeDetermeningObject, QualifiedName fqn, PPImportedNamesAdapter importedNames,
@@ -366,7 +381,7 @@ public class PPFinder {
 		// if(fqn.getSegmentCount() == 1 && "".equals(fqn.getSegment(0)))
 		// throw new IllegalArgumentException("FQN has one empty segment");
 
-		List<IEObjectDescription> targets = Lists.newArrayList();
+		List<IEObjectDescription> targets = new UniqueEList<IEObjectDescription>();
 		Resource scopeDetermeningResource = scopeDetermeningObject.eResource();
 
 		// Not meaningful to continue if the name is empty (looking up nothing)
@@ -446,7 +461,7 @@ public class PPFinder {
 		// 'file'.
 		if(fqn.getSegmentCount() == 0)
 			return new SearchResult(); // can happen while editing
-		fqn = fqn.skipLast(1).append(toInitialLowerCase(fqn.getLastSegment()));
+		fqn = fqn.skipLast(1).append(StringUtils.toInitialLowerCase(fqn.getLastSegment()));
 		return findExternal(scopeDetermeningResource, fqn, importedNames, Match.EQUALS, CLASS_AND_TYPE);
 	}
 
@@ -559,10 +574,18 @@ public class PPFinder {
 					}
 				}
 			}
-			if(container instanceof HostClassDefinition)
+			if(container instanceof HostClassDefinition) {
+				IEObjectDescription desc = findDefinitionArgument(((HostClassDefinition) container).getArguments(), name);
+				if(desc != null)
+					return desc;
 				break;
-			if(container instanceof Definition)
+			}
+			if(container instanceof Definition) {
+				IEObjectDescription desc = findDefinitionArgument(((Definition) container).getArguments(), name);
+				if(desc != null)
+					return desc;
 				break;
+			}
 			if(container instanceof NodeDefinition)
 				break;
 		}
@@ -720,6 +743,12 @@ public class PPFinder {
 		return Multimaps.unmodifiableMultimap(exportedPerLastSegment);
 	}
 
+	public Collection<IEObjectDescription> getExportedPerLastSegment(String name) {
+		return name == null
+			? Collections.<IEObjectDescription> emptyList()
+			: exportedPerLastSegment.get(StringUtils.toInitialLowerCase(name));
+	}
+
 	/**
 	 * Produces the name of the scope where the given object 'o' is contained.
 	 *
@@ -736,11 +765,22 @@ public class PPFinder {
 		return QualifiedName.EMPTY;
 	}
 
+	public IEObjectDescription getPuppetTypeByName(String name) {
+		for(IEObjectDescription export : getExportedPerLastSegment(name))
+			if(PPTPPackage.Literals.PUPPET_TYPE.isSuperTypeOf(export.getEClass()))
+				return export;
+		return null;
+	}
+
 	private boolean isContainedInDefinition(EObject scoped) {
 		for(EObject o = scoped; o != null; o = o.eContainer())
 			if(o.eClass() == PPPackage.Literals.DEFINITION)
 				return true;
 		return false;
+	}
+
+	public boolean isPuppetTypeName(String name) {
+		return getPuppetTypeByName(name) != null;
 	}
 
 	/**
@@ -752,28 +792,52 @@ public class PPFinder {
 	 * @return list of descriptions with lowest index.
 	 */
 	private List<IEObjectDescription> searchPathAdjusted(List<IEObjectDescription> targets) {
-		int minIdx = Integer.MAX_VALUE;
-		List<IEObjectDescription> result = Lists.newArrayList();
+		int minTypesAndDefinesIdx = Integer.MAX_VALUE;
+		int minClassIdx = Integer.MAX_VALUE;
+		List<IEObjectDescription> result = new UniqueEList<IEObjectDescription>();
+		List<IEObjectDescription> classResult = null;
+		List<IEObjectDescription> typesAndDefinesResult = null;
 		for(IEObjectDescription d : targets) {
 			int idx = searchPath.searchIndexOf(d);
-			if(idx < 0)
+			if(idx == PPSearchPath.NOT_FOUND)
 				continue; // not found, skip
-			if(idx < minIdx) {
-				minIdx = idx;
-				result.clear(); // forget worse result
-			}
-			// only remember if equal to best found so far
-			if(idx <= minIdx)
+			if(idx == PPSearchPath.FOUND_IN_TPTP) {
+				// Always found but not on search path so it might cause ambiguities
 				result.add(d);
-		}
-		return result;
-	}
+				continue;
+			}
 
-	private String toInitialLowerCase(String s) {
-		if(s.length() < 1 || Character.isLowerCase(s.charAt(0)))
-			return s;
-		StringBuilder buf = new StringBuilder(s);
-		buf.setCharAt(0, Character.toLowerCase(buf.charAt(0)));
-		return buf.toString();
+			if(PPPackage.Literals.HOST_CLASS_DEFINITION == d.getEClass()) {
+				if(idx < minClassIdx) {
+					minClassIdx = idx;
+					if(classResult != null)
+						classResult.clear(); // forget worse result
+				}
+				// only remember if equal to best found so far
+				if(idx <= minClassIdx) {
+					if(classResult == null)
+						classResult = Lists.newArrayList();
+					classResult.add(d);
+				}
+			}
+			else {
+				if(idx < minTypesAndDefinesIdx) {
+					minTypesAndDefinesIdx = idx;
+					if(typesAndDefinesResult != null)
+						typesAndDefinesResult.clear(); // forget worse result
+				}
+				// only remember if equal to best found so far
+				if(idx <= minTypesAndDefinesIdx) {
+					if(typesAndDefinesResult == null)
+						typesAndDefinesResult = Lists.newArrayList();
+					typesAndDefinesResult.add(d);
+				}
+			}
+		}
+		if(typesAndDefinesResult != null)
+			result.addAll(typesAndDefinesResult);
+		if(classResult != null)
+			result.addAll(classResult);
+		return result;
 	}
 }

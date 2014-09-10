@@ -31,20 +31,15 @@ import com.puppetlabs.geppetto.pp.VerbatimTE;
 public class TextExpressionHelper {
 
 	public static String getNonInterpolated(DoubleQuotedString dqString) {
-		if(hasInterpolation(dqString))
-			return null;
-		// if there is no interpolation, there is by definition only one StringData
-		// ignore the fact that a static string could be interpolated since this is an
-		// esoteric case.
-		// TODO: Handle this esoteric case "abc${"xyz"}"
 		EList<TextExpression> parts = dqString.getStringPart();
 		if(parts.size() < 1)
 			return "";
 		if(parts.size() == 1) {
-			return ((VerbatimTE) parts.get(0)).getText();
+			TextExpression part = parts.get(0);
+			if(part instanceof VerbatimTE)
+				return ((VerbatimTE) part).getText();
 		}
-		// impossible can not have more than one verbatim part and not be interpolated
-		throw new IllegalArgumentException("The given dqString lied about not being interpolated");
+		return null;
 	}
 
 	public static boolean hasInterpolation(DoubleQuotedString dqString) {
@@ -99,6 +94,18 @@ public class TextExpressionHelper {
 
 	public String doubleQuote(String s) {
 		return '"' + s + '"';
+	}
+
+	// Integers and floats are presented as LiteralNameOrReference. This
+	// method will return such strings but nothing else (not quoted
+	// strings for instance)
+	public static String getLiteralString(Expression value) {
+		String s = null;
+		if(value instanceof LiteralNameOrReference)
+			s = ((LiteralNameOrReference) value).getValue();
+		if(s != null && s.isEmpty())
+			s = null;
+		return s;
 	}
 
 }

@@ -44,6 +44,7 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.ppformatting.PPIndentationInformation;
 import com.puppetlabs.geppetto.pp.dsl.serialization.PPValueSerializer;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.validation.BuiltinTypesModule;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
 import com.puppetlabs.xtext.dommodel.DomModelUtils;
@@ -157,6 +158,10 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 
 	public Class<? extends ISearchPathProvider> bindSearchPathProvider() {
 		return PPSearchPathProvider.class;
+	}
+
+	public void configureBuiltinTypes(com.google.inject.Binder binder) {
+		binder.install(new BuiltinTypesModule());
 	}
 
 	public void configureDebugTracing(com.google.inject.Binder binder) {

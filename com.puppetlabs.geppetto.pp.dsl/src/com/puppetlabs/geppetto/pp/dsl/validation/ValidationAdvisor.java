@@ -185,6 +185,11 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public boolean allowTypeDefinitions() {
+			return false;
+		}
+
+		@Override
 		public boolean allowUnless() {
 			return false;
 		}
@@ -408,6 +413,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public boolean allowSeparatorExpression() {
+			return true;
+		}
+
+		@Override
+		public boolean allowTypeDefinitions() {
 			return true;
 		}
 

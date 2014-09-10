@@ -411,7 +411,7 @@ DefinitionArgumentList returns pp::DefinitionArgumentList
 // VALIDATION: value expr is RVALUE
 // 	
 DefinitionArgument returns pp::DefinitionArgument
-	: argName = UNION_VARIABLE_OR_NAME  ((op = '=' | op = '=>')  value = AssignmentExpression)?
+	: (puppetType = TypeExpression)? argName = UNION_VARIABLE_OR_NAME  ((op = '=' | op = '=>')  value = AssignmentExpression)?
 	;
 
 //-- CASE
@@ -619,6 +619,20 @@ LiteralName returns pp::LiteralName
 VariableExpression returns pp::VariableExpression
 	: varName = dollarVariable 
 	; 
+
+TypeExpression returns pp::Expression:
+	TypeName 
+	({pp::AtExpression.leftExpr=current}
+		'['  
+			(parameters += Expression (','  parameters += Expression)*)?
+		']' 
+	)*
+	;
+
+// VALIDATION: checks that the name is a puppet Type
+TypeName returns pp::LiteralNameOrReference
+	: value = name 
+	;
 
 dollarVariable hidden()
 	: DOLLAR_VAR 
