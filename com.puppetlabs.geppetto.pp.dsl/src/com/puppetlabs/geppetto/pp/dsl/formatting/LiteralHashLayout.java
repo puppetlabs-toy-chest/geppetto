@@ -107,7 +107,7 @@ public class LiteralHashLayout extends AbstractListLayout {
 					if(DomModelUtils.isWhitespace(nextLeaf))
 						nextLeaf.getStyles().add(StyleSet.withStyles(styles.oneLineBreak()));
 				}
-				else if(ge == hashAccess.getKeyLiteralNameOrStringParserRuleCall_0_0()) {
+				else if(ge == hashAccess.getKeyAssignmentExpressionParserRuleCall_0_0()) {
 					DelegatingLayoutContext keyContext = new DelegatingLayoutContext(context);
 					TextFlow keyFlow = new TextFlow(keyContext);
 					ArrayList<IDomNode> children = Lists.newArrayList(n.getChildren());

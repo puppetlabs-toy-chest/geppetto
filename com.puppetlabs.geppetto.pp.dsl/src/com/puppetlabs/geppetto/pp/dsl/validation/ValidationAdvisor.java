@@ -116,6 +116,14 @@ public class ValidationAdvisor {
 		 * @returns false
 		 */
 		@Override
+		public boolean allowAnyValueAsHashKey() {
+			return false;
+		}
+
+		/**
+		 * @returns false
+		 */
+		@Override
 		public boolean allowExpressionLastInBlocks() {
 			return false;
 		}
@@ -394,6 +402,11 @@ public class ValidationAdvisor {
 	public static class ValidationAdvisor_4_0 extends ValidationAdvisor_3_7 implements IValidationAdvisor {
 		protected ValidationAdvisor_4_0(IPotentialProblemsAdvisor problemsAdvisor) {
 			super(problemsAdvisor);
+		}
+
+		@Override
+		public boolean allowAnyValueAsHashKey() {
+			return true;
 		}
 
 		@Override
