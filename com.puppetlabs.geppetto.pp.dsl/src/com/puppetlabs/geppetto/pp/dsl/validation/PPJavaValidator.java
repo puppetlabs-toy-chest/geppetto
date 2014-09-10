@@ -68,6 +68,7 @@ import com.puppetlabs.geppetto.pp.EqualityExpression;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.ExpressionTE;
 import com.puppetlabs.geppetto.pp.FunctionCall;
+import com.puppetlabs.geppetto.pp.HashEntry;
 import com.puppetlabs.geppetto.pp.HostClassDefinition;
 import com.puppetlabs.geppetto.pp.IQuotedString;
 import com.puppetlabs.geppetto.pp.IfExpression;
@@ -1036,6 +1037,23 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				"Must be a name or reference.", o, PPPackage.Literals.PARAMETERIZED_EXPRESSION__LEFT_EXPR,
 				IPPDiagnostics.ISSUE__NOT_NAME_OR_REF);
 		// rest of validation - valid function - is done during linking
+	}
+
+	@Check
+	public void checkHashEntry(HashEntry o) {
+		if(!advisor().allowAnyValueAsHashKey()) {
+			Expression key = o.getKey();
+			if(key instanceof LiteralNameOrReference) {
+				if(!patternHelper.isNAME(((LiteralNameOrReference) key).getValue()))
+					acceptor.acceptError(
+						"Expected to comply with NAME rule", key, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, INSIGNIFICANT_INDEX,
+						IPPDiagnostics.ISSUE__NOT_NAME);
+			}
+			else if(!(key instanceof SingleQuotedString || key instanceof DoubleQuotedString))
+				acceptor.acceptError(
+					"Key must be a name or string constant", o, PPPackage.Literals.HASH_ENTRY__KEY,
+					IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+		}
 	}
 
 	@Check

@@ -96,6 +96,11 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	}
 
 	/**
+	 * The 3.5 --parser future allows any value as hash key
+	 */
+	public boolean allowAnyValueAsHashKey();
+
+	/**
 	 * The 3.2 --parser future allows blocks to end with an expression
 	 */
 	public boolean allowExpressionLastInBlocks();
