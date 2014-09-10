@@ -361,7 +361,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 			asserter.messageFragment("Unknown class: 'svn'"), //
 			asserter.messageFragment("Unknown resource type: 'pam::accesslogin'"), //
 			asserter.messageFragment("Unknown resource type: 'svn::checkout'"), //
-			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_TYPE), //
+			asserter.issue(IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_TYPE), //
 			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE).greedy(), //
 			asserter.messageFragment("Missing comma."));
 	}
