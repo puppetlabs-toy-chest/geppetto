@@ -597,6 +597,31 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 	}
 
 	/**
+	 * Tests that chained assignemt is not ok
+	 * - $x = $y = expr
+	 */
+	@Test
+	public void test_Validate_AssignmentExpression_NotOk_Chained() {
+		PuppetManifest pp = pf.createPuppetManifest();
+		AssignmentExpression ax = pf.createAssignmentExpression();
+		VariableExpression v = pf.createVariableExpression();
+		v.setVarName("$x");
+		ax.setLeftExpr(v);
+
+		AssignmentExpression ay = pf.createAssignmentExpression();
+		VariableExpression y = pf.createVariableExpression();
+		y.setVarName("$y");
+		ay.setLeftExpr(y);
+
+		LiteralBoolean b = pf.createLiteralBoolean();
+		ay.setRightExpr(b);
+		ax.setRightExpr(ay);
+		pp.getStatements().add(ax);
+
+		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__ASSIGNMENT_CHAINED);
+	}
+
+	/**
 	 * Tests assignment not ok states:
 	 * - $0 = expr
 	 */

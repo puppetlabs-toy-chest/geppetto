@@ -28,6 +28,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__AMBIGUOUS_REFERENCE = ISSUE_PREFIX + "AmbigousReference";
 
+	public static final String ISSUE__ASSIGNMENT_CHAINED = ISSUE_PREFIX + "AssignmentChained";
+
 	public static final String ISSUE__ASSIGNMENT_DECIMAL_VAR = ISSUE_PREFIX + "AssignmentDecimalVar";
 
 	public static final String ISSUE__ASSIGNMENT_OTHER_NAMESPACE = ISSUE_PREFIX + "AssignmentOtherNamespace";
