@@ -12,13 +12,13 @@ package com.puppetlabs.geppetto.ruby.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 
+import com.puppetlabs.geppetto.common.os.UnicodeReaderFactory;
 import com.puppetlabs.geppetto.pp.pptp.Function;
 import com.puppetlabs.geppetto.pp.pptp.MetaType;
 import com.puppetlabs.geppetto.pp.pptp.PPTPFactory;
@@ -201,7 +201,7 @@ public class PptpRubyResource extends ResourceImpl {
 		try {
 			switch(loadType) {
 				case TYPE: {
-					List<PPTypeInfo> typeInfo = helper.getTypeInfo(uri.path(), new InputStreamReader(inputStream));
+					List<PPTypeInfo> typeInfo = helper.getTypeInfo(uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
 					for(PPTypeInfo info : typeInfo) {
 						Type type = PPTPFactory.eINSTANCE.createType();
 						type.setName(info.getTypeName());
@@ -226,7 +226,8 @@ public class PptpRubyResource extends ResourceImpl {
 					break;
 
 				case FUNCTION: {
-					List<PPFunctionInfo> functions = helper.getFunctionInfo(uri.path(), new InputStreamReader(inputStream));
+					List<PPFunctionInfo> functions = helper.getFunctionInfo(
+						uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
 
 					for(PPFunctionInfo info : functions) {
 						Function pptpFunc = PPTPFactory.eINSTANCE.createFunction();
@@ -239,7 +240,7 @@ public class PptpRubyResource extends ResourceImpl {
 					break;
 
 				case META: {
-					PPTypeInfo info = helper.getMetaTypeInfo(uri.path(), new InputStreamReader(inputStream));
+					PPTypeInfo info = helper.getMetaTypeInfo(uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
 
 					MetaType type = PPTPFactory.eINSTANCE.createMetaType();
 					type.setName(info.getTypeName());
@@ -265,7 +266,7 @@ public class PptpRubyResource extends ResourceImpl {
 				}
 
 				case TYPEFRAGMENT: {
-					for(PPTypeInfo type : helper.getTypeFragments(uri.path(), new InputStreamReader(inputStream))) {
+					for(PPTypeInfo type : helper.getTypeFragments(uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"))) {
 						TypeFragment fragment = PPTPFactory.eINSTANCE.createTypeFragment();
 						fragment.setName(type.getTypeName());
 
