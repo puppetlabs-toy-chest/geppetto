@@ -82,4 +82,6 @@ public class PPPreferenceConstants {
 
 	public static final String PROBLEM_IMPORT_IS_DEPRECATED = "importIsDeprecated";
 
+	public static final String PROBLEM_DEPRECATED_VARIABLE_NAME = "deprecatedVariableName";
+
 }

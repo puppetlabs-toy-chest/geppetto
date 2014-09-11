@@ -859,8 +859,10 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		tester.validate(v).assertOK();
 
 		v.setVarName("$3_4");
-		tester.validate(v).assertOK();
+		tester.validate(v).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_VARIABLE_NAME);
 
+		v.setVarName("$Abc123");
+		tester.validate(v).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_VARIABLE_NAME);
 	}
 
 }

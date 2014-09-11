@@ -18,12 +18,12 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	/**
 	 * How should assignment to variable $string be treated. Puppet bug http://projects.puppetlabs.com/issues/14093.
 	 */
-	public ValidationPreference assignmentToVarNamedString();
+	ValidationPreference assignmentToVarNamedString();
 
 	/**
 	 * How should assignment to variable $trusted be treated.
 	 */
-	public ValidationPreference assignmentToVarNamedTrusted();
+	ValidationPreference assignmentToVarNamedTrusted();
 
 	/**
 	 * Puppet interprets the strings "false" and "true" as boolean true when they are used in a boolean context.
@@ -31,51 +31,56 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	 *
 	 * @return
 	 */
-	public ValidationPreference booleansInStringForm();
+	ValidationPreference booleansInStringForm();
+
+	/**
+	 * How should use of deprecated capitalized variable names be reported.
+	 */
+	ValidationPreference deprecatedVariableName();
 
 	/**
 	 * How to validate a dq string - style guide says single quoted should be used if possible.
 	 *
 	 * @return
 	 */
-	public ValidationPreference dqStringNotRequired();
+	ValidationPreference dqStringNotRequired();
 
 	/**
 	 * How to validate a dq string when it only contains a single interpolated variable.
 	 *
 	 * @return
 	 */
-	public ValidationPreference dqStringNotRequiredVariable();
+	ValidationPreference dqStringNotRequiredVariable();
 
 	/**
 	 * How should use of deprecated 'import' keyword be reported.
 	 */
-	public ValidationPreference importIsDeprecated();
+	ValidationPreference importIsDeprecated();
 
 	/**
 	 * How to validate hyphens in non brace enclosed interpolations. In < 2.7 interpolation stops at a hyphen, but
 	 * not in 2.7. Thus when using 2.6 code in 2.7 or vice versa, the result is different.
 	 */
-	public ValidationPreference interpolatedNonBraceEnclosedHyphens();
+	ValidationPreference interpolatedNonBraceEnclosedHyphens();
 
 	/**
 	 * How to validate a missing 'default' in switch type expressions i.e. 'case' and 'selector'
 	 */
-	public ValidationPreference missingDefaultInSelector();
+	ValidationPreference missingDefaultInSelector();
 
 	/**
 	 * How to validate unbraced interpolation.
 	 */
-	public ValidationPreference unbracedInterpolation();
+	ValidationPreference unbracedInterpolation();
 
 	/**
 	 * How to validate a literal resource title. Style guide says they should be single quoted.
 	 */
-	public ValidationPreference unquotedResourceTitles();
+	ValidationPreference unquotedResourceTitles();
 
 	/**
 	 * How should expression validity that cannot be asserted until runtime be reported.
 	 * See Issue GEP-110
 	 */
-	public ValidationPreference validityAssertedAtRuntime();
+	ValidationPreference validityAssertedAtRuntime();
 }

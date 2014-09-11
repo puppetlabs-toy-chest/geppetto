@@ -33,6 +33,9 @@ public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 			PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, "Assignment to $trusted", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, "Validity not asserted until runtime", getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, "Deprecated variable name",
+			getFieldEditorParent()));
 	}
 
 }

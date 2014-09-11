@@ -91,7 +91,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, //
 		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, //
 		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, //
-		PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED //
+		PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED, //
+		PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME //
 	);
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -128,6 +129,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getBooleansInStringForm() {
 		return getPreference(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING);
+	}
+
+	public ValidationPreference getDeprecatedVariableName() {
+		return getPreference(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME);
 	}
 
 	public ValidationPreference getCaseDefaultShouldAppearLast() {
@@ -298,6 +303,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, ValidationPreference.WARNING.toString());
 
 		// save actions
 		store.setDefault(PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL, false);

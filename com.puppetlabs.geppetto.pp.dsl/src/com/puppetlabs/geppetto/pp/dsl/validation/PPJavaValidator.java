@@ -835,20 +835,17 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 					: "") + "Definition argument should start with $", o, PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME,
 				IPPDiagnostics.ISSUE__NOT_VARNAME);
 		}
-		else if(!isVARIABLE(argName))
-			acceptor.acceptError(
-				"Not a valid variable name", o, PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__NOT_VARNAME);
-
-		else if(!isFirstNonDollarLowerCase(argName))
-			acceptor.acceptError(
-				"A parameter must start with a lower case letter", o, PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME,
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_INITIAL_LOWERCASE);
-		else if("$trusted".equals(argName)) {
-			warningOrError(
-				acceptor, advisor().assignmentToVarNamedTrusted(),
-				"$trusted will automatically contain trusted node data in future versions - avoid using this name.", o,
-				PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME, IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
+		else if(internalCheckVariableName(o, argName, PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME, false)) {
+			if(!isFirstNonDollarLowerCase(argName))
+				acceptor.acceptError(
+					"A parameter must start with a lower case letter", o, PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME,
+					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_INITIAL_LOWERCASE);
+			else if("$trusted".equals(argName)) {
+				warningOrError(
+					acceptor, advisor().assignmentToVarNamedTrusted(),
+					"$trusted will automatically contain trusted node data in future versions - avoid using this name.", o,
+					PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME, IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
+			}
 		}
 
 		if(o.getOp() != null && !"=".equals(o.getOp()))
@@ -1129,7 +1126,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		String varName = o.getValue();
 		if(EcoreUtil2.getContainerOfType(o, ExpressionTE.class) != null) {
 			// Interpolated name. Treat a literal name expression e.g. "${literalName}" as if it was "${$literalname}"
-			checkVariableName(o, '$' + varName);
+			internalCheckVariableName(o, '$' + varName, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, true);
 			return;
 		}
 
@@ -1759,14 +1756,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkVariableExpression(VariableExpression o) {
-		checkVariableName(o, o.getVarName());
-	}
-
-	private void checkVariableName(EObject o, String varName) {
-		if(!isVARIABLE(varName))
-			acceptor.acceptError(
-				"Expected to comply with Variable rule", o, PPPackage.Literals.VARIABLE_EXPRESSION__VAR_NAME, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__NOT_VARNAME);
+		internalCheckVariableName(o, o.getVarName(), PPPackage.Literals.VARIABLE_EXPRESSION__VAR_NAME, true);
 	}
 
 	@Check
@@ -1975,6 +1965,25 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	}
 
+	private boolean internalCheckVariableName(EObject o, String varName, EStructuralFeature feature, boolean matchArgOK) {
+		if(patternHelper.isVARIABLE(varName) || matchArgOK && patternHelper.isDECIMALVAR(varName))
+			return true;
+
+		boolean ok = false;
+		if(patternHelper.isDEPRECATED_VARIABLE(varName)) {
+			if(advisor().deprecatedVariableName() != ValidationPreference.ERROR) {
+				ok = true;
+				if(advisor().deprecatedVariableName() == ValidationPreference.WARNING)
+					acceptor.acceptWarning(
+						"Variable name that start with an upper case letter or digit is deprecated and will become illegal in future versions of Puppet",
+						o, feature, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__DEPRECATED_VARIABLE_NAME);
+			}
+		}
+		if(!ok)
+			acceptor.acceptError("Not a valid variable name", o, feature, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_VARNAME);
+		return ok;
+	}
+
 	private boolean isCLASSNAME(String s) {
 		return patternHelper.isCLASSNAME(s);
 	}
@@ -2078,10 +2087,6 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	private boolean isSTRING(String s) {
 		return patternHelper.isSQSTRING(s);
-	}
-
-	private boolean isVARIABLE(String s) {
-		return patternHelper.isVARIABLE(s);
 	}
 
 	private Severity severity(ValidationPreference pref) {

@@ -110,4 +110,23 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 		v.setVarName("$x");
 		tester.validate(pp).assertOK();
 	}
+
+	@Test
+	public void test_Validate_VariableExpression_NotOk() {
+		PuppetManifest pp = pf.createPuppetManifest();
+		VariableExpression v = pf.createVariableExpression();
+		pp.getStatements().add(v);
+
+		v.setVarName("Abc");
+		tester.validate(v).assertError(IPPDiagnostics.ISSUE__NOT_VARNAME);
+
+		v.setVarName("3b");
+		tester.validate(v).assertError(IPPDiagnostics.ISSUE__NOT_VARNAME);
+
+		v.setVarName("01");
+		tester.validate(v).assertError(IPPDiagnostics.ISSUE__NOT_VARNAME);
+
+		v.setVarName("foo::bar::Fee");
+		tester.validate(v).assertError(IPPDiagnostics.ISSUE__NOT_VARNAME);
+	}
 }
