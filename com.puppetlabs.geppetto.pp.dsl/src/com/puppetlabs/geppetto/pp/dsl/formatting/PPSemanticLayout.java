@@ -231,7 +231,7 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	}
 
 	protected boolean _format(ElseIfExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
-		internalFormatStatementList(node, grammarAccess.getElseIfExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
+		internalFormatStatementList(node, grammarAccess.getElseIfExpressionAccess().getStatementsExpressionListParserRuleCall_3_0());
 		return false;
 	}
 
@@ -242,7 +242,7 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	}
 
 	protected boolean _format(IfExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
-		internalFormatStatementList(node, grammarAccess.getIfExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
+		internalFormatStatementList(node, grammarAccess.getIfExpressionAccess().getStatementsExpressionListParserRuleCall_3_0());
 		return false;
 	}
 
@@ -334,7 +334,7 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	}
 
 	protected boolean _format(UnlessExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
-		internalFormatStatementList(node, grammarAccess.getUnlessExpressionAccess().getThenStatementsExpressionListParserRuleCall_3_0());
+		internalFormatStatementList(node, grammarAccess.getUnlessExpressionAccess().getStatementsExpressionListParserRuleCall_3_0());
 		return false;
 	}
 

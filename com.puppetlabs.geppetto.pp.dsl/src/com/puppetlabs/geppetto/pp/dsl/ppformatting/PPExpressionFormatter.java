@@ -272,7 +272,7 @@ public class PPExpressionFormatter {
 		stream.appendText("{");
 		stream.changeIndentation(1);
 		stream.appendBreaks(1);
-		formatStatementList(o.getThenStatements(), stream);
+		formatStatementList(o.getStatements(), stream);
 		stream.changeIndentation(-1);
 		stream.appendText("}");
 		if(o.getElseStatement() != null) {
@@ -350,7 +350,7 @@ public class PPExpressionFormatter {
 		stream.appendText("{");
 		stream.changeIndentation(1);
 		stream.appendBreaks(1);
-		formatStatementList(o.getThenStatements(), stream);
+		formatStatementList(o.getStatements(), stream);
 		stream.changeIndentation(-1);
 		stream.appendText("}");
 		if(o.getElseStatement() != null) {
@@ -566,7 +566,7 @@ public class PPExpressionFormatter {
 		stream.appendText("{");
 		stream.changeIndentation(1);
 		stream.appendBreaks(1);
-		formatStatementList(o.getThenStatements(), stream);
+		formatStatementList(o.getStatements(), stream);
 		stream.changeIndentation(-1);
 		stream.appendText("}");
 	}

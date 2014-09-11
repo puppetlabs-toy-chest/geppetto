@@ -1277,11 +1277,11 @@ public class PPResourceLinker implements IPPDiagnostics {
 					break;
 
 				case PPPackage.IF_EXPRESSION:
-					internalLinkUnparenthesisedCall(((IfExpression) o).getThenStatements(), ctx);
+					internalLinkUnparenthesisedCall(((IfExpression) o).getStatements(), ctx);
 					break;
 
 				case PPPackage.UNLESS_EXPRESSION:
-					internalLinkUnparenthesisedCall(((UnlessExpression) o).getThenStatements(), ctx);
+					internalLinkUnparenthesisedCall(((UnlessExpression) o).getStatements(), ctx);
 					break;
 
 				case PPPackage.ELSE_EXPRESSION:
@@ -1289,7 +1289,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 					break;
 
 				case PPPackage.ELSE_IF_EXPRESSION:
-					internalLinkUnparenthesisedCall(((ElseIfExpression) o).getThenStatements(), ctx);
+					internalLinkUnparenthesisedCall(((ElseIfExpression) o).getStatements(), ctx);
 					break;
 
 				case PPPackage.NODE_DEFINITION:

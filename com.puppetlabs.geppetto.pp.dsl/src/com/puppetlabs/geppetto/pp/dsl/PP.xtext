@@ -431,7 +431,7 @@ Case returns pp::Case
 
 //-- UNLESS (is the same as if !(e) {}, but without support for "else"
 UnlessExpression returns pp::UnlessExpression
-	: 'unless' condExpr = AssignmentExpression '{' (thenStatements += ExpressionList)* '}'
+	: 'unless' condExpr = AssignmentExpression '{' (statements += ExpressionList)* '}'
 		(=>'else' elseStatement = ElseExpression)?
     ;
 	 
@@ -443,7 +443,7 @@ IfExpression returns pp::IfExpression
 	: 'if'  
 		condExpr = AssignmentExpression 
 		'{'  
-			(thenStatements += ExpressionList)*
+			(statements += ExpressionList)*
 		'}' 
 			((=>'elsif' elseStatement=ElseIfExpression)|(=>'else' elseStatement=ElseExpression))?
 	;
@@ -459,7 +459,7 @@ ElseIfExpression returns pp::Expression
 	: 	{pp::ElseIfExpression}
 		condExpr = AssignmentExpression 
 		'{' 
-			(thenStatements += ExpressionList)*
+			(statements += ExpressionList)*
 		'}' 
 			((=>'elsif' elseStatement=ElseIfExpression)|(=>'else' elseStatement=ElseExpression))?
 	;

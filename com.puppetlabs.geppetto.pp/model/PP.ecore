@@ -26,12 +26,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//LiteralExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Definition" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="Definition" eSuperTypes="#//ExpressionBlock">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" eType="#//DefinitionArgumentList"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
-        eType="#//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DefinitionArgumentList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
@@ -51,17 +49,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
         eType="#//Case" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Case">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Case" eSuperTypes="#//ExpressionBlock">
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IfExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="IfExpression" eSuperTypes="#//ExpressionBlock">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condExpr" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="thenStatements" upperBound="-1"
-        eType="#//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elseStatement" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
@@ -148,13 +142,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeDefinition" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="NodeDefinition" eSuperTypes="#//ExpressionBlock">
     <eStructuralFeatures xsi:type="ecore:EReference" name="hostNames" upperBound="-1"
         eType="#//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentName" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
-        eType="#//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" abstract="true" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expr" eType="#//Expression"
@@ -208,11 +200,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="varName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralClass" eSuperTypes="#//LiteralExpression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UnlessExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="UnlessExpression" eSuperTypes="#//ExpressionBlock">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condExpr" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="thenStatements" upperBound="-1"
-        eType="#//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elseStatement" eType="#//Expression"
         containment="true"/>
   </eClassifiers>

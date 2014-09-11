@@ -66,6 +66,7 @@ import com.puppetlabs.geppetto.pp.ElseExpression;
 import com.puppetlabs.geppetto.pp.ElseIfExpression;
 import com.puppetlabs.geppetto.pp.EqualityExpression;
 import com.puppetlabs.geppetto.pp.Expression;
+import com.puppetlabs.geppetto.pp.ExpressionBlock;
 import com.puppetlabs.geppetto.pp.ExpressionTE;
 import com.puppetlabs.geppetto.pp.FunctionCall;
 import com.puppetlabs.geppetto.pp.HashEntry;
@@ -332,6 +333,21 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	private IValidationAdvisor advisor() {
 		return validationAdvisorProvider.get();
+	}
+
+	private void assertConditionalAtTopLevel(Expression o) {
+		if(advisor().allowRHSConditionals())
+			return;
+
+		Expression container = (Expression) o.eContainer();
+		if(container instanceof ExpressionBlock)
+			return;
+
+		if(container instanceof RelationshipExpression && advisor().allowExtendedDependencyTypes() &&
+			extendedRelationshipClasses.contains(o.eClass()))
+			return;
+
+		acceptor.acceptError(expressionTypeNameProvider.doToString(o) + " must be at top level", o, IPPDiagnostics.ISSUE__NOT_TOPLEVEL);
 	}
 
 	@Check
@@ -689,6 +705,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkCaseExpression(CaseExpression o) {
+		assertConditionalAtTopLevel(o);
 		final Expression switchExpr = o.getSwitchExpr();
 
 		boolean theDefaultIsSeen = false;
@@ -1016,7 +1033,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkElseIfExpression(ElseIfExpression o) {
-		internalCheckTopLevelExpressions(o.getThenStatements());
+		internalCheckTopLevelExpressions(o.getStatements());
 		EObject container = o.eContainer();
 		if(container instanceof IfExpression || container instanceof ElseExpression || container instanceof ElseIfExpression)
 			return;
@@ -1063,7 +1080,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkIfExpression(IfExpression o) {
-		internalCheckTopLevelExpressions(o.getThenStatements());
+		internalCheckTopLevelExpressions(o.getStatements());
+		assertConditionalAtTopLevel(o);
 		Expression elseStatement = o.getElseStatement();
 		if(elseStatement == null || elseStatement instanceof ElseExpression || elseStatement instanceof IfExpression ||
 			elseStatement instanceof ElseIfExpression)
@@ -1743,7 +1761,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	void checkUnlessExpression(UnlessExpression o) {
-		internalCheckTopLevelExpressions(o.getThenStatements());
+		assertConditionalAtTopLevel(o);
+		internalCheckTopLevelExpressions(o.getStatements());
 		if(!advisor().allowUnless()) {
 			acceptor.acceptError(
 				"The 'unless' statment is only available in Puppet version >= 3.0. (Change target preference?)", o,
