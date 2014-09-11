@@ -278,6 +278,11 @@ public class PuppetTPTests {
 	}
 
 	@Test
+	public void testLoad3_7_0() throws Exception {
+		performLoad("3.7.0");
+	}
+
+	@Test
 	public void testLoadEMFTP() throws Exception {
 		File pptpFile = TestDataProvider.getTestFile(new Path("testData/pptp/puppet-2.6.4_0.pptp"));
 
