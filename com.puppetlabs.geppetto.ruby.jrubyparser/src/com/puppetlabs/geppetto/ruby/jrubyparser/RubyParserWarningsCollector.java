@@ -69,7 +69,9 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 		}
 
 		protected RubyIssue(SyntaxException error) {
-			this(null, error.getPosition(), error.getMessage(), EMPTY_DATA);
+			this(null, error.getPosition(), error.getMessage() == null
+				? "Syntax error"
+				: error.getMessage(), EMPTY_DATA);
 		}
 
 		@Override
