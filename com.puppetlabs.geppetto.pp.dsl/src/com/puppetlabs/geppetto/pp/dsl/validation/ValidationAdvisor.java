@@ -36,6 +36,11 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference deprecatedVariableName() {
+			return problemsAdvisor.deprecatedVariableName();
+		}
+
+		@Override
 		public ValidationPreference caseDefaultShouldAppearLast() {
 			return problemsAdvisor.caseDefaultShouldAppearLast();
 		}
@@ -453,9 +458,13 @@ public class ValidationAdvisor {
 		}
 
 		@Override
-		public ValidationPreference importIsDeprecated() {
+		public ValidationPreference deprecatedVariableName() {
 			return ValidationPreference.ERROR;
 		}
 
+		@Override
+		public ValidationPreference importIsDeprecated() {
+			return ValidationPreference.ERROR;
+		}
 	}
 }

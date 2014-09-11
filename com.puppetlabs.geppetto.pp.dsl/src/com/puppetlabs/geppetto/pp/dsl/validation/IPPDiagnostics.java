@@ -238,4 +238,6 @@ public interface IPPDiagnostics {
 	public static final String ISSUE__UNKNOWN_TYPE_PROP = ISSUE__UNKNOWN_TYPE + ISSUE_PROPOSAL_SUFFIX;
 
 	public static final String ISSUE__TYPE_CONSTRAINT_NOT_FULFILLED = "TypeConstraintNotFulfilled";
+
+	public static final String ISSUE__DEPRECATED_VARIABLE_NAME = "DeprecatedVariableName";
 }

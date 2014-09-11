@@ -74,10 +74,10 @@ public class TestVariables extends AbstractPuppetTests implements AbstractPuppet
 		Resource r = loadAndLinkSingleResource(code);
 		tester.validate(r.getContents().get(0)).assertError(IPPDiagnostics.ISSUE__ASSIGNMENT_DECIMAL_VAR);
 
-		// allowed, not decimal
+		// allowed, not decimal. Will yield warning though
 		code = "$01 = 10"; //
 		r = loadAndLinkSingleResource(code);
-		tester.validate(r.getContents().get(0)).assertOK();
+		tester.validate(r.getContents().get(0)).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_VARIABLE_NAME);
 	}
 
 	@Test

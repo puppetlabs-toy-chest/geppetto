@@ -38,6 +38,8 @@ public class PPPatternHelper {
 
 	protected final Pattern regexpPattern;
 
+	protected final Pattern deprecatedVariablePattern;
+
 	protected final Pattern variablePattern;
 
 	protected final Pattern sqStringPattern;
@@ -50,7 +52,7 @@ public class PPPatternHelper {
 
 	protected final Pattern recognizedDQEscapes;
 
-	protected final Pattern decimalVarPattern;
+	protected final Pattern decimalVariablePattern;
 
 	/**
 	 * Intended as Ruby %r{[\w-]} equivalence
@@ -78,7 +80,15 @@ public class PPPatternHelper {
 		// start with a * - '/*...'
 		// contain newline character
 		regexpPattern = Pattern.compile("/([^/\\n\\*\\\\]|(\\\\[^\\n]))([^/\\n\\\\]|(\\\\[^\\n]))*/[a-z]*");
-		variablePattern = Pattern.compile("\\$(::)?(" + VAR_CHAR + "+::)*" + VAR_CHAR + "+");
+
+		// For regexp match results
+		decimalVariablePattern = Pattern.compile("\\$?([0]|([1-9][0-9]*))");
+
+		// For versions < 4.0
+		deprecatedVariablePattern = Pattern.compile("\\$(::)?(" + VAR_CHAR + "+::)*" + VAR_CHAR + "+");
+
+		// For versoins >= 4.0
+		variablePattern = Pattern.compile("\\$(:?(::)?[a-z]\\w*)*(:?(::)?[a-z_]\\w*)");
 
 		// sq string may not contain unescaped single quote
 		sqStringPattern = Pattern.compile("([^'\\\\]|\\\\.)*");
@@ -90,8 +100,6 @@ public class PPPatternHelper {
 		unrecognizedDQEscapes = Pattern.compile("\\\\[^stn '\"\\\\\\r\\n\\$]");
 
 		recognizedDQEscapes = Pattern.compile("\\\\[\\\\nrst'\" \\$]");
-
-		decimalVarPattern = Pattern.compile("\\$?([0]|([1-9][0-9]*))");
 	}
 
 	/**
@@ -147,7 +155,13 @@ public class PPPatternHelper {
 	public boolean isDECIMALVAR(String s) {
 		if(s == null || s.length() == 0)
 			return false;
-		return decimalVarPattern.matcher(s).matches();
+		return decimalVariablePattern.matcher(s).matches();
+	}
+
+	public boolean isDEPRECATED_VARIABLE(String s) {
+		if(s == null || s.length() == 0)
+			return false;
+		return deprecatedVariablePattern.matcher(s).matches();
 	}
 
 	public boolean isNAME(String s) {

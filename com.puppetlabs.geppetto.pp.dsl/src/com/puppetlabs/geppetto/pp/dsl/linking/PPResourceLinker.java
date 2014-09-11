@@ -191,11 +191,10 @@ public class PPResourceLinker implements IPPDiagnostics {
 			varName = ((LiteralNameOrReference) expr).getValue();
 		if(varName == null)
 			return; // it is some other type of expression - it is validated as expression
-		StringBuilder varName2 = new StringBuilder();
-		if(!varName.startsWith("$"))
-			varName2.append("$");
-		varName2.append(varName);
-		if(patternHelper.isVARIABLE(varName2.toString()))
+		String varNameWithDollar = varName.startsWith("$")
+			? varName
+			: ('$' + varName);
+		if(patternHelper.isVARIABLE(varNameWithDollar) || patternHelper.isDECIMALVAR(varNameWithDollar))
 			internalLinkVariable(expr, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, varName, ctx);
 		else
 			ctx.acceptError("Not a valid variable name", expr, PPPackage.Literals.LITERAL_NAME_OR_REFERENCE__VALUE, ISSUE__NOT_VARNAME);

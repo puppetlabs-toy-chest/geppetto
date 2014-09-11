@@ -32,6 +32,11 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	}
 
 	@Override
+	public ValidationPreference deprecatedVariableName() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
 	public ValidationPreference caseDefaultShouldAppearLast() {
 		return ValidationPreference.IGNORE;
 	}

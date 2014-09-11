@@ -45,6 +45,11 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	}
 
 	@Override
+	public ValidationPreference deprecatedVariableName() {
+		return preferences.getDeprecatedVariableName();
+	}
+
+	@Override
 	public ValidationPreference caseDefaultShouldAppearLast() {
 		return preferences.getCaseDefaultShouldAppearLast();
 	}
