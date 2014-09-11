@@ -358,6 +358,17 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkAppendExpression(AppendExpression o) {
+		ValidationPreference peIsDeprecated = advisor().plusEqualsIsDeprecated();
+		if(peIsDeprecated != ValidationPreference.IGNORE) {
+			if(peIsDeprecated == ValidationPreference.ERROR)
+				acceptor.acceptError(
+					"The operator '+=' is no longer supported. See http://links.puppetlabs.com/remove-plus-equals", o,
+					IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
+			else
+				acceptor.acceptWarning(
+					"The operator '+=' is deprecated and will become illegal in future versions of Puppet. See http://links.puppetlabs.com/remove-plus-equals",
+					o, IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
+		}
 		Expression leftExpr = o.getLeftExpr();
 		if(!(leftExpr instanceof VariableExpression))
 			acceptor.acceptError(

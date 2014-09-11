@@ -13,6 +13,8 @@ package com.puppetlabs.geppetto.pp.dsl.tests;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.junit.Test;
 
+import com.puppetlabs.geppetto.pp.AppendExpression;
+import com.puppetlabs.geppetto.pp.LiteralBoolean;
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.MatchingExpression;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
@@ -50,6 +52,24 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 		Resource r = loadAndLinkSingleResource(code);
 		String s = serialize(r.getContents().get(0));
 		assertEquals("serialization should produce same result", code, s);
+	}
+
+	/**
+	 * Test that append is an error.
+	 * - $x += expr
+	 */
+	@Test
+	public void test_Validate_AppendExpression_Ok() {
+		PuppetManifest pp = pf.createPuppetManifest();
+		AppendExpression ae = pf.createAppendExpression();
+		LiteralBoolean b = pf.createLiteralBoolean();
+		VariableExpression v = pf.createVariableExpression();
+		v.setVarName("$x");
+		ae.setLeftExpr(v);
+		ae.setRightExpr(b);
+		pp.getStatements().add(ae);
+
+		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
 	}
 
 	@Test

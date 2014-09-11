@@ -240,4 +240,6 @@ public interface IPPDiagnostics {
 	public static final String ISSUE__TYPE_CONSTRAINT_NOT_FULFILLED = "TypeConstraintNotFulfilled";
 
 	public static final String ISSUE__DEPRECATED_VARIABLE_NAME = "DeprecatedVariableName";
+
+	public static final String ISSUE__PLUS_EQUALS_IS_DEPRECATED = ISSUE_PREFIX + "PlusEqualsIsDeprecated";
 }

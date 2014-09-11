@@ -513,10 +513,14 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		ae.setLeftExpr(at);
 		ae.setRightExpr(b);
 
-		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__NOT_APPENDABLE);
+		tester.validate(pp).assertAll(
+			AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__NOT_APPENDABLE),
+			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED));
 
 		ae.setLeftExpr(createNameOrReference("a"));
-		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__NOT_APPENDABLE);
+		tester.validate(pp).assertAll(
+			AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__NOT_APPENDABLE),
+			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED));
 
 	}
 
@@ -535,8 +539,9 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		ae.setRightExpr(b);
 		pp.getStatements().add(ae);
 
-		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__ASSIGNMENT_DECIMAL_VAR);
-
+		tester.validate(pp).assertAll(
+			AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__ASSIGNMENT_DECIMAL_VAR),
+			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED));
 	}
 
 	/**
@@ -554,12 +559,13 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		ae.setRightExpr(b);
 		pp.getStatements().add(ae);
 
-		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__ASSIGNMENT_OTHER_NAMESPACE);
-
+		tester.validate(pp).assertAll(
+			AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__ASSIGNMENT_OTHER_NAMESPACE),
+			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED));
 	}
 
 	/**
-	 * Tests append ok states:
+	 * Test that append gives a deprecation warning.
 	 * - $x += expr
 	 */
 	@Test
@@ -573,7 +579,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		ae.setRightExpr(b);
 		pp.getStatements().add(ae);
 
-		tester.validate(pp).assertOK();
+		tester.validate(pp).assertWarning(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
 	}
 
 	@Test

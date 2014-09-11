@@ -84,4 +84,6 @@ public class PPPreferenceConstants {
 
 	public static final String PROBLEM_DEPRECATED_VARIABLE_NAME = "deprecatedVariableName";
 
+	public static final String PROBLEM_PLUS_EQUALS_IS_DEPRECATED = "plusEqualsIsDeprecated";
+
 }

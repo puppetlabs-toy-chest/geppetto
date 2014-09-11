@@ -93,6 +93,11 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	}
 
 	@Override
+	public ValidationPreference plusEqualsIsDeprecated() {
+		return preferences.getPlusEqualsIsDeprecated();
+	}
+
+	@Override
 	public ValidationPreference rightToLeftRelationships() {
 		return preferences.getRightToLeftRelationships();
 	}

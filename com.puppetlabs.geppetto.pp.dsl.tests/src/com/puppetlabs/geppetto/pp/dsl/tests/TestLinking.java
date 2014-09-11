@@ -20,6 +20,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
+
 /**
  * Test validation/linking of variables.
  */
@@ -72,7 +74,7 @@ public class TestLinking extends AbstractPuppetTests {
 		// XtextResource r = getResourceFromString(code);
 		List<Resource> resources = loadAndLinkResources(code1, code2);
 		Resource r = resources.get(0);
-		tester.validate(r.getContents().get(0)).assertOK();
+		tester.validate(r.getContents().get(0)).assertWarning(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
 		resourceWarningDiagnostics(r).assertOK();
 		resourceErrorDiagnostics(r).assertOK();
 

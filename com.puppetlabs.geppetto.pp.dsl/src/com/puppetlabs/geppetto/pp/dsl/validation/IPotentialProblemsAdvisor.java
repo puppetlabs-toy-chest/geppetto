@@ -69,6 +69,11 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	ValidationPreference missingDefaultInSelector();
 
 	/**
+	 * How should use of deprecated '-=' and '+=' operators be reported.
+	 */
+	public ValidationPreference plusEqualsIsDeprecated();
+
+	/**
 	 * How to validate unbraced interpolation.
 	 */
 	ValidationPreference unbracedInterpolation();
