@@ -81,6 +81,11 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference plusEqualsIsDeprecated() {
+			return problemsAdvisor.plusEqualsIsDeprecated();
+		}
+
+		@Override
 		public ValidationPreference rightToLeftRelationships() {
 			return problemsAdvisor.rightToLeftRelationships();
 		}
@@ -464,6 +469,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public ValidationPreference importIsDeprecated() {
+			return ValidationPreference.ERROR;
+		}
+
+		@Override
+		public ValidationPreference plusEqualsIsDeprecated() {
 			return ValidationPreference.ERROR;
 		}
 	}

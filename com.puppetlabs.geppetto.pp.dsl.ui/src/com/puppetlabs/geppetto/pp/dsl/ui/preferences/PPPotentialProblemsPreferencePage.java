@@ -34,8 +34,12 @@ public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, "Validity not asserted until runtime", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
-			PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, "Deprecated variable name",
+			PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, "Use of deprecated variable name",
 			getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED, "Use of deprecated 'import' keyword", getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_PLUS_EQUALS_IS_DEPRECATED, "Use of deprecated += operator", getFieldEditorParent()));
 	}
 
 }
