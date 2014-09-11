@@ -188,6 +188,14 @@ public class ValidationAdvisor {
 		 * @returns false
 		 */
 		@Override
+		public boolean allowRHSConditionals() {
+			return false;
+		}
+
+		/**
+		 * @returns false
+		 */
+		@Override
 		public boolean allowSeparatorExpression() {
 			return false;
 		}
@@ -421,6 +429,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public boolean allowLambdas() {
+			return true;
+		}
+
+		@Override
+		public boolean allowRHSConditionals() {
 			return true;
 		}
 

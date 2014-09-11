@@ -148,6 +148,11 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public boolean allowMoreThan2AtInSequence();
 
 	/**
+	 * The 3.5 with --parser future should allow the expressions if, unless, and case as r-values.
+	 */
+	public boolean allowRHSConditionals();
+
+	/**
 	 * 3.2 --parser future adds an expression separator (';')
 	 */
 	public boolean allowSeparatorExpression();
