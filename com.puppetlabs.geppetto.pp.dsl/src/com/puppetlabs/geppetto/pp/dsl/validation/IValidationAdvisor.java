@@ -101,6 +101,11 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public boolean allowAnyValueAsHashKey();
 
 	/**
+	 * The 3.5 --parser future allows chained assignments
+	 */
+	public boolean allowChainedAssignments();
+
+	/**
 	 * The 3.2 --parser future allows blocks to end with an expression
 	 */
 	public boolean allowExpressionLastInBlocks();

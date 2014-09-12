@@ -134,6 +134,14 @@ public class ValidationAdvisor {
 		 * @returns false
 		 */
 		@Override
+		public boolean allowChainedAssignments() {
+			return false;
+		}
+
+		/**
+		 * @returns false
+		 */
+		@Override
 		public boolean allowExpressionLastInBlocks() {
 			return false;
 		}
@@ -424,6 +432,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public boolean allowAnyValueAsHashKey() {
+			return true;
+		}
+
+		@Override
+		public boolean allowChainedAssignments() {
 			return true;
 		}
 

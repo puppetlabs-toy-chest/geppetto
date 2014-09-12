@@ -429,8 +429,13 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		if(leftExpr instanceof VariableExpression)
 			checkAssignability(o, (VariableExpression) leftExpr);
 
-		// TODO: rhs is not validated, it allows expression, which includes rvalue, but some top level expressions
-		// are probably not allowed (case?)
+		Expression rightExpr = o.getRightExpr();
+		if(rightExpr instanceof AssignmentExpression) {
+			if(!advisor().allowChainedAssignments())
+				acceptor.acceptError(
+					"Chained assignments not allowed in versions < 4.0", o, PPPackage.Literals.BINARY_EXPRESSION__RIGHT_EXPR,
+					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__ASSIGNMENT_CHAINED);
+		}
 	}
 
 	/**

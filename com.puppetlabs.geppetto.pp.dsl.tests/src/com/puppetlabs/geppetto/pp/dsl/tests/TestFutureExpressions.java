@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.junit.Test;
 
 import com.puppetlabs.geppetto.pp.AppendExpression;
+import com.puppetlabs.geppetto.pp.AssignmentExpression;
 import com.puppetlabs.geppetto.pp.LiteralBoolean;
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.MatchingExpression;
@@ -70,6 +71,31 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 		pp.getStatements().add(ae);
 
 		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
+	}
+
+	/**
+	 * Tests that chained assignemt is ok
+	 * - $x = $y = expr
+	 */
+	@Test
+	public void test_Validate_AssignmentExpression_NotOk_Chained() {
+		PuppetManifest pp = pf.createPuppetManifest();
+		AssignmentExpression ax = pf.createAssignmentExpression();
+		VariableExpression v = pf.createVariableExpression();
+		v.setVarName("$x");
+		ax.setLeftExpr(v);
+
+		AssignmentExpression ay = pf.createAssignmentExpression();
+		VariableExpression y = pf.createVariableExpression();
+		y.setVarName("$y");
+		ay.setLeftExpr(y);
+
+		LiteralBoolean b = pf.createLiteralBoolean();
+		ay.setRightExpr(b);
+		ax.setRightExpr(ay);
+		pp.getStatements().add(ax);
+
+		tester.validate(pp).assertOK();
 	}
 
 	@Test

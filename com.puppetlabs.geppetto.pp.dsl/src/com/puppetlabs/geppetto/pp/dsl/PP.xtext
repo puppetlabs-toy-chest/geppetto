@@ -141,7 +141,7 @@ endComma : ',' ;
 AssignmentExpression returns pp::Expression
 	: AppendExpression ({pp::AssignmentExpression.leftExpr = current}
 		'='  
-		rightExpr = AppendExpression
+		rightExpr = AssignmentExpression
 	  )? 
   	;
 
