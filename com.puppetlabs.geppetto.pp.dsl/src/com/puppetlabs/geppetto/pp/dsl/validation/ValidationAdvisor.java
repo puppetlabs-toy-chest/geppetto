@@ -223,6 +223,14 @@ public class ValidationAdvisor {
 			return false;
 		}
 
+		/**
+		 * @returns false
+		 */
+		@Override
+		public boolean allowSplashAttribute() {
+			return false;
+		}
+
 		@Override
 		public boolean allowTypeDefinitions() {
 			return false;
@@ -467,6 +475,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public boolean allowSeparatorExpression() {
+			return true;
+		}
+
+		@Override
+		public boolean allowSplashAttribute() {
 			return true;
 		}
 

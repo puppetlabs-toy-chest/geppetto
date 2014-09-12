@@ -163,6 +163,11 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public boolean allowSeparatorExpression();
 
 	/**
+	 * The 3.7 --parser future allows splash attributes in resource body
+	 */
+	public boolean allowSplashAttribute();
+
+	/**
 	 * @return wether or not type definitions are allowed (introduced in Puppet 4.x)
 	 */
 	public boolean allowTypeDefinitions();
