@@ -70,7 +70,7 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 		ae.setRightExpr(b);
 		pp.getStatements().add(ae);
 
-		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
+		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS);
 	}
 
 	/**

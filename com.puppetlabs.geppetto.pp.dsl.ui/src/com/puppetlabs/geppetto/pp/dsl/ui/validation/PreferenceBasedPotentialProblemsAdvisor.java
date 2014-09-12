@@ -45,13 +45,23 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	}
 
 	@Override
-	public ValidationPreference deprecatedVariableName() {
-		return preferences.getDeprecatedVariableName();
+	public ValidationPreference caseDefaultShouldAppearLast() {
+		return preferences.getCaseDefaultShouldAppearLast();
 	}
 
 	@Override
-	public ValidationPreference caseDefaultShouldAppearLast() {
-		return preferences.getCaseDefaultShouldAppearLast();
+	public ValidationPreference deprecatedImport() {
+		return preferences.getDeprecatedImport();
+	}
+
+	@Override
+	public ValidationPreference deprecatedPlusEquals() {
+		return preferences.getDeprecatedPlusEquals();
+	}
+
+	@Override
+	public ValidationPreference deprecatedVariableName() {
+		return preferences.getDeprecatedVariableName();
 	}
 
 	@Override
@@ -73,11 +83,6 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	}
 
 	@Override
-	public ValidationPreference importIsDeprecated() {
-		return preferences.getImportIsDeprecated();
-	}
-
-	@Override
 	public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
 		return preferences.getInterpolatedNonBraceEnclosedHypens();
 	}
@@ -90,11 +95,6 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	@Override
 	public ValidationPreference mlComments() {
 		return preferences.getMLCommentsValidationPreference();
-	}
-
-	@Override
-	public ValidationPreference plusEqualsIsDeprecated() {
-		return preferences.getPlusEqualsIsDeprecated();
 	}
 
 	@Override

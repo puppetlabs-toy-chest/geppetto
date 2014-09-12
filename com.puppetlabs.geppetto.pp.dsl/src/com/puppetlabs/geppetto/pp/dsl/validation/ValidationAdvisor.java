@@ -36,13 +36,23 @@ public class ValidationAdvisor {
 		}
 
 		@Override
-		public ValidationPreference deprecatedVariableName() {
-			return problemsAdvisor.deprecatedVariableName();
+		public ValidationPreference caseDefaultShouldAppearLast() {
+			return problemsAdvisor.caseDefaultShouldAppearLast();
 		}
 
 		@Override
-		public ValidationPreference caseDefaultShouldAppearLast() {
-			return problemsAdvisor.caseDefaultShouldAppearLast();
+		public ValidationPreference deprecatedImport() {
+			return problemsAdvisor.deprecatedImport();
+		}
+
+		@Override
+		public ValidationPreference deprecatedPlusEquals() {
+			return problemsAdvisor.deprecatedPlusEquals();
+		}
+
+		@Override
+		public ValidationPreference deprecatedVariableName() {
+			return problemsAdvisor.deprecatedVariableName();
 		}
 
 		@Override
@@ -61,11 +71,6 @@ public class ValidationAdvisor {
 		}
 
 		@Override
-		public ValidationPreference importIsDeprecated() {
-			return problemsAdvisor.importIsDeprecated();
-		}
-
-		@Override
 		public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
 			return problemsAdvisor.interpolatedNonBraceEnclosedHyphens();
 		}
@@ -78,11 +83,6 @@ public class ValidationAdvisor {
 		@Override
 		public ValidationPreference mlComments() {
 			return problemsAdvisor.mlComments();
-		}
-
-		@Override
-		public ValidationPreference plusEqualsIsDeprecated() {
-			return problemsAdvisor.plusEqualsIsDeprecated();
 		}
 
 		@Override
@@ -476,17 +476,17 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference deprecatedImport() {
+			return ValidationPreference.ERROR;
+		}
+
+		@Override
+		public ValidationPreference deprecatedPlusEquals() {
+			return ValidationPreference.ERROR;
+		}
+
+		@Override
 		public ValidationPreference deprecatedVariableName() {
-			return ValidationPreference.ERROR;
-		}
-
-		@Override
-		public ValidationPreference importIsDeprecated() {
-			return ValidationPreference.ERROR;
-		}
-
-		@Override
-		public ValidationPreference plusEqualsIsDeprecated() {
 			return ValidationPreference.ERROR;
 		}
 	}

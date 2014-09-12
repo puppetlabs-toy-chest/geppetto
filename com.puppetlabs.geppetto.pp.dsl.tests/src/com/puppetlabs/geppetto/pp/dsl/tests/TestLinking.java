@@ -74,7 +74,7 @@ public class TestLinking extends AbstractPuppetTests {
 		// XtextResource r = getResourceFromString(code);
 		List<Resource> resources = loadAndLinkResources(code1, code2);
 		Resource r = resources.get(0);
-		tester.validate(r.getContents().get(0)).assertWarning(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
+		tester.validate(r.getContents().get(0)).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS);
 		resourceWarningDiagnostics(r).assertOK();
 		resourceErrorDiagnostics(r).assertOK();
 

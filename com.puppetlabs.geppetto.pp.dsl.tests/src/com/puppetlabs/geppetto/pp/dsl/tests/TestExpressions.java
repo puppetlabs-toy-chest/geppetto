@@ -515,12 +515,12 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 		tester.validate(pp).assertAll(
 			AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__NOT_APPENDABLE),
-			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED));
+			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS));
 
 		ae.setLeftExpr(createNameOrReference("a"));
 		tester.validate(pp).assertAll(
 			AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__NOT_APPENDABLE),
-			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED));
+			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS));
 
 	}
 
@@ -541,7 +541,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 		tester.validate(pp).assertAll(
 			AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__ASSIGNMENT_DECIMAL_VAR),
-			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED));
+			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS));
 	}
 
 	/**
@@ -561,7 +561,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 		tester.validate(pp).assertAll(
 			AssertableDiagnostics.errorCode(IPPDiagnostics.ISSUE__ASSIGNMENT_OTHER_NAMESPACE),
-			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED));
+			AssertableDiagnostics.warningCode(IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS));
 	}
 
 	/**
@@ -579,7 +579,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		ae.setRightExpr(b);
 		pp.getStatements().add(ae);
 
-		tester.validate(pp).assertWarning(IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
+		tester.validate(pp).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS);
 	}
 
 	@Test
@@ -689,7 +689,7 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		pp.getStatements().add(ip);
 
 		tester.validate(ip).assertAll(
-			errorCode(IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION), warningCode(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED));
+			errorCode(IPPDiagnostics.ISSUE__REQUIRED_EXPRESSION), warningCode(IPPDiagnostics.ISSUE__DEPRECATED_IMPORT));
 	}
 
 	@Test
@@ -699,9 +699,9 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		ip.getValues().add(createSqString("somewhere/*.pp"));
 		pp.getStatements().add(ip);
 
-		tester.validate(ip).assertWarning(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED);
+		tester.validate(ip).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_IMPORT);
 		ip.getValues().add(createSqString("nowhere/*.pp"));
-		tester.validate(ip).assertWarning(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED);
+		tester.validate(ip).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_IMPORT);
 	}
 
 	@Test

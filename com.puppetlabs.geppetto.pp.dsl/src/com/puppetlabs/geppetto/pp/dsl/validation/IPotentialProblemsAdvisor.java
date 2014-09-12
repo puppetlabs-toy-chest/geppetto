@@ -34,6 +34,16 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	ValidationPreference booleansInStringForm();
 
 	/**
+	 * How should use of deprecated 'import' keyword be reported.
+	 */
+	ValidationPreference deprecatedImport();
+
+	/**
+	 * How should use of deprecated '-=' and '+=' operators be reported.
+	 */
+	ValidationPreference deprecatedPlusEquals();
+
+	/**
 	 * How should use of deprecated capitalized variable names be reported.
 	 */
 	ValidationPreference deprecatedVariableName();
@@ -53,11 +63,6 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	ValidationPreference dqStringNotRequiredVariable();
 
 	/**
-	 * How should use of deprecated 'import' keyword be reported.
-	 */
-	ValidationPreference importIsDeprecated();
-
-	/**
 	 * How to validate hyphens in non brace enclosed interpolations. In < 2.7 interpolation stops at a hyphen, but
 	 * not in 2.7. Thus when using 2.6 code in 2.7 or vice versa, the result is different.
 	 */
@@ -67,11 +72,6 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	 * How to validate a missing 'default' in switch type expressions i.e. 'case' and 'selector'
 	 */
 	ValidationPreference missingDefaultInSelector();
-
-	/**
-	 * How should use of deprecated '-=' and '+=' operators be reported.
-	 */
-	public ValidationPreference plusEqualsIsDeprecated();
 
 	/**
 	 * How to validate unbraced interpolation.

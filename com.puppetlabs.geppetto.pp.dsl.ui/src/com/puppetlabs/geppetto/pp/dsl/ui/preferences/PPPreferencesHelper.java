@@ -91,9 +91,9 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, //
 		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, //
 		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, //
-		PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED, //
+		PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT, //
 		PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, //
-		PPPreferenceConstants.PROBLEM_PLUS_EQUALS_IS_DEPRECATED //
+		PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS //
 	);
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -132,16 +132,24 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		return getPreference(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING);
 	}
 
-	public ValidationPreference getDeprecatedVariableName() {
-		return getPreference(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME);
-	}
-
 	public ValidationPreference getCaseDefaultShouldAppearLast() {
 		return getPreference(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST);
 	}
 
 	public List<String> getDefaultFolderFilters() {
 		return FolderFilterEditor.parseFolderFilter(defaultFolderFilter);
+	}
+
+	public ValidationPreference getDeprecatedImport() {
+		return getPreference(PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT);
+	}
+
+	public ValidationPreference getDeprecatedPlusEquals() {
+		return getPreference(PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS);
+	}
+
+	public ValidationPreference getDeprecatedVariableName() {
+		return getPreference(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME);
 	}
 
 	public ValidationPreference getDqStringNotRequired() {
@@ -160,10 +168,6 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		return FolderFilterEditor.parseFolderFilter(store.getString(PPPreferenceConstants.PUPPET_FOLDER_FILTER));
 	}
 
-	public ValidationPreference getImportIsDeprecated() {
-		return getPreference(PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED);
-	}
-
 	public ValidationPreference getInterpolatedNonBraceEnclosedHypens() {
 		return getPreference(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN);
 	}
@@ -174,10 +178,6 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getMLCommentsValidationPreference() {
 		return getPreference(PPPreferenceConstants.PROBLEM_ML_COMMENTS);
-	}
-
-	public ValidationPreference getPlusEqualsIsDeprecated() {
-		return getPreference(PPPreferenceConstants.PROBLEM_PLUS_EQUALS_IS_DEPRECATED);
 	}
 
 	private ValidationPreference getPreference(String prefId) {
@@ -307,9 +307,9 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, ValidationPreference.IGNORE.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_IMPORT_IS_DEPRECATED, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, ValidationPreference.WARNING.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_PLUS_EQUALS_IS_DEPRECATED, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS, ValidationPreference.WARNING.toString());
 
 		// save actions
 		store.setDefault(PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL, false);

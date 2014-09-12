@@ -42,6 +42,10 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__DEFAULT_NOT_LAST = ISSUE_PREFIX + "DefaultNotLast";
 
+	public static final String ISSUE__DEPRECATED_IMPORT = ISSUE_PREFIX + "DeprecatedImport";
+
+	public static final String ISSUE__DEPRECATED_PLUS_EQUALS = ISSUE_PREFIX + "DeprecatedPlusEquals";
+
 	public static final String ISSUE__DEPRECATED_REFERENCE = ISSUE_PREFIX + "DeprecatedReference";
 
 	public static final String ISSUE__DEPRECATED_VARIABLE_NAME = ISSUE_PREFIX + "DeprecatedVariableName";
@@ -66,8 +70,6 @@ public interface IPPDiagnostics {
 	 * This should not happen if a model is parsed from text, but can occur when manually constructing a model.
 	 */
 	public static final String ISSUE__ILLEGAL_OP = ISSUE_PREFIX + "IllegalOperator";
-
-	public static final String ISSUE__IMPORT_IS_DEPRECATED = ISSUE_PREFIX + "ImportIsDeprecated";
 
 	public static final String ISSUE__INHERITANCE_WITH_PARAMETERS = ISSUE_PREFIX + "InheritenceOfParameterizedClass";
 
@@ -243,6 +245,4 @@ public interface IPPDiagnostics {
 	public static final String ISSUE__UNSUPPORTED_UNLESS = ISSUE_PREFIX + "UnsupportedUnless";
 
 	public static final String ISSUE__VALIDITY_ASSERTED_AT_RUNTIME = ISSUE_PREFIX + "ValidityAssertedAtRuntime";
-
-	public static final String ISSUE__PLUS_EQUALS_IS_DEPRECATED = ISSUE_PREFIX + "PlusEqualsIsDeprecated";
 }

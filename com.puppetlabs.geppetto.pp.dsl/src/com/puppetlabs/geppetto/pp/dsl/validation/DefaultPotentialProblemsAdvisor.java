@@ -32,13 +32,23 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	}
 
 	@Override
-	public ValidationPreference deprecatedVariableName() {
+	public ValidationPreference caseDefaultShouldAppearLast() {
+		return ValidationPreference.IGNORE;
+	}
+
+	@Override
+	public ValidationPreference deprecatedImport() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference caseDefaultShouldAppearLast() {
-		return ValidationPreference.IGNORE;
+	public ValidationPreference deprecatedPlusEquals() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
+	public ValidationPreference deprecatedVariableName() {
+		return ValidationPreference.WARNING;
 	}
 
 	@Override
@@ -57,11 +67,6 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	}
 
 	@Override
-	public ValidationPreference importIsDeprecated() {
-		return ValidationPreference.WARNING;
-	}
-
-	@Override
 	public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
 		return ValidationPreference.WARNING;
 	}
@@ -74,11 +79,6 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	@Override
 	public ValidationPreference mlComments() {
 		return ValidationPreference.IGNORE;
-	}
-
-	@Override
-	public ValidationPreference plusEqualsIsDeprecated() {
-		return ValidationPreference.WARNING;
 	}
 
 	@Override

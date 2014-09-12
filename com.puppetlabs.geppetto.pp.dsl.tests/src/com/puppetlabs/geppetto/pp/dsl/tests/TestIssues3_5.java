@@ -33,7 +33,7 @@ public class TestIssues3_5 extends AbstractPuppetTests {
 	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
 		return new DefaultPotentialProblemsAdvisor() {
 			@Override
-			public ValidationPreference importIsDeprecated() {
+			public ValidationPreference deprecatedImport() {
 				return ValidationPreference.WARNING;
 			}
 			// TODO: Add more
@@ -44,6 +44,6 @@ public class TestIssues3_5 extends AbstractPuppetTests {
 	public void test_deprecatedImport() throws Exception {
 		String code = "import \"foo\"\n";
 		Resource r = loadAndLinkSingleResource(code);
-		tester.validate(r.getContents().get(0)).assertWarning(IPPDiagnostics.ISSUE__IMPORT_IS_DEPRECATED);
+		tester.validate(r.getContents().get(0)).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_IMPORT);
 	}
 }

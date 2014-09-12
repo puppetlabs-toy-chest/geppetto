@@ -358,16 +358,16 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkAppendExpression(AppendExpression o) {
-		ValidationPreference peIsDeprecated = advisor().plusEqualsIsDeprecated();
+		ValidationPreference peIsDeprecated = advisor().deprecatedPlusEquals();
 		if(peIsDeprecated != ValidationPreference.IGNORE) {
 			if(peIsDeprecated == ValidationPreference.ERROR)
 				acceptor.acceptError(
 					"The operator '+=' is no longer supported. See http://links.puppetlabs.com/remove-plus-equals", o,
-					IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
+					IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS);
 			else
 				acceptor.acceptWarning(
 					"The operator '+=' is deprecated and will become illegal in future versions of Puppet. See http://links.puppetlabs.com/remove-plus-equals",
-					o, IPPDiagnostics.ISSUE__PLUS_EQUALS_IS_DEPRECATED);
+					o, IPPDiagnostics.ISSUE__DEPRECATED_PLUS_EQUALS);
 		}
 		Expression leftExpr = o.getLeftExpr();
 		if(!(leftExpr instanceof VariableExpression))
@@ -1106,9 +1106,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkImportExpression(ImportExpression o) {
-		if(advisor().importIsDeprecated() != ValidationPreference.IGNORE)
+		if(advisor().deprecatedImport() != ValidationPreference.IGNORE)
 			warningOrError(
-				acceptor, advisor().importIsDeprecated(), "Import is deprecated in Puppet version >= 3.5.", o, ISSUE__IMPORT_IS_DEPRECATED);
+				acceptor, advisor().deprecatedImport(), "Import is deprecated in Puppet version >= 3.5.", o, ISSUE__DEPRECATED_IMPORT);
 
 		if(o.getValues().size() <= 0)
 			acceptor.acceptError(
