@@ -46,6 +46,11 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference deprecatedNodeInheritance() {
+			return problemsAdvisor.deprecatedNodeInheritance();
+		}
+
+		@Override
 		public ValidationPreference deprecatedPlusEquals() {
 			return problemsAdvisor.deprecatedPlusEquals();
 		}
@@ -477,6 +482,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public ValidationPreference deprecatedImport() {
+			return ValidationPreference.ERROR;
+		}
+
+		@Override
+		public ValidationPreference deprecatedNodeInheritance() {
 			return ValidationPreference.ERROR;
 		}
 

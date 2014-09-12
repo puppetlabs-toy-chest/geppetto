@@ -18,6 +18,7 @@ import com.puppetlabs.geppetto.pp.AssignmentExpression;
 import com.puppetlabs.geppetto.pp.LiteralBoolean;
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.MatchingExpression;
+import com.puppetlabs.geppetto.pp.NodeDefinition;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
 import com.puppetlabs.geppetto.pp.SingleQuotedString;
 import com.puppetlabs.geppetto.pp.VariableExpression;
@@ -142,6 +143,16 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 		pp.getStatements().add(me);
 
 		tester.validate(me).assertWarning(IPPDiagnostics.ISSUE__VALIDITY_ASSERTED_AT_RUNTIME);
+	}
+
+	@Test
+	public void test_Validate_NodeDefinitionExpression_NotOk_Inheritance() {
+		PuppetManifest pp = pf.createPuppetManifest();
+		NodeDefinition nd = pf.createNodeDefinition();
+		nd.getHostNames().add(createNameOrReference("common"));
+		nd.setParentName(pf.createLiteralDefault());
+		pp.getStatements().add(nd);
+		tester.validate(pp).assertError(IPPDiagnostics.ISSUE__DEPRECATED_NODE_INHERITANCE);
 	}
 
 	/**

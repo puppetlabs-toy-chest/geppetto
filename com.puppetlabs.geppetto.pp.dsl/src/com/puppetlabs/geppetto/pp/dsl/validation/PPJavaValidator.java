@@ -1270,11 +1270,22 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		Expression parentExpr = o.getParentName();
 		if(parentExpr != null) {
-			String parentName = stringConstantEvaluator.doToString(parentExpr);
-			if(parentName == null)
-				acceptor.acceptError(
-					"Must be a constant name/string expression.", o, PPPackage.Literals.NODE_DEFINITION__PARENT_NAME, INSIGNIFICANT_INDEX,
-					IPPDiagnostics.ISSUE__NOT_CONSTANT);
+			ValidationPreference deprecatedNI = advisor().deprecatedNodeInheritance();
+			if(deprecatedNI != ValidationPreference.IGNORE)
+				warningOrError(
+					acceptor,
+					deprecatedNI,
+					"Node inheritance is not supported in Puppet >= 4.0. See http://links.puppetlabs.com/puppet-node-inheritance-deprecation",
+					o, PPPackage.Literals.NODE_DEFINITION__PARENT_NAME, INSIGNIFICANT_INDEX,
+					IPPDiagnostics.ISSUE__DEPRECATED_NODE_INHERITANCE);
+
+			if(deprecatedNI != ValidationPreference.ERROR) {
+				String parentName = stringConstantEvaluator.doToString(parentExpr);
+				if(parentName == null)
+					acceptor.acceptError(
+						"Must be a constant name/string expression.", o, PPPackage.Literals.NODE_DEFINITION__PARENT_NAME,
+						INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_CONSTANT);
+			}
 		}
 	}
 
@@ -2143,7 +2154,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		if(validationPreference.isWarning())
 			acceptor.acceptWarning(message, o, feature, index, issueCode);
 		else if(validationPreference.isError())
-			acceptor.acceptWarning(message, o, feature, index, issueCode);
+			acceptor.acceptError(message, o, feature, index, issueCode);
 	}
 
 	private void warningOrError(IMessageAcceptor acceptor, ValidationPreference validationPreference, String message, EObject o,

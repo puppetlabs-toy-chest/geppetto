@@ -38,6 +38,8 @@ public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT, "Use of deprecated 'import' keyword", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE, "Use of deprecated node inheritance", getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, "Use of deprecated variable name", getFieldEditorParent()));
 	}
 

@@ -33,6 +33,8 @@ public class PPPreferenceConstants {
 
 	public static final String PROBLEM_DEPRECATED_IMPORT = "importIsDeprecated";
 
+	public static final String PROBLEM_DEPRECATED_NODE_INHERITANCE = "deprecatedNodeInheritance";
+
 	public static final String PROBLEM_DEPRECATED_PLUS_EQUALS = "deprecatedPlusEquals";
 
 	public static final String PROBLEM_DEPRECATED_VARIABLE_NAME = "deprecatedVariableName";

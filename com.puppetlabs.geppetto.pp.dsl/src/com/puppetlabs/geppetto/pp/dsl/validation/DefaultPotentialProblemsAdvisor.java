@@ -42,6 +42,11 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	}
 
 	@Override
+	public ValidationPreference deprecatedNodeInheritance() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
 	public ValidationPreference deprecatedPlusEquals() {
 		return ValidationPreference.WARNING;
 	}

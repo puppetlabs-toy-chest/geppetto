@@ -55,6 +55,11 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	}
 
 	@Override
+	public ValidationPreference deprecatedNodeInheritance() {
+		return preferences.getDeprecatedNodeInheritance();
+	}
+
+	@Override
 	public ValidationPreference deprecatedPlusEquals() {
 		return preferences.getDeprecatedPlusEquals();
 	}
