@@ -1410,10 +1410,19 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		// missing name is checked by container (if it is ok or not)
 		if(nameExpr == null)
 			return;
-		if(!(nameExpr instanceof StringExpression ||
+
+		// @fmtOff
+		if(!(
+		   nameExpr instanceof StringExpression
+		|| nameExpr instanceof LiteralNameOrReference
+		|| nameExpr instanceof LiteralName
+		|| nameExpr instanceof VariableExpression
+		|| nameExpr instanceof AtExpression
+		|| nameExpr instanceof LiteralList
+		|| nameExpr instanceof SelectorExpression
+		|| advisor().allowLiteralDefaultInTitle() && nameExpr instanceof LiteralDefault))
+		// @fmtOn
 			// TODO: was LiteralString, follow up
-			nameExpr instanceof LiteralNameOrReference || nameExpr instanceof LiteralName || nameExpr instanceof VariableExpression ||
-			nameExpr instanceof AtExpression || nameExpr instanceof LiteralList || nameExpr instanceof SelectorExpression))
 			acceptor.acceptError(
 				"Expression unsupported as resource name/title.", o, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, INSIGNIFICANT_INDEX,
 				IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION_STRING_OK);

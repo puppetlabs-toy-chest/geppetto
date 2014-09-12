@@ -190,6 +190,14 @@ public class ValidationAdvisor {
 		 * @returns false
 		 */
 		@Override
+		public boolean allowLiteralDefaultInTitle() {
+			return false;
+		}
+
+		/**
+		 * @returns false
+		 */
+		@Override
 		public boolean allowModulo() {
 			return false;
 		}
@@ -452,6 +460,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public boolean allowLambdas() {
+			return true;
+		}
+
+		@Override
+		public boolean allowLiteralDefaultInTitle() {
 			return true;
 		}
 

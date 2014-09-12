@@ -140,6 +140,11 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public boolean allowLambdas();
 
 	/**
+	 * The 3.7 --parser future allows a title that is literal default in resource body
+	 */
+	public boolean allowLiteralDefaultInTitle();
+
+	/**
 	 * Before 3.2 modulo operator '%' was not supported.
 	 *
 	 * @return

@@ -109,18 +109,6 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		return false;
 	}
 
-	private void subTestValidateExpressionTitles(Expression titleExpr) {
-		PuppetManifest pp = pf.createPuppetManifest();
-		EList<Expression> statements = pp.getStatements();
-
-		ResourceExpression re = createVirtualResourceExpression("file", titleExpr, "owner", createValue("0777"));
-		statements.add(re);
-		tester.validator().checkResourceExpression(re);
-		tester.validator().checkResourceBody(re.getResourceData().get(0));
-		tester.diagnose().assertOK();
-
-	}
-
 	@Test
 	public void test_Serialize_1() throws Exception {
 		String code = "file { 'afile': owner => 'foo'}";
