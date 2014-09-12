@@ -28,6 +28,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.pp.AppendExpression;
 import com.puppetlabs.geppetto.pp.AssignmentExpression;
+import com.puppetlabs.geppetto.pp.AtExpression;
 import com.puppetlabs.geppetto.pp.AttributeOperations;
 import com.puppetlabs.geppetto.pp.Case;
 import com.puppetlabs.geppetto.pp.CaseExpression;
@@ -140,6 +141,9 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 	private LiteralListLayout literaListLayout;
 
 	@Inject
+	private AtExpressionLayout atExpressionLayout;
+
+	@Inject
 	private CaseLayout caseLayout;
 
 	@Inject
@@ -190,6 +194,10 @@ public class PPSemanticLayout extends DeclarativeSemanticFlowLayout {
 
 	protected boolean _format(AssignmentExpression ae, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
 		return assignmentLayout._format(ae, styleSet, node, flow, context);
+	}
+
+	protected boolean _format(AtExpression o, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
+		return atExpressionLayout.format(node, flow, context);
 	}
 
 	protected boolean _format(AttributeOperations aos, StyleSet styleSet, IDomNode node, ITextFlow flow, ILayoutContext context) {
