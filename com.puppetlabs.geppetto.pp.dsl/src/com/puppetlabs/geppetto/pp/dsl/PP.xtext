@@ -640,7 +640,7 @@ keyword : ('and' | 'case' | 'class' | 'default' | 'define' | 'else' | 'elsif' | 
 		| 'import' | 'node' | 'or' | 'undef' | 'true' | 'false' | 'if' | 'unless')
 	;
 
-attributeName : name | keyword;
+attributeName : name | keyword | '*';
 
 name
 	// a puppet grammar glitch allows '::' any number of times (\w*::)*\w+. Validation checks correctness.

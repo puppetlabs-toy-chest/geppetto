@@ -618,65 +618,88 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	}
 
 	@Check
-	public void checkAttributeAddition(AttributeOperation o) {
-		if(!isNAME(o.getKey()))
-			acceptor.acceptError(
-				"Bad name format.", o, PPPackage.Literals.ATTRIBUTE_OPERATION__KEY, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_NAME);
+	public void checkAttributeOperation(AttributeOperation o) {
+		String key = o.getKey();
+		boolean splash = false;
+		if(!isNAME(key)) {
+			splash = advisor().allowSplashAttribute() && "*".equals(key);
+			if(!splash)
+				acceptor.acceptError(
+					"Bad name format.", o, PPPackage.Literals.ATTRIBUTE_OPERATION__KEY, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_NAME);
+		}
 		String op = o.getOp();
 		if(!(op != null && (op.equals("=>") || op.equals("+>"))))
 			acceptor.acceptError(
 				"Bad operator.", o, PPPackage.Literals.ATTRIBUTE_OPERATION__OP, INSIGNIFICANT_INDEX,
 				IPPDiagnostics.ISSUE__UNSUPPORTED_OPERATOR);
-		if(o.getValue() == null)
+
+		Expression value = o.getValue();
+		if(value == null)
 			acceptor.acceptError(
 				"Missing value expression", o, PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX,
 				IPPDiagnostics.ISSUE__NULL_EXPRESSION);
+		else if(splash) {
+			switch(typeEvaluator.type(value)) {
+				case HASH:
+				case DYNAMIC:
+					break;
+				default:
+					acceptor.acceptError(
+						"Right hand side of splash operator must be a hash or a variable", o,
+						PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__SPLASH_VALUE_MUST_BE_HASH);
+			}
+		}
 	}
 
 	@Check
 	public void checkAttributeOperations(AttributeOperations o) {
-		final int count = o.getAttributes().size();
-		EList<AttributeOperation> attrs = o.getAttributes();
-		for(int i = 0; i < count - 1; i++) {
-			INode n = NodeModelUtils.getNode(attrs.get(i));
-			INode n2 = NodeModelUtils.getNode(attrs.get(i + 1));
+		final EList<AttributeOperation> attrs = o.getAttributes();
+		if(attrs.isEmpty())
+			return;
 
-			INode commaNode = null;
-			for(commaNode = n.getNextSibling(); commaNode != null; commaNode = commaNode.getNextSibling())
-				if(commaNode == n2)
-					break;
-				else if(commaNode instanceof LeafNode && ((LeafNode) commaNode).isHidden())
-					continue;
-				else
-					break;
-
-			if(commaNode == null || !",".equals(commaNode.getText())) {
-				int expectOffset = n.getTotalOffset() + n.getTotalLength();
-				acceptor.acceptError("Missing comma.", n.getSemanticElement(),
-				// note that offset must be -1 as this ofter a hidden newline and this
-				// does not work otherwise. Any quickfix needs to adjust the offset on replacement.
-					expectOffset - 1, 2, IPPDiagnostics.ISSUE__MISSING_COMMA);
-			}
-		}
-		// check for duplicate use of attribute/parameter
-		Set<String> duplicates = Sets.newHashSet();
 		Set<String> processed = Sets.newHashSet();
-		AttributeOperations aos = o;
-
-		// find duplicates
-		for(AttributeOperation ao : aos.getAttributes()) {
-			final String key = ao.getKey();
-			if(processed.contains(key))
+		Set<String> duplicates = null;
+		INode prevNode = null;
+		for(AttributeOperation attr : attrs) {
+			String key = attr.getKey();
+			if(!processed.add(key)) {
+				if(duplicates == null)
+					duplicates = Sets.newHashSet();
 				duplicates.add(key);
-			processed.add(key);
+			}
+
+			INode currNode = NodeModelUtils.getNode(attr);
+			if(prevNode != null) {
+				INode commaNode = null;
+				for(commaNode = prevNode.getNextSibling(); commaNode != null; commaNode = commaNode.getNextSibling())
+					if(commaNode == currNode)
+						break;
+					else if(commaNode instanceof LeafNode && ((LeafNode) commaNode).isHidden())
+						continue;
+					else
+						break;
+
+				if(commaNode == null || !",".equals(commaNode.getText())) {
+					int expectOffset = prevNode.getTotalOffset() + prevNode.getTotalLength();
+					acceptor.acceptError("Missing comma.", prevNode.getSemanticElement(),
+					// note that offset must be -1 as this ofter a hidden newline and this
+					// does not work otherwise. Any quickfix needs to adjust the offset on replacement.
+						expectOffset - 1, 2, IPPDiagnostics.ISSUE__MISSING_COMMA);
+				}
+			}
+			prevNode = currNode;
 		}
-		// mark all instances of duplicate name
-		if(duplicates.size() > 0)
-			for(AttributeOperation ao : aos.getAttributes())
-				if(duplicates.contains(ao.getKey()))
-					acceptor.acceptError(
-						"Duplicate attribute: '" + ao.getKey() + "'", ao, PPPackage.Literals.ATTRIBUTE_OPERATION__KEY,
-						IPPDiagnostics.ISSUE__RESOURCE_DUPLICATE_PARAMETER);
+
+		if(duplicates == null)
+			return;
+
+		for(AttributeOperation attr : attrs) {
+			String key = attr.getKey();
+			if(duplicates.contains(key))
+				acceptor.acceptError(
+					"Duplicate use of: '" + key + "'", attr, PPPackage.Literals.ATTRIBUTE_OPERATION__KEY,
+					IPPDiagnostics.ISSUE__RESOURCE_DUPLICATE_ATTRIBUTE);
+		}
 	}
 
 	@Check

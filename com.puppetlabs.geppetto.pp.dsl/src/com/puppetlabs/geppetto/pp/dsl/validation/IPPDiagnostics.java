@@ -181,6 +181,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__RESOURCE_WITHOUT_TITLE = ISSUE_PREFIX + "ResourceWithoutTitle";
 
+	public static final String ISSUE__SPLASH_VALUE_MUST_BE_HASH = ISSUE_PREFIX + "SplashValueMustBeHash";
+
 	public static final String ISSUE__STRING_BOOLEAN = ISSUE_PREFIX + "StringBoolean";
 
 	public static final String ISSUE__TYPE_CONSTRAINT_NOT_FULFILLED = ISSUE_PREFIX + "TypeConstraintNotFulfilled";
