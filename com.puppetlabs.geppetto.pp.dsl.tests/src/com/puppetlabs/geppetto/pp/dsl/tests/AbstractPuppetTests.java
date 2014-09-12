@@ -29,6 +29,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.mwe.ContainersStateFactory;
@@ -60,6 +61,7 @@ import com.puppetlabs.geppetto.pp.AttributeOperations;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.PPFactory;
+import com.puppetlabs.geppetto.pp.PuppetManifest;
 import com.puppetlabs.geppetto.pp.ResourceBody;
 import com.puppetlabs.geppetto.pp.ResourceExpression;
 import com.puppetlabs.geppetto.pp.SingleQuotedString;
@@ -530,5 +532,16 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 				URI.createFileURI(System.getProperty("java.io.tmpdir")), null, null, null);
 
 		tester = new ValidatorTester<PPJavaValidator>(validator, registrar, "com.puppetlabs.geppetto.pp.dsl.PP");
+	}
+
+	protected AssertableDiagnostics subTestValidateExpressionTitles(Expression titleExpr) {
+		PuppetManifest pp = pf.createPuppetManifest();
+		EList<Expression> statements = pp.getStatements();
+
+		ResourceExpression re = createVirtualResourceExpression("file", titleExpr, "owner", createValue("0777"));
+		statements.add(re);
+		tester.validator().checkResourceExpression(re);
+		tester.validator().checkResourceBody(re.getResourceData().get(0));
+		return tester.diagnose();
 	}
 }

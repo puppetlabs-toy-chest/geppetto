@@ -66,6 +66,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__ENSURE_NOT_FIRST = ISSUE_PREFIX + "EnsureNotFirst";
 
+	public static final String ISSUE__EXPRESSION_UNSUPPORTED_AS_TITLE = ISSUE_PREFIX + "ExpressionUnsupportedAsTitle";
+
 	public static final String ISSUE__HYPHEN_IN_NAME = ISSUE_PREFIX + "HyphenInName";
 
 	/**
