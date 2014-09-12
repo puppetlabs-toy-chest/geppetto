@@ -44,6 +44,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__DEPRECATED_IMPORT = ISSUE_PREFIX + "DeprecatedImport";
 
+	public static final String ISSUE__DEPRECATED_NODE_INHERITANCE = ISSUE_PREFIX + "DeprecatedNodeInheritance";
+
 	public static final String ISSUE__DEPRECATED_PLUS_EQUALS = ISSUE_PREFIX + "DeprecatedPlusEquals";
 
 	public static final String ISSUE__DEPRECATED_REFERENCE = ISSUE_PREFIX + "DeprecatedReference";

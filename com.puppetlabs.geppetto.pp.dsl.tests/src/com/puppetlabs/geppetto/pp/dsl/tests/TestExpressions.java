@@ -37,6 +37,7 @@ import com.puppetlabs.geppetto.pp.LiteralBoolean;
 import com.puppetlabs.geppetto.pp.LiteralNameOrReference;
 import com.puppetlabs.geppetto.pp.LiteralRegex;
 import com.puppetlabs.geppetto.pp.MatchingExpression;
+import com.puppetlabs.geppetto.pp.NodeDefinition;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
 import com.puppetlabs.geppetto.pp.RelationshipExpression;
 import com.puppetlabs.geppetto.pp.ResourceExpression;
@@ -765,6 +766,17 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 
 		me.setOpName("!~");
 		tester.validate(me).assertOK();
+	}
+
+	@Test
+	public void test_Validate_NodeDefinitionExpression_Ok() {
+		PuppetManifest pp = pf.createPuppetManifest();
+		NodeDefinition nd = pf.createNodeDefinition();
+		nd.getHostNames().add(createNameOrReference("common"));
+		pp.getStatements().add(nd);
+		tester.validate(pp).assertOK();
+		nd.setParentName(pf.createLiteralDefault());
+		tester.validate(pp).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_NODE_INHERITANCE);
 	}
 
 	@Test

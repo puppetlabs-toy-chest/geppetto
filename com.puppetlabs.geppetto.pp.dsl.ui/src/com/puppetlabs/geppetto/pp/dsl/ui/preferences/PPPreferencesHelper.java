@@ -93,7 +93,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, //
 		PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT, //
 		PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, //
-		PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS //
+		PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS, PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE //
 	);
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -142,6 +142,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getDeprecatedImport() {
 		return getPreference(PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT);
+	}
+
+	public ValidationPreference getDeprecatedNodeInheritance() {
+		return getPreference(PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE);
 	}
 
 	public ValidationPreference getDeprecatedPlusEquals() {
@@ -310,6 +314,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE, ValidationPreference.WARNING.toString());
 
 		// save actions
 		store.setDefault(PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL, false);

@@ -39,6 +39,11 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	ValidationPreference deprecatedImport();
 
 	/**
+	 * How should use of deprecated node inheritance be reported.
+	 */
+	ValidationPreference deprecatedNodeInheritance();
+
+	/**
 	 * How should use of deprecated '-=' and '+=' operators be reported.
 	 */
 	ValidationPreference deprecatedPlusEquals();
