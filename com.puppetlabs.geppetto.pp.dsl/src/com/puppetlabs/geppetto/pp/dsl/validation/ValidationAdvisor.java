@@ -195,6 +195,14 @@ public class ValidationAdvisor {
 		 * @returns false
 		 */
 		@Override
+		public boolean allowExtendedTitleExpressions() {
+			return false;
+		}
+
+		/**
+		 * @returns false
+		 */
+		@Override
 		public boolean allowModulo() {
 			return false;
 		}
@@ -220,6 +228,14 @@ public class ValidationAdvisor {
 		 */
 		@Override
 		public boolean allowSeparatorExpression() {
+			return false;
+		}
+
+		/**
+		 * @returns false
+		 */
+		@Override
+		public boolean allowSplashAttribute() {
 			return false;
 		}
 
@@ -461,12 +477,22 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public boolean allowExtendedTitleExpressions() {
+			return true;
+		}
+
+		@Override
 		public boolean allowRHSConditionals() {
 			return true;
 		}
 
 		@Override
 		public boolean allowSeparatorExpression() {
+			return true;
+		}
+
+		@Override
+		public boolean allowSplashAttribute() {
 			return true;
 		}
 

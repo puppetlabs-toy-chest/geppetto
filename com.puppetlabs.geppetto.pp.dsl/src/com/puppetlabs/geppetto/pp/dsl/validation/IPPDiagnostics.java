@@ -66,6 +66,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__ENSURE_NOT_FIRST = ISSUE_PREFIX + "EnsureNotFirst";
 
+	public static final String ISSUE__EXPRESSION_UNSUPPORTED_AS_TITLE = ISSUE_PREFIX + "ExpressionUnsupportedAsTitle";
+
 	public static final String ISSUE__HYPHEN_IN_NAME = ISSUE_PREFIX + "HyphenInName";
 
 	/**
@@ -182,6 +184,8 @@ public interface IPPDiagnostics {
 	public static final String ISSUE__RESOURCE_WITH_TITLE = ISSUE_PREFIX + "ResourceDefaultWithTitle";
 
 	public static final String ISSUE__RESOURCE_WITHOUT_TITLE = ISSUE_PREFIX + "ResourceWithoutTitle";
+
+	public static final String ISSUE__SPLASH_VALUE_MUST_BE_HASH = ISSUE_PREFIX + "SplashValueMustBeHash";
 
 	public static final String ISSUE__STRING_BOOLEAN = ISSUE_PREFIX + "StringBoolean";
 

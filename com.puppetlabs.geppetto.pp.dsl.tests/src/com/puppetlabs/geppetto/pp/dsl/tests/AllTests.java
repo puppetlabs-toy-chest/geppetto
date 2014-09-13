@@ -26,6 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestTypes.class,
 	TestExpressions.class,
 	TestFutureExpressions.class,
+	TestFutureResourceExpr.class,
 	TestCollectExpression.class,
 	TestSelectorExpression.class,
 	TestDoubleQuotedString.class,

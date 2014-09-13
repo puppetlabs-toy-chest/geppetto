@@ -140,6 +140,11 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	public boolean allowLambdas();
 
 	/**
+	 * The 3.7 --parser future allows a title that is literal default in resource body
+	 */
+	public boolean allowExtendedTitleExpressions();
+
+	/**
 	 * Before 3.2 modulo operator '%' was not supported.
 	 *
 	 * @return
@@ -161,6 +166,11 @@ public interface IValidationAdvisor extends IPotentialProblemsAdvisor {
 	 * 3.2 --parser future adds an expression separator (';')
 	 */
 	public boolean allowSeparatorExpression();
+
+	/**
+	 * The 3.7 --parser future allows splash attributes in resource body
+	 */
+	public boolean allowSplashAttribute();
 
 	/**
 	 * @return wether or not type definitions are allowed (introduced in Puppet 4.x)

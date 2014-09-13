@@ -632,7 +632,12 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 		if(aos != null && desc != null)
 			for(AttributeOperation ao : aos.getAttributes()) {
-				QualifiedName fqn = desc.getQualifiedName().append(ao.getKey());
+				String key = ao.getKey();
+				if("*".equals(key))
+					// Linking not applicable
+					continue;
+
+				QualifiedName fqn = desc.getQualifiedName().append(key);
 				// Accept name if there is at least one type/definition that lists the key
 				// NOTE/TODO: If there are other problems (multiple definitions with same name etc,
 				// the property could be ok in one, but not in another instance.
