@@ -18,6 +18,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.junit.Test;
 
+import com.puppetlabs.geppetto.pp.AssignmentExpression;
+import com.puppetlabs.geppetto.pp.AtExpression;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.HashEntry;
 import com.puppetlabs.geppetto.pp.LiteralHash;
@@ -90,5 +92,33 @@ public class TestFutureResourceExpr extends AbstractPuppetTests {
 		ResourceExpression re = createResourceExpression("file", "a resource", "owner", createValue("0777"), "*", createVariable("h"));
 		statements.add(re);
 		tester.validate(pp).assertOK();
+	}
+
+	@Test
+	public void test_ValidateExpressionTitles_NotOk() {
+		subTestValidateExpressionTitles(createResourceExpression("file", "a resource")).assertError(
+			IPPDiagnostics.ISSUE__EXPRESSION_UNSUPPORTED_AS_TITLE);
+
+		AssignmentExpression asg = pf.createAssignmentExpression();
+		asg.setLeftExpr(createVariable("x"));
+		asg.setRightExpr(createValue("10"));
+		subTestValidateExpressionTitles(asg).assertError(IPPDiagnostics.ISSUE__EXPRESSION_UNSUPPORTED_AS_TITLE);
+	}
+
+	@Test
+	public void test_ValidateExpressionTitles_Ok() {
+		subTestValidateExpressionTitles(pf.createLiteralDefault()).assertOK();
+		subTestValidateExpressionTitles(createHash("hi", "hello")).assertOK();
+		subTestValidateExpressionTitles(createValue("ArbitraryKey")).assertOK();
+		subTestValidateExpressionTitles(createSqString("String title")).assertOK();
+
+		AtExpression array = pf.createAtExpression();
+		array.setLeftExpr(createNameOrReference("Array"));
+		AtExpression variant = pf.createAtExpression();
+		variant.setLeftExpr(createNameOrReference("Variant"));
+		array.getParameters().add(variant);
+		variant.getParameters().add(createNameOrReference("String"));
+		variant.getParameters().add(createNameOrReference("Default"));
+		subTestValidateExpressionTitles(array).assertOK();
 	}
 }

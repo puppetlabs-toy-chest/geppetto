@@ -1444,13 +1444,38 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		// missing name is checked by container (if it is ok or not)
 		if(nameExpr == null)
 			return;
-		if(!(nameExpr instanceof StringExpression ||
+
+		String issueCode;
+		boolean isAllowedExpr;
+		if(advisor().allowExtendedTitleExpressions()) {
+			// @fmtOff
+ 			isAllowedExpr = !(
+ 				   nameExpr instanceof ResourceExpression
+ 				|| nameExpr instanceof AssignmentExpression
+ 				|| nameExpr instanceof RelationshipExpression
+ 			);
+			// @fmtOn
+			issueCode = IPPDiagnostics.ISSUE__EXPRESSION_UNSUPPORTED_AS_TITLE;
+		}
+		else {
+			// @fmtOff
+			isAllowedExpr =
+				   nameExpr instanceof StringExpression
+				|| nameExpr instanceof LiteralNameOrReference
+				|| nameExpr instanceof LiteralName
+				|| nameExpr instanceof VariableExpression
+				|| nameExpr instanceof AtExpression
+				|| nameExpr instanceof LiteralList
+				|| nameExpr instanceof SelectorExpression;
+			// @fmtOn
+			issueCode = IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION_STRING_OK;
+		}
+
+		if(!isAllowedExpr)
 			// TODO: was LiteralString, follow up
-			nameExpr instanceof LiteralNameOrReference || nameExpr instanceof LiteralName || nameExpr instanceof VariableExpression ||
-			nameExpr instanceof AtExpression || nameExpr instanceof LiteralList || nameExpr instanceof SelectorExpression))
 			acceptor.acceptError(
 				"Expression unsupported as resource name/title.", o, PPPackage.Literals.RESOURCE_BODY__NAME_EXPR, INSIGNIFICANT_INDEX,
-				IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION_STRING_OK);
+				issueCode);
 
 		// prior to 2.7 a qualified name caused problems
 		boolean unquotedNameFlagged = false;

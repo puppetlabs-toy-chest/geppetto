@@ -109,18 +109,6 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		return false;
 	}
 
-	private void subTestValidateExpressionTitles(Expression titleExpr) {
-		PuppetManifest pp = pf.createPuppetManifest();
-		EList<Expression> statements = pp.getStatements();
-
-		ResourceExpression re = createVirtualResourceExpression("file", titleExpr, "owner", createValue("0777"));
-		statements.add(re);
-		tester.validator().checkResourceExpression(re);
-		tester.validator().checkResourceBody(re.getResourceData().get(0));
-		tester.diagnose().assertOK();
-
-	}
-
 	@Test
 	public void test_Serialize_1() throws Exception {
 		String code = "file { 'afile': owner => 'foo'}";
@@ -659,29 +647,29 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 		{ // -- literal string
 			SingleQuotedString titleExpr = pf.createSingleQuotedString();
 			titleExpr.setText("test");
-			subTestValidateExpressionTitles(titleExpr);
+			subTestValidateExpressionTitles(titleExpr).assertOK();
 		}
 		{ // -- name
 			LiteralNameOrReference titleExpr = pf.createLiteralNameOrReference();
 			titleExpr.setValue("test");
-			subTestValidateExpressionTitles(titleExpr);
+			subTestValidateExpressionTitles(titleExpr).assertOK();
 		}
 		{ // -- variable
 			VariableExpression titleExpr = pf.createVariableExpression();
 			titleExpr.setVarName("$test");
-			subTestValidateExpressionTitles(titleExpr);
+			subTestValidateExpressionTitles(titleExpr).assertOK();
 		}
 		{ // -- literal list
 			LiteralList titleExpr = pf.createLiteralList();
 			titleExpr.getElements().add(this.createNameOrReference("a"));
 			titleExpr.getElements().add(this.createNameOrReference("b"));
-			subTestValidateExpressionTitles(titleExpr);
+			subTestValidateExpressionTitles(titleExpr).assertOK();
 		}
 		{ // -- hasharray access
 			AtExpression titleExpr = pf.createAtExpression();
 			titleExpr.setLeftExpr(createNameOrReference("Foo"));
 			titleExpr.getParameters().add(createNameOrReference("a"));
-			subTestValidateExpressionTitles(titleExpr);
+			subTestValidateExpressionTitles(titleExpr).assertOK();
 		}
 		{ // -- selector
 			SelectorExpression titleExpr = pf.createSelectorExpression();
@@ -696,7 +684,7 @@ public class TestPuppetResourceExpr extends AbstractPuppetTests {
 			titleExpr.setLeftExpr(slhs);
 			entry.setLeftExpr(entrylhs);
 			entry.setRightExpr(pf.createLiteralBoolean());
-			subTestValidateExpressionTitles(titleExpr);
+			subTestValidateExpressionTitles(titleExpr).assertOK();
 		}
 	}
 }

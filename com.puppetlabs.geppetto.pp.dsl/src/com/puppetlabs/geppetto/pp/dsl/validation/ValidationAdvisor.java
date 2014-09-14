@@ -195,6 +195,14 @@ public class ValidationAdvisor {
 		 * @returns false
 		 */
 		@Override
+		public boolean allowExtendedTitleExpressions() {
+			return false;
+		}
+
+		/**
+		 * @returns false
+		 */
+		@Override
 		public boolean allowModulo() {
 			return false;
 		}
@@ -465,6 +473,11 @@ public class ValidationAdvisor {
 
 		@Override
 		public boolean allowLambdas() {
+			return true;
+		}
+
+		@Override
+		public boolean allowExtendedTitleExpressions() {
 			return true;
 		}
 
