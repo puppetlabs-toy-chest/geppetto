@@ -96,8 +96,7 @@ public class TestFutureResourceExpr extends AbstractPuppetTests {
 
 	@Test
 	public void test_ValidateExpressionTitles_NotOk() {
-		subTestValidateExpressionTitles(
-			createResourceExpression("file", "a resource", "owner", createValue("0777"), "*", createVariable("h"))).assertError(
+		subTestValidateExpressionTitles(createResourceExpression("file", "a resource")).assertError(
 			IPPDiagnostics.ISSUE__EXPRESSION_UNSUPPORTED_AS_TITLE);
 
 		AssignmentExpression asg = pf.createAssignmentExpression();
