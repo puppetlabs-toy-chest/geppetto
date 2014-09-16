@@ -137,6 +137,31 @@ public class Validate extends AbstractForgeServiceMojo {
 	private ValidationPreference caseDefaultShouldAppearLast = IGNORE;
 
 	/**
+	 * How to validate use of 'import' keyword that was deprecated in Puppet 3.5
+	 */
+	@Parameter(property = "forge.validation.importIsDeprecated", defaultValue = "WARNING")
+	protected ValidationPreference deprecatedImport = WARNING;
+
+	/**
+	 * How to validate that use of node inheritance that is deprecated and will be invalid in Puppet >= 4.0
+	 */
+	@Parameter(property = "forge.validation.deprecatedNodeInheritance", defaultValue = "WARNING")
+	protected ValidationPreference deprecatedNodeInheritance = WARNING;
+
+	/**
+	 * How to validate that use of += operator is deprecated and will be invalid in Puppet >= 4.0
+	 */
+	@Parameter(property = "forge.validation.deprecatedPlusEquals", defaultValue = "WARNING")
+	protected ValidationPreference deprecatedPlusEquals = WARNING;
+
+	/**
+	 * How to validate that use of variable names that starts with a digit or upper case letter is deprecated and will be invalid in Puppet
+	 * >= 4.0
+	 */
+	@Parameter(property = "forge.validation.deprecatedVariableName", defaultValue = "WARNING")
+	protected ValidationPreference deprecatedVariableName = WARNING;
+
+	/**
 	 * How to validate a dq string - style guide says single quoted should be used if possible.
 	 */
 	@Parameter(property = "forge.validation.dqStringNotRequired", defaultValue = "IGNORE")
@@ -153,12 +178,6 @@ public class Validate extends AbstractForgeServiceMojo {
 	 */
 	@Parameter(property = "forge.validation.ensureShouldAppearFirstInResource", defaultValue = "IGNORE")
 	private ValidationPreference ensureShouldAppearFirstInResource = IGNORE;
-
-	/**
-	 * How to validate use of 'import' keyword that was deprecated in Puppet 3.5
-	 */
-	@Parameter(property = "forge.validation.importIsDeprecated", defaultValue = "WARNING")
-	protected ValidationPreference importIsDeprecated = WARNING;
 
 	/**
 	 * How to validate hyphens in non brace enclosed interpolations. In < 2.7 interpolation stops at a hyphen, but
@@ -375,6 +394,26 @@ public class Validate extends AbstractForgeServiceMojo {
 		}
 
 		@Override
+		public ValidationPreference deprecatedImport() {
+			return deprecatedImport;
+		}
+
+		@Override
+		public ValidationPreference deprecatedNodeInheritance() {
+			return deprecatedNodeInheritance;
+		}
+
+		@Override
+		public ValidationPreference deprecatedPlusEquals() {
+			return deprecatedPlusEquals;
+		}
+
+		@Override
+		public ValidationPreference deprecatedVariableName() {
+			return deprecatedVariableName;
+		}
+
+		@Override
 		public ValidationPreference dqStringNotRequired() {
 			return dqStringNotRequired;
 		}
@@ -387,11 +426,6 @@ public class Validate extends AbstractForgeServiceMojo {
 		@Override
 		public ValidationPreference ensureShouldAppearFirstInResource() {
 			return ensureShouldAppearFirstInResource;
-		}
-
-		@Override
-		public ValidationPreference importIsDeprecated() {
-			return importIsDeprecated;
 		}
 
 		@Override
