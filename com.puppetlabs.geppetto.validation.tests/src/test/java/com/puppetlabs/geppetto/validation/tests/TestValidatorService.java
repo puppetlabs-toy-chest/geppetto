@@ -118,6 +118,7 @@ public class TestValidatorService extends AbstractValidationTest {
 			asserter.issue(ModuleDiagnostics.ISSUE__MISSING_REQUIRED_ATTRIBUTE), //
 			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE), //
 			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME), //
+			asserter.issue(IPPDiagnostics.ISSUE__NOT_OCTAL_NUMBER), //
 			asserter.messageFragment("unexpected tIDENTIFIER"));
 	}
 

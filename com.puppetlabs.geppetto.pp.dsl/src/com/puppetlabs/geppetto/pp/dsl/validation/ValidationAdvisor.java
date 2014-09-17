@@ -31,6 +31,16 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference attributeIsNotOctal() {
+			return problemsAdvisor.attributeIsNotOctal();
+		}
+
+		@Override
+		public ValidationPreference attributeIsNotString() {
+			return problemsAdvisor.attributeIsNotString();
+		}
+
+		@Override
 		public ValidationPreference booleansInStringForm() {
 			return problemsAdvisor.booleansInStringForm();
 		}
@@ -168,6 +178,14 @@ public class ValidationAdvisor {
 		}
 
 		/**
+		 * @returns false
+		 */
+		@Override
+		public boolean allowExtendedTitleExpressions() {
+			return false;
+		}
+
+		/**
 		 * @returns true
 		 */
 		@Override
@@ -188,14 +206,6 @@ public class ValidationAdvisor {
 		 */
 		@Override
 		public boolean allowLambdas() {
-			return false;
-		}
-
-		/**
-		 * @returns false
-		 */
-		@Override
-		public boolean allowExtendedTitleExpressions() {
 			return false;
 		}
 
@@ -472,12 +482,12 @@ public class ValidationAdvisor {
 		}
 
 		@Override
-		public boolean allowLambdas() {
+		public boolean allowExtendedTitleExpressions() {
 			return true;
 		}
 
 		@Override
-		public boolean allowExtendedTitleExpressions() {
+		public boolean allowLambdas() {
 			return true;
 		}
 

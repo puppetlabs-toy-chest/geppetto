@@ -27,6 +27,16 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	}
 
 	@Override
+	public ValidationPreference attributeIsNotOctal() {
+		return ValidationPreference.ERROR;
+	}
+
+	@Override
+	public ValidationPreference attributeIsNotString() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
 	public ValidationPreference booleansInStringForm() {
 		return ValidationPreference.WARNING;
 	}

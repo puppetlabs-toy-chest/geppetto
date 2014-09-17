@@ -40,6 +40,16 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	}
 
 	@Override
+	public ValidationPreference attributeIsNotOctal() {
+		return preferences.getAttributeIsNotOctal();
+	}
+
+	@Override
+	public ValidationPreference attributeIsNotString() {
+		return preferences.getAttributeIsNotString();
+	}
+
+	@Override
 	public ValidationPreference booleansInStringForm() {
 		return preferences.getBooleansInStringForm();
 	}

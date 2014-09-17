@@ -26,6 +26,11 @@ public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 	ValidationPreference assignmentToVarNamedTrusted();
 
 	/**
+	 * Mode attribute not expressed as an octal number
+	 */
+	ValidationPreference attributeIsNotOctal();
+
+	/**
 	 * Puppet interprets the strings "false" and "true" as boolean true when they are used in a boolean context.
 	 * This validation preference flags them as "not a boolean value"
 	 *

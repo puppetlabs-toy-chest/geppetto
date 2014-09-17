@@ -22,6 +22,9 @@ public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 	protected void createFieldEditors() {
 
 		addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_ATTRIBUTE_IS_NOT_OCTAL, "File mode attribute is neither in string nor octal form",
+			getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, "Interpolated hyphen without surrounding {}", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, "Strings containing \"false\" or \"true\"", getFieldEditorParent()));
