@@ -20,6 +20,8 @@ public class PPStylisticProblemsPreferencePage extends AbstractPreferencePage {
 
 	@Override
 	protected void createFieldEditors() {
+		addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_ATTRIBUTE_IS_NOT_STRING, "File mode attribute is not in string form", getFieldEditorParent()));
 
 		// case and selector
 		this.addField(new ValidationPreferenceFieldEditor(

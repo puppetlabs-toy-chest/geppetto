@@ -109,6 +109,8 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__NOT_NUMERIC = ISSUE_PREFIX + "NotNumeric";
 
+	public static final String ISSUE__NOT_OCTAL_NUMBER = ISSUE_PREFIX + "NotOctalNumber";
+
 	public static final String ISSUE__NOT_ON_PATH = ISSUE_PREFIX + "NotOnPath";
 
 	public static final String ISSUE__NOT_REGEX = ISSUE_PREFIX + "Badlyformedregularexpression";
@@ -124,6 +126,8 @@ public interface IPPDiagnostics {
 	public static final String ISSUE__NOT_VARNAME = ISSUE_PREFIX + "NotVariableName";
 
 	public static final String ISSUE__NULL_EXPRESSION = ISSUE_PREFIX + "NullExpression";
+
+	public static final String ISSUE__OCTAL_SHOULD_BE_STRING = ISSUE_PREFIX + "OctalShouldBeString";
 
 	public static final String ISSUE__PARAM_DEFAULT_NOT_LAST = ISSUE_PREFIX + "ParamDefaultNotLast";
 

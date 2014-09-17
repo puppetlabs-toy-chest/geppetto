@@ -15,7 +15,7 @@ $filesc = regsubst($file,'[/]','_','G')
 
     file {
         "$basedir/augeas$filesc-$parameter":
-            mode => 600, owner => root, group => root,
+            mode => 0600, owner => root, group => root,
             path => "$basedir/augeas$filesc-$parameter",
             content => template("common/augeasconfig.erb"),
             notify  => Exec["Augeas_$basedir/augeas$file-$parameter"],

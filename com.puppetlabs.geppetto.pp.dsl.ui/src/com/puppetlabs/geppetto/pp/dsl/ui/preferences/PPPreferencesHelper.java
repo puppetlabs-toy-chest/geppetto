@@ -70,30 +70,33 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	 * Add all preference that requires a rebuild when their value change.
 	 */
 	private final List<String> requiresRebuild = Lists.newArrayList(//
-		PPPreferenceConstants.PUPPET_TARGET_VERSION, //
-		PPPreferenceConstants.PUPPET_ENVIRONMENT, //
-		PPPreferenceConstants.PUPPET_PROJECT_PATH, //
-		PPPreferenceConstants.PUPPET_MANIFEST_DIR, //
-		PPPreferenceConstants.PUPPET_FOLDER_FILTER, //
-		PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, //
-		PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, //
-		PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, //
-		PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST, //
-		PPPreferenceConstants.PROBLEM_SELECTOR_DEFAULT_LAST, //
-
-		PPPreferenceConstants.PROBLEM_UNQUOTED_RESOURCE_TITLE, //
-		PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED, //
-		PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR, //
-		PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION, //
-		PPPreferenceConstants.PROBLEM_ML_COMMENTS, //
-		PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, //
-		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, //
-		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, //
-		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, //
-		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, //
-		PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT, //
-		PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, //
-		PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS, PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE //
+		// @fmtOff
+		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING,
+		PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED,
+		PPPreferenceConstants.PROBLEM_ATTRIBUTE_IS_NOT_STRING,
+		PPPreferenceConstants.PROBLEM_BOOLEAN_STRING,
+		PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST,
+		PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT,
+		PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE,
+		PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS,
+		PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME,
+		PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED,
+		PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR,
+		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST,
+		PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN,
+		PPPreferenceConstants.PROBLEM_MISSING_DEFAULT,
+		PPPreferenceConstants.PROBLEM_ML_COMMENTS,
+		PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP,
+		PPPreferenceConstants.PROBLEM_SELECTOR_DEFAULT_LAST,
+		PPPreferenceConstants.PROBLEM_UNQUOTED_RESOURCE_TITLE,
+		PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION,
+		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME,
+		PPPreferenceConstants.PUPPET_ENVIRONMENT,
+		PPPreferenceConstants.PUPPET_FOLDER_FILTER,
+		PPPreferenceConstants.PUPPET_MANIFEST_DIR,
+		PPPreferenceConstants.PUPPET_PROJECT_PATH,
+		PPPreferenceConstants.PUPPET_TARGET_VERSION
+		// @fmtOn
 	);
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -126,6 +129,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getAssignmentToVariableNamedTrusted() {
 		return getPreference(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
+	}
+
+	public ValidationPreference getAttributeIsNotString() {
+		return getPreference(PPPreferenceConstants.PROBLEM_ATTRIBUTE_IS_NOT_STRING);
 	}
 
 	public ValidationPreference getBooleansInStringForm() {
@@ -287,36 +294,34 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store = preferenceStoreAccess.getWritablePreferenceStore();
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_STRATEGY, 0);
 		store.setDefault(PPPreferenceConstants.AUTO_EDIT_COMPLETE_COMPOUND_BLOCKS, true);
+
 		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.getDefault().getLiteral());
 		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, PPSearchPath.DEFAULT_PUPPET_PROJECT_PATH);
 		store.setDefault(PPPreferenceConstants.PUPPET_MANIFEST_DIR, PPSearchPath.DEFAULT_MANIFEST_DIR);
 		store.setDefault(PPPreferenceConstants.PUPPET_FOLDER_FILTER, defaultFolderFilter);
 		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, PPSearchPath.DEFAULT_PUPPET_ENVIRONMENT);
 
-		store.setDefault(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, ValidationPreference.WARNING.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, ValidationPreference.WARNING.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED, ValidationPreference.WARNING.toString());
-
-		// stylistic
+		store.setDefault(PPPreferenceConstants.PROBLEM_ATTRIBUTE_IS_NOT_STRING, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_BOOLEAN_STRING, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST, ValidationPreference.IGNORE.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_SELECTOR_DEFAULT_LAST, ValidationPreference.IGNORE.toString());
-
-		store.setDefault(PPPreferenceConstants.PROBLEM_UNQUOTED_RESOURCE_TITLE, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR, ValidationPreference.IGNORE.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, ValidationPreference.WARNING.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_ML_COMMENTS, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_RTOL_RELATIONSHIP, ValidationPreference.IGNORE.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_SELECTOR_DEFAULT_LAST, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_UNQUOTED_RESOURCE_TITLE, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME, ValidationPreference.IGNORE.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_IMPORT, ValidationPreference.WARNING.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, ValidationPreference.WARNING.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_PLUS_EQUALS, ValidationPreference.WARNING.toString());
-		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE, ValidationPreference.WARNING.toString());
 
-		// save actions
 		store.setDefault(PPPreferenceConstants.SAVE_ACTION_ENSURE_ENDS_WITH_NL, false);
 		store.setDefault(PPPreferenceConstants.SAVE_ACTION_TRIM_LINES, false);
 		store.setDefault(PPPreferenceConstants.SAVE_ACTION_REPLACE_FUNKY_SPACES, false);

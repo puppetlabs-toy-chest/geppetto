@@ -36,6 +36,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
@@ -127,6 +128,8 @@ import com.puppetlabs.geppetto.pp.dsl.linking.IMessageAcceptor;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPClassifier;
 import com.puppetlabs.geppetto.pp.dsl.linking.ValidationBasedMessageAcceptor;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
+import com.puppetlabs.geppetto.pp.pptp.PPTPPackage;
+import com.puppetlabs.geppetto.pp.pptp.Type;
 
 public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagnostics {
 	/**
@@ -621,7 +624,11 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	public void checkAttributeOperation(AttributeOperation o) {
 		String key = o.getKey();
 		boolean splash = false;
-		if(!isNAME(key)) {
+		boolean octal = false;
+		if(isNAME(key))
+			octal = !(advisor().allowModeWithNonOctalIntegerLiterals() && advisor().attributeIsNotString() == ValidationPreference.IGNORE) &&
+				isOctalAttribute(o);
+		else {
 			splash = advisor().allowSplashAttribute() && "*".equals(key);
 			if(!splash)
 				acceptor.acceptError(
@@ -638,15 +645,69 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			acceptor.acceptError(
 				"Missing value expression", o, PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX,
 				IPPDiagnostics.ISSUE__NULL_EXPRESSION);
-		else if(splash) {
-			switch(typeEvaluator.type(value)) {
-				case HASH:
-				case DYNAMIC:
-					break;
-				default:
-					acceptor.acceptError(
-						"Right hand side of splash operator must be a hash or a variable", o,
-						PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__SPLASH_VALUE_MUST_BE_HASH);
+		else {
+			if(octal) {
+				PPType vtype = typeEvaluator.type(value);
+				switch(vtype) {
+					case DYNAMIC:
+					case DYNAMIC_STRING:
+						// Can't validate this
+						break;
+					case STRING:
+					case INTEGER_STRING:
+						// symbolic notation or already an integer string, ignore since it will
+						// always be treated as an octal number (regardless of leading zero)
+						break;
+					case INTEGER: {
+						boolean badFormat = false;
+						if(!advisor().allowModeWithNonOctalIntegerLiterals()) {
+							// Check that this number has an octal presentation. If it doesn't
+							// then this is an error.
+							String s = stringConstantEvaluator.doToString(value);
+							if(s != null) {
+								badFormat = true;
+								int len = s.length();
+								if(len >= 4 && len <= 5 && s.charAt(0) == '0') {
+									try {
+										Integer.parseInt(s, 8);
+										badFormat = false;
+									}
+									catch(NumberFormatException e) {
+									}
+								}
+							}
+						}
+						if(badFormat)
+							acceptor.acceptError(
+								"Attribute '" + key + "' should be an octal number in string form, e.g. '0nnn'", o,
+								PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_OCTAL_NUMBER);
+						else
+							// It's an octal number so this is just a stylistic thing
+							warningOrError(
+								acceptor, advisor().attributeIsNotString(), "Attribute '" + key + "' should be a string", o,
+								PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX,
+								IPPDiagnostics.ISSUE__OCTAL_SHOULD_BE_STRING);
+						break;
+					}
+					default:
+						// Something that definitely doesn't belong here
+						acceptor.acceptError(
+							"Attribute '" + key + "' should be an octal number in string form, e.g. '0nnn'", o,
+							PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX,
+							IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+				}
+			}
+			if(splash) {
+				switch(typeEvaluator.type(value)) {
+					case HASH:
+					case DYNAMIC:
+						break;
+					default:
+						acceptor.acceptError(
+							"Right hand side of splash operator must be a hash or a variable", o,
+							PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX,
+							IPPDiagnostics.ISSUE__SPLASH_VALUE_MUST_BE_HASH);
+				}
 			}
 		}
 	}
@@ -2145,6 +2206,32 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	private boolean isNAME(String s) {
 		return patternHelper.isNAME(s);
+	}
+
+	/**
+	 * Returns true for an attribute with the name &quot;mode&quot; that resides in a {@link Type} that
+	 * is named something other than &quot;interface&quot;
+	 *
+	 * @param o
+	 *            The attribute to check
+	 * @return <code>true</code> if the attribute fulfills the requirement.
+	 */
+	private boolean isOctalAttribute(AttributeOperation o) {
+		// Hard-coded check for file mode attribute. Should really be
+		// a String[/0[0-9]{3}/] type declared in the pptp.
+		//
+		if("mode".equals(o.getKey())) {
+			EObject r = o.eContainer().eContainer().eContainer();
+			if(r instanceof ResourceExpression) {
+				ClassifierAdapter adapter = ClassifierAdapterFactory.eINSTANCE.adaptOrNull(r);
+				if(adapter != null) {
+					IEObjectDescription target = adapter.getTargetObjectDescription();
+					if(target != null && PPTPPackage.Literals.TYPE.isSuperTypeOf(target.getEClass()))
+						return !StringUtils.equalsIgnoreInitialCase("interface", target.getName().getLastSegment());
+				}
+			}
+		}
+		return false;
 	}
 
 	private boolean isREGEX(String s) {

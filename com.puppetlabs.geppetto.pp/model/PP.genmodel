@@ -35,7 +35,6 @@
     <genClasses ecoreClass="PP.ecore#//Definition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PP.ecore#//Definition/className"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//Definition/arguments"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//Definition/statements"/>
     </genClasses>
     <genClasses ecoreClass="PP.ecore#//DefinitionArgumentList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//DefinitionArgumentList/arguments"/>
@@ -51,12 +50,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//CaseExpression/cases"/>
     </genClasses>
     <genClasses ecoreClass="PP.ecore#//Case">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//Case/statements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//Case/values"/>
     </genClasses>
     <genClasses ecoreClass="PP.ecore#//IfExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//IfExpression/condExpr"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//IfExpression/thenStatements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//IfExpression/elseStatement"/>
     </genClasses>
     <genClasses ecoreClass="PP.ecore#//LiteralExpression"/>
@@ -129,7 +126,6 @@
     <genClasses ecoreClass="PP.ecore#//NodeDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//NodeDefinition/hostNames"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//NodeDefinition/parentName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//NodeDefinition/statements"/>
     </genClasses>
     <genClasses image="false" ecoreClass="PP.ecore#//UnaryExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//UnaryExpression/expr"/>
@@ -178,7 +174,6 @@
     <genClasses ecoreClass="PP.ecore#//LiteralClass"/>
     <genClasses ecoreClass="PP.ecore#//UnlessExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//UnlessExpression/condExpr"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//UnlessExpression/thenStatements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PP.ecore#//UnlessExpression/elseStatement"/>
     </genClasses>
     <genClasses image="false" ecoreClass="PP.ecore#//Lambda">

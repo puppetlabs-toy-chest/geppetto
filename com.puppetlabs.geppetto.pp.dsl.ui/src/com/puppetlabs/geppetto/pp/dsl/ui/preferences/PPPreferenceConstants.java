@@ -27,6 +27,8 @@ public class PPPreferenceConstants {
 
 	public static final String PROBLEM_ASSIGNMENT_TO_VAR_NAMED_TRUSTED = "assignmentToVarNamedTrusted";
 
+	public static final String PROBLEM_ATTRIBUTE_IS_NOT_STRING = "attributeIsNotString";
+
 	public static final String PROBLEM_BOOLEAN_STRING = "booleanString";
 
 	public static final String PROBLEM_CASE_DEFAULT_LAST = "CaseDefaultLast";

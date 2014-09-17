@@ -31,6 +31,11 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference attributeIsNotString() {
+			return problemsAdvisor.attributeIsNotString();
+		}
+
+		@Override
 		public ValidationPreference booleansInStringForm() {
 			return problemsAdvisor.booleansInStringForm();
 		}
@@ -168,6 +173,14 @@ public class ValidationAdvisor {
 		}
 
 		/**
+		 * @returns false
+		 */
+		@Override
+		public boolean allowExtendedTitleExpressions() {
+			return false;
+		}
+
+		/**
 		 * @returns true
 		 */
 		@Override
@@ -191,12 +204,9 @@ public class ValidationAdvisor {
 			return false;
 		}
 
-		/**
-		 * @returns false
-		 */
 		@Override
-		public boolean allowExtendedTitleExpressions() {
-			return false;
+		public boolean allowModeWithNonOctalIntegerLiterals() {
+			return true; // Always parsed as a string by Puppet so OK
 		}
 
 		/**
@@ -472,13 +482,18 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public boolean allowExtendedTitleExpressions() {
+			return true;
+		}
+
+		@Override
 		public boolean allowLambdas() {
 			return true;
 		}
 
 		@Override
-		public boolean allowExtendedTitleExpressions() {
-			return true;
+		public boolean allowModeWithNonOctalIntegerLiterals() {
+			return false; // Parsed as a integer by Puppet >= 4.0 so this is not OK
 		}
 
 		@Override
