@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.puppetlabs.geppetto</groupId>
@@ -30,12 +31,13 @@
 		<ifie>.v${git.commit.time}</ifie>
 		<lifie>-v${git.commit.time}</lifie>
 
-		<!-- we'd like to use stock Guice, but that breaks Maven embedder
-             because it uses a modified Guice called Sisu -->
+		<!-- we'd like to use stock Guice, but that breaks Maven embedder because 
+			it uses a modified Guice called Sisu -->
 		<guice.groupId>org.sonatype.sisu</guice.groupId>
 		<guice.artifactId>sisu-guice</guice.artifactId>
 		<emf.version>2.10.0-v20140514-1158</emf.version>
 		<xtext.version>2.7.1-v201409090713</xtext.version>
+		<buckminster.home>${user.home}/buildtools/buckminster</buckminster.home>
 	</properties>
 
 	<organization>
@@ -49,8 +51,8 @@
 		<connection>scm:git:git://github.com/puppetlabs/geppetto.git</connection>
 		<url>https://github.com/puppetlabs/geppetto</url>
 		<developerConnection>scm:git:git@github.com:puppetlabs/geppetto.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
 	<distributionManagement>
 		<repository>
@@ -324,11 +326,11 @@
 				<artifactId>org.eclipse.xtext.util</artifactId>
 				<version>${xtext.version}</version>
 			</dependency>
-		  	<dependency>
-		  		<groupId>com.puppetlabs.graph</groupId>
-		  		<artifactId>com.puppetlabs.graph</artifactId>
-		  		<version>1.0.3</version>
-		  	</dependency>
+			<dependency>
+				<groupId>com.puppetlabs.graph</groupId>
+				<artifactId>com.puppetlabs.graph</artifactId>
+				<version>1.0.3</version>
+			</dependency>
 			<dependency>
 				<groupId>com.puppetlabs.jruby</groupId>
 				<artifactId>jrubyparser</artifactId>
@@ -438,6 +440,42 @@
 						</goals>
 						<configuration>
 							<dateFormat>yyyyMMdd-HHmm</dateFormat>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>buckminster.import</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<dirname property="git.clones.root" file="${basedir}"/>
+								<basename property="geppetto.clone" file="${basedir}"/>
+								<property name="releng.home" location="${basedir}/com.puppetlabs.geppetto.releng"/>
+								<java fork="true" dir="${buckminster.home}" logError="true"
+									classname="org.eclipse.core.launcher.Main" failonerror="true">
+									<classpath>
+										<fileset dir="${buckminster.home}/plugins">
+											<include name="org.eclipse.equinox.launcher_*.jar" />
+										</fileset>
+									</classpath>
+									<arg line='-data "${project.build.directory}/ws"' />
+									<arg line='--script ${releng.home}/populate.bmscript' />
+									<sysproperty key="geppetto.clone" value="${geppetto.clone}" />
+									<sysproperty key="git.clones.root" value="${git.clones.root}" />
+									<sysproperty key="tp.root" value="${project.build.directory}/tp" />
+									<sysproperty key="releng.home" value="${releng.home}" />
+									<sysproperty key="jsse.enableSNIExtension" value="false" />
+								</java>
+							</target>
 						</configuration>
 					</execution>
 				</executions>

@@ -1,0 +1,3 @@
+setpref targetPlatformPath=${tp.root}
+setpref complianceLevel=1.7
+import ${releng.home}/geppetto.cquery
