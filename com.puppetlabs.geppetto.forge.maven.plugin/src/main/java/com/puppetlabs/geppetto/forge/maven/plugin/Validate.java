@@ -124,6 +124,12 @@ public class Validate extends AbstractForgeServiceMojo {
 	private ValidationPreference assignmentToVarNamedTrusted = WARNING;
 
 	/**
+	 * How should mode attributes that are not strings but otherwise ok be treated
+	 */
+	@Parameter(property = "forge.validation.attributeIsNotString", defaultValue = "WARNING")
+	private ValidationPreference attributeIsNotString = WARNING;
+
+	/**
 	 * Puppet interprets the strings "false" and "true" as boolean true when they are used in a boolean context.
 	 * This validation preference flags them as "not a boolean value"
 	 */
@@ -381,6 +387,11 @@ public class Validate extends AbstractForgeServiceMojo {
 		@Override
 		public ValidationPreference assignmentToVarNamedTrusted() {
 			return assignmentToVarNamedTrusted;
+		}
+
+		@Override
+		public ValidationPreference attributeIsNotString() {
+			return attributeIsNotString;
 		}
 
 		@Override
