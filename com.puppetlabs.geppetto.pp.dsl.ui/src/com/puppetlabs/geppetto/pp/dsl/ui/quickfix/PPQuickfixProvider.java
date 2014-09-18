@@ -162,6 +162,31 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 
+	@Fix(IPPDiagnostics.ISSUE__NOT_OCTAL_NUMBER)
+	public void changeNumberToOctalString(final Issue issue, final IssueResolutionAcceptor acceptor) {
+		changeNumberToOctalString2(issue, acceptor);
+	}
+
+	@Fix(IPPDiagnostics.ISSUE__OCTAL_SHOULD_BE_STRING)
+	public void changeNumberToOctalString2(final Issue issue, final IssueResolutionAcceptor acceptor) {
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
+		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
+		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+
+				String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
+				String pfx = issueString.startsWith("0")
+					? "'"
+					: "'0";
+
+				acceptor.accept(issue, "Convert numeric value to string", //
+					"Changes " + issueString + " to " + pfx + issueString + '\'', null, //
+					new SurroundWithTextModification(issue.getOffset(), issueString.length(), pfx, "'"));
+			}
+		});
+	}
+
 	@Fix(IPPDiagnostics.ISSUE__UNBRACED_INTERPOLATION)
 	public void changeToBracedInterpolation(final Issue issue, final IssueResolutionAcceptor acceptor) {
 		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);

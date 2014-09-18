@@ -17,20 +17,23 @@ public interface IStylisticProblemsAdvisor {
 
 	/**
 	 * How an (optional) default that is not placed last should be validated for a case expression.
-	 *
-	 * @return
 	 */
-	public ValidationPreference caseDefaultShouldAppearLast();
+	ValidationPreference caseDefaultShouldAppearLast();
 
 	/**
 	 * How the 'ensure' property should be validated if not placed first among a resource's properties.
 	 */
-	public ValidationPreference ensureShouldAppearFirstInResource();
+	ValidationPreference ensureShouldAppearFirstInResource();
 
 	/**
 	 * How to 'validate' the presence of ML comments.
 	 */
-	public ValidationPreference mlComments();
+	ValidationPreference mlComments();
+
+	/**
+	 * Octal number is not quoted
+	 */
+	ValidationPreference attributeIsNotString();
 
 	/**
 	 * How to validate right to left relationships ( e.g. a <- b and a <~ b)
@@ -39,9 +42,7 @@ public interface IStylisticProblemsAdvisor {
 
 	/**
 	 * How an (almost required) default that is not placed last should be validated for a selector expression.
-	 *
-	 * @return
 	 */
-	public ValidationPreference selectorDefaultShouldAppearLast();
+	ValidationPreference selectorDefaultShouldAppearLast();
 
 }

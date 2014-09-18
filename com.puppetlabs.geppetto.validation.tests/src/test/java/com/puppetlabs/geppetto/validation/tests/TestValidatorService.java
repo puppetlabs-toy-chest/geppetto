@@ -119,6 +119,7 @@ public class TestValidatorService extends AbstractValidationTest {
 			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE), //
 			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME), //
 			asserter.messageFragment("unexpected tIDENTIFIER"));
+		asserter.assertWarnings(asserter.issue(IPPDiagnostics.ISSUE__OCTAL_SHOULD_BE_STRING));
 	}
 
 	@Test

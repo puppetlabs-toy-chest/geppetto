@@ -32,7 +32,7 @@ class test_module {
 	}
 
 	file { "/etc/java_release":
-		owner => root, group => root, mode => 440,
+		owner => root, group => root, mode => '440',
 		content => $java_release_content,
 		ensure => present,
 		require => $java_requirement
