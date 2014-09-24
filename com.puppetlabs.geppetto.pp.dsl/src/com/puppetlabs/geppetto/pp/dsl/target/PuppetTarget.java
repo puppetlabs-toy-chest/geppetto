@@ -24,13 +24,14 @@ public enum PuppetTarget {
 	PUPPET34("3.4.2", "3.4", "puppet-3.4.2.pptp", null, null, ComplianceLevel.PUPPET_3_4),
 	PUPPET35("3.5.1", "3.5", "puppet-3.5.1.pptp", null, null, ComplianceLevel.PUPPET_3_5),
 	PUPPET36("3.6.2", "3.6", "puppet-3.6.2.pptp", null, null, ComplianceLevel.PUPPET_3_6),
-	PUPPET37("3.7.0", "3.7", "puppet-3.7.0.pptp", null, null, ComplianceLevel.PUPPET_3_7),
-	PUPPET40("3.7.0", "4.0", "puppet-3.7.0.pptp", "types-1.0.0.pptp", null, ComplianceLevel.PUPPET_4_0),
+	PUPPET37("3.7.1", "3.7", "puppet-3.7.1.pptp", null, null, ComplianceLevel.PUPPET_3_7),
+	PUPPET40("3.7.1", "4.0", "puppet-3.7.1.pptp", "types-1.0.0.pptp", null, ComplianceLevel.PUPPET_4_0),
 	PUPPET_ENTERPRISE20("2.7.9", "PE 2.0", "puppet-2.7.19.pptp", null, "2.0.2", ComplianceLevel.PUPPET_2_7),
 	PUPPET_ENTERPRISE27("2.7.19", "PE 2.7", "puppet-2.7.19.pptp", null, "2.7.2", ComplianceLevel.PUPPET_2_7),
 	PUPPET_ENTERPRISE28("2.7.25", "PE 2.8", "puppet-2.7.25.pptp", null, "2.8.1", ComplianceLevel.PUPPET_2_7),
 	PUPPET_ENTERPRISE30("3.2.4", "PE 3.0", "puppet-3.2.4.pptp", null, "3.0.1", ComplianceLevel.PUPPET_3_2),
-	PUPPET_ENTERPRISE31("3.3.2", "PE 3.1", "puppet-3.3.2.pptp", null, "3.1.0", ComplianceLevel.PUPPET_3_2);
+	PUPPET_ENTERPRISE31("3.3.2", "PE 3.1", "puppet-3.3.2.pptp", null, "3.1.0", ComplianceLevel.PUPPET_3_2),
+	PUPPET_ENTERPRISE33("3.7.1", "PE 3.3", "puppet-3.7.1.pptp", null, "3.3.0", ComplianceLevel.PUPPET_3_7);
 	// @fmtOn
 
 	public static PuppetTarget forComplianceLevel(ComplianceLevel level, boolean enterprise) {
@@ -65,7 +66,7 @@ public enum PuppetTarget {
 	}
 
 	public static PuppetTarget getDefault() {
-		return PUPPET34;
+		return PUPPET37;
 	}
 
 	private final Version version;

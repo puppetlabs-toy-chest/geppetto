@@ -278,8 +278,8 @@ public class PuppetTPTests {
 	}
 
 	@Test
-	public void testLoad3_7_0() throws Exception {
-		performLoad("3.7.0");
+	public void testLoad3_7_1() throws Exception {
+		performLoad("3.7.1");
 	}
 
 	@Test
