@@ -60,7 +60,7 @@ public interface Forge {
 	 *            adjacent to the built module. Created if necessary.
 	 * @param filter
 	 *            The filter that is used for selecting the files. Can be null in which case the injected
-	 *            filter annotated by {@link Named @Named}({@link ForgeConstants#MODULE_FILE_FILTER}) will be used.
+	 *            filter annotated by {@link Named @Named}({@link #MODULE_FILE_FILTER}) will be used.
 	 * @param resultingMetadata
 	 *            A one element array that will receive the resulting metadata. Can be <tt>null</tt>.
 	 * @param resultingMD5
@@ -82,7 +82,7 @@ public interface Forge {
 	 *            The module directory
 	 * @param filter
 	 *            The filter that is used by the scan. Can be null in which case the injected
-	 *            filter annotated by {@link Named @Named}({@link ForgeConstants#MODULE_FILE_FILTER}) will be used.
+	 *            filter annotated by {@link Named @Named}({@link #MODULE_FILE_FILTER}) will be used.
 	 * @return A collection of modified files.
 	 * @throws IOException
 	 */
@@ -99,7 +99,7 @@ public interface Forge {
 	 *            The directory containing the module
 	 * @param filter
 	 *            The filter that is used by the scan. Can be null in which case the injected
-	 *            filter annotated by {@link Named @Named}({@link ForgeConstants#MODULE_FILE_FILTER}) will be used.
+	 *            filter annotated by {@link Named @Named}({@link #MODULE_FILE_FILTER}) will be used.
 	 * @param extractedFrom
 	 *            A one element File array that will receive the file that the metadata was extracted from.
 	 *            Can be <tt>null</tt> when that piece of information is of no interest
@@ -120,7 +120,7 @@ public interface Forge {
 	 *            The directory where the scan starts. Can be a module in itself.
 	 * @param filter
 	 *            The filter that is used for selecting the files. Can be null in which case the injected
-	 *            filter annotated by {@link Named @Named}({@link ForgeConstants#MODULE_FILE_FILTER}) will be used.
+	 *            filter annotated by {@link Named @Named}({@link #MODULE_FILE_FILTER}) will be used.
 	 * @return A list of directories that seems to be module roots.
 	 */
 	Collection<File> findModuleRoots(File modulesRoot, FileFilter filter);
@@ -153,7 +153,7 @@ public interface Forge {
 	 * @param moduleDirectory
 	 * @param filter
 	 *            The filter that is used for selecting the files. Can be null in which case the injected
-	 *            filter annotated by {@link Named @Named}({@link ForgeConstants#MODULE_FILE_FILTER}) will be used.
+	 *            filter annotated by {@link Named @Named}({@link #MODULE_FILE_FILTER}) will be used.
 	 * @return <tt>true</tt> if a least one metadata extractor can extract metadata from the given location
 	 */
 	boolean hasModuleMetadata(File moduleDirectory, FileFilter filter);

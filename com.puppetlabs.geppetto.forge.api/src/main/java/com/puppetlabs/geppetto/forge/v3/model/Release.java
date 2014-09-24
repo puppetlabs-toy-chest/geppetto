@@ -239,7 +239,7 @@ public class Release extends AbbrevRelease {
 	}
 
 	/**
-	 * @param metadata
+	 * @param metadataJSON
 	 *            the metadata to set
 	 */
 	public void setMetadataJSON(String metadataJSON) {

@@ -186,7 +186,7 @@ public class FlatRelease extends TimestampedEntity {
 	}
 
 	/**
-	 * @param metadata
+	 * @param metadataJSON
 	 *            the metadata to set
 	 */
 	public void setMetadataJSON(String metadataJSON) {

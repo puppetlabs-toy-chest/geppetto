@@ -103,7 +103,7 @@ public class Dependency extends Entity {
 	/**
 	 * Checks if this dependency is matched by the name and version
 	 *
-	 * @param name
+	 * @param qname
 	 *            The name to match
 	 * @param version
 	 *            The version to match

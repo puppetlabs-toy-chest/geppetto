@@ -17,7 +17,7 @@ import java.util.List;
 import com.puppetlabs.geppetto.forge.v1.model.ModuleInfo;
 
 /**
- * A CRUD service for {@link Module} objects
+ * A CRUD service for {@link ModuleInfo} objects
  */
 public interface ModuleService {
 

@@ -165,7 +165,6 @@ public class JSonResponseHandler<V> implements ResponseHandler<V> {
 	/**
 	 * Parse JSON to specified type
 	 *
-	 * @param <V>
 	 * @param stream
 	 * @param type
 	 * @return parsed type

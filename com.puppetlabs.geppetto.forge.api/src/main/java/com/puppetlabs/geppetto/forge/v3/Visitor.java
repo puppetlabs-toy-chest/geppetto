@@ -11,15 +11,14 @@
  */
 package com.puppetlabs.geppetto.forge.v3;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import com.puppetlabs.geppetto.forge.model.Entity;
-import com.puppetlabs.geppetto.forge.v3.ForgeService.Compare;
+import com.puppetlabs.geppetto.forge.v3.ForgeService.Query;
 import com.puppetlabs.geppetto.forge.v3.impl.AbstractForgeService;
 
 /**
- * Visitor used by the {@link AbstractForgeService#accept(Compare, SortBy, boolean, Visitor)} method.
+ * Visitor used by the {@link AbstractForgeService#accept(Query, SortBy, boolean, Visitor, ProgressMonitor)} method.
  *
  * @param <T>
  */
@@ -29,7 +28,7 @@ public interface Visitor<T extends Entity> {
 	 *
 	 * @param entity
 	 *            The entity to visit
-	 * @throws IOException
+	 * @throws InvocationTargetException
 	 */
 	void visit(T entity, ProgressMonitor progressMonitor) throws InvocationTargetException;
 }

@@ -356,7 +356,6 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 	 *
 	 * @param object
 	 * @return JSON string
-	 * @throws IOException
 	 */
 	protected String toJson(Object object) {
 		return gson.toJson(object);

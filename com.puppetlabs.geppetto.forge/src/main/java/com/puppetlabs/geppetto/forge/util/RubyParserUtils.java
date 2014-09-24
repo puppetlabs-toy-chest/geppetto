@@ -91,7 +91,7 @@ public abstract class RubyParserUtils {
 	 *            The root node
 	 * @param path
 	 *            The node type path
-	 * @return The list of nodes, possibly empty but never <code>null</null>
+	 * @return The list of nodes, possibly empty but never <code>null</code>
 	 */
 	public static List<Node> findNodes(Node root, NodeType[] path) {
 		if(root == null || path == null)

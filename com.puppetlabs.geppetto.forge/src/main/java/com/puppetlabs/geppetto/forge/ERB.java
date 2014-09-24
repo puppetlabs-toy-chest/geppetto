@@ -23,7 +23,7 @@ import com.puppetlabs.geppetto.forge.model.Metadata;
  * <ul>
  * <li>&lt;%#<i>comment</i>%&gt;</li>
  * <li>&lt;%=<i>expression</i>%&gt;</li>
- * <li>&lt;%% (escape, output as '<%')</li>
+ * <li>&lt;%% (escape, output as '&lt;%')</li>
  * </ul>
  * where <i>expression</i> must be in the form <tt>metadata.&lt;variable&gt;</tt> and
  * the variable must be one of the attributes in {@link Metadata}.

@@ -31,7 +31,7 @@ public class AbbrevRelease extends Entity {
 	}
 
 	/**
-	 * @return code>true</code> if this release is supported by Puppet Labs Inc.
+	 * @return <code>true</code> if this release is supported by Puppet Labs Inc.
 	 */
 	public boolean isSupported() {
 		return supported != null && supported.booleanValue();

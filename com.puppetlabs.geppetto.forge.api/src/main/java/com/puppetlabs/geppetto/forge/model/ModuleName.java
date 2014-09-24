@@ -152,11 +152,11 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 	 * Creates a name from a string with a separator.
 	 * </p>
 	 * <p>
-	 * The separator may be either '/' or '-' and if more than one separator is present, then one placed first wins. Thus<br/>
-	 * &quot;foo-bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '-'<br/>
-	 * &quot;foo/bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '/'<br/>
-	 * &quot;foo/bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '/'<br/>
-	 * &quot;foo-bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '-'<br/>
+	 * The separator may be either '/' or '-' and if more than one separator is present, then one placed first wins. Thus<br>
+	 * &quot;foo-bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '-'<br>
+	 * &quot;foo/bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '/'<br>
+	 * &quot;foo/bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '/'<br>
+	 * &quot;foo-bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '-'<br>
 	 * </p>
 	 *
 	 * @param fullName
@@ -293,22 +293,22 @@ public class ModuleName implements Serializable, Comparable<ModuleName> {
 
 	/**
 	 * <p>
-	 * Splits the <code>moduleName into two parts. The owner and the name. This method performs no validation
-	 * of the names.
+	 * Splits the <code>moduleName</code> into two parts. The owner and the name. This method performs no validation of the names.
 	 * </p>
 	 * <p>
-	 * The separator may be either '/' or '-' and if more than one separator is present, then one placed first wins. Thus<br/>
-	 * &quot;foo-bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '-'<br/>
-	 * &quot;foo/bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '/'<br/>
-	 * &quot;foo/bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '/'<br/>
-	 * &quot;foo-bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '-'<br/>
+	 * The separator may be either '/' or '-' and if more than one separator is present, then one placed first wins. Thus<br>
+	 * &quot;foo-bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '-'<br>
+	 * &quot;foo/bar-baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar-baz&quot;, separator '/'<br>
+	 * &quot;foo/bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '/'<br>
+	 * &quot;foo-bar/baz&quot; yields owner = &quot;foo&quot;, name = &quot;bar/baz&quot;, separator '-'<br>
 	 * </p>
-	 * In case no separator is found, owner will be considered missing and the argument is returned as the
-	 * second element.</p>
+	 * <p>
+	 * In case no separator is found, owner will be considered missing and the argument is returned as the second element.
+	 * </p>
 	 *
 	 * @param moduleName
 	 * @return A two element array with the owner and name of the module. The first element in this array may be <code>null</code> .
-	 * @see #checkOwner(String)
+	 * @see #checkOwner(String, boolean)
 	 * @see #checkName(String, boolean)
 	 */
 	public static String[] splitName(String moduleName) {

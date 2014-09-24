@@ -53,7 +53,6 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	/**
 	 * @param moduleName
 	 * @param version
-	 * @return The created name
 	 * @throws IllegalArgumentException
 	 */
 	public VersionedName(ModuleName moduleName, Version version) throws IllegalArgumentException {
@@ -68,7 +67,6 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	 *
 	 * @param slug
 	 *            The string to create the owner/name/version from
-	 * @return The created name
 	 */
 	public VersionedName(String slug) {
 		int sep = getVersionSeparatorPosition(slug);
@@ -82,7 +80,6 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	/**
 	 * @param moduleName
 	 * @param version
-	 * @return The created name
 	 * @throws IllegalArgumentException
 	 */
 	public VersionedName(String moduleName, String version) throws IllegalArgumentException {
@@ -93,7 +90,6 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	 * @param owner
 	 * @param name
 	 * @param version
-	 * @return The created name
 	 * @throws IllegalArgumentException
 	 */
 	public VersionedName(String owner, String name, String version) throws IllegalArgumentException {
@@ -104,7 +100,6 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	 * @param owner
 	 * @param name
 	 * @param version
-	 * @return The created name
 	 * @throws IllegalArgumentException
 	 */
 	public VersionedName(String owner, String name, Version version) throws IllegalArgumentException {
@@ -159,7 +154,8 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	 *
 	 * @param bld
 	 *            The builder that will receive the string representation
-	 * @versionSep the separator that will be inserted between the module name and the version
+	 * @param versionSep
+	 *            the separator that will be inserted between the module name and the version
 	 */
 	public void toString(StringBuilder bld, char versionSep) {
 		getModuleName().toString(bld);

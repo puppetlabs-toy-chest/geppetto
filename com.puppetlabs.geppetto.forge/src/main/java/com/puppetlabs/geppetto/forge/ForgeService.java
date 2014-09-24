@@ -98,7 +98,9 @@ public interface ForgeService {
 	 * @param moduleTarball
 	 *            The gzipped tarball
 	 *            Set to <tt>true</tt> if all but the final step of sending to the Forge should be made
-	 * @param result
+	 * @param dryRun
+	 *            Perform a dry run, don't actually publish.
+	 * @param diagnostic
 	 *            The collector diagnostic.
 	 * @throws AlreadyPublishedException
 	 *             if the module is found on the forge at its current version prior to publishing

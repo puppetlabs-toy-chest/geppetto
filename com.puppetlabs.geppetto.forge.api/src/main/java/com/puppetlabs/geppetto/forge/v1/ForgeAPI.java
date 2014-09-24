@@ -19,17 +19,17 @@ import com.puppetlabs.geppetto.forge.v1.service.ModuleService;
  * <pre>
  * // Obtain preferences in some way. Command line options, property settings, etc.
  * ForgeAPIPreferences prefs = ...;
- * 
+ *
  * Injector injector = Guice.createInjector(new ForgeHttpModule(prefs));
- * 
+ *
  * // Create a new forge instance
  * ForgeAPI forge = new ForgeAPI(injector);
- * 
+ *
  * // Use the forge instance to create a service.
  * DefaultModuleService moduleService = forge.createModuleService();
- * 
+ *
  * // Use the service
- * List<ModuleInfo> stdLibReleases = moduleService.getModules("puppetlabs");
+ * List&lt;ModuleInfo&gt; stdLibReleases = moduleService.getModules("puppetlabs");
  * </pre>
  */
 public class ForgeAPI {

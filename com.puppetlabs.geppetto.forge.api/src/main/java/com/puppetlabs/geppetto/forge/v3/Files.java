@@ -23,27 +23,16 @@ import com.puppetlabs.geppetto.forge.model.VersionedName;
 public interface Files {
 
 	/**
-	 * @param owner
-	 *            The Module owner.
-	 * @param name
-	 *            The name of the Module.
-	 * @param version
-	 *            The version of the module Release
+	 * @param release
 	 * @return The content of a particular release
 	 * @throws IOException
 	 */
 	InputStream download(VersionedName release) throws IOException;
 
 	/**
-	 * @param owner
-	 *            The Module owner.
-	 * @param name
-	 *            The name of the Module.
-	 * @param version
-	 *            The version of the module Release
+	 * @param release
 	 * @param output
 	 *            The stream that will receive the file content
-	 * @return The content of a particular release
 	 * @throws IOException
 	 */
 	void download(VersionedName release, OutputStream output) throws IOException;

@@ -140,7 +140,7 @@ public interface ForgeClient {
 	 *
 	 * @param userPath
 	 * @param params
-	 * @param class1
+	 * @param type
 	 * @return
 	 */
 	<V> V patch(String userPath, Object params, Class<V> type) throws IOException;

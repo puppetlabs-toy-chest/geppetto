@@ -143,13 +143,12 @@ public class ModuleUtils {
 	 * ruby code. It
 	 * just parses the code and extracts values from the resulting AST.
 	 *
-	 * @param moduleFile
+	 * @param modulefile
 	 *            The file to parse
 	 * @param receiver
 	 *            The receiver of the parsed metadata
 	 * @param chain
 	 *            Diagnostics collecting errors
-	 * @return The resulting metadata
 	 * @throws IOException
 	 *             when it is not possible to read the <tt>modulefile</tt>.
 	 * @throws IllegalArgumentException

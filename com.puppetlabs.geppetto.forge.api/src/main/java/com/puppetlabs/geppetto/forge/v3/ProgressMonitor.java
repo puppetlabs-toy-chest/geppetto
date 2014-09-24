@@ -15,7 +15,7 @@ public interface ProgressMonitor {
 	/**
 	 * Starts a new task with <code>totalWorkUnits</code>.
 	 *
-	 * @param totalWorkUnits
+	 * @param toDo
 	 *            The total number of work units to allocate for the task
 	 */
 	public void beginTask(int toDo);

@@ -183,7 +183,7 @@ public interface PuppetLintRunner {
 	 * Run puppet lint on the specified directory or file
 	 *
 	 * @param fileOrDirectory
-	 * @param parameters
+	 * @param options
 	 * @return
 	 * @throws IOException
 	 */

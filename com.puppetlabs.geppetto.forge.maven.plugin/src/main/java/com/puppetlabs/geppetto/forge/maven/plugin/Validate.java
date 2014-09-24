@@ -149,20 +149,20 @@ public class Validate extends AbstractForgeServiceMojo {
 	protected ValidationPreference deprecatedImport = WARNING;
 
 	/**
-	 * How to validate that use of node inheritance that is deprecated and will be invalid in Puppet >= 4.0
+	 * How to validate that use of node inheritance that is deprecated and will be invalid in Puppet &gt;= 4.0
 	 */
 	@Parameter(property = "forge.validation.deprecatedNodeInheritance", defaultValue = "WARNING")
 	protected ValidationPreference deprecatedNodeInheritance = WARNING;
 
 	/**
-	 * How to validate that use of += operator is deprecated and will be invalid in Puppet >= 4.0
+	 * How to validate that use of += operator is deprecated and will be invalid in Puppet &gt;= 4.0
 	 */
 	@Parameter(property = "forge.validation.deprecatedPlusEquals", defaultValue = "WARNING")
 	protected ValidationPreference deprecatedPlusEquals = WARNING;
 
 	/**
 	 * How to validate that use of variable names that starts with a digit or upper case letter is deprecated and will be invalid in Puppet
-	 * >= 4.0
+	 * &gt;= 4.0
 	 */
 	@Parameter(property = "forge.validation.deprecatedVariableName", defaultValue = "WARNING")
 	protected ValidationPreference deprecatedVariableName = WARNING;
