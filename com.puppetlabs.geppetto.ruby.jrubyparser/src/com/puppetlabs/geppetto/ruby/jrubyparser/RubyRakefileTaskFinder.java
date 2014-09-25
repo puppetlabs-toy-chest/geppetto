@@ -80,7 +80,7 @@ public class RubyRakefileTaskFinder {
 	// // TODO: make this return more than one
 	// return findTaskInternal(root, false);
 	// }
-	private String lastDesc;
+	private String lastDesc = "";
 
 	public Map<String, String> findTasks(Node root) {
 		// use a linked map to get entries in the order they are added
