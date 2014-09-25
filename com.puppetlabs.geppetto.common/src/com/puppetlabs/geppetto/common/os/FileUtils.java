@@ -338,6 +338,7 @@ public class FileUtils {
 		"%*%",
 		"._*",
 		"CVS",
+		".bundle",
 		".cvsignore",
 		"SCCS",
 		"vssver.scc",
