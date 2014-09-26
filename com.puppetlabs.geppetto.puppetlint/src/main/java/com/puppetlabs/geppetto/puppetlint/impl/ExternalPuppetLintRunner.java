@@ -38,6 +38,28 @@ public class ExternalPuppetLintRunner implements PuppetLintRunner {
 
 	private static final Pattern versionPattern = Pattern.compile("^[A-Za-z0-9_.-]+\\s+(\\S+)\\s*$", Pattern.MULTILINE);
 
+	private IOException createIOException(int exitCode, OpenBAStream out, OpenBAStream err) {
+		StringBuilder bld = new StringBuilder();
+		bld.append("Got exit code ");
+		bld.append(exitCode);
+		bld.append(" when running puppet-lint.");
+		String outStr = out.toString(Charset.defaultCharset());
+		outStr = outStr.trim();
+		if(!outStr.isEmpty()) {
+			bld.append(" Output \"");
+			bld.append(outStr);
+			bld.append('"');
+		}
+
+		String errStr = err.toString(Charset.defaultCharset()).trim();
+		if(!errStr.isEmpty()) {
+			bld.append(" Errors \"");
+			bld.append(errStr);
+			bld.append('"');
+		}
+		return new IOException(bld.toString());
+	}
+
 	@Override
 	public String getVersion() throws IOException {
 		// Verify that puppet-lint is installed. If not, then refuse to install this bundle
@@ -46,27 +68,9 @@ public class ExternalPuppetLintRunner implements PuppetLintRunner {
 		OpenBAStream err = new OpenBAStream();
 		File home = new File(System.getProperty("user.home"));
 		int exitCode = OsUtil.runProcess(home, out, err, getPuppetLintExecutable(), "--version");
+		if(exitCode != 0)
+			throw createIOException(exitCode, out, err);
 		String outStr = out.toString(Charset.defaultCharset());
-		if(exitCode != 0) {
-			StringBuilder bld = new StringBuilder();
-			bld.append("Got exit code ");
-			bld.append(exitCode);
-			bld.append(" when running puppet-lint.");
-			outStr = outStr.trim();
-			if(!outStr.isEmpty()) {
-				bld.append(" Output \"");
-				bld.append(outStr);
-				bld.append('"');
-			}
-
-			String errStr = err.toString(Charset.defaultCharset()).trim();
-			if(!errStr.isEmpty()) {
-				bld.append(" Errors \"");
-				bld.append(errStr);
-				bld.append('"');
-			}
-			throw new IOException(bld.toString());
-		}
 		String version = outStr;
 		Matcher m = versionPattern.matcher(version);
 		if(m.find())
@@ -91,7 +95,7 @@ public class ExternalPuppetLintRunner implements PuppetLintRunner {
 
 		OpenBAStream out = new OpenBAStream();
 		OpenBAStream err = new OpenBAStream();
-		OsUtil.runProcess(fileOrDirectory, out, err, params.toArray(new String[params.size()]));
+		int exitCode = OsUtil.runProcess(fileOrDirectory, out, err, params.toArray(new String[params.size()]));
 		List<Issue> issues = new ArrayList<Issue>();
 		Matcher m = issuePattern.matcher(out.toString(Charset.defaultCharset()));
 		while(m.find()) {
@@ -100,6 +104,8 @@ public class ExternalPuppetLintRunner implements PuppetLintRunner {
 				path = path.substring(2);
 			issues.add(new PuppetLintIssue(path, Severity.valueOf(m.group(1)), m.group(2), m.group(5), Integer.parseInt(m.group(4))));
 		}
+		if(issues.isEmpty() && exitCode != 0)
+			throw createIOException(exitCode, out, err);
 		return issues;
 	}
 }
