@@ -213,13 +213,13 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 			if(validationAdvisor.getModulefileExists() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExists()), Forge.FORGE,
-					"Modulefile is deprecated. Using metadata.json"));
+						"Modulefile is deprecated. Using metadata.json"));
 		}
 		else {
 			if(validationAdvisor.getModulefileExistsAndIsUsed() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExistsAndIsUsed()), Forge.FORGE,
-					"Modulefile is deprecated. Building metadata.json from modulefile"));
+						"Modulefile is deprecated. Building metadata.json from modulefile"));
 
 			try {
 				Metadata md = forge.loadModulefile(ModuleBuildParticipant.toLocalFile(moduleFile, monitor.newChild(1)), diag);
@@ -229,8 +229,7 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 				}
 			}
 			catch(IOException e) {
-				diag.addChild(new ExceptionDiagnostic(Diagnostic.ERROR, Forge.FORGE, "Unable to create metadata.json from Modulefile: " +
-					e.getMessage(), e));
+				diag.addChild(new ExceptionDiagnostic(Diagnostic.ERROR, Forge.FORGE, "Unable to create metadata.json from Modulefile", e));
 			}
 		}
 		createResourceMarkers(moduleFile, diag);

@@ -136,10 +136,13 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 			throw new MojoFailureException(getActionName() + " failed: " + e.getMessage(), e);
 		}
 		if(diagnostic.getSeverity() == Diagnostic.ERROR) {
+			StringBuilder bld = new StringBuilder();
+			diagnostic.toString(Diagnostic.ERROR, bld, 0);
+			String msg = bld.toString();
 			Exception e = diagnostic.getException();
 			if(e == null)
-				throw new MojoFailureException(diagnostic.getErrorText());
-			throw new MojoFailureException(diagnostic.getErrorText(), e);
+				throw new MojoFailureException(msg);
+			throw new MojoFailureException(msg, e);
 		}
 	}
 

@@ -589,7 +589,7 @@ public class DirectoryValidator {
 				worked(ticker, 1);
 			}
 			catch(Exception e) {
-				addExceptionDiagnostic("Internal Error: Exception while processing file: " + f.getName() + ": " + e, e);
+				addExceptionDiagnostic("Internal Error: Exception while processing file: " + f.getName(), e);
 			}
 		}
 	}

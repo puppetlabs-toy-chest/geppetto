@@ -102,10 +102,21 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 			addChild(child);
 	}
 
-	protected void appendExceptionMessage(StringBuilder bld) {
+	public boolean appendLocationLabel(StringBuilder builder, boolean withOffsets) {
+		return false;
 	}
 
-	public boolean appendLocationLabel(StringBuilder builder, boolean withOffsets) {
+	/**
+	 * Append message to <code>bld</code>
+	 *
+	 * @param bld
+	 * @return <code>true</code> if at least one character was appended
+	 */
+	public boolean appendMessage(StringBuilder bld) {
+		if(!(message == null || message.isEmpty())) {
+			bld.append(message);
+			return true;
+		}
 		return false;
 	}
 
@@ -123,12 +134,6 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 		return children == null
 			? Collections.<Diagnostic> emptyList()
 			: children;
-	}
-
-	public String getErrorText() {
-		StringBuilder bld = new StringBuilder();
-		toString(ERROR, bld, false, 0);
-		return bld.toString();
 	}
 
 	/**
@@ -209,8 +214,10 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	/**
 	 * @return the message
 	 */
-	public String getMessage() {
-		return message;
+	public final String getMessage() {
+		StringBuilder bld = new StringBuilder();
+		appendMessage(bld);
+		return bld.toString();
 	}
 
 	/**
@@ -313,8 +320,12 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 
 	@Override
 	public final String toString() {
+		return toString(INFO);
+	}
+
+	public final String toString(int minSeverity) {
 		StringBuilder bld = new StringBuilder();
-		toString(bld, 0);
+		toString(minSeverity, bld, 0);
 		return bld.toString();
 	}
 
@@ -349,14 +360,9 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 			if(appendLocationLabel(bld, true))
 				bld.append(':');
 
-			if(getMessage() != null) {
-				bld.append(getMessage());
-				bld.append(':');
-			}
+			if(!appendMessage(bld))
+				bld.setLength(bld.length() - 1);
 
-			appendExceptionMessage(bld);
-
-			bld.setLength(bld.length() - 1);
 			if(children != null) {
 				bld.append('\n');
 				indent += 4;
@@ -375,7 +381,7 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 		}
 	}
 
-	public void toString(StringBuilder bld, int indent) {
-		toString(INFO, bld, true, indent);
+	public void toString(int minSeverity, StringBuilder bld, int indent) {
+		toString(minSeverity, bld, true, indent);
 	}
 }

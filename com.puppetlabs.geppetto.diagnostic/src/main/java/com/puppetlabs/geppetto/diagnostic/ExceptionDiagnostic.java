@@ -23,18 +23,22 @@ public class ExceptionDiagnostic extends Diagnostic {
 	}
 
 	@Override
-	protected void appendExceptionMessage(StringBuilder bld) {
+	public boolean appendMessage(StringBuilder bld) {
+		boolean didAppend = super.appendMessage(bld);
 		Exception e = getException();
 		if(e != null) {
+			if(didAppend)
+				bld.append(':');
 			bld.append(e.getClass().getSimpleName());
 			String msg = e.getMessage();
-			if(msg != null) {
+			if(!(msg == null || msg.isEmpty())) {
 				bld.append('(');
 				bld.append(msg);
 				bld.append(')');
 			}
-			bld.append(':');
+			didAppend = true;
 		}
+		return didAppend;
 	}
 
 	@Override
