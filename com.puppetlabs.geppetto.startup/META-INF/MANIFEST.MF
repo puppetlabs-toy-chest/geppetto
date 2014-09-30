@@ -3,13 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Startup
 Bundle-SymbolicName: com.puppetlabs.geppetto.startup;singleton:=true
 Bundle-Version: 4.3.0.qualifier
-Bundle-Activator: com.puppetlabs.geppetto.startup.Activator
 Bundle-Vendor: Puppet Labs Inc.
 Bundle-RequiredExecutionEnvironment: J2SE-1.4
-Import-Package: org.apache.commons.lang,
- org.eclipse.core.runtime,
- org.eclipse.jface.dialogs,
- org.eclipse.swt.graphics,
- org.eclipse.swt.widgets,
- org.eclipse.ui.plugin,
- org.osgi.framework
+Import-Package: org.apache.commons.lang
+Require-Bundle: org.eclipse.ui
