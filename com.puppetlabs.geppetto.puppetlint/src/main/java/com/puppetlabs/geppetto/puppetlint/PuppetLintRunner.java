@@ -12,7 +12,11 @@ package com.puppetlabs.geppetto.puppetlint;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * An interface to the <a href="http://puppet-lint.com">puppet-lint</a> program.
@@ -50,127 +54,22 @@ public interface PuppetLintRunner {
 
 	}
 
-	/**
-	 * Options that can be passed to {@link PuppetLintRunner#run(File, Option...)}
-	 */
-	enum Option {
-		/** Fail on warnings */
-		FailOnWarnings("fail-on-warnings"),
-
-		/** Skip the arrow_alignment check */
-		NoArrowAlignmentCheck("no-arrow_alignment-check"),
-
-		/** Skip the autoloader_layout check */
-		NoAutoloaderLayoutCheck("no-autoloader_layout-check"),
-
-		/** Skip the case_without_default check */
-		NoCaseWithoutDefaultCheck("no-case_without_default-check"),
-
-		/** Skip the parameterized class inherits from 'params' class check */
-		NoClassInheritsFromParamsClassCheck("no-class_inherits_from_params_class-check"),
-
-		/** Skip the calss parameter defaults check */
-		NoClassParameterDefaultsCheck("no-class_parameter_defaults-check"),
-
-		/** Skip the documentation check */
-		NoDocumentationCheck("no-documentation-check"),
-
-		/** Skip the double_quoted_strings check */
-		NoDoubleQuotedStringsCheck("no-double_quoted_strings-check"),
-
-		/** Skip the duplicate_params check */
-		NoDuplicateParamsCheck("no-duplicate_params-check"),
-
-		/** Skip the 80chars check */
-		NoEightyCharsCheck("no-80chars-check"),
-
-		/** Skip the ensure_first_param check */
-		NoEnsureFirstParamCheck("no-ensure_first_param-check"),
-
-		/** Skip the ensure_not_symlink_target check */
-		NoEnsureNotSymlinkTargetCheck("no-ensure_not_symlink_target-check"),
-
-		/** Skip the file_mode check */
-		NoFileModeCheck("no-file_mode-check"),
-
-		/** Skip the hard_tabs check */
-		NoHardTabsCheck("no-hard_tabs-check"),
-
-		/** Skip the inherits_across_namespaces check */
-		NoInheritsAcrossNamespacesCheck("no-inherits_across_namespaces-check"),
-
-		/** Skip the names_containing_dash check */
-		NoNamesContainingDashCheck("no-names_containing_dash-check"),
-
-		/** Skip the nested_classes_or_defines check */
-		NoNestedClassesOrDefinesCheck("no-nested_classes_or_defines-check"),
-
-		/** Skip the only_variable_string check */
-		NoOnlyVariableStringCheck("no-only_variable_string-check"),
-
-		/** Skip the parameterised_classes check */
-		NoParameterisedClassesCheck("no-parameterised_classes-check"),
-
-		/** Skip the parameter_order check */
-		NoParameterOrderCheck("no-parameter_order-check"),
-
-		/** Skip the quoted_booleans check */
-		NoQuotedBooleansCheck("no-quoted_booleans-check"),
-
-		/** Skip the right_to_left_relationship check */
-		NoRightToLeftRelationshipCheck("no-right_to_left_relationship-check"),
-
-		/** Skip the selector_inside_resource check */
-		NoSelectorInsideResourceCheck("no-selector_inside_resource-check"),
-
-		/** Skip the single_quote_string_with_variables check */
-		NoSingleQuoteStringWithVariablesCheck("no-single_quote_string_with_variables-check"),
-
-		/** Skip the slash_comments check */
-		NoSlashCommentsCheck("no-slash_comments-check"),
-
-		/** Skip the star_comments check */
-		NoStarCommentsCheck("no-star_comments-check"),
-
-		/** Skip the trailing_whitespace check */
-		NoTrailingWhitespaceCheck("no-trailing_whitespace-check"),
-
-		/** Include or skip the 2sp_soft_tabs check */
-		NoTwoSpaceSoftTabsCheck("no-2sp_soft_tabs-check"),
-
-		/** Skip the unquoted_file_mode check */
-		NoUnquotedFileModeCheck("no-unquoted_file_mode-check"),
-
-		/** Skip the unquoted_resource_title check */
-		NoUnquotedResourceTitleCheck("no-unquoted_resource_title-check"),
-
-		/** Skip the variable_contains_dash check */
-		NoVariableContainsDashCheck("no-variable_contains_dash-check"),
-
-		/** Skip the variable_scope check */
-		NoVariableScopeCheck("no-variable_scope-check"),
-
-		/** Skip the variables_not_enclosed check */
-		NoVariablesNotEnclosedCheck("no-variables_not_enclosed-check");
-
-		private final String cmdLineOption;
-
-		private Option(String cmdLineOption) {
-			this.cmdLineOption = cmdLineOption;
-		}
-
-		/**
-		 * @return The command line option without the leading two dashes
-		 */
-		@Override
-		public String toString() {
-			return cmdLineOption;
-		}
-	}
-
 	enum Severity {
-		WARNING, ERROR
+		ERROR, WARNING
 	}
+
+	/**
+	 * Check name may only contain lowercase letters, digits, and underscores and may
+	 * not start or end with underscore.
+	 */
+	Pattern CHECK_PATTERN = Pattern.compile("^[a-z0-9]+(?:[a-z0-9_]*[a-z0-9]+)?$");
+
+	/**
+	 * List of known puppet-lint options that are not checks.
+	 */
+	Set<String> NOT_CHECK_OPTIONS = new HashSet<>(Arrays.asList(new String[] {
+		"version", "config", "with-context", "with-filename", "fail-on-warnings", "error-level", "show-ignored", "relative", "l", "load",
+		"fix", "log-format", "only-checks" }));
 
 	/**
 	 * @return The version of the puppet-lint program.
@@ -183,9 +82,15 @@ public interface PuppetLintRunner {
 	 * Run puppet lint on the specified directory or file
 	 *
 	 * @param fileOrDirectory
-	 * @param options
+	 *            The file or directory to check
+	 * @param inverted
+	 *            When <code>true</code>, pass each check as
+	 *            --no-&lt;check&gt;-check. When <code>false</code>, use <code>--only-checks</code> parameter followed by a comma separated
+	 *            <code>&lt;check&gt;,&lt;check&gt;,...</code> list
+	 * @param checks
+	 *            The checks to be performed. Use the name of the check only, not &quot;--no-&lt;check&gt;-check&quot;
 	 * @return
 	 * @throws IOException
 	 */
-	List<Issue> run(File fileOrDirectory, Option... options) throws IOException;
+	List<Issue> run(File fileOrDirectory, boolean inverted, String... checks) throws IOException;
 }

@@ -79,7 +79,7 @@ public class ExternalPuppetLintRunner implements PuppetLintRunner {
 	}
 
 	@Override
-	public List<Issue> run(File fileOrDirectory, Option... options) throws IOException {
+	public List<Issue> run(File fileOrDirectory, boolean inverted, String... checks) throws IOException {
 		String pathToCheck = ".";
 		if(fileOrDirectory.isFile()) {
 			pathToCheck = fileOrDirectory.getName();
@@ -88,9 +88,20 @@ public class ExternalPuppetLintRunner implements PuppetLintRunner {
 		List<String> params = new ArrayList<String>();
 		params.add(getPuppetLintExecutable());
 		params.add("--log-format");
-		params.add("%{KIND} %{check} #%{path}#:%{linenumber} %{message}");
-		for(Option option : options)
-			params.add("--" + option);
+		params.add("%{KIND} %{check} #%{path}#:%{line} %{message}");
+		if(inverted)
+			for(String check : checks)
+				params.add("--no-" + check + "-check");
+		else {
+			params.add("--only-checks");
+			StringBuilder bld = new StringBuilder();
+			for(String check : checks) {
+				if(bld.length() > 0)
+					bld.append(',');
+				bld.append(check);
+			}
+			params.add(bld.toString());
+		}
 		params.add(pathToCheck);
 
 		OpenBAStream out = new OpenBAStream();
@@ -104,7 +115,7 @@ public class ExternalPuppetLintRunner implements PuppetLintRunner {
 				path = path.substring(2);
 			issues.add(new PuppetLintIssue(path, Severity.valueOf(m.group(1)), m.group(2), m.group(5), Integer.parseInt(m.group(4))));
 		}
-		if(issues.isEmpty() && exitCode != 0)
+		if(exitCode != 0 && issues.isEmpty())
 			throw createIOException(exitCode, out, err);
 		return issues;
 	}

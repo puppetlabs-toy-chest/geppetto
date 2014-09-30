@@ -235,7 +235,7 @@ public class Validate extends AbstractForgeServiceMojo {
 	 * @See {@link #enablePuppetLintValidation}
 	 */
 	@Parameter(property = "forge.lint.options")
-	private PuppetLintRunner.Option[] puppetLintOptions;
+	private String[] puppetLintOptions;
 
 	/**
 	 * How should circular module dependencies be reported
@@ -586,10 +586,13 @@ public class Validate extends AbstractForgeServiceMojo {
 	private void lintValidation(Collection<File> moduleLocations, Diagnostic result) throws IOException {
 		PuppetLintRunner runner = PuppetLintService.getInstance().getPuppetLintRunner();
 		getLog().debug("Performing puppet lint validation on all modules");
-		if(puppetLintOptions == null)
-			puppetLintOptions = new PuppetLintRunner.Option[0];
+		boolean inverted = false;
+		if(puppetLintOptions == null || puppetLintOptions.length == 0) {
+			puppetLintOptions = new String[0];
+			inverted = true;
+		}
 		for(File moduleRoot : moduleLocations) {
-			for(PuppetLintRunner.Issue issue : runner.run(moduleRoot, puppetLintOptions)) {
+			for(PuppetLintRunner.Issue issue : runner.run(moduleRoot, inverted, puppetLintOptions)) {
 				Diagnostic diag = convertPuppetLintDiagnostic(moduleRoot, issue);
 				if(diag != null)
 					result.addChild(diag);
