@@ -13,14 +13,18 @@ package com.puppetlabs.geppetto.diagnostic;
 import static java.lang.String.format;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Formattable;
+import java.util.FormattableFlags;
+import java.util.Formatter;
 import java.util.Iterator;
 import java.util.List;
 
-public class Diagnostic implements Serializable, Iterable<Diagnostic> {
+public class Diagnostic implements Formattable, Serializable, Iterable<Diagnostic> {
 	/**
 	 * Return the severity as a string. The string &quot;UNKNOWN(&lt;severity&gt;)&quot; will be returned if the
 	 * argument represents an unknown severity.
@@ -128,6 +132,35 @@ public class Diagnostic implements Serializable, Iterable<Diagnostic> {
 	 */
 	protected void childAdded(Diagnostic child) {
 		// Default is to do nothing.
+	}
+
+	@Override
+	public final void formatTo(Formatter formatter, int flags, int width, int precision) {
+		StringBuilder bld = new StringBuilder();
+		formatTo(bld);
+		try {
+			if(precision >= 0 && bld.length() > precision) {
+				bld.setLength(precision - 1);
+				bld.append('*');
+			}
+			int pad = width - bld.length();
+			if(pad > 0) {
+				if((flags & FormattableFlags.LEFT_JUSTIFY) != 0)
+					while(--pad >= 0)
+						bld.append(' ');
+				else
+					while(--pad >= 0)
+						bld.insert(0, ' ');
+			}
+			formatter.out().append(bld);
+		}
+		catch(IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void formatTo(StringBuilder bld) {
+		appendMessage(bld);
 	}
 
 	public List<Diagnostic> getChildren() {

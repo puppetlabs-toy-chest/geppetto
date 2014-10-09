@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.geppetto.diagnostic;
 
+import java.io.PrintWriter;
+
 /**
  */
 public class ExceptionDiagnostic extends Diagnostic {
@@ -39,6 +41,13 @@ public class ExceptionDiagnostic extends Diagnostic {
 			didAppend = true;
 		}
 		return didAppend;
+	}
+
+	@Override
+	public void formatTo(StringBuilder bld) {
+		super.formatTo(bld);
+		PrintWriter pw = new PrintWriter(new AppendableWriter(bld));
+		exception.printStackTrace(pw);
 	}
 
 	@Override
