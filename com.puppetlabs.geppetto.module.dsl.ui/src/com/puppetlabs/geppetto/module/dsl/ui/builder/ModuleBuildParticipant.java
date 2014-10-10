@@ -5,7 +5,7 @@ import static com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference.IGN
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -28,7 +28,6 @@ import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
@@ -79,6 +78,14 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 		this.rebuildChecker = rebuildChecker;
 	}
 
+	private void addProjectReferences(JsonMetadata metadata, Set<IProject> wanted) {
+		for(JsonMetadata refMd : moduleUtil.getResolvedDependencies(metadata)) {
+			IProject proj = getAccessibleProject(refMd);
+			if(proj != null)
+				wanted.add(proj);
+		}
+	}
+
 	@Override
 	public void build(IXtextBuilderParticipant.IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		SubMonitor subMon = SubMonitor.convert(monitor, 10);
@@ -87,7 +94,8 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 			removeErrorMarkers(proj);
 
 		super.build(context, subMon.newChild(7));
-		if(ModuleProjectsState.isAccessiblePuppetProject(proj))
+		if(ModuleProjectsState.isAccessiblePuppetProject(proj)) {
+			Set<IProject> referencedProjects = Sets.newHashSet(workspaceRoot.getProject(".com_puppetlabs_geppetto_pptp_target"));
 			for(IResourceDescription.Delta delta : context.getDeltas()) {
 				IResourceDescription dsc = delta.getNew();
 				if(dsc == null)
@@ -97,9 +105,11 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 					if(obj.eIsProxy())
 						obj = EcoreUtil.resolve(obj, context.getResourceSet());
 					if(!obj.eIsProxy())
-						syncProjectReferences(proj, getProjectReferences(((JsonMetadata) obj)), subMon.newChild(1));
+						addProjectReferences((JsonMetadata) obj, referencedProjects);
 				}
 			}
+			syncProjectReferences(proj, referencedProjects, subMon.newChild(1));
+		}
 		legacyCheck(proj, subMon.newChild(2));
 		monitor.done();
 	}
@@ -172,16 +182,6 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 		return severity;
 	}
 
-	private List<IProject> getProjectReferences(JsonMetadata metadata) {
-		List<IProject> wanted = Lists.newArrayList(workspaceRoot.getProject(".com_puppetlabs_geppetto_pptp_target"));
-		for(JsonMetadata refMd : moduleUtil.getResolvedDependencies(metadata)) {
-			IProject proj = getAccessibleProject(refMd);
-			if(proj != null)
-				wanted.add(proj);
-		}
-		return wanted;
-	}
-
 	/**
 	 * This check takes care of the following:
 	 * <ol>
@@ -245,8 +245,9 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 		project.deleteMarkers(PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE, true, IResource.DEPTH_INFINITE);
 	}
 
-	private void syncProjectReferences(IProject project, List<IProject> wanted, SubMonitor subMon) throws CoreException {
+	private void syncProjectReferences(IProject project, Set<IProject> wanted, SubMonitor subMon) throws CoreException {
 		subMon.setWorkRemaining(2);
+		wanted.remove(project); // Avoid self references
 		project.refreshLocal(IResource.DEPTH_INFINITE, subMon.newChild(1));
 		IProjectDescription description = project.getDescription();
 		HashSet<IProject> current = Sets.newHashSet(description.getDynamicReferences());

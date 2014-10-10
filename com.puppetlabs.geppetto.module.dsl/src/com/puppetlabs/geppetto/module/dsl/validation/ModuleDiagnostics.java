@@ -23,6 +23,8 @@ public interface ModuleDiagnostics {
 
 	String ISSUE__CIRCULAR_DEPENDENCY = ISSUE_PREFIX + "circularDependency";
 
+	String ISSUE__DEPENDENCY_DECLARED_MORE_THAN_ONCE = ISSUE_PREFIX + "dependencyDeclaredMoreThanOnce";
+
 	String ISSUE__INVALID_VERSION_RANGE = ISSUE_PREFIX + "invalidVersionRange";
 
 	String ISSUE__INVALID_MODULE_NAME = ISSUE_PREFIX + "invalidModuleName";

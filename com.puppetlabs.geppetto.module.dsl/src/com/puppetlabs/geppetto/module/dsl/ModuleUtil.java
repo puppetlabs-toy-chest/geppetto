@@ -218,22 +218,22 @@ public class ModuleUtil {
 	}
 
 	public String getRawName(JsonDependency dependency) {
-		if(dependency == null)
+		return getRawName(dependency, getReferencedModule(dependency));
+	}
+
+	public String getRawName(JsonDependency dep, JsonMetadata ref) {
+		if(dep == null || ref == null)
 			return null;
 
-		JsonMetadata ref = getReferencedModule(dependency);
-		if(ref != null) {
-			if(isResolved(ref))
-				return getString(ref, "name");
+		if(isResolved(ref))
+			return getString(ref, "name");
 
-			Triple<EObject, EReference, INode> d = lazyURIEncoder.decode(
-				dependency.eResource(), ((InternalEObject) ref).eProxyURI().fragment());
+		Triple<EObject, EReference, INode> d = lazyURIEncoder.decode(dep.eResource(), ((InternalEObject) ref).eProxyURI().fragment());
 
-			if(d != null) {
-				String string = d.getThird().getText();
-				if(string != null && string.length() >= 2)
-					return Strings.convertFromJavaString(string.substring(1, string.length() - 1), true);
-			}
+		if(d != null) {
+			String string = d.getThird().getText();
+			if(string != null && string.length() >= 2)
+				return Strings.convertFromJavaString(string.substring(1, string.length() - 1), true);
 		}
 		return null;
 	}
@@ -246,18 +246,24 @@ public class ModuleUtil {
 		return null;
 	}
 
-	public List<JsonMetadata> getResolvedDependencies(JsonMetadata metadata) {
+	public List<JsonDependency> getDependencies(JsonMetadata metadata) {
 		Value depsVal = getValue(metadata, "dependencies");
 		if(depsVal instanceof JsonArray) {
-			List<JsonMetadata> resolved = Lists.newArrayList();
-			for(Value dep : ((JsonArray) depsVal).getValue()) {
-				JsonMetadata refMd = getReferencedModule(((JsonDependency) dep));
-				if(isResolved(refMd))
-					resolved.add(refMd);
-			}
-			return resolved;
+			@SuppressWarnings("unchecked")
+			List<JsonDependency> list = (List<JsonDependency>) ((List<?>) ((JsonArray) depsVal).getValue());
+			return list;
 		}
 		return Collections.emptyList();
+	}
+
+	public List<JsonMetadata> getResolvedDependencies(JsonMetadata metadata) {
+		List<JsonMetadata> resolved = Lists.newArrayList();
+		for(JsonDependency dep : getDependencies(metadata)) {
+			JsonMetadata refMd = getReferencedModule((dep));
+			if(isResolved(refMd))
+				resolved.add(refMd);
+		}
+		return resolved;
 	}
 
 	public String getString(JsonObject object, String name) {
