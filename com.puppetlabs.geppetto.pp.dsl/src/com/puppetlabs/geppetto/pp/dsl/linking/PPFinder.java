@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -442,7 +443,7 @@ public class PPFinder {
 			for(IEObjectDescription d : targets)
 				tracer.trace("    : ", converter.toString(d.getName()), " in: ", d.getEObjectURI().path());
 		}
-		return new SearchResult(searchPathAdjusted(targets), targets);
+		return new SearchResult(searchPathAdjusted(scopeDetermeningObject, targets), targets);
 	}
 
 	public SearchResult findFunction(EObject scopeDetermeningObject, QualifiedName fqn, PPImportedNamesAdapter importedNames) {
@@ -791,7 +792,7 @@ public class PPFinder {
 	 * @param targets
 	 * @return list of descriptions with lowest index.
 	 */
-	private List<IEObjectDescription> searchPathAdjusted(List<IEObjectDescription> targets) {
+	private List<IEObjectDescription> searchPathAdjusted(EObject scopeDeterminingObject, List<IEObjectDescription> targets) {
 		int minTypesAndDefinesIdx = Integer.MAX_VALUE;
 		int minClassIdx = Integer.MAX_VALUE;
 		List<IEObjectDescription> result = new UniqueEList<IEObjectDescription>();
@@ -799,9 +800,13 @@ public class PPFinder {
 		List<IEObjectDescription> typesAndDefinesResult = null;
 		for(IEObjectDescription d : targets) {
 			int idx = searchPath.searchIndexOf(d);
-			if(idx == PPSearchPath.NOT_FOUND)
-				continue; // not found, skip
-			if(idx == PPSearchPath.FOUND_IN_TPTP) {
+			if(idx == PPSearchPath.NOT_FOUND) {
+				// We consider targets found in the same root container as the scope determining object to be OK
+				// although they are not strictly on the search path.
+				if(EcoreUtil.getRootContainer(scopeDeterminingObject) != EcoreUtil.getRootContainer(d.getEObjectOrProxy()))
+					continue; // not found, skip
+			}
+			else if(idx == PPSearchPath.FOUND_IN_TPTP) {
 				// Always found but not on search path so it might cause ambiguities
 				result.add(d);
 				continue;
