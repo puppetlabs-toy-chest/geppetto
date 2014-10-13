@@ -5,6 +5,7 @@ import static java.lang.String.format;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,9 +54,20 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 	@Check
 	public void checkDependency(JsonDependency dependency) {
 		JsonMetadata ref = moduleUtil.getReferencedModule(dependency);
+		String name = moduleUtil.getRawName(dependency, ref);
 		VersionRange range = moduleUtil.getRange(dependency);
-		if(ref == null)
+		if(name == null)
 			missingAttribute(dependency, "name", ValidationPreference.ERROR);
+		else {
+			List<JsonDependency> deps = moduleUtil.getDependencies(moduleUtil.getOwnerMetadata(dependency));
+			for(JsonDependency otherDep : deps)
+				if(otherDep != dependency && name.equals(moduleUtil.getRawName(otherDep))) {
+					error(
+						String.format("Dependency to '%s' is declared more than once", name), dependency.eContainer(),
+						Literals.JSON_ARRAY__VALUE, deps.indexOf(dependency), ISSUE__DEPENDENCY_DECLARED_MORE_THAN_ONCE);
+					break;
+				}
+		}
 
 		if(range == null)
 			warning(

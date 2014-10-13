@@ -33,6 +33,68 @@ import com.puppetlabs.geppetto.semver.Version;
  */
 @Singleton
 public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
+	/**
+	 * Find start and length of the element that <code>issue</code> represents in an array. The resulting <code>bounds</code> will include
+	 * preceeding or trailing comma (not both) if present so that the syntax
+	 * of the array is intact if the range is removed.
+	 *
+	 * @param txt
+	 *            The text containing the array
+	 * @param issue
+	 *            The issue that represents the array element
+	 * @param bounds
+	 *            A two element array where the start and lenght will be returned
+	 * @return <code>true</code> if the range could be deteremined or <code>false</code> to indicate that the tokens expected
+	 *         to precede and succeed the element could not be found.
+	 */
+	public static boolean findArrayElementBounds(String txt, Issue issue, int[] bounds) {
+		int start = issue.getOffset();
+		int end = issue.getOffset() + issue.getLength();
+
+		// Find preceding comma or start of array
+		char c = 0;
+		int cma = start;
+		while(--cma >= 0) {
+			c = txt.charAt(cma);
+			if(c == ',' || c == '[')
+				break;
+		}
+
+		if(c != ',') {
+			if(c != '[')
+				// Element must be preceeded by comma or start of array
+				return false;
+
+			// No preceding comma. Find trailing comma or end of array
+			int eot = txt.length();
+			cma = end;
+			c = 0;
+			while(cma < eot) {
+				c = txt.charAt(cma);
+				if(c == ',' || c == ']')
+					break;
+				++cma;
+			}
+			if(c == ',') {
+				end = cma + 1;
+				// Also swallow whitespace after comma
+				while(end < eot && Character.isWhitespace(txt.charAt(end)))
+					end++;
+			}
+			else if(c == ']')
+				end = cma;
+			else
+				// Neither comma nor array end follow after element.
+				return false;
+
+		}
+		else
+			start = cma;
+		bounds[0] = start;
+		bounds[1] = end - start;
+		return true;
+	}
+
 	@Inject
 	private ModuleUtil moduleUtil;
 
@@ -124,6 +186,20 @@ public class ModuleQuickfixProvider extends DefaultQuickfixProvider {
 
 	private Version getResolvedMetadataVersion(EObject element) {
 		return moduleUtil.getVersion(moduleUtil.getReferencedModule(((JsonDependency) element.eContainer().eContainer())));
+	}
+
+	@Fix(ModuleDiagnostics.ISSUE__DEPENDENCY_DECLARED_MORE_THAN_ONCE)
+	public void removeRedundantDependency(final Issue issue, final IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove dependency", "Remove duplication of dependency", null, new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				IXtextDocument doc = context.getXtextDocument();
+				int[] bounds = new int[2];
+				if(findArrayElementBounds(doc.get(), issue, bounds))
+					doc.replace(bounds[0], bounds[1], "");
+			}
+		});
+
 	}
 
 	@Fix(ModuleDiagnostics.ISSUE__MODULE_VERSION_RANGE_MISMATCH)
