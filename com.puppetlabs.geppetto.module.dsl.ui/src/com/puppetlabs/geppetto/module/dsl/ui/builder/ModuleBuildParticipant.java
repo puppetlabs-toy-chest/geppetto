@@ -125,7 +125,7 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 			createResourceMarkers(r, child);
 
 		String msg = diagnostic.getMessage();
-		if(msg == null)
+		if(msg == null || msg.isEmpty())
 			return;
 
 		IMarker m = r.createMarker(ModuleBuildParticipant.PUPPET_MODULE_PROBLEM_MARKER_TYPE);
