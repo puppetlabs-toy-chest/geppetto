@@ -1426,7 +1426,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 		ListIterator<IEObjectDescription> litor = descs.listIterator();
 		while(litor.hasNext()) {
 			IEObjectDescription x = litor.next();
-			if(x.getEClass() == PPPackage.Literals.DEFINITION || !isParent(x, o))
+			if(!(x.getEClass() == PPPackage.Literals.DEFINITION && isParent(x, o)))
 				continue;
 			litor.remove();
 		}
