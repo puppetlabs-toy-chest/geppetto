@@ -312,9 +312,12 @@ public class PPResourceLinker implements IPPDiagnostics {
 		if(!patternHelper.isCLASSREF(name))
 			return;
 
+		if(!name.startsWith("::"))
+			name = "::" + name;
 		PPImportedNamesAdapter importedNames = ctx.getImportedNames();
 		SearchResult result = ppFinder.findDefinitions(o, name, importedNames);
 		List<IEObjectDescription> refs = result.getAdjusted();
+		purgeHostClassResult(refs);
 		boolean existsAdjusted = !refs.isEmpty();
 		boolean existsRaw = existsAdjusted;
 		if(existsAdjusted) {
@@ -327,6 +330,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 		}
 		else {
 			refs = result.getRaw();
+			purgeHostClassResult(refs);
 			existsRaw = !refs.isEmpty();
 			if(existsRaw)
 				ctx.acceptWarning("Found outside search path: '" + name + "'", o, ISSUE__NOT_ON_PATH);
@@ -992,7 +996,10 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 		// normal resource
 		final PPImportedNamesAdapter importedNames = ctx.getImportedNames();
-		SearchResult searchResult = ppFinder.findDefinitions(o, resourceTypeName, importedNames);
+		String queryName = resourceTypeName;
+		if(advisor().allowTypeDefinitions() && !queryName.startsWith("::"))
+			queryName = "::" + queryName;
+		SearchResult searchResult = ppFinder.findDefinitions(o, queryName, importedNames);
 		List<IEObjectDescription> descs = searchResult.getAdjusted(); // findDefinitions(o, resourceTypeName, importedNames);
 
 		// A resource type cannot reference a class but the HostClassDefinition inherits Definition
