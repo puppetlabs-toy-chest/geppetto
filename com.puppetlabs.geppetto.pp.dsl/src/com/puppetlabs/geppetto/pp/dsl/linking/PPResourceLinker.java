@@ -580,11 +580,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 	}
 
 	private void checkValidName(EObject scopeDeterminingObject, EStructuralFeature feature, int idx, String name, LinkContext ctx) {
-		if(advisor().allowTypeDefinitions())
-			if(ppFinder.isPuppetTypeName(name))
-				ctx.acceptError(
-					"The name '" + name + "' is already defined by Puppet.", scopeDeterminingObject, feature, idx,
-					ISSUE__RESERVED_TYPE_NAME);
+		if(ppFinder.isReservedTypeName(name))
+			ctx.acceptError(
+				"The name '" + name + "' is already defined by Puppet.", scopeDeterminingObject, feature, idx, ISSUE__RESERVED_TYPE_NAME);
 	}
 
 	private void checkValidName(Expression expr, String name, LinkContext ctx) {
