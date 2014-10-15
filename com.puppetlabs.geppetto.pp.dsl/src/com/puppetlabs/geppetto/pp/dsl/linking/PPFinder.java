@@ -138,6 +138,11 @@ public class PPFinder {
 	// PPTPPackage.Literals.TYPE
 	};
 
+	private static final EClass[] PPTP_TYPE = { PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE };
+
+	private static final EClass[] PPTP_TYPE_AND_FUNC = {
+		PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE, PPTPPackage.Literals.FUNCTION };
+
 	private Resource resource;
 
 	@Inject
@@ -702,6 +707,16 @@ public class PPFinder {
 		return findVariables(scopeDetermeningObject, fqn, importedNames, Match.NO_OUTER_STARTS_WITH);
 	}
 
+	public IEObjectDescription getExportByName(String name, EClass... classes) {
+		for(IEObjectDescription export : getExportedPerLastSegment(name)) {
+			int len = classes.length;
+			while(--len >= 0)
+				if(classes[len].isSuperTypeOf(export.getEClass()))
+					return export;
+		}
+		return null;
+	}
+
 	/**
 	 * Produces an unmodifiable list of everything visible to the resource.
 	 *
@@ -766,13 +781,6 @@ public class PPFinder {
 		return QualifiedName.EMPTY;
 	}
 
-	public IEObjectDescription getPuppetTypeByName(String name) {
-		for(IEObjectDescription export : getExportedPerLastSegment(name))
-			if(PPTPPackage.Literals.PUPPET_TYPE.isSuperTypeOf(export.getEClass()))
-				return export;
-		return null;
-	}
-
 	private boolean isContainedInDefinition(EObject scoped) {
 		for(EObject o = scoped; o != null; o = o.eContainer())
 			if(o.eClass() == PPPackage.Literals.DEFINITION)
@@ -780,8 +788,28 @@ public class PPFinder {
 		return false;
 	}
 
-	public boolean isPuppetTypeName(String name) {
-		return getPuppetTypeByName(name) != null;
+	/**
+	 * Return true if the name represents an object exported by the target platfrom and that object
+	 * is a puppet type, resource type, or function.
+	 *
+	 * @param name
+	 *            The name to check
+	 * @return the result of the check
+	 */
+	public boolean isReservedFunctionName(String name) {
+		return getExportByName(name, PPTP_TYPE_AND_FUNC) != null;
+	}
+
+	/**
+	 * Return true if the name represents an object exported by the target platfrom and that object
+	 * is a puppet type or a resource type.
+	 *
+	 * @param name
+	 *            The name to check
+	 * @return the result of the check
+	 */
+	public boolean isReservedTypeName(String name) {
+		return getExportByName(name, PPTP_TYPE) != null;
 	}
 
 	/**

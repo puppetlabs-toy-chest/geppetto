@@ -312,9 +312,12 @@ public class PPResourceLinker implements IPPDiagnostics {
 		if(!patternHelper.isCLASSREF(name))
 			return;
 
+		if(!name.startsWith("::"))
+			name = "::" + name;
 		PPImportedNamesAdapter importedNames = ctx.getImportedNames();
 		SearchResult result = ppFinder.findDefinitions(o, name, importedNames);
 		List<IEObjectDescription> refs = result.getAdjusted();
+		purgeHostClassResult(refs);
 		boolean existsAdjusted = !refs.isEmpty();
 		boolean existsRaw = existsAdjusted;
 		if(existsAdjusted) {
@@ -327,6 +330,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 		}
 		else {
 			refs = result.getRaw();
+			purgeHostClassResult(refs);
 			existsRaw = !refs.isEmpty();
 			if(existsRaw)
 				ctx.acceptWarning("Found outside search path: '" + name + "'", o, ISSUE__NOT_ON_PATH);
@@ -576,11 +580,9 @@ public class PPResourceLinker implements IPPDiagnostics {
 	}
 
 	private void checkValidName(EObject scopeDeterminingObject, EStructuralFeature feature, int idx, String name, LinkContext ctx) {
-		if(advisor().allowTypeDefinitions())
-			if(ppFinder.isPuppetTypeName(name))
-				ctx.acceptError(
-					"The name '" + name + "' is already defined by Puppet.", scopeDeterminingObject, feature, idx,
-					ISSUE__RESERVED_TYPE_NAME);
+		if(ppFinder.isReservedTypeName(name))
+			ctx.acceptError(
+				"The name '" + name + "' is already defined by Puppet.", scopeDeterminingObject, feature, idx, ISSUE__RESERVED_TYPE_NAME);
 	}
 
 	private void checkValidName(Expression expr, String name, LinkContext ctx) {
@@ -992,7 +994,10 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 		// normal resource
 		final PPImportedNamesAdapter importedNames = ctx.getImportedNames();
-		SearchResult searchResult = ppFinder.findDefinitions(o, resourceTypeName, importedNames);
+		String queryName = resourceTypeName;
+		if(advisor().allowTypeDefinitions() && !queryName.startsWith("::"))
+			queryName = "::" + queryName;
+		SearchResult searchResult = ppFinder.findDefinitions(o, queryName, importedNames);
 		List<IEObjectDescription> descs = searchResult.getAdjusted(); // findDefinitions(o, resourceTypeName, importedNames);
 
 		// A resource type cannot reference a class but the HostClassDefinition inherits Definition
@@ -1419,7 +1424,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 		ListIterator<IEObjectDescription> litor = descs.listIterator();
 		while(litor.hasNext()) {
 			IEObjectDescription x = litor.next();
-			if(x.getEClass() == PPPackage.Literals.DEFINITION || !isParent(x, o))
+			if(!(x.getEClass() == PPPackage.Literals.DEFINITION && isParent(x, o)))
 				continue;
 			litor.remove();
 		}
