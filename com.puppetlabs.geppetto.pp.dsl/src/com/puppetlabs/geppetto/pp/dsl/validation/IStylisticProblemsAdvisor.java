@@ -18,31 +18,31 @@ public interface IStylisticProblemsAdvisor {
 	/**
 	 * How an (optional) default that is not placed last should be validated for a case expression.
 	 */
-	ValidationPreference caseDefaultShouldAppearLast();
+	ValidationPreference getCaseDefaultShouldAppearLast();
 
 	/**
 	 * How the 'ensure' property should be validated if not placed first among a resource's properties.
 	 */
-	ValidationPreference ensureShouldAppearFirstInResource();
+	ValidationPreference getEnsureShouldAppearFirstInResource();
 
 	/**
 	 * How to 'validate' the presence of ML comments.
 	 */
-	ValidationPreference mlComments();
+	ValidationPreference getMlComments();
 
 	/**
 	 * Octal number is not quoted
 	 */
-	ValidationPreference attributeIsNotString();
+	ValidationPreference getAttributeIsNotString();
 
 	/**
 	 * How to validate right to left relationships ( e.g. a <- b and a <~ b)
 	 */
-	ValidationPreference rightToLeftRelationships();
+	ValidationPreference getRightToLeftRelationships();
 
 	/**
 	 * How an (almost required) default that is not placed last should be validated for a selector expression.
 	 */
-	ValidationPreference selectorDefaultShouldAppearLast();
+	ValidationPreference getSelectorDefaultShouldAppearLast();
 
 }

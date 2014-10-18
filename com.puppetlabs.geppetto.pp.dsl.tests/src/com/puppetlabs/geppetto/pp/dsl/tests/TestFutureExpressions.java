@@ -41,7 +41,7 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
 		return new DefaultPotentialProblemsAdvisor() {
 			@Override
-			public ValidationPreference validityAssertedAtRuntime() {
+			public ValidationPreference getValidityAssertedAtRuntime() {
 				return ValidationPreference.WARNING;
 			}
 			// TODO: Add more

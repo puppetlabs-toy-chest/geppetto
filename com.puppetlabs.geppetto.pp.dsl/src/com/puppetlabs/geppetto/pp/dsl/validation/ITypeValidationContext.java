@@ -105,7 +105,7 @@ public interface ITypeValidationContext {
 
 	/**
 	 * Will do nothing, emit a warning, or emit an error that validity cannot be asserted until runtime using the {@link #acceptor()}
-	 * depending on the {@link IValidationAdvisor#validityAssertedAtRuntime()} preference obtained from the {@link #advisor()}.
+	 * depending on the {@link IValidationAdvisor#getValidityAssertedAtRuntime()} preference obtained from the {@link #advisor()}.
 	 */
 	void validityAssertedAtRuntime();
 

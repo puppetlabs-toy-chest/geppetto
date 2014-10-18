@@ -12,9 +12,12 @@ package com.puppetlabs.geppetto.validation;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Collections;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.google.common.collect.Sets;
 import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
@@ -48,11 +51,21 @@ public class ValidationOptions {
 
 	private boolean checkReferences;
 
+	private boolean allowFileOverride;
+
 	private IModuleValidationAdvisor moduleValidationAdvisor;
+
+	private Set<String> folderExclusionPatterns;
 
 	private FileFilter fileFilter;
 
 	private FileFilter validationFilter;
+
+	public static final Set<String> DEFAULT_EXCLUTION_PATTERNS;
+
+	static {
+		DEFAULT_EXCLUTION_PATTERNS = Collections.unmodifiableSet(Sets.newHashSet("pkg", "spec"));
+	}
 
 	public ValidationOptions() {
 		fileType = FileType.DETECT;
@@ -71,6 +84,9 @@ public class ValidationOptions {
 		checkModuleSemantics = source.checkModuleSemantics;
 		checkReferences = source.checkReferences;
 		moduleValidationAdvisor = source.moduleValidationAdvisor;
+		folderExclusionPatterns = source.folderExclusionPatterns;
+		fileFilter = source.fileFilter;
+		validationFilter = source.validationFilter;
 	}
 
 	/**
@@ -117,6 +133,17 @@ public class ValidationOptions {
 	}
 
 	/**
+	 * @return the folderExclusionPattern
+	 */
+	public Set<String> getFolderExclusionPatterns() {
+		if(folderExclusionPatterns == null) {
+			folderExclusionPatterns = Sets.newHashSet(FileUtils.DEFAULT_EXCLUDES);
+			folderExclusionPatterns.addAll(DEFAULT_EXCLUTION_PATTERNS);
+		}
+		return folderExclusionPatterns;
+	}
+
+	/**
 	 * @return the value of the '<em>manifestDir</em>' attribute.
 	 */
 	public String getManifestDir() {
@@ -160,6 +187,13 @@ public class ValidationOptions {
 	}
 
 	/**
+	 * @return the allowFileOverride
+	 */
+	public boolean isAllowFileOverride() {
+		return allowFileOverride;
+	}
+
+	/**
 	 * @return the value of the '<em>checkLayout</em>' attribute.
 	 */
 	public boolean isCheckLayout() {
@@ -194,6 +228,16 @@ public class ValidationOptions {
 	 */
 	public boolean isValidationCandidate(File candidate) {
 		return validationFilter == null || validationFilter.accept(candidate);
+	}
+
+	/**
+	 * Sets the value of the '<em>allowFileOverride</em>' attribute.
+	 *
+	 * @param allowFileOverride
+	 *            the new value of the '<em>allowFileOverride</em>' attribute.
+	 */
+	public void setAllowFileOverride(boolean allowFileOverride) {
+		this.allowFileOverride = allowFileOverride;
 	}
 
 	/**
@@ -275,6 +319,14 @@ public class ValidationOptions {
 		this.fileType = fileType == null
 			? FileType.DETECT
 			: fileType;
+	}
+
+	/**
+	 * @param folderExclusionPatterns
+	 *            the folderExclusionPattern to set
+	 */
+	public void setFolderExclusionPatterns(Set<String> folderExclusionPatterns) {
+		this.folderExclusionPatterns = folderExclusionPatterns;
 	}
 
 	/**

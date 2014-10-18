@@ -139,7 +139,7 @@ public class AbstractValidationTest {
 	public void setUp() {
 		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
 		ValidationOptions options = getValidationOptions();
-		new PPDiagnosticsSetup(options.getComplianceLevel(), options.getProblemsAdvisor()).createInjectorAndDoEMFRegistration();
+		new PPDiagnosticsSetup(options).createInjectorAndDoEMFRegistration();
 		injector = Guice.createInjector(GsonModule.INSTANCE, new ForgeModule(), new ValidationModule());
 	}
 }

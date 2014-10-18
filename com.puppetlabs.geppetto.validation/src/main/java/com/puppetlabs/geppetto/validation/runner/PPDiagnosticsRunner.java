@@ -73,10 +73,9 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.IConfigurableProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.parser.antlr.PPParser;
-import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
 import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
  * Runner/Helper that can perform diagnostics/validation of PP files.
@@ -705,9 +704,9 @@ public class PPDiagnosticsRunner {
 	 *
 	 * @throws Exception
 	 */
-	public void setUp(IValidationAdvisor.ComplianceLevel complianceLevel, IPotentialProblemsAdvisor problemsAdvisor) throws Exception {
+	public void setUp(ValidationOptions validationOptions) throws Exception {
 		// Setup with overrides
-		instance = new PPDiagnosticsSetup(complianceLevel, problemsAdvisor);
+		instance = new PPDiagnosticsSetup(validationOptions);
 		injector = instance.createInjectorAndDoEMFRegistration();
 		resourceSet = get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(getClass());

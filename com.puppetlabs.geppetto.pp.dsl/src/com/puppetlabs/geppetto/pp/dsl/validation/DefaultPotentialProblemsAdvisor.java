@@ -17,102 +17,102 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdvisor, IStylisticProblemsAdvisor {
 
 	@Override
-	public ValidationPreference assignmentToVarNamedString() {
+	public ValidationPreference getAssignmentToVarNamedString() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference assignmentToVarNamedTrusted() {
+	public ValidationPreference getAssignmentToVarNamedTrusted() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference attributeIsNotString() {
+	public ValidationPreference getAttributeIsNotString() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference booleansInStringForm() {
+	public ValidationPreference getBooleansInStringForm() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference caseDefaultShouldAppearLast() {
+	public ValidationPreference getCaseDefaultShouldAppearLast() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference deprecatedImport() {
+	public ValidationPreference getDeprecatedImport() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference deprecatedNodeInheritance() {
+	public ValidationPreference getDeprecatedNodeInheritance() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference deprecatedPlusEquals() {
+	public ValidationPreference getDeprecatedPlusEquals() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference deprecatedVariableName() {
+	public ValidationPreference getDeprecatedVariableName() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference dqStringNotRequired() {
+	public ValidationPreference getDqStringNotRequired() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference dqStringNotRequiredVariable() {
+	public ValidationPreference getDqStringNotRequiredVariable() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference ensureShouldAppearFirstInResource() {
+	public ValidationPreference getEnsureShouldAppearFirstInResource() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
+	public ValidationPreference getInterpolatedNonBraceEnclosedHyphens() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference missingDefaultInSelector() {
+	public ValidationPreference getMissingDefaultInSelector() {
 		return ValidationPreference.WARNING;
 	}
 
 	@Override
-	public ValidationPreference mlComments() {
+	public ValidationPreference getMlComments() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference rightToLeftRelationships() {
+	public ValidationPreference getRightToLeftRelationships() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference selectorDefaultShouldAppearLast() {
+	public ValidationPreference getSelectorDefaultShouldAppearLast() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference unbracedInterpolation() {
+	public ValidationPreference getUnbracedInterpolation() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference unquotedResourceTitles() {
+	public ValidationPreference getUnquotedResourceTitles() {
 		return ValidationPreference.IGNORE;
 	}
 
 	@Override
-	public ValidationPreference validityAssertedAtRuntime() {
+	public ValidationPreference getValidityAssertedAtRuntime() {
 		return ValidationPreference.IGNORE;
 	}
 

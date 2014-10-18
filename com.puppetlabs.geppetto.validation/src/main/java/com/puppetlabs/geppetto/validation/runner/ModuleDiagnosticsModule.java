@@ -60,7 +60,7 @@ public class ModuleDiagnosticsModule extends ModuleRuntimeModule {
 	 *
 	 * @return
 	 */
-	public IModuleValidationAdvisor bindModuleValidationAdvisor() {
+	public IModuleValidationAdvisor bindIModuleValidationAdvisor() {
 		return moduleValidationAdvisor;
 	}
 }

@@ -17,24 +17,21 @@ import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.resource.IContainer.Manager;
 
 import com.google.inject.Provider;
+import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
 import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
-import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
  * Provides bindings for the PPDiagnostician.
  */
 public class PPDiagnosticsModule extends PPRuntimeModule {
 
-	private final ComplianceLevel complicanceLevel;
+	private final ValidationOptions validationOptions;
 
-	private final IPotentialProblemsAdvisor problemsAdvisor;
-
-	public PPDiagnosticsModule(IValidationAdvisor.ComplianceLevel complianceLevel, IPotentialProblemsAdvisor problemsAdvisor) {
-		this.complicanceLevel = complianceLevel;
-		this.problemsAdvisor = problemsAdvisor;
+	public PPDiagnosticsModule(ValidationOptions validationOptions) {
+		this.validationOptions = validationOptions;
 	}
 
 	/**
@@ -53,6 +50,11 @@ public class PPDiagnosticsModule extends PPRuntimeModule {
 		return ValidationStateBasedContainerManager.class;
 	}
 
+	@Override
+	public Class<? extends IFolderDiscriminator> bindIFolderDiscriminator() {
+		return OptionsBasedFolderDiscriminator.class;
+	}
+
 	/**
 	 * Overrides the PPLinker used by default, to a linker that does not process documentation and that performs no
 	 * resource linking. (To allow this to be performed separately).
@@ -62,6 +64,10 @@ public class PPDiagnosticsModule extends PPRuntimeModule {
 		return LazyLinker.class;
 	}
 
+	public ValidationOptions bindValidationOptions() {
+		return validationOptions;
+	}
+
 	/**
 	 * Bind a ValidationAdvisorProvider.
 	 *
@@ -69,6 +75,6 @@ public class PPDiagnosticsModule extends PPRuntimeModule {
 	 */
 	@Override
 	public Provider<IValidationAdvisor> provideValidationAdvisor() {
-		return ValidationAdvisorProvider.create(complicanceLevel, problemsAdvisor);
+		return ValidationAdvisorProvider.create(validationOptions.getComplianceLevel(), validationOptions.getProblemsAdvisor());
 	}
 }

@@ -24,5 +24,8 @@ Require-Bundle: org.eclipse.xtext,
  com.google.gson,
  org.junit
 Export-Package: com.puppetlabs.geppetto.validation.tests
-Import-Package: com.puppetlabs.geppetto.injectable,
+Import-Package: com.fasterxml.jackson.core;version="2.4.3",
+ com.fasterxml.jackson.databind;version="2.4.3",
+ com.fasterxml.jackson.databind.jsonschema;version="2.4.3",
+ com.puppetlabs.geppetto.injectable,
  org.eclipse.core.runtime

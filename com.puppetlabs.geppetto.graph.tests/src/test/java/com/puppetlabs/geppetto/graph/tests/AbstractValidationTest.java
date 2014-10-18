@@ -130,8 +130,7 @@ public class AbstractValidationTest {
 	@Before
 	public void setUp() {
 		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
-		ValidationOptions options = getValidationOptions();
-		injector = new PPDiagnosticsSetup(options.getComplianceLevel(), options.getProblemsAdvisor()).createInjectorAndDoEMFRegistration();
+		injector = new PPDiagnosticsSetup(getValidationOptions()).createInjectorAndDoEMFRegistration();
 		injector = injector.createChildInjector(GsonModule.INSTANCE, new ForgeModule(), new ValidationModule(), new DependencyGraphModule(
 			JavascriptHrefProducer.class, ""));
 	}

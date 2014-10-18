@@ -361,7 +361,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkAppendExpression(AppendExpression o) {
-		ValidationPreference peIsDeprecated = advisor().deprecatedPlusEquals();
+		ValidationPreference peIsDeprecated = advisor().getDeprecatedPlusEquals();
 		if(peIsDeprecated != ValidationPreference.IGNORE) {
 			if(peIsDeprecated == ValidationPreference.ERROR)
 				acceptor.acceptError(
@@ -406,7 +406,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		// The name "$string" causes inline templates to produce the wrong content.
 		// http://projects.puppetlabs.com/issues/14093
-		ValidationPreference preference = advisor().assignmentToVarNamedString();
+		ValidationPreference preference = advisor().getAssignmentToVarNamedString();
 		if(preference.isWarningOrError() && ("string".equals(varExpr.getVarName()) || "$string".equals(varExpr.getVarName()))) {
 			warningOrError(
 				acceptor, preference, "Assignment to $string will cause inline templates to fail", varExpr,
@@ -414,7 +414,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		}
 
 		// The name "$trusted" will automatically contain trusted node data in future versions.
-		preference = advisor().assignmentToVarNamedTrusted();
+		preference = advisor().getAssignmentToVarNamedTrusted();
 		if(preference.isWarningOrError() && ("trusted".equals(varExpr.getVarName()) || "$trusted".equals(varExpr.getVarName()))) {
 			warningOrError(
 				acceptor, preference, "$trusted will automatically contain trusted node data in future versions - avoid using this name.",
@@ -626,7 +626,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		boolean splash = false;
 		boolean octal = false;
 		if(isNAME(key))
-			octal = !(advisor().allowModeWithNonOctalIntegerLiterals() && advisor().attributeIsNotString() == ValidationPreference.IGNORE) &&
+			octal = !(advisor().allowModeWithNonOctalIntegerLiterals() && advisor().getAttributeIsNotString() == ValidationPreference.IGNORE) &&
 				isOctalAttribute(o);
 		else {
 			splash = advisor().allowSplashAttribute() && "*".equals(key);
@@ -684,7 +684,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 						else
 							// It's an octal number so this is just a stylistic thing
 							warningOrError(
-								acceptor, advisor().attributeIsNotString(), "Attribute '" + key + "' should be a string", o,
+								acceptor, advisor().getAttributeIsNotString(), "Attribute '" + key + "' should be a string", o,
 								PPPackage.Literals.ATTRIBUTE_OPERATION__VALUE, INSIGNIFICANT_INDEX,
 								IPPDiagnostics.ISSUE__OCTAL_SHOULD_BE_STRING);
 						break;
@@ -825,7 +825,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		// if a default is seen it should (optionally) appear last
 		if(theDefaultIsSeen) {
 			IValidationAdvisor advisor = advisor();
-			ValidationPreference shouldBeLast = advisor.caseDefaultShouldAppearLast();
+			ValidationPreference shouldBeLast = advisor.getCaseDefaultShouldAppearLast();
 			if(shouldBeLast.isWarningOrError()) {
 				int last = caseExpressions.size() - 1;
 				for(int i = 0; i < last; i++)
@@ -959,7 +959,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 					INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_INITIAL_LOWERCASE);
 			else if("$trusted".equals(argName)) {
 				warningOrError(
-					acceptor, advisor().assignmentToVarNamedTrusted(),
+					acceptor, advisor().getAssignmentToVarNamedTrusted(),
 					"$trusted will automatically contain trusted node data in future versions - avoid using this name.", o,
 					PPPackage.Literals.DEFINITION_ARGUMENT__ARG_NAME, IPPDiagnostics.ISSUE__ASSIGNMENT_TO_VAR_NAMED_TRUSTED);
 			}
@@ -1036,7 +1036,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		TextExpression previous = null;
 		int idx = 0;
 		IValidationAdvisor advisor = advisor();
-		ValidationPreference hyphens = advisor.interpolatedNonBraceEnclosedHyphens();
+		ValidationPreference hyphens = advisor.getInterpolatedNonBraceEnclosedHyphens();
 		for(TextExpression te : o.getStringPart()) {
 			if(idx > 0 && previous instanceof VariableTE && te instanceof VerbatimTE) {
 				VerbatimTE verbatim = (VerbatimTE) te;
@@ -1050,7 +1050,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			previous = te;
 			idx++;
 		}
-		ValidationPreference booleansInStringForm = advisor.booleansInStringForm();
+		ValidationPreference booleansInStringForm = advisor.getBooleansInStringForm();
 
 		BOOLEAN_STRING: if(booleansInStringForm.isWarningOrError()) {
 			// Check if string contains "true" or "false"
@@ -1063,7 +1063,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		}
 
 		// DQ_STRING_NOT_REQUIRED
-		ValidationPreference dqStringNotRequired = advisor.dqStringNotRequired();
+		ValidationPreference dqStringNotRequired = advisor.getDqStringNotRequired();
 		if(dqStringNotRequired.isWarningOrError() && !hasInterpolation(o)) {
 			// contains escape sequences?
 			String constant = stringConstantEvaluator.doToString(o);
@@ -1072,7 +1072,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 					acceptor, dqStringNotRequired, "Double quoted string not required", o, IPPDiagnostics.ISSUE__DQ_STRING_NOT_REQUIRED);
 		}
 		// UNBRACED INTERPOLATION
-		ValidationPreference unbracedInterpolation = advisor.unbracedInterpolation();
+		ValidationPreference unbracedInterpolation = advisor.getUnbracedInterpolation();
 		if(unbracedInterpolation.isWarningOrError()) {
 			for(TextExpression te : o.getStringPart()) {
 				if(te.eClass().getClassifierID() == PPPackage.VARIABLE_TE) {
@@ -1083,7 +1083,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			}
 		}
 		// SINGLE INTERPOLATION
-		ValidationPreference dqStringNotRequiredVariable = advisor.dqStringNotRequiredVariable();
+		ValidationPreference dqStringNotRequiredVariable = advisor.getDqStringNotRequiredVariable();
 		SINGLE_INTERPOLATION: if(dqStringNotRequiredVariable.isWarningOrError()) {
 			if(o.getStringPart().size() == 1) {
 				String replacement = null;
@@ -1190,9 +1190,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	@Check
 	public void checkImportExpression(ImportExpression o) {
-		if(advisor().deprecatedImport() != ValidationPreference.IGNORE)
+		if(advisor().getDeprecatedImport() != ValidationPreference.IGNORE)
 			warningOrError(
-				acceptor, advisor().deprecatedImport(), "Import is deprecated in Puppet version >= 3.5.", o, ISSUE__DEPRECATED_IMPORT);
+				acceptor, advisor().getDeprecatedImport(), "Import is deprecated in Puppet version >= 3.5.", o, ISSUE__DEPRECATED_IMPORT);
 
 		if(o.getValues().size() <= 0)
 			acceptor.acceptError(
@@ -1289,7 +1289,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			}
 			else {
 				if(rhs instanceof VariableExpression) {
-					ValidationPreference var = advisor().validityAssertedAtRuntime();
+					ValidationPreference var = advisor().getValidityAssertedAtRuntime();
 					if(var != ValidationPreference.IGNORE)
 						warningOrError(
 							acceptor, var, "Validity or right expression cannot be asserted until runtime", o,
@@ -1354,7 +1354,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		Expression parentExpr = o.getParentName();
 		if(parentExpr != null) {
-			ValidationPreference deprecatedNI = advisor().deprecatedNodeInheritance();
+			ValidationPreference deprecatedNI = advisor().getDeprecatedNodeInheritance();
 			if(deprecatedNI != ValidationPreference.IGNORE)
 				warningOrError(
 					acceptor,
@@ -1477,7 +1477,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		if(opName.startsWith("<")) {
 			// what does the advice say
 			IValidationAdvisor advisor = advisor();
-			ValidationPreference rightToLeft = advisor.rightToLeftRelationships();
+			ValidationPreference rightToLeft = advisor.getRightToLeftRelationships();
 			if(rightToLeft.isWarningOrError()) {
 				List<INode> x = NodeModelUtils.findNodesForFeature(o, PPPackage.Literals.BINARY_OP_EXPRESSION__OP_NAME);
 				// in case there is embedded whitespace or crazy stuff... (locate the node)
@@ -1551,13 +1551,13 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			}
 		if(!unquotedNameFlagged && nameExpr instanceof LiteralNameOrReference) {
 			IValidationAdvisor advisor = advisor();
-			ValidationPreference unquotedResourceTitles = advisor.unquotedResourceTitles();
+			ValidationPreference unquotedResourceTitles = advisor.getUnquotedResourceTitles();
 			if(unquotedResourceTitles.isWarningOrError()) {
 				warningOrError(
 					acceptor, unquotedResourceTitles, "Unquoted resource title", nameExpr, IPPDiagnostics.ISSUE__UNQUOTED_QUALIFIED_NAME);
 			}
 		}
-		ValidationPreference ensureFirstAdvise = advisor().ensureShouldAppearFirstInResource();
+		ValidationPreference ensureFirstAdvise = advisor().getEnsureShouldAppearFirstInResource();
 		if(ensureFirstAdvise.isWarningOrError() && o.getAttributes() != null) {
 			int ix = 0;
 			for(AttributeOperation ao : o.getAttributes().getAttributes()) {
@@ -1755,7 +1755,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			}
 		}
 
-		ValidationPreference defaultLast = advisor.selectorDefaultShouldAppearLast();
+		ValidationPreference defaultLast = advisor.getSelectorDefaultShouldAppearLast();
 		if(defaultLast.isWarningOrError() && theDefaultIsSeen) {
 			for(int i = 0; i < caseExpressions.size() - 1; i++) {
 				Expression e1 = caseExpressions.get(i);
@@ -1769,7 +1769,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		// check that there is a default
 		if(!theDefaultIsSeen) {
-			ValidationPreference missingDefaultInSelector = advisor.missingDefaultInSelector();
+			ValidationPreference missingDefaultInSelector = advisor.getMissingDefaultInSelector();
 			if(missingDefaultInSelector.isWarningOrError())
 				acceptor.accept(
 					severity(missingDefaultInSelector), "Missing 'default' selector case", o, IPPDiagnostics.ISSUE__MISSING_DEFAULT);
@@ -1860,7 +1860,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				IPPDiagnostics.ISSUE__NOT_STRING);
 
 		IValidationAdvisor advisor = advisor();
-		ValidationPreference booleansInStringForm = advisor.booleansInStringForm();
+		ValidationPreference booleansInStringForm = advisor.getBooleansInStringForm();
 
 		if(booleansInStringForm.isWarningOrError()) {
 			// Check if string contains "true" or "false"
@@ -1957,7 +1957,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	}
 
 	public void internalCheckComments(PuppetManifest o) {
-		ValidationPreference mlComments = validationAdvisorProvider.get().mlComments();
+		ValidationPreference mlComments = validationAdvisorProvider.get().getMlComments();
 		if(mlComments.isWarningOrError()) {
 			INode root = NodeModelUtils.getNode(o);
 			if(root != null) {
@@ -2126,9 +2126,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		boolean ok = false;
 		if(patternHelper.isDEPRECATED_VARIABLE(varName)) {
-			if(advisor().deprecatedVariableName() != ValidationPreference.ERROR) {
+			if(advisor().getDeprecatedVariableName() != ValidationPreference.ERROR) {
 				ok = true;
-				if(advisor().deprecatedVariableName() == ValidationPreference.WARNING)
+				if(advisor().getDeprecatedVariableName() == ValidationPreference.WARNING)
 					acceptor.acceptWarning(
 						"Variable name that start with an upper case letter or digit is deprecated and will become illegal in future versions of Puppet",
 						o, feature, INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__DEPRECATED_VARIABLE_NAME);

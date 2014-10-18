@@ -380,102 +380,102 @@ public class Validate extends AbstractForgeServiceMojo {
 
 	private final IPotentialProblemsAdvisor potentialProblemsAdvisor = new IPotentialProblemsAdvisor() {
 		@Override
-		public ValidationPreference assignmentToVarNamedString() {
+		public ValidationPreference getAssignmentToVarNamedString() {
 			return assignmentToVarNamedString;
 		}
 
 		@Override
-		public ValidationPreference assignmentToVarNamedTrusted() {
+		public ValidationPreference getAssignmentToVarNamedTrusted() {
 			return assignmentToVarNamedTrusted;
 		}
 
 		@Override
-		public ValidationPreference attributeIsNotString() {
+		public ValidationPreference getAttributeIsNotString() {
 			return attributeIsNotString;
 		}
 
 		@Override
-		public ValidationPreference booleansInStringForm() {
+		public ValidationPreference getBooleansInStringForm() {
 			return booleansInStringForm;
 		}
 
 		@Override
-		public ValidationPreference caseDefaultShouldAppearLast() {
+		public ValidationPreference getCaseDefaultShouldAppearLast() {
 			return caseDefaultShouldAppearLast;
 		}
 
 		@Override
-		public ValidationPreference deprecatedImport() {
+		public ValidationPreference getDeprecatedImport() {
 			return deprecatedImport;
 		}
 
 		@Override
-		public ValidationPreference deprecatedNodeInheritance() {
+		public ValidationPreference getDeprecatedNodeInheritance() {
 			return deprecatedNodeInheritance;
 		}
 
 		@Override
-		public ValidationPreference deprecatedPlusEquals() {
+		public ValidationPreference getDeprecatedPlusEquals() {
 			return deprecatedPlusEquals;
 		}
 
 		@Override
-		public ValidationPreference deprecatedVariableName() {
+		public ValidationPreference getDeprecatedVariableName() {
 			return deprecatedVariableName;
 		}
 
 		@Override
-		public ValidationPreference dqStringNotRequired() {
+		public ValidationPreference getDqStringNotRequired() {
 			return dqStringNotRequired;
 		}
 
 		@Override
-		public ValidationPreference dqStringNotRequiredVariable() {
+		public ValidationPreference getDqStringNotRequiredVariable() {
 			return dqStringNotRequiredVariable;
 		}
 
 		@Override
-		public ValidationPreference ensureShouldAppearFirstInResource() {
+		public ValidationPreference getEnsureShouldAppearFirstInResource() {
 			return ensureShouldAppearFirstInResource;
 		}
 
 		@Override
-		public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
+		public ValidationPreference getInterpolatedNonBraceEnclosedHyphens() {
 			return interpolatedNonBraceEnclosedHyphens;
 		}
 
 		@Override
-		public ValidationPreference missingDefaultInSelector() {
+		public ValidationPreference getMissingDefaultInSelector() {
 			return missingDefaultInSelector;
 		}
 
 		@Override
-		public ValidationPreference mlComments() {
+		public ValidationPreference getMlComments() {
 			return mlComments;
 		}
 
 		@Override
-		public ValidationPreference rightToLeftRelationships() {
+		public ValidationPreference getRightToLeftRelationships() {
 			return rightToLeftRelationships;
 		}
 
 		@Override
-		public ValidationPreference selectorDefaultShouldAppearLast() {
+		public ValidationPreference getSelectorDefaultShouldAppearLast() {
 			return selectorDefaultShouldAppearLast;
 		}
 
 		@Override
-		public ValidationPreference unbracedInterpolation() {
+		public ValidationPreference getUnbracedInterpolation() {
 			return unbracedInterpolation;
 		}
 
 		@Override
-		public ValidationPreference unquotedResourceTitles() {
+		public ValidationPreference getUnquotedResourceTitles() {
 			return unquotedResourceTitles;
 		}
 
 		@Override
-		public ValidationPreference validityAssertedAtRuntime() {
+		public ValidationPreference getValidityAssertedAtRuntime() {
 			return validityAssertedAtRuntime;
 		}
 	};
@@ -521,7 +521,7 @@ public class Validate extends AbstractForgeServiceMojo {
 
 		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
 		ValidationOptions options = getValidationOptions(moduleLocations, importedModuleLocations);
-		new PPDiagnosticsSetup(complianceLevel, options.getProblemsAdvisor()).createInjectorAndDoEMFRegistration();
+		new PPDiagnosticsSetup(options).createInjectorAndDoEMFRegistration();
 		getValidationService().validate(result, options, getModulesDir(), new NullProgressMonitor());
 	}
 
@@ -554,6 +554,7 @@ public class Validate extends AbstractForgeServiceMojo {
 		else
 			options.setFileType(FileType.PUPPET_ROOT);
 		options.setFileFilter(getFileFilter());
+		options.setComplianceLevel(complianceLevel);
 		options.setPlatformURI(PuppetTarget.forComplianceLevel(complianceLevel, false).getPlatformURI());
 		options.setEncodingProvider(new IEncodingProvider() {
 			@Override

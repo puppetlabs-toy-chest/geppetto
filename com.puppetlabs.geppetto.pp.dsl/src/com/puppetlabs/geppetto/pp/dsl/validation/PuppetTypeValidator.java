@@ -614,7 +614,7 @@ public class PuppetTypeValidator {
 
 	private void validityAssertedAtRuntime(EObject value, IMessageAcceptor acceptor) {
 		Severity severity;
-		switch(advisor().validityAssertedAtRuntime()) {
+		switch(advisor().getValidityAssertedAtRuntime()) {
 			case IGNORE:
 				return;
 			case WARNING:

@@ -21,103 +21,103 @@ public class ValidationAdvisor {
 		}
 
 		@Override
-		public ValidationPreference assignmentToVarNamedString() {
-			return problemsAdvisor.assignmentToVarNamedString();
+		public ValidationPreference getAssignmentToVarNamedString() {
+			return problemsAdvisor.getAssignmentToVarNamedString();
 		}
 
 		@Override
-		public ValidationPreference assignmentToVarNamedTrusted() {
-			return problemsAdvisor.assignmentToVarNamedTrusted();
+		public ValidationPreference getAssignmentToVarNamedTrusted() {
+			return problemsAdvisor.getAssignmentToVarNamedTrusted();
 		}
 
 		@Override
-		public ValidationPreference attributeIsNotString() {
-			return problemsAdvisor.attributeIsNotString();
+		public ValidationPreference getAttributeIsNotString() {
+			return problemsAdvisor.getAttributeIsNotString();
 		}
 
 		@Override
-		public ValidationPreference booleansInStringForm() {
-			return problemsAdvisor.booleansInStringForm();
+		public ValidationPreference getBooleansInStringForm() {
+			return problemsAdvisor.getBooleansInStringForm();
 		}
 
 		@Override
-		public ValidationPreference caseDefaultShouldAppearLast() {
-			return problemsAdvisor.caseDefaultShouldAppearLast();
+		public ValidationPreference getCaseDefaultShouldAppearLast() {
+			return problemsAdvisor.getCaseDefaultShouldAppearLast();
 		}
 
 		@Override
-		public ValidationPreference deprecatedImport() {
-			return problemsAdvisor.deprecatedImport();
+		public ValidationPreference getDeprecatedImport() {
+			return problemsAdvisor.getDeprecatedImport();
 		}
 
 		@Override
-		public ValidationPreference deprecatedNodeInheritance() {
-			return problemsAdvisor.deprecatedNodeInheritance();
+		public ValidationPreference getDeprecatedNodeInheritance() {
+			return problemsAdvisor.getDeprecatedNodeInheritance();
 		}
 
 		@Override
-		public ValidationPreference deprecatedPlusEquals() {
-			return problemsAdvisor.deprecatedPlusEquals();
+		public ValidationPreference getDeprecatedPlusEquals() {
+			return problemsAdvisor.getDeprecatedPlusEquals();
 		}
 
 		@Override
-		public ValidationPreference deprecatedVariableName() {
-			return problemsAdvisor.deprecatedVariableName();
+		public ValidationPreference getDeprecatedVariableName() {
+			return problemsAdvisor.getDeprecatedVariableName();
 		}
 
 		@Override
-		public ValidationPreference dqStringNotRequired() {
-			return problemsAdvisor.dqStringNotRequired();
+		public ValidationPreference getDqStringNotRequired() {
+			return problemsAdvisor.getDqStringNotRequired();
 		}
 
 		@Override
-		public ValidationPreference dqStringNotRequiredVariable() {
-			return problemsAdvisor.dqStringNotRequiredVariable();
+		public ValidationPreference getDqStringNotRequiredVariable() {
+			return problemsAdvisor.getDqStringNotRequiredVariable();
 		}
 
 		@Override
-		public ValidationPreference ensureShouldAppearFirstInResource() {
-			return problemsAdvisor.ensureShouldAppearFirstInResource();
+		public ValidationPreference getEnsureShouldAppearFirstInResource() {
+			return problemsAdvisor.getEnsureShouldAppearFirstInResource();
 		}
 
 		@Override
-		public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
-			return problemsAdvisor.interpolatedNonBraceEnclosedHyphens();
+		public ValidationPreference getInterpolatedNonBraceEnclosedHyphens() {
+			return problemsAdvisor.getInterpolatedNonBraceEnclosedHyphens();
 		}
 
 		@Override
-		public ValidationPreference missingDefaultInSelector() {
-			return problemsAdvisor.missingDefaultInSelector();
+		public ValidationPreference getMissingDefaultInSelector() {
+			return problemsAdvisor.getMissingDefaultInSelector();
 		}
 
 		@Override
-		public ValidationPreference mlComments() {
-			return problemsAdvisor.mlComments();
+		public ValidationPreference getMlComments() {
+			return problemsAdvisor.getMlComments();
 		}
 
 		@Override
-		public ValidationPreference rightToLeftRelationships() {
-			return problemsAdvisor.rightToLeftRelationships();
+		public ValidationPreference getRightToLeftRelationships() {
+			return problemsAdvisor.getRightToLeftRelationships();
 		}
 
 		@Override
-		public ValidationPreference selectorDefaultShouldAppearLast() {
-			return problemsAdvisor.selectorDefaultShouldAppearLast();
+		public ValidationPreference getSelectorDefaultShouldAppearLast() {
+			return problemsAdvisor.getSelectorDefaultShouldAppearLast();
 		}
 
 		@Override
-		public ValidationPreference unbracedInterpolation() {
-			return problemsAdvisor.unbracedInterpolation();
+		public ValidationPreference getUnbracedInterpolation() {
+			return problemsAdvisor.getUnbracedInterpolation();
 		}
 
 		@Override
-		public ValidationPreference unquotedResourceTitles() {
-			return problemsAdvisor.unquotedResourceTitles();
+		public ValidationPreference getUnquotedResourceTitles() {
+			return problemsAdvisor.getUnquotedResourceTitles();
 		}
 
 		@Override
-		public ValidationPreference validityAssertedAtRuntime() {
-			return problemsAdvisor.validityAssertedAtRuntime();
+		public ValidationPreference getValidityAssertedAtRuntime() {
+			return problemsAdvisor.getValidityAssertedAtRuntime();
 		}
 	}
 
@@ -433,7 +433,7 @@ public class ValidationAdvisor {
 		}
 
 		@Override
-		public ValidationPreference assignmentToVarNamedTrusted() {
+		public ValidationPreference getAssignmentToVarNamedTrusted() {
 			return ValidationPreference.ERROR;
 		}
 	}
@@ -522,22 +522,22 @@ public class ValidationAdvisor {
 		}
 
 		@Override
-		public ValidationPreference deprecatedImport() {
+		public ValidationPreference getDeprecatedImport() {
 			return ValidationPreference.ERROR;
 		}
 
 		@Override
-		public ValidationPreference deprecatedNodeInheritance() {
+		public ValidationPreference getDeprecatedNodeInheritance() {
 			return ValidationPreference.ERROR;
 		}
 
 		@Override
-		public ValidationPreference deprecatedPlusEquals() {
+		public ValidationPreference getDeprecatedPlusEquals() {
 			return ValidationPreference.ERROR;
 		}
 
 		@Override
-		public ValidationPreference deprecatedVariableName() {
+		public ValidationPreference getDeprecatedVariableName() {
 			return ValidationPreference.ERROR;
 		}
 	}

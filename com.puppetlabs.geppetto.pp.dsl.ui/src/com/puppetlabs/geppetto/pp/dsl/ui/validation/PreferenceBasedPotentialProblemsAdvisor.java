@@ -30,105 +30,105 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 	}
 
 	@Override
-	public ValidationPreference assignmentToVarNamedString() {
+	public ValidationPreference getAssignmentToVarNamedString() {
 		return preferences.getAssignmentToVariableNamedString();
 	}
 
 	@Override
-	public ValidationPreference assignmentToVarNamedTrusted() {
+	public ValidationPreference getAssignmentToVarNamedTrusted() {
 		return preferences.getAssignmentToVariableNamedTrusted();
 	}
 
 	@Override
-	public ValidationPreference attributeIsNotString() {
+	public ValidationPreference getAttributeIsNotString() {
 		return preferences.getAttributeIsNotString();
 	}
 
 	@Override
-	public ValidationPreference booleansInStringForm() {
+	public ValidationPreference getBooleansInStringForm() {
 		return preferences.getBooleansInStringForm();
 	}
 
 	@Override
-	public ValidationPreference caseDefaultShouldAppearLast() {
+	public ValidationPreference getCaseDefaultShouldAppearLast() {
 		return preferences.getCaseDefaultShouldAppearLast();
 	}
 
 	@Override
-	public ValidationPreference deprecatedImport() {
+	public ValidationPreference getDeprecatedImport() {
 		return preferences.getDeprecatedImport();
 	}
 
 	@Override
-	public ValidationPreference deprecatedNodeInheritance() {
+	public ValidationPreference getDeprecatedNodeInheritance() {
 		return preferences.getDeprecatedNodeInheritance();
 	}
 
 	@Override
-	public ValidationPreference deprecatedPlusEquals() {
+	public ValidationPreference getDeprecatedPlusEquals() {
 		return preferences.getDeprecatedPlusEquals();
 	}
 
 	@Override
-	public ValidationPreference deprecatedVariableName() {
+	public ValidationPreference getDeprecatedVariableName() {
 		return preferences.getDeprecatedVariableName();
 	}
 
 	@Override
-	public ValidationPreference dqStringNotRequired() {
+	public ValidationPreference getDqStringNotRequired() {
 		return preferences.getDqStringNotRequired();
 	}
 
 	@Override
-	public ValidationPreference dqStringNotRequiredVariable() {
+	public ValidationPreference getDqStringNotRequiredVariable() {
 		return preferences.getDqStringNotRequiredVar();
 	}
 
 	/**
-	 * @see com.puppetlabs.geppetto.pp.dsl.validation.IStylisticProblemsAdvisor#ensureShouldAppearFirstInResource()
+	 * @see com.puppetlabs.geppetto.pp.dsl.validation.IStylisticProblemsAdvisor#getEnsureShouldAppearFirstInResource()
 	 */
 	@Override
-	public ValidationPreference ensureShouldAppearFirstInResource() {
+	public ValidationPreference getEnsureShouldAppearFirstInResource() {
 		return preferences.getEnsureShouldAppearFirst();
 	}
 
 	@Override
-	public ValidationPreference interpolatedNonBraceEnclosedHyphens() {
+	public ValidationPreference getInterpolatedNonBraceEnclosedHyphens() {
 		return preferences.getInterpolatedNonBraceEnclosedHypens();
 	}
 
 	@Override
-	public ValidationPreference missingDefaultInSelector() {
+	public ValidationPreference getMissingDefaultInSelector() {
 		return preferences.getMissingDefaultInSwitch();
 	}
 
 	@Override
-	public ValidationPreference mlComments() {
+	public ValidationPreference getMlComments() {
 		return preferences.getMLCommentsValidationPreference();
 	}
 
 	@Override
-	public ValidationPreference rightToLeftRelationships() {
+	public ValidationPreference getRightToLeftRelationships() {
 		return preferences.getRightToLeftRelationships();
 	}
 
 	@Override
-	public ValidationPreference selectorDefaultShouldAppearLast() {
+	public ValidationPreference getSelectorDefaultShouldAppearLast() {
 		return preferences.getSelectorDefaultShouldAppearLast();
 	}
 
 	@Override
-	public ValidationPreference unbracedInterpolation() {
+	public ValidationPreference getUnbracedInterpolation() {
 		return preferences.getUnbracedInterpolation();
 	}
 
 	@Override
-	public ValidationPreference unquotedResourceTitles() {
+	public ValidationPreference getUnquotedResourceTitles() {
 		return preferences.getUnquotedResourceTitles();
 	}
 
 	@Override
-	public ValidationPreference validityAssertedAtRuntime() {
+	public ValidationPreference getValidityAssertedAtRuntime() {
 		return preferences.getValidityAssertedAtRuntime();
 	}
 

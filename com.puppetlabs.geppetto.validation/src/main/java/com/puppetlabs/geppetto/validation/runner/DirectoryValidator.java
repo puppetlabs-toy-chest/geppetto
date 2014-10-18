@@ -11,10 +11,12 @@
  */
 package com.puppetlabs.geppetto.validation.runner;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -39,6 +41,8 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
@@ -49,6 +53,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.diagnostic.ExceptionDiagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
@@ -57,11 +62,15 @@ import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
 import com.puppetlabs.geppetto.module.dsl.metadata.JsonMetadata;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
 import com.puppetlabs.geppetto.module.dsl.validation.ModuleDiagnostics;
+import com.puppetlabs.geppetto.module.dsl.validation.ModuleValidationAdvisorBean;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
 import com.puppetlabs.geppetto.pp.dsl.adapters.ResourcePropertiesAdapter;
 import com.puppetlabs.geppetto.pp.dsl.adapters.ResourcePropertiesAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.PotentialProblemsAdvisorBean;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 import com.puppetlabs.geppetto.ruby.RubyHelper;
 import com.puppetlabs.geppetto.ruby.RubySyntaxException;
@@ -70,7 +79,9 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
 import com.puppetlabs.geppetto.semver.VersionRange;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
+import com.puppetlabs.geppetto.validation.ValidationService;
 import com.puppetlabs.geppetto.validation.impl.ValidationServiceImpl;
+import com.puppetlabs.geppetto.validation.runner.GeppettoRC.Advices;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Rakefile;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Raketask;
 
@@ -78,6 +89,51 @@ public class DirectoryValidator {
 	private static boolean isOnPath(File f, PPSearchPath searchPath) {
 
 		return searchPath.searchIndexOf(URI.createFileURI(f.getPath())) >= 0;
+	}
+
+	private static ValidationOptions mergeFileOverride(Diagnostic diagnostics, File root, ValidationOptions options) {
+		File geppettoRCFile = new File(root, ".geppetto-rc.json");
+		try (InputStream in = new BufferedInputStream(new FileInputStream(geppettoRCFile))) {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+			GeppettoRC geppettoRC = mapper.readValue(in, GeppettoRC.class);
+
+			options = new ValidationOptions(options);
+			Advices advice = geppettoRC.getAdvice();
+			IPotentialProblemsAdvisor ppAdvisor = options.getProblemsAdvisor();
+			IModuleValidationAdvisor moduleAdvisor = options.getModuleValidationAdvisor();
+			if(advice != null) {
+				PotentialProblemsAdvisorBean ppBean = advice.getManifest();
+				if(ppBean != null)
+					ppAdvisor = ppBean.merge(ppAdvisor);
+
+				ModuleValidationAdvisorBean mvBean = advice.getModule();
+				if(mvBean != null)
+					moduleAdvisor = mvBean.merge(moduleAdvisor);
+			}
+			IValidationAdvisor.ComplianceLevel level = geppettoRC.getComplianceLevel();
+			if(level == null)
+				level = options.getComplianceLevel();
+			else
+				options.setComplianceLevel(level);
+			options.setProblemsAdvisor(level.createValidationAdvisor(ppAdvisor));
+			options.setModuleValidationAdvisor(moduleAdvisor);
+
+			Set<String> exclusionPatterns = geppettoRC.getExclusionPatterns();
+			if(exclusionPatterns != null) {
+				Set<String> merged = Sets.newHashSet(exclusionPatterns);
+				merged.addAll(options.getFolderExclusionPatterns());
+				options.setFolderExclusionPatterns(merged);
+			}
+		}
+		catch(FileNotFoundException e) {
+			return options;
+		}
+		catch(IOException e) {
+			diagnostics.addChild(new ExceptionDiagnostic(
+				Diagnostic.ERROR, ValidationService.GEPPETTO, "Unable to parse .geppetto-rc.json", e));
+		}
+		return options;
 	}
 
 	private static final String NAME_OF_DIR_WITH_RESTRICTED_SCOPE = "roles";
@@ -154,6 +210,8 @@ public class DirectoryValidator {
 	public DirectoryValidator(Diagnostic diagnostics, File root, ValidationOptions options) {
 		this.diagnostics = diagnostics;
 		this.root = root;
+		if(options.isAllowFileOverride())
+			options = mergeFileOverride(diagnostics, root, options);
 		this.options = options;
 
 		ppRunner = new PPDiagnosticsRunner();
@@ -648,7 +706,7 @@ public class DirectoryValidator {
 		}
 
 		try {
-			ppRunner.setUp(options.getComplianceLevel(), options.getProblemsAdvisor());
+			ppRunner.setUp(options);
 		}
 		catch(Exception e) {
 			rubyHelper.tearDown();

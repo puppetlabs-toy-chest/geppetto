@@ -37,6 +37,7 @@
 		<emf.version>2.10.0-v20140514-1158</emf.version>
 		<xtext.version>2.7.1-v201409090713</xtext.version>
 		<buckminster.home>${user.home}/buildtools/buckminster</buckminster.home>
+		<skip.dslGen>false</skip.dslGen>
 	</properties>
 
 	<organization>
@@ -455,6 +456,7 @@
 							<goal>run</goal>
 						</goals>
 						<configuration>
+							<skip>${skip.dslGen}</skip>
 							<target>
 								<dirname property="git.clones.root" file="${basedir}" />
 								<basename property="geppetto.clone" file="${basedir}" />

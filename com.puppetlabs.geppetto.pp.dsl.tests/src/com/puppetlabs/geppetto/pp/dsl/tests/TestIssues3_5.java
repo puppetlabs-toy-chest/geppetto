@@ -33,7 +33,7 @@ public class TestIssues3_5 extends AbstractPuppetTests {
 	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
 		return new DefaultPotentialProblemsAdvisor() {
 			@Override
-			public ValidationPreference deprecatedImport() {
+			public ValidationPreference getDeprecatedImport() {
 				return ValidationPreference.WARNING;
 			}
 			// TODO: Add more

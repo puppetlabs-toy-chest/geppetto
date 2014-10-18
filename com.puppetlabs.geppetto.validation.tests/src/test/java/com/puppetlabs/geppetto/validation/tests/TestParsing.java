@@ -19,8 +19,7 @@ import org.junit.Test;
 import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
-import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
-import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsRunner;
 
 /**
@@ -33,7 +32,7 @@ public class TestParsing {
 
 		// The diagnostics runner has all the capabilities to perform parsing
 		PPDiagnosticsRunner runner = new PPDiagnosticsRunner();
-		runner.setUp(PuppetTarget.getDefault().getComplianceLevel(), new DefaultPotentialProblemsAdvisor());
+		runner.setUp(new ValidationOptions());
 
 		// The grammar access provides methods to obtain any parser rule.
 		// It is possible to start anywhere in the grammar and only get specific

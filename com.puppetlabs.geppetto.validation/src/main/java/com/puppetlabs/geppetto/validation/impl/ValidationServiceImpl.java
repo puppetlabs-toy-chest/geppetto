@@ -253,7 +253,7 @@ public class ValidationServiceImpl implements ValidationService {
 			if(isPP) {
 				PPDiagnosticsRunner ppDr = new PPDiagnosticsRunner();
 				try {
-					ppDr.setUp(options.getComplianceLevel(), options.getProblemsAdvisor());
+					ppDr.setUp(options);
 					validatePPFile(ppDr, diagnostics, source, source.getParentFile(), monitor);
 				}
 				catch(Exception e) {
@@ -307,7 +307,7 @@ public class ValidationServiceImpl implements ValidationService {
 		Resource r = null;
 		worked(ticker, 1);
 		try {
-			ppRunner.setUp(options.getComplianceLevel(), options.getProblemsAdvisor());
+			ppRunner.setUp(options);
 			worked(ticker, 1);
 			File f = new File("/unnamed.pp");
 			r = ppRunner.loadResource(code, URI.createFileURI(f.getPath()));

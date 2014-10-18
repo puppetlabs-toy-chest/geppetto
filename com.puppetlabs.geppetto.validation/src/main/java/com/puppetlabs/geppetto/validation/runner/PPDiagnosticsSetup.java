@@ -15,28 +15,22 @@ import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonM
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.puppetlabs.geppetto.pp.dsl.PPStandaloneSetup;
-import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
  * Setup of PP runtime with overrides for validation service.
  */
 public class PPDiagnosticsSetup extends PPStandaloneSetup {
 
-	private final ComplianceLevel complianceLevel;
+	private final ValidationOptions validationOptions;
 
-	private IPotentialProblemsAdvisor problemsAdvisor;
-
-	public PPDiagnosticsSetup(IValidationAdvisor.ComplianceLevel complianceLevel, IPotentialProblemsAdvisor problemsAdvisor) {
-		this.complianceLevel = complianceLevel;
-		this.problemsAdvisor = problemsAdvisor;
-
+	public PPDiagnosticsSetup(ValidationOptions validationOptions) {
+		this.validationOptions = validationOptions;
 	}
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(getCommonModule(), new PPDiagnosticsModule(complianceLevel, problemsAdvisor));
+		return Guice.createInjector(getCommonModule(), new PPDiagnosticsModule(validationOptions));
 	}
 
 }

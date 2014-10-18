@@ -38,7 +38,7 @@ public class TestIssues3_0 extends TestIssues {
 	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
 		return new DefaultPotentialProblemsAdvisor() {
 			@Override
-			public ValidationPreference assignmentToVarNamedString() {
+			public ValidationPreference getAssignmentToVarNamedString() {
 				return ValidationPreference.WARNING;
 			}
 			// TODO: Add more
