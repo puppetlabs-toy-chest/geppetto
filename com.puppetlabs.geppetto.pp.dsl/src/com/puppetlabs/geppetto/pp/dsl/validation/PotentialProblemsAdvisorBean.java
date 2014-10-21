@@ -1,9 +1,13 @@
 package com.puppetlabs.geppetto.pp.dsl.validation;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor {
+public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private final ValidationPreference assignmentToVarNamedString;
 
