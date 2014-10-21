@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -797,7 +798,18 @@ public class PPFinder {
 	 * @return the result of the check
 	 */
 	public boolean isReservedFunctionName(String name) {
-		return getExportByName(name, PPTP_TYPE_AND_FUNC) != null;
+		return isReservedName(name, PPTP_TYPE_AND_FUNC);
+	}
+
+	private boolean isReservedName(String name, EClass... classes) {
+		IEObjectDescription dsc = getExportByName(name, classes);
+		if(dsc == null)
+			return false;
+		URI uri = dsc.getEObjectURI();
+		if(uri == null)
+			return false;
+		String path = uri.path();
+		return path != null && path.endsWith(".pptp");
 	}
 
 	/**
@@ -809,7 +821,7 @@ public class PPFinder {
 	 * @return the result of the check
 	 */
 	public boolean isReservedTypeName(String name) {
-		return getExportByName(name, PPTP_TYPE) != null;
+		return isReservedName(name, PPTP_TYPE);
 	}
 
 	/**
