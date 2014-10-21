@@ -11,9 +11,12 @@
  */
 package com.puppetlabs.geppetto.module.dsl.validation;
 
+import java.io.Serializable;
+
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 
-public class DefaultModuleValidationAdvisor implements IModuleValidationAdvisor {
+public class DefaultModuleValidationAdvisor implements IModuleValidationAdvisor, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public ValidationPreference getCircularDependency() {

@@ -103,6 +103,7 @@ public class AbstractValidationTest {
 		return getValidationOptions(PuppetTarget.getDefault().getComplianceLevel());
 	}
 
+	@SuppressWarnings("serial")
 	protected ValidationOptions getValidationOptions(ComplianceLevel complianceLevel) {
 		ValidationOptions options = new ValidationOptions();
 		options.setPlatformURI(PuppetTarget.forComplianceLevel(complianceLevel, false).getPlatformURI());

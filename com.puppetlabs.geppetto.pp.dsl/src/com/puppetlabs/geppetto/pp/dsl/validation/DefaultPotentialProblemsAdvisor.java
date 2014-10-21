@@ -10,11 +10,14 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.validation;
 
+import java.io.Serializable;
+
 /**
  * A default implementation of IPotentialProblemsAdvisor that returns Warnings for all potential problems, and
  * Ignore for all stylistic problems
  */
-public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdvisor, IStylisticProblemsAdvisor {
+public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdvisor, IStylisticProblemsAdvisor, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public ValidationPreference getAssignmentToVarNamedString() {
