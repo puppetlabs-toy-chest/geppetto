@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.Sets;
+import com.puppetlabs.geppetto.common.Strings;
 import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
@@ -29,6 +30,24 @@ import com.puppetlabs.geppetto.validation.runner.DefaultEncodingProvider;
 import com.puppetlabs.geppetto.validation.runner.IEncodingProvider;
 
 public class ValidationOptions {
+	/**
+	 * Checks that the folder exclusion pattern is valid.
+	 *
+	 * @param pattern
+	 *            The pattern to check
+	 */
+	public static void checkFolderExclusionPattern(String pattern) throws IllegalArgumentException {
+		pattern = Strings.trimToNull(pattern);
+		if(pattern != null) {
+			int len = pattern.length();
+			for(int i = 0; i < len; ++i) {
+				char c = pattern.charAt(i);
+				if(c == '/' || c == '\\')
+					throw new IllegalArgumentException(String.format("Exclusion pattern must not contain '%c'", c));
+			}
+		}
+	}
+
 	private ComplianceLevel complianceLevel;
 
 	private IEncodingProvider encodingProvider;

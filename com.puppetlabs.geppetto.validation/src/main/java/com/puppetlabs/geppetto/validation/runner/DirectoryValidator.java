@@ -96,7 +96,14 @@ public class DirectoryValidator {
 		try (InputStream in = new BufferedInputStream(new FileInputStream(geppettoRCFile))) {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
-			GeppettoRC geppettoRC = mapper.readValue(in, GeppettoRC.class);
+			GeppettoRC geppettoRC;
+			try {
+				geppettoRC = mapper.readValue(in, GeppettoRC.class);
+			}
+			catch(IllegalArgumentException e) {
+				diagnostics.addChild(new Diagnostic(Diagnostic.WARNING, ValidationService.GEPPETTO, e.getMessage()));
+				return options;
+			}
 
 			options = new ValidationOptions(options);
 			Advices advice = geppettoRC.getAdvice();
@@ -119,7 +126,7 @@ public class DirectoryValidator {
 			options.setProblemsAdvisor(level.createValidationAdvisor(ppAdvisor));
 			options.setModuleValidationAdvisor(moduleAdvisor);
 
-			Set<String> exclusionPatterns = geppettoRC.getExclusionPatterns();
+			Set<String> exclusionPatterns = geppettoRC.getFolderExclusionPatterns();
 			if(exclusionPatterns != null) {
 				Set<String> merged = Sets.newHashSet(exclusionPatterns);
 				merged.addAll(options.getFolderExclusionPatterns());

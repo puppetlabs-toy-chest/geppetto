@@ -11,6 +11,7 @@
  */
 package com.puppetlabs.geppetto.validation.runner;
 
+import java.util.Collections;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.puppetlabs.geppetto.module.dsl.validation.ModuleValidationAdvisorBean;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 import com.puppetlabs.geppetto.pp.dsl.validation.PotentialProblemsAdvisorBean;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
  */
@@ -49,16 +51,20 @@ public class GeppettoRC {
 		}
 	}
 
-	private final Set<String> exclusionPatterns;
+	private final Set<String> folderExclusionPatterns;
 
 	private final ComplianceLevel complianceLevel;
 
 	private final Advices advice;
 
 	@JsonCreator
-	public GeppettoRC(@JsonProperty("exclusion_patterns") Set<String> exclusionPatterns,
-			@JsonProperty("compliance_level") ComplianceLevel complianceLevel, @JsonProperty("advice") Advices advice) {
-		this.exclusionPatterns = exclusionPatterns;
+	public GeppettoRC(@JsonProperty("folder_exclusion_patterns") Set<String> folderExclusionPatterns,
+			@JsonProperty("compliance_level") ComplianceLevel complianceLevel, @JsonProperty("advice") Advices advice)
+			throws IllegalArgumentException {
+		if(folderExclusionPatterns != null)
+			for(String fePattern : folderExclusionPatterns)
+				ValidationOptions.checkFolderExclusionPattern(fePattern);
+		this.folderExclusionPatterns = folderExclusionPatterns;
 		this.complianceLevel = complianceLevel;
 		this.advice = advice;
 	}
@@ -78,9 +84,11 @@ public class GeppettoRC {
 	}
 
 	/**
-	 * @return the exclusionPatterns
+	 * @return the folderExclusionPatterns
 	 */
-	public Set<String> getExclusionPatterns() {
-		return exclusionPatterns;
+	public Set<String> getFolderExclusionPatterns() {
+		return folderExclusionPatterns == null
+			? Collections.<String> emptySet()
+			: Collections.unmodifiableSet(folderExclusionPatterns);
 	}
 }
