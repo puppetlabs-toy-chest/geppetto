@@ -46,13 +46,13 @@ import com.puppetlabs.geppetto.common.tracer.AbstractTracer.DefaultStringProvide
 import com.puppetlabs.geppetto.common.tracer.DefaultTracer;
 import com.puppetlabs.geppetto.common.tracer.IStringProvider;
 import com.puppetlabs.geppetto.common.tracer.ITracer;
-import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
 import com.puppetlabs.geppetto.pp.dsl.formatting.IBreakAndAlignAdvice;
 import com.puppetlabs.geppetto.pp.dsl.formatting.PPCommentConfiguration;
 import com.puppetlabs.geppetto.pp.dsl.lexer.PPOverridingLexer;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.ui.builder.NatureAddingEditorCallback;
-import com.puppetlabs.geppetto.pp.dsl.ui.builder.PreferenceBasedFolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.ui.builder.PreferenceBasedFileExcluder;
 import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPHighlightConfiguration;
 import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPSemanticHighlightingCalculator;
 import com.puppetlabs.geppetto.pp.dsl.ui.coloring.PPTokenToAttributeIdMapper;
@@ -111,8 +111,8 @@ public class PPUiModule extends com.puppetlabs.geppetto.pp.dsl.ui.AbstractPPUiMo
 		return PPEditStrategyProvider.class;
 	}
 
-	public Class<? extends IFolderDiscriminator> bindFolderDiscriminator() {
-		return PreferenceBasedFolderDiscriminator.class;
+	public Class<? extends IFileExcluder> bindFolderDiscriminator() {
+		return PreferenceBasedFileExcluder.class;
 	}
 
 	@Override

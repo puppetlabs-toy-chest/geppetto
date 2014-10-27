@@ -19,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.puppetlabs.geppetto.module.dsl.validation.ModuleValidationAdvisorBean;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 import com.puppetlabs.geppetto.pp.dsl.validation.PotentialProblemsAdvisorBean;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
+ * Class that represents the geppetto-rc.json file
  */
 public class GeppettoRC {
 	public static class Advices {
@@ -51,20 +51,25 @@ public class GeppettoRC {
 		}
 	}
 
-	private final Set<String> folderExclusionPatterns;
+	private final Set<String> excludes;
 
 	private final ComplianceLevel complianceLevel;
 
 	private final Advices advice;
 
+	/**
+	 * @param excludes
+	 *            glob patterns for file/folder exclusions
+	 * @param complianceLevel
+	 *            Puppet version
+	 * @param advice
+	 *            Validation advices
+	 * @throws IllegalArgumentException
+	 */
 	@JsonCreator
-	public GeppettoRC(@JsonProperty("folder_exclusion_patterns") Set<String> folderExclusionPatterns,
-			@JsonProperty("compliance_level") ComplianceLevel complianceLevel, @JsonProperty("advice") Advices advice)
-			throws IllegalArgumentException {
-		if(folderExclusionPatterns != null)
-			for(String fePattern : folderExclusionPatterns)
-				ValidationOptions.checkFolderExclusionPattern(fePattern);
-		this.folderExclusionPatterns = folderExclusionPatterns;
+	public GeppettoRC(@JsonProperty("excludes") Set<String> excludes, @JsonProperty("compliance_level") ComplianceLevel complianceLevel,
+			@JsonProperty("advice") Advices advice) {
+		this.excludes = excludes;
 		this.complianceLevel = complianceLevel;
 		this.advice = advice;
 	}
@@ -84,11 +89,11 @@ public class GeppettoRC {
 	}
 
 	/**
-	 * @return the folderExclusionPatterns
+	 * @return the excludes
 	 */
-	public Set<String> getFolderExclusionPatterns() {
-		return folderExclusionPatterns == null
+	public Set<String> getExcludes() {
+		return excludes == null
 			? Collections.<String> emptySet()
-			: Collections.unmodifiableSet(folderExclusionPatterns);
+			: Collections.unmodifiableSet(excludes);
 	}
 }

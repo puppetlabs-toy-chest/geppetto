@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpTargetProjectHandler;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.FolderFilterEditor;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.GlobPatternFieldEditor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 
@@ -38,8 +38,6 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	public interface IPreferenceListener {
 		void onChange(String key, String newValue);
 	}
-
-	private int autoInsertOverrides = 0;
 
 	private final static String OVERRIDE_AUTO_INSERT = "com.puppetlabs.geppetto.override.autoinsert";
 
@@ -55,9 +53,11 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public final static int AUTO_INSERT_DQ = 0x20;
 
-	private IPreferenceStore store;
+	private static final String defaultExclusions = "**/pkg/**:**/spec/**"; //$NON-NLS-1$
 
-	private static final String defaultFolderFilter = "pkg:spec"; //$NON-NLS-1$
+	private int autoInsertOverrides = 0;
+
+	private IPreferenceStore store;
 
 	private final PptpTargetProjectHandler pptpHandler;
 
@@ -92,7 +92,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_UNBRACED_INTERPOLATION,
 		PPPreferenceConstants.PROBLEM_VALIDITY_ASSERTED_AT_RUNTIME,
 		PPPreferenceConstants.PUPPET_ENVIRONMENT,
-		PPPreferenceConstants.PUPPET_FOLDER_FILTER,
+		PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS,
 		PPPreferenceConstants.PUPPET_MANIFEST_DIR,
 		PPPreferenceConstants.PUPPET_PROJECT_PATH,
 		PPPreferenceConstants.PUPPET_TARGET_VERSION
@@ -123,6 +123,26 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		}
 	}
 
+	private void convertLegacyFolderExclusions() {
+		if(store.getBoolean(PPPreferenceConstants.PUPPET_FOLDER_FILTER_CONVERTED))
+			return;
+
+		if(!store.isDefault(PPPreferenceConstants.PUPPET_FOLDER_FILTER)) {
+			String s = store.getString(PPPreferenceConstants.PUPPET_FOLDER_FILTER);
+			StringBuilder bld = new StringBuilder();
+			List<String> array = GlobPatternFieldEditor.parseFolderFilter(s);
+			for(int i = 0; i < array.size(); i++) {
+				if(i > 0)
+					bld.append(':');
+				bld.append("**/");
+				bld.append(array.get(i));
+				bld.append("/**");
+			}
+			store.setValue(PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS, bld.toString());
+		}
+		store.setValue(PPPreferenceConstants.PUPPET_FOLDER_FILTER_CONVERTED, true);
+	}
+
 	public ValidationPreference getAssignmentToVariableNamedString() {
 		return getPreference(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING);
 	}
@@ -144,7 +164,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 	}
 
 	public List<String> getDefaultFolderFilters() {
-		return FolderFilterEditor.parseFolderFilter(defaultFolderFilter);
+		return GlobPatternFieldEditor.parseFolderFilter(defaultExclusions);
 	}
 
 	public ValidationPreference getDeprecatedImport() {
@@ -175,8 +195,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		return getPreference(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST);
 	}
 
-	public List<String> getFolderFilters() {
-		return FolderFilterEditor.parseFolderFilter(store.getString(PPPreferenceConstants.PUPPET_FOLDER_FILTER));
+	public List<String> getExcludeGlobs() {
+		return GlobPatternFieldEditor.parseFolderFilter(store.getString(PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS));
 	}
 
 	public ValidationPreference getInterpolatedNonBraceEnclosedHypens() {
@@ -298,7 +318,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PUPPET_TARGET_VERSION, PuppetTarget.getDefault().getLiteral());
 		store.setDefault(PPPreferenceConstants.PUPPET_PROJECT_PATH, PPSearchPath.DEFAULT_PUPPET_PROJECT_PATH);
 		store.setDefault(PPPreferenceConstants.PUPPET_MANIFEST_DIR, PPSearchPath.DEFAULT_MANIFEST_DIR);
-		store.setDefault(PPPreferenceConstants.PUPPET_FOLDER_FILTER, defaultFolderFilter);
+		store.setDefault(PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS, defaultExclusions);
 		store.setDefault(PPPreferenceConstants.PUPPET_ENVIRONMENT, PPSearchPath.DEFAULT_PUPPET_ENVIRONMENT);
 
 		store.setDefault(PPPreferenceConstants.PROBLEM_ASSIGNMENT_TO_VAR_NAMED_STRING, ValidationPreference.WARNING.toString());
@@ -333,6 +353,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		// (Removes the need to run one rebuild per changing preference).
 		store.addPropertyChangeListener(this);
 
+		// Convert legacy preference for folder exclusions
+		convertLegacyFolderExclusions();
 	}
 
 	public boolean isAutoBraceInsertWanted() {

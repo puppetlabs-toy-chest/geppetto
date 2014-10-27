@@ -7,14 +7,14 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.puppetlabs.geppetto.pp.dsl.FolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.FileExcluder;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferenceConstants;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelperProvider;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.RebuildChecker;
 
 @Singleton
-public class PreferenceBasedFolderDiscriminator extends FolderDiscriminator implements IPropertyChangeListener {
+public class PreferenceBasedFileExcluder extends FileExcluder implements IPropertyChangeListener {
 	@Inject
 	private PPPreferencesHelperProvider preferencesProvider;
 
@@ -24,18 +24,18 @@ public class PreferenceBasedFolderDiscriminator extends FolderDiscriminator impl
 	private PPPreferencesHelper helper;
 
 	@Override
-	protected synchronized Set<String> getExcludePatterns() {
+	protected synchronized Set<String> getExcludeGlobs() {
 		if(helper == null) {
 			helper = preferencesProvider.get();
-			helper.addPreferenceListener(PPPreferenceConstants.PUPPET_FOLDER_FILTER, this);
+			helper.addPreferenceListener(PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS, this);
 		}
 
-		Set<String> patterns = super.getExcludePatterns();
+		Set<String> patterns = super.getExcludeGlobs();
 		// Remove the defaults since user might have removed them
 		patterns.removeAll(helper.getDefaultFolderFilters());
 
 		// Add user specific entries
-		patterns.addAll(helper.getFolderFilters());
+		patterns.addAll(helper.getExcludeGlobs());
 		return patterns;
 	}
 

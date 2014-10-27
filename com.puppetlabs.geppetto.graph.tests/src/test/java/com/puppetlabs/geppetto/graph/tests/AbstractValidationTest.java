@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 
@@ -107,6 +108,7 @@ public class AbstractValidationTest {
 	@SuppressWarnings("serial")
 	protected ValidationOptions getValidationOptions(ComplianceLevel complianceLevel) {
 		ValidationOptions options = new ValidationOptions();
+		options.setValidationRoot(TestDataProvider.getTestFile(new Path("testData")));
 		options.setPlatformURI(PuppetTarget.forComplianceLevel(complianceLevel, false).getPlatformURI());
 		options.setEncodingProvider(new IEncodingProvider() {
 			@Override

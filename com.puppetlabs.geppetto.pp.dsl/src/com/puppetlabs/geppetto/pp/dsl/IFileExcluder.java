@@ -11,32 +11,33 @@
  */
 package com.puppetlabs.geppetto.pp.dsl;
 
+import java.nio.file.Path;
+
 import org.eclipse.emf.common.util.URI;
 
 /**
  * Discriminates folders based on expressions that matches path segments
  */
-public interface IFolderDiscriminator {
+public interface IFileExcluder {
 	/**
 	 * <p>
-	 * Checks if the given URI contains a path segment that is matched by the exclude pattern and returns <code>true</code> if that is the
-	 * case.
+	 * Checks if the given Path is matched by the exclude pattern and returns <code>true</code> if that is the case.
 	 * </p>
+	 *
+	 * @param path
+	 *            The path to check.
+	 * @return <code>true</code> if the path is excluded by the pattern
+	 */
+	boolean isExcluded(Path path);
+
+	/**
 	 * <p>
-	 * The last path segment is considered to be a file name unless the URI has a trailing separator. File names do not participate in the
-	 * check.
+	 * Checks if the path of the URI is matched by the exclude pattern and returns <code>true</code> if that is the case.
 	 * </p>
 	 *
 	 * @param uri
 	 *            The URI to check.
-	 * @return <code>true</code> if the URI path contains a folder that is excluded by the pattern
+	 * @return <code>true</code> if the URI path is excluded by the pattern
 	 */
 	boolean isExcluded(URI uri);
-
-	/**
-	 * @param segment
-	 *            The segment to check
-	 * @return <code>true</code> if the given segment is matched by the exclusion expressions
-	 */
-	boolean isSegmentExcluded(String segment);
 }

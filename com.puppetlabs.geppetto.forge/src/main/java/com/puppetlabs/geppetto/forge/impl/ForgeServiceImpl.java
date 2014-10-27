@@ -150,7 +150,7 @@ class ForgeServiceImpl implements ForgeService {
 				throw new IOException("Destination folder is not empty: " + destination.getAbsolutePath());
 
 			// Don't remove .project, .settings, .git, .svn, etc. if they are present.
-			FileUtils.rmR(destination, FileUtils.DEFAULT_EXCLUDES_PATTERN);
+			FileUtils.rmR(destination, FileUtils.DEFAULT_EXCLUDES_MATCHER);
 		}
 
 		File moduleFile = cache.retrieve(moduleName, best.getVersion());

@@ -69,6 +69,10 @@ public class PPPreferenceConstants {
 
 	public static final String PUPPET_FOLDER_FILTER = "folderFilter";
 
+	public static final String PUPPET_FOLDER_FILTER_CONVERTED = "folderFilterConverted";
+
+	public static final String PUPPET_EXCLUDE_GLOBS = "excludeGlobs";
+
 	public static final String PUPPET_MANIFEST_DIR = "puppetManifestDir";
 
 	public static final String PUPPET_PROJECT_PATH = "puppetPath";

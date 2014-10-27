@@ -9,11 +9,11 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 import com.google.inject.Inject;
-import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
 
 public class ModuleResourceDescriptionManager extends DefaultResourceDescriptionManager {
 	@Inject
-	private IFolderDiscriminator folderDiscriminator;
+	private IFileExcluder folderDiscriminator;
 
 	@Override
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {

@@ -10,42 +10,43 @@
  */
 package com.puppetlabs.geppetto.validation;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.google.common.collect.Sets;
-import com.puppetlabs.geppetto.common.Strings;
 import com.puppetlabs.geppetto.common.os.FileUtils;
+import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.diagnostic.ExceptionDiagnostic;
 import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
+import com.puppetlabs.geppetto.module.dsl.validation.ModuleValidationAdvisorBean;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
+import com.puppetlabs.geppetto.pp.dsl.validation.PotentialProblemsAdvisorBean;
 import com.puppetlabs.geppetto.validation.runner.DefaultEncodingProvider;
+import com.puppetlabs.geppetto.validation.runner.GeppettoRC;
+import com.puppetlabs.geppetto.validation.runner.GeppettoRC.Advices;
 import com.puppetlabs.geppetto.validation.runner.IEncodingProvider;
 
 public class ValidationOptions {
-	/**
-	 * Checks that the folder exclusion pattern is valid.
-	 *
-	 * @param pattern
-	 *            The pattern to check
-	 */
-	public static void checkFolderExclusionPattern(String pattern) throws IllegalArgumentException {
-		pattern = Strings.trimToNull(pattern);
-		if(pattern != null) {
-			int len = pattern.length();
-			for(int i = 0; i < len; ++i) {
-				char c = pattern.charAt(i);
-				if(c == '/' || c == '\\')
-					throw new IllegalArgumentException(String.format("Exclusion pattern must not contain '%c'", c));
-			}
-		}
+	public static final Set<String> DEFAULT_EXCLUDES;
+
+	static {
+		DEFAULT_EXCLUDES = Collections.unmodifiableSet(Sets.newHashSet("**/pkg/**", "**/spec/**"));
 	}
 
 	private ComplianceLevel complianceLevel;
@@ -74,17 +75,13 @@ public class ValidationOptions {
 
 	private IModuleValidationAdvisor moduleValidationAdvisor;
 
-	private Set<String> folderExclusionPatterns;
+	private Set<String> excludeGlobs;
 
 	private FileFilter fileFilter;
 
 	private FileFilter validationFilter;
 
-	public static final Set<String> DEFAULT_EXCLUTION_PATTERNS;
-
-	static {
-		DEFAULT_EXCLUTION_PATTERNS = Collections.unmodifiableSet(Sets.newHashSet("pkg", "spec"));
-	}
+	private File validationRoot;
 
 	public ValidationOptions() {
 		fileType = FileType.DETECT;
@@ -103,9 +100,10 @@ public class ValidationOptions {
 		checkModuleSemantics = source.checkModuleSemantics;
 		checkReferences = source.checkReferences;
 		moduleValidationAdvisor = source.moduleValidationAdvisor;
-		folderExclusionPatterns = source.folderExclusionPatterns;
+		excludeGlobs = source.excludeGlobs;
 		fileFilter = source.fileFilter;
 		validationFilter = source.validationFilter;
+		validationRoot = source.validationRoot;
 	}
 
 	/**
@@ -136,6 +134,15 @@ public class ValidationOptions {
 	}
 
 	/**
+	 * @return the excludeGlobs
+	 */
+	public Set<String> getExcludeGlobs() {
+		return excludeGlobs == null
+			? Collections.<String> emptySet()
+			: excludeGlobs;
+	}
+
+	/**
 	 * @return the fileFilter
 	 */
 	public FileFilter getFileFilter() {
@@ -149,17 +156,6 @@ public class ValidationOptions {
 	 */
 	public FileType getFileType() {
 		return fileType;
-	}
-
-	/**
-	 * @return the folderExclusionPattern
-	 */
-	public Set<String> getFolderExclusionPatterns() {
-		if(folderExclusionPatterns == null) {
-			folderExclusionPatterns = Sets.newHashSet(FileUtils.DEFAULT_EXCLUDES);
-			folderExclusionPatterns.addAll(DEFAULT_EXCLUTION_PATTERNS);
-		}
-		return folderExclusionPatterns;
 	}
 
 	/**
@@ -206,6 +202,13 @@ public class ValidationOptions {
 	}
 
 	/**
+	 * @return The root folder for the validation
+	 */
+	public File getValidationRoot() {
+		return validationRoot;
+	}
+
+	/**
 	 * @return the allowFileOverride
 	 */
 	public boolean isAllowFileOverride() {
@@ -247,6 +250,51 @@ public class ValidationOptions {
 	 */
 	public boolean isValidationCandidate(File candidate) {
 		return validationFilter == null || validationFilter.accept(candidate);
+	}
+
+	public ValidationOptions mergeFileOverride(Diagnostic diagnostics) {
+		File geppettoRCFile = new File(validationRoot, ".geppetto-rc.json");
+
+		try (InputStream in = new BufferedInputStream(new FileInputStream(geppettoRCFile))) {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+			GeppettoRC geppettoRC = mapper.readValue(in, GeppettoRC.class);
+			ValidationOptions options = new ValidationOptions(this);
+			Advices advice = geppettoRC.getAdvice();
+			IPotentialProblemsAdvisor ppAdvisor = options.getProblemsAdvisor();
+			IModuleValidationAdvisor moduleAdvisor = options.getModuleValidationAdvisor();
+			if(advice != null) {
+				PotentialProblemsAdvisorBean ppBean = advice.getManifest();
+				if(ppBean != null)
+					ppAdvisor = ppBean.merge(ppAdvisor);
+
+				ModuleValidationAdvisorBean mvBean = advice.getModule();
+				if(mvBean != null)
+					moduleAdvisor = mvBean.merge(moduleAdvisor);
+			}
+			IValidationAdvisor.ComplianceLevel level = geppettoRC.getComplianceLevel();
+			if(level == null)
+				level = options.getComplianceLevel();
+			else
+				options.setComplianceLevel(level);
+			options.setProblemsAdvisor(level.createValidationAdvisor(ppAdvisor));
+			options.setModuleValidationAdvisor(moduleAdvisor);
+
+			Set<String> exclusionPatterns = geppettoRC.getExcludes();
+			if(exclusionPatterns != null) {
+				Set<String> merged = Sets.newHashSet(exclusionPatterns);
+				merged.addAll(options.getExcludeGlobs());
+				options.setExcludeGlobs(merged);
+			}
+			return options;
+		}
+		catch(FileNotFoundException e) {
+		}
+		catch(IOException e) {
+			diagnostics.addChild(new ExceptionDiagnostic(
+				Diagnostic.ERROR, ValidationService.GEPPETTO, "Unable to parse .geppetto-rc.json", e));
+		}
+		return this;
 	}
 
 	/**
@@ -321,6 +369,14 @@ public class ValidationOptions {
 	}
 
 	/**
+	 * @param excludeGlobs
+	 *            the excludeGlobs to set
+	 */
+	public void setExcludeGlobs(Set<String> excludeGlobs) {
+		this.excludeGlobs = excludeGlobs;
+	}
+
+	/**
 	 * @param fileFilter
 	 *            the fileFilter to set
 	 */
@@ -338,14 +394,6 @@ public class ValidationOptions {
 		this.fileType = fileType == null
 			? FileType.DETECT
 			: fileType;
-	}
-
-	/**
-	 * @param folderExclusionPatterns
-	 *            the folderExclusionPattern to set
-	 */
-	public void setFolderExclusionPatterns(Set<String> folderExclusionPatterns) {
-		this.folderExclusionPatterns = folderExclusionPatterns;
 	}
 
 	/**
@@ -406,5 +454,15 @@ public class ValidationOptions {
 	 */
 	public void setValidationFilter(FileFilter validationFilter) {
 		this.validationFilter = validationFilter;
+	}
+
+	/**
+	 * Sets the value of the '<em>validationRoot</em>' attribute.
+	 *
+	 * @param validationRoot
+	 *            the new value of the '<em>validationRoot</em>' attribute.
+	 */
+	public void setValidationRoot(File validationRoot) {
+		this.validationRoot = validationRoot;
 	}
 }

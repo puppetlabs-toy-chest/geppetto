@@ -63,6 +63,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
 import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
 import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapterFactory;
@@ -194,6 +195,8 @@ public class PPDiagnosticsRunner {
 
 	}
 
+	public static final String PPTPCONTAINER = "_pptp";
+
 	private Injector injector;
 
 	private XtextResourceSet resourceSet;
@@ -204,6 +207,8 @@ public class PPDiagnosticsRunner {
 	private PPResourceLinker resourceLinker;
 
 	private PPDiagnosticsSetup instance;
+
+	private IFileExcluder fileExcluder;
 
 	private IResourceServiceProvider pptpRubyResourceServiceProvider;
 
@@ -216,8 +221,6 @@ public class PPDiagnosticsRunner {
 	private IQualifiedNameConverter converter;
 
 	Map<String, File> pathToFileMap;
-
-	public static final String PPTPCONTAINER = "_pptp";
 
 	private String ROOTCONTAINER = null;
 
@@ -546,6 +549,10 @@ public class PPDiagnosticsRunner {
 		return get(ISerializer.class);
 	}
 
+	public boolean isExcluded(File f) {
+		return fileExcluder.isExcluded(f.toPath());
+	}
+
 	/**
 	 * Loads a .pp, .pptp or .rb resource using the resource factory configured for the extension. Returns null for a
 	 * .rb resource that is not expected to contribute anything to the pptp. All non null resources are added to the
@@ -715,6 +722,7 @@ public class PPDiagnosticsRunner {
 		pptpRubyResourceServiceProvider = instance.getPptpRubyInjector().getInstance(IResourceServiceProvider.class);
 
 		resourceLinker = injector.getInstance(PPResourceLinker.class);
+		fileExcluder = injector.getInstance(IFileExcluder.class);
 
 		resourceServiceProvider = getIResourceServiceProvider();
 

@@ -13,17 +13,20 @@ package com.puppetlabs.geppetto.common.os;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.NotLinkException;
+import java.nio.file.Path;
+import java.nio.file.PathMatcher;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.FileTime;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
-import java.util.regex.Pattern;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -31,97 +34,52 @@ public class FileUtils {
 	public static class DefaultFileFilter implements FileFilter {
 		@Override
 		public boolean accept(File file) {
-			return !DEFAULT_EXCLUDES_PATTERN.matcher(file.getName()).matches();
+			return !DEFAULT_EXCLUDES_MATCHER.matches(file.toPath());
 		}
 	}
 
-	public static void appendExcludePattern(String string, StringBuilder bld) {
-		int top = string.length();
-		for(int idx = 0; idx < top; ++idx) {
-			char c = string.charAt(idx);
-			switch(c) {
-				case '.':
-					bld.append('\\');
-					bld.append(c);
-					break;
-				case '*':
-					bld.append('.');
-					bld.append('*');
-					break;
-				case '?':
-					bld.append('.');
-					break;
-				default:
-					bld.append(c);
-			}
-		}
-	}
+	// @fmtOff
+	public static final String[] DEFAULT_EXCLUDES = {
+		"**/*~",
+		"**/#*#",
+		"**/.#*",
+		"**/%*%",
+		"**/._*",
+		"**/.cvsignore",
+		"**/vssver.scc",
+		"**/.DS_Store",
+		"**/.gitattributes",
+		"**/.gitignore",
+		"**/.gitmodules",
+		"**/.hgignore",
+		"**/.hgsub",
+		"**/.hgsubstate",
+		"**/.hgtags",
+		"**/.bzrignore",
+		"**/.project",
+		"**/.classpath",
+		"**/.bzrignore",
+		"**/.bundle/**",
+		"**/CVS/**",
+		"**/SCCS/**",
+		"**/.svn/**",
+		"**/.git/**",
+		"**/.hg/**",
+		"**/.bzr/**",
+		"**/.forge-releng/**",
+		"**/.settings/**",
+		"**/pkg/**",
+		"**/coverage/**"
+	};
+	// @fmtOn
 
-	public static Pattern compileExcludePattern(List<String> excludes) {
-		if(excludes != null) {
-			int top = excludes.size();
-			if(top > 0) {
-				StringBuilder bld = new StringBuilder();
-				bld.append("^(?:");
-				appendExcludePattern(excludes.get(0), bld);
-				for(int idx = 1; idx < top; ++idx) {
-					bld.append('|');
-					appendExcludePattern(excludes.get(idx), bld);
-				}
-				bld.append(")$");
-				return Pattern.compile(bld.toString());
-			}
-		}
-		// Anything goes
-		return Pattern.compile(".*");
-	}
+	// Directory names that should not be checksummed or copied.
+	public static final PathMatcher DEFAULT_EXCLUDES_MATCHER = createGlobMatcher(Arrays.asList(DEFAULT_EXCLUDES));
+
+	public static final FileFilter DEFAULT_FILE_FILTER = new DefaultFileFilter();
 
 	public static void cp(File source, File destDir, String fileName) throws IOException {
-		cp(source, destDir, fileName, isSymlink(source));
-	}
-
-	private static void cp(File source, File destDir, String fileName, boolean isSymlink) throws IOException {
-		if(Files_copy != null) {
-			File destFile = new File(destDir, fileName);
-			try {
-				// Use Files.copy() to preserve attributes and links.
-				Files_copy.invoke(null, File_toPath.invoke(source), File_toPath.invoke(destFile), defaultCopyOptions);
-				return;
-			}
-			catch(InvocationTargetException e) {
-				Throwable t = e.getTargetException();
-				if(t instanceof IOException)
-					throw (IOException) t;
-				if(t instanceof RuntimeException)
-					throw (RuntimeException) t;
-				throw new RuntimeException(t);
-			}
-			catch(IllegalAccessException e) {
-				throw new RuntimeException(e);
-			}
-		}
-
-		if(isSymlink) {
-			// Ouch! We're asked to copy a symlink but we don't
-			// have access to Java 1.7. We'll have to try and copy
-			// this using a remote execution of 'cp' (unless it's
-			// windows in which case we're lost).
-			//
-			if(OsUtil.unixCopy(source, destDir))
-				return;
-
-			throw new UnsupportedOperationException("Sorry. Not possible to copy symlinks on Windows. This is the link: '" +
-				source.getAbsolutePath() + '\'');
-		}
-		InputStream in = new FileInputStream(source);
-		try {
-			cp(in, destDir, fileName);
-			if(source.canExecute())
-				new File(destDir, fileName).setExecutable(true, false);
-		}
-		finally {
-			StreamUtil.close(in);
-		}
+		Files.copy(source.toPath(), new File(destDir, fileName).toPath(), StandardCopyOption.COPY_ATTRIBUTES, LinkOption.NOFOLLOW_LINKS);
 	}
 
 	public static void cp(InputStream source, File destDir, String fileName) throws IOException {
@@ -129,16 +87,10 @@ public class FileUtils {
 	}
 
 	public static void cp(InputStream source, File destDir, String fileName, long timestamp) throws IOException {
-		File target = new File(destDir, fileName);
-		OutputStream out = new FileOutputStream(target);
-		try {
-			StreamUtil.copy(source, out);
-			if(timestamp > 0)
-				target.setLastModified(timestamp);
-		}
-		finally {
-			StreamUtil.close(out);
-		}
+		Path target = destDir.toPath().resolve(fileName);
+		Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+		if(timestamp > 0)
+			Files.setLastModifiedTime(target, FileTime.fromMillis(timestamp));
 	}
 
 	public static void cpR(File source, File destDir, FileFilter fileFilter, boolean createTop, boolean includeEmptyFolders)
@@ -155,7 +107,7 @@ public class FileUtils {
 			File destFile = new File(destDir, name);
 			if(destFile.exists())
 				throw new IOException(destFile.getAbsolutePath() + " already exists");
-			cp(source, destDir, name, isSymlink);
+			cp(source, destDir, name);
 			return;
 		}
 
@@ -175,53 +127,62 @@ public class FileUtils {
 			cpR(child, destDir, fileFilter, true, includeEmptyFolders);
 	}
 
+	public static PathMatcher createGlobMatcher(Iterable<String> excludes) {
+		if(excludes == null)
+			excludes = Collections.emptyList();
+
+		Iterator<String> iter = excludes.iterator();
+		if(!iter.hasNext())
+			return new PathMatcher() {
+				@Override
+				public boolean matches(Path path) {
+					return false;
+				}
+			};
+
+		String first = iter.next();
+		StringBuilder bld = new StringBuilder();
+		bld.append("glob:");
+		if(iter.hasNext()) {
+			bld.append('{');
+			bld.append(first);
+			do {
+				bld.append(',');
+				bld.append(iter.next());
+			} while(iter.hasNext());
+			bld.append('}');
+		}
+		else
+			bld.append(first);
+		return FileSystems.getDefault().getPathMatcher(bld.toString());
+	}
+
 	/**
 	 * @param file
 	 *            The file to examine
 	 * @return <code>true</code> if the <code>file</code> represents a symbolic link
 	 */
 	public static boolean isSymlink(File file) {
-		if(file == null)
-			return false;
-
-		try {
-			// Use Java 7 Files.isSymbolicLink(Path) if it is available
-			//
-			if(Files_isSymbolicLink != null)
-				return ((Boolean) Files_isSymbolicLink.invoke(null, File_toPath.invoke(file))).booleanValue();
-
-			File canon;
-			if(file.getParent() == null)
-				canon = file;
-			else {
-				File canonDir = file.getParentFile().getCanonicalFile();
-				canon = new File(canonDir, file.getName());
-			}
-			return !canon.getCanonicalFile().equals(canon.getAbsoluteFile());
-		}
-		catch(Exception e) {
-			return false;
-		}
+		return file != null && Files.isSymbolicLink(file.toPath());
 	}
 
 	/**
 	 * @param file
 	 *            The file that represents the symbolic link source
 	 * @return The symbolic link target or <code>null</code> if file does not represent a symbolic link
+	 * @throws IOException
 	 */
-	public static String readSymbolicLink(File file) {
+	public static String readSymbolicLink(File file) throws IOException {
 		if(file == null)
 			return null;
 
 		try {
-			if(Files_readSymbolicLink != null) {
-				Object target = Files_readSymbolicLink.invoke(null, File_toPath.invoke(file));
-				return target == null
-					? null
-					: target.toString();
-			}
+			Path target = Files.readSymbolicLink(file.toPath());
+			return target == null
+				? null
+				: target.toString();
 		}
-		catch(Exception e) {
+		catch(NotLinkException | UnsupportedOperationException e) {
 		}
 		return null;
 	}
@@ -230,24 +191,20 @@ public class FileUtils {
 		rmR(fileOrDir, null);
 	}
 
-	public static void rmR(File fileOrDir, Pattern excludePattern) {
-		if(excludePattern != null && excludePattern.matcher(fileOrDir.getName()).matches())
+	public static void rmR(File fileOrDir, PathMatcher excludeMatcher) {
+		if(excludeMatcher != null && excludeMatcher.matches(fileOrDir.toPath()))
 			return;
 
 		File[] children = fileOrDir.listFiles();
 		if(children != null)
 			for(File child : children)
-				rmR(child, excludePattern);
+				rmR(child, excludeMatcher);
 		fileOrDir.delete();
 	}
 
 	public static void unzip(File zipFile, File destDir) throws IOException {
-		InputStream in = new FileInputStream(zipFile);
-		try {
+		try (InputStream in = new FileInputStream(zipFile)) {
 			unzip(in, destDir);
-		}
-		finally {
-			StreamUtil.close(in);
 		}
 	}
 
@@ -275,98 +232,4 @@ public class FileUtils {
 			cp(input, dest, name, entryTime);
 		}
 	}
-
-	private static final Method Files_copy;
-
-	private static final Method Files_isSymbolicLink;
-
-	private static final Method Files_readSymbolicLink;
-
-	private static final Method File_toPath;
-
-	private static Object[] defaultCopyOptions;
-
-	static {
-		Method isSymbolicLink = null;
-		Method readSymbolicLink = null;
-		Method toPath = null;
-		Method copy = null;
-		Enum<?> option_COPY_ATTRIBUTES = null;
-		Enum<?> option_NOFOLLOW_LINKS = null;
-		Object[] dfltCopyOptions = null;
-		try {
-			Class<?> class_Files = Class.forName("java.nio.file.Files");
-			Class<?> class_Path = Class.forName("java.nio.file.Path");
-			Class<?> class_CopyOption = Class.forName("java.nio.file.CopyOption");
-			Class<?> class_LinkOption = Class.forName("java.nio.file.LinkOption");
-			Class<?> class_StandardCopyOption = Class.forName("java.nio.file.StandardCopyOption");
-			isSymbolicLink = class_Files.getMethod("isSymbolicLink", class_Path);
-			readSymbolicLink = class_Files.getMethod("readSymbolicLink", class_Path);
-			toPath = File.class.getMethod("toPath");
-
-			for(Object e : class_LinkOption.getEnumConstants()) {
-				Enum<?> en = (Enum<?>) e;
-				if("NOFOLLOW_LINKS".equals(en.name()))
-					option_NOFOLLOW_LINKS = en;
-
-			}
-
-			for(Object e : class_StandardCopyOption.getEnumConstants()) {
-				Enum<?> en = (Enum<?>) e;
-				if("COPY_ATTRIBUTES".equals(en.name()))
-					option_COPY_ATTRIBUTES = en;
-			}
-			dfltCopyOptions = (Object[]) Array.newInstance(class_CopyOption, 2);
-			dfltCopyOptions[0] = option_COPY_ATTRIBUTES;
-			dfltCopyOptions[1] = option_NOFOLLOW_LINKS;
-			copy = class_Files.getMethod("copy", class_Path, class_Path, Class.forName("[Ljava.nio.file.CopyOption;"));
-		}
-		catch(Exception e) {
-		}
-		Files_isSymbolicLink = isSymbolicLink;
-		Files_readSymbolicLink = readSymbolicLink;
-		File_toPath = toPath;
-		Files_copy = copy;
-		defaultCopyOptions = dfltCopyOptions;
-	}
-
-	// @fmtOff
-	public static final String[] DEFAULT_EXCLUDES = {
-		"*~",
-		"#*#",
-		".#*",
-		"%*%",
-		"._*",
-		"CVS",
-		".bundle",
-		".cvsignore",
-		"SCCS",
-		"vssver.scc",
-		".svn",
-		".DS_Store",
-		".git",
-		".gitattributes",
-		".gitignore",
-		".gitmodules",
-		".hg",
-		".hgignore",
-		".hgsub",
-		".hgsubstate",
-		".hgtags",
-		".bzr",
-		".bzrignore",
-		".project",
-		".forge-releng",
-		".settings",
-		".classpath",
-		".bzrignore",
-		"pkg",
-		"coverage"
-	};
-	// @fmtOn
-
-	// Directory names that should not be checksummed or copied.
-	public static final Pattern DEFAULT_EXCLUDES_PATTERN = compileExcludePattern(Arrays.asList(DEFAULT_EXCLUDES));
-
-	public static final FileFilter DEFAULT_FILE_FILTER = new DefaultFileFilter();
 }

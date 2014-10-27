@@ -11,7 +11,7 @@
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
 //import org.eclipse.jface.preference.PathEditor;
-import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.FolderFilterEditor;
+import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.GlobPatternFieldEditor;
 
 /**
  * A simple preference page for search path and environment
@@ -22,8 +22,8 @@ public class PuppetRootPreferencePage extends AbstractRebuildingPreferencePage {
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new FolderFilterEditor(getPreferenceId(), //
-			"Folder Exclusion Patterns", getFieldEditorParent()) {
+		addField(new GlobPatternFieldEditor(getPreferenceId(), //
+			"Glob Exclude Patterns (relative to workspace root)", getFieldEditorParent()) {
 
 			@Override
 			public void load() {
@@ -37,7 +37,7 @@ public class PuppetRootPreferencePage extends AbstractRebuildingPreferencePage {
 
 	@Override
 	protected String getPreferenceId() {
-		return PPPreferenceConstants.PUPPET_FOLDER_FILTER;
+		return PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS;
 	}
 
 	@Override

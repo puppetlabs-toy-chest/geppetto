@@ -14,6 +14,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 
@@ -107,6 +108,7 @@ public class AbstractValidationTest {
 	protected ValidationOptions getValidationOptions(ComplianceLevel complianceLevel) {
 		ValidationOptions options = new ValidationOptions();
 		options.setPlatformURI(PuppetTarget.forComplianceLevel(complianceLevel, false).getPlatformURI());
+		options.setValidationRoot(TestDataProvider.getTestFile(new Path("testData")));
 		options.setEncodingProvider(new IEncodingProvider() {
 			@Override
 			public String getEncoding(URI file) {

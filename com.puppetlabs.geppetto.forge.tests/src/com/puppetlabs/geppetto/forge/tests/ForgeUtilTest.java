@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.zip.GZIPInputStream;
 
@@ -37,12 +39,13 @@ import com.puppetlabs.geppetto.semver.Version;
 public class ForgeUtilTest extends AbstractForgeTest {
 
 	private static void assertExcludesMatch(String name) {
-		assertTrue(
-			"The name '" + name + "' does not match default excludes pattern", FileUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
+		Path path = Paths.get("dummyproject", name);
+		assertTrue("The name '" + name + "' does not match default excludes pattern", FileUtils.DEFAULT_EXCLUDES_MATCHER.matches(path));
 	}
 
 	private static void assertNotExcludesMatch(String name) {
-		assertFalse("The name '" + name + "' matches default excludes pattern", FileUtils.DEFAULT_EXCLUDES_PATTERN.matcher(name).matches());
+		Path path = Paths.get(".", name);
+		assertFalse("The name '" + name + "' matches default excludes pattern", FileUtils.DEFAULT_EXCLUDES_MATCHER.matches(path));
 	}
 
 	private Forge fixture = null;
@@ -108,21 +111,21 @@ public class ForgeUtilTest extends AbstractForgeTest {
 		assertExcludesMatch("%%");
 		assertExcludesMatch("%percent%");
 		assertExcludesMatch("._foo");
-		assertExcludesMatch("CVS");
+		assertExcludesMatch("CVS/x");
 		assertExcludesMatch(".cvsignore");
-		assertExcludesMatch("SCCS");
-		assertExcludesMatch(".git");
+		assertExcludesMatch("SCCS/x");
+		assertExcludesMatch(".git/x");
 		assertExcludesMatch(".gitignore");
 		assertExcludesMatch(".gitmodules");
 		assertExcludesMatch(".gitattributes");
-		assertExcludesMatch(".hg");
+		assertExcludesMatch(".hg/x");
 		assertExcludesMatch(".hgignore");
 		assertExcludesMatch(".hgsubstate");
 		assertExcludesMatch(".hgtags");
-		assertExcludesMatch(".bzr");
+		assertExcludesMatch(".bzr/x");
 		assertExcludesMatch(".bzrignore");
-		assertExcludesMatch("pkg");
-		assertExcludesMatch("coverage");
+		assertExcludesMatch("pkg/x");
+		assertExcludesMatch("coverage/x");
 
 		assertNotExcludesMatch(".");
 		assertNotExcludesMatch("..");

@@ -1,14 +1,13 @@
-/*******************************************************************************
- * Copyright (c) 2000, 2009 IBM Corporation and others.
+/**
+ * Copyright (c) 2014 Puppet Labs, Inc. and other contributors, as listed below.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
- *     Puppet Labs - edit capability
- *******************************************************************************/
+ *   Puppet Labs
+ */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors;
 
 import java.util.ArrayList;
@@ -17,16 +16,25 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.VerifyEvent;
-import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Composite;
 
 import com.google.common.collect.Lists;
 
 /**
- * A field editor to edit directory paths.
+ * A field editor to edit glob patterns.
  */
-public class FolderFilterEditor extends ListEditor {
+public class GlobPatternFieldEditor extends ListEditor {
+	private static String mangleGlob(String glob) {
+		if(glob != null) {
+			glob = glob.trim();
+			while(glob.startsWith("/"))
+				glob = glob.substring(1).trim();
+			if(glob.isEmpty())
+				glob = null;
+		}
+		return glob;
+	}
+
 	public static List<String> parseFolderFilter(String filter) {
 		if(filter != null) {
 			filter = filter.trim();
@@ -34,7 +42,7 @@ public class FolderFilterEditor extends ListEditor {
 				StringTokenizer st = new StringTokenizer(filter, ":\n\r");
 				ArrayList<String> v = Lists.newArrayList();
 				while(st.hasMoreElements())
-					v.add((String) st.nextElement());
+					v.add(((String) st.nextElement()).trim());
 				return v;
 			}
 		}
@@ -42,7 +50,7 @@ public class FolderFilterEditor extends ListEditor {
 	}
 
 	/**
-	 * Creates a folder filter field editor.
+	 * Creates a glob pattern field editor.
 	 *
 	 * @param name
 	 *            the name of the preference this field editor works on
@@ -51,7 +59,7 @@ public class FolderFilterEditor extends ListEditor {
 	 * @param parent
 	 *            the parent of the field editor's control
 	 */
-	public FolderFilterEditor(String name, String labelText, Composite parent) {
+	public GlobPatternFieldEditor(String name, String labelText, Composite parent) {
 		init(name, labelText);
 		createControl(parent);
 	}
@@ -61,17 +69,21 @@ public class FolderFilterEditor extends ListEditor {
 		if(items.length == 0)
 			return "";
 
-		StringBuffer path = new StringBuffer(items[0]);
-		for(int i = 1; i < items.length; i++) {
-			path.append(':');
-			path.append(items[i]);
+		StringBuffer path = new StringBuffer();
+		for(int i = 0; i < items.length; i++) {
+			String glob = mangleGlob(items[i]);
+			if(glob == null)
+				continue;
+			if(path.length() > 0)
+				path.append(':');
+			path.append(glob);
 		}
 		return path.toString();
 	}
 
 	@Override
 	protected String getEditedInput(String input) {
-		return getInputObject("Edit Segment Match", input);
+		return getInputObject("Edit Glob Pattern", input);
 	}
 
 	protected String getInputObject(String title, String input) {
@@ -79,34 +91,7 @@ public class FolderFilterEditor extends ListEditor {
 		String[] value = new String[] { input };
 		int[] okCancel = new int[] { 1 };
 
-		dialog.prompt(title, "Folder path segment pattern (* = any string, ? = any character)", null, new VerifyListener() {
-			@Override
-			public void verifyText(VerifyEvent event) {
-				switch(event.keyCode) {
-					case SWT.BS:
-					case SWT.DEL:
-					case SWT.HOME:
-					case SWT.END:
-					case SWT.ARROW_LEFT:
-					case SWT.ARROW_RIGHT:
-						break;
-					default: {
-						String txt = event.text;
-						if(txt == null)
-							break;
-
-						int len = txt.length();
-						for(int i = 0; i < len; ++i) {
-							char c = txt.charAt(i);
-							if(c == '/' || c == '\\') {
-								event.doit = false;
-								break;
-							}
-						}
-					}
-				}
-			}
-		}, value, null, okCancel);
+		dialog.prompt(title, "Glob pattern (* = any string, ? = any character, ** = any path)", null, value, null, okCancel);
 		if(okCancel[0] == 0)
 			return null;
 		return value[0].trim();
@@ -114,7 +99,7 @@ public class FolderFilterEditor extends ListEditor {
 
 	@Override
 	protected String getNewInputObject() {
-		return getInputObject("Add Segment Match", null);
+		return getInputObject("Add Glob Pattern", null);
 	}
 
 	@Override

@@ -17,7 +17,7 @@ import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.resource.IContainer.Manager;
 
 import com.google.inject.Provider;
-import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
 import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
@@ -51,8 +51,8 @@ public class PPDiagnosticsModule extends PPRuntimeModule {
 	}
 
 	@Override
-	public Class<? extends IFolderDiscriminator> bindIFolderDiscriminator() {
-		return OptionsBasedFolderDiscriminator.class;
+	public Class<? extends IFileExcluder> bindIFolderDiscriminator() {
+		return OptionsBasedFileExcluder.class;
 	}
 
 	/**

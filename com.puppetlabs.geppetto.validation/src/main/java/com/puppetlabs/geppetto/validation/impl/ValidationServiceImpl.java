@@ -289,7 +289,13 @@ public class ValidationServiceImpl implements ValidationService {
 		if(!isDirectory)
 			throw new IllegalArgumentException("source is not a directory as dictated by options");
 
-		return new DirectoryValidator(diagnostics, source, options).validateDirectory(monitor);
+		try {
+			return new DirectoryValidator(diagnostics, source, options).validateDirectory(monitor);
+		}
+		catch(Exception e) {
+			addExceptionDiagnostic(diagnostics, "Internal Error: Exception while setting up pp diagnostics.", e);
+			return new BuildResult(false); // give up
+		}
 	}
 
 	/**

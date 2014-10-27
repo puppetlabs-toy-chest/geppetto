@@ -21,14 +21,14 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 import com.google.inject.Inject;
-import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
 
 /**
  * Overrides the default to provide a PPResourceDescription instead of the default
  */
 public class PPResourceDescriptionManager extends DefaultResourceDescriptionManager {
 	@Inject
-	private IFolderDiscriminator folderDiscriminator;
+	private IFileExcluder folderDiscriminator;
 
 	@Override
 	protected IResourceDescription internalGetResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {

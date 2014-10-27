@@ -548,6 +548,7 @@ public class Validate extends AbstractForgeServiceMojo {
 		options.setCheckLayout(checkLayout);
 		options.setCheckModuleSemantics(checkModuleSemantics);
 		options.setCheckReferences(checkReferences);
+		options.setValidationRoot(getModulesDir());
 
 		if(moduleLocations.size() == 1 && getModulesDir().equals(moduleLocations.iterator().next()))
 			options.setFileType(FileType.MODULE_ROOT);

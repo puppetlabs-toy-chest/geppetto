@@ -30,6 +30,7 @@ public class TestPptpOptionHandling extends AbstractValidationTest {
 		options.setCheckModuleSemantics(true);
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
+		options.setValidationRoot(root.getParentFile());
 		options.setPlatformURI(PuppetTarget.PUPPET26.getPlatformURI());
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 

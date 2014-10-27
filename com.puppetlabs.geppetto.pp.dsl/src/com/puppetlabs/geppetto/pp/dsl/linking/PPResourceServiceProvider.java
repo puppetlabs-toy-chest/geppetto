@@ -5,14 +5,14 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 
 import com.google.inject.Inject;
-import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
 
 /**
  * {@link IResourceServiceProvider} that handles 'metadata.json' URI's
  */
 public class PPResourceServiceProvider extends DefaultResourceServiceProvider {
 	@Inject
-	private IFolderDiscriminator folderDiscriminator;
+	private IFileExcluder folderDiscriminator;
 
 	@Override
 	public boolean canHandle(URI uri) {

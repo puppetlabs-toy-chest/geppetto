@@ -21,8 +21,8 @@ import com.puppetlabs.geppetto.module.dsl.generator.ModuleGenerator;
 import com.puppetlabs.geppetto.module.dsl.linking.ModuleLinkingDiagnosticMessageProvider;
 import com.puppetlabs.geppetto.module.dsl.scoping.ModuleQualifiedNameConverter;
 import com.puppetlabs.geppetto.module.dsl.scoping.ModuleQualifiedNameProvider;
-import com.puppetlabs.geppetto.pp.dsl.FolderDiscriminator;
-import com.puppetlabs.geppetto.pp.dsl.IFolderDiscriminator;
+import com.puppetlabs.geppetto.pp.dsl.FileExcluder;
+import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
 
 public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 	@Override
@@ -30,8 +30,8 @@ public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 		return StateBasedContainerManager.class;
 	}
 
-	public Class<? extends IFolderDiscriminator> bindIFolderDiscriminator() {
-		return FolderDiscriminator.class;
+	public Class<? extends IFileExcluder> bindIFolderDiscriminator() {
+		return FileExcluder.class;
 	}
 
 	public Class<? extends IGenerator> bindIGenerator() {

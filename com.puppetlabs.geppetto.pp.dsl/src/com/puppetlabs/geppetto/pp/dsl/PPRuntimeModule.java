@@ -79,8 +79,8 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 		return PPResourceDescriptionStrategy.class;
 	}
 
-	public Class<? extends IFolderDiscriminator> bindIFolderDiscriminator() {
-		return FolderDiscriminator.class;
+	public Class<? extends IFileExcluder> bindIFolderDiscriminator() {
+		return FileExcluder.class;
 	}
 
 	public Class<? extends IFormattingContextFactory> bindIFormattingContextFactory() {
