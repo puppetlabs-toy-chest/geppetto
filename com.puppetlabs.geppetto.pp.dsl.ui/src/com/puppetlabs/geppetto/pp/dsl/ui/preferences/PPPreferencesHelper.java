@@ -11,6 +11,7 @@
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -130,12 +131,11 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		if(!store.isDefault(PPPreferenceConstants.PUPPET_FOLDER_FILTER)) {
 			String s = store.getString(PPPreferenceConstants.PUPPET_FOLDER_FILTER);
 			StringBuilder bld = new StringBuilder();
-			List<String> array = GlobPatternFieldEditor.parseFolderFilter(s);
-			for(int i = 0; i < array.size(); i++) {
-				if(i > 0)
+			for(String glob : GlobPatternFieldEditor.parseGlobPatterns(s)) {
+				if(bld.length() > 0)
 					bld.append(':');
 				bld.append("**/");
-				bld.append(array.get(i));
+				bld.append(glob);
 				bld.append("/**");
 			}
 			store.setValue(PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS, bld.toString());
@@ -161,10 +161,6 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getCaseDefaultShouldAppearLast() {
 		return getPreference(PPPreferenceConstants.PROBLEM_CASE_DEFAULT_LAST);
-	}
-
-	public List<String> getDefaultFolderFilters() {
-		return GlobPatternFieldEditor.parseFolderFilter(defaultExclusions);
 	}
 
 	public ValidationPreference getDeprecatedImport() {
@@ -195,8 +191,8 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		return getPreference(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST);
 	}
 
-	public List<String> getExcludeGlobs() {
-		return GlobPatternFieldEditor.parseFolderFilter(store.getString(PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS));
+	public Set<String> getExcludeGlobs() {
+		return GlobPatternFieldEditor.parseGlobPatterns(store.getString(PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS));
 	}
 
 	public ValidationPreference getInterpolatedNonBraceEnclosedHypens() {

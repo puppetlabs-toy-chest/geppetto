@@ -10,15 +10,14 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * A field editor to edit glob patterns.
@@ -35,18 +34,18 @@ public class GlobPatternFieldEditor extends ListEditor {
 		return glob;
 	}
 
-	public static List<String> parseFolderFilter(String filter) {
+	public static Set<String> parseGlobPatterns(String filter) {
 		if(filter != null) {
 			filter = filter.trim();
 			if(filter.length() > 0) {
 				StringTokenizer st = new StringTokenizer(filter, ":\n\r");
-				ArrayList<String> v = Lists.newArrayList();
+				Set<String> v = Sets.newLinkedHashSet();
 				while(st.hasMoreElements())
 					v.add(((String) st.nextElement()).trim());
 				return v;
 			}
 		}
-		return Collections.emptyList();
+		return Collections.emptySet();
 	}
 
 	/**
@@ -104,7 +103,7 @@ public class GlobPatternFieldEditor extends ListEditor {
 
 	@Override
 	protected String[] parseString(String stringList) {
-		List<String> v = parseFolderFilter(stringList);
+		Set<String> v = parseGlobPatterns(stringList);
 		return v.toArray(new String[v.size()]);
 	}
 }

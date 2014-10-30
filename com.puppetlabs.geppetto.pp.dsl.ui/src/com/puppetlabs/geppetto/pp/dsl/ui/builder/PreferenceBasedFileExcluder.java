@@ -29,14 +29,7 @@ public class PreferenceBasedFileExcluder extends FileExcluder implements IProper
 			helper = preferencesProvider.get();
 			helper.addPreferenceListener(PPPreferenceConstants.PUPPET_EXCLUDE_GLOBS, this);
 		}
-
-		Set<String> patterns = super.getExcludeGlobs();
-		// Remove the defaults since user might have removed them
-		patterns.removeAll(helper.getDefaultFolderFilters());
-
-		// Add user specific entries
-		patterns.addAll(helper.getExcludeGlobs());
-		return patterns;
+		return helper.getExcludeGlobs();
 	}
 
 	@Override
