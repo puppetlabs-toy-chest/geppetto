@@ -32,7 +32,9 @@ public class TestParsing {
 
 		// The diagnostics runner has all the capabilities to perform parsing
 		PPDiagnosticsRunner runner = new PPDiagnosticsRunner();
-		runner.setUp(new ValidationOptions());
+		ValidationOptions opts = new ValidationOptions();
+		opts.setValidationRoot(TestDataProvider.getTestFile("testData"));
+		runner.setUp(opts);
 
 		// The grammar access provides methods to obtain any parser rule.
 		// It is possible to start anywhere in the grammar and only get specific

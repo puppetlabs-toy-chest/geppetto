@@ -152,7 +152,7 @@ public class PPTypeFinder {
 					break;
 				case INSTASGNNODE:
 					InstAsgnNode docNode = (InstAsgnNode) n;
-					if("@doc".equals(docNode.getName())) {
+					if("doc".equals(docNode.getName())) {
 						typeDocumentation = getStringArgDefault(docNode.getValue(), "");
 					}
 					break;
@@ -195,7 +195,7 @@ public class PPTypeFinder {
 					break;
 				case INSTASGNNODE:
 					InstAsgnNode docNode = (InstAsgnNode) n;
-					if("@doc".equals(docNode.getName())) {
+					if("doc".equals(docNode.getName())) {
 						typeDocumentation = getStringArgDefault(docNode.getValue(), "");
 					}
 					break;

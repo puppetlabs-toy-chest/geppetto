@@ -194,7 +194,7 @@ public class Types {
 
 		for(Node node : nodes) {
 			InstAsgnNode asgnNode = (InstAsgnNode) node;
-			if(!"@doc".equals(asgnNode.getName()))
+			if(!"doc".equals(asgnNode.getName()))
 				continue;
 
 			Node valueNode = asgnNode.getValue();

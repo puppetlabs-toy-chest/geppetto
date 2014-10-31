@@ -66,6 +66,12 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 	}
 
 	@Override
+	public Object visitArgumentNode(ArgumentNode iVisited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
 	public Object visitArrayNode(ArrayNode iVisited) {
 		// DOES NOTHING
 		return null;
@@ -169,6 +175,12 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 
 	@Override
 	public Object visitColon3Node(Colon3Node iVisited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
+	public Object visitCommentNode(CommentNode iVisited) {
 		// DOES NOTHING
 		return null;
 	}
@@ -324,6 +336,12 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 	}
 
 	@Override
+	public Object visitImplicitNilNode(ImplicitNilNode visited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
 	public Object visitInstAsgnNode(InstAsgnNode iVisited) {
 		// DOES NOTHING
 		return null;
@@ -337,6 +355,30 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 
 	@Override
 	public Object visitIterNode(IterNode iVisited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
+	public Object visitKeywordArgNode(KeywordArgNode iVisited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
+	public Object visitKeywordRestArgNode(KeywordRestArgNode iVisited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
+	public Object visitLambdaNode(LambdaNode visited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
+	public Object visitListNode(ListNode iVisited) {
 		// DOES NOTHING
 		return null;
 	}
@@ -378,13 +420,13 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 	}
 
 	@Override
-	public Object visitModuleNode(ModuleNode iVisited) {
+	public Object visitMethodNameNode(MethodNameNode iVisited) {
 		// DOES NOTHING
 		return null;
 	}
 
 	@Override
-	public Object visitMultipleAsgnNode(MultipleAsgn19Node iVisited) {
+	public Object visitModuleNode(ModuleNode iVisited) {
 		// DOES NOTHING
 		return null;
 	}
@@ -445,6 +487,12 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 
 	@Override
 	public Object visitOpElementAsgnNode(OpElementAsgnNode iVisited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
+	public Object visitOptArgNode(OptArgNode iVisited) {
 		// DOES NOTHING
 		return null;
 	}
@@ -558,6 +606,12 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 	}
 
 	@Override
+	public Object visitSyntaxNode(SyntaxNode iVisited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
 	public Object visitToAryNode(ToAryNode iVisited) {
 		// DOES NOTHING
 		return null;
@@ -565,6 +619,12 @@ public class AbstractJRubyVisitor implements NodeVisitor {
 
 	@Override
 	public Object visitTrueNode(TrueNode iVisited) {
+		// DOES NOTHING
+		return null;
+	}
+
+	@Override
+	public Object visitUnaryCallNode(UnaryCallNode iVisited) {
 		// DOES NOTHING
 		return null;
 	}

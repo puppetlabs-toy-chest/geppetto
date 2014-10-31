@@ -334,7 +334,7 @@
 			<dependency>
 				<groupId>com.puppetlabs.jruby</groupId>
 				<artifactId>jrubyparser</artifactId>
-				<version>0.4</version>
+				<version>0.5.4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sonatype.aether</groupId>

@@ -51,10 +51,31 @@ public class GenericCallNode implements INameNode, IArgumentNode, BlockAccepting
 	}
 
 	@Override
+	public String getLexicalName() {
+		return (callNode == null
+			? fcallNode
+			: callNode).getLexicalName();
+	}
+
+	@Override
+	public SourcePosition getLexicalNamePosition() {
+		return (callNode == null
+			? fcallNode
+			: callNode).getLexicalNamePosition();
+	}
+
+	@Override
 	public String getName() {
 		return (callNode == null
 			? fcallNode
 			: callNode).getName();
+	}
+
+	@Override
+	public SourcePosition getNamePosition() {
+		return (callNode == null
+			? fcallNode
+			: callNode).getNamePosition();
 	}
 
 	public Node getNode() {
@@ -74,6 +95,13 @@ public class GenericCallNode implements INameNode, IArgumentNode, BlockAccepting
 		return (callNode == null
 			? fcallNode
 			: callNode).hasParens();
+	}
+
+	@Override
+	public boolean isNameMatch(String name) {
+		return (callNode == null
+			? fcallNode
+			: callNode).isNameMatch(name);
 	}
 
 	public boolean isValid() {

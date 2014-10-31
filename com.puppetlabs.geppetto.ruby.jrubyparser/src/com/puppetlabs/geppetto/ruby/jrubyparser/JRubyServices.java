@@ -32,6 +32,7 @@ import org.jrubyparser.lexer.SyntaxException;
 import org.jrubyparser.parser.ParserConfiguration;
 import org.jrubyparser.parser.Ruby18Parser;
 import org.jrubyparser.parser.Ruby19Parser;
+import org.jrubyparser.parser.Ruby20Parser;
 import org.jrubyparser.parser.RubyParser;
 
 import com.google.common.collect.Lists;
@@ -100,6 +101,16 @@ public class JRubyServices implements IRubyServices {
 		}
 	};
 
+	// private static final String[] functionModuleFQN = new String[] {
+	// "Puppet", "Parser", "Functions"};
+	private static final String functionDefinition = "newfunction";
+
+	private static final String[] newFunctionFQN = new String[] { "Puppet", "Parser", "Functions", functionDefinition };
+
+	private static final String[] NAGIOS_BASE_PATH = new String[] { "puppet", "external", "nagios", "base.rb" };
+
+	// private Ruby rubyRuntime;
+
 	/**
 	 * The number of the first line in a source file.
 	 */
@@ -108,19 +119,9 @@ public class JRubyServices implements IRubyServices {
 	/**
 	 * Compatibility of Ruby language version.
 	 */
-	private final CompatVersion rubyVersion = CompatVersion.RUBY1_9;
+	private final CompatVersion rubyVersion = CompatVersion.RUBY2_0;
 
 	private ParserConfiguration parserConfiguration;
-
-	// private Ruby rubyRuntime;
-
-	// private static final String[] functionModuleFQN = new String[] {
-	// "Puppet", "Parser", "Functions"};
-	private static final String functionDefinition = "newfunction";
-
-	private static final String[] newFunctionFQN = new String[] { "Puppet", "Parser", "Functions", functionDefinition };
-
-	private static final String[] NAGIOS_BASE_PATH = new String[] { "puppet", "external", "nagios", "base.rb" };
 
 	@Override
 	public List<PPFunctionInfo> getFunctionInfo(File file) throws IOException, RubySyntaxException {
@@ -198,7 +199,7 @@ public class JRubyServices implements IRubyServices {
 			// n = ((NewlineNode) n).getNextNode();
 			if(n.getNodeType() == NodeType.INSTASGNNODE) {
 				InstAsgnNode instAsgn = (InstAsgnNode) n;
-				if("@levels".equals(instAsgn.getName())) {
+				if("levels".equals(instAsgn.getName())) {
 					Object value = new ConstEvaluator().eval(instAsgn.getValue());
 					if(!(value instanceof List<?>))
 						return functions;
@@ -347,8 +348,11 @@ public class JRubyServices implements IRubyServices {
 		if(configuration.getVersion() == CompatVersion.RUBY1_8) {
 			parser = new Ruby18Parser();
 		}
-		else {
+		else if(configuration.getVersion() == CompatVersion.RUBY1_9) {
 			parser = new Ruby19Parser();
+		}
+		else {
+			parser = new Ruby20Parser();
 		}
 		RubyParserWarningsCollector warnings = new RubyParserWarningsCollector();
 		parser.setWarnings(warnings);

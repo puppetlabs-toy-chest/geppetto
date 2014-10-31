@@ -142,7 +142,7 @@ public abstract class RubyParserUtils {
 
 	public static RootNode parse(String id, Reader reader) throws SyntaxException {
 		Parser parser = new Parser();
-		return (RootNode) parser.parse(id, reader, new ParserConfiguration(0, CompatVersion.RUBY1_9));
+		return (RootNode) parser.parse(id, reader, new ParserConfiguration(0, CompatVersion.RUBY2_0));
 	}
 
 	/**
