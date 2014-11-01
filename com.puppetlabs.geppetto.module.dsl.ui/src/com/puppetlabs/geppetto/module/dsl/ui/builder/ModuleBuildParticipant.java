@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.builder.BuilderParticipant;
@@ -35,7 +36,6 @@ import com.puppetlabs.geppetto.diagnostic.ExceptionDiagnostic;
 import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Metadata;
-import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
 import com.puppetlabs.geppetto.module.dsl.metadata.JsonMetadata;
 import com.puppetlabs.geppetto.module.dsl.metadata.MetadataPackage.Literals;
@@ -46,10 +46,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 
 @Singleton
 public class ModuleBuildParticipant extends BuilderParticipant {
-	public static File toLocalFile(IFile file, IProgressMonitor monitor) throws CoreException {
-		return EFS.getStore(file.getLocationURI()).toLocalFile(EFS.NONE, monitor);
-	}
-
 	public static String PUPPET_MODULE_PROBLEM_MARKER_TYPE = "com.puppetlabs.geppetto.module.dsl.ui.puppetModuleProblem";
 
 	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_FAST = "com.puppetlabs.geppetto.module.dsl.ui.module.check.fast";
@@ -57,6 +53,10 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_NORMAL = "com.puppetlabs.geppetto.module.dsl.ui.module.check.normal";
 
 	public static String PUPPET_MODULE_PROBLEM_MARKER_CHECK_EXPENSIVE = "com.puppetlabs.geppetto.module.dsl.ui.module.check.expensive";
+
+	public static File toLocalFile(IFile file, IProgressMonitor monitor) throws CoreException {
+		return EFS.getStore(file.getLocationURI()).toLocalFile(EFS.NONE, monitor);
+	}
 
 	private final ModuleUtil moduleUtil;
 
@@ -80,9 +80,15 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 
 	private void addProjectReferences(JsonMetadata metadata, Set<IProject> wanted) {
 		for(JsonMetadata refMd : moduleUtil.getResolvedDependencies(metadata)) {
-			IProject proj = getAccessibleProject(refMd);
-			if(proj != null)
-				wanted.add(proj);
+			URI uri = refMd.eResource().getURI();
+			if(uri.isPlatformResource()) {
+				IResource mdFile = workspaceRoot.findMember(uri.toPlatformString(true));
+				if(mdFile != null) {
+					IProject proj = mdFile.getProject();
+					if(ModuleProjectsState.isAccessiblePuppetProject(proj))
+						wanted.add(proj);
+				}
+			}
 		}
 	}
 
@@ -135,20 +141,6 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 		m.setAttribute(IMarker.LOCATION, r.getName());
 		if((diagnostic instanceof FileDiagnostic))
 			m.setAttribute(IMarker.LINE_NUMBER, ((FileDiagnostic) diagnostic).getLineNumber());
-	}
-
-	private IProject getAccessibleProject(JsonMetadata metadata) {
-		try {
-			ModuleName name = moduleUtil.getName(metadata);
-			if(name != null) {
-				IProject proj = workspaceRoot.getProject(name.getName());
-				if(ModuleProjectsState.isAccessiblePuppetProject(proj))
-					return proj;
-			}
-		}
-		catch(IllegalArgumentException e) {
-		}
-		return null;
 	}
 
 	private int getDiagnosticSeverity(ValidationPreference pref) {
@@ -213,13 +205,13 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 			if(validationAdvisor.getModulefileExists() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExists()), Forge.FORGE,
-						"Modulefile is deprecated. Using metadata.json"));
+					"Modulefile is deprecated. Using metadata.json"));
 		}
 		else {
 			if(validationAdvisor.getModulefileExistsAndIsUsed() != IGNORE)
 				diag.addChild(new Diagnostic(
 					getDiagnosticSeverity(validationAdvisor.getModulefileExistsAndIsUsed()), Forge.FORGE,
-						"Modulefile is deprecated. Building metadata.json from modulefile"));
+					"Modulefile is deprecated. Building metadata.json from modulefile"));
 
 			try {
 				Metadata md = forge.loadModulefile(ModuleBuildParticipant.toLocalFile(moduleFile, monitor.newChild(1)), diag);
