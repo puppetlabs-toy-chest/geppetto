@@ -61,7 +61,7 @@ public class ModuleDiagnosticsRunner extends ModuleStandaloneSetup {
 	public ModuleDiagnosticsRunner(ValidationOptions options) {
 		IModuleValidationAdvisor mvAdvisor = options.getModuleValidationAdvisor();
 		if(mvAdvisor == null)
-			mvAdvisor = new DefaultModuleValidationAdvisor();
+			mvAdvisor = DefaultModuleValidationAdvisor.INSTANCE;
 		this.moduleValidationAdvisor = mvAdvisor;
 		IEncodingProvider encodingProvider = options.getEncodingProvider();
 		if(encodingProvider == null)

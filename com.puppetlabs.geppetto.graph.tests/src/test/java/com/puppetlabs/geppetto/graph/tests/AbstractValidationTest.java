@@ -116,7 +116,7 @@ public class AbstractValidationTest {
 				return "UTF-8";
 			}
 		});
-		options.setProblemsAdvisor(complianceLevel.createValidationAdvisor(new DefaultPotentialProblemsAdvisor()));
+		options.setProblemsAdvisor(complianceLevel.createValidationAdvisor(DefaultPotentialProblemsAdvisor.INSTANCE));
 		options.setModuleValidationAdvisor(new DefaultModuleValidationAdvisor() {
 			@Override
 			public ValidationPreference getMissingForgeRequiredFields() {

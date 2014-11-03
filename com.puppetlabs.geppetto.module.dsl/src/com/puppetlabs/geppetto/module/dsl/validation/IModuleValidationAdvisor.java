@@ -24,6 +24,11 @@ public interface IModuleValidationAdvisor {
 	ValidationPreference getMissingForgeRequiredFields();
 
 	/**
+	 * How should missing module class in manifests/init.pp be handled
+	 */
+	ValidationPreference getModuleClassNotInInitPP();
+
+	/**
 	 * How should existence of the deprecated Modulefile be handled
 	 */
 	ValidationPreference getModulefileExists();

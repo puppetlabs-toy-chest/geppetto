@@ -26,6 +26,7 @@ public class ModulePreferencesHelper implements ModulePreferenceConstants, IProp
 		PROBLEM_CIRCULAR_DEPENDENCY,
 		PROBLEM_DEPENDENCY_VERSION_MISMATCH,
 		PROBLEM_DEPRECATED_KEY,
+		PROBLEM_MODULE_CLASS_NOT_IN_INIT_PP,
 		PROBLEM_MODULE_NAME_NOT_STRICT,
 		PROBLEM_MODULE_REDEFINITION,
 		PROBLEM_MODULEFILE_EXISTS,
@@ -45,6 +46,7 @@ public class ModulePreferencesHelper implements ModulePreferenceConstants, IProp
 		store.setDefault(PROBLEM_CIRCULAR_DEPENDENCY, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_DEPRECATED_KEY, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_DEPENDENCY_VERSION_MISMATCH, ValidationPreference.WARNING.toString());
+		store.setDefault(PROBLEM_MODULE_CLASS_NOT_IN_INIT_PP, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_MODULE_NAME_NOT_STRICT, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_MODULE_REDEFINITION, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_MODULEFILE_EXISTS, ValidationPreference.IGNORE.toString());
@@ -80,6 +82,10 @@ public class ModulePreferencesHelper implements ModulePreferenceConstants, IProp
 
 	public ValidationPreference getMissingForgeRequiredFieldsPreference() {
 		return getValidationPreference(PROBLEM_MISSING_FORGE_REQUIRED_FIELDS);
+	}
+
+	public ValidationPreference getModuleClassNotInInitPP() {
+		return getValidationPreference(PROBLEM_MODULE_CLASS_NOT_IN_INIT_PP);
 	}
 
 	public ValidationPreference getModulefileExistsPreference() {

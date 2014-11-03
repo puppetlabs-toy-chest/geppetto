@@ -323,7 +323,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 	}
 
 	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
-		return new DefaultPotentialProblemsAdvisor();
+		return DefaultPotentialProblemsAdvisor.INSTANCE;
 	}
 
 	protected final ISetup getSetupInstance() {

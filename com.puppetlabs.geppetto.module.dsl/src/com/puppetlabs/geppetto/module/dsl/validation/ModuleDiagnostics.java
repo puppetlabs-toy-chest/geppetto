@@ -19,21 +19,29 @@ public interface ModuleDiagnostics {
 
 	String ISSUE_PROPOSAL_SUFFIX = ".prop";
 
-	String ISSUE__INVALID_VERSION = ISSUE_PREFIX + "invalidVersion";
-
 	String ISSUE__CIRCULAR_DEPENDENCY = ISSUE_PREFIX + "circularDependency";
 
 	String ISSUE__DEPENDENCY_DECLARED_MORE_THAN_ONCE = ISSUE_PREFIX + "dependencyDeclaredMoreThanOnce";
 
-	String ISSUE__INVALID_VERSION_RANGE = ISSUE_PREFIX + "invalidVersionRange";
+	String ISSUE__DEPRECATED_KEY = ISSUE_PREFIX + "deprecatedKey";
+
+	String ISSUE__EMPTY_ATTRIBUTE = ISSUE_PREFIX + "emptyAttribute";
 
 	String ISSUE__INVALID_MODULE_NAME = ISSUE_PREFIX + "invalidModuleName";
 
 	String ISSUE__INVALID_TAG = ISSUE_PREFIX + "invalidTag";
 
+	String ISSUE__INVALID_VERSION = ISSUE_PREFIX + "invalidVersion";
+
+	String ISSUE__INVALID_VERSION_RANGE = ISSUE_PREFIX + "invalidVersionRange";
+
 	String ISSUE__MISSING_METADATA_JSON_FILE = ISSUE_PREFIX + "missingMetadataJsonFile";
 
 	String ISSUE__MISSING_REQUIRED_ATTRIBUTE = ISSUE_PREFIX + "missingRequiredAttribute";
+
+	String ISSUE__MODULE_CLASS_NOT_IN_INIT_PP = "moduleClassNotInInitPP";
+
+	String ISSUE__MODULE_REDEFINITION = ISSUE_PREFIX + "moduleRedefined";
 
 	String ISSUE__MODULE_VERSION_RANGE_MISMATCH = ISSUE_PREFIX + "versionRangeMismatch";
 
@@ -41,15 +49,9 @@ public interface ModuleDiagnostics {
 
 	String ISSUE__MODULEFILE_IS_DEPRECATED_BUT_USED = ISSUE_PREFIX + "modulefileIsDeprecatedButUsed";
 
-	String ISSUE__MODULE_REDEFINITION = ISSUE_PREFIX + "moduleRedefined";
-
 	String ISSUE__UNKNOWN_REQUIREMENT_NAME = ISSUE_PREFIX + "unknownRequirementName";
 
-	String ISSUE__DEPRECATED_KEY = ISSUE_PREFIX + "deprecatedKey";
+	String ISSUE__UNEXPECTED_SUBMODULE_DIRECTORY = ISSUE_PREFIX + "unexpectedSubmoduleDirectory";
 
 	String ISSUE__UNRECOGNIZED_KEY = ISSUE_PREFIX + "unrecognizedKey";
-
-	String ISSUE__EMPTY_ATTRIBUTE = ISSUE_PREFIX + "emptyAttribute";
-
-	String ISSUE__UNEXPECTED_SUBMODULE_DIRECTORY = ISSUE_PREFIX + "unexpectedSubmoduleDirectory";
 }

@@ -44,6 +44,28 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 
 	private final ValidationPreference whitespaceInTag;
 
+	private ValidationPreference moduleClassNotInInitPP;
+
+	public ModuleValidationAdvisorBean() {
+		this(DefaultModuleValidationAdvisor.INSTANCE);
+	}
+
+	public ModuleValidationAdvisorBean(IModuleValidationAdvisor moduleAdvisor) {
+		circularDependency = moduleAdvisor.getCircularDependency();
+		dependencyVersionMismatch = moduleAdvisor.getDependencyVersionMismatch();
+		deprecatedKey = moduleAdvisor.getDeprecatedKey();
+		missingForgeRequiredFields = moduleAdvisor.getMissingForgeRequiredFields();
+		moduleClassNotInInitPP = moduleAdvisor.getModuleClassNotInInitPP();
+		moduleNameNotStrict = moduleAdvisor.getModuleNameNotStrict();
+		moduleRedefinition = moduleAdvisor.getModuleRedefinition();
+		modulefileExists = moduleAdvisor.getModulefileExists();
+		modulefileExistsAndIsUsed = moduleAdvisor.getModulefileExistsAndIsUsed();
+		unexpectedSubmodule = moduleAdvisor.getUnexpectedSubmodule();
+		unrecognizedKey = moduleAdvisor.getUnrecognizedKey();
+		unresolvedReference = moduleAdvisor.getUnresolvedReference();
+		whitespaceInTag = moduleAdvisor.getWhitespaceInTag();
+	}
+
 	@JsonCreator
 	public ModuleValidationAdvisorBean(
 			// @fmtOff
@@ -51,6 +73,7 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 			@JsonProperty("dependency_version_mismatch") ValidationPreference dependencyVersionMismatch,
 			@JsonProperty("deprecated_key") ValidationPreference deprecatedKey,
 			@JsonProperty("missing_forge_required_fields") ValidationPreference missingForgeRequiredFields,
+			@JsonProperty("module_class_not_in_init_pp") ValidationPreference moduleClassNotInInitPP,
 			@JsonProperty("module_name_not_strict") ValidationPreference moduleNameNotStrict,
 			@JsonProperty("module_redefinition") ValidationPreference moduleRedefinition,
 			@JsonProperty("modulefile_exists") ValidationPreference modulefileExists,
@@ -64,6 +87,7 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 		this.dependencyVersionMismatch = dependencyVersionMismatch;
 		this.deprecatedKey = deprecatedKey;
 		this.missingForgeRequiredFields = missingForgeRequiredFields;
+		this.moduleClassNotInInitPP = moduleClassNotInInitPP;
 		this.moduleNameNotStrict = moduleNameNotStrict;
 		this.moduleRedefinition = moduleRedefinition;
 		this.modulefileExists = modulefileExists;
@@ -104,6 +128,11 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	@Override
 	public ValidationPreference getMissingForgeRequiredFields() {
 		return missingForgeRequiredFields;
+	}
+
+	@Override
+	public ValidationPreference getModuleClassNotInInitPP() {
+		return moduleClassNotInInitPP;
 	}
 
 	/**
@@ -177,6 +206,7 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 			dependencyVersionMismatch == null ? moduleAdvisor.getDependencyVersionMismatch() : dependencyVersionMismatch,
 			deprecatedKey == null ? moduleAdvisor.getDeprecatedKey() : deprecatedKey,
 			missingForgeRequiredFields == null ? moduleAdvisor.getMissingForgeRequiredFields() : missingForgeRequiredFields,
+			moduleClassNotInInitPP == null ? moduleAdvisor.getModuleClassNotInInitPP() : moduleClassNotInInitPP,
 			moduleNameNotStrict == null ? moduleAdvisor.getModuleNameNotStrict() : moduleNameNotStrict,
 			moduleRedefinition == null ? moduleAdvisor.getModuleRedefinition() : moduleRedefinition,
 			modulefileExists == null ? moduleAdvisor.getModulefileExists() : modulefileExists,

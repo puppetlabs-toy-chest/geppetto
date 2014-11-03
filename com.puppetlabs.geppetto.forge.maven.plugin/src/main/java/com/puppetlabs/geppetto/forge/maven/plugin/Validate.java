@@ -262,6 +262,12 @@ public class Validate extends AbstractForgeServiceMojo {
 	private ValidationPreference missingForgeRequiredFields = WARNING;
 
 	/**
+	 * How should How should missing module class in manifests/init.pp digit be reported
+	 */
+	@Parameter(property = "forge.validation.moduleClassNotInInitPP", defaultValue = "WARNING")
+	private ValidationPreference moduleClassNotInInitPP = WARNING;
+
+	/**
 	 * How should ModuleNames that contains upper cased characters or owner that start with a digit be reported
 	 */
 	@Parameter(property = "forge.validation.moduleNameNotStrict", defaultValue = "WARNING")
@@ -335,6 +341,11 @@ public class Validate extends AbstractForgeServiceMojo {
 		@Override
 		public ValidationPreference getMissingForgeRequiredFields() {
 			return missingForgeRequiredFields;
+		}
+
+		@Override
+		public ValidationPreference getModuleClassNotInInitPP() {
+			return moduleClassNotInInitPP;
 		}
 
 		@Override

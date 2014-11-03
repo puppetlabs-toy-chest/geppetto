@@ -18,6 +18,8 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 public class DefaultModuleValidationAdvisor implements IModuleValidationAdvisor, Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static final DefaultModuleValidationAdvisor INSTANCE = new DefaultModuleValidationAdvisor();
+
 	@Override
 	public ValidationPreference getCircularDependency() {
 		return ValidationPreference.WARNING;
@@ -35,6 +37,11 @@ public class DefaultModuleValidationAdvisor implements IModuleValidationAdvisor,
 
 	@Override
 	public ValidationPreference getMissingForgeRequiredFields() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
+	public ValidationPreference getModuleClassNotInInitPP() {
 		return ValidationPreference.WARNING;
 	}
 

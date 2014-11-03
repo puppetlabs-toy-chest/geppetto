@@ -42,7 +42,7 @@ public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements 
 	public IValidationAdvisor get() {
 		return level.createValidationAdvisor(problemsAdvisor != null
 			? problemsAdvisor
-			: new DefaultPotentialProblemsAdvisor());
+			: DefaultPotentialProblemsAdvisor.INSTANCE);
 	}
 
 }

@@ -39,6 +39,8 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 
 	private final ValidationPreference mlComments;
 
+	private final ValidationPreference rightToLeftRelationships;
+
 	private final ValidationPreference selectorDefaultShouldAppearLast;
 
 	private final ValidationPreference unbracedInterpolation;
@@ -47,7 +49,32 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 
 	private final ValidationPreference validityAssertedAtRuntime;
 
-	private final ValidationPreference rightToLeftRelationships;
+	public PotentialProblemsAdvisorBean() {
+		this(DefaultPotentialProblemsAdvisor.INSTANCE);
+	}
+
+	public PotentialProblemsAdvisorBean(IPotentialProblemsAdvisor ppAdvisor) {
+		this.assignmentToVarNamedString = ppAdvisor.getAssignmentToVarNamedString();
+		this.assignmentToVarNamedTrusted = ppAdvisor.getAssignmentToVarNamedTrusted();
+		this.attributeIsNotString = ppAdvisor.getAttributeIsNotString();
+		this.booleansInStringForm = ppAdvisor.getBooleansInStringForm();
+		this.caseDefaultShouldAppearLast = ppAdvisor.getCaseDefaultShouldAppearLast();
+		this.deprecatedImport = ppAdvisor.getDeprecatedImport();
+		this.deprecatedNodeInheritance = ppAdvisor.getDeprecatedNodeInheritance();
+		this.deprecatedPlusEquals = ppAdvisor.getDeprecatedPlusEquals();
+		this.deprecatedVariableName = ppAdvisor.getDeprecatedVariableName();
+		this.dqStringNotRequired = ppAdvisor.getDqStringNotRequired();
+		this.dqStringNotRequiredVariable = ppAdvisor.getDqStringNotRequiredVariable();
+		this.ensureShouldAppearFirstInResource = ppAdvisor.getEnsureShouldAppearFirstInResource();
+		this.interpolatedNonBraceEnclosedHyphens = ppAdvisor.getInterpolatedNonBraceEnclosedHyphens();
+		this.missingDefaultInSelector = ppAdvisor.getMissingDefaultInSelector();
+		this.mlComments = ppAdvisor.getMlComments();
+		this.selectorDefaultShouldAppearLast = ppAdvisor.getSelectorDefaultShouldAppearLast();
+		this.rightToLeftRelationships = ppAdvisor.getRightToLeftRelationships();
+		this.unbracedInterpolation = ppAdvisor.getUnbracedInterpolation();
+		this.unquotedResourceTitles = ppAdvisor.getUnquotedResourceTitles();
+		this.validityAssertedAtRuntime = ppAdvisor.getValidityAssertedAtRuntime();
+	}
 
 	@JsonCreator
 	public PotentialProblemsAdvisorBean(
@@ -67,11 +94,11 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 			@JsonProperty("interpolated_non_brace_enclosed_hyphens") ValidationPreference interpolatedNonBraceEnclosedHyphens,
 			@JsonProperty("missing_default_in_selector") ValidationPreference missingDefaultInSelector,
 			@JsonProperty("ml_comments") ValidationPreference mlComments,
+			@JsonProperty("right_to_left_relationships") ValidationPreference rightToLeftRelationships,
 			@JsonProperty("selector_default_should_appear_last") ValidationPreference selectorDefaultShouldAppearLast,
 			@JsonProperty("unbraced_interpolation") ValidationPreference unbracedInterpolation,
 			@JsonProperty("unquoted_resource_titles") ValidationPreference unquotedResourceTitles,
-			@JsonProperty("validity_asserted_at_runtime") ValidationPreference validityAssertedAtRuntime,
-			@JsonProperty("right_to_left_relationships") ValidationPreference rightToLeftRelationships) {
+			@JsonProperty("validity_asserted_at_runtime") ValidationPreference validityAssertedAtRuntime) {
 		// @fmtOn
 		this.assignmentToVarNamedString = assignmentToVarNamedString;
 		this.assignmentToVarNamedTrusted = assignmentToVarNamedTrusted;
@@ -88,11 +115,11 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 		this.interpolatedNonBraceEnclosedHyphens = interpolatedNonBraceEnclosedHyphens;
 		this.missingDefaultInSelector = missingDefaultInSelector;
 		this.mlComments = mlComments;
+		this.rightToLeftRelationships = rightToLeftRelationships;
 		this.selectorDefaultShouldAppearLast = selectorDefaultShouldAppearLast;
 		this.unbracedInterpolation = unbracedInterpolation;
 		this.unquotedResourceTitles = unquotedResourceTitles;
 		this.validityAssertedAtRuntime = validityAssertedAtRuntime;
-		this.rightToLeftRelationships = rightToLeftRelationships;
 	}
 
 	@Override
@@ -213,11 +240,11 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 			interpolatedNonBraceEnclosedHyphens == null ? problemsAdvisor.getInterpolatedNonBraceEnclosedHyphens() : interpolatedNonBraceEnclosedHyphens,
 			missingDefaultInSelector == null ? problemsAdvisor.getMissingDefaultInSelector() : missingDefaultInSelector,
 			mlComments == null ? problemsAdvisor.getMlComments() : mlComments,
+			rightToLeftRelationships == null ? problemsAdvisor.getRightToLeftRelationships() : rightToLeftRelationships,
 			selectorDefaultShouldAppearLast == null ? problemsAdvisor.getSelectorDefaultShouldAppearLast() : selectorDefaultShouldAppearLast,
 			unbracedInterpolation == null ? problemsAdvisor.getUnbracedInterpolation() : unbracedInterpolation,
 			unquotedResourceTitles == null ? problemsAdvisor.getUnquotedResourceTitles() : unquotedResourceTitles,
-			validityAssertedAtRuntime == null ? problemsAdvisor.getValidityAssertedAtRuntime() : validityAssertedAtRuntime,
-			rightToLeftRelationships == null ? problemsAdvisor.getRightToLeftRelationships() : rightToLeftRelationships);
+			validityAssertedAtRuntime == null ? problemsAdvisor.getValidityAssertedAtRuntime() : validityAssertedAtRuntime);
 		// @fmtOn
 	}
 }

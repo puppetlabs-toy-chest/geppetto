@@ -33,6 +33,11 @@ public class PreferencedBasedValidationAdvisor implements IModuleValidationAdvis
 	}
 
 	@Override
+	public ValidationPreference getModuleClassNotInInitPP() {
+		return preferenceHelper.getModuleClassNotInInitPP();
+	}
+
+	@Override
 	public ValidationPreference getModulefileExists() {
 		return preferenceHelper.getModulefileExistsPreference();
 	}

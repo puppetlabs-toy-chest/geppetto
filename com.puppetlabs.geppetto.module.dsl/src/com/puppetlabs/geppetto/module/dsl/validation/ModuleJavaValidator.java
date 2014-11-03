@@ -9,8 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.common.collect.Lists;
@@ -20,6 +26,7 @@ import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
 import com.puppetlabs.geppetto.module.dsl.metadata.*;
 import com.puppetlabs.geppetto.module.dsl.metadata.MetadataPackage.Literals;
+import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
@@ -88,15 +95,19 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 
 	@Check
 	public void checkModuleName(JsonModuleName moduleNameValue) {
+		ModuleName moduleName = null;
+		String mnv = (String) moduleNameValue.getValue();
 		try {
-			checkBothNames(ModuleName.create((String) moduleNameValue.getValue(), true));
+			moduleName = ModuleName.create(mnv, true);
+			checkBothNames(moduleName);
 		}
 		catch(IllegalArgumentException w) {
 			if(validationAdvisor.getModuleNameNotStrict() == ERROR)
 				error(w.getMessage(), moduleNameValue, Literals.JSON_VALUE__VALUE, ISSUE__INVALID_MODULE_NAME);
 			else
 				try {
-					checkBothNames(ModuleName.create((String) moduleNameValue.getValue(), false));
+					moduleName = ModuleName.create(mnv, false);
+					checkBothNames(moduleName);
 					if(validationAdvisor.getModuleNameNotStrict() == ValidationPreference.WARNING)
 						warning(w.getMessage(), moduleNameValue, Literals.JSON_VALUE__VALUE, ISSUE__INVALID_MODULE_NAME);
 				}
@@ -104,7 +115,28 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 					error(e.getMessage(), moduleNameValue, Literals.JSON_VALUE__VALUE, ISSUE__INVALID_MODULE_NAME);
 				}
 		}
+		if(moduleName == null || validationAdvisor.getModuleClassNotInInitPP() == IGNORE)
+			return;
+
+		Resource resource = moduleNameValue.eResource();
+		String uriStr = resource.getURI().toString();
+		if(!uriStr.endsWith("/metadata.json"))
+			return;
+
+		uriStr = uriStr.substring(0, uriStr.length() - 13) + "manifests/init.pp";
+		URI initPPUri = URI.createURI(uriStr);
+		IResourceDescriptions descriptionIndex = indexProvider.getResourceDescriptions(resource);
+		IResourceDescription descr = descriptionIndex.getResourceDescription(initPPUri);
+		if(descr.getExportedObjects(PPPackage.Literals.HOST_CLASS_DEFINITION, QualifiedName.create(moduleName.getName()), false).iterator().hasNext())
+			return;
+
+		warningOrError(
+			validationAdvisor.getModuleClassNotInInitPP(), moduleNameValue, Literals.JSON_VALUE__VALUE, ISSUE__MODULE_CLASS_NOT_IN_INIT_PP,
+			"A class named '" + moduleName.getName() + "' should be defined in manifests/init.pp");
 	}
+
+	@Inject
+	private ResourceDescriptionsProvider indexProvider;
 
 	@Check
 	public void checkOS(JsonOS os) {

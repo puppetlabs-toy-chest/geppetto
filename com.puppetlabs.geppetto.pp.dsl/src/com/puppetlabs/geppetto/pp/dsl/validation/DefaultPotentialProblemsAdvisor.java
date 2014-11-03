@@ -19,6 +19,8 @@ import java.io.Serializable;
 public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdvisor, IStylisticProblemsAdvisor, Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static final DefaultPotentialProblemsAdvisor INSTANCE = new DefaultPotentialProblemsAdvisor();
+
 	@Override
 	public ValidationPreference getAssignmentToVarNamedString() {
 		return ValidationPreference.IGNORE;

@@ -21,6 +21,8 @@ public interface ModulePreferenceConstants {
 
 	String PROBLEM_MISSING_FORGE_REQUIRED_FIELDS = "missingForgeRequiredFields";
 
+	String PROBLEM_MODULE_CLASS_NOT_IN_INIT_PP = "moduleClassNotInInitPP";
+
 	String PROBLEM_UNRECOGNIZED_KEY = "unrecognizedKey";
 
 	String PROBLEM_UNRESOLVED_REFERENCE = "unresolvedReference";

@@ -170,7 +170,7 @@ public class ValidationOptions {
 	 */
 	public IModuleValidationAdvisor getModuleValidationAdvisor() {
 		if(moduleValidationAdvisor == null)
-			moduleValidationAdvisor = new DefaultModuleValidationAdvisor();
+			moduleValidationAdvisor = DefaultModuleValidationAdvisor.INSTANCE;
 		return moduleValidationAdvisor;
 	}
 
@@ -190,7 +190,7 @@ public class ValidationOptions {
 	 */
 	public IPotentialProblemsAdvisor getProblemsAdvisor() {
 		if(problemsAdvisor == null)
-			problemsAdvisor = getComplianceLevel().createValidationAdvisor(new DefaultPotentialProblemsAdvisor());
+			problemsAdvisor = getComplianceLevel().createValidationAdvisor(DefaultPotentialProblemsAdvisor.INSTANCE);
 		return problemsAdvisor;
 	}
 

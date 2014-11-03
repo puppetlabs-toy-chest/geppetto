@@ -238,28 +238,6 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	}
 
 	/**
-	 * Classifies ResourceExpression based on its content (regular, override, etc).
-	 */
-	@Inject
-	private PPClassifier classifier;
-
-	final protected IMessageAcceptor acceptor;
-
-	@Inject
-	private PPPatternHelper patternHelper;
-
-	@Inject
-	private PPStringConstantEvaluator stringConstantEvaluator;
-
-	private final Provider<IValidationAdvisor> validationAdvisorProvider;
-
-	@Inject
-	private PPExpressionEquivalenceCalculator eqCalculator;
-
-	@Inject
-	private PuppetTypeValidator typeValidator;
-
-	/**
 	 * Classes accepted as top level statements in a pp manifest.
 	 */
 	private static final Class<?>[] topLevelExprClasses = { ResourceExpression.class, // resource, virtual, resource override
@@ -307,6 +285,28 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 	private static final String[] keywords = {
 		"and", "or", "case", "default", "define", "import", "if", "elsif", "else", "inherits", "node", "in", "undef", "true", "false" };
+
+	/**
+	 * Classifies ResourceExpression based on its content (regular, override, etc).
+	 */
+	@Inject
+	private PPClassifier classifier;
+
+	final protected IMessageAcceptor acceptor;
+
+	@Inject
+	private PPPatternHelper patternHelper;
+
+	@Inject
+	private PPStringConstantEvaluator stringConstantEvaluator;
+
+	private final Provider<IValidationAdvisor> validationAdvisorProvider;
+
+	@Inject
+	private PPExpressionEquivalenceCalculator eqCalculator;
+
+	@Inject
+	private PuppetTypeValidator typeValidator;
 
 	@Inject
 	protected PPExpressionTypeNameProvider expressionTypeNameProvider;

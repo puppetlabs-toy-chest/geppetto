@@ -10,6 +10,8 @@ public class PotentialModuleProblemPreferencesPage extends AbstractPreferencePag
 			"Circular Dependency", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(PROBLEM_DEPENDENCY_VERSION_MISMATCH, //
 			"Dependency Version Mismatch", getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(PROBLEM_MODULE_CLASS_NOT_IN_INIT_PP, //
+			"Module Class not defined in manifests/init.pp", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(PROBLEM_MODULE_NAME_NOT_STRICT, //
 			"Module Name not Strictly Correct", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(PROBLEM_MODULE_REDEFINITION, //

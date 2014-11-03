@@ -59,7 +59,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		options.setCheckModuleSemantics(true);
 		options.setCheckReferences(false);
 		options.setFileType(FileType.PUPPET_ROOT);
-		options.setProblemsAdvisor(new DefaultPotentialProblemsAdvisor());
+		options.setProblemsAdvisor(DefaultPotentialProblemsAdvisor.INSTANCE);
 
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 
