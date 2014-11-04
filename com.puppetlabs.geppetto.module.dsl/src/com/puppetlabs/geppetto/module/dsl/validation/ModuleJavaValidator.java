@@ -131,7 +131,7 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 			// No manifests/init.pp file present. This is OK. Some modules only provide types, providers, and functions
 			return;
 
-		if(descr.getExportedObjects(PPPackage.Literals.HOST_CLASS_DEFINITION, QualifiedName.create(moduleName.getName()), false).iterator().hasNext())
+		if(descr.getExportedObjects(PPPackage.Literals.DEFINITION, QualifiedName.create(moduleName.getName()), false).iterator().hasNext())
 			return;
 
 		warningOrError(
