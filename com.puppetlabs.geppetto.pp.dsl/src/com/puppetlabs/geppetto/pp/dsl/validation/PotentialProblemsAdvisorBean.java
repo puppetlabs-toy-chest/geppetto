@@ -124,104 +124,152 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 
 	@Override
 	public ValidationPreference getAssignmentToVarNamedString() {
-		return assignmentToVarNamedString;
+		return assignmentToVarNamedString == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getAssignmentToVarNamedString()
+			: assignmentToVarNamedString;
 	}
 
 	@Override
 	public ValidationPreference getAssignmentToVarNamedTrusted() {
-		return assignmentToVarNamedTrusted;
+		return assignmentToVarNamedTrusted == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getAssignmentToVarNamedTrusted()
+			: assignmentToVarNamedTrusted;
 	}
 
 	@Override
 	public ValidationPreference getAttributeIsNotString() {
-		return attributeIsNotString;
+		return attributeIsNotString == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getAttributeIsNotString()
+			: attributeIsNotString;
 	}
 
 	@Override
 	public ValidationPreference getBooleansInStringForm() {
-		return booleansInStringForm;
+		return booleansInStringForm == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getBooleansInStringForm()
+			: booleansInStringForm;
 	}
 
 	@Override
 	public ValidationPreference getCaseDefaultShouldAppearLast() {
-		return caseDefaultShouldAppearLast;
+		return caseDefaultShouldAppearLast == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getCaseDefaultShouldAppearLast()
+			: caseDefaultShouldAppearLast;
 	}
 
 	@Override
 	public ValidationPreference getDeprecatedImport() {
-		return deprecatedImport;
+		return deprecatedImport == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getDeprecatedImport()
+			: deprecatedImport;
 	}
 
 	@Override
 	public ValidationPreference getDeprecatedNodeInheritance() {
-		return deprecatedNodeInheritance;
+		return deprecatedNodeInheritance == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getDeprecatedNodeInheritance()
+			: deprecatedNodeInheritance;
 	}
 
 	@Override
 	public ValidationPreference getDeprecatedPlusEquals() {
-		return deprecatedPlusEquals;
+		return deprecatedPlusEquals == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getDeprecatedPlusEquals()
+			: deprecatedPlusEquals;
 	}
 
 	@Override
 	public ValidationPreference getDeprecatedVariableName() {
-		return deprecatedVariableName;
+		return deprecatedVariableName == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getDeprecatedVariableName()
+			: deprecatedVariableName;
 	}
 
 	@Override
 	public ValidationPreference getDqStringNotRequired() {
-		return dqStringNotRequired;
+		return dqStringNotRequired == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getDqStringNotRequired()
+			: dqStringNotRequired;
 	}
 
 	@Override
 	public ValidationPreference getDqStringNotRequiredVariable() {
-		return dqStringNotRequiredVariable;
+		return dqStringNotRequiredVariable == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getDqStringNotRequiredVariable()
+			: dqStringNotRequiredVariable;
 	}
 
 	@Override
 	public ValidationPreference getEnsureShouldAppearFirstInResource() {
-		return ensureShouldAppearFirstInResource;
+		return ensureShouldAppearFirstInResource == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getEnsureShouldAppearFirstInResource()
+			: ensureShouldAppearFirstInResource;
 	}
 
 	@Override
 	public ValidationPreference getInterpolatedNonBraceEnclosedHyphens() {
-		return interpolatedNonBraceEnclosedHyphens;
+		return interpolatedNonBraceEnclosedHyphens == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getInterpolatedNonBraceEnclosedHyphens()
+			: interpolatedNonBraceEnclosedHyphens;
 	}
 
 	@Override
 	public ValidationPreference getMissingDefaultInSelector() {
-		return missingDefaultInSelector;
+		return missingDefaultInSelector == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getMissingDefaultInSelector()
+			: missingDefaultInSelector;
 	}
 
 	@Override
 	public ValidationPreference getMlComments() {
-		return mlComments;
+		return mlComments == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getMlComments()
+			: mlComments;
 	}
 
 	@Override
 	public ValidationPreference getRightToLeftRelationships() {
-		return rightToLeftRelationships;
+		return rightToLeftRelationships == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getRightToLeftRelationships()
+			: rightToLeftRelationships;
 	}
 
 	@Override
 	public ValidationPreference getSelectorDefaultShouldAppearLast() {
-		return selectorDefaultShouldAppearLast;
+		return selectorDefaultShouldAppearLast == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getSelectorDefaultShouldAppearLast()
+			: selectorDefaultShouldAppearLast;
 	}
 
 	@Override
 	public ValidationPreference getUnbracedInterpolation() {
-		return unbracedInterpolation;
+		return unbracedInterpolation == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getUnbracedInterpolation()
+			: unbracedInterpolation;
 	}
 
 	@Override
 	public ValidationPreference getUnquotedResourceTitles() {
-		return unquotedResourceTitles;
+		return unquotedResourceTitles == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getUnquotedResourceTitles()
+			: unquotedResourceTitles;
 	}
 
 	@Override
 	public ValidationPreference getValidityAssertedAtRuntime() {
-		return validityAssertedAtRuntime;
+		return validityAssertedAtRuntime == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getValidityAssertedAtRuntime()
+			: validityAssertedAtRuntime;
 	}
 
+	/**
+	 * Merge this problems advisor from another problems advisor. This means that all fields that are not set in this
+	 * advisor will get their values from the argument. All values that are set will remain unchanged.
+	 *
+	 * @param problemsAdvisor
+	 *            The advisor to pick default values from.
+	 * @return The result of the merge.
+	 */
 	public IPotentialProblemsAdvisor merge(IPotentialProblemsAdvisor problemsAdvisor) {
 		// @fmtOff
 		return new PotentialProblemsAdvisorBean(

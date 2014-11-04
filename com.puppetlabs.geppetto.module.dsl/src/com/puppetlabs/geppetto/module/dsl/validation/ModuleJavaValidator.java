@@ -123,16 +123,20 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 		if(!uriStr.endsWith("/metadata.json"))
 			return;
 
-		uriStr = uriStr.substring(0, uriStr.length() - 13) + "manifests/init.pp";
-		URI initPPUri = URI.createURI(uriStr);
 		IResourceDescriptions descriptionIndex = indexProvider.getResourceDescriptions(resource);
+
+		URI initPPUri = URI.createURI(uriStr.substring(0, uriStr.length() - 13) + "manifests/init.pp");
 		IResourceDescription descr = descriptionIndex.getResourceDescription(initPPUri);
+		if(descr == null)
+			// No manifests/init.pp file present. This is OK. Some modules only provide types, providers, and functions
+			return;
+
 		if(descr.getExportedObjects(PPPackage.Literals.HOST_CLASS_DEFINITION, QualifiedName.create(moduleName.getName()), false).iterator().hasNext())
 			return;
 
 		warningOrError(
 			validationAdvisor.getModuleClassNotInInitPP(), moduleNameValue, Literals.JSON_VALUE__VALUE, ISSUE__MODULE_CLASS_NOT_IN_INIT_PP,
-			"A class named '" + moduleName.getName() + "' should be defined in manifests/init.pp");
+			"No class named '" + moduleName.getName() + "' is defined" + " in manifests/init.pp");
 	}
 
 	@Inject

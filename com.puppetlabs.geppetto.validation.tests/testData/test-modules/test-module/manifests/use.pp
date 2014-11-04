@@ -11,4 +11,4 @@
 # Sample Usage:
 #
 # [Remember: No empty lines between comments and class definition]
-include test_module
+include module

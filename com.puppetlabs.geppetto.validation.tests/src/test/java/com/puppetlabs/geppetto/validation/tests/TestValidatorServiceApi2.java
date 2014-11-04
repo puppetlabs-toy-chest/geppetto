@@ -276,7 +276,7 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 				otherIssues++;
 
 		assertEquals("There should be 11 hyphen warnings", 11, hyphenWarning);
-		assertEquals("There should be 4 other issues", 4, otherIssues);
+		assertEquals("There should be 3 other issues", 3, otherIssues);
 	}
 
 	@Test

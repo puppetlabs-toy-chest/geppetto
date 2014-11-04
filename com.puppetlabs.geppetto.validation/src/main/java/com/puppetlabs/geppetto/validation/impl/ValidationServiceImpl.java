@@ -372,7 +372,8 @@ public class ValidationServiceImpl implements ValidationService {
 		try {
 			ModuleDiagnosticsRunner mdRunner = new ModuleDiagnosticsRunner(options);
 			FileInputStream input = new FileInputStream(f);
-			Resource r = mdRunner.loadResource(input, URI.createFileURI(f.getPath()));
+			PPDiagnosticsRunner ppDr = new PPDiagnosticsRunner();
+			Resource r = ppDr.loadResource(input, URI.createFileURI(f.getPath()));
 			IResourceValidator rv = mdRunner.getModuleResourceValidator();
 			final CancelIndicator cancelMonitor = new CancelIndicator() {
 				@Override

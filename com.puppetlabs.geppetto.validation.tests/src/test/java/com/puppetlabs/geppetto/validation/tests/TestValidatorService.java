@@ -119,7 +119,9 @@ public class TestValidatorService extends AbstractValidationTest {
 			asserter.issue(IPPDiagnostics.ISSUE__UNKNOWN_VARIABLE), //
 			asserter.issue(IPPDiagnostics.ISSUE__HYPHEN_IN_NAME), //
 			asserter.messageFragment("unexpected tIDENTIFIER"));
-		asserter.assertWarnings(asserter.issue(IPPDiagnostics.ISSUE__OCTAL_SHOULD_BE_STRING));
+		asserter.assertWarnings(
+			asserter.issue(IPPDiagnostics.ISSUE__OCTAL_SHOULD_BE_STRING),
+			asserter.issue(ModuleDiagnostics.ISSUE__MODULE_CLASS_NOT_IN_INIT_PP));
 	}
 
 	@Test
@@ -220,7 +222,7 @@ public class TestValidatorService extends AbstractValidationTest {
 		for(Diagnostic e : chain)
 			if(IPPDiagnostics.ISSUE__INTERPOLATED_HYPHEN.equals(e.getIssue()) || IPPDiagnostics.ISSUE__HYPHEN_IN_NAME.equals(e.getIssue()))
 				hyphenWarning++;
-		assertEquals("There should be four warnings", 4, chain.getChildren().size() - hyphenWarning);
+		assertEquals("There should be 3 warnings", 3, chain.getChildren().size() - hyphenWarning);
 	}
 
 }

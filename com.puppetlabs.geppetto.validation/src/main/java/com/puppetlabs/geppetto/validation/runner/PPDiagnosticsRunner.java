@@ -393,7 +393,7 @@ public class PPDiagnosticsRunner {
 
 		// translate all exports and create a map from IEObjectDescription to
 		// Export
-		Map<IEObjectDescription, ModuleExport> exports = Maps.newHashMap();
+		Map<URI, ModuleExport> exports = Maps.newHashMap();
 		for(IResourceDescription rdesc : descriptionIndex.getAllResourceDescriptions()) {
 			String handle = validationContainerManager.getContainerHandle(rdesc, descriptionIndex);
 
@@ -405,7 +405,7 @@ public class PPDiagnosticsRunner {
 
 			for(IEObjectDescription desc : rdesc.getExportedObjects()) {
 				ModuleExport me = createExport(desc);
-				exports.put(desc, me);
+				exports.put(desc.getEObjectURI(), me);
 				result.addExport(moduleDir, me);
 			}
 		}
@@ -422,9 +422,7 @@ public class PPDiagnosticsRunner {
 				File moduleDir = getContainerHandle(desc.getEObjectURI(), descriptionIndex, validationContainerManager);
 				if(moduleDir == null)
 					continue;
-				ModuleExport me = exports.get(desc);
-				if(me == null)
-					me = searchMissing(importingModuleDir, moduleDir, exports, desc);
+				ModuleExport me = exports.get(desc.getEObjectURI());
 				result.addImport(importingModuleDir, moduleDir, me);
 			}
 			// get the ambiguities recording during linking
@@ -433,9 +431,7 @@ public class PPDiagnosticsRunner {
 				File moduleDir = getContainerHandle(desc.getEObjectURI(), descriptionIndex, validationContainerManager);
 				if(moduleDir == null)
 					continue;
-				ModuleExport me = exports.get(desc);
-				if(me == null)
-					me = searchMissing(importingModuleDir, moduleDir, exports, desc);
+				ModuleExport me = exports.get(desc.getEObjectURI());
 				result.addAmbiguity(importingModuleDir, moduleDir, me);
 			}
 			// TODO: RECORD BOTH NAME FILE, AND LOCATIONS FOR THAT NAME
@@ -667,34 +663,6 @@ public class PPDiagnosticsRunner {
 				System.err.printf("EcoreUtil.resolveAll: (%s)\n", after - before);
 		}
 
-	}
-
-	/**
-	 * Perform an equals scan of exports (instead of using identity). (Pity that IEObjectDescription does not have an
-	 * equals method). For some reason some descriptions change identify (but are otherwise compatible) - don't know
-	 * why. TODO: Figure out what is going on.
-	 *
-	 * @param importingModuleDir
-	 * @param moduleDir
-	 * @param exports
-	 * @param desc
-	 */
-	private ModuleExport searchMissing(File importingModuleDir, File moduleDir, Map<IEObjectDescription, ModuleExport> exports,
-			IEObjectDescription desc) {
-
-		List<IEObjectDescription> matching = Lists.newArrayList();
-		for(IEObjectDescription d2 : exports.keySet()) {
-			if(!d2.getName().equals(desc.getName()))
-				continue;
-			if(!d2.getEObjectURI().equals(desc.getEObjectURI()))
-				continue;
-			if(!d2.getEClass().equals(desc.getEClass()))
-				continue;
-			matching.add(d2);
-		}
-		if(matching.size() == 1)
-			return exports.get(matching.get(0));
-		return null;
 	}
 
 	public String serialize(EObject obj) {

@@ -272,7 +272,7 @@ public class DirectoryValidator {
 		}
 	}
 
-	private Multimap<ModuleName, MetadataInfo> collectModuleData(final SubMonitor ticker) {
+	private Multimap<ModuleName, MetadataInfo> collectModuleData(List<Entry<File, Resource>> modulesToValidate, final SubMonitor ticker) {
 		Set<URI> resourcesOnPath = Sets.newHashSet();
 		Set<File> filesOnPath = Sets.newHashSet();
 		final PPSearchPath searchPath = ppRunner.getDefaultSearchPath();
@@ -322,27 +322,13 @@ public class DirectoryValidator {
 			}
 		}
 
-		mdRunner.configureContainers(root, filesOnPath, resourcesOnPath);
-		IResourceValidator validator = mdRunner.getModuleResourceValidator();
-
-		Map<File, Resource> mdResources = loadModuleResources(filesOnPath, mdRunner, ticker);
-		for(Entry<File, Resource> r : mdResources.entrySet()) {
-			File f = r.getKey();
-			if(nonRootsOnPath.contains(f) || !options.isValidationCandidate(f))
-				continue;
-
-			if(options.isCheckModuleSemantics()) {
-				CancelIndicator cancelMonitor = new CancelIndicator() {
-					@Override
-					public boolean isCanceled() {
-						return ticker.isCanceled();
-					}
-				};
-
-				for(Issue issue : validator.validate(r.getValue(), CheckMode.ALL, cancelMonitor))
-					addIssueDiagnostic(issue, f);
+		Map<File, Resource> mdResources = loadModuleResources(filesOnPath, ticker);
+		if(options.isCheckModuleSemantics())
+			for(Entry<File, Resource> r : mdResources.entrySet()) {
+				File f = r.getKey();
+				if(!nonRootsOnPath.contains(f) && options.isValidationCandidate(f))
+					modulesToValidate.add(r);
 			}
-		}
 
 		final IPath nodeRootPath = new Path(root.getAbsolutePath()).append(NAME_OF_DIR_WITH_RESTRICTED_SCOPE);
 		final Multimap<ModuleName, MetadataInfo> moduleData = ArrayListMultimap.create();
@@ -473,7 +459,7 @@ public class DirectoryValidator {
 		return modulesDir.isDirectory();
 	}
 
-	private Map<File, Resource> loadModuleResources(Set<File> files, ModuleDiagnosticsRunner mdRunner, SubMonitor ticker) {
+	private Map<File, Resource> loadModuleResources(Set<File> files, SubMonitor ticker) {
 		// Load all pp
 		// crosslink and validate all
 		Map<File, Resource> moduleResources = Maps.newHashMapWithExpectedSize(files.size());
@@ -499,7 +485,7 @@ public class DirectoryValidator {
 					mf = f;
 				}
 				try {
-					moduleResources.put(f, mdRunner.loadResource(in, URI.createFileURI(mf.getPath())));
+					moduleResources.put(f, ppRunner.loadResource(in, URI.createFileURI(mf.getPath())));
 				}
 				finally {
 					in.close();
@@ -663,7 +649,8 @@ public class DirectoryValidator {
 			worked(ticker, 1);
 
 			// collect info in a structure
-			Multimap<ModuleName, MetadataInfo> moduleData = collectModuleData(ticker);
+			List<Entry<File, Resource>> modulesToValidate = Lists.newArrayList();
+			Multimap<ModuleName, MetadataInfo> moduleData = collectModuleData(modulesToValidate, ticker);
 
 			// TODO: Wasteful to calculate the URL's more than once.
 			// Could be done once per pp and rb (to separate the processing), or have all in one pile
@@ -676,6 +663,8 @@ public class DirectoryValidator {
 			RakefileInfo rakefileInfo = loadRakeFiles(ticker);
 
 			validatePpResources(ticker.newChild(1));
+			validateModules(modulesToValidate, ticker.newChild(1));
+
 			AllModulesState all = ppRunner.getAllModulesState();
 
 			// set the root to allow relative lookup of module exports
@@ -693,6 +682,22 @@ public class DirectoryValidator {
 		finally {
 			ppRunner.tearDown();
 			rubyHelper.tearDown();
+		}
+	}
+
+	private void validateModules(List<Entry<File, Resource>> modulesToValidate, final SubMonitor ticker) {
+		IResourceValidator validator = mdRunner.getModuleResourceValidator();
+		for(Entry<File, Resource> r : modulesToValidate) {
+
+			CancelIndicator cancelMonitor = new CancelIndicator() {
+				@Override
+				public boolean isCanceled() {
+					return ticker.isCanceled();
+				}
+			};
+
+			for(Issue issue : validator.validate(r.getValue(), CheckMode.ALL, cancelMonitor))
+				addIssueDiagnostic(issue, r.getKey());
 		}
 	}
 

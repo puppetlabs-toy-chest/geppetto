@@ -10,7 +10,8 @@ file {
 }
 
 
+class common {
+}
 
-import "classes/*"
 import "defines/*"
 

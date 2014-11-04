@@ -103,7 +103,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getCircularDependency() {
-		return circularDependency;
+		return circularDependency == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getCircularDependency()
+			: circularDependency;
 	}
 
 	/**
@@ -111,7 +113,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getDependencyVersionMismatch() {
-		return dependencyVersionMismatch;
+		return dependencyVersionMismatch == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getDependencyVersionMismatch()
+			: dependencyVersionMismatch;
 	}
 
 	/**
@@ -119,7 +123,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getDeprecatedKey() {
-		return deprecatedKey;
+		return deprecatedKey == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getDeprecatedKey()
+			: deprecatedKey;
 	}
 
 	/**
@@ -127,12 +133,16 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getMissingForgeRequiredFields() {
-		return missingForgeRequiredFields;
+		return missingForgeRequiredFields == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getMissingForgeRequiredFields()
+			: missingForgeRequiredFields;
 	}
 
 	@Override
 	public ValidationPreference getModuleClassNotInInitPP() {
-		return moduleClassNotInInitPP;
+		return moduleClassNotInInitPP == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getModuleClassNotInInitPP()
+			: moduleClassNotInInitPP;
 	}
 
 	/**
@@ -140,7 +150,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getModulefileExists() {
-		return modulefileExists;
+		return modulefileExists == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getModulefileExists()
+			: modulefileExists;
 	}
 
 	/**
@@ -148,7 +160,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getModulefileExistsAndIsUsed() {
-		return modulefileExistsAndIsUsed;
+		return modulefileExistsAndIsUsed == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getModulefileExistsAndIsUsed()
+			: modulefileExistsAndIsUsed;
 	}
 
 	/**
@@ -156,7 +170,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getModuleNameNotStrict() {
-		return moduleNameNotStrict;
+		return moduleNameNotStrict == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getModuleNameNotStrict()
+			: moduleNameNotStrict;
 	}
 
 	/**
@@ -164,7 +180,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getModuleRedefinition() {
-		return moduleRedefinition;
+		return moduleRedefinition == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getModuleRedefinition()
+			: moduleRedefinition;
 	}
 
 	/**
@@ -172,7 +190,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getUnexpectedSubmodule() {
-		return unexpectedSubmodule;
+		return unexpectedSubmodule == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getUnexpectedSubmodule()
+			: unexpectedSubmodule;
 	}
 
 	/**
@@ -180,7 +200,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getUnrecognizedKey() {
-		return unrecognizedKey;
+		return unrecognizedKey == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getUnrecognizedKey()
+			: unrecognizedKey;
 	}
 
 	/**
@@ -188,7 +210,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getUnresolvedReference() {
-		return unresolvedReference;
+		return unresolvedReference == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getUnresolvedReference()
+			: unresolvedReference;
 	}
 
 	/**
@@ -196,7 +220,9 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	@Override
 	public ValidationPreference getWhitespaceInTag() {
-		return whitespaceInTag;
+		return whitespaceInTag == null
+			? DefaultModuleValidationAdvisor.INSTANCE.getWhitespaceInTag()
+			: whitespaceInTag;
 	}
 
 	public IModuleValidationAdvisor merge(IModuleValidationAdvisor moduleAdvisor) {
