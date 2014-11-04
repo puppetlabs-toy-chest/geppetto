@@ -18,7 +18,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +39,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -388,16 +385,19 @@ public class DirectoryValidator {
 	 * sets up iterateable over all files including pptp
 	 */
 	private void configureContainers(Multimap<ModuleName, MetadataInfo> moduleData) {
-		URI uri = options.getPlatformURI();
-		if(uri == null)
-			uri = PuppetTarget.getDefault().getPlatformURI();
-		ppRunner.configureContainers(root, moduleData.values(), //
-			Iterables.concat(Iterables.transform(Iterables.concat(ppFiles, rbFiles), new Function<File, URI>() {
-				@Override
-				public URI apply(File from) {
-					return URI.createFileURI(from.getPath());
-				}
-			}), Collections.singletonList(uri)));
+		List<URI> uris = Lists.newArrayList();
+		for(File f : ppFiles)
+			uris.add(URI.createFileURI(f.getPath()));
+		for(File f : rbFiles)
+			uris.add(URI.createFileURI(f.getPath()));
+
+		PuppetTarget target = PuppetTarget.forComplianceLevel(options.getComplianceLevel(), false);
+		uris.add(target.getPlatformURI());
+		URI typesURI = target.getTypesURI();
+		if(typesURI != null)
+			uris.add(typesURI);
+
+		ppRunner.configureContainers(root, moduleData.values(), uris);
 	}
 
 	private List<File> findFiles(File root, FileFilter filter) {
@@ -531,10 +531,11 @@ public class DirectoryValidator {
 
 	private void loadPptp() {
 		try {
-			URI platformURI = options.getPlatformURI();
-			ppRunner.loadResource(platformURI != null
-				? platformURI
-				: PuppetTarget.getDefault().getPlatformURI());
+			PuppetTarget target = PuppetTarget.forComplianceLevel(options.getComplianceLevel(), false);
+			ppRunner.loadResource(target.getPlatformURI());
+			URI typesURI = target.getTypesURI();
+			if(typesURI != null)
+				ppRunner.loadResource(typesURI);
 		}
 		catch(IOException e) {
 			addExceptionDiagnostic("Internal Error: Could not load pptp.", e);

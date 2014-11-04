@@ -107,7 +107,7 @@ public class AbstractValidationTest {
 	@SuppressWarnings("serial")
 	protected ValidationOptions getValidationOptions(ComplianceLevel complianceLevel) {
 		ValidationOptions options = new ValidationOptions();
-		options.setPlatformURI(PuppetTarget.forComplianceLevel(complianceLevel, false).getPlatformURI());
+		options.setComplianceLevel(complianceLevel);
 		options.setValidationRoot(TestDataProvider.getTestFile(new Path("testData")));
 		options.setEncodingProvider(new IEncodingProvider() {
 			@Override

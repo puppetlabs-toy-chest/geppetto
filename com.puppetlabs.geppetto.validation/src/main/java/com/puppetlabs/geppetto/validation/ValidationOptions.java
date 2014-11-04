@@ -20,8 +20,6 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.URI;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.google.common.collect.Sets;
@@ -59,8 +57,6 @@ public class ValidationOptions {
 
 	private FileType fileType;
 
-	private URI platformURI;
-
 	private IPotentialProblemsAdvisor problemsAdvisor;
 
 	private String searchPath;
@@ -93,7 +89,6 @@ public class ValidationOptions {
 		environment = source.environment;
 		manifestDir = source.manifestDir;
 		fileType = source.fileType;
-		platformURI = source.platformURI;
 		problemsAdvisor = source.problemsAdvisor;
 		searchPath = source.searchPath;
 		checkLayout = source.checkLayout;
@@ -172,17 +167,6 @@ public class ValidationOptions {
 		if(moduleValidationAdvisor == null)
 			moduleValidationAdvisor = DefaultModuleValidationAdvisor.INSTANCE;
 		return moduleValidationAdvisor;
-	}
-
-	/**
-	 * A URI to a pptp resource in string form. If null, a default pptp will be
-	 * used when validating. An unloadable pptp reference will result in an
-	 * internal error.
-	 *
-	 * @return the value of the '<em>platformURI</em>' attribute.
-	 */
-	public URI getPlatformURI() {
-		return platformURI;
 	}
 
 	/**
@@ -412,16 +396,6 @@ public class ValidationOptions {
 	 */
 	public void setModuleValidationAdvisor(IModuleValidationAdvisor moduleValidationAdvisor) {
 		this.moduleValidationAdvisor = moduleValidationAdvisor;
-	}
-
-	/**
-	 * Sets the value of the '<em>platformURI</em>' attribute.
-	 *
-	 * @param platformURI
-	 *            the new value of the '<em>platformURI</em>' attribute.
-	 */
-	public void setPlatformURI(URI platformURI) {
-		this.platformURI = platformURI;
 	}
 
 	/**

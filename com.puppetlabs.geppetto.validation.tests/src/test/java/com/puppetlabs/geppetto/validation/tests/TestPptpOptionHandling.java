@@ -9,7 +9,7 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
@@ -31,13 +31,13 @@ public class TestPptpOptionHandling extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 		options.setValidationRoot(root.getParentFile());
-		options.setPlatformURI(PuppetTarget.PUPPET26.getPlatformURI());
+		options.setComplianceLevel(ComplianceLevel.PUPPET_2_6);
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 
 		assertEquals("There should be 1 errors", 1, chain.getChildren().size());
 
 		chain = new Diagnostic();
-		options.setPlatformURI(PuppetTarget.PUPPET27.getPlatformURI());
+		options.setComplianceLevel(ComplianceLevel.PUPPET_2_7);
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 		dumpErrors(chain);
 		assertEquals("There should be 0 errors", 0, chain.getChildren().size());
