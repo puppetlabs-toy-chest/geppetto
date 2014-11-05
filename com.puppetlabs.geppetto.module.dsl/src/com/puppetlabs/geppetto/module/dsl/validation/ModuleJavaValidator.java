@@ -136,7 +136,7 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 
 		warningOrError(
 			validationAdvisor.getModuleClassNotInInitPP(), moduleNameValue, Literals.JSON_VALUE__VALUE, ISSUE__MODULE_CLASS_NOT_IN_INIT_PP,
-			"No class named '" + moduleName.getName() + "' is defined" + " in manifests/init.pp");
+			"No class or type named '" + moduleName.getName() + "' is defined" + " in manifests/init.pp");
 	}
 
 	@Inject
