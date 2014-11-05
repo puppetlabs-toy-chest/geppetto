@@ -104,7 +104,7 @@ public class PomMetadataExtractor extends AbstractMetadataExtractor {
 				}
 			}
 			catch(InvalidVersionSpecificationException e) {
-				result.addChild(new FileDiagnostic(Diagnostic.WARNING, ValidationService.GEPPETTO, e.getMessage(), mavenProject.getFile()));
+				result.addChild(new FileDiagnostic(Diagnostic.WARNING, ValidationService.MODULE, e.getMessage(), mavenProject.getFile()));
 			}
 		}
 		metadata.setDependencies(forgeDeps);

@@ -46,6 +46,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.diagnostic.DiagnosticType;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
@@ -67,6 +68,7 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
 import com.puppetlabs.geppetto.semver.VersionRange;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
+import com.puppetlabs.geppetto.validation.ValidationService;
 import com.puppetlabs.geppetto.validation.impl.ValidationServiceImpl;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Rakefile;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Raketask;
@@ -182,14 +184,14 @@ public class DirectoryValidator {
 	 * @param message
 	 * @param issueId
 	 */
-	private void addFileDiagnostic(ValidationPreference pref, File file, String message, String issueId) {
+	private void addFileDiagnostic(ValidationPreference pref, DiagnosticType type, File file, String message, String issueId) {
 		int severity = Diagnostic.OK;
 		if(ValidationPreference.ERROR == pref)
 			severity = Diagnostic.ERROR;
 		else if(ValidationPreference.WARNING == pref)
 			severity = Diagnostic.WARNING;
 		if(severity != Diagnostic.OK)
-			ValidationServiceImpl.addFileDiagnostic(diagnostics, severity, file, root, message, issueId);
+			ValidationServiceImpl.addFileDiagnostic(diagnostics, severity, type, file, root, message, issueId);
 	}
 
 	/**
@@ -226,26 +228,27 @@ public class DirectoryValidator {
 
 		if(hasModulesSubDirectory(moduleRoot))
 			addFileDiagnostic(
-				mdAdvisor.getUnexpectedSubmodule(), new File(moduleRoot, "modules"), "Submodules in a module is not allowed",
-				ModuleDiagnostics.ISSUE__UNEXPECTED_SUBMODULE_DIRECTORY);
+				mdAdvisor.getUnexpectedSubmodule(), ValidationService.MODULE, new File(moduleRoot, "modules"),
+				"Submodules in a module is not allowed", ModuleDiagnostics.ISSUE__UNEXPECTED_SUBMODULE_DIRECTORY);
 
 		File moduleFile = new File(moduleRoot, Forge.MODULEFILE_NAME);
 		boolean hasMetadataJsonFile = new File(moduleRoot, Forge.METADATA_JSON_NAME).isFile();
 		if(moduleFile.isFile()) {
 			if(hasMetadataJsonFile)
 				addFileDiagnostic(
-					mdAdvisor.getModulefileExists(), moduleFile, "Modulefile is deprecated. Using metadata.json",
+					mdAdvisor.getModulefileExists(), ValidationService.MODULE, moduleFile, "Modulefile is deprecated. Using metadata.json",
 					ModuleDiagnostics.ISSUE__MODULEFILE_IS_DEPRECATED);
 			else
 				addFileDiagnostic(
-					mdAdvisor.getModulefileExistsAndIsUsed(), moduleFile,
+					mdAdvisor.getModulefileExistsAndIsUsed(), ValidationService.MODULE, moduleFile,
 					"Modulefile is deprecated. Building metadata.json from modulefile",
 					ModuleDiagnostics.ISSUE__MODULEFILE_IS_DEPRECATED_BUT_USED);
 		}
 		else {
 			if(!hasMetadataJsonFile)
 				addFileDiagnostic(
-					ValidationPreference.ERROR, moduleRoot, "Missing metadata.json", ModuleDiagnostics.ISSUE__MISSING_METADATA_JSON_FILE);
+					ValidationPreference.ERROR, ValidationService.MODULE, moduleRoot, "Missing metadata.json",
+					ModuleDiagnostics.ISSUE__MISSING_METADATA_JSON_FILE);
 		}
 	}
 
@@ -372,7 +375,7 @@ public class DirectoryValidator {
 					}
 					if(redefined)
 						addFileDiagnostic(
-							options.getModuleValidationAdvisor().getModuleRedefinition(), mi.getFile(),
+							options.getModuleValidationAdvisor().getModuleRedefinition(), ValidationService.MODULE, mi.getFile(),
 							"Redefinition - equally named module already exists", ModuleDiagnostics.ISSUE__MODULE_REDEFINITION);
 				}
 			}

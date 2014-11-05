@@ -73,10 +73,10 @@ public class ValidationServiceImpl implements ValidationService {
 	 * @param message
 	 * @param issueId
 	 */
-	public static void addFileDiagnostic(Diagnostic diagnostics, int severity, File file, File rootDirectory, String message, String issueId) {
+	public static void addFileDiagnostic(Diagnostic diagnostics, int severity, DiagnosticType type, File file, File rootDirectory,
+			String message, String issueId) {
 
-		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(severity, UNKNOWN, message, pathToFile(
-			file.getAbsolutePath(), rootDirectory));
+		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(severity, type, message, pathToFile(file.getAbsolutePath(), rootDirectory));
 		dft.setLineNumber(-1);
 		dft.setLength(-1);
 		dft.setOffset(-1);
@@ -96,8 +96,8 @@ public class ValidationServiceImpl implements ValidationService {
 	 */
 	public static void addIssueDiagnostic(Diagnostic diagnostics, Issue issue, File processedFile, File rootDirectory) {
 		DiagnosticType type = issue.isSyntaxError()
-			? GEPPETTO_SYNTAX
-			: GEPPETTO;
+			? PP_SYNTAX
+			: PP_LINKING;
 		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(
 			translateIssueSeverity(issue.getSeverity()), type, issue.getMessage(), relativeFile(processedFile, rootDirectory));
 

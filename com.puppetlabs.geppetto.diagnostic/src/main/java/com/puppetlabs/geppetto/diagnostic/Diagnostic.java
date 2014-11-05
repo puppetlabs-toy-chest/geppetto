@@ -15,29 +15,23 @@ import static java.lang.String.format;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Formattable;
 import java.util.FormattableFlags;
 import java.util.Formatter;
 import java.util.Iterator;
 import java.util.List;
 
-public class Diagnostic implements Formattable, Serializable, Iterable<Diagnostic> {
-	/**
-	 * Return the severity as a string. The string &quot;UNKNOWN(&lt;severity&gt;)&quot; will be returned if the
-	 * argument represents an unknown severity.
-	 *
-	 * @param severity
-	 * @return A string representing the severity
-	 */
-	public static String getSeverityString(int severity) {
-		return severity >= 0 && severity < severityStrings.length
-			? severityStrings[severity]
-			: format("UNKNOWN(%d)", severity);
-	}
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
+public class Diagnostic implements Formattable, Serializable, Iterable<Diagnostic> {
 	public static final DiagnosticType CHAIN = new DiagnosticType("CHAIN", Diagnostic.class.getName());
 
 	private static final long serialVersionUID = 1L;
@@ -56,6 +50,48 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 
 	private static final String[] severityStrings = new String[] { "OK", "DEBUG", "INFO", "WARNING", "ERROR", "FATAL" };
 
+	private static final SimpleDateFormat ISO_8601_TZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+
+	public static int getSeverity(String severityString) {
+		int severity = OK;
+		switch(severityString.toUpperCase()) {
+			case "OK":
+				severity = Diagnostic.OK;
+				break;
+			case "DEBUG":
+				severity = Diagnostic.DEBUG;
+				break;
+			case "INFO":
+				severity = Diagnostic.INFO;
+				break;
+			case "WARNING":
+				severity = Diagnostic.WARNING;
+				break;
+			case "ERROR":
+				severity = Diagnostic.ERROR;
+				break;
+			case "FATAL":
+				severity = Diagnostic.FATAL;
+				break;
+			default:
+				throw new IllegalArgumentException();
+		}
+		return severity;
+	}
+
+	/**
+	 * Return the severity as a string. The string &quot;UNKNOWN(&lt;severity&gt;)&quot; will be returned if the
+	 * argument represents an unknown severity.
+	 *
+	 * @param severity
+	 * @return A string representing the severity
+	 */
+	public static String getSeverityString(int severity) {
+		return severity >= 0 && severity < severityStrings.length
+			? severityStrings[severity]
+			: format("UNKNOWN(%d)", severity);
+	}
+
 	private long timestamp;
 
 	private int severity;
@@ -73,6 +109,15 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	public Diagnostic() {
 		setType(CHAIN);
 		setSeverity(OK);
+	}
+
+	public Diagnostic(Diagnostic source) {
+		setSeverity(source.getSeverity());
+		setMessage(source.getMessage());
+		setType(source.getType());
+		setTimestamp(source.getTimestamp());
+		setIssue(source.getIssue());
+		setIssueData(source.getIssueData());
 	}
 
 	/**
@@ -256,10 +301,12 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	/**
 	 * @return the severity
 	 */
+	@JsonIgnore
 	public int getSeverity() {
 		return severity;
 	}
 
+	@JsonGetter("severity")
 	public String getSeverityString() {
 		return getSeverityString(getSeverity());
 	}
@@ -267,19 +314,34 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	/**
 	 * @return the source
 	 */
+	@JsonIgnore
 	public String getSource() {
 		return type.getSource();
 	}
 
+	@JsonIgnore
 	public long getTimestamp() {
 		return timestamp;
+	}
+
+	@JsonGetter("timestamp")
+	public String getTimestampString() {
+		synchronized(ISO_8601_TZ) {
+			return ISO_8601_TZ.format(new Date(timestamp));
+		}
 	}
 
 	/**
 	 * @return The type of diagnostic
 	 */
+	@JsonIgnore
 	public DiagnosticType getType() {
 		return type;
+	}
+
+	@JsonGetter("type")
+	public String getTypeString() {
+		return type.getName();
 	}
 
 	@Override
@@ -334,6 +396,7 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	 * @param severity
 	 *            the severity to set
 	 */
+	@JsonIgnore
 	public void setSeverity(int severity) {
 		if(severity < this.severity)
 			// Ensures children severity is not above this one
@@ -343,10 +406,29 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 			this.severity = severity;
 	}
 
+	@JsonSetter("severity")
+	public void setSeverityString(String severityString) {
+		setSeverity(getSeverity(severityString));
+	}
+
+	@JsonIgnore
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
 
+	@JsonSetter("timestamp")
+	public void setTimestampString(String timestampString) {
+		synchronized(ISO_8601_TZ) {
+			try {
+				setTimestamp(ISO_8601_TZ.parse(timestampString).getTime());
+			}
+			catch(ParseException e) {
+				throw new IllegalArgumentException(e.getMessage());
+			}
+		}
+	}
+
+	@JsonIgnore
 	public void setType(DiagnosticType type) {
 		this.type = type;
 	}

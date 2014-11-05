@@ -584,7 +584,7 @@ public class Validate extends AbstractForgeServiceMojo {
 	protected void invoke(Diagnostic result) throws IOException {
 		Collection<File> moduleRoots = findModuleRoots();
 		if(moduleRoots.isEmpty()) {
-			result.addChild(new Diagnostic(Diagnostic.ERROR, ValidationService.GEPPETTO, "No modules found in repository"));
+			result.addChild(new Diagnostic(Diagnostic.ERROR, ValidationService.MODULE, "No modules found in repository"));
 			return;
 		}
 

@@ -276,7 +276,7 @@ public class ValidationOptions {
 		}
 		catch(IOException e) {
 			diagnostics.addChild(new ExceptionDiagnostic(
-				Diagnostic.ERROR, ValidationService.GEPPETTO, "Unable to parse .geppetto-rc.json", e));
+				Diagnostic.ERROR, ValidationService.PP_LINKING, "Unable to parse .geppetto-rc.json", e));
 		}
 		return this;
 	}

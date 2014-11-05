@@ -22,13 +22,13 @@ import com.puppetlabs.geppetto.validation.runner.BuildResult;
 /**
  */
 public interface ValidationService {
-	DiagnosticType GEPPETTO = new DiagnosticType("GEPPETTO", ValidationService.class.getName());
+	DiagnosticType PP_LINKING = new DiagnosticType("PP", ValidationService.class.getName());
 
-	DiagnosticType GEPPETTO_SYNTAX = new DiagnosticType("GEPPETTO_SYNTAX", ValidationService.class.getName());
+	DiagnosticType PP_SYNTAX = new DiagnosticType("PP_SYNTAX", ValidationService.class.getName());
+
+	DiagnosticType MODULE = new DiagnosticType("MODULE", ValidationService.class.getName());
 
 	DiagnosticType INTERNAL_ERROR = new DiagnosticType("INTERNAL_ERROR", ValidationService.class.getName());
-
-	DiagnosticType UNKNOWN = new DiagnosticType("UNKNOWN", ValidationService.class.getName());
 
 	DiagnosticType RUBY_SYNTAX = new DiagnosticType("RUBY_SYNTAX", ValidationService.class.getName());
 
