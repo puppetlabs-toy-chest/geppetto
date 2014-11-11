@@ -11,19 +11,9 @@
 
 package com.puppetlabs.geppetto.ruby.tests;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-
-import com.puppetlabs.geppetto.ruby.RubyHelper;
-import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 
 /**
  * All Puppet Tests.
@@ -41,24 +31,4 @@ import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 })
 @RunWith(Suite.class)
 public class AllTests {
-	@BeforeClass
-	public static void initRubyService() {
-		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
-		Registry registry = EPackage.Registry.INSTANCE;
-		if(!registry.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
-			registry.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
-
-		if(!registry.containsKey(com.puppetlabs.geppetto.pp.PPPackage.eNS_URI))
-			registry.put(com.puppetlabs.geppetto.pp.PPPackage.eNS_URI, com.puppetlabs.geppetto.pp.PPPackage.eINSTANCE);
-
-		if(!registry.containsKey(com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eNS_URI))
-			registry.put(com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eNS_URI, com.puppetlabs.geppetto.pp.pptp.PPTPPackage.eINSTANCE);
-
-		Map<String, Object> factoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-		if(!factoryMap.containsKey("pptp"))
-			factoryMap.put("pptp", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-
-		if(!factoryMap.containsKey("rb"))
-			factoryMap.put("rb", new PptpRubyResourceFactory());
-	}
 }

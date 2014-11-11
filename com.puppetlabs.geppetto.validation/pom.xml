@@ -44,5 +44,15 @@
 			<artifactId>com.puppetlabs.geppetto.catalog</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.puppetlabs.geppetto</groupId>
+			<artifactId>com.puppetlabs.geppetto.ruby</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.puppetlabs.geppetto</groupId>
+			<artifactId>com.puppetlabs.geppetto.ruby.jrubyparser</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -12,11 +12,11 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 
 public class ValidationAdvisor {
 
-	public static class BaseValidationAdvisor implements IPotentialProblemsAdvisor, IStylisticProblemsAdvisor {
+	public static class PotentialProblemsAdvisorWrapper implements IPotentialProblemsAdvisor, IStylisticProblemsAdvisor {
 
 		private IPotentialProblemsAdvisor problemsAdvisor;
 
-		protected BaseValidationAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+		public PotentialProblemsAdvisorWrapper(IPotentialProblemsAdvisor problemsAdvisor) {
 			this.problemsAdvisor = problemsAdvisor;
 		}
 
@@ -119,12 +119,20 @@ public class ValidationAdvisor {
 		public ValidationPreference getValidityAssertedAtRuntime() {
 			return problemsAdvisor.getValidityAssertedAtRuntime();
 		}
+
+		protected IPotentialProblemsAdvisor getWrapped() {
+			return problemsAdvisor;
+		}
+
+		public void setProblemsAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+			this.problemsAdvisor = problemsAdvisor;
+		}
 	}
 
 	/**
 	 * Validation Advisor for Puppet 2.6
 	 */
-	public static class ValidationAdvisor_2_6 extends BaseValidationAdvisor implements IValidationAdvisor {
+	public static class ValidationAdvisor_2_6 extends PotentialProblemsAdvisorWrapper implements IValidationAdvisor {
 		/**
 		 * @param problemsAdvisor
 		 */
@@ -540,5 +548,137 @@ public class ValidationAdvisor {
 		public ValidationPreference getDeprecatedVariableName() {
 			return ValidationPreference.ERROR;
 		}
+	}
+
+	public static class ValidationAdvisorWrapper extends PotentialProblemsAdvisorWrapper implements IValidationAdvisor {
+		public ValidationAdvisorWrapper(IValidationAdvisor problemsAdvisor) {
+			super(problemsAdvisor);
+		}
+
+		@Override
+		public boolean allowAnyValueAsHashKey() {
+			return getWrapped().allowAnyValueAsHashKey();
+		}
+
+		@Override
+		public boolean allowChainedAssignments() {
+			return getWrapped().allowChainedAssignments();
+		}
+
+		@Override
+		public boolean allowExpressionLastInBlocks() {
+			return getWrapped().allowExpressionLastInBlocks();
+		}
+
+		@Override
+		public boolean allowExtendedDependencyTypes() {
+			return getWrapped().allowExtendedDependencyTypes();
+		}
+
+		@Override
+		public boolean allowExtendedMatchRHS() {
+			return getWrapped().allowExtendedMatchRHS();
+		}
+
+		@Override
+		public boolean allowExtendedTitleExpressions() {
+			return getWrapped().allowExtendedTitleExpressions();
+		}
+
+		@Override
+		public boolean allowHashInSelector() {
+			return getWrapped().allowHashInSelector();
+		}
+
+		@Override
+		public boolean allowInheritanceFromParameterizedClass() {
+			return getWrapped().allowInheritanceFromParameterizedClass();
+		}
+
+		@Override
+		public boolean allowLambdas() {
+			return getWrapped().allowLambdas();
+		}
+
+		@Override
+		public boolean allowModeWithNonOctalIntegerLiterals() {
+			return getWrapped().allowModeWithNonOctalIntegerLiterals();
+		}
+
+		@Override
+		public boolean allowModulo() {
+			return getWrapped().allowModulo();
+		}
+
+		@Override
+		public boolean allowMoreThan2AtInSequence() {
+			return getWrapped().allowMoreThan2AtInSequence();
+		}
+
+		@Override
+		public boolean allowRHSConditionals() {
+			return getWrapped().allowRHSConditionals();
+		}
+
+		@Override
+		public boolean allowSeparatorExpression() {
+			return getWrapped().allowSeparatorExpression();
+		}
+
+		@Override
+		public boolean allowSplashAttribute() {
+			return getWrapped().allowSplashAttribute();
+		}
+
+		@Override
+		public boolean allowTypeDefinitions() {
+			return getWrapped().allowTypeDefinitions();
+		}
+
+		@Override
+		public boolean allowUnless() {
+			return getWrapped().allowUnless();
+		}
+
+		@Override
+		public boolean allowUnlessElse() {
+			return getWrapped().allowUnlessElse();
+		}
+
+		@Override
+		public boolean allowUnquotedQualifiedResourceNames() {
+			return getWrapped().allowUnquotedQualifiedResourceNames();
+		}
+
+		@Override
+		public ValidationPreference definitionArgumentListEndComma() {
+			return getWrapped().definitionArgumentListEndComma();
+		}
+
+		@Override
+		public ValidationPreference definitionParamterMissingDollar() {
+			return getWrapped().definitionParamterMissingDollar();
+		}
+
+		@Override
+		protected IValidationAdvisor getWrapped() {
+			return (IValidationAdvisor) super.getWrapped();
+		}
+
+		@Override
+		public ValidationPreference hyphensInNames() {
+			return getWrapped().hyphensInNames();
+		}
+
+		@Override
+		public ValidationPreference periodInCase() {
+			return getWrapped().periodInCase();
+		}
+
+		@Override
+		public ValidationPreference unqualifiedVariables() {
+			return getWrapped().unqualifiedVariables();
+		}
+
 	}
 }

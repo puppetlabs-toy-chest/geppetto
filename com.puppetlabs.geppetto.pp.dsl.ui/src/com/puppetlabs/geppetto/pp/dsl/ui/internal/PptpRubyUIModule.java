@@ -12,16 +12,28 @@ package com.puppetlabs.geppetto.pp.dsl.ui.internal;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.GlobalURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
+import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
+import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
+import org.eclipse.xtext.ui.validation.LanguageAwareMarkerTypeProvider;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 
+import com.google.inject.Binder;
+import com.puppetlabs.geppetto.common.os.IFileExcluder;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRubyRuntimeModule;
+import com.puppetlabs.geppetto.pp.dsl.ui.builder.PreferenceBasedFileExcluder;
+import com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider;
 import com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpResourceUiServiceProvider;
+import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
+import com.puppetlabs.geppetto.ruby.resource.PptpRubyRuntimeModule;
+import com.puppetlabs.geppetto.ruby.spi.IRubyServices;
 
 /**
  * UI Runtime module for Ruby PPTP variant.
@@ -46,21 +58,36 @@ public class PptpRubyUIModule extends PptpRubyRuntimeModule {
 		}
 	}
 
-	public Class<? extends org.eclipse.xtext.ui.resource.IResourceUIServiceProvider> bindIResourceUIServiceProvider() {
-		return PptpResourceUiServiceProvider.class;
-		// return org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider.class;
+	@Override
+	public Class<? extends IFileExcluder> bindIFileExcluder() {
+		return PreferenceBasedFileExcluder.class;
 	}
 
-	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
+	public Class<? extends IResourceUIServiceProvider> bindIResourceUIServiceProvider() {
+		return PptpResourceUiServiceProvider.class;
+	}
+
+	@Override
+	public Class<? extends IRubyServices> bindIRubyServices() {
+		return JRubyServices.class;
+	}
+
+	public Class<? extends MarkerTypeProvider> bindMarkerTypeProvider() {
+		return LanguageAwareMarkerTypeProvider.class;
+	}
+
+	public void configureAbstractUIPlugin(Binder binder) {
+		binder.bind(AbstractUIPlugin.class).toInstance(PPDSLActivator.getDefault());
+	}
+
+	public void configureLanguageSpecificURIEditorOpener(Binder binder) {
 		if(PlatformUI.isWorkbenchRunning())
 			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(UseDefaultURIEditorOpener.class);
 	}
 
 	// must bind a description label provider...
-	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(
-			org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(
-			com.puppetlabs.geppetto.pp.dsl.ui.labeling.PPDescriptionLabelProvider.class);
+	public void configureResourceUIServiceLabelProvider(Binder binder) {
+		binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(PPDescriptionLabelProvider.class);
 	}
 
 }

@@ -50,6 +50,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
@@ -61,9 +62,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
+import com.google.inject.Inject;
+import com.puppetlabs.geppetto.common.os.IFileExcluder;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
 import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
 import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapterFactory;
@@ -74,9 +74,6 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.IConfigurableProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.parser.antlr.PPParser;
-import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
  * Runner/Helper that can perform diagnostics/validation of PP files.
@@ -197,38 +194,50 @@ public class PPDiagnosticsRunner {
 
 	public static final String PPTPCONTAINER = "_pptp";
 
-	private Injector injector;
-
+	@Inject
 	private XtextResourceSet resourceSet;
 
 	/**
 	 * The linker that performs the "special" PP linking. Normally used/called from the PPLinker.
 	 */
+	@Inject
 	private PPResourceLinker resourceLinker;
 
-	private PPDiagnosticsSetup instance;
-
+	@Inject
 	private IFileExcluder fileExcluder;
 
-	private IResourceServiceProvider pptpRubyResourceServiceProvider;
-
-	private IResourceServiceProvider ppResourceServiceProvider;
-
+	@Inject
 	private IResourceServiceProvider resourceServiceProvider;
 
-	private org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider indexProvider;
+	@Inject
+	private ResourceDescriptionsProvider indexProvider;
 
+	@Inject
 	private IQualifiedNameConverter converter;
 
-	Map<String, File> pathToFileMap;
+	@Inject
+	private IEncodingProvider encodingProvider;
+
+	@Inject
+	private ISearchPathProvider searchPathProvider;
+
+	@Inject
+	private IResourceValidator resourceValidator;
+
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+
+	@Inject
+	private PPParser ppParser;
+
+	@Inject
+	private ISerializer serializer;
+
+	private final Map<String, File> pathToFileMap;
 
 	private String ROOTCONTAINER = null;
 
 	private Multimap<String, String> restricted = null;
-
-	private IEncodingProvider encodingProvider;
-
-	private ISearchPathProvider searchPathProvider;
 
 	private final Function<QualifiedName, String> fQualifiedToString = new Function<QualifiedName, String>() {
 
@@ -345,6 +354,10 @@ public class PPDiagnosticsRunner {
 		_configureTransitiveClosure(processed, rootModule, restricted, mi);
 	}
 
+	// private PPGrammarAccess getGrammarAccess() {
+	// return get(PPGrammarAccess.class);
+	// }
+
 	private ModuleExport createExport(IEObjectDescription desc) {
 		// String name = converter.toString(desc.getName());
 		File f = uri2File(desc.getEObjectURI());
@@ -359,19 +372,6 @@ public class PPDiagnosticsRunner {
 		}
 		ModuleExport me = new ModuleExport(f, desc, offset, line, length);
 		return me;
-	}
-
-	/**
-	 * Get instance of class via the PP RT injector.
-	 *
-	 * @param <T>
-	 * @param clazz
-	 * @return
-	 */
-	public <T> T get(Class<T> clazz) {
-		if(injector == null)
-			injector = Guice.createInjector();
-		return injector.getInstance(clazz);
 	}
 
 	/**
@@ -483,33 +483,12 @@ public class PPDiagnosticsRunner {
 		return searchPathProvider.get(null);
 	}
 
-	// private PPGrammarAccess getGrammarAccess() {
-	// return get(PPGrammarAccess.class);
-	// }
-
-	private IEncodingProvider getEncodingProvider() {
-		if(encodingProvider == null)
-			encodingProvider = new DefaultEncodingProvider();
-		return encodingProvider;
-	}
-
 	IQualifiedNameConverter getIQualifiedNameConverter() {
-		return get(IQualifiedNameConverter.class);
-	}
-
-	/**
-	 * Access to the 'pp' services (container management and more).
-	 */
-	private IResourceServiceProvider getIResourceServiceProvider() {
-		return get(IResourceServiceProvider.class);
-	}
-
-	private PPParser getParser() {
-		return get(PPParser.class);
+		return qualifiedNameConverter;
 	}
 
 	public IResourceValidator getPPResourceValidator() {
-		return get(IResourceValidator.class);
+		return resourceValidator;
 	}
 
 	/**
@@ -521,28 +500,8 @@ public class PPDiagnosticsRunner {
 		return indexProvider.getResourceDescriptions(resourceSet.getResources().get(0));
 	}
 
-	/**
-	 * Access to the global index maintained by Xtext, is made via a special (non guice) provider that is aware of the
-	 * context (builder, dirty editors, etc.). It is used to obtain the index for a particular resource. This special
-	 * provider is obtained here.
-	 */
-	private org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider getResourceDescriptionsProvider() {
-		return get(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.class);
-	}
-
 	public EList<Resource> getResources() {
 		return resourceSet.getResources();
-	}
-
-	/**
-	 *
-	 */
-	private ISearchPathProvider getSearchPathProvider() {
-		return get(ISearchPathProvider.class);
-	}
-
-	private ISerializer getSerializer() {
-		return get(ISerializer.class);
 	}
 
 	public boolean isExcluded(File f) {
@@ -550,24 +509,16 @@ public class PPDiagnosticsRunner {
 	}
 
 	/**
-	 * Loads a .pp, .pptp or .rb resource using the resource factory configured for the extension. Returns null for a
-	 * .rb resource that is not expected to contribute anything to the pptp. All non null resources are added to the
+	 * Loads a .pp, .pptp or .rb resource using the resource factory configured for the extension. The resource is added to the
 	 * resource set.
+	 *
+	 * @return The loaded resource
 	 */
-	public Resource loadResource(InputStream in, URI uri) throws Exception {
+	public Resource loadResource(InputStream in, URI uri) throws IOException {
 		// Lookup the factory to use for the resource
 		Factory factory = Resource.Factory.Registry.INSTANCE.getFactory(uri);
-		// // UGLY AS HELL HACK
-		// if(factory instanceof XtextResourceFactory)
-		// factory = injector.getInstance(XtextResourceFactory.class);
-
-		// Avoid loading lots of empty resources for rb files that do not
-		// contribute
-		if(factory instanceof PptpRubyResourceFactory && !pptpRubyResourceServiceProvider.canHandle(uri))
-			return null;
-
 		Map<String, String> options = Maps.newHashMap();
-		options.put(XtextResource.OPTION_ENCODING, getEncodingProvider().getEncoding(uri));
+		options.put(XtextResource.OPTION_ENCODING, encodingProvider.getEncoding(uri));
 
 		Resource r = factory.createResource(uri);
 		resourceSet.getResources().add(r);
@@ -585,14 +536,19 @@ public class PPDiagnosticsRunner {
 	 * @return
 	 * @throws Exception
 	 */
-	public final Resource loadResource(String sourceString, URI uri) throws Exception {
-		return loadResource(new StringInputStream(sourceString, getEncodingProvider().getEncoding(uri)), uri);
+	public final Resource loadResource(String sourceString, URI uri) {
+		try {
+			return loadResource(new StringInputStream(sourceString, encodingProvider.getEncoding(uri)), uri);
+		}
+		catch(IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public Resource loadResource(URI uri) throws IOException {
 		Resource resource = resourceSet.createResource(uri);
 		Map<String, String> options = Maps.newHashMap();
-		options.put(XtextResource.OPTION_ENCODING, getEncodingProvider().getEncoding(uri));
+		options.put(XtextResource.OPTION_ENCODING, encodingProvider.getEncoding(uri));
 
 		resource.load(options);
 		resourceSet.getResources().add(resource);
@@ -615,8 +571,7 @@ public class PPDiagnosticsRunner {
 	}
 
 	public IParseResult parseString(ParserRule rule, String s) throws PPSyntaxErrorException {
-		PPParser parser = getParser();
-		IParseResult result = parser.parse(rule, new StringReader(s));
+		IParseResult result = ppParser.parse(rule, new StringReader(s));
 		if(result.hasSyntaxErrors())
 			throw new PPSyntaxErrorException(result);
 		return result;
@@ -640,7 +595,7 @@ public class PPDiagnosticsRunner {
 
 			// just in case some other crazy thing is sent here, check that it is a pp resource
 			// (pp resource linking is not relevant on anything but .pp resources).
-			if(ppResourceServiceProvider.canHandle(resource.getURI())) {
+			if(resourceServiceProvider.canHandle(resource.getURI())) {
 				// The PP resource linking (normally done by PP Linker (but
 				// without documentation association)
 				//
@@ -667,45 +622,11 @@ public class PPDiagnosticsRunner {
 
 	public String serialize(EObject obj) {
 		SaveOptions options = SaveOptions.newBuilder().getOptions();
-		return getSerializer().serialize(obj, options);
+		return serializer.serialize(obj, options);
 	}
 
 	public String serializeFormatted(EObject obj) {
-		return getSerializer().serialize(obj, SaveOptions.newBuilder().format().getOptions());
-	}
-
-	/**
-	 * Must be called prior to calling any other methods. Creates an injector and sets things up.
-	 *
-	 * @throws Exception
-	 */
-	public void setUp(ValidationOptions validationOptions) throws Exception {
-		// Setup with overrides
-		instance = new PPDiagnosticsSetup(validationOptions);
-		injector = instance.createInjectorAndDoEMFRegistration();
-		resourceSet = get(XtextResourceSet.class);
-		resourceSet.setClasspathURIContext(getClass());
-
-		ppResourceServiceProvider = injector.getInstance(IResourceServiceProvider.class);
-		pptpRubyResourceServiceProvider = instance.getPptpRubyInjector().getInstance(IResourceServiceProvider.class);
-
-		resourceLinker = injector.getInstance(PPResourceLinker.class);
-		fileExcluder = injector.getInstance(IFileExcluder.class);
-
-		resourceServiceProvider = getIResourceServiceProvider();
-
-		indexProvider = getResourceDescriptionsProvider();
-		converter = getIQualifiedNameConverter();
-		searchPathProvider = getSearchPathProvider();
-
-		// Force the PPJavaValidator instance to be created early (in case it
-		// was not registered with eager creation.
-		injector.getInstance(PPJavaValidator.class);
-	}
-
-	public void tearDown() {
-		injector = null;
-		instance = null;
+		return serializer.serialize(obj, SaveOptions.newBuilder().format().getOptions());
 	}
 
 	private File uri2File(URI uri) {

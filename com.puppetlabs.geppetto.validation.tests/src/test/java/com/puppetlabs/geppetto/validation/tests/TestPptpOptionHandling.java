@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 import com.puppetlabs.geppetto.validation.FileType;
@@ -15,6 +16,9 @@ import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
 
 public class TestPptpOptionHandling extends AbstractValidationTest {
+	@Inject
+	private ValidationService vs;
+
 	/**
 	 * Tests that nodex (with declares a depedency on module A, which has a
 	 * transitive dependency on B) can see functions afunc and bfunc, but not
@@ -23,7 +27,6 @@ public class TestPptpOptionHandling extends AbstractValidationTest {
 	@Test
 	public void pptpOptionHandling() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/testFor2_7_1/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -41,7 +44,6 @@ public class TestPptpOptionHandling extends AbstractValidationTest {
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 		dumpErrors(chain);
 		assertEquals("There should be 0 errors", 0, chain.getChildren().size());
-
 	}
 
 }

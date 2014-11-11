@@ -15,27 +15,18 @@ import static org.junit.Assert.fail;
 import java.io.File;
 
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 
 import com.google.common.collect.Multimap;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
-import com.puppetlabs.geppetto.forge.client.GsonModule;
-import com.puppetlabs.geppetto.forge.impl.ForgeModule;
 import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
-import com.puppetlabs.geppetto.ruby.RubyHelper;
-import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
-import com.puppetlabs.geppetto.validation.ValidationService;
-import com.puppetlabs.geppetto.validation.impl.ValidationModule;
 import com.puppetlabs.geppetto.validation.runner.AllModulesState;
 import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
-import com.puppetlabs.geppetto.validation.runner.IEncodingProvider;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsSetup;
 
 public class AbstractValidationTest {
@@ -46,8 +37,6 @@ public class AbstractValidationTest {
 				++count;
 		return count;
 	}
-
-	private Injector injector;
 
 	protected final void assertContainsIssue(Diagnostic chain, String issue) {
 		for(Diagnostic d : chain.getChildren())
@@ -100,22 +89,21 @@ public class AbstractValidationTest {
 		return builder.toString();
 	}
 
-	protected ValidationOptions getValidationOptions() {
-		return getValidationOptions(PuppetTarget.getDefault().getComplianceLevel());
+	protected ComplianceLevel getComplianceLevel() {
+		return PuppetTarget.getDefault().getComplianceLevel();
 	}
 
-	@SuppressWarnings("serial")
-	protected ValidationOptions getValidationOptions(ComplianceLevel complianceLevel) {
+	public IPotentialProblemsAdvisor getProblemsAdvisor() {
+		return null;
+	}
+
+	protected ValidationOptions getValidationOptions() {
 		ValidationOptions options = new ValidationOptions();
-		options.setComplianceLevel(complianceLevel);
+		options.setComplianceLevel(getComplianceLevel());
 		options.setValidationRoot(TestDataProvider.getTestFile(new Path("testData")));
-		options.setEncodingProvider(new IEncodingProvider() {
-			@Override
-			public String getEncoding(URI file) {
-				return "UTF-8";
-			}
-		});
 		options.setModuleValidationAdvisor(new DefaultModuleValidationAdvisor() {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public ValidationPreference getDeprecatedKey() {
 				return ValidationPreference.IGNORE;
@@ -134,15 +122,8 @@ public class AbstractValidationTest {
 		return options;
 	}
 
-	public ValidationService getValidationService() {
-		return injector.getInstance(ValidationService.class);
-	}
-
 	@Before
 	public void setUp() {
-		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
-		ValidationOptions options = getValidationOptions();
-		new PPDiagnosticsSetup(options).createInjectorAndDoEMFRegistration();
-		injector = Guice.createInjector(GsonModule.INSTANCE, new ForgeModule(), new ValidationModule());
+		new PPDiagnosticsSetup().createInjectorAndDoEMFRegistration().injectMembers(this);
 	}
 }

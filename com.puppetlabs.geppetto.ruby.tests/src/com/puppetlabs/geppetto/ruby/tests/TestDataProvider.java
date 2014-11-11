@@ -10,18 +10,25 @@
  */
 package com.puppetlabs.geppetto.ruby.tests;
 
-import static com.google.inject.Guice.createInjector;
-import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
 import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
 
+import javax.inject.Singleton;
+
 import org.eclipse.core.runtime.IPath;
 
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.common.util.BundleAccess;
 
+@Singleton
 public class TestDataProvider {
+
+	@Inject
+	private BundleAccess bundleAccess;
+
+	private File basedir;
 
 	/**
 	 * Return the project root so that we can get testData in a way that works for both
@@ -29,13 +36,12 @@ public class TestDataProvider {
 	 *
 	 * @return absolute path of the project.
 	 */
-	public static File getBasedir() {
+	public File getBasedir() {
 		if(basedir == null) {
 			String basedirProp = System.getProperty("basedir");
 			if(basedirProp == null) {
 				try {
-					File testData = createInjector(getCommonModule()).getInstance(BundleAccess.class).getFileFromClassBundle(
-						TestDataProvider.class, "testData");
+					File testData = bundleAccess.getFileFromClassBundle(TestDataProvider.class, "testData");
 					if(testData == null || !testData.isDirectory())
 						fail("Unable to determine basedir");
 					basedir = testData.getParentFile();
@@ -50,15 +56,13 @@ public class TestDataProvider {
 		return basedir;
 	}
 
-	public static File getTestFile(IPath testBundleRelativePath) {
+	public File getTestFile(IPath testBundleRelativePath) {
 		return new File(getBasedir(), testBundleRelativePath.toOSString());
 	}
 
-	public static File getTestOutputDir() {
+	public File getTestOutputDir() {
 		File testOutputDir = new File(getBasedir(), "target/testOutput");
 		testOutputDir.mkdirs();
 		return testOutputDir;
 	}
-
-	private static File basedir;
 }

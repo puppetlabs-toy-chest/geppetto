@@ -16,37 +16,33 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.IParseResult;
 import org.junit.Test;
 
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.PuppetManifest;
 import com.puppetlabs.geppetto.pp.dsl.services.PPGrammarAccess;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsRunner;
 
 /**
  * Tests PPDiagnosticsRunner's parseString method.
  */
-public class TestParsing {
+public class TestParsing extends AbstractValidationTest {
+	// The grammar access provides methods to obtain any parser rule.
+	// It is possible to start anywhere in the grammar and only get specific
+	// things back. Look at PP.xtext to understand what the parser rules
+	// expects
+	// to parse. (Note that some rules are tricky to call from the outside
+	// as the "hidden" configuration may have to be a certain way). Parsing
+	// PuppetManifest, or the high level Expression, or ExprList, should be
+	// fine.
+	//
+	@Inject
+	private PPGrammarAccess ga;
+
+	@Inject
+	private PPDiagnosticsRunner runner;
 
 	@Test
 	public void parseString() throws Exception {
-
-		// The diagnostics runner has all the capabilities to perform parsing
-		PPDiagnosticsRunner runner = new PPDiagnosticsRunner();
-		ValidationOptions opts = new ValidationOptions();
-		opts.setValidationRoot(TestDataProvider.getTestFile("testData"));
-		runner.setUp(opts);
-
-		// The grammar access provides methods to obtain any parser rule.
-		// It is possible to start anywhere in the grammar and only get specific
-		// things back. Look at PP.xtext to understand what the parser rules
-		// expects
-		// to parse. (Note that some rules are tricky to call from the outside
-		// as the "hidden" configuration may have to be a certain way). Parsing
-		// PuppetManifest, or the high level Expression, or ExprList, should be
-		// fine.
-		//
-		PPGrammarAccess ga = runner.get(PPGrammarAccess.class);
-
 		// Parse a string using the root rule "PuppetManifest"
 		// throws an exception with the IParseResult if there are syntax errors
 		// (test just fails if that is the case).
@@ -70,7 +66,5 @@ public class TestParsing {
 		//
 		result = ((PuppetManifest) result).getStatements().get(0);
 		assertTrue("An instance of SingleQuotedString is obtained", PPPackage.Literals.SINGLE_QUOTED_STRING.isSuperTypeOf(result.eClass()));
-
-		runner.tearDown(); // bye for now
 	}
 }

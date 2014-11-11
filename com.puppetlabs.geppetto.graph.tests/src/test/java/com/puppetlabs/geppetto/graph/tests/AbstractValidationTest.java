@@ -16,37 +16,25 @@ import java.io.File;
 import java.util.List;
 
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.inject.Injector;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.client.GsonModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeModule;
-import com.puppetlabs.geppetto.graph.DependencyGraphProducer;
 import com.puppetlabs.geppetto.graph.JavascriptHrefProducer;
-import com.puppetlabs.geppetto.graph.SVGProducer;
 import com.puppetlabs.geppetto.graph.dependency.DependencyGraphModule;
 import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
-import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
-import com.puppetlabs.geppetto.ruby.RubyHelper;
-import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
-import com.puppetlabs.geppetto.validation.ValidationService;
-import com.puppetlabs.geppetto.validation.impl.ValidationModule;
 import com.puppetlabs.geppetto.validation.runner.AllModulesState;
 import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
-import com.puppetlabs.geppetto.validation.runner.IEncodingProvider;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsSetup;
 
 public class AbstractValidationTest {
-	private Injector injector;
-
 	protected final void assertContainsErrorCode(Diagnostic chain, String errorCode) {
 		List<String> issues = Lists.newArrayList();
 		for(Diagnostic d : chain)
@@ -93,16 +81,12 @@ public class AbstractValidationTest {
 		return builder.toString();
 	}
 
-	public DependencyGraphProducer getDependencyGraphProducer() {
-		return injector.getInstance(DependencyGraphProducer.class);
-	}
-
-	public SVGProducer getSVGProducer() {
-		return injector.getInstance(SVGProducer.class);
+	protected ComplianceLevel getComplianceLevel() {
+		return PuppetTarget.getDefault().getComplianceLevel();
 	}
 
 	protected ValidationOptions getValidationOptions() {
-		return getValidationOptions(PuppetTarget.getDefault().getComplianceLevel());
+		return getValidationOptions(getComplianceLevel());
 	}
 
 	@SuppressWarnings("serial")
@@ -110,13 +94,6 @@ public class AbstractValidationTest {
 		ValidationOptions options = new ValidationOptions();
 		options.setValidationRoot(TestDataProvider.getTestFile(new Path("testData")));
 		options.setComplianceLevel(complianceLevel);
-		options.setEncodingProvider(new IEncodingProvider() {
-			@Override
-			public String getEncoding(URI file) {
-				return "UTF-8";
-			}
-		});
-		options.setProblemsAdvisor(complianceLevel.createValidationAdvisor(DefaultPotentialProblemsAdvisor.INSTANCE));
 		options.setModuleValidationAdvisor(new DefaultModuleValidationAdvisor() {
 			@Override
 			public ValidationPreference getMissingForgeRequiredFields() {
@@ -126,15 +103,9 @@ public class AbstractValidationTest {
 		return options;
 	}
 
-	public ValidationService getValidationService() {
-		return injector.getInstance(ValidationService.class);
-	}
-
 	@Before
 	public void setUp() {
-		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
-		injector = new PPDiagnosticsSetup(getValidationOptions()).createInjectorAndDoEMFRegistration();
-		injector = injector.createChildInjector(GsonModule.INSTANCE, new ForgeModule(), new ValidationModule(), new DependencyGraphModule(
-			JavascriptHrefProducer.class, ""));
+		new PPDiagnosticsSetup().createInjectorAndDoEMFRegistration().createChildInjector(
+			GsonModule.INSTANCE, new ForgeModule(), new DependencyGraphModule(JavascriptHrefProducer.class, "")).injectMembers(this);
 	}
 }

@@ -9,22 +9,22 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 import com.google.inject.Inject;
-import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
+import com.puppetlabs.geppetto.common.os.IFileExcluder;
 
 public class ModuleResourceDescriptionManager extends DefaultResourceDescriptionManager {
 	@Inject
-	private IFileExcluder folderDiscriminator;
+	private IFileExcluder fileExcluder;
 
 	@Override
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
-		return folderDiscriminator.isExcluded(candidate.getURI())
+		return fileExcluder.isExcluded(candidate.getURI())
 			? false
 			: super.isAffected(deltas, candidate, context);
 	}
 
 	@Override
 	protected boolean isAffected(Collection<QualifiedName> importedNames, IResourceDescription description) {
-		return description == null || folderDiscriminator.isExcluded(description.getURI())
+		return description == null || fileExcluder.isExcluded(description.getURI())
 			? false
 			: super.isAffected(importedNames, description);
 	}

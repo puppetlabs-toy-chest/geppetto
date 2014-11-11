@@ -35,19 +35,24 @@ import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
-import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRubyRuntimeModule;
 import com.puppetlabs.geppetto.pp.dsl.ui.jdt_ersatz.ImagesOnFileSystemRegistry;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.RebuildChecker;
-import com.puppetlabs.geppetto.ruby.RubyHelper;
-import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
+import com.puppetlabs.geppetto.ruby.resource.PptpRubyRuntimeModule;
 
 /**
  * Adds support for PPTP Ruby by creating injectors and caching them using a language key
  */
 public class PPDSLActivator extends PPActivator {
+	public static final String PP_LANGUAGE_NAME = "com.puppetlabs.geppetto.pp.dsl.PP";
+
+	private static BundleContext slaActivatorContext;
+
+	private static final Logger logger = Logger.getLogger(PPDSLActivator.class);
+
+	private static final QualifiedName LAST_BUILDER_VERSION = new QualifiedName("com.puppetlabs.geppetto.dsl.ui", "builder.version");
+
 	public static PPDSLActivator getDefault() {
 		return (PPDSLActivator) getInstance();
 	}
@@ -70,14 +75,6 @@ public class PPDSLActivator extends PPActivator {
 		return false;
 	}
 
-	public static final String PP_LANGUAGE_NAME = "com.puppetlabs.geppetto.pp.dsl.PP";
-
-	private static BundleContext slaActivatorContext;
-
-	private static final Logger logger = Logger.getLogger(PPDSLActivator.class);
-
-	private static final QualifiedName LAST_BUILDER_VERSION = new QualifiedName("com.puppetlabs.geppetto.dsl.ui", "builder.version");
-
 	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
 
 	private IResourceChangeListener projectChangeListener;
@@ -85,11 +82,10 @@ public class PPDSLActivator extends PPActivator {
 	@Override
 	protected Injector createInjector(String language) {
 		try {
-			Module commonModule = CommonModuleProvider.getCommonModule();
 			Module runtimeModule = getRuntimeModule(language);
 			Module sharedStateModule = getSharedStateModule();
 			Module uiModule = getUiModule(language);
-			Module mergedModule = Modules2.mixin(commonModule, runtimeModule, sharedStateModule, uiModule);
+			Module mergedModule = Modules2.mixin(runtimeModule, sharedStateModule, uiModule);
 			return Guice.createInjector(mergedModule);
 		}
 		catch(Exception e) {
@@ -117,30 +113,20 @@ public class PPDSLActivator extends PPActivator {
 		return this.getInjector(PP_LANGUAGE_NAME);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator#getRuntimeModule(java.lang.String)
-	 */
 	@Override
 	protected Module getRuntimeModule(String grammar) {
-		if(PPDSLConstants.PPTP_RUBY_LANGUAGE_NAME.equals(grammar))
+		if(PptpRubyRuntimeModule.PPTP_RUBY_LANGUAGE_NAME.equals(grammar))
 			return new PptpRubyRuntimeModule();
 		else if(PPDSLConstants.PPTP_LANGUAGE_NAME.equals(grammar))
 			return new PptpUIModule();
 		return super.getRuntimeModule(grammar);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.puppetlabs.geppetto.pp.dsl.ui.internal.PPActivator#getUiModule(java.lang.String)
-	 */
 	@Override
 	protected Module getUiModule(String grammar) {
 		if(PPDSLConstants.PPTP_LANGUAGE_NAME.equals(grammar))
 			return new PptpUIModule(); // DefaultModules.EMPTY_MODULE;
-		else if(PPDSLConstants.PPTP_RUBY_LANGUAGE_NAME.equals(grammar))
+		else if(PptpRubyRuntimeModule.PPTP_RUBY_LANGUAGE_NAME.equals(grammar))
 			return new PptpRubyUIModule();
 
 		return super.getUiModule(grammar);
@@ -162,14 +148,13 @@ public class PPDSLActivator extends PPActivator {
 
 		slaActivatorContext = context;
 		try {
-			registerInjectorFor(PPDSLConstants.PPTP_RUBY_LANGUAGE_NAME);
+			registerInjectorFor(PptpRubyRuntimeModule.PPTP_RUBY_LANGUAGE_NAME);
 			registerInjectorFor(PPDSLConstants.PPTP_LANGUAGE_NAME);
 		}
 		catch(Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
 			throw e;
 		}
-		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
 
 		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		String lastBuilderVersion = workspace.getRoot().getPersistentProperty(LAST_BUILDER_VERSION);

@@ -10,6 +10,7 @@
  */
 package com.puppetlabs.geppetto.ruby.jrubyparser;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -106,7 +107,19 @@ public class RubyCallFinder {
 					CallNode callNode = (CallNode) root;
 					if(!callNode.getName().equals(qualifiedName.get(0)))
 						break SEARCH;
-					pushNames(constEvaluator.stringList(constEvaluator.eval(callNode.getReceiver())));
+					Node receiver = callNode.getReceiver();
+					List<String> callNodes = null;
+					while(receiver.getNodeType() == NodeType.CALLNODE) {
+						// Can't evaluate this one but we do consider it to be on path nevertheless
+						CallNode cn = (CallNode) receiver;
+						if(callNodes == null)
+							callNodes = Lists.newArrayList();
+						callNodes.add(0, cn.getName());
+						receiver = cn.getReceiver();
+					}
+					pushNames(constEvaluator.stringList(constEvaluator.eval(receiver)));
+					if(callNodes != null)
+						pushNames(callNodes);
 					if(inWantedScope())
 						return Lists.newArrayList(new GenericCallNode(callNode));
 					pop(root); // clear the pushed names
@@ -160,8 +173,10 @@ public class RubyCallFinder {
 		// used.
 		this.qualifiedName = Lists.reverse(Lists.newArrayList(qualifiedName));
 
-		// TODO: make this return more than one
-		return findCallInternal(root, false);
+		List<GenericCallNode> result = findCallInternal(root, false);
+		return result == null
+			? Collections.<GenericCallNode> emptyList()
+			: result;
 	}
 
 	/**

@@ -12,6 +12,7 @@ package com.puppetlabs.geppetto.pp.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
@@ -22,13 +23,17 @@ import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.validation.CompositeEValidator;
 
+import com.google.inject.Binder;
 import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
+import com.puppetlabs.geppetto.common.os.FileExcluderProvider;
+import com.puppetlabs.geppetto.common.os.IFileExcluder;
 import com.puppetlabs.geppetto.common.tracer.AbstractTracer.DefaultStringProvider;
 import com.puppetlabs.geppetto.common.tracer.DefaultTracer;
 import com.puppetlabs.geppetto.common.tracer.IStringProvider;
 import com.puppetlabs.geppetto.common.tracer.ITracer;
+import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
 import com.puppetlabs.geppetto.pp.dsl.formatting.PPCommentConfiguration;
 import com.puppetlabs.geppetto.pp.dsl.formatting.PPSemanticLayout;
 import com.puppetlabs.geppetto.pp.dsl.formatting.PPStylesheetProvider;
@@ -43,7 +48,6 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.ppformatting.PPIndentationInformation;
 import com.puppetlabs.geppetto.pp.dsl.serialization.PPValueSerializer;
-import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.validation.BuiltinTypesModule;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
@@ -70,6 +74,10 @@ import com.puppetlabs.xtext.serializer.DomBasedSerializer;
  */
 public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRuntimeModule {
 
+	private final FileExcluderProvider fileExcluderProvider = new FileExcluderProvider();
+
+	private final ValidationAdvisorProvider validationAdvisorProvider = new ValidationAdvisorProvider();
+
 	/**
 	 * Binds resource description strategy that binds parent data for inheritance
 	 *
@@ -79,8 +87,14 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 		return PPResourceDescriptionStrategy.class;
 	}
 
-	public Class<? extends IFileExcluder> bindIFolderDiscriminator() {
-		return FileExcluder.class;
+	/**
+	 * Need separate binding for the configurable provider so that it can be reached as
+	 * a provider instance.
+	 *
+	 * @return The configurable FileExcluderProvider instance
+	 */
+	public FileExcluderProvider bindIFileExcluderProvider() {
+		return fileExcluderProvider;
 	}
 
 	public Class<? extends IFormattingContextFactory> bindIFormattingContextFactory() {
@@ -92,7 +106,7 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 	 * standard EReference links).
 	 */
 	@Override
-	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
+	public Class<? extends ILinker> bindILinker() {
 		return PPLinker.class;
 	}
 
@@ -160,8 +174,22 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 		return PPSearchPathProvider.class;
 	}
 
+	/**
+	 * Need separate binding for the configurable provider so that it can be reached as
+	 * a provider instance.
+	 *
+	 * @return The configurable ValidationAdvisorProvider instance
+	 */
+	public ValidationAdvisorProvider bindValidationAdvisorProvider() {
+		return validationAdvisorProvider;
+	}
+
 	public void configureBuiltinTypes(com.google.inject.Binder binder) {
 		binder.install(new BuiltinTypesModule());
+	}
+
+	public void configureCommon(Binder binder) {
+		binder.install(CommonModuleProvider.getCommonModule());
 	}
 
 	public void configureDebugTracing(com.google.inject.Binder binder) {
@@ -235,9 +263,8 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 			com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(PPOverridingLexer.class);
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
-	public Provider<PPOverridingLexer> providePPOverridingLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(PPOverridingLexer.class);
+	public Provider<IFileExcluder> provideIFileExcluder() {
+		return fileExcluderProvider;
 	}
 
 	/**
@@ -246,8 +273,13 @@ public class PPRuntimeModule extends com.puppetlabs.geppetto.pp.dsl.AbstractPPRu
 	 *
 	 * @return
 	 */
-	public Provider<IValidationAdvisor> provideValidationAdvisor() {
-		return ValidationAdvisorProvider.create(PuppetTarget.getDefault().getComplianceLevel());
+	public Provider<IValidationAdvisor> provideIValidationAdvisor() {
+		return validationAdvisorProvider;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
+	public Provider<PPOverridingLexer> providePPOverridingLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(PPOverridingLexer.class);
 	}
 
 }

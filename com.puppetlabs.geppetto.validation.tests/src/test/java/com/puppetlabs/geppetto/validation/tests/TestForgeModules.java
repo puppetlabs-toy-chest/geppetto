@@ -7,12 +7,16 @@ import java.io.File;
 import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
 
 public class TestForgeModules extends AbstractValidationTest {
+	@Inject
+	private ValidationService vs;
+
 	@Test
 	public void validateForge() throws Exception {
 		File root = new File("/Users/henrik/gitrepos/forge-modules");
@@ -21,7 +25,6 @@ public class TestForgeModules extends AbstractValidationTest {
 
 		// TestDataProvider.getTestFile(new Path(
 		// "testData/test-modules/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);

@@ -12,9 +12,12 @@ package com.puppetlabs.geppetto.validation.runner;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * A provider of encodings for files.
  */
+@ImplementedBy(DefaultEncodingProvider.class)
 public interface IEncodingProvider {
 
 	/**

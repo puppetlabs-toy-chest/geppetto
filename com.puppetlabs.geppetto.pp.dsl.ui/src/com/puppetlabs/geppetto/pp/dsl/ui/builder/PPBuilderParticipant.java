@@ -36,6 +36,18 @@ import com.puppetlabs.geppetto.pp.dsl.ui.PPUiConstants;
  * An XtextBuilderParticipant for Puppet.
  */
 public class PPBuilderParticipant implements IXtextBuilderParticipant {
+	public static final String PP_PROBLEM_MARKER_CHECK_FAST = "com.puppetlabs.geppetto.pp.dsl.ui.pp.check.fast";
+
+	public static final String PP_PROBLEM_MARKER_CHECK_NORMAL = "com.puppetlabs.geppetto.pp.dsl.ui.pp.check.normal";
+
+	public static final String PP_PROBLEM_MARKER_CHECK_EXPENSIVE = "com.puppetlabs.geppetto.pp.dsl.ui.pp.check.expensive";
+
+	public static final String RB_PROBLEM_MARKER_CHECK_FAST = "com.puppetlabs.geppetto.pp.dsl.ui.rb.check.fast";
+
+	public static final String RB_PROBLEM_MARKER_CHECK_NORMAL = "com.puppetlabs.geppetto.pp.dsl.ui.rb.check.normal";
+
+	public static final String RB_PROBLEM_MARKER_CHECK_EXPENSIVE = "com.puppetlabs.geppetto.pp.dsl.ui.rb.check.expensive";
+
 	private static List<PPTask> getTaskList(Resource r) {
 		ResourcePropertiesAdapter adapter = ResourcePropertiesAdapterFactory.eINSTANCE.adapt(r);
 		@SuppressWarnings("unchecked")
@@ -78,12 +90,6 @@ public class PPBuilderParticipant implements IXtextBuilderParticipant {
 		}
 	}
 
-	public static final String PP_PROBLEM_MARKER_CHECK_FAST = "com.puppetlabs.geppetto.pp.dsl.ui.pp.check.fast";
-
-	public static final String PP_PROBLEM_MARKER_CHECK_NORMAL = "com.puppetlabs.geppetto.pp.dsl.ui.pp.check.normal";
-
-	public static final String PP_PROBLEM_MARKER_CHECK_EXPENSIVE = "com.puppetlabs.geppetto.pp.dsl.ui.pp.check.expensive";
-
 	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if(context.getBuildType() == BuildType.CLEAN)
@@ -108,5 +114,8 @@ public class PPBuilderParticipant implements IXtextBuilderParticipant {
 		project.deleteMarkers(PP_PROBLEM_MARKER_CHECK_FAST, true, IResource.DEPTH_INFINITE);
 		project.deleteMarkers(PP_PROBLEM_MARKER_CHECK_NORMAL, true, IResource.DEPTH_INFINITE);
 		project.deleteMarkers(PP_PROBLEM_MARKER_CHECK_EXPENSIVE, true, IResource.DEPTH_INFINITE);
+		project.deleteMarkers(RB_PROBLEM_MARKER_CHECK_FAST, true, IResource.DEPTH_INFINITE);
+		project.deleteMarkers(RB_PROBLEM_MARKER_CHECK_NORMAL, true, IResource.DEPTH_INFINITE);
+		project.deleteMarkers(RB_PROBLEM_MARKER_CHECK_EXPENSIVE, true, IResource.DEPTH_INFINITE);
 	}
 }

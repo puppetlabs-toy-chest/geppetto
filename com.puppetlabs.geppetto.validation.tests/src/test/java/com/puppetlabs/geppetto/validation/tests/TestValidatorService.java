@@ -14,54 +14,62 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
 import com.puppetlabs.geppetto.module.dsl.validation.ModuleDiagnostics;
-import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
 
 public class TestValidatorService extends AbstractValidationTest {
+	@Inject
+	private ValidationService vs;
 
 	private void assertNotEquals(String message, Object expected, Object actual) {
 		assertThat(message, expected, not(equalTo(actual)));
 	}
 
+	ValidationOptions getManifestOptions() {
+		ValidationOptions options = getValidationOptions();
+		options.setCheckLayout(false);
+		options.setCheckModuleSemantics(false);
+		options.setCheckReferences(false);
+		options.setFileType(FileType.SINGLE_SOURCE_FILE);
+		return options;
+	}
+
+	ValidationOptions getRepositoryOptions() {
+		ValidationOptions options = getValidationOptions();
+		options.setCheckLayout(true);
+		options.setCheckModuleSemantics(true);
+		options.setCheckReferences(true);
+		options.setFileType(FileType.PUPPET_ROOT);
+		return options;
+	}
+
 	@Test
 	public void validateAString_NotOk() throws Exception {
 		String code = "$a = ";
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateManifest(chain, getValidationOptions(), code, null);
+		vs.validate(chain, getManifestOptions(), code, null);
 		assertTrue("There should be errors", chain.getChildren().size() != 0);
 	}
 
 	@Test
 	public void validateAString_ok() throws Exception {
 		String code = "$a = 'a::b'";
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateManifest(chain, getValidationOptions(), code, SubMonitor.convert(null));
+		vs.validate(chain, getManifestOptions(), code, SubMonitor.convert(null));
 		assertTrue("There should be no errors", chain.getChildren().size() == 0);
 	}
 
 	@Test
 	public void validateCiruclarRepositories() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/circularModules/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-
-		// Set options like API1 would behave for a validateRepository
-		ValidationOptions options = getValidationOptions();
-		options.setCheckLayout(true);
-		options.setCheckModuleSemantics(true);
-		options.setCheckReferences(false);
-		options.setFileType(FileType.PUPPET_ROOT);
-		options.setProblemsAdvisor(DefaultPotentialProblemsAdvisor.INSTANCE);
-
-		vs.validate(chain, options, root, SubMonitor.convert(null));
+		vs.validate(chain, getRepositoryOptions(), root, SubMonitor.convert(null));
 
 		int circularity = 0;
 		int otherErrors = 0;
@@ -89,29 +97,24 @@ public class TestValidatorService extends AbstractValidationTest {
 	@Test
 	public void validateManifest_notok() throws Exception {
 		File manifest = TestDataProvider.getTestFile(new Path("testData/manifests/not_ok_manifest.pp"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateManifest(chain, getValidationOptions(), manifest, SubMonitor.convert(null));
+		vs.validate(chain, getManifestOptions(), manifest, SubMonitor.convert(null));
 		assertTrue("There should be errors", countErrors(chain) > 0);
 	}
 
 	@Test
 	public void validateManifest_ok() throws Exception {
 		File manifest = TestDataProvider.getTestFile(new Path("testData/manifests/ok_manifest.pp"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		ValidationOptions options = getValidationOptions();
-		options.setFileType(FileType.SINGLE_SOURCE_FILE);
-		vs.validateManifest(chain, options, manifest, SubMonitor.convert(null));
+		vs.validate(chain, getManifestOptions(), manifest, SubMonitor.convert(null));
 		assertTrue("There should be no errors", countErrors(chain) == 0);
 	}
 
 	@Test
 	public void validateModule_notok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/broken/broken-module/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateRepository(chain, getValidationOptions(), root, SubMonitor.convert(null));
+		vs.validate(chain, getRepositoryOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertErrors(//
 			asserter.messageFragment("mismatched input"), //
@@ -127,9 +130,8 @@ public class TestValidatorService extends AbstractValidationTest {
 	@Test
 	public void validateModule_ok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/test-module/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateRepository(chain, getValidationOptions(), root, SubMonitor.convert(null));
+		vs.validate(chain, getRepositoryOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		// no errors
 		asserter.assertErrors();
@@ -140,9 +142,8 @@ public class TestValidatorService extends AbstractValidationTest {
 	@Test
 	public void validateModuleWithSpaces_notok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/broken withSpaces/module"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-		vs.validateRepository(chain, getValidationOptions(), root, SubMonitor.convert(null));
+		vs.validate(chain, getRepositoryOptions(), root, SubMonitor.convert(null));
 		assertNotEquals("There should be errors", 0, chain.getChildren().size());
 		for(Diagnostic d : chain)
 			if(d instanceof FileDiagnostic) {
@@ -154,16 +155,11 @@ public class TestValidatorService extends AbstractValidationTest {
 	@Test
 	public void validateRepository_notok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/forgeModules/lab42-activemq-0.1.2-withErrors/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 
-		// Set options like API1 would behave for a validateRepository
-		ValidationOptions options = getValidationOptions();
-		options.setCheckLayout(true);
+		ValidationOptions options = getRepositoryOptions();
 		options.setCheckModuleSemantics(false);
 		options.setCheckReferences(false);
-		options.setFileType(FileType.PUPPET_ROOT);
-
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotEquals("There should be  errors", 0, chain.getChildren().size());
 		Set<String> fileNames = Sets.newHashSet();
@@ -183,16 +179,9 @@ public class TestValidatorService extends AbstractValidationTest {
 	@Test
 	public void validateRepository_ok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/forgeModules/lab42-activemq-0.1.2/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-
-		// Set options like API1 would behave for a validateRepository
-		ValidationOptions options = getValidationOptions();
-		options.setCheckLayout(true);
-		options.setCheckModuleSemantics(true);
+		ValidationOptions options = getRepositoryOptions();
 		options.setCheckReferences(false);
-		options.setFileType(FileType.PUPPET_ROOT);
-
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
 		asserter.assertAll(asserter.issue(IPPDiagnostics.ISSUE__STRING_BOOLEAN).optional().greedy());
@@ -207,16 +196,9 @@ public class TestValidatorService extends AbstractValidationTest {
 	@Test
 	public void validateSeveralRepositories_ok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
-
-		// Set options like API1 would behave for a validateRepository
-		ValidationOptions options = getValidationOptions();
-		options.setCheckLayout(true);
-		options.setCheckModuleSemantics(true);
+		ValidationOptions options = getRepositoryOptions();
 		options.setCheckReferences(false);
-		options.setFileType(FileType.PUPPET_ROOT);
-
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 		int hyphenWarning = 0;
 		for(Diagnostic e : chain)

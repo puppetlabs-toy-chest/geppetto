@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
 import com.puppetlabs.geppetto.validation.ValidationService;
@@ -20,6 +21,9 @@ import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Rakefile;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Raketask;
 
 public class TestRakefileScanning extends AbstractValidationTest {
+
+	@Inject
+	private ValidationService vs;
 
 	private void assertTask(Raketask task, String name, String description) {
 		assertEquals("Expected taskname", name, task.getName());
@@ -34,7 +38,6 @@ public class TestRakefileScanning extends AbstractValidationTest {
 		File theRakefile = new File(root, "a/Rakefile");
 		assertTrue("CONFIGURATION ERROR: Testdata a/Rakefile must exist: check test config!", theRakefile.exists());
 
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		assertTrue("CONFIGURATION ERROR:: Configuration should include ruby services!!", result.isRubyServicesAvailable());
@@ -52,7 +55,6 @@ public class TestRakefileScanning extends AbstractValidationTest {
 	@Test
 	public void oneRakefile4Tasks() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/simple/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
@@ -73,7 +75,6 @@ public class TestRakefileScanning extends AbstractValidationTest {
 	@Test
 	public void oneRakefileWithCode() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/withcode/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
@@ -95,7 +96,6 @@ public class TestRakefileScanning extends AbstractValidationTest {
 	@Test
 	public void rakefileFromJenkinsModule() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/fromJenkinsModule/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);
@@ -120,7 +120,6 @@ public class TestRakefileScanning extends AbstractValidationTest {
 	@Test
 	public void twoRakefilesWith4Tasks() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/rakefiledata/twice/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		BuildResult result = vs.validate(chain, getValidationOptions(), root, SubMonitor.convert(null));
 		DiagnosticsAsserter asserter = new DiagnosticsAsserter(chain);

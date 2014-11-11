@@ -307,6 +307,28 @@
         </resourceServiceProvider>
     </extension>
 
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="com.puppetlabs.geppetto.pp.dsl.ui.RBExecutableExtensionFactory:com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory"
+            type="rb">
+      </parser>
+   </extension>
+    <extension
+          point="org.eclipse.xtext.extension_resourceServiceProvider">
+       <resourceServiceProvider
+             class="com.puppetlabs.geppetto.pp.dsl.ui.RBExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+             uriExtension="rb">
+       </resourceServiceProvider>
+    </extension>
+
+    <extension
+          point="org.eclipse.xtext.extension_resourceServiceProvider">
+       <resourceServiceProvider
+             class="com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+             uriExtension="pptp">
+       </resourceServiceProvider>
+    </extension>
 
     <!-- marker definitions for com.puppetlabs.geppetto.pp.dsl.PP -->
     <extension
@@ -326,6 +348,28 @@
     <extension
             id="pp.check.expensive"
             name="PP Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
+
+    <extension
+            id="rb.check.fast"
+            name="Ruby Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="rb.check.normal"
+            name="Ruby Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="rb.check.expensive"
+            name="Ruby Problem"
             point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.xtext.ui.check.expensive"/>
         <persistent value="true"/>
@@ -448,20 +492,6 @@
             id="com.puppetlabs.geppetto.pp.dsl.ui.addRemoveNatureAction">
       </command>
    </extension>
-    <extension
-          point="org.eclipse.xtext.extension_resourceServiceProvider">
-       <resourceServiceProvider
-             class="com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpRubyExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-             uriExtension="rb">
-       </resourceServiceProvider>
-    </extension>
-    <extension
-          point="org.eclipse.xtext.extension_resourceServiceProvider">
-       <resourceServiceProvider
-             class="com.puppetlabs.geppetto.pp.dsl.ui.pptp.PptpExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-             uriExtension="pptp">
-       </resourceServiceProvider>
-    </extension>
     <extension
           point="org.eclipse.ui.startup">
        <startup

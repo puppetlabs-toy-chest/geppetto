@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.validation.FileType;
@@ -26,13 +27,15 @@ import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 import com.puppetlabs.geppetto.validation.runner.BuildResult;
 
 public class TestStackhammerDemo extends AbstractValidationTest {
+	@Inject
+	private ValidationService vs;
+
 	@Test
 	public void test_ValidateStackhammerDemo() throws Exception {
 		{
 			File root = new File("/Users/henrik/gitrepos/stackhammer-demo");
 			// TestDataProvider.getTestFile(new Path(
 			// "testData/test-modules/"));
-			ValidationService vs = getValidationService();
 			Diagnostic chain = new Diagnostic();
 			ValidationOptions options = getValidationOptions();
 			options.setCheckLayout(true);
@@ -107,7 +110,6 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			File root = new File("/Users/henrik/gitrepos/stackhammer-demo");
 			// TestDataProvider.getTestFile(new Path(
 			// "testData/test-modules/"));
-			ValidationService vs = getValidationService();
 			Diagnostic chain = new Diagnostic();
 			ValidationOptions options = getValidationOptions();
 			options.setCheckLayout(true);
@@ -190,7 +192,6 @@ public class TestStackhammerDemo extends AbstractValidationTest {
 			File root = new File("/Users/henrik/git/khussey-puppetconf-demo");
 			// TestDataProvider.getTestFile(new Path(
 			// "testData/test-modules/"));
-			ValidationService vs = getValidationService();
 			Diagnostic chain = new Diagnostic();
 			ValidationOptions options = getValidationOptions();
 			options.setCheckLayout(true);

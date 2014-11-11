@@ -29,7 +29,6 @@ import org.apache.maven.model.Build;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.core.runtime.IPath;
@@ -47,12 +46,15 @@ import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.validation.ValidationService;
-import com.puppetlabs.geppetto.validation.impl.ValidationModule;
 
 /**
  * Goal which performs basic validation.
  */
 public abstract class AbstractForgeMojo extends AbstractMojo {
+	static final String IMPORTED_MODULES_ROOT = "importedModules";
+
+	static final Charset UTF_8 = Charset.forName("UTF-8");
+
 	public static boolean isNull(String field) {
 		if(field == null)
 			return true;
@@ -85,10 +87,6 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 		}
 	}
 
-	static final String IMPORTED_MODULES_ROOT = "importedModules";
-
-	static final Charset UTF_8 = Charset.forName("UTF-8");
-
 	/**
 	 * The directory where this plug-in will search for modules. The directory itself
 	 * can be a module or it may be the root of a hierarchy where modules can be found.
@@ -96,7 +94,7 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 	@Parameter(property = "forge.modules.root", defaultValue = "${project.basedir}")
 	private String modulesRoot;
 
-	@Component
+	@Parameter(defaultValue = "${session}", readonly = true)
 	private MavenSession session;
 
 	private transient File baseDir;
@@ -111,8 +109,11 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 
 	protected void addModules(Diagnostic diagnostic, List<Module> modules) {
 		modules.add(new ForgeMavenModule(getFileFilter(), session.getCurrentProject()));
-		modules.add(new ValidationModule());
 		modules.add(getCommonModule());
+	}
+
+	protected Injector createInjector(List<Module> modules) {
+		return Guice.createInjector(modules);
 	}
 
 	@Override
@@ -122,7 +123,7 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 			List<Module> modules = new ArrayList<Module>();
 			addModules(diagnostic, modules);
 			if(diagnostic.getSeverity() <= Diagnostic.WARNING) {
-				injector = Guice.createInjector(modules);
+				injector = createInjector(modules);
 				invoke(diagnostic);
 			}
 		}

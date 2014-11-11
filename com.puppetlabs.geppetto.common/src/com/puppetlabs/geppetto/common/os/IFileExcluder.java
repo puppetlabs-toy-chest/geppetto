@@ -9,7 +9,7 @@
  *   Puppet Labs
  *
  */
-package com.puppetlabs.geppetto.pp.dsl;
+package com.puppetlabs.geppetto.common.os;
 
 import java.nio.file.Path;
 

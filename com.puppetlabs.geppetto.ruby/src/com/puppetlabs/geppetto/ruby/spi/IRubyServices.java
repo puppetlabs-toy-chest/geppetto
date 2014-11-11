@@ -16,7 +16,9 @@ import java.io.Reader;
 import java.util.List;
 import java.util.Map;
 
+import com.puppetlabs.geppetto.diagnostic.DiagnosticType;
 import com.puppetlabs.geppetto.ruby.PPFunctionInfo;
+import com.puppetlabs.geppetto.ruby.PPProviderInfo;
 import com.puppetlabs.geppetto.ruby.PPTypeInfo;
 import com.puppetlabs.geppetto.ruby.RubySyntaxException;
 
@@ -27,9 +29,13 @@ import com.puppetlabs.geppetto.ruby.RubySyntaxException;
  */
 public interface IRubyServices {
 
-	public List<PPFunctionInfo> getFunctionInfo(File file) throws IOException, RubySyntaxException;
+	DiagnosticType RUBY_SYNTAX = new DiagnosticType("RUBY_SYNTAX", IRubyServices.class.getName());
 
-	public List<PPFunctionInfo> getFunctionInfo(String fileName, Reader reader) throws IOException, RubySyntaxException;
+	DiagnosticType RUBY = new DiagnosticType("RUBY", IRubyServices.class.getName());
+
+	IRubyParseResult<List<PPFunctionInfo>> getFunctionInfo(File file) throws IOException, RubySyntaxException;
+
+	IRubyParseResult<List<PPFunctionInfo>> getFunctionInfo(String fileName, Reader reader) throws IOException, RubySyntaxException;
 
 	/**
 	 * Turns the array called "@levels" in class Puppet::Utils::Log into
@@ -41,7 +47,7 @@ public interface IRubyServices {
 	 * @throws IOException
 	 * @throws RubySyntaxException
 	 */
-	public List<PPFunctionInfo> getLogFunctions(File file) throws IOException, RubySyntaxException;
+	IRubyParseResult<List<PPFunctionInfo>> getLogFunctions(File file) throws IOException, RubySyntaxException;
 
 	/**
 	 * Loads a PPTypeInfo describing metaparameters.
@@ -53,9 +59,13 @@ public interface IRubyServices {
 	 * @throws IOException
 	 * @throws RubySyntaxException
 	 */
-	public PPTypeInfo getMetaTypeProperties(File file) throws IOException, RubySyntaxException;
+	IRubyParseResult<PPTypeInfo> getMetaTypeProperties(File file) throws IOException, RubySyntaxException;
 
-	public PPTypeInfo getMetaTypeProperties(String fileName, Reader reader) throws IOException, RubySyntaxException;
+	IRubyParseResult<PPTypeInfo> getMetaTypeProperties(String fileName, Reader reader) throws IOException, RubySyntaxException;
+
+	IRubyParseResult<List<PPProviderInfo>> getProviderInfo(File file) throws IOException, RubySyntaxException;
+
+	IRubyParseResult<List<PPProviderInfo>> getProviderInfo(String fileName, Reader reader) throws IOException, RubySyntaxException;
 
 	/**
 	 * Produce a Map of taks to description mapping. For tasks without a description, the description
@@ -66,11 +76,11 @@ public interface IRubyServices {
 	 * @throws IOException
 	 *             , RubySyntaxException
 	 */
-	public Map<String, String> getRakefileTaskDescriptions(File file) throws IOException, RubySyntaxException;
+	IRubyParseResult<Map<String, String>> getRakefileTaskDescriptions(File file) throws IOException, RubySyntaxException;
 
-	public List<PPTypeInfo> getTypeInfo(File file) throws IOException, RubySyntaxException;
+	IRubyParseResult<List<PPTypeInfo>> getTypeInfo(File file) throws IOException, RubySyntaxException;
 
-	public List<PPTypeInfo> getTypeInfo(String fileName, Reader reader) throws IOException, RubySyntaxException;
+	IRubyParseResult<List<PPTypeInfo>> getTypeInfo(String fileName, Reader reader) throws IOException, RubySyntaxException;
 
 	/**
 	 * Parses and returns additional properties from a ruby file - such "extra"
@@ -82,23 +92,18 @@ public interface IRubyServices {
 	 * @throws IOException
 	 * @throws RubySyntaxException
 	 */
-	public List<PPTypeInfo> getTypePropertiesInfo(File file) throws IOException, RubySyntaxException;
+	IRubyParseResult<List<PPTypeInfo>> getTypePropertiesInfo(File file) throws IOException, RubySyntaxException;
 
-	public List<PPTypeInfo> getTypePropertiesInfo(String fileName, Reader reader) throws IOException, RubySyntaxException;
+	IRubyParseResult<List<PPTypeInfo>> getTypePropertiesInfo(String fileName, Reader reader) throws IOException, RubySyntaxException;
 
 	/**
 	 * Indicates if this is a real service or one that produces no results.
 	 *
 	 * @return
 	 */
-	public boolean isMockService();
+	boolean isMockService();
 
-	public IRubyParseResult parse(File file) throws IOException;
+	List<IRubyIssue> parse(File file) throws IOException, RubySyntaxException;
 
-	IRubyParseResult parse(String path, Reader reader) throws IOException;
-
-	public void setUp();
-
-	public void tearDown();
-
+	List<IRubyIssue> parse(String path, Reader reader) throws IOException, RubySyntaxException;
 }

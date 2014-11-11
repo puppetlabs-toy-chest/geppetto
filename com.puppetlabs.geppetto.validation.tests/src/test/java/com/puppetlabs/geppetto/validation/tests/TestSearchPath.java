@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.junit.Test;
 
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
@@ -30,24 +31,19 @@ import com.puppetlabs.geppetto.validation.ValidationService;
  * @author thhal
  */
 public class TestSearchPath extends AbstractValidationTest {
+	@Inject
+	private ValidationService vs;
 
-	@Override
-	public ValidationOptions getValidationOptions() {
-		ValidationOptions options = super.getValidationOptions();
+	@Test
+	public void testManifestDir() throws Exception {
+		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/test-module"));
+		Diagnostic chain = new Diagnostic();
+		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
 		options.setCheckModuleSemantics(true);
 		options.setCheckReferences(true);
 		options.setSearchPath(PPSearchPath.DEFAULT_PUPPET_PROJECT_PATH);
 		options.setFileType(FileType.MODULE_ROOT);
-		return options;
-	}
-
-	@Test
-	public void testManifestDir() throws Exception {
-		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/test-module"));
-		ValidationService vs = getValidationService();
-		Diagnostic chain = new Diagnostic();
-		ValidationOptions options = getValidationOptions();
 		vs.validate(chain, options, root, SubMonitor.convert(null));
 
 		// Without constraint that only things on path are validated - there should be two redefinition errors

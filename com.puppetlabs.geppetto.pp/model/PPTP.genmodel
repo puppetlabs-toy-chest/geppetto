@@ -12,12 +12,14 @@
     <genClasses image="false" ecoreClass="PPTP.ecore#//TargetEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetEntry/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/providers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/types"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetEntry/version"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/typeFragments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/metaType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetEntry/label"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/metaVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/puppetTypes"/>
     </genClasses>
     <genClasses ecoreClass="PPTP.ecore#//PuppetDistribution"/>
     <genClasses ecoreClass="PPTP.ecore#//Function">
@@ -39,6 +41,9 @@
     </genClasses>
     <genClasses ecoreClass="PPTP.ecore#//Property"/>
     <genClasses ecoreClass="PPTP.ecore#//Parameter"/>
+    <genClasses ecoreClass="PPTP.ecore#//Provider">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//Provider/typeName"/>
+    </genClasses>
     <genClasses ecoreClass="PPTP.ecore#//TypeFragment"/>
     <genClasses ecoreClass="PPTP.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//Type/superType"/>

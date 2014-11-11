@@ -47,19 +47,7 @@ public class ValidationOptions {
 		DEFAULT_EXCLUDES = Collections.unmodifiableSet(Sets.newHashSet("**/pkg/**", "**/spec/**"));
 	}
 
-	private ComplianceLevel complianceLevel;
-
-	private IEncodingProvider encodingProvider;
-
-	private String environment;
-
-	private String manifestDir;
-
-	private FileType fileType;
-
-	private IPotentialProblemsAdvisor problemsAdvisor;
-
-	private String searchPath;
+	private boolean allowFileOverride;
 
 	private boolean checkLayout;
 
@@ -67,13 +55,27 @@ public class ValidationOptions {
 
 	private boolean checkReferences;
 
-	private boolean allowFileOverride;
+	private ComplianceLevel complianceLevel;
 
-	private IModuleValidationAdvisor moduleValidationAdvisor;
+	private IEncodingProvider encodingProvider;
+
+	private String environment;
 
 	private Set<String> excludeGlobs;
 
+	private boolean extractTypes;
+
 	private FileFilter fileFilter;
+
+	private FileType fileType;
+
+	private String manifestDir;
+
+	private IModuleValidationAdvisor moduleValidationAdvisor;
+
+	private IPotentialProblemsAdvisor problemsAdvisor;
+
+	private String searchPath;
 
 	private FileFilter validationFilter;
 
@@ -84,19 +86,21 @@ public class ValidationOptions {
 	}
 
 	public ValidationOptions(ValidationOptions source) {
-		complianceLevel = source.complianceLevel;
-		encodingProvider = source.encodingProvider;
-		environment = source.environment;
-		manifestDir = source.manifestDir;
-		fileType = source.fileType;
-		problemsAdvisor = source.problemsAdvisor;
-		searchPath = source.searchPath;
+		allowFileOverride = source.allowFileOverride;
 		checkLayout = source.checkLayout;
 		checkModuleSemantics = source.checkModuleSemantics;
 		checkReferences = source.checkReferences;
-		moduleValidationAdvisor = source.moduleValidationAdvisor;
+		complianceLevel = source.complianceLevel;
+		encodingProvider = source.encodingProvider;
+		environment = source.environment;
 		excludeGlobs = source.excludeGlobs;
+		extractTypes = source.extractTypes;
 		fileFilter = source.fileFilter;
+		fileType = source.fileType;
+		manifestDir = source.manifestDir;
+		moduleValidationAdvisor = source.moduleValidationAdvisor;
+		problemsAdvisor = source.problemsAdvisor;
+		searchPath = source.searchPath;
 		validationFilter = source.validationFilter;
 		validationRoot = source.validationRoot;
 	}
@@ -221,6 +225,20 @@ public class ValidationOptions {
 	 */
 	public boolean isCheckReferences() {
 		return checkReferences;
+	}
+
+	/**
+	 * @return wether or not type documentation should be extracted
+	 */
+	public boolean isExtractTypes() {
+		return extractTypes;
+	}
+
+	/**
+	 * @return wether or not to add ruby warnings to the diagnostic output
+	 */
+	public boolean isRubyWarnings() {
+		return true;
 	}
 
 	/**
@@ -358,6 +376,14 @@ public class ValidationOptions {
 	 */
 	public void setExcludeGlobs(Set<String> excludeGlobs) {
 		this.excludeGlobs = excludeGlobs;
+	}
+
+	/**
+	 * @param extractTypes
+	 *            the extractTypes to set
+	 */
+	public void setExtractTypes(boolean extractTypes) {
+		this.extractTypes = extractTypes;
 	}
 
 	/**

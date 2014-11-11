@@ -12,18 +12,13 @@ package com.puppetlabs.geppetto.validation.runner;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.google.inject.Singleton;
+
 /**
  * A default implementation of IEncodingProvider that always returns UTF-8
  */
+@Singleton
 public class DefaultEncodingProvider implements IEncodingProvider {
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.puppetlabs.geppetto.validation.runner.IEncodingProvider#getEncoding
-	 * (java.io.File)
-	 */
 	@Override
 	public String getEncoding(URI uri) {
 		return "UTF-8";

@@ -1,4 +1,4 @@
-package com.puppetlabs.geppetto.pp.dsl;
+package com.puppetlabs.geppetto.common.os;
 
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
@@ -9,12 +9,21 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.Sets;
-import com.google.inject.Singleton;
-import com.puppetlabs.geppetto.common.os.FileUtils;
 
-@Singleton
 public class FileExcluder implements IFileExcluder {
+	private static final Path DOT = Paths.get(".");
+
 	private PathMatcher pathMatcher;
+
+	private final FileExcluderProvider provider;
+
+	public FileExcluder() {
+		provider = null;
+	}
+
+	public FileExcluder(FileExcluderProvider provider) {
+		this.provider = provider;
+	}
 
 	/**
 	 * UI module might override this to provide custom patterns
@@ -22,7 +31,9 @@ public class FileExcluder implements IFileExcluder {
 	 * @return Pattern used when excluding
 	 */
 	protected Set<String> getExcludeGlobs() {
-		return Collections.emptySet();
+		return provider == null
+			? Collections.<String> emptySet()
+			: provider.getExcludeGlobs();
 	}
 
 	protected synchronized PathMatcher getPathMatcher() {
@@ -31,19 +42,41 @@ public class FileExcluder implements IFileExcluder {
 		return pathMatcher;
 	}
 
+	/**
+	 * Returns the path relative to the validation root prefixed with &quot;./&quot; so
+	 * that it will match patterns that start with wildcard
+	 */
 	protected Path getRelativePath(Path path) {
-		return path;
+		if(path == null)
+			return null;
+
+		Path root = provider == null
+			? null
+			: provider.getRoot();
+		if(root == null || !path.startsWith(root))
+			return path.isAbsolute()
+				? path
+				: DOT.resolve(path);
+
+		return DOT.resolve(root.relativize(path));
 	}
 
 	protected Path getRelativePath(URI uri) {
-		if(uri != null && uri.isPlatform() && uri.segmentCount() > 1 && "resource".equals(uri.segment(0))) {
-			String[] segments = uri.segments();
-			StringBuilder path = new StringBuilder(segments[1]);
-			for(int idx = 2; idx < segments.length; ++idx) {
-				path.append('/');
-				path.append(segments[idx]);
+		if(uri != null) {
+			if(uri.isPlatform() && uri.segmentCount() > 1 && "resource".equals(uri.segment(0))) {
+				String[] segments = uri.segments();
+				StringBuilder path = new StringBuilder(segments[1]);
+				for(int idx = 2; idx < segments.length; ++idx) {
+					path.append('/');
+					path.append(segments[idx]);
+				}
+				return Paths.get(path.toString());
 			}
-			return Paths.get(path.toString());
+			else if(uri.isFile()) {
+				String filePath = uri.toFileString();
+				if(filePath != null)
+					return getRelativePath(Paths.get(filePath));
+			}
 		}
 		return null;
 	}

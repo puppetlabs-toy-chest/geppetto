@@ -27,6 +27,8 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.name.Names;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
@@ -41,11 +43,10 @@ import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 import com.puppetlabs.geppetto.puppetlint.PuppetLintRunner;
 import com.puppetlabs.geppetto.puppetlint.PuppetLintRunner.Issue;
 import com.puppetlabs.geppetto.puppetlint.PuppetLintService;
-import com.puppetlabs.geppetto.ruby.RubyHelper;
-import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
+import com.puppetlabs.geppetto.validation.impl.ValidationModule;
 import com.puppetlabs.geppetto.validation.runner.IEncodingProvider;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsSetup;
 
@@ -505,6 +506,7 @@ public class Validate extends AbstractForgeServiceMojo {
 					bind(File.class).annotatedWith(Names.named(Forge.CACHE_LOCATION)).toInstance(new File(cacheLocation));
 				}
 			});
+		modules.add(new ValidationModule());
 	}
 
 	private Diagnostic convertPuppetLintDiagnostic(File moduleRoot, Issue issue) {
@@ -512,6 +514,16 @@ public class Validate extends AbstractForgeServiceMojo {
 			getRelativePath(new File(moduleRoot, issue.getPath()))));
 		diagnostic.setLineNumber(issue.getLineNumber());
 		return diagnostic;
+	}
+
+	@Override
+	protected Injector createInjector(final List<Module> modules) {
+		return new PPDiagnosticsSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(modules);
+			}
+		}.createInjectorAndDoEMFRegistration();
 	}
 
 	private void geppettoValidation(Collection<File> moduleLocations, Diagnostic result) throws IOException {
@@ -530,9 +542,7 @@ public class Validate extends AbstractForgeServiceMojo {
 		if(importedModuleLocations == null)
 			importedModuleLocations = Collections.emptyList();
 
-		RubyHelper.setRubyServicesFactory(JRubyServices.FACTORY);
 		ValidationOptions options = getValidationOptions(moduleLocations, importedModuleLocations);
-		new PPDiagnosticsSetup(options).createInjectorAndDoEMFRegistration();
 		getValidationService().validate(result, options, getModulesDir(), new NullProgressMonitor());
 	}
 

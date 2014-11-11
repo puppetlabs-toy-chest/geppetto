@@ -14,14 +14,16 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRubyRuntimeModule;
+import com.puppetlabs.geppetto.pp.PPFactory;
 import com.puppetlabs.geppetto.pp.dsl.pptp.PptpRuntimeModule;
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 
 /**
  * Initialization support for running Xtext languages
@@ -32,8 +34,6 @@ public class PPStandaloneSetup extends PPStandaloneSetupGenerated {
 	public static void doSetup() {
 		new PPStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
-
-	private Injector pptpRubyInjector;
 
 	private Injector pptpInjector;
 
@@ -52,32 +52,24 @@ public class PPStandaloneSetup extends PPStandaloneSetupGenerated {
 
 		Map<String, Object> factoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
 		if(!factoryMap.containsKey("pptp"))
-			factoryMap.put("pptp", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+			factoryMap.put("pptp", new XMIResourceFactoryImpl());
 
-		if(!factoryMap.containsKey("rb"))
-			factoryMap.put("rb", new PptpRubyResourceFactory());
+		EValidator.Registry.INSTANCE.remove(PPFactory.eINSTANCE.getPPPackage());
 
 		Injector mainInjector = super.createInjectorAndDoEMFRegistration();
-
 		doPptpSetup();
+
 		return mainInjector;
 	}
 
 	public void doPptpSetup() {
-		// two injectors needed - one for pptp model, and one for ruby
-		pptpRubyInjector = Guice.createInjector(getPptpRubyModule());
 		pptpInjector = Guice.createInjector(getPptpModule());
 
-		// register rb
-		// expects the PptpRubyResourceFactory to have been registered via a Eclipse Extension
-		// register the resource service provider (in a UI scnario this is registered by the Activator)
-		org.eclipse.xtext.resource.IResourceServiceProvider pptpRubyServiceProvider = pptpRubyInjector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("rb", pptpRubyServiceProvider);
 		// register pptp
 		// Expect the pptp resource factory (a default XMI resource) to be available by default
 		// register the resource service provider (in a UI scenario this is registered by the Activator).
-		org.eclipse.xtext.resource.IResourceServiceProvider pptpServiceProvider = pptpInjector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("pptp", pptpServiceProvider);
+		IResourceServiceProvider pptpServiceProvider = pptpInjector.getInstance(IResourceServiceProvider.class);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("pptp", pptpServiceProvider);
 	}
 
 	public Injector getPptpInjector() {
@@ -87,13 +79,4 @@ public class PPStandaloneSetup extends PPStandaloneSetupGenerated {
 	protected Module getPptpModule() {
 		return new PptpRuntimeModule();
 	}
-
-	public Injector getPptpRubyInjector() {
-		return pptpRubyInjector;
-	}
-
-	protected Module getPptpRubyModule() {
-		return new PptpRubyRuntimeModule();
-	}
-
 }

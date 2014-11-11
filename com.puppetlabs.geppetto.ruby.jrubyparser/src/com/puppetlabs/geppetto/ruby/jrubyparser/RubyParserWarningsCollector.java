@@ -26,6 +26,8 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
 public class RubyParserWarningsCollector implements IRubyWarnings {
 
 	public static class RubyIssue implements IRubyIssue {
+		private static final Object[] EMPTY_DATA = {};
+
 		private ID id;
 
 		private int line;
@@ -41,8 +43,6 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 		private int startOffset;
 
 		private int length;
-
-		private static final Object[] EMPTY_DATA = {};
 
 		protected RubyIssue(ID id, int line, int startLine, String fileName, String message, Object... data) {
 			if(id == null)
@@ -153,63 +153,76 @@ public class RubyParserWarningsCollector implements IRubyWarnings {
 			return id == null;
 		}
 
+		@Override
+		public String toString() {
+			StringBuilder bld = new StringBuilder();
+			bld.append(message);
+			if(fileName != null) {
+				bld.append(": ");
+				bld.append(fileName);
+				if(line >= 0) {
+					bld.append(':');
+					bld.append(line);
+				}
+			}
+			return bld.toString();
+		}
 	}
 
-	private List<IRubyIssue> issues;
+	private final List<IRubyIssue> issues;
 
-	public RubyParserWarningsCollector() {
-		issues = Lists.newArrayList();
+	private final boolean verbose;
+
+	public RubyParserWarningsCollector(boolean collectWarnings, boolean verbose) {
+		this.issues = collectWarnings
+			? Lists.<IRubyIssue> newArrayList()
+			: null;
+		this.verbose = verbose;
+	}
+
+	protected void addIssue(RubyIssue issue) {
+		if(issues != null)
+			issues.add(issue);
 	}
 
 	public List<IRubyIssue> getIssues() {
-		return Collections.unmodifiableList(issues);
+		return issues == null
+			? Collections.<IRubyIssue> emptyList()
+			: Collections.unmodifiableList(issues);
 	}
 
-	/**
-	 * Unknown what this does - there is no javadoc in interface. Returns
-	 * 'false'.
-	 */
 	@Override
 	public boolean isVerbose() {
-		return false;
-	}
-
-	// @Override
-	// public Ruby getRuntime() {
-	// return runtime;
-	// }
-
-	public void syntaxError(SyntaxException error) {
-		issues.add(new RubyIssue(error));
+		return verbose;
 	}
 
 	@Override
 	public void warn(ID id, SourcePosition position, String message, Object... data) {
-		issues.add(new RubyIssue(id, position, message, data));
+		warning(id, position, message, data);
 	}
 
 	@Override
 	public void warn(ID id, String fileName, int lineNumber, String message, Object... data) {
-		issues.add(new RubyIssue(id, lineNumber, -1, fileName, message, data));
+		warning(id, fileName, lineNumber, message, data);
 	}
 
 	@Override
 	public void warn(ID id, String message, Object... data) {
-		issues.add(new RubyIssue(id, -1, -1, null, message, data));
+		warning(id, message, data);
 	}
 
 	@Override
 	public void warning(ID id, SourcePosition position, String message, Object... data) {
-		issues.add(new RubyIssue(id, position, message, data));
+		addIssue(new RubyIssue(id, position, message, data));
 	}
 
 	@Override
 	public void warning(ID id, String fileName, int lineNumber, String message, Object... data) {
-		issues.add(new RubyIssue(id, lineNumber, -1, fileName, message, data));
+		addIssue(new RubyIssue(id, lineNumber, -1, fileName, message, data));
 	}
 
 	@Override
 	public void warning(ID id, String message, Object... data) {
-		issues.add(new RubyIssue(id, -1, -1, null, message, data));
+		addIssue(new RubyIssue(id, -1, -1, null, message, data));
 	}
 }

@@ -17,6 +17,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.common.CharSequences;
 import com.puppetlabs.geppetto.ruby.RubyDocProcessor.RubyDocLexer.HeadingToken;
 import com.puppetlabs.geppetto.ruby.RubyDocProcessor.RubyDocLexer.Token;
@@ -24,6 +25,7 @@ import com.puppetlabs.geppetto.ruby.RubyDocProcessor.RubyDocLexer.Token;
 /**
  * A better Ruby Doc parser
  */
+@Singleton
 public class RubyDocProcessor {
 	public static class RubyDocLexer {
 		public class HeadingToken extends Token {

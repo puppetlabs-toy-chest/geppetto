@@ -17,6 +17,7 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
+					<forkMode>never</forkMode>
 					<includes>
 						<include>**/AllTests.java</include>
 					</includes>
@@ -34,6 +35,12 @@
 		<dependency>
 			<groupId>org.apache.log4j</groupId>
 			<artifactId>org.apache.log4j</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.puppetlabs.geppetto</groupId>
+			<artifactId>com.puppetlabs.geppetto.pp.dsl</artifactId>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

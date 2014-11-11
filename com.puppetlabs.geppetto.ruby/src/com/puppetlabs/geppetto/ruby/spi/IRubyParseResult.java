@@ -16,7 +16,7 @@ import java.util.List;
  * Represents the result from a ruby parser. Currently only provides abstraction
  * of Ruby issues (syntax errors and warnings).
  */
-public interface IRubyParseResult {
+public interface IRubyParseResult<T> {
 	/**
 	 * Returns a list of issues. Will return an empty list if there were no
 	 * issues.
@@ -24,6 +24,11 @@ public interface IRubyParseResult {
 	 * @return
 	 */
 	public List<IRubyIssue> getIssues();
+
+	/**
+	 * Returns the result held by this instance
+	 */
+	public T getResult();
 
 	/**
 	 * Returns true if a syntax error was found.

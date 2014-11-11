@@ -15,6 +15,8 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 
+import com.google.inject.Binder;
+import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPQualifiedNameConverter;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPResourceDescriptionStrategy;
@@ -53,6 +55,10 @@ public class PptpRuntimeModule extends AbstractGenericResourceRuntimeModule {
 
 	public Class<? extends ISearchPathProvider> bindSearchPathProvider() {
 		return PPSearchPathProvider.class;
+	}
+
+	public void configureCommon(Binder binder) {
+		binder.install(CommonModuleProvider.getCommonModule());
 	}
 
 	/*

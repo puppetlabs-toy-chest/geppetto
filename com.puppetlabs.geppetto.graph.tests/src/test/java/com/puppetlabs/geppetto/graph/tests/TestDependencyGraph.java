@@ -19,8 +19,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.junit.Test;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
+import com.puppetlabs.geppetto.graph.DependencyGraphProducer;
 import com.puppetlabs.geppetto.graph.GraphHrefType;
 import com.puppetlabs.geppetto.graph.IHrefProducer;
 import com.puppetlabs.geppetto.graph.SVGProducer;
@@ -33,10 +35,18 @@ import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 import com.puppetlabs.geppetto.validation.runner.BuildResult;
 
 public class TestDependencyGraph extends AbstractValidationTest {
+	@Inject
+	private ValidationService vs;
+
+	@Inject
+	private DependencyGraphProducer graphProducer;
+
+	@Inject
+	private SVGProducer svgProducer;
+
 	@Test
 	public void demoDependencyGraph() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -51,10 +61,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertTrue("Validation had errors", chain.getSeverity() < Diagnostic.ERROR);
-		getDependencyGraphProducer().produceGraph(null, "Demo DefaultModules Dependencies", null, dotStream, buildResult, chain);
-
-		// produce SVG
-		SVGProducer svgProducer = getSVGProducer();
+		graphProducer.produceGraph(null, "Demo DefaultModules Dependencies", null, dotStream, buildResult, chain);
 
 		FileInputStream dotInputStream = new FileInputStream(new File(outputFolder, "demoGraphSVG.dot"));
 
@@ -76,10 +83,9 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		options.setFileType(FileType.PUPPET_ROOT);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-		ValidationService vs = getValidationService();
 		BuildResult result = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotNull("Should have found exported references", result.getAllModuleReferences());
-		getDependencyGraphProducer().produceGraph(null, "Module dependencies for graphTestData", null, stream, result, chain);
+		graphProducer.produceGraph(null, "Module dependencies for graphTestData", null, stream, result, chain);
 
 		assertTrue("Stream contains data", stream.size() > 10);
 	}
@@ -90,7 +96,6 @@ public class TestDependencyGraph extends AbstractValidationTest {
 	@Test
 	public void dependencyGraph_Include() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/graphDataIncludeRequire/include/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -101,8 +106,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		BuildResult result = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotNull("Should have found exported references", result.getAllModuleReferences());
 
-		getDependencyGraphProducer().produceGraph(
-			null, "Module dependencies for graphDataIncludeRequire/include", null, stream, result, chain);
+		graphProducer.produceGraph(null, "Module dependencies for graphDataIncludeRequire/include", null, stream, result, chain);
 
 		//		dumpImports(result.getAllModuleReferences());
 
@@ -115,7 +119,6 @@ public class TestDependencyGraph extends AbstractValidationTest {
 	@Test
 	public void dependencyGraph_Limited() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/graphTestData/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -127,7 +130,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotNull("Should have found exported references", buildResult.getAllModuleReferences());
 		// dumpExports(buildResult.getExportsForAll());
-		getDependencyGraphProducer().produceGraph(null, "Module dependencies for graphTestData", modules, stream, buildResult, chain);
+		graphProducer.produceGraph(null, "Module dependencies for graphTestData", modules, stream, buildResult, chain);
 
 		String output = stream.toString();
 		assertTrue("Stream should contain data", stream.size() > 10);
@@ -139,7 +142,6 @@ public class TestDependencyGraph extends AbstractValidationTest {
 	@Test
 	public void dependencyGraph_SVG() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/graphTestData/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -151,12 +153,9 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertNotNull("Should have found exported references", buildResult.getAllModuleReferences());
 
-		getDependencyGraphProducer().produceGraph(null, "Module dependencies for graphTestData", null, stream, buildResult, chain);
+		graphProducer.produceGraph(null, "Module dependencies for graphTestData", null, stream, buildResult, chain);
 
 		assertTrue("Stream should contain data", stream.size() > 10);
-
-		// produce SVG
-		SVGProducer svgProducer = getSVGProducer();
 
 		// turn the produced dot around and send it to the SVG producer.
 		ByteArrayInputStream dotStream = new ByteArrayInputStream(stream.toByteArray());
@@ -187,7 +186,6 @@ public class TestDependencyGraph extends AbstractValidationTest {
 	@Test
 	public void forgeDependencyGraph() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -199,10 +197,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		File outputFolder = TestDataProvider.getTestOutputDir();
 		FileOutputStream dotStream = new FileOutputStream(new File(outputFolder, "forgeGraphSVG.dot"));
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
-		getDependencyGraphProducer().produceGraph(null, "Forge DefaultModules Dependencies", null, dotStream, buildResult, chain);
-
-		// produce SVG
-		SVGProducer svgProducer = getSVGProducer();
+		graphProducer.produceGraph(null, "Forge DefaultModules Dependencies", null, dotStream, buildResult, chain);
 
 		FileInputStream dotInputStream = new FileInputStream(new File(outputFolder, "forgeGraphSVG.dot"));
 
@@ -282,7 +277,6 @@ public class TestDependencyGraph extends AbstractValidationTest {
 	@Test
 	public void karelsGraph() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -295,10 +289,7 @@ public class TestDependencyGraph extends AbstractValidationTest {
 		FileOutputStream dotStream = new FileOutputStream(new File(outputFolder, "karelGraphSVG.dot"));
 
 		BuildResult buildResult = vs.validate(chain, options, root, SubMonitor.convert(null));
-		getDependencyGraphProducer().produceGraph(null, "Karel DefaultModules Dependencies", null, dotStream, buildResult, chain);
-
-		// produce SVG
-		SVGProducer svgProducer = getSVGProducer();
+		graphProducer.produceGraph(null, "Karel DefaultModules Dependencies", null, dotStream, buildResult, chain);
 
 		FileInputStream dotInputStream = new FileInputStream(new File(outputFolder, "karelGraphSVG.dot"));
 

@@ -6,6 +6,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
         eType="#//Function" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providers" upperBound="-1"
+        eType="#//Provider" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
         eType="#//Type" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -20,6 +22,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaVariables" upperBound="-1"
         eType="#//MetaVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="puppetTypes" upperBound="-1"
+        eType="#//PuppetType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PuppetDistribution" eSuperTypes="#//TargetEntry"/>
   <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//IDocumented #//TargetElement">
@@ -43,6 +47,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//TypeArgument"/>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypeArgument"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Provider" eSuperTypes="#//TargetElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="java.io.File"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypeFragment" eSuperTypes="#//AbstractType"/>
   <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//AbstractType">

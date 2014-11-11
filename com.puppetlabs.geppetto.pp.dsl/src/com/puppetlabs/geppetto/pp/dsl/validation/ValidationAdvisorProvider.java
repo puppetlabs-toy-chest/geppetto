@@ -11,27 +11,24 @@
 package com.puppetlabs.geppetto.pp.dsl.validation;
 
 import com.google.inject.Provider;
+import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
+import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisor.ValidationAdvisorWrapper;
 
 /**
  * A parameterized provider of validation advisor.
  */
-public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements Provider<IValidationAdvisor> {
-	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(IValidationAdvisor.ComplianceLevel level) {
-		return new ValidationAdvisorProvider<T>(level, null);
-	}
+public class ValidationAdvisorProvider implements Provider<IValidationAdvisor> {
+	private ComplianceLevel level;
 
-	public static <T extends IValidationAdvisor> ValidationAdvisorProvider<T> create(IValidationAdvisor.ComplianceLevel level,
-			IPotentialProblemsAdvisor problemsAdvisor) {
-		return new ValidationAdvisorProvider<T>(level, problemsAdvisor);
-	}
+	private IPotentialProblemsAdvisor problemsAdvisor;
 
-	private final IValidationAdvisor.ComplianceLevel level;
+	private final ValidationAdvisorWrapper instance;
 
-	private final IPotentialProblemsAdvisor problemsAdvisor;
-
-	public ValidationAdvisorProvider(IValidationAdvisor.ComplianceLevel level, IPotentialProblemsAdvisor problemsAdvisor) {
-		this.level = level;
-		this.problemsAdvisor = problemsAdvisor;
+	public ValidationAdvisorProvider() {
+		this.level = PuppetTarget.getDefault().getComplianceLevel();
+		this.problemsAdvisor = DefaultPotentialProblemsAdvisor.INSTANCE;
+		this.instance = new ValidationAdvisorWrapper(level.createValidationAdvisor(problemsAdvisor));
 	}
 
 	/**
@@ -39,10 +36,25 @@ public class ValidationAdvisorProvider<T extends IValidationAdvisor> implements 
 	 * If the problems advisor is null, an instance of {@link DefaultPotentialProblemsAdvisor} is used.
 	 */
 	@Override
-	public IValidationAdvisor get() {
-		return level.createValidationAdvisor(problemsAdvisor != null
-			? problemsAdvisor
-			: DefaultPotentialProblemsAdvisor.INSTANCE);
+	public synchronized IValidationAdvisor get() {
+		return instance;
 	}
 
+	private void reset() {
+		instance.setProblemsAdvisor(level.createValidationAdvisor(problemsAdvisor));
+	}
+
+	public synchronized void setComplianceLevel(ComplianceLevel level) {
+		if(this.level != level) {
+			this.level = level;
+			reset();
+		}
+	}
+
+	public synchronized void setProblemsAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
+		if(this.problemsAdvisor != problemsAdvisor) {
+			this.problemsAdvisor = problemsAdvisor;
+			reset();
+		}
+	}
 }

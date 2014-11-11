@@ -21,18 +21,11 @@ import com.puppetlabs.geppetto.pp.pptp.Parameter;
 import com.puppetlabs.geppetto.pp.pptp.Property;
 import com.puppetlabs.geppetto.pp.pptp.Type;
 import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
-import com.puppetlabs.geppetto.ruby.resource.PptpRubyResourceFactory;
 
-public class PptpResourceTests {
+public class PptpResourceTests extends AbstractRubyTests {
 	private void doFunctionResource(String path, String functionName) throws IOException {
-		doFunctionResource(path, functionName, true);
-	}
-
-	private void doFunctionResource(String path, String functionName, boolean register) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		if(register)
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("rb", new PptpRubyResourceFactory());
-		File aRubyFile = TestDataProvider.getTestFile(new Path(path));
+		File aRubyFile = testDataProvider.getTestFile(new Path(path));
 		URI uri = URI.createFileURI(aRubyFile.getAbsolutePath());
 		Resource r = resourceSet.getResource(uri, true);
 
@@ -46,8 +39,7 @@ public class PptpResourceTests {
 
 	private TypeFragment doTypeFragmentResource(String path, String typeName) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("rb", new PptpRubyResourceFactory());
-		File aRubyFile = TestDataProvider.getTestFile(new Path(path));
+		File aRubyFile = testDataProvider.getTestFile(new Path(path));
 		URI uri = URI.createFileURI(aRubyFile.getAbsolutePath());
 		Resource r = resourceSet.getResource(uri, true);
 
@@ -61,8 +53,7 @@ public class PptpResourceTests {
 
 	private Type doTypeResource(String path, String typeName) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("rb", new PptpRubyResourceFactory());
-		File aRubyFile = TestDataProvider.getTestFile(new Path(path));
+		File aRubyFile = testDataProvider.getTestFile(new Path(path));
 		URI uri = URI.createFileURI(aRubyFile.getAbsolutePath());
 		Resource r = resourceSet.getResource(uri, true);
 
@@ -101,11 +92,6 @@ public class PptpResourceTests {
 	@Test
 	public void testFunctionResource3() throws IOException {
 		doFunctionResource("testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest3.rb", "echotest3");
-	}
-
-	@Test
-	public void testFunctionResource3WoRegistry() throws IOException {
-		doFunctionResource("testData/pp-modules-ruby/module-x/lib/puppet/parser/functions/echotest3.rb", "echotest3", false);
 	}
 
 	@Test

@@ -10,7 +10,6 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  com.puppetlabs.geppetto.pp,
  com.puppetlabs.geppetto.pp.dsl,
- com.puppetlabs.geppetto.ruby,
  com.puppetlabs.geppetto.forge,
  com.puppetlabs.geppetto.forge.api,
  com.puppetlabs.geppetto.module.dsl;bundle-version="4.2.0",

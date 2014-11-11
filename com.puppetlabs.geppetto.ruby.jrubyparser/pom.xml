@@ -28,6 +28,10 @@
 			<artifactId>jrubyparser</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>${guice.groupId}</groupId>
+			<artifactId>${guice.artifactId}</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>

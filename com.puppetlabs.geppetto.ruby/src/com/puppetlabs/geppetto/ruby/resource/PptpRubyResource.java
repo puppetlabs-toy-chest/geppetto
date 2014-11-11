@@ -27,6 +27,7 @@ import com.puppetlabs.geppetto.pp.pptp.Property;
 import com.puppetlabs.geppetto.pp.pptp.Type;
 import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
 import com.puppetlabs.geppetto.ruby.PPFunctionInfo;
+import com.puppetlabs.geppetto.ruby.PPProviderInfo;
 import com.puppetlabs.geppetto.ruby.PPTypeInfo;
 import com.puppetlabs.geppetto.ruby.RubyHelper;
 import com.puppetlabs.geppetto.ruby.RubySyntaxException;
@@ -41,12 +42,12 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
 public class PptpRubyResource extends ResourceImpl {
 
 	public enum LoadType {
-		TYPE, TYPEFRAGMENT, META, FUNCTION, IGNORED;
+		TYPE, TYPEFRAGMENT, META, PROVIDER, FUNCTION, IGNORED;
 
 	}
 
 	public static class RubyIssueDiagnostic implements Diagnostic {
-		private IRubyIssue issue;
+		private final IRubyIssue issue;
 
 		public RubyIssueDiagnostic(IRubyIssue issue) {
 			this.issue = issue;
@@ -59,6 +60,10 @@ public class PptpRubyResource extends ResourceImpl {
 		@Override
 		public int getColumn() {
 			throw new UnsupportedOperationException();
+		}
+
+		public IRubyIssue getIssue() {
+			return issue;
 		}
 
 		@Override
@@ -75,40 +80,6 @@ public class PptpRubyResource extends ResourceImpl {
 		public String getMessage() {
 			return issue.getMessage();
 		}
-
-	}
-
-	public static class RubySyntaxExceptionDiagnostic implements Diagnostic {
-		private RubySyntaxException issue;
-
-		public RubySyntaxExceptionDiagnostic(RubySyntaxException issue) {
-			this.issue = issue;
-		}
-
-		/**
-		 * @throws UnsupportedOperationException
-		 *             - column is not available.
-		 */
-		@Override
-		public int getColumn() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public int getLine() {
-			return issue.getLine();
-		}
-
-		@Override
-		public String getLocation() {
-			return issue.getFilename();
-		}
-
-		@Override
-		public String getMessage() {
-			return issue.getMessage();
-		}
-
 	}
 
 	/**
@@ -122,54 +93,55 @@ public class PptpRubyResource extends ResourceImpl {
 		List<String> segments = uri.segmentsList();
 		final int lastPuppet = segments.lastIndexOf("puppet");
 		final int segmentCount = segments.size();
-		if(lastPuppet < 0)
+		int idx = lastPuppet + 1;
+		if(lastPuppet < 0 || idx >= segmentCount)
 			return LoadType.IGNORED;
 
-		int idx = lastPuppet + 1;
-		if(idx < segmentCount) {
-			String segment = segments.get(idx);
-			if("parser".equals(segment)) {
-				idx++;
-				if(idx < segmentCount) {
-					segment = segments.get(idx);
-					if("functions".equals(segment)) {
-						idx++;
-						if(idx == segmentCount - 1 && segments.get(idx).endsWith(".rb"))
-							return LoadType.FUNCTION;
-					}
-				}
-			}
-			else if("type".equals(segment)) {
-				idx++;
-				if(idx < segmentCount) {
-					segment = segments.get(idx);
-					// a .rb file under type
-					if(segment.endsWith(".rb") && idx == segmentCount - 1)
-						return LoadType.TYPE;
+		String typeDir = segments.get(idx++);
+		if(idx == segmentCount)
+			return "type.rb".equals(typeDir)
+				? LoadType.META
+				: LoadType.IGNORED;
 
-					// typefragment must be in a subdir of type, e.g.
-					// type/file/X.rb
-					idx++;
-					if(idx == segmentCount - 1 && segments.get(idx).endsWith(".rb"))
-						return LoadType.TYPEFRAGMENT;
-				}
-			}
-			else if("type.rb".equals(segment) && idx == segmentCount - 1) {
-				return LoadType.META;
-			}
+		String segment = segments.get(idx++);
+		switch(typeDir) {
+			case "parser":
+				if("functions".equals(segment) && idx == segmentCount - 1 && segments.get(idx).endsWith(".rb"))
+					return LoadType.FUNCTION;
+				break;
+			case "type":
+				// a .rb file under type
+				if(segment.endsWith(".rb") && idx == segmentCount)
+					return LoadType.TYPE;
+
+				// typefragment must be in a subdir of type, e.g.
+				// type/file/X.rb
+				segment = segments.get(idx++);
+				if(idx == segmentCount && segment.endsWith(".rb"))
+					return LoadType.TYPEFRAGMENT;
+				break;
+			case "provider":
+				if(segment.endsWith(".rb") && idx == segmentCount)
+					return LoadType.PROVIDER;
+
+				segment = segments.get(idx++);
+				if(idx == segmentCount && segment.endsWith(".rb"))
+					return LoadType.PROVIDER;
+				break;
 		}
 		return LoadType.IGNORED;
 	}
 
-	private LoadType loadType;
+	private final RubyHelper rubyHelper;
 
 	/**
 	 * Create an instance with a reference to a resource in Ruby text format.
 	 *
 	 * @param uri
 	 */
-	public PptpRubyResource(URI uri) {
+	public PptpRubyResource(URI uri, RubyHelper rubyHelper) {
 		super(uri);
+		this.rubyHelper = rubyHelper;
 	}
 
 	protected LoadType detectLoadType() {
@@ -178,7 +150,6 @@ public class PptpRubyResource extends ResourceImpl {
 
 	@Override
 	public void doLoad(InputStream in, Map<?, ?> options) throws IOException {
-		loadType = detectLoadType();
 		internalLoadRuby(in);
 	}
 
@@ -190,19 +161,21 @@ public class PptpRubyResource extends ResourceImpl {
 	 * @throws IOException
 	 */
 	protected void internalLoadRuby(InputStream inputStream) throws IOException {
+		LoadType loadType = detectLoadType();
 		if(loadType == LoadType.IGNORED) {
 			this.getContents().clear();
 			return;
 		}
-		RubyHelper helper = new RubyHelper();
-		helper.setUp();
-
+		List<IRubyIssue> warnings = null;
 		URI uri = getURI();
 		try {
 			switch(loadType) {
 				case TYPE: {
-					List<PPTypeInfo> typeInfo = helper.getTypeInfo(uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
-					for(PPTypeInfo info : typeInfo) {
+					IRubyParseResult<List<PPTypeInfo>> typeInfo = rubyHelper.getTypeInfo(
+						uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
+					warnings = typeInfo.getIssues();
+
+					for(PPTypeInfo info : typeInfo.getResult()) {
 						Type type = PPTPFactory.eINSTANCE.createType();
 						type.setName(info.getTypeName());
 						type.setDocumentation(info.getDocumentation());
@@ -222,14 +195,15 @@ public class PptpRubyResource extends ResourceImpl {
 						}
 						getContents().add(type);
 					}
-				}
 					break;
+				}
 
 				case FUNCTION: {
-					List<PPFunctionInfo> functions = helper.getFunctionInfo(
+					IRubyParseResult<List<PPFunctionInfo>> functions = rubyHelper.getFunctionInfo(
 						uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
+					warnings = functions.getIssues();
 
-					for(PPFunctionInfo info : functions) {
+					for(PPFunctionInfo info : functions.getResult()) {
 						Function pptpFunc = PPTPFactory.eINSTANCE.createFunction();
 						pptpFunc.setName(info.getFunctionName());
 						pptpFunc.setRValue(info.isRValue());
@@ -240,8 +214,11 @@ public class PptpRubyResource extends ResourceImpl {
 					break;
 
 				case META: {
-					PPTypeInfo info = helper.getMetaTypeInfo(uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
+					IRubyParseResult<PPTypeInfo> rr = rubyHelper.getMetaTypeInfo(
+						uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
+					warnings = rr.getIssues();
 
+					PPTypeInfo info = rr.getResult();
 					MetaType type = PPTPFactory.eINSTANCE.createMetaType();
 					type.setName(info.getTypeName());
 					type.setDocumentation(info.getDocumentation());
@@ -266,7 +243,11 @@ public class PptpRubyResource extends ResourceImpl {
 				}
 
 				case TYPEFRAGMENT: {
-					for(PPTypeInfo type : helper.getTypeFragments(uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"))) {
+					IRubyParseResult<List<PPTypeInfo>> rr = rubyHelper.getTypeFragments(
+						uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
+					warnings = rr.getIssues();
+
+					for(PPTypeInfo type : rr.getResult()) {
 						TypeFragment fragment = PPTPFactory.eINSTANCE.createTypeFragment();
 						fragment.setName(type.getTypeName());
 
@@ -291,16 +272,28 @@ public class PptpRubyResource extends ResourceImpl {
 					}
 					break;
 				}
+
+				case PROVIDER: {
+					IRubyParseResult<List<PPProviderInfo>> rr = rubyHelper.getProviderInfo(
+						uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
+					warnings = rr.getIssues();
+
+					for(PPProviderInfo info : rr.getResult())
+						getContents().add(info.toProvider());
+				}
+					break;
 				case IGNORED:
 					break;
 			}
 		}
 		catch(RubySyntaxException syntaxException) {
-			getErrors().add(new RubySyntaxExceptionDiagnostic(syntaxException));
+			getErrors().add(new RubyIssueDiagnostic(syntaxException));
+			for(IRubyIssue warning : syntaxException.getIssues())
+				getWarnings().add(new RubyIssueDiagnostic(warning));
 		}
-		finally {
-			helper.tearDown();
-		}
+		if(warnings != null)
+			for(IRubyIssue warning : warnings)
+				getWarnings().add(new RubyIssueDiagnostic(warning));
 	}
 
 	@Override
@@ -308,27 +301,10 @@ public class PptpRubyResource extends ResourceImpl {
 		if(!super.isLoaded) {
 			super.isLoading = true;
 
-			loadType = detectLoadType();
 			internalLoadRuby(getURIConverter().createInputStream(uri));
 
 			super.isLoading = false;
 			super.isLoaded = true;
-		}
-	}
-
-	/**
-	 * Translates ruby issues to diagnostics using instances of {@link RubyIssueDiagnostic}. All syntax issues are
-	 * reported as errors,
-	 * all others as warnings.
-	 *
-	 * @param parseResult
-	 */
-	protected void rubyIssuesToDiagnostics(IRubyParseResult parseResult) {
-		for(IRubyIssue issue : parseResult.getIssues()) {
-			if(issue.isSyntaxError())
-				getErrors().add(new RubyIssueDiagnostic(issue));
-			else
-				getWarnings().add(new RubyIssueDiagnostic(issue));
 		}
 	}
 

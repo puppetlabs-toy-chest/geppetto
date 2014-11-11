@@ -15,6 +15,8 @@ import static com.puppetlabs.geppetto.ui.UIPlugin.getLocalString;
 import static java.lang.String.format;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
@@ -162,9 +164,16 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 
 		@Override
 		public Object[] getChildren(Object parentElement) {
-			return parentElement instanceof IFileStore
+			IFileStore[] fileStores = parentElement instanceof IFileStore
 				? IDEResourceInfoUtils.listFileStores((IFileStore) parentElement, fileFilter, new NullProgressMonitor())
 				: EMPTY;
+			Arrays.sort(fileStores, new Comparator<IFileStore>() {
+				@Override
+				public int compare(IFileStore o1, IFileStore o2) {
+					return o1.getName().compareTo(o2.getName());
+				}
+			});
+			return fileStores;
 		}
 
 		@Override
@@ -395,6 +404,8 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 		}
 	}
 
+	private static final IFileStore[] EMPTY = new IFileStore[0];
+
 	private static boolean isModule(File file) {
 		return new File(file, Forge.METADATA_JSON_NAME).exists() || new File(file, Forge.MODULEFILE_NAME).exists();
 	}
@@ -411,8 +422,6 @@ public class ImportPuppetModuleFromSourceWizard extends AbstractPuppetModuleWiza
 	private static boolean isProject(IFileStore fs) {
 		return fs.getChild(IProjectDescription.DESCRIPTION_FILE_NAME).fetchInfo().exists();
 	}
-
-	private static final Object[] EMPTY = new Object[0];
 
 	@Inject
 	private IWorkspace workspace;

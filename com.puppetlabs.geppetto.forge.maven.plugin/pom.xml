@@ -68,11 +68,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.puppetlabs.geppetto</groupId>
-			<artifactId>com.puppetlabs.geppetto.ruby.jrubyparser</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.puppetlabs.geppetto</groupId>
 			<artifactId>com.puppetlabs.geppetto.pp.dsl</artifactId>
 			<version>${project.version}</version>
 		</dependency>

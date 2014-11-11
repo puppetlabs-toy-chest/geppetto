@@ -18,16 +18,17 @@ import org.eclipse.xtext.resource.IContainer.Manager;
 
 import com.puppetlabs.geppetto.module.dsl.ModuleRuntimeModule;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
+import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
  * Provides bindings for the ModuleDiagnostician.
  */
 public class ModuleDiagnosticsModule extends ModuleRuntimeModule {
 
-	private final IModuleValidationAdvisor moduleValidationAdvisor;
+	private final ValidationOptions validationOptions;
 
-	public ModuleDiagnosticsModule(IModuleValidationAdvisor moduleValidationAdvisor) {
-		this.moduleValidationAdvisor = moduleValidationAdvisor;
+	public ModuleDiagnosticsModule(ValidationOptions validationOptions) {
+		this.validationOptions = validationOptions;
 	}
 
 	/**
@@ -61,6 +62,6 @@ public class ModuleDiagnosticsModule extends ModuleRuntimeModule {
 	 * @return
 	 */
 	public IModuleValidationAdvisor bindIModuleValidationAdvisor() {
-		return moduleValidationAdvisor;
+		return validationOptions.getModuleValidationAdvisor();
 	}
 }

@@ -10,6 +10,7 @@
  */
 package com.puppetlabs.geppetto.ruby.jrubyparser;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ import org.jrubyparser.ast.VCallNode;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.puppetlabs.geppetto.ruby.PPProviderInfo;
 import com.puppetlabs.geppetto.ruby.PPTypeInfo;
 
 /**
@@ -107,9 +109,13 @@ public class PPTypeFinder {
 
 	private final static String NEWTYPE = "newtype";
 
+	private final static String DESC = "desc";
+
 	private final static String ENSURABLE = "ensurable";
 
 	private final static String NEWCHECK = "newcheck";
+
+	private final static String[] PUPPET_PROVIDE_FQN = new String[] { "Puppet", "Type", "type", "provide" };
 
 	private final static String[] PUPPET_NEWTYPE_FQN = new String[] { "Puppet", "Type", "newtype" };
 
@@ -164,12 +170,32 @@ public class PPTypeFinder {
 		return typeInfo;
 	}
 
+	private PPProviderInfo createProviderInfo(Node root, String typeName, String providerName) {
+		if(root == null)
+			return null;
+		String documentation = "";
+
+		for(Node n : root.childNodes()) {
+			if(n.getNodeType() == NodeType.NEWLINENODE)
+				n = ((NewlineNode) n).getNextNode();
+
+			if(n instanceof FCallNode) {
+				FCallNode callNode = (FCallNode) n;
+				if(DESC.equals(callNode.getName())) {
+					documentation = getFirstArg(callNode);
+					break;
+				}
+			}
+		}
+		return new PPProviderInfo(typeName, providerName, documentation);
+	}
+
 	private PPTypeInfo createTypeInfo(Node root, String typeName) {
 		if(root == null)
 			return null;
 		Map<String, PPTypeInfo.Entry> propertyMap = Maps.newHashMap();
 		Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
-		String typeDocumentation = "";
+		String typeDocumentation = null;
 
 		for(Node n : root.childNodes()) {
 			if(n.getNodeType() == NodeType.NEWLINENODE)
@@ -186,6 +212,8 @@ public class PPTypeFinder {
 						propertyMap.put(getFirstArg(callNode), getEntry(callNode));
 					else if(ENSURABLE.equals(callNode.getName()))
 						parameterMap.put("ensure", getEntry(callNode));
+					else if(typeDocumentation == null && DESC.equals(callNode.getName()))
+						typeDocumentation = getFirstArg(callNode);
 					break;
 				case VCALLNODE:
 					VCallNode vcallNode = (VCallNode) n;
@@ -203,6 +231,8 @@ public class PPTypeFinder {
 					break;
 			}
 		}
+		if(typeDocumentation == null)
+			typeDocumentation = "";
 		PPTypeInfo typeInfo = new PPTypeInfo(typeName, typeDocumentation, propertyMap, parameterMap);
 		return typeInfo;
 	}
@@ -248,26 +278,70 @@ public class PPTypeFinder {
 
 		RubyCallFinder callFinder = new RubyCallFinder();
 		// style 1
-		List<GenericCallNode> newTypeCalls = callFinder.findCalls(root, PUPPET_NAGIOS_NEWTYPE_FQN);
 
 		List<PPTypeInfo> result = Lists.newArrayList();
-		if(newTypeCalls != null) {
-			for(GenericCallNode newTypeCall : newTypeCalls) {
-				if(newTypeCall.isValid()) {
-					// should have at least one argument, the (raw) name of the
-					// type
-					String typeName = getFirstArg(newTypeCall);
-					if(typeName != null) { // just in case there is something
-						// really wrong in parsing
-						PPTypeInfo typeInfo = createNagiosTypeInfo(safeGetBodyNode(newTypeCall), "nagios_" + typeName);
-						if(typeInfo != null)
-							result.add(typeInfo);
-					}
+		for(GenericCallNode newTypeCall : callFinder.findCalls(root, PUPPET_NAGIOS_NEWTYPE_FQN)) {
+			if(newTypeCall.isValid()) {
+				// should have at least one argument, the (raw) name of the
+				// type
+				String typeName = getFirstArg(newTypeCall);
+				if(typeName != null) { // just in case there is something
+					// really wrong in parsing
+					PPTypeInfo typeInfo = createNagiosTypeInfo(safeGetBodyNode(newTypeCall), "nagios_" + typeName);
+					if(typeInfo != null)
+						result.add(typeInfo);
 				}
-
 			}
+
 		}
 		return result;
+	}
+
+	/**
+	 * Finds provider info the form:<br/>
+	 * <code>
+	 * Puppet::Type.type(:typename).provide
+	 * </code>
+	 *
+	 * @param root
+	 * @return
+	 */
+	public List<PPProviderInfo> findProviderInfo(Node root) {
+		RubyCallFinder callFinder = new RubyCallFinder();
+		List<PPProviderInfo> result = null;
+		for(GenericCallNode providerCall : callFinder.findCalls(root, PUPPET_PROVIDE_FQN)) {
+			if(providerCall == null || !providerCall.isValid())
+				continue;
+
+			String providerName = getFirstArg(providerCall);
+			if(providerName == null)
+				continue;
+
+			Node node = providerCall.getNode();
+			if(!(node instanceof CallNode))
+				continue;
+
+			Node receiver = ((CallNode) node).getReceiver();
+			GenericCallNode typeCall = null;
+			if(receiver instanceof CallNode)
+				typeCall = new GenericCallNode((CallNode) receiver);
+			else if(receiver instanceof FCallNode)
+				typeCall = new GenericCallNode((FCallNode) receiver);
+
+			if(typeCall == null || !typeCall.isValid())
+				continue;
+
+			String typeName = getFirstArg(typeCall);
+			if(typeName == null)
+				continue;
+
+			if(result == null)
+				result = Lists.newArrayList();
+			result.add(createProviderInfo(safeGetBodyNode(providerCall), typeName, providerName));
+		}
+		return result == null
+			? Collections.<PPProviderInfo> emptyList()
+			: result;
 	}
 
 	/**

@@ -1,56 +1,24 @@
-/**
- * Copyright (c) 2013 Puppet Labs, Inc. and other contributors, as listed below.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Puppet Labs
- */
 package com.puppetlabs.geppetto.ruby.resource;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 
-public class PptpRubyResourceServiceProvider implements IResourceServiceProvider {
+import com.google.inject.Inject;
+import com.puppetlabs.geppetto.common.os.IFileExcluder;
 
-	/**
-	 * Returns true for .rb files that make a contribution to PPTP.
-	 * This is the only difference from the default...
-	 */
+/**
+ * An IResourceServiceProvider for PPTP Ruby.
+ * This implementation optimizes which .rb instances which will be visited by restricing {@link #canHandle(URI)} to only
+ * operate on the paths where
+ * PPTP contributions can be made.
+ */
+public class PptpRubyResourceServiceProvider extends DefaultResourceServiceProvider {
+	@Inject
+	private IFileExcluder folderDiscriminator;
+
 	@Override
 	public boolean canHandle(URI uri) {
-		return PptpRubyResource.detectLoadType(uri) != PptpRubyResource.LoadType.IGNORED;
+		return super.canHandle(uri) &&
+			!(PptpRubyResource.detectLoadType(uri) == PptpRubyResource.LoadType.IGNORED || folderDiscriminator.isExcluded(uri));
 	}
-
-	@Override
-	public <T> T get(Class<T> t) {
-		return null;
-	}
-
-	@Override
-	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IEncodingProvider getEncodingProvider() {
-		return null;
-	}
-
-	@Override
-	public Manager getResourceDescriptionManager() {
-		return null;
-	}
-
-	@Override
-	public IResourceValidator getResourceValidator() {
-		return IResourceValidator.NULL;
-	}
-
 }

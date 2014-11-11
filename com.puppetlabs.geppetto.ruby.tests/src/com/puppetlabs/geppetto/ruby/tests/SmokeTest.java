@@ -12,71 +12,54 @@ package com.puppetlabs.geppetto.ruby.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 
 import org.eclipse.core.runtime.Path;
 import org.junit.Test;
 
-import com.puppetlabs.geppetto.ruby.RubyHelper;
-import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
-import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
+import com.puppetlabs.geppetto.ruby.RubySyntaxException;
 
-public class SmokeTest {
-
+public class SmokeTest extends AbstractRubyTests {
 	@Test
 	public void testConfiguration() {
-		RubyHelper rubyHelper = new RubyHelper();
-		rubyHelper.setUp();
-		assertTrue("Should have a real ruby service configured", rubyHelper.isRubyServicesAvailable());
+		assertTrue("Should have a real ruby service configured", helper.isRubyServicesAvailable());
 	}
 
 	@Test
 	public void testHelloBrokenWorld() throws Exception {
-		File aRubyFile = TestDataProvider.getTestFile(new Path("testData/ruby/helloBrokenWorld.rb"));
-		RubyHelper helper = new RubyHelper();
-		helper.setUp();
+		File aRubyFile = testDataProvider.getTestFile(new Path("testData/ruby/helloBrokenWorld.rb"));
 		try {
-			IRubyParseResult r = helper.parse(aRubyFile);
-			assertEquals("Expect one error", 1, r.getIssues().size());
-			IRubyIssue theIssue = r.getIssues().get(0);
-			assertTrue("Expect one syntax error", theIssue.isSyntaxError());
-			assertEquals("source line starts with 1", 1, theIssue.getLine());
-			assertEquals("the file path is reported", aRubyFile.getPath(), theIssue.getFileName());
-			assertTrue("the error message is the expected", theIssue.getMessage().contains("unexpected tLPAREN_ARG"));
-			// assertTrue("the error message is the expected", theIssue.getMessage().startsWith("syntax error, unexpected tLPAREN_ARG"));
+			helper.parse(aRubyFile);
+			fail("Expected one syntax error");
 		}
-		finally {
-			helper.tearDown();
+		catch(RubySyntaxException e) {
+			assertEquals("source line starts with 1", 1, e.getLine());
+			assertEquals("the file path is reported", aRubyFile.getPath(), e.getFileName());
+			assertTrue("the error message is the expected", e.getMessage().contains("unexpected tLPAREN_ARG"));
+			assertTrue("expects no extra issues", e.getIssues().isEmpty());
 		}
 	}
 
 	@Test
 	public void testHelloBrokenWorld2() throws Exception {
-		File aRubyFile = TestDataProvider.getTestFile(new Path("testData/ruby/helloBrokenWorld2.rb"));
-		RubyHelper helper = new RubyHelper();
-		helper.setUp();
+		File aRubyFile = testDataProvider.getTestFile(new Path("testData/ruby/helloBrokenWorld2.rb"));
 		try {
-			IRubyParseResult r = helper.parse(aRubyFile);
-			assertEquals("Expect one error", 1, r.getIssues().size());
-			IRubyIssue theIssue = r.getIssues().get(0);
-			assertTrue("Expect one syntax error", theIssue.isSyntaxError());
-			assertEquals("source line is 2", 2, theIssue.getLine());
-			assertEquals("the file path is reported", aRubyFile.getPath(), theIssue.getFileName());
-			assertTrue("the error message is the expected", theIssue.getMessage().contains("unexpected tLPAREN_ARG"));
+			helper.parse(aRubyFile);
+			fail("Expected one syntax error");
 		}
-		finally {
-			helper.tearDown();
+		catch(RubySyntaxException e) {
+			assertEquals("source line is 2", 2, e.getLine());
+			assertEquals("the file path is reported", aRubyFile.getPath(), e.getFileName());
+			assertTrue("the error message is the expected", e.getMessage().contains("unexpected tLPAREN_ARG"));
+			assertTrue("expects no extra issues", e.getIssues().isEmpty());
 		}
 	}
 
 	@Test
 	public void testHelloWorld() throws Exception {
-		File aRubyFile = TestDataProvider.getTestFile(new Path("testData/ruby/helloWorld.rb"));
-		RubyHelper helper = new RubyHelper();
-		helper.setUp();
+		File aRubyFile = testDataProvider.getTestFile(new Path("testData/ruby/helloWorld.rb"));
 		helper.parse(aRubyFile);
-		helper.tearDown();
 	}
-
 }

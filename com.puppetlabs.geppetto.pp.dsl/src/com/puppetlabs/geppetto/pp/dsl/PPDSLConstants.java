@@ -24,11 +24,7 @@ public interface PPDSLConstants {
 
 	public static final String PP_DEBUG_LINKER = DSL_PLUGIN_NAME + "/debug/linker";
 
-	public static final String PPTP_RUBY_LANGUAGE_NAME = "com.puppetlabs.geppetto.pp.dsl.PPTP.RB";
-
 	public static final String PPTP_LANGUAGE_NAME = "com.puppetlabs.geppetto.pp.dsl.PPTP";
-
-	public static final String PPTP_RUBY_EXTENSION = "rb";
 
 	public static final String PPTP_EXTENSION = "pptp";
 

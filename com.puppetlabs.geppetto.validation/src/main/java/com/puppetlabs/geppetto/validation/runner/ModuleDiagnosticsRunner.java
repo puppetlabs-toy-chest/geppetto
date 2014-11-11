@@ -16,18 +16,17 @@ import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.puppetlabs.geppetto.common.os.FileExcluderProvider;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.module.dsl.ModuleStandaloneSetup;
 import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
-import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
-import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 
 /**
  * Runner/Helper that can perform diagnostics/validation of metadata.json files.
  */
 public class ModuleDiagnosticsRunner extends ModuleStandaloneSetup {
-	private final IModuleValidationAdvisor moduleValidationAdvisor;
+	private final ValidationOptions validationOptions;
 
 	private IResourceValidator resourceValidator;
 
@@ -35,16 +34,13 @@ public class ModuleDiagnosticsRunner extends ModuleStandaloneSetup {
 
 	private Forge forge;
 
-	public ModuleDiagnosticsRunner(ValidationOptions options) {
-		IModuleValidationAdvisor mvAdvisor = options.getModuleValidationAdvisor();
-		if(mvAdvisor == null)
-			mvAdvisor = DefaultModuleValidationAdvisor.INSTANCE;
-		this.moduleValidationAdvisor = mvAdvisor;
+	public ModuleDiagnosticsRunner(ValidationOptions validationOptions) {
+		this.validationOptions = validationOptions;
 	}
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new ModuleDiagnosticsModule(moduleValidationAdvisor));
+		return Guice.createInjector(new ModuleDiagnosticsModule(validationOptions));
 	}
 
 	public Forge getForge() {
@@ -65,5 +61,8 @@ public class ModuleDiagnosticsRunner extends ModuleStandaloneSetup {
 		resourceValidator = injector.getInstance(IResourceValidator.class);
 		moduleUtil = injector.getInstance(ModuleUtil.class);
 		forge = injector.getInstance(Forge.class);
+		FileExcluderProvider fileExcluderProvider = injector.getInstance(FileExcluderProvider.class);
+		fileExcluderProvider.setExcludeGlobs(validationOptions.getExcludeGlobs());
+		fileExcluderProvider.setRoot(validationOptions.getValidationRoot().toPath());
 	}
 }

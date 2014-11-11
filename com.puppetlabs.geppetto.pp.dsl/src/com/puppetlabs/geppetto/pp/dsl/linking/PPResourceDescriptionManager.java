@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 import com.google.inject.Inject;
-import com.puppetlabs.geppetto.pp.dsl.IFileExcluder;
+import com.puppetlabs.geppetto.common.os.IFileExcluder;
 
 /**
  * Overrides the default to provide a PPResourceDescription instead of the default

@@ -17,7 +17,9 @@ Require-Bundle: com.puppetlabs.geppetto.ruby,
  com.puppetlabs.geppetto.forge
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Import-Package: com.puppetlabs.geppetto.injectable,
+Import-Package: com.puppetlabs.geppetto.diagnostic,
+ com.puppetlabs.geppetto.injectable,
+ com.puppetlabs.geppetto.pp.dsl,
  com.puppetlabs.geppetto.ruby.jrubyparser;resolution:=optional,
  org.apache.log4j
 Export-Package: com.puppetlabs.geppetto.ruby.tests

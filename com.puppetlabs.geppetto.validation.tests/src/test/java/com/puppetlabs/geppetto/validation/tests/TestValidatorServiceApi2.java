@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.diagnostic.FileDiagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
@@ -29,6 +30,9 @@ import com.puppetlabs.geppetto.validation.ValidationService;
 
 public class TestValidatorServiceApi2 extends AbstractValidationTest {
 
+	@Inject
+	private ValidationService vs;
+
 	private void assertNotEquals(String message, Object expected, Object actual) {
 		assertThat(message, expected, not(equalTo(actual)));
 	}
@@ -36,7 +40,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void relativeAmbiguityErrorReport() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/ambiguity/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(false);
@@ -56,7 +59,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateAString_NotOk() throws Exception {
 		String code = "$a = ";
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		vs.validate(chain, getValidationOptions(), code, SubMonitor.convert(null));
 		assertTrue("There should be errors", countErrors(chain) != 0);
@@ -65,7 +67,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateAString_ok() throws Exception {
 		String code = "$a = 'a::b'";
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		vs.validate(chain, getValidationOptions(), code, SubMonitor.convert(null));
 		assertTrue("There should be no errors", countErrors(chain) == 0);
@@ -74,7 +75,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateManifest_notok() throws Exception {
 		File manifest = TestDataProvider.getTestFile(new Path("testData/manifests/not_ok_manifest.pp"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setFileType(FileType.SINGLE_SOURCE_FILE);
@@ -85,7 +85,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateManifest_ok() throws Exception {
 		File manifest = TestDataProvider.getTestFile(new Path("testData/manifests/ok_manifest.pp"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setFileType(FileType.SINGLE_SOURCE_FILE);
@@ -96,7 +95,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateModule_notok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/broken/broken-module/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setFileType(FileType.MODULE_ROOT);
@@ -112,7 +110,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateModule_ok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/test-module/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setFileType(FileType.MODULE_ROOT);
@@ -123,7 +120,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateModuleWithSpaces_notok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/broken withSpaces/module"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setFileType(FileType.MODULE_ROOT);
@@ -139,7 +135,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateRepository_notok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/forgeModules/lab42-activemq-0.1.2-withErrors/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(false);
@@ -184,7 +179,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateRepository_ok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/forgeModules/lab42-activemq-0.1.2/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setFileType(FileType.MODULE_ROOT);
@@ -196,7 +190,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateRepositoryDependencies() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/dependencyCheckData/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(false);
@@ -237,7 +230,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateRepositoryDependenciesWithExclude() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/dependencyCheckData/"));
-		ValidationService vs = getValidationService();
 		ValidationOptions options = getValidationOptions();
 		Diagnostic chain = new Diagnostic();
 		options.setCheckLayout(false);
@@ -261,7 +253,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void validateSeveralRepositories_ok() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/test-modules/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setFileType(FileType.DETECT);
@@ -282,7 +273,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 	@Test
 	public void variationsOfValidateCall() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/ghbindcases/asmodule/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(false);
@@ -295,7 +285,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 
 		// Same but using a repository layout
 		root = TestDataProvider.getTestFile(new Path("testData/ghbindcases/asrepo/"));
-		vs = getValidationService();
 		chain = new Diagnostic();
 		options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -307,7 +296,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// Use API1 call to do the same as repository layout validation above
-		vs = getValidationService();
 		chain = new Diagnostic();
 		options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -315,13 +303,12 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 		options.setCheckReferences(true);
 		options.setFileType(FileType.PUPPET_ROOT);
 
-		vs.validateRepository(chain, options, root, SubMonitor.convert(null));
+		vs.validate(chain, options, root, SubMonitor.convert(null));
 		assertContainsIssue(chain, IPPDiagnostics.ISSUE__MISSING_COMMA);
 
 		// just the manifest
 		root = TestDataProvider.getTestFile(new Path("testData/ghbindcases/asmodule/ghoneycutt-bind-1.0.0/manifests/master.pp"));
 
-		vs = getValidationService();
 		chain = new Diagnostic();
 		options = getValidationOptions();
 		options.setCheckLayout(false);
@@ -334,7 +321,6 @@ public class TestValidatorServiceApi2 extends AbstractValidationTest {
 
 		// Validate single file in context of repo
 		root = TestDataProvider.getTestFile(new Path("testData/ghbindcases/asrepo/"));
-		vs = getValidationService();
 		chain = new Diagnostic();
 		options = getValidationOptions();
 		options.setCheckLayout(true);

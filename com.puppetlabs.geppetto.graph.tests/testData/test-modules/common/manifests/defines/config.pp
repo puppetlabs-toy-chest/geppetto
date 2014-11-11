@@ -83,11 +83,11 @@ define config (
                 replacement => "$line",
             }
         }
-
+ 
         setparam: {
             setparam {
                 "$file-$parameter":
-                target      => "$file",
+                target    => "$file",
                 parameter => "$parameter",
                 value     => "$value",
             }

@@ -11,7 +11,6 @@
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
 import static com.google.inject.util.Modules.override;
-import static com.puppetlabs.geppetto.injectable.CommonModuleProvider.getCommonModule;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,7 +73,6 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.validation.DefaultPotentialProblemsAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IPotentialProblemsAdvisor;
-import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor;
 import com.puppetlabs.geppetto.pp.dsl.validation.IValidationAdvisor.ComplianceLevel;
 import com.puppetlabs.geppetto.pp.dsl.validation.PPJavaValidator;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
@@ -82,10 +80,6 @@ import com.puppetlabs.xtext.serializer.DomBasedSerializer;
 
 public class AbstractPuppetTests extends AbstractXtextTests {
 	public class PPTestModule extends AbstractGenericModule {
-
-		public Provider<IValidationAdvisor> provideValidationAdvisor() {
-			return ValidationAdvisorProvider.create(getComplianceLevel(), getPotentialProblemsAdvisor());
-		}
 
 		// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
 		public Provider<XtextResourceSet> provideXtextResourceSet() {
@@ -108,7 +102,7 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 	public class PPTestSetup extends PPStandaloneSetup {
 		@Override
 		public Injector createInjector() {
-			return Guice.createInjector(override(getCommonModule(), new PPRuntimeModule()).with(getTestModule()));
+			return Guice.createInjector(override(new PPRuntimeModule()).with(getTestModule()));
 		}
 	}
 
@@ -524,6 +518,9 @@ public class AbstractPuppetTests extends AbstractXtextTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(getSetupInstance());
+		ValidationAdvisorProvider vdProvider = get(ValidationAdvisorProvider.class);
+		vdProvider.setComplianceLevel(getComplianceLevel());
+		vdProvider.setProblemsAdvisor(getPotentialProblemsAdvisor());
 		PPJavaValidator validator = get(PPJavaValidator.class);
 		EValidatorRegistrar registrar = get(EValidatorRegistrar.class);
 		ISearchPathProvider searchPathProvider = get(ISearchPathProvider.class);

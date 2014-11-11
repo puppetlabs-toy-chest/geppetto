@@ -18,6 +18,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
+import com.puppetlabs.geppetto.forge.model.Type;
 import com.puppetlabs.geppetto.semver.VersionRange;
 
 public class MetadataInfo {
@@ -74,6 +75,8 @@ public class MetadataInfo {
 
 	private final List<Dependency> unresolvedDependencies;
 
+	private final List<Type> types;
+
 	private final boolean roleFlag;
 
 	public MetadataInfo(Metadata data, File f, boolean roleFlag) {
@@ -81,11 +84,16 @@ public class MetadataInfo {
 		this.file = f;
 		this.resolvedDependencies = Lists.newArrayList();
 		this.unresolvedDependencies = Lists.newArrayList();
+		this.types = Lists.newArrayList();
 		this.roleFlag = roleFlag;
 	}
 
 	public void addResolvedDependency(Dependency d, MetadataInfo mi) {
 		resolvedDependencies.add(new Resolution(d, mi));
+	}
+
+	public void addType(Type type) {
+		types.add(type);
 	}
 
 	/**
@@ -106,6 +114,10 @@ public class MetadataInfo {
 
 	public Collection<Resolution> getResolvedDependencies() {
 		return Collections.unmodifiableList(resolvedDependencies);
+	}
+
+	public Collection<Type> getTypes() {
+		return Collections.unmodifiableList(types);
 	}
 
 	public Collection<Dependency> getUnresolvedDependencies() {

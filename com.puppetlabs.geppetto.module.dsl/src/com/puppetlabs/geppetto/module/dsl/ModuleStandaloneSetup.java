@@ -3,6 +3,11 @@
  */
 package com.puppetlabs.geppetto.module.dsl;
 
+import org.eclipse.emf.ecore.EValidator;
+
+import com.google.inject.Injector;
+import com.puppetlabs.geppetto.module.dsl.metadata.MetadataFactory;
+
 /**
  * Initialization support for running Xtext languages
  * without equinox extension registry
@@ -11,5 +16,11 @@ public class ModuleStandaloneSetup extends ModuleStandaloneSetupGenerated {
 
 	public static void doSetup() {
 		new ModuleStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
+
+	@Override
+	public Injector createInjector() {
+		EValidator.Registry.INSTANCE.remove(MetadataFactory.eINSTANCE.getMetadataPackage());
+		return super.createInjector();
 	}
 }

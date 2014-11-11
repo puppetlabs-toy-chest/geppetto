@@ -18,67 +18,59 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
  * A simplified RubySyntaxException that should be thrown in operations where it
  * is expected that syntax errors are not present.
  */
-public class RubySyntaxException extends Exception {
+public class RubySyntaxException extends Exception implements IRubyIssue {
 
 	private static final long serialVersionUID = 1L;
 
-	private String filename;
+	private final IRubyIssue syntaxIssue;
 
-	private int line;
+	private final List<IRubyIssue> issues;
 
-	private String message;
-
-	public RubySyntaxException(List<IRubyIssue> issues) {
-		FOUND: {
-			for(IRubyIssue issue : issues) {
-				if(issue.isSyntaxError()) {
-					filename = issue.getFileName();
-					line = issue.getLine();
-					message = issue.getMessage();
-					break FOUND;
-				}
-			}
-			if(issues.size() < 1) {
-				filename = "unknown";
-				line = -1;
-				message = "Can't find an error message to display!";
-			}
-			if(issues.size() == 1) {
-				IRubyIssue issue = issues.get(0);
-				filename = issue.getFileName();
-				line = -1;
-				message = issue.getMessage();
-			}
-			else {
-				IRubyIssue issue = issues.get(0);
-				filename = issue.getFileName();
-				line = -1;
-				message = "Several non syntax errors - file is the first reported file.";
-			}
-		}
+	public RubySyntaxException(IRubyIssue syntaxIssue, List<IRubyIssue> issues) {
+		super(syntaxIssue.getMessage());
+		this.syntaxIssue = syntaxIssue;
+		this.issues = issues;
 	}
 
-	public String getFilename() {
-		return filename;
+	@Override
+	public Object[] getData() {
+		return syntaxIssue.getData();
 	}
 
+	@Override
+	public String getFileName() {
+		return syntaxIssue.getFileName();
+	}
+
+	@Override
+	public String getIdString() {
+		return syntaxIssue.getIdString();
+	}
+
+	public List<IRubyIssue> getIssues() {
+		return issues;
+	}
+
+	@Override
+	public int getLength() {
+		return syntaxIssue.getLength();
+	}
+
+	@Override
 	public int getLine() {
-		return line;
+		return syntaxIssue.getLine();
+	}
+
+	public int getStartLine() {
+		return syntaxIssue.getStartLine();
+	}
+
+	public int getStartOffset() {
+		return syntaxIssue.getStartOffset();
 	}
 
 	@Override
-	public String getMessage() {
-		return message;
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer str = new StringBuffer();
-		str.append(filename);
-		str.append(", line: ");
-		str.append(line);
-		str.append(" ");
-		str.append(message);
-		return str.toString();
+	public boolean isSyntaxError() {
+		return true;
 	}
 }

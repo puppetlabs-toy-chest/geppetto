@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.module.dsl.validation.ModuleDiagnostics;
 import com.puppetlabs.geppetto.validation.FileType;
@@ -27,6 +28,8 @@ import com.puppetlabs.geppetto.validation.runner.AllModulesState.Export;
 import com.puppetlabs.geppetto.validation.runner.BuildResult;
 
 public class TestNodeHandling extends AbstractValidationTest {
+	@Inject
+	private ValidationService vs;
 
 	/**
 	 * Tests that nodex (with declares a dependency on module A, which has a
@@ -36,7 +39,6 @@ public class TestNodeHandling extends AbstractValidationTest {
 	@Test
 	public void validateDuplicateRoleDifferentEnv() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/testRoles3/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -92,7 +94,6 @@ public class TestNodeHandling extends AbstractValidationTest {
 	@Test
 	public void validateDuplicateRoleDuplicateRole() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/testRoles3/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -122,7 +123,6 @@ public class TestNodeHandling extends AbstractValidationTest {
 	@Test
 	public void validateNodes() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/testRoles/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);
@@ -159,7 +159,6 @@ public class TestNodeHandling extends AbstractValidationTest {
 	@Test
 	public void validateNodes2() throws Exception {
 		File root = TestDataProvider.getTestFile(new Path("testData/testRoles2/"));
-		ValidationService vs = getValidationService();
 		Diagnostic chain = new Diagnostic();
 		ValidationOptions options = getValidationOptions();
 		options.setCheckLayout(true);

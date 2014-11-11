@@ -7,7 +7,7 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.puppetlabs.geppetto.pp.dsl.FileExcluder;
+import com.puppetlabs.geppetto.common.os.FileExcluder;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferenceConstants;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelper;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.PPPreferencesHelperProvider;
