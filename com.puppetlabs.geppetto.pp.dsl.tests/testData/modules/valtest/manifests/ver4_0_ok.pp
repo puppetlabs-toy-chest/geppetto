@@ -1,0 +1,1 @@
+define foo (Integer[0, 5] $i) {}
