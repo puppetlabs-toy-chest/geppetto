@@ -214,6 +214,10 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 			: children;
 	}
 
+	public int getErrorCount() {
+		return getSeverityCount(Diagnostic.ERROR);
+	}
+
 	/**
 	 * Scans the children, depth first, until an ExceptionDiagnostic is found. The exception held by that diagnostic is
 	 * return.
@@ -306,6 +310,14 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 		return severity;
 	}
 
+	private int getSeverityCount(int severity) {
+		int count = 0;
+		for(Diagnostic d : this)
+			if(d.getSeverity() == severity)
+				++count;
+		return count;
+	}
+
 	@JsonGetter("severity")
 	public String getSeverityString() {
 		return getSeverityString(getSeverity());
@@ -342,6 +354,10 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	@JsonGetter("type")
 	public String getTypeString() {
 		return type.getName();
+	}
+
+	public int getWarningCount() {
+		return getSeverityCount(Diagnostic.WARNING);
 	}
 
 	@Override
