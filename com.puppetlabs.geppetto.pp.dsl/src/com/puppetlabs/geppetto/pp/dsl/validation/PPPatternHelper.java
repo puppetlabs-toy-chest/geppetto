@@ -30,6 +30,21 @@ import com.google.inject.Singleton;
 @Singleton
 public class PPPatternHelper {
 
+	/**
+	 * Intended as Ruby %r{[\w-]} equivalence
+	 */
+	private static final String EXT_WORD_CHAR = "[0-9a-zA-Z_\\.-]";
+
+	/**
+	 * Intended as Ruby %r{-[\w]} equivalence
+	 */
+	private static final String WORD_CHAR = "[0-9a-zA-Z_-]";
+
+	/**
+	 * No '-' allowed in variables.
+	 */
+	private static final String VAR_CHAR = "[0-9a-zA-Z_]";
+
 	protected final Pattern namePattern;
 
 	protected final Pattern classRefPattern;
@@ -54,21 +69,6 @@ public class PPPatternHelper {
 
 	protected final Pattern decimalVariablePattern;
 
-	/**
-	 * Intended as Ruby %r{[\w-]} equivalence
-	 */
-	private static final String EXT_WORD_CHAR = "[0-9a-zA-Z_\\.-]";
-
-	/**
-	 * Intended as Ruby %r{-[\w]} equivalence
-	 */
-	private static final String WORD_CHAR = "[0-9a-zA-Z_-]";
-
-	/**
-	 * No '-' allowed in variables.
-	 */
-	private static final String VAR_CHAR = "[0-9a-zA-Z_]";
-
 	@Inject
 	public PPPatternHelper() {
 		namePattern = Pattern.compile("[0-9a-z]" + EXT_WORD_CHAR + "*");
@@ -87,8 +87,8 @@ public class PPPatternHelper {
 		// For versions < 4.0
 		deprecatedVariablePattern = Pattern.compile("\\$(::)?(" + VAR_CHAR + "+::)*" + VAR_CHAR + "+");
 
-		// For versoins >= 4.0
-		variablePattern = Pattern.compile("\\$(:?(::)?[a-z]\\w*)*(:?(::)?[a-z_]\\w*)");
+		// For versions >= 4.0
+		variablePattern = Pattern.compile("^\\$(?:(?:::)?[a-z_]\\w*)(?:::[a-z_]\\w*)*$");
 
 		// sq string may not contain unescaped single quote
 		sqStringPattern = Pattern.compile("([^'\\\\]|\\\\.)*");
