@@ -970,6 +970,11 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 				"Must be an assignment operator '=' (not definition '=>')", o, PPPackage.Literals.DEFINITION_ARGUMENT__OP,
 				IPPDiagnostics.ISSUE__NOT_ASSIGNMENT_OP);
 
+		if(o.getPuppetType() != null && !advisor().allowTypeDefinitions())
+			acceptor.acceptError(
+				"Typed arguments are not allowed in puppet versions < 4.0", o, PPPackage.Literals.DEFINITION_ARGUMENT__PUPPET_TYPE,
+				IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
+
 		// -- RHS should be a rvalue
 		internalCheckRvalueExpression(o.getValue());
 	}

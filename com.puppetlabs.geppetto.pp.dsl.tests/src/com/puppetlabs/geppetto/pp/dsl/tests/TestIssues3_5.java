@@ -36,7 +36,6 @@ public class TestIssues3_5 extends AbstractPuppetTests {
 			public ValidationPreference getDeprecatedImport() {
 				return ValidationPreference.WARNING;
 			}
-			// TODO: Add more
 		};
 	}
 
@@ -45,5 +44,12 @@ public class TestIssues3_5 extends AbstractPuppetTests {
 		String code = "import \"foo\"\n";
 		Resource r = loadAndLinkSingleResource(code);
 		tester.validate(r.getContents().get(0)).assertWarning(IPPDiagnostics.ISSUE__DEPRECATED_IMPORT);
+	}
+
+	@Test
+	public void test_puppetTypesNotSupported() throws Exception {
+		String code = "define ver4_0 (Integer[0, 5] $i) {}\n";
+		Resource r = loadAndLinkSingleResource(code);
+		tester.validate(r.getContents().get(0)).assertError(IPPDiagnostics.ISSUE__UNSUPPORTED_EXPRESSION);
 	}
 }
