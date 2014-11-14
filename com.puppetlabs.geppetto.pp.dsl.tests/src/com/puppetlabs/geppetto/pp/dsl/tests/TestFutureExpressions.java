@@ -37,6 +37,7 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 		return ComplianceLevel.PUPPET_4_0;
 	}
 
+	@SuppressWarnings("serial")
 	@Override
 	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
 		return new DefaultPotentialProblemsAdvisor() {

@@ -634,7 +634,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 		if(aos != null && desc != null)
 			for(AttributeOperation ao : aos.getAttributes()) {
-				String key = ao.getKey();
+				final String key = ao.getKey();
 				if("*".equals(key))
 					// Linking not applicable
 					continue;
@@ -653,11 +653,19 @@ public class PPResourceLinker implements IPPDiagnostics {
 
 					if(containsNameVar(foundAttributes))
 						nameVariables.add(ao);
+
+					if("provider".equals(key)) {
+						// Check that the given provider exists if possible
+						//
+						String providerName = stringConstantEvaluator.doToString(ao.getValue());
+						if(providerName != null)
+							internalLinkProvider(ao, desc.getQualifiedName().append(providerName), ctx);
+					}
 					continue; // found one such parameter == ok
 				}
 				// if the reference is to "name" (and it was not found), then this is a deprecated
 				// reference to the namevar
-				if("name".equals(ao.getKey())) {
+				if("name".equals(key)) {
 					nameVariables.add(ao);
 					ctx.acceptWarning(
 						"Deprecated use of the alias 'name'. Use the type's real name attribute.", ao,
@@ -666,7 +674,7 @@ public class PPResourceLinker implements IPPDiagnostics {
 				}
 				String[] proposals = proposer.computeAttributeProposals(fqn, ppFinder.getExportedDescriptions(), ctx.getSearchPath());
 				ctx.acceptError(
-					"Unknown attribute: '" + ao.getKey() + "' in definition: '" + desc.getName() + "'", ao,
+					"Unknown attribute: '" + key + "' in definition: '" + desc.getName() + "'", ao,
 					PPPackage.Literals.ATTRIBUTE_OPERATION__KEY, proposalIssue(ISSUE__RESOURCE_UNKNOWN_PROPERTY, proposals), proposals);
 			}
 		if(nameVariables.size() > 1) {
@@ -915,6 +923,49 @@ public class PPResourceLinker implements IPPDiagnostics {
 		// record failure at resource level
 		addUnresolved(importedNames, name, NodeModelUtils.findActualNodeFor(nameExpr));
 		CrossReferenceAdapter.clear(nameExpr);
+	}
+
+	/**
+	 * @param aos
+	 * @param append
+	 * @param ctx
+	 */
+	private void internalLinkProvider(AttributeOperation ao, QualifiedName providerName, LinkContext ctx) {
+		Expression provider = ao.getValue();
+		PPImportedNamesAdapter importedNames = ctx.getImportedNames();
+		SearchResult searchResult = ppFinder.findProvider(ao, providerName, ctx.getImportedNames());
+		List<IEObjectDescription> found = searchResult.getAdjusted(); // findFunction(o, name, importedNames);
+		if(found.size() > 0) {
+			ctx.getImportedNames().addResolved(found);
+			CrossReferenceAdapter.set(provider, found);
+			return;
+		}
+
+		if(searchResult.getRaw().size() > 0) {
+			importedNames.addResolved(searchResult.getRaw());
+			CrossReferenceAdapter.set(provider, searchResult.getRaw());
+			ctx.acceptWarning("Found outside current path: '" + providerName, provider, ISSUE__NOT_ON_PATH);
+			return;
+		}
+
+		String typeName = providerName.getFirstSegment();
+		PPSearchPath searchPath = ctx.getSearchPath();
+		List<String> proposalLists = Lists.newArrayList();
+		for(IEObjectDescription d : ppFinder.getExportedDescriptions()) {
+			QualifiedName pn = d.getQualifiedName();
+			if(typeName.equals(pn.getFirstSegment()) && PPTPPackage.Literals.PROVIDER.isSuperTypeOf(d.getEClass()) &&
+				searchPath.searchIndexOf(d) != PPSearchPath.NOT_FOUND)
+				proposalLists.add(pn.getLastSegment());
+		}
+
+		String name = providerName.getLastSegment();
+		String[] proposals = proposalLists.toArray(new String[proposalLists.size()]);
+		ctx.acceptError("Unknown provider: '" + name + "'", provider, //
+			proposalIssue(ISSUE__UNKNOWN_PROVIDER_REFERENCE, proposals), //
+			proposals);
+		// record failure at resource level
+		addUnresolved(importedNames, name, NodeModelUtils.findActualNodeFor(provider));
+		CrossReferenceAdapter.clear(provider);
 	}
 
 	/**

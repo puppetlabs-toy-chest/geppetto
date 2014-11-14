@@ -106,6 +106,30 @@ public class PPFinder {
 		}
 	}
 
+	private final static EClass[] CLASSES_FOR_VARIABLES = { //
+	PPPackage.Literals.DEFINITION_ARGUMENT, //
+		PPTPPackage.Literals.TP_VARIABLE, //
+		// PPTPPackage.Literals.TYPE_ARGUMENT, //
+		PPPackage.Literals.VARIABLE_EXPRESSION };
+
+	private final static EClass[] DEF_AND_TYPE_ARGUMENTS = { PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
+
+	// Note that order is important
+	static final EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
+
+	static final EClass[] FUNC = { PPTPPackage.Literals.FUNCTION };
+
+	static final EClass[] PROVIDER = { PPTPPackage.Literals.PROVIDER };
+
+	final static EClass[] CLASS_AND_TYPE = { PPPackage.Literals.HOST_CLASS_DEFINITION,
+	// PPTPPackage.Literals.TYPE
+	};
+
+	private static final EClass[] PPTP_TYPE = { PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE };
+
+	private static final EClass[] PPTP_TYPE_AND_FUNC = {
+		PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE, PPTPPackage.Literals.FUNCTION };
+
 	static String getNameString(LiteralExpression expr) {
 		if(expr == null)
 			return null;
@@ -121,28 +145,6 @@ public class PPFinder {
 		}
 		return null;
 	}
-
-	private final static EClass[] CLASSES_FOR_VARIABLES = { //
-	PPPackage.Literals.DEFINITION_ARGUMENT, //
-		PPTPPackage.Literals.TP_VARIABLE, //
-		// PPTPPackage.Literals.TYPE_ARGUMENT, //
-		PPPackage.Literals.VARIABLE_EXPRESSION };
-
-	private final static EClass[] DEF_AND_TYPE_ARGUMENTS = { PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
-
-	// Note that order is important
-	static final EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
-
-	static final EClass[] FUNC = { PPTPPackage.Literals.FUNCTION };
-
-	final static EClass[] CLASS_AND_TYPE = { PPPackage.Literals.HOST_CLASS_DEFINITION,
-	// PPTPPackage.Literals.TYPE
-	};
-
-	private static final EClass[] PPTP_TYPE = { PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE };
-
-	private static final EClass[] PPTP_TYPE_AND_FUNC = {
-		PPTPPackage.Literals.PUPPET_TYPE, PPTPPackage.Literals.TYPE, PPTPPackage.Literals.FUNCTION };
 
 	private Resource resource;
 
@@ -599,6 +601,10 @@ public class PPFinder {
 		return null;
 	}
 
+	public SearchResult findProvider(EObject scopeDetermeningObject, QualifiedName fqn, PPImportedNamesAdapter importedNames) {
+		return findExternal(scopeDetermeningObject, fqn, importedNames, Match.EQUALS, PROVIDER);
+	}
+
 	/**
 	 * Finds a parameter or variable with the given name. More than one may be returned if the definition
 	 * is ambiguous.
@@ -706,6 +712,16 @@ public class PPFinder {
 
 	public SearchResult findVariablesPrefixed(EObject scopeDetermeningObject, QualifiedName fqn, PPImportedNamesAdapter importedNames) {
 		return findVariables(scopeDetermeningObject, fqn, importedNames, Match.NO_OUTER_STARTS_WITH);
+	}
+
+	public IEObjectDescription getExportByClass(String name, EClass... classes) {
+		for(IEObjectDescription export : getExportedPerLastSegment(name)) {
+			int len = classes.length;
+			while(--len >= 0)
+				if(classes[len].isSuperTypeOf(export.getEClass()))
+					return export;
+		}
+		return null;
 	}
 
 	public IEObjectDescription getExportByName(String name, EClass... classes) {

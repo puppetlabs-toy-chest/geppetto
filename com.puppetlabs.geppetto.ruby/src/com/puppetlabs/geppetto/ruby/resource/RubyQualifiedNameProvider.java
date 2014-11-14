@@ -16,6 +16,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 
 import com.puppetlabs.geppetto.pp.pptp.INamed;
+import com.puppetlabs.geppetto.pp.pptp.Provider;
 import com.puppetlabs.geppetto.pp.pptp.TargetElement;
 import com.puppetlabs.geppetto.pp.pptp.Type;
 
@@ -29,6 +30,11 @@ public class RubyQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 			EObject container = te.eContainer();
 			if(container instanceof Type)
 				return QualifiedName.create(((Type) container).getName(), te.getName());
+
+			if(obj instanceof Provider) {
+				Provider p = (Provider) obj;
+				return QualifiedName.create(p.getTypeName(), p.getName());
+			}
 		}
 
 		if(obj instanceof INamed)

@@ -59,6 +59,12 @@ import com.puppetlabs.xtext.textflow.CharSequences;
 import com.puppetlabs.xtext.textflow.TextFlow;
 
 public class PPQuickfixProvider extends DefaultQuickfixProvider {
+	private final static EClass[] PARAMS_AND_VARIABLES = { //
+	//
+		PPPackage.Literals.DEFINITION_ARGUMENT, //
+		// PPTPPackage.Literals.TYPE_ARGUMENT, //
+		PPPackage.Literals.VARIABLE_EXPRESSION };
+
 	private static String toInitialCase(String s, boolean upper) {
 		if(s.length() < 1)
 			return s;
@@ -78,12 +84,6 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	protected PPDescriptionLabelProvider descriptionLabelProvider;
-
-	private final static EClass[] PARAMS_AND_VARIABLES = { //
-	//
-		PPPackage.Literals.DEFINITION_ARGUMENT, //
-		// PPTPPackage.Literals.TYPE_ARGUMENT, //
-		PPPackage.Literals.VARIABLE_EXPRESSION };
 
 	/**
 	 * Access to naming of model elements.
@@ -337,6 +337,11 @@ public class PPQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IPPDiagnostics.ISSUE__RESOURCE_UNKNOWN_PROPERTY_PROP)
 	public void findClosestParameters(final Issue issue, IssueResolutionAcceptor acceptor) {
+		proposeDataAsChangeTo(issue, acceptor);
+	}
+
+	@Fix(IPPDiagnostics.ISSUE__UNKNOWN_PROVIDER_REFERENCE_PROP)
+	public void findClosestProvider(final Issue issue, IssueResolutionAcceptor acceptor) {
 		proposeDataAsChangeTo(issue, acceptor);
 	}
 

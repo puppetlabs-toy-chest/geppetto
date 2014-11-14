@@ -15,7 +15,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 
 import com.puppetlabs.geppetto.common.os.UnicodeReaderFactory;
@@ -24,6 +26,7 @@ import com.puppetlabs.geppetto.pp.pptp.MetaType;
 import com.puppetlabs.geppetto.pp.pptp.PPTPFactory;
 import com.puppetlabs.geppetto.pp.pptp.Parameter;
 import com.puppetlabs.geppetto.pp.pptp.Property;
+import com.puppetlabs.geppetto.pp.pptp.Provider;
 import com.puppetlabs.geppetto.pp.pptp.Type;
 import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
 import com.puppetlabs.geppetto.ruby.PPFunctionInfo;
@@ -177,7 +180,8 @@ public class PptpRubyResource extends ResourceImpl {
 
 					for(PPTypeInfo info : typeInfo.getResult()) {
 						Type type = PPTPFactory.eINSTANCE.createType();
-						type.setName(info.getTypeName());
+						String name = info.getTypeName();
+						type.setName(name);
 						type.setDocumentation(info.getDocumentation());
 						for(Map.Entry<String, PPTypeInfo.Entry> entry : info.getParameters().entrySet()) {
 							Parameter parameter = PPTPFactory.eINSTANCE.createParameter();
@@ -194,6 +198,7 @@ public class PptpRubyResource extends ResourceImpl {
 							type.getProperties().add(property);
 						}
 						getContents().add(type);
+						rubyHelper.registerType(type);
 					}
 					break;
 				}
@@ -210,8 +215,8 @@ public class PptpRubyResource extends ResourceImpl {
 						pptpFunc.setDocumentation(info.getDocumentation());
 						getContents().add(pptpFunc);
 					}
-				}
 					break;
+				}
 
 				case META: {
 					IRubyParseResult<PPTypeInfo> rr = rubyHelper.getMetaTypeInfo(
@@ -229,15 +234,6 @@ public class PptpRubyResource extends ResourceImpl {
 						parameter.setRequired(entry.getValue().isRequired());
 						type.getParameters().add(parameter);
 					}
-					// TODO: Scan the puppet source for providers for the type
-					// This is a CHEAT -
-					// https://github.com/puppetlabs/geppetto/issues/37
-					Parameter p = PPTPFactory.eINSTANCE.createParameter();
-					p.setName("provider");
-					p.setDocumentation("");
-					p.setRequired(false);
-					type.getParameters().add(p);
-
 					getContents().add(type);
 					break;
 				}
@@ -278,10 +274,14 @@ public class PptpRubyResource extends ResourceImpl {
 						uri.path(), UnicodeReaderFactory.createReader(inputStream, "UTF-8"));
 					warnings = rr.getIssues();
 
-					for(PPProviderInfo info : rr.getResult())
-						getContents().add(info.toProvider());
-				}
+					EList<EObject> contents = getContents();
+					for(PPProviderInfo info : rr.getResult()) {
+						Provider p = info.toProvider();
+						contents.add(p);
+						rubyHelper.registerProvider(p);
+					}
 					break;
+				}
 				case IGNORED:
 					break;
 			}

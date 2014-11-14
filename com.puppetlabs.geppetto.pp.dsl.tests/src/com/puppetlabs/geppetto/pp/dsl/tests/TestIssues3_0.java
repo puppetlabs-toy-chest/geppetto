@@ -35,6 +35,7 @@ public class TestIssues3_0 extends TestIssues {
 	}
 
 	@Override
+	@SuppressWarnings("serial")
 	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
 		return new DefaultPotentialProblemsAdvisor() {
 			@Override

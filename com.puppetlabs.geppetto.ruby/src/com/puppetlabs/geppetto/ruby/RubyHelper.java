@@ -24,11 +24,13 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.diagnostic.DetailedFileDiagnostic;
@@ -86,8 +88,41 @@ public class RubyHelper {
 
 	};
 
+	private static void addProviderParameter(Type type) {
+		synchronized(type) {
+			List<Parameter> params = type.getParameters();
+			for(Parameter param : params)
+				if("provider".equals(param.getName()))
+					return;
+
+			Parameter p = PPTPFactory.eINSTANCE.createParameter();
+			p.setName("provider");
+			p.setDocumentation("");
+			p.setRequired(false);
+			params.add(p);
+		}
+	}
+
+	private static void checkArgs(File file) throws FileNotFoundException {
+		if(file == null)
+			throw new IllegalArgumentException("Given file is null");
+		if(!file.exists())
+			throw new FileNotFoundException(file.getPath());
+	}
+
+	private static void checkArgs(String fileName, Reader reader) {
+		if(fileName == null)
+			throw new IllegalArgumentException("Given fileName is null");
+		if(reader == null)
+			throw new IllegalArgumentException("Given reader is null");
+	}
+
 	@Inject
 	private IRubyServices rubyProvider;
+
+	private final Map<String, Map<String, Type>> knownTypes = Maps.newHashMap();
+
+	private final Map<String, Map<String, Map<String, Provider>>> knownProviders = Maps.newHashMap();
 
 	private TPVariable addTPVariable(ITargetElementContainer container, String name, String documentation, boolean deprecated) {
 		TPVariable var = PPTPFactory.eINSTANCE.createTPVariable();
@@ -97,20 +132,6 @@ public class RubyHelper {
 		var.setDeprecated(deprecated);
 		container.getContents().add(var);
 		return var;
-	}
-
-	private void checkArgs(File file) throws FileNotFoundException {
-		if(file == null)
-			throw new IllegalArgumentException("Given file is null");
-		if(!file.exists())
-			throw new FileNotFoundException(file.getPath());
-	}
-
-	private void checkArgs(String fileName, Reader reader) {
-		if(fileName == null)
-			throw new IllegalArgumentException("Given fileName is null");
-		if(reader == null)
-			throw new IllegalArgumentException("Given reader is null");
 	}
 
 	private Diagnostic convert(IRubyIssue rse, int severity, DiagnosticType type) {
@@ -177,6 +198,24 @@ public class RubyHelper {
 	public IRubyParseResult<PPTypeInfo> getMetaTypeInfo(String fileName, Reader reader) throws IOException, RubySyntaxException {
 		checkArgs(fileName, reader);
 		return rubyProvider.getMetaTypeProperties(fileName, reader);
+	}
+
+	private String getModuleRoot(EObject object) {
+		Resource r = object.eResource();
+		if(r != null) {
+			URI uri = r.getURI();
+			if(uri != null) {
+				String path = uri.path();
+				if(path != null) {
+					int idx = path.indexOf("/lib/puppet/");
+					if(idx == 0)
+						return "";
+					else if(idx > 0)
+						return path.substring(0, idx);
+				}
+			}
+		}
+		return null;
 	}
 
 	public IRubyParseResult<List<PPProviderInfo>> getProviderInfo(File file) throws IOException, RubySyntaxException {
@@ -457,13 +496,6 @@ public class RubyHelper {
 			parameter.setRequired(entry.getValue().isRequired());
 			type.getParameters().add(parameter);
 		}
-		// TODO: Scan the puppet source for providers for the type
-		// This is a CHEAT - https://github.com/puppetlabs/geppetto/issues/37
-		Parameter p = PPTPFactory.eINSTANCE.createParameter();
-		p.setName("provider");
-		p.setDocumentation("");
-		p.setRequired(false);
-		type.getParameters().add(p);
 
 		// TODO: there are more interesting things to pick up (like valid
 		// values)
@@ -749,8 +781,15 @@ public class RubyHelper {
 		for(File rbFile : typesDir.listFiles(rbFileFilter))
 			try {
 				IRubyParseResult<List<Type>> rr = loadTypes(rbFile);
-				for(Type t : rr.getResult())
+				for(Type t : rr.getResult()) {
 					target.getTypes().add(t);
+					for(Provider pv : target.getProviders()) {
+						if(t.getName().equals(pv.getTypeName())) {
+							addProviderParameter(t);
+							break;
+						}
+					}
+				}
 				handleWarnings(rr.getIssues(), diag);
 			}
 			catch(Exception e) {
@@ -784,6 +823,47 @@ public class RubyHelper {
 	 */
 	public List<IRubyIssue> parse(String path, Reader reader) throws IOException, RubySyntaxException {
 		return rubyProvider.parse(path, reader);
+	}
+
+	public synchronized void registerProvider(Provider provider) {
+		String moduleRoot = getModuleRoot(provider);
+		if(moduleRoot == null)
+			return;
+
+		Map<String, Map<String, Provider>> moduleProviders = knownProviders.get(moduleRoot);
+		if(moduleProviders == null) {
+			moduleProviders = Maps.newHashMap();
+			knownProviders.put(moduleRoot, moduleProviders);
+		}
+		Map<String, Provider> typeProviders = moduleProviders.get(provider.getTypeName());
+		if(typeProviders == null) {
+			typeProviders = Maps.newHashMap();
+			moduleProviders.put(provider.getTypeName(), typeProviders);
+		}
+		typeProviders.put(provider.getName(), provider);
+
+		Map<String, Type> moduleTypes = knownTypes.get(moduleRoot);
+		if(moduleTypes != null) {
+			Type type = moduleTypes.get(provider.getTypeName());
+			if(type != null)
+				addProviderParameter(type);
+		}
+	}
+
+	public synchronized void registerType(Type type) {
+		String moduleRoot = getModuleRoot(type);
+		if(moduleRoot == null)
+			return;
+
+		Map<String, Type> moduleTypes = knownTypes.get(moduleRoot);
+		if(moduleTypes == null) {
+			moduleTypes = Maps.newHashMap();
+			knownTypes.put(moduleRoot, moduleTypes);
+		}
+		moduleTypes.put(type.getName(), type);
+		Map<String, Map<String, Provider>> moduleProviders = knownProviders.get(moduleRoot);
+		if(moduleProviders != null && moduleProviders.containsKey(type.getName()))
+			addProviderParameter(type);
 	}
 
 	private RubyResult<List<Provider>> transformProviders(IRubyParseResult<List<PPProviderInfo>> providerInfos) {

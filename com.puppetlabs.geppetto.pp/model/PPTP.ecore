@@ -47,7 +47,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//TypeArgument"/>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypeArgument"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Provider" eSuperTypes="#//TargetElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Provider" eSuperTypes="#//TypeArgument">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

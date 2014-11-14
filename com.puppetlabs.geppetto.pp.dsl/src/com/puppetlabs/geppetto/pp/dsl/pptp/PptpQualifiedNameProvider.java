@@ -21,6 +21,7 @@ import com.puppetlabs.geppetto.pp.pptp.MetaVariable;
 import com.puppetlabs.geppetto.pp.pptp.NameSpace;
 import com.puppetlabs.geppetto.pp.pptp.Parameter;
 import com.puppetlabs.geppetto.pp.pptp.Property;
+import com.puppetlabs.geppetto.pp.pptp.Provider;
 import com.puppetlabs.geppetto.pp.pptp.PuppetDistribution;
 import com.puppetlabs.geppetto.pp.pptp.TPVariable;
 
@@ -72,6 +73,10 @@ public class PptpQualifiedNameProvider extends DefaultDeclarativeQualifiedNamePr
 
 	QualifiedName qualifiedName(Property o) {
 		return splice(getParentsFullyQualifiedName(o), converter.toQualifiedName(o.getName()));
+	}
+
+	QualifiedName qualifiedName(Provider o) {
+		return QualifiedName.create(o.getTypeName(), o.getName());
 	}
 
 	QualifiedName qualifiedName(PuppetDistribution o) {

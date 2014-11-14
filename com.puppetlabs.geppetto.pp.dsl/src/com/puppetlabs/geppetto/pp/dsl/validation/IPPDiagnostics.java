@@ -207,10 +207,14 @@ public interface IPPDiagnostics {
 
 	public static final String ISSUE__UNKNOWN_FUNCTION_REFERENCE = ISSUE_PREFIX + "ReferenceToUnknownfunction";
 
+	public static final String ISSUE__UNKNOWN_PROVIDER_REFERENCE = ISSUE_PREFIX + "ReferenceToUnknownProvider";
+
 	/**
 	 * with proposals.
 	 */
 	public static final String ISSUE__UNKNOWN_FUNCTION_REFERENCE_PROP = ISSUE__UNKNOWN_FUNCTION_REFERENCE + ISSUE_PROPOSAL_SUFFIX;
+
+	public static final String ISSUE__UNKNOWN_PROVIDER_REFERENCE_PROP = ISSUE__UNKNOWN_PROVIDER_REFERENCE + ISSUE_PROPOSAL_SUFFIX;
 
 	public static final String ISSUE__UNKNOWN_REGEXP = ISSUE_PREFIX + "UnknownRegexp";
 

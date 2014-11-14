@@ -1,0 +1,13 @@
+{
+  "author": "Thomas Hallgren",
+  "dependencies": [],
+  "license": "Apache 2.0",
+  "name": "thhal-y",
+  "operatingsystem_support": [],
+  "project_page": "",
+  "requirements": [],
+  "source": "git@github.com/puppetlabs/geppetto",
+  "summary": "Test validation services. The lack of licence is deliberate",
+  "tags": ["goo_tag"],
+  "version": "0.1.0"
+}

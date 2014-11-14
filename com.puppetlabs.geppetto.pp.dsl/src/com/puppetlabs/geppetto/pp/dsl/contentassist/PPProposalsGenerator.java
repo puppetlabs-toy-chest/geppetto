@@ -67,15 +67,15 @@ public class PPProposalsGenerator {
 
 	}
 
+	protected final static EClass[] DEF_AND_TYPE_ARGUMENTS = { PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
+
+	protected final static EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
+
 	/**
 	 * PP FQN to/from Xtext QualifiedName converter.
 	 */
 	@Inject
 	IQualifiedNameConverter converter;
-
-	protected final static EClass[] DEF_AND_TYPE_ARGUMENTS = { PPPackage.Literals.DEFINITION_ARGUMENT, PPTPPackage.Literals.TYPE_ARGUMENT };
-
-	protected final static EClass[] DEF_AND_TYPE = { PPTPPackage.Literals.TYPE, PPPackage.Literals.DEFINITION };
 
 	/**
 	 * Computes attribute proposals where the class/definition name must match exactly, but where

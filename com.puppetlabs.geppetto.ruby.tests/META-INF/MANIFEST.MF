@@ -21,5 +21,7 @@ Import-Package: com.puppetlabs.geppetto.diagnostic,
  com.puppetlabs.geppetto.injectable,
  com.puppetlabs.geppetto.pp.dsl,
  com.puppetlabs.geppetto.ruby.jrubyparser;resolution:=optional,
+ com.puppetlabs.geppetto.validation,
+ com.puppetlabs.geppetto.validation.runner,
  org.apache.log4j
 Export-Package: com.puppetlabs.geppetto.ruby.tests

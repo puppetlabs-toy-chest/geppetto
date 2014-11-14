@@ -30,6 +30,7 @@ public class TestIssues3_5 extends AbstractPuppetTests {
 	}
 
 	@Override
+	@SuppressWarnings("serial")
 	protected IPotentialProblemsAdvisor getPotentialProblemsAdvisor() {
 		return new DefaultPotentialProblemsAdvisor() {
 			@Override
