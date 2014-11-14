@@ -17,6 +17,7 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -47,7 +48,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.diagnostic.DiagnosticType;
 import com.puppetlabs.geppetto.forge.Forge;
@@ -287,20 +287,24 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 	/**
 	 * Collects file matching filter while skipping all symbolically linked files.
 	 *
-	 * @param root
+	 * @param files
+	 *            The initial set of files and directories
 	 * @param filter
+	 *            The filter to apply
 	 * @param result
 	 */
-	private void collectFiles(File root, FileFilter filter, List<File> result) {
-		for(File f : root.listFiles(options.getFileFilter())) {
-			if(f.isDirectory())
-				collectFiles(f, filter, result);
-			else {
-				if(FileUtils.isSymlink(f))
-					continue;
+	private void collectFiles(File[] files, FileFilter filter, List<File> result) {
+		for(File f : files) {
+			if(Files.isSymbolicLink(f.toPath()))
+				continue;
+
+			File[] dirFiles = f.listFiles(options.getFileFilter());
+			if(dirFiles == null) {
 				if(filter.accept(f) && !ppRunner.isExcluded(f))
 					result.add(f);
 			}
+			else
+				collectFiles(dirFiles, filter, result);
 		}
 	}
 
@@ -435,27 +439,30 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 		ppRunner.configureContainers(root, moduleData.values(), uris);
 	}
 
-	private List<File> findFiles(File root, FileFilter filter) {
+	private List<File> findFiles(FileFilter filter) {
+		File[] files = root.listFiles(options.getFileFilter());
+		if(files == null || files.length == 0)
+			return Collections.emptyList();
 		List<File> result = Lists.newArrayList();
-		collectFiles(root, filter, result);
+		collectFiles(files, filter, result);
 		return result;
 
 	}
 
 	private List<File> findMetadataFiles() {
-		return findFiles(root, metadataFileFilter);
+		return findFiles(metadataFileFilter);
 	}
 
 	private List<File> findPPFiles() {
-		return findFiles(root, ppFileFilter);
+		return findFiles(ppFileFilter);
 	}
 
 	private List<File> findRakefiles() {
-		return findFiles(root, RakefileFileFilter);
+		return findFiles(RakefileFileFilter);
 	}
 
 	private List<File> findRubyFiles() {
-		return findFiles(root, rbFileFilter);
+		return findFiles(rbFileFilter);
 	}
 
 	/**
