@@ -25,7 +25,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -49,9 +48,6 @@ import com.puppetlabs.geppetto.pp.pptp.TypeFragment;
 import com.puppetlabs.geppetto.ruby.tests.Facter.Facter1_6;
 
 public class PuppetTPTests extends AbstractRubyTests {
-
-	private static final Logger log = Logger.getLogger(PuppetTPTests.class);
-
 	private static final String PUPPET_DOWNLOADS = "http://downloads.puppetlabs.com/";
 
 	private Diagnostic diag;
@@ -153,11 +149,6 @@ public class PuppetTPTests extends AbstractRubyTests {
 		helper.loadMetaVariables(target);
 		helper.loadPuppetVariables(target);
 
-		for(Type t : target.getTypes())
-			log.info("Found t: " + t.getName());
-		for(Function f : target.getFunctions())
-			log.info("Found f: " + f.getName());
-
 		// Load (optional) any plugins
 		List<TargetEntry> plugins = helper.loadPluginsTarget(pluginsDir, diag);
 
@@ -171,7 +162,6 @@ public class PuppetTPTests extends AbstractRubyTests {
 		for(TargetEntry entry : plugins)
 			targetResource.getContents().add(entry);
 		targetResource.save(null);
-		log.info("Target saved to: " + fileURI.toString());
 	}
 
 	private void performLoad(String version) throws Exception {
@@ -211,8 +201,6 @@ public class PuppetTPTests extends AbstractRubyTests {
 		// Add all (optional) plugins
 		targetResource.getContents().add(facter.asPPTP());
 		targetResource.save(null);
-		log.info("Target saved to: " + fileURI.toString());
-
 	}
 
 	@Test
@@ -228,8 +216,6 @@ public class PuppetTPTests extends AbstractRubyTests {
 		// Add all (optional) plugins
 		targetResource.getContents().add(facter.asPPTP());
 		targetResource.save(null);
-		log.info("Target saved to: " + fileURI.toString());
-
 	}
 
 	@Test

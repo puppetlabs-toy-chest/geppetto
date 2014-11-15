@@ -6,7 +6,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
 import com.puppetlabs.geppetto.module.dsl.metadata.JsonMetadata;
 
@@ -17,11 +16,8 @@ public class ModuleQualifiedNameProvider extends IQualifiedNameProvider.Abstract
 
 	@Override
 	public QualifiedName getFullyQualifiedName(EObject obj) {
-		if(obj instanceof JsonMetadata) {
-			ModuleName moduleName = moduleUtil.getName(((JsonMetadata) obj));
-			if(moduleName != null)
-				return QualifiedName.create(moduleName.getOwner(), moduleName.getName());
-		}
+		if(obj instanceof JsonMetadata)
+			return moduleUtil.getName((JsonMetadata) obj);
 		return null;
 	}
 }

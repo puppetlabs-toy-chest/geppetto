@@ -44,8 +44,12 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 			throw new ModuleName.BadNameSyntaxException();
 	}
 
-	private void checkCircularDependencies(JsonMetadata ref, JsonDependency origin, Set<ModuleName> visited, LinkedList<ModuleName> chain) {
-		ModuleName refName = moduleUtil.getName(ref);
+	private void checkCircularDependencies(JsonMetadata ref, JsonDependency origin, Set<QualifiedName> visited,
+			LinkedList<QualifiedName> chain) {
+		QualifiedName refName = moduleUtil.getName(ref);
+		if(refName == null)
+			return;
+
 		if(chain.getFirst().equals(refName))
 			circularDependencyError(origin, chain);
 		else {
@@ -66,6 +70,22 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 		if(name == null)
 			missingAttribute(dependency, "name", ValidationPreference.ERROR);
 		else {
+			try {
+				checkBothNames(ModuleName.create(name, true));
+			}
+			catch(IllegalArgumentException w) {
+				if(validationAdvisor.getModuleNameNotStrict() == ERROR)
+					error(w.getMessage(), dependency, Literals.JSON_OBJECT__PAIRS, ISSUE__INVALID_MODULE_NAME);
+				else
+					try {
+						checkBothNames(ModuleName.create(name, false));
+						if(validationAdvisor.getModuleNameNotStrict() == ValidationPreference.WARNING)
+							warning(w.getMessage(), dependency, Literals.JSON_OBJECT__PAIRS, ISSUE__INVALID_MODULE_NAME);
+					}
+					catch(IllegalArgumentException e) {
+						error(e.getMessage(), dependency, Literals.JSON_OBJECT__PAIRS, ISSUE__INVALID_MODULE_NAME);
+					}
+			}
 			List<JsonDependency> deps = moduleUtil.getDependencies(moduleUtil.getOwnerMetadata(dependency));
 			for(JsonDependency otherDep : deps)
 				if(otherDep != dependency && name.equals(moduleUtil.getRawName(otherDep))) {
@@ -81,9 +101,12 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 				missingAttributeMessage("version_requirement") + ". All versions will be considered a match", dependency,
 				Literals.JSON_OBJECT__PAIRS, ISSUE__MISSING_REQUIRED_ATTRIBUTE);
 		else if(moduleUtil.isResolved(ref) && validationAdvisor.getCircularDependency() != IGNORE) {
-			LinkedList<ModuleName> chain = Lists.newLinkedList();
-			chain.add(moduleUtil.getName(moduleUtil.getOwnerMetadata(dependency)));
-			checkCircularDependencies(ref, dependency, new HashSet<ModuleName>(), chain);
+			LinkedList<QualifiedName> chain = Lists.newLinkedList();
+			QualifiedName depName = moduleUtil.getName(moduleUtil.getOwnerMetadata(dependency));
+			if(depName != null) {
+				chain.add(depName);
+				checkCircularDependencies(ref, dependency, new HashSet<QualifiedName>(), chain);
+			}
 		}
 	}
 
@@ -253,13 +276,13 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 		}
 	}
 
-	private void circularDependencyError(JsonDependency dependency, LinkedList<ModuleName> chain) {
+	private void circularDependencyError(JsonDependency dependency, LinkedList<QualifiedName> chain) {
 		StringBuilder buf = new StringBuilder("Circular dependency: [");
-		for(ModuleName name : chain) {
-			name.toString(buf);
+		for(QualifiedName name : chain) {
+			buf.append(name);
 			buf.append(" -> ");
 		}
-		chain.getFirst().toString(buf);
+		buf.append(chain.getFirst());
 		buf.append("]");
 		warningOrError(
 			validationAdvisor.getCircularDependency(), dependency, Literals.JSON_OBJECT__PAIRS, ISSUE__CIRCULAR_DEPENDENCY, buf.toString());

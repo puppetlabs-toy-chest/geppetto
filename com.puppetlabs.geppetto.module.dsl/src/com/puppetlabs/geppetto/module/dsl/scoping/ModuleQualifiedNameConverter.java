@@ -18,14 +18,12 @@ public class ModuleQualifiedNameConverter extends IQualifiedNameConverter.Defaul
 	}
 
 	@Override
-	public QualifiedName toQualifiedName(final String qualifiedNameAsString) {
-		try {
-			ModuleName mn = ModuleName.create(qualifiedNameAsString, false);
-			if(mn != null)
-				return QualifiedName.create(mn.getOwner(), mn.getName());
-		}
-		catch(IllegalArgumentException e) {
-		}
-		return null;
+	public QualifiedName toQualifiedName(final String fullName) {
+		if(fullName == null)
+			return null;
+		String[] split = ModuleName.splitName(fullName);
+		return split[0] == null
+			? QualifiedName.create(split[1])
+			: QualifiedName.create(split);
 	}
 }

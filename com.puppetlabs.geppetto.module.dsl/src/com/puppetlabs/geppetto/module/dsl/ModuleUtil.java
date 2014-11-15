@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
@@ -31,9 +33,12 @@ import com.puppetlabs.geppetto.semver.VersionRange;
 public class ModuleUtil {
 	private final LazyURIEncoder lazyURIEncoder;
 
+	private final IQualifiedNameConverter qnConverter;
+
 	@Inject
-	public ModuleUtil(LazyURIEncoder lazyURIEncoder) {
+	public ModuleUtil(LazyURIEncoder lazyURIEncoder, IQualifiedNameConverter qnConverter) {
 		this.lazyURIEncoder = lazyURIEncoder;
+		this.qnConverter = qnConverter;
 	}
 
 	public List<Dependency> getApiDependencies(JsonMetadata metadata) {
@@ -41,7 +46,7 @@ public class ModuleUtil {
 		if(depsVal instanceof JsonArray) {
 			List<Dependency> apiDeps = Lists.newArrayList();
 			for(Value dep : ((JsonArray) depsVal).getValue())
-				apiDeps.add(getApiDependency(((JsonDependency) dep)));
+				apiDeps.add(getApiDependency((JsonDependency) dep));
 			return apiDeps;
 		}
 		return Collections.emptyList();
@@ -49,9 +54,31 @@ public class ModuleUtil {
 
 	public Dependency getApiDependency(JsonDependency dependency) {
 		Dependency apiDep = new Dependency();
-		apiDep.setName(ModuleName.create(getRawName(dependency), false));
+		apiDep.setName(createModuleName(getRawName(dependency)));
 		apiDep.setVersionRequirement(getRange(dependency));
 		return apiDep;
+	}
+
+	public ModuleName createModuleName(String fullName) {
+		return createModuleName(qnConverter.toQualifiedName(fullName));
+	}
+
+	public ModuleName createModuleName(QualifiedName fqn) {
+		if(fqn == null)
+			return null;
+		String owner = null;
+		String name;
+		if(fqn.getSegmentCount() == 1)
+			name = ModuleName.safeName(fqn.getSegment(0), false);
+		else {
+			owner = ModuleName.safeOwner(fqn.getSegment(0));
+			name = ModuleName.safeName(fqn.getSegment(1), false);
+		}
+		return ModuleName.create(owner, name, false);
+	}
+
+	public QualifiedName createQualifiedName(String fullName) {
+		return qnConverter.toQualifiedName(fullName);
 	}
 
 	public Metadata getApiMetadata(JsonMetadata metadata) {
@@ -74,7 +101,7 @@ public class ModuleUtil {
 			else if(name.equals("license"))
 				apiMd.setLicense(getString(value));
 			else if(name.equals("name"))
-				apiMd.setName(ModuleName.create(getString(value), false));
+				apiMd.setName(createModuleName(getString(value)));
 			else if(name.equals("project_page"))
 				apiMd.setProjectPage(getString(value));
 			else if(name.equals("operatingsystem_support"))
@@ -173,22 +200,12 @@ public class ModuleUtil {
 		return map;
 	}
 
-	public ModuleName getName(JsonDependency dependency) {
-		try {
-			return ModuleName.create(getRawName(dependency), false);
-		}
-		catch(IllegalArgumentException e) {
-			return null;
-		}
+	public QualifiedName getName(JsonDependency dependency) {
+		return createQualifiedName(getRawName(dependency));
 	}
 
-	public ModuleName getName(JsonMetadata metadata) {
-		try {
-			return ModuleName.create(getString(metadata, "name"), false);
-		}
-		catch(IllegalArgumentException e) {
-			return null;
-		}
+	public QualifiedName getName(JsonMetadata metadata) {
+		return createQualifiedName(getString(metadata, "name"));
 	}
 
 	public String getName(JsonRequirement requirement) {

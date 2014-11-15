@@ -249,9 +249,11 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 	private void checkLayout() {
 		Set<File> rootsChecked = new HashSet<File>();
 		for(File metadata : metadataFiles) {
-			File moduleRoot = metadata.getParentFile();
-			if(rootsChecked.add(moduleRoot))
-				checkModuleLayout(moduleRoot);
+			if(options.isValidationCandidate(metadata)) {
+				File moduleRoot = metadata.getParentFile();
+				if(rootsChecked.add(moduleRoot))
+					checkModuleLayout(moduleRoot);
+			}
 		}
 	}
 
@@ -383,11 +385,12 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 			EObject first = contents.get(0);
 			if(first instanceof JsonMetadata) {
 				JsonMetadata m = (JsonMetadata) first;
-				ModuleName moduleName = mdUtil.getName(m);
-				// remember the metadata and where it came from
-				// and if it represents a NODE as opposed to a regular MODULE
-				moduleData.put(
-					moduleName, new MetadataInfo(mdUtil.getApiMetadata(m), f, nodeRootPath.isPrefixOf(new Path(f.getAbsolutePath()))));
+				ModuleName moduleName = mdUtil.createModuleName(mdUtil.getName(m));
+				if(moduleName != null)
+					// remember the metadata and where it came from
+					// and if it represents a NODE as opposed to a regular MODULE
+					moduleData.put(
+						moduleName, new MetadataInfo(mdUtil.getApiMetadata(m), f, nodeRootPath.isPrefixOf(new Path(f.getAbsolutePath()))));
 			}
 		}
 
@@ -590,7 +593,8 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 		// System.err.println("Processing Rakefiles count: " + rakeFiles.size());
 
 		for(File f : rakeFiles) {
-			validateRubyFile(f, ticker.newChild(1));
+			if(options.isValidationCandidate(f))
+				validateRubyFile(f, ticker.newChild(1));
 
 			// parsing adds one rakefile work tick
 			rakefileInfo.addRakefile(getRakefileInformation(f, ticker.newChild(1)));
@@ -619,22 +623,24 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 				}
 
 				Resource r = ppRunner.loadResource(new FileInputStream(f), uri);
-				for(org.eclipse.emf.ecore.resource.Resource.Diagnostic diag : r.getErrors())
-					if(diag instanceof RubyIssueDiagnostic)
-						addRubyIssueDiagnostic(((RubyIssueDiagnostic) diag).getIssue(), f);
-				for(org.eclipse.emf.ecore.resource.Resource.Diagnostic diag : r.getWarnings())
-					if(diag instanceof RubyIssueDiagnostic)
-						addRubyIssueDiagnostic(((RubyIssueDiagnostic) diag).getIssue(), f);
+				if(options.isValidationCandidate(f)) {
+					for(org.eclipse.emf.ecore.resource.Resource.Diagnostic diag : r.getErrors())
+						if(diag instanceof RubyIssueDiagnostic)
+							addRubyIssueDiagnostic(((RubyIssueDiagnostic) diag).getIssue(), f);
+					for(org.eclipse.emf.ecore.resource.Resource.Diagnostic diag : r.getWarnings())
+						if(diag instanceof RubyIssueDiagnostic)
+							addRubyIssueDiagnostic(((RubyIssueDiagnostic) diag).getIssue(), f);
 
-				if(options.isExtractTypes())
-					for(EObject c : r.getContents()) {
-						if(c instanceof Type)
-							allTypes.put(f, (Type) c);
-						else if(c instanceof Provider) {
-							Provider p = (Provider) c;
-							allProviders.put(p.getTypeName(), p);
+					if(options.isExtractTypes())
+						for(EObject c : r.getContents()) {
+							if(c instanceof Type)
+								allTypes.put(f, (Type) c);
+							else if(c instanceof Provider) {
+								Provider p = (Provider) c;
+								allProviders.put(p.getTypeName(), p);
+							}
 						}
-					}
+				}
 
 				if(options.isCheckReferences())
 					rememberRootInResource(r);
