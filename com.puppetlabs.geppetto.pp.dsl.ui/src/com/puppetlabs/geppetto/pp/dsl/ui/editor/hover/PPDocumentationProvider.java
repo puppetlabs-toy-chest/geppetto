@@ -126,7 +126,7 @@ public class PPDocumentationProvider implements IEObjectDocumentationProvider {
 	 */
 	protected String _document(IDocumented o) {
 		// produces a string, get it as HTML documentation if not already in HTML
-		return document(o.getDocumentation());
+		return document(new RubyDocProcessor().asHTML(o.getDocumentation()));
 	}
 
 	protected String _document(NodeDefinition o) {

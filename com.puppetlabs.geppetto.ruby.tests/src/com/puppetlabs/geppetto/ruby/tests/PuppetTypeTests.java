@@ -13,6 +13,7 @@ package com.puppetlabs.geppetto.ruby.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.util.List;
@@ -39,16 +40,16 @@ public class PuppetTypeTests extends AbstractRubyTests {
 
 		PPTypeInfo.Entry nameEntry = info.getParameters().get("name");
 		assertNotNull("Should have found a parameter called 'name'", nameEntry);
-		assertEquals("Should have found a description of 'name'", "<p>Description of name</p>", nameEntry.getDocumentation());
+		assertEquals("Should have found a description of 'name'", "Description of name", nameEntry.getDocumentation());
 
 		// TODO: check "ensure"
 		PPTypeInfo.Entry weightEntry = info.getProperties().get("weight");
 		assertNotNull("Should have found a property called 'weight'", weightEntry);
-		assertEquals("Should have found a description of 'weight'", "<p>Description of weight</p>", weightEntry.getDocumentation());
+		assertEquals("Should have found a description of 'weight'", "Description of weight", weightEntry.getDocumentation());
 
 		PPTypeInfo.Entry emptyEntry = info.getProperties().get("empty");
 		assertNotNull("Should have found a property called 'weight'", emptyEntry);
-		assertEquals("Should have found a missing description of 'empty'", "", emptyEntry.getDocumentation());
+		assertNull("Should have found a missing description of 'empty'", emptyEntry.getDocumentation());
 	}
 
 }

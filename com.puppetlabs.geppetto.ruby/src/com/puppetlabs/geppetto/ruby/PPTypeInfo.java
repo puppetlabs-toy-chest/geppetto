@@ -13,6 +13,8 @@ package com.puppetlabs.geppetto.ruby;
 import java.util.Collections;
 import java.util.Map;
 
+import com.puppetlabs.geppetto.common.Strings;
+
 /**
  * Represents information about a PP Type (a Resource).
  */
@@ -26,7 +28,7 @@ public class PPTypeInfo {
 		private boolean namevar;
 
 		public Entry(String documentation, boolean required, boolean namevar) {
-			this.documentation = new RubyDocProcessor().asHTML(documentation);
+			this.documentation = Strings.trimToNull(documentation);
 			this.required = required;
 			this.namevar = namevar;
 		}
@@ -54,7 +56,7 @@ public class PPTypeInfo {
 
 	public PPTypeInfo(String typeName, String documentation, Map<String, Entry> properties, Map<String, Entry> parameters) {
 		this.typeName = typeName;
-		this.documentation = new RubyDocProcessor().asHTML(documentation);
+		this.documentation = Strings.trimToNull(documentation);
 		if(properties == null)
 			properties = Collections.emptyMap();
 		if(parameters == null)

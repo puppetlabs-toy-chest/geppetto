@@ -12,6 +12,7 @@ package com.puppetlabs.geppetto.ruby.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -71,6 +72,6 @@ public class PuppetFunctionTests extends AbstractRubyTests {
 		PPFunctionInfo info = foundFunctions.get(0);
 		assertEquals("Should have found echotest", "docless", info.getFunctionName());
 		assertFalse("Should not have been an rValue", info.isRValue());
-		assertEquals("Should be no documentation", "", info.getDocumentation());
+		assertNull("Should be no documentation", info.getDocumentation());
 	}
 }

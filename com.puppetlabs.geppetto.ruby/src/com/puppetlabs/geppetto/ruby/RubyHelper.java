@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.puppetlabs.geppetto.common.Strings;
 import com.puppetlabs.geppetto.diagnostic.DetailedFileDiagnostic;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.diagnostic.DiagnosticType;
@@ -689,7 +690,7 @@ public class RubyHelper {
 		//
 		SettingsData settingsData = new SettingsData();
 		for(SettingsData.Setting s : settingsData.settings) {
-			addTPVariable(settings, s.name, new RubyDocProcessor().asHTML(s.documentation), s.deprecated);
+			addTPVariable(settings, s.name, Strings.trimToNull(s.documentation), s.deprecated);
 		}
 	}
 

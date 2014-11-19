@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.geppetto.ruby;
 
+import com.puppetlabs.geppetto.common.Strings;
+
 /**
  * Represents information about a puppet custom function; its name and if it
  * returns a value.
@@ -24,7 +26,7 @@ public class PPFunctionInfo {
 	public PPFunctionInfo(String name, boolean rvalue, String documentation) {
 		this.functionName = name;
 		this.rValue = rvalue;
-		this.documentation = new RubyDocProcessor().asHTML(documentation);
+		this.documentation = Strings.trimToNull(documentation);
 
 	}
 

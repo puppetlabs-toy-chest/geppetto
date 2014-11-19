@@ -27,8 +27,8 @@ import com.puppetlabs.geppetto.ruby.RubyDocProcessor.RubyDocLexer.Token;
  */
 @Singleton
 public class RubyDocProcessor {
-	public static class RubyDocLexer {
-		public class HeadingToken extends Token {
+	static class RubyDocLexer {
+		class HeadingToken extends Token {
 			int level;
 
 			HeadingToken(int lineIdx) {
@@ -48,28 +48,28 @@ public class RubyDocProcessor {
 			}
 		}
 
-		public class ListEndToken extends Token {
+		class ListEndToken extends Token {
 		}
 
-		public class ListItemEndToken extends Token {
+		class ListItemEndToken extends Token {
 		}
 
-		public class ListItemStartToken extends Token {
+		class ListItemStartToken extends Token {
 		}
 
-		public class ListStartToken extends Token {
+		class ListStartToken extends Token {
 			ListStartToken(char startChar) {
 				text = Character.toString(startChar);
 			}
 		}
 
-		public class ParagraphEndToken extends Token {
+		class ParagraphEndToken extends Token {
 		}
 
-		public class ParagraphStartToken extends Token {
+		class ParagraphStartToken extends Token {
 		}
 
-		public class SpanToken extends Token {
+		class SpanToken extends Token {
 			StringBuilder builder = new StringBuilder();
 
 			SpanToken(int startLine, int lastLine) {
@@ -89,7 +89,7 @@ public class RubyDocProcessor {
 
 		}
 
-		public abstract class Token {
+		abstract class Token {
 			protected CharSequence text = "";
 
 			CharSequence getText() {
@@ -111,7 +111,7 @@ public class RubyDocProcessor {
 			}
 		}
 
-		public class VerbatimToken extends Token {
+		class VerbatimToken extends Token {
 
 			VerbatimToken(int startLine, int endLine) {
 				// keep lines verbatim, but remove their naturalMargin, or it will again be
@@ -123,11 +123,11 @@ public class RubyDocProcessor {
 			}
 		}
 
-		private CharSequence[] lines;
+		private final CharSequence[] lines;
 
-		List<Integer> marginStack = Lists.newLinkedList();
+		private final List<Integer> marginStack = Lists.newLinkedList();
 
-		List<Token> tokens = Lists.newArrayList();
+		private final List<Token> tokens = Lists.newArrayList();
 
 		int naturalMargin = 0;
 
@@ -288,10 +288,11 @@ public class RubyDocProcessor {
 
 		private boolean isListContinue(int i) {
 			int margin = marginStack.get(1);
-			int nonWsPos = CharSequences.indexOfNonWhitespace(lines[i], margin);
+			CharSequence line = lines[i];
+			int nonWsPos = CharSequences.indexOfNonWhitespace(line, margin);
 			if(nonWsPos < 0)
 				return false;
-			return (isListStartChar(lines[i].charAt(nonWsPos)) && lines[i].length() >= nonWsPos + 1 && lines[i].charAt(nonWsPos + 1) == ' ');
+			return (isListStartChar(line.charAt(nonWsPos)) && line.length() >= nonWsPos + 1 && line.charAt(nonWsPos + 1) == ' ');
 		}
 
 		/**
@@ -303,10 +304,11 @@ public class RubyDocProcessor {
 		 * @return
 		 */
 		private boolean isListStart(int i) {
-			int nonWsPos = CharSequences.indexOfNonWhitespace(lines[i], naturalMargin);
+			CharSequence line = lines[i];
+			int nonWsPos = CharSequences.indexOfNonWhitespace(line, naturalMargin);
 			if(nonWsPos < 0)
 				return false;
-			return (isListStartChar(lines[i].charAt(nonWsPos)) && lines[i].length() >= nonWsPos + 1 && lines[i].charAt(nonWsPos + 1) == ' ');
+			return (isListStartChar(line.charAt(nonWsPos)) && line.length() >= nonWsPos + 1 && line.charAt(nonWsPos + 1) == ' ');
 		}
 
 		private boolean isListStartChar(char c) {
@@ -442,7 +444,7 @@ public class RubyDocProcessor {
 
 	public String asHTML(String s) {
 		if(s == null || s.length() < 1)
-			return s;
+			return "";
 
 		int minPos = Integer.MAX_VALUE;
 		String[] lines = s.split("\\n");

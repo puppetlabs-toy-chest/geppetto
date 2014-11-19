@@ -2,6 +2,7 @@ package com.puppetlabs.geppetto.ruby.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -103,18 +104,18 @@ public class PptpResourceTests extends AbstractRubyTests {
 
 		Parameter nameEntry = findParameter(type, "name");
 		assertNotNull("Should have found a parameter called 'name'", nameEntry);
-		assertEquals("Should have found a description of 'name'", "<p>Description of name</p>", nameEntry.getDocumentation());
+		assertEquals("Should have found a description of 'name'", "Description of name", nameEntry.getDocumentation());
 
 		Parameter ensure = findParameter(type, "ensure");
 		assertNotNull("Should have found a parameter called 'ensure'", ensure);
 
 		Property weightEntry = findProperty(type, "weight");
 		assertNotNull("Should have found a property called 'weight'", weightEntry);
-		assertEquals("Should have found a description of 'weight'", "<p>Description of weight</p>", weightEntry.getDocumentation());
+		assertEquals("Should have found a description of 'weight'", "Description of weight", weightEntry.getDocumentation());
 
 		Property emptyEntry = findProperty(type, "empty");
 		assertNotNull("Should have found a property called 'weight'", emptyEntry);
-		assertEquals("Should have found a missing description of 'empty'", "", emptyEntry.getDocumentation());
+		assertNull("Should have found a missing description of 'empty'", emptyEntry.getDocumentation());
 	}
 
 	@Test

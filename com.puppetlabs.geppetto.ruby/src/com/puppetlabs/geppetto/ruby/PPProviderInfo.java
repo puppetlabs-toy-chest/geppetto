@@ -10,6 +10,7 @@
  */
 package com.puppetlabs.geppetto.ruby;
 
+import com.puppetlabs.geppetto.common.Strings;
 import com.puppetlabs.geppetto.pp.pptp.PPTPFactory;
 import com.puppetlabs.geppetto.pp.pptp.Provider;
 
@@ -27,7 +28,7 @@ public class PPProviderInfo {
 	public PPProviderInfo(String typeName, String providerName, String documentation) {
 		this.typeName = typeName;
 		this.providerName = providerName;
-		this.documentation = new RubyDocProcessor().asHTML(documentation);
+		this.documentation = Strings.trimToNull(documentation);
 	}
 
 	public String getDocumentation() {
