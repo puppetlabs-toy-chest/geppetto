@@ -220,6 +220,7 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 		return children;
 	}
 
+	@JsonIgnore
 	public int getErrorCount() {
 		return getSeverityCount(Diagnostic.ERROR);
 	}
@@ -361,6 +362,7 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 		return type.getName();
 	}
 
+	@JsonIgnore
 	public int getWarningCount() {
 		return getSeverityCount(Diagnostic.WARNING);
 	}
