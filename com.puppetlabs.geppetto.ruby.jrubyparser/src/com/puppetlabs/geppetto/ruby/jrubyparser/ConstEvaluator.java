@@ -7,13 +7,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jrubyparser.ast.ArrayNode;
+import org.jrubyparser.ast.BlockNode;
 import org.jrubyparser.ast.CallNode;
 import org.jrubyparser.ast.Colon2Node;
+import org.jrubyparser.ast.ConstDeclNode;
 import org.jrubyparser.ast.ConstNode;
 import org.jrubyparser.ast.DStrNode;
 import org.jrubyparser.ast.EvStrNode;
 import org.jrubyparser.ast.HashNode;
+import org.jrubyparser.ast.IterNode;
 import org.jrubyparser.ast.ListNode;
+import org.jrubyparser.ast.NewlineNode;
 import org.jrubyparser.ast.Node;
 import org.jrubyparser.ast.StrNode;
 import org.jrubyparser.ast.SymbolNode;
@@ -27,14 +31,47 @@ import com.google.common.collect.Maps;
  * of String there is currently no marker if it is relative or absolute. {@link }
  */
 public class ConstEvaluator extends AbstractJRubyVisitor {
+	private static final Map<String, Map<String, String>> defaultConstants;
+
+	static {
+		defaultConstants = Maps.newHashMap();
+		Map<String, String> fileConstants = Maps.newHashMap();
+		fileConstants.put("SEPARATOR", File.separator);
+		fileConstants.put("Separator", File.separator);
+		fileConstants.put("PATH_SEPARATOR", File.pathSeparator);
+		defaultConstants.put("File", fileConstants);
+	}
+
 	private static String getRubyConstant(String qual, String name) {
-		if("File".equals(qual)) {
-			if("SEPARATOR".equals(name) || "Separator".equals(name))
-				return File.separator;
-			if("PATH_SEPARATOR".equals(name))
-				return File.pathSeparator;
-		}
-		return null;
+		String value = null;
+		Map<String, String> constants = defaultConstants.get(qual);
+		if(constants != null)
+			value = constants.get(name);
+		return value;
+	}
+
+	private final Map<String, String> constants = Maps.newHashMap();
+
+	public ConstEvaluator(Node root) {
+		new AbstractJRubyVisitor() {
+			@Override
+			public Object visitConstDeclNode(ConstDeclNode node) {
+				Node p = realParent(node.getParent());
+				if(p instanceof BlockNode) {
+					p = realParent(p.getParent());
+					if(p instanceof IterNode) {
+						p = realParent(p.getParent());
+						if(p instanceof CallNode) {
+							String n = ((CallNode) p).getName();
+							if("newtype".equals(n) || "newprovider".equals(n) || "newfunction".equals(n))
+								// Constant is declared at root block of known call
+								constants.put(node.getName(), evalToString(node.getValue()));
+						}
+					}
+				}
+				return p;
+			}
+		}.all(root);
 	}
 
 	private List<String> addAll(List<String> a, List<String> b) {
@@ -96,6 +133,12 @@ public class ConstEvaluator extends AbstractJRubyVisitor {
 		return bld.toString();
 	}
 
+	private Node realParent(Node n) {
+		while(n instanceof NewlineNode)
+			n = n.getParent();
+		return n;
+	}
+
 	private List<String> splice(Object a, Object b) {
 		return addAll(stringList(a), stringList(b));
 	}
@@ -155,7 +198,12 @@ public class ConstEvaluator extends AbstractJRubyVisitor {
 
 	@Override
 	public Object visitConstNode(ConstNode iVisited) {
-		return iVisited.getName();
+		String constValue = null;
+		if(realParent(iVisited.getParent()) instanceof EvStrNode)
+			constValue = constants.get(iVisited.getName());
+		if(constValue == null)
+			constValue = iVisited.getName();
+		return constValue;
 	}
 
 	/**
@@ -205,6 +253,11 @@ public class ConstEvaluator extends AbstractJRubyVisitor {
 		for(Node n : iVisited.childNodes())
 			result.add(eval(n));
 		return result;
+	}
+
+	@Override
+	public Object visitNewlineNode(NewlineNode nlNode) {
+		return eval(nlNode.getNextNode());
 	}
 
 	@Override

@@ -24,6 +24,8 @@
         eType="#//MetaVariable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="puppetTypes" upperBound="-1"
         eType="#//PuppetType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaTypes" upperBound="-1"
+        eType="#//MetaType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PuppetDistribution" eSuperTypes="#//TargetEntry"/>
   <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//IDocumented #//TargetElement">

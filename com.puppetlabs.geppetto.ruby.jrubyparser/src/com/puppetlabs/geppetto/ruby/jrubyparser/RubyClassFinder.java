@@ -22,9 +22,7 @@ import com.google.common.collect.Lists;
 /**
  * Finds a class
  */
-public class RubyClassFinder {
-
-	private List<String> wantedName = null;
+public class RubyClassFinder extends RubyFinder {
 
 	/**
 	 * Returned when a visited node detect it is not meaningful to visit its
@@ -32,19 +30,29 @@ public class RubyClassFinder {
 	 */
 	public static final Object DO_NOT_VISIT_CHILDREN = new Object();
 
-	public ClassNode findClass(Node root, String... qualifiedName) {
-		wantedName = Lists.newArrayList(qualifiedName);
+	/**
+	 * @param root
+	 */
+	RubyClassFinder(Node root) {
+		super(root);
+	}
 
-		for(Node n : root.childNodes()) {
+	public ClassNode findClass(String... qualifiedName) {
+		return internalFindClass(root, Lists.newArrayList(qualifiedName));
+	}
+
+	public ClassNode internalFindClass(Node node, List<String> wantedName) {
+
+		for(Node n : node.childNodes()) {
 			if(n.getNodeType() == NodeType.NEWLINENODE)
 				n = ((NewlineNode) n).getNextNode();
 			switch(n.getNodeType()) {
 				case ROOTNODE: // fall through
 				case BLOCKNODE:
-					return findClass(n, qualifiedName);
+					return internalFindClass(n, wantedName);
 				case CLASSNODE:
 					ClassNode classNode = (ClassNode) n;
-					if(wantedName.equals(new ConstEvaluator().eval(classNode.getCPath())))
+					if(wantedName.equals(constEvaluator.eval(classNode.getCPath())))
 						return (ClassNode) n;
 				default:
 					break;

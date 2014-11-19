@@ -37,7 +37,7 @@ import com.google.common.collect.Lists;
  * made inside module A, it will be recognized (in error) as A::X::Y::foo() -
  * also see {@link ConstEvaluator}.
  */
-public class RubyCallFinder {
+public class RubyCallFinder extends RubyFinder {
 
 	/**
 	 * Keeps track of where processing is in the node model.
@@ -54,12 +54,11 @@ public class RubyCallFinder {
 	 */
 	private List<String> qualifiedName = null;
 
-	/**
-	 * An evaluator of constant ruby expressions
-	 */
-	private ConstEvaluator constEvaluator = new ConstEvaluator();
+	RubyCallFinder(Node root) {
+		super(root);
+	}
 
-	public GenericCallNode findCall(Node root, String... qualifiedName) {
+	public GenericCallNode findCall(String... qualifiedName) {
 		if(qualifiedName.length < 1)
 			throw new IllegalArgumentException("qualifiedName can not be empty");
 
@@ -160,7 +159,7 @@ public class RubyCallFinder {
 			: result;
 	}
 
-	public List<GenericCallNode> findCalls(Node root, String... qualifiedName) {
+	public List<GenericCallNode> findCalls(String... qualifiedName) {
 		if(qualifiedName.length < 1)
 			throw new IllegalArgumentException("qualifiedName can not be empty");
 

@@ -27,15 +27,34 @@ import com.puppetlabs.geppetto.ruby.spi.IRubyParseResult;
 public class PuppetTypeTests extends AbstractRubyTests {
 
 	@Test
+	public void testConstantExpanded() throws Exception {
+		File aRubyFile = testDataProvider.getTestFile(new Path("testData/pp-modules-ruby/module-y/lib/puppet/type/thing.rb"));
+		IRubyParseResult<List<PPTypeInfo>> rr = helper.getTypeInfo(aRubyFile);
+		assertFalse("Should have found no issues", rr.hasIssues());
+		List<PPTypeInfo> foundTypes = rr.getResult();
+		assertEquals("Should have found one type", 1, foundTypes.size());
+		PPTypeInfo info = foundTypes.get(0);
+		assertEquals("Should have found 'thing'", "thing", info.getTypeName());
+		assertEquals("Should have found 3 parameters", 3, info.getParameters().size());
+		assertEquals("Should have found two properties", 2, info.getProperties().size());
+
+		PPTypeInfo.Entry flagEntry = info.getParameters().get("flag");
+		assertNotNull("Should have found a parameter called 'flag'", flagEntry);
+		assertEquals(
+			"Should have constant expanded in description of 'flag'", "The flag. Valid values are: False/0/No or True/1/Yes.",
+			flagEntry.getDocumentation());
+	}
+
+	@Test
 	public void testParseFunctionInNestedModules() throws Exception {
 		File aRubyFile = testDataProvider.getTestFile(new Path("testData/pp-modules-ruby/module-x/lib/puppet/type/thing.rb"));
 		IRubyParseResult<List<PPTypeInfo>> rr = helper.getTypeInfo(aRubyFile);
 		assertFalse("Should have found no issues", rr.hasIssues());
 		List<PPTypeInfo> foundTypes = rr.getResult();
-		assertEquals("Should have found one function", 1, foundTypes.size());
+		assertEquals("Should have found one type", 1, foundTypes.size());
 		PPTypeInfo info = foundTypes.get(0);
 		assertEquals("Should have found 'thing'", "thing", info.getTypeName());
-		assertEquals("Should have found one parameter", 2, info.getParameters().size());
+		assertEquals("Should have found two parameters", 2, info.getParameters().size());
 		assertEquals("Should have found two properties", 2, info.getProperties().size());
 
 		PPTypeInfo.Entry nameEntry = info.getParameters().get("name");

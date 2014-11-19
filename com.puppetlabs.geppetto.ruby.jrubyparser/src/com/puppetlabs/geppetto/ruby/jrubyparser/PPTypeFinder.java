@@ -39,18 +39,21 @@ import com.puppetlabs.geppetto.ruby.PPTypeInfo;
  */
 public class PPTypeFinder {
 	private static class OpCallVisitor extends AbstractJRubyVisitor {
-
 		/**
 		 * Returned when a visited node detect it is not meaningful to visit its
 		 * children.
 		 */
 		public static final Object DO_NOT_VISIT_CHILDREN = new Object();
 
+		private final ConstEvaluator constEvaluator;
+
 		private String name = null;
 
 		private String[] fqn = null;
 
-		private ConstEvaluator constEvaluator = new ConstEvaluator();
+		OpCallVisitor(ConstEvaluator constEvaluator) {
+			this.constEvaluator = constEvaluator;
+		}
 
 		/**
 		 * Visits all nodes in graph, and if visitor returns non-null, the
@@ -121,9 +124,7 @@ public class PPTypeFinder {
 
 	private final static String[] PUPPET_NAGIOS_NEWTYPE_FQN = new String[] { "Nagios", "Base", "newtype" };
 
-	private ConstEvaluator constEvaluator = new ConstEvaluator();
-
-	private PPTypeInfo createNagiosTypeInfo(Node root, String typeName) {
+	private PPTypeInfo createNagiosTypeInfo(RubyFinder finder, Node root, String typeName) {
 
 		if(root == null)
 			return null;
@@ -147,8 +148,8 @@ public class PPTypeFinder {
 				case FCALLNODE:
 					FCallNode callNode = (FCallNode) n;
 					if("setparameters".equals(callNode.getName()))
-						for(String name : getArgs(callNode))
-							parameterMap.put(name, getEntry(callNode));
+						for(String name : getArgs(finder, callNode))
+							parameterMap.put(name, getEntry(finder, callNode));
 					break;
 				case VCALLNODE:
 					VCallNode vcallNode = (VCallNode) n;
@@ -159,7 +160,7 @@ public class PPTypeFinder {
 				case INSTASGNNODE:
 					InstAsgnNode docNode = (InstAsgnNode) n;
 					if("doc".equals(docNode.getName())) {
-						typeDocumentation = getStringArgDefault(docNode.getValue(), "");
+						typeDocumentation = getStringArgDefault(finder, docNode.getValue(), "");
 					}
 					break;
 				default:
@@ -170,7 +171,7 @@ public class PPTypeFinder {
 		return typeInfo;
 	}
 
-	private PPProviderInfo createProviderInfo(Node root, String typeName, String providerName) {
+	private PPProviderInfo createProviderInfo(RubyFinder finder, Node root, String typeName, String providerName) {
 		if(root == null)
 			return null;
 		String documentation = "";
@@ -182,7 +183,7 @@ public class PPTypeFinder {
 			if(n instanceof FCallNode) {
 				FCallNode callNode = (FCallNode) n;
 				if(DESC.equals(callNode.getName())) {
-					documentation = getFirstArg(callNode);
+					documentation = getFirstArg(finder, callNode);
 					break;
 				}
 			}
@@ -190,7 +191,7 @@ public class PPTypeFinder {
 		return new PPProviderInfo(typeName, providerName, documentation);
 	}
 
-	private PPTypeInfo createTypeInfo(Node root, String typeName) {
+	private PPTypeInfo createTypeInfo(RubyFinder finder, Node root, String typeName) {
 		if(root == null)
 			return null;
 		Map<String, PPTypeInfo.Entry> propertyMap = Maps.newHashMap();
@@ -205,15 +206,15 @@ public class PPTypeFinder {
 				case FCALLNODE:
 					FCallNode callNode = (FCallNode) n;
 					if(NEWPARAM.equals(callNode.getName()))
-						parameterMap.put(getFirstArg(callNode), getEntry(callNode));
+						parameterMap.put(getFirstArg(finder, callNode), getEntry(finder, callNode));
 					else if(NEWCHECK.equals(callNode.getName()))
-						parameterMap.put(getFirstArg(callNode), getEntry(callNode));
+						parameterMap.put(getFirstArg(finder, callNode), getEntry(finder, callNode));
 					else if(NEWPROPERTY.equals(callNode.getName()))
-						propertyMap.put(getFirstArg(callNode), getEntry(callNode));
+						propertyMap.put(getFirstArg(finder, callNode), getEntry(finder, callNode));
 					else if(ENSURABLE.equals(callNode.getName()))
-						parameterMap.put("ensure", getEntry(callNode));
+						parameterMap.put("ensure", getEntry(finder, callNode));
 					else if(typeDocumentation == null && DESC.equals(callNode.getName()))
-						typeDocumentation = getFirstArg(callNode);
+						typeDocumentation = getFirstArg(finder, callNode);
 					break;
 				case VCALLNODE:
 					VCallNode vcallNode = (VCallNode) n;
@@ -224,7 +225,7 @@ public class PPTypeFinder {
 				case INSTASGNNODE:
 					InstAsgnNode docNode = (InstAsgnNode) n;
 					if("doc".equals(docNode.getName())) {
-						typeDocumentation = getStringArgDefault(docNode.getValue(), "");
+						typeDocumentation = getStringArgDefault(finder, docNode.getValue(), "");
 					}
 					break;
 				default:
@@ -245,8 +246,8 @@ public class PPTypeFinder {
 	 */
 	public PPTypeInfo findMetaTypeInfo(Node root) {
 		Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
-		RubyModuleFinder moduleFinder = new RubyModuleFinder();
-		Node module = moduleFinder.findModule(root, new String[] { "Puppet" });
+		RubyModuleFinder moduleFinder = new RubyModuleFinder(root);
+		Node module = moduleFinder.findModule(new String[] { "Puppet" });
 		for(Node n : module.childNodes()) {
 			if(n.getNodeType() == NodeType.NEWLINENODE)
 				n = ((NewlineNode) n).getNextNode();
@@ -262,7 +263,7 @@ public class PPTypeFinder {
 					if(bn.getNodeType() == NodeType.FCALLNODE) {
 						FCallNode callNode = (FCallNode) bn;
 						if("newmetaparam".equals(callNode.getName())) {
-							parameterMap.put(getFirstArg(callNode), getEntry(callNode));
+							parameterMap.put(getFirstArg(moduleFinder, callNode), getEntry(moduleFinder, callNode));
 
 						}
 					}
@@ -276,18 +277,18 @@ public class PPTypeFinder {
 
 	public List<PPTypeInfo> findNagiosTypeInfo(Node root) {
 
-		RubyCallFinder callFinder = new RubyCallFinder();
+		RubyCallFinder callFinder = new RubyCallFinder(root);
 		// style 1
 
 		List<PPTypeInfo> result = Lists.newArrayList();
-		for(GenericCallNode newTypeCall : callFinder.findCalls(root, PUPPET_NAGIOS_NEWTYPE_FQN)) {
+		for(GenericCallNode newTypeCall : callFinder.findCalls(PUPPET_NAGIOS_NEWTYPE_FQN)) {
 			if(newTypeCall.isValid()) {
 				// should have at least one argument, the (raw) name of the
 				// type
-				String typeName = getFirstArg(newTypeCall);
+				String typeName = getFirstArg(callFinder, newTypeCall);
 				if(typeName != null) { // just in case there is something
 					// really wrong in parsing
-					PPTypeInfo typeInfo = createNagiosTypeInfo(safeGetBodyNode(newTypeCall), "nagios_" + typeName);
+					PPTypeInfo typeInfo = createNagiosTypeInfo(callFinder, safeGetBodyNode(newTypeCall), "nagios_" + typeName);
 					if(typeInfo != null)
 						result.add(typeInfo);
 				}
@@ -307,13 +308,13 @@ public class PPTypeFinder {
 	 * @return
 	 */
 	public List<PPProviderInfo> findProviderInfo(Node root) {
-		RubyCallFinder callFinder = new RubyCallFinder();
+		RubyCallFinder callFinder = new RubyCallFinder(root);
 		List<PPProviderInfo> result = null;
-		for(GenericCallNode providerCall : callFinder.findCalls(root, PUPPET_PROVIDE_FQN)) {
+		for(GenericCallNode providerCall : callFinder.findCalls(PUPPET_PROVIDE_FQN)) {
 			if(providerCall == null || !providerCall.isValid())
 				continue;
 
-			String providerName = getFirstArg(providerCall);
+			String providerName = getFirstArg(callFinder, providerCall);
 			if(providerName == null)
 				continue;
 
@@ -331,13 +332,13 @@ public class PPTypeFinder {
 			if(typeCall == null || !typeCall.isValid())
 				continue;
 
-			String typeName = getFirstArg(typeCall);
+			String typeName = getFirstArg(callFinder, typeCall);
 			if(typeName == null)
 				continue;
 
 			if(result == null)
 				result = Lists.newArrayList();
-			result.add(createProviderInfo(safeGetBodyNode(providerCall), typeName, providerName));
+			result.add(createProviderInfo(callFinder, safeGetBodyNode(providerCall), typeName, providerName));
 		}
 		return result == null
 			? Collections.<PPProviderInfo> emptyList()
@@ -362,22 +363,22 @@ public class PPTypeFinder {
 	 */
 	public PPTypeInfo findTypeInfo(Node root) {
 
-		RubyCallFinder callFinder = new RubyCallFinder();
+		RubyCallFinder callFinder = new RubyCallFinder(root);
 		// style 1
-		GenericCallNode newTypeCall = callFinder.findCall(root, PUPPET_NEWTYPE_FQN);
+		GenericCallNode newTypeCall = callFinder.findCall(PUPPET_NEWTYPE_FQN);
 		if(newTypeCall == null || !newTypeCall.isValid()) {
 			// style 2
-			newTypeCall = callFinder.findCall(root, "Puppet", NEWTYPE);
+			newTypeCall = callFinder.findCall("Puppet", NEWTYPE);
 			if(newTypeCall == null || !newTypeCall.isValid())
 				return null;
 		}
 
 		// should have at least one argument, the name of the type
-		String typeName = getFirstArg(newTypeCall);
+		String typeName = getFirstArg(callFinder, newTypeCall);
 		if(typeName == null)
 			return null;
 
-		return createTypeInfo(safeGetBodyNode(newTypeCall), typeName);
+		return createTypeInfo(callFinder, safeGetBodyNode(newTypeCall), typeName);
 	}
 
 	/**
@@ -394,15 +395,15 @@ public class PPTypeFinder {
 	 */
 	public List<PPTypeInfo> findTypePropertyInfo(Node root) {
 		List<PPTypeInfo> result = Lists.newArrayList();
-		RubyModuleFinder moduleFinder = new RubyModuleFinder();
-		Node module = moduleFinder.findModule(root, new String[] { "Puppet" });
+		RubyModuleFinder moduleFinder = new RubyModuleFinder(root);
+		Node module = moduleFinder.findModule(new String[] { "Puppet" });
 
 		// Some property additions are in "Puppet" modules, some are not
 		if(module == null)
 			module = root.getNodeType() == NodeType.ROOTNODE
 				? ((RootNode) root).getBody()
 				: root;
-		OpCallVisitor opCallVisitor = new OpCallVisitor();
+		OpCallVisitor opCallVisitor = new OpCallVisitor(moduleFinder.getConstEvaluator());
 		for(Node n1 : module.childNodes()) {
 			if(n1.getNodeType() == NodeType.NEWLINENODE)
 				n1 = ((NewlineNode) n1).getNextNode();
@@ -421,11 +422,11 @@ public class PPTypeFinder {
 						CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
 						if(typeCall == null)
 							continue;
-						String typeName = getFirstArg(typeCall);
+						String typeName = getFirstArg(moduleFinder, typeCall);
 						if(typeName == null)
 							continue;
 						Map<String, PPTypeInfo.Entry> propertyMap = Maps.newHashMap();
-						propertyMap.put(getFirstArg(callNode), getEntry(callNode));
+						propertyMap.put(getFirstArg(moduleFinder, callNode), getEntry(moduleFinder, callNode));
 						result.add(new PPTypeInfo(typeName, "", propertyMap, null));
 						continue;
 					}
@@ -433,11 +434,11 @@ public class PPTypeFinder {
 						CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
 						if(typeCall == null)
 							continue;
-						String typeName = getFirstArg(typeCall);
+						String typeName = getFirstArg(moduleFinder, typeCall);
 						if(typeName == null)
 							continue;
 						Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
-						parameterMap.put(getFirstArg(callNode), getEntry(callNode));
+						parameterMap.put(getFirstArg(moduleFinder, callNode), getEntry(moduleFinder, callNode));
 						result.add(new PPTypeInfo(typeName, "", null, parameterMap));
 						continue;
 					}
@@ -445,11 +446,11 @@ public class PPTypeFinder {
 						CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
 						if(typeCall == null)
 							continue;
-						String typeName = getFirstArg(typeCall);
+						String typeName = getFirstArg(moduleFinder, typeCall);
 						if(typeName == null)
 							continue;
 						Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
-						parameterMap.put(getFirstArg(callNode), getEntry(callNode));
+						parameterMap.put(getFirstArg(moduleFinder, callNode), getEntry(moduleFinder, callNode));
 						result.add(new PPTypeInfo(typeName, "", null, parameterMap));
 					}
 					// NOTE: this does probably never occur
@@ -457,11 +458,11 @@ public class PPTypeFinder {
 						CallNode typeCall = opCallVisitor.findOpCall(callNode.getReceiver(), "type", "Puppet", "Type");
 						if(typeCall == null)
 							continue;
-						String typeName = getFirstArg(typeCall);
+						String typeName = getFirstArg(moduleFinder, typeCall);
 						if(typeName == null)
 							continue;
 						Map<String, PPTypeInfo.Entry> parameterMap = Maps.newHashMap();
-						parameterMap.put("ensure", getEntry(callNode));
+						parameterMap.put("ensure", getEntry(moduleFinder, callNode));
 						result.add(new PPTypeInfo(typeName, "", parameterMap, null));
 
 					}
@@ -479,8 +480,8 @@ public class PPTypeFinder {
 	 * @param callNode
 	 * @return
 	 */
-	private List<String> getArgs(IArgumentNode callNode) {
-		Object result = constEvaluator.eval(callNode.getArgs());
+	private List<String> getArgs(RubyFinder finder, IArgumentNode callNode) {
+		Object result = finder.getConstEvaluator().eval(callNode.getArgs());
 		if(!(result instanceof List<?>))
 			return Collections.emptyList();
 		@SuppressWarnings("unchecked")
@@ -488,7 +489,7 @@ public class PPTypeFinder {
 		return list;
 	}
 
-	PPTypeInfo.Entry getEntry(BlockAcceptingNode callNode) {
+	PPTypeInfo.Entry getEntry(RubyFinder finder, BlockAcceptingNode callNode) {
 		String desc = "";
 		boolean namevar = false;
 		Node bodyNode = safeGetBodyNode(callNode);
@@ -499,7 +500,7 @@ public class PPTypeFinder {
 				if(n.getNodeType() == NodeType.FCALLNODE) {
 					FCallNode cn = (FCallNode) n;
 					if(DESC.equals(cn.getName()))
-						desc = getFirstArgDefault(cn, "");
+						desc = getFirstArgDefault(finder, cn, "");
 					// return new PPTypeInfo.Entry(getFirstArgDefault(cn, ""),
 					// false);
 				}
@@ -521,29 +522,29 @@ public class PPTypeFinder {
 	 * @param callNode
 	 * @return
 	 */
-	private String getFirstArg(IArgumentNode callNode) {
-		List<String> args = getArgs(callNode);
+	private String getFirstArg(RubyFinder finder, IArgumentNode callNode) {
+		List<String> args = getArgs(finder, callNode);
 		return args.isEmpty()
 			? null
 			: args.get(0);
 	}
 
-	private String getFirstArgDefault(IArgumentNode callNode, String defaultValue) {
-		String x = getFirstArg(callNode);
+	private String getFirstArgDefault(RubyFinder finder, IArgumentNode callNode, String defaultValue) {
+		String x = getFirstArg(finder, callNode);
 		return x == null
 			? defaultValue
 			: x;
 	}
 
-	private String getStringArg(Node n) {
-		Object x = constEvaluator.eval(n);
+	private String getStringArg(RubyFinder finder, Node n) {
+		Object x = finder.getConstEvaluator().eval(n);
 		if(!(x instanceof String))
 			return null;
 		return (String) x;
 	}
 
-	private String getStringArgDefault(Node n, String defaultValue) {
-		String x = getStringArg(n);
+	private String getStringArgDefault(RubyFinder finder, Node n, String defaultValue) {
+		String x = getStringArg(finder, n);
 		return x == null
 			? defaultValue
 			: x;

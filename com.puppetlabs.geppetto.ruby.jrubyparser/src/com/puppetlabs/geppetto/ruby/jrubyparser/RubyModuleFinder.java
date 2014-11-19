@@ -13,67 +13,20 @@ package com.puppetlabs.geppetto.ruby.jrubyparser;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jrubyparser.ast.Colon2Node;
-import org.jrubyparser.ast.ConstNode;
 import org.jrubyparser.ast.ModuleNode;
 import org.jrubyparser.ast.Node;
 import org.jrubyparser.ast.NodeType;
 
 import com.google.common.collect.Lists;
 
-public class RubyModuleFinder {
-
-	private static class ConstEvaluator extends AbstractJRubyVisitor {
-		private List<String> addAll(List<String> a, List<String> b) {
-			a.addAll(b);
-			return a;
-		}
-
-		public List<String> eval(Node node) {
-			if(node == null)
-				return Lists.newArrayList();
-			return stringList(node.accept(this));
-		}
-
-		private List<String> splice(Object a, Object b) {
-			return addAll(stringList(a), stringList(b));
-		}
-
-		@SuppressWarnings("unchecked")
-		private List<String> stringList(Object x) {
-			if(x instanceof List)
-				return (List<String>) x; // have faith
-			if(x instanceof String)
-				return Lists.newArrayList((String) x);
-			throw new IllegalArgumentException("Not a string or lists of strings");
-		}
-
-		@Override
-		public Object visitColon2Node(Colon2Node iVisited) {
-			return splice(eval(iVisited.getLeftNode()), iVisited.getName());
-		}
-
-		@Override
-		public Object visitConstNode(ConstNode iVisited) {
-			return iVisited.getName();
-		}
-	}
-
-	private static class ModuleVisitor extends AbstractJRubyVisitor {
-
-		/**
-		 * Returned when a visited node detect it is not meaningful to visit its
-		 * children.
-		 */
-		public static final Object DO_NOT_VISIT_CHILDREN = new Object();
+public class RubyModuleFinder extends RubyFinder {
+	class ModuleVisitor extends AbstractJRubyVisitor {
 
 		private LinkedList<Object> stack = null;
 
 		private LinkedList<Object> nameStack = null;
 
 		private List<String> qualifiedName = null;
-
-		private ConstEvaluator constEvaluator = new ConstEvaluator();
 
 		/**
 		 * Visits all nodes in graph, and if visitor returns non-null, the
@@ -164,7 +117,7 @@ public class RubyModuleFinder {
 		@Override
 		public Object visitModuleNode(ModuleNode iVisited) {
 			// Evaluate the name(s)
-			pushNames(constEvaluator.eval(iVisited.getCPath()));
+			pushNames(constEvaluator.stringList(constEvaluator.eval(iVisited.getCPath())));
 
 			// if an inner module of the wanted module is found
 			// i.e. we find module a::b::c::d when we are looking for a::b::c
@@ -195,6 +148,16 @@ public class RubyModuleFinder {
 	}
 
 	/**
+	 * Returned when a visited node detect it is not meaningful to visit its
+	 * children.
+	 */
+	public static final Object DO_NOT_VISIT_CHILDREN = new Object();
+
+	public RubyModuleFinder(Node root) {
+		super(root);
+	}
+
+	/**
 	 * Returns the first found module with the given qualified name, or null if
 	 * no such module was found. The qualified name should be specified in
 	 * natural order e.g. new String[] { "Puppet", "Parser", "Functions" }.
@@ -203,7 +166,7 @@ public class RubyModuleFinder {
 	 * @param qualifiedName
 	 * @return found module or null
 	 */
-	public ModuleNode findModule(Node root, String[] qualifiedName) {
+	public ModuleNode findModule(String[] qualifiedName) {
 		return new ModuleVisitor().findModule(root, qualifiedName);
 	}
 

@@ -42,7 +42,7 @@ import com.google.common.collect.Maps;
  * made inside module A, it will be recognized (in error) as A::X::Y::foo() -
  * also see {@link ConstEvaluator}.
  */
-public class RubyRakefileTaskFinder {
+public class RubyRakefileTaskFinder extends RubyFinder {
 
 	/**
 	 * Keeps track of where processing is in the node model.
@@ -63,11 +63,6 @@ public class RubyRakefileTaskFinder {
 
 	private List<String> rspecTask = Lists.newArrayList("RSpec", "Core", "RakeTask");
 
-	/**
-	 * An evaluator of constant ruby expressions
-	 */
-	private ConstEvaluator constEvaluator = new ConstEvaluator();
-
 	// public List<GenericCallNode> findCalls(Node root, String... qualifiedName) {
 	// if(qualifiedName.length < 1)
 	// throw new IllegalArgumentException("qualifiedName can not be empty");
@@ -82,7 +77,11 @@ public class RubyRakefileTaskFinder {
 	// }
 	private String lastDesc = "";
 
-	public Map<String, String> findTasks(Node root) {
+	public RubyRakefileTaskFinder(Node root) {
+		super(root);
+	}
+
+	public Map<String, String> findTasks() {
 		// use a linked map to get entries in the order they are added
 		Map<String, String> resultMap = Maps.newLinkedHashMap();
 

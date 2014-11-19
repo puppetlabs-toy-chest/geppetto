@@ -64,8 +64,6 @@ public class JRubyServices implements IRubyServices {
 	@Inject
 	private RubyParserConfiguration parserConfig;
 
-	private final ConstEvaluator constEvaluator = new ConstEvaluator();
-
 	/**
 	 * Where the parsing "magic" takes place. This impl is used instead of a
 	 * similar in the Parser util class since that impl uses a Null warning
@@ -116,9 +114,9 @@ public class JRubyServices implements IRubyServices {
 
 	protected IRubyParseResult<List<PPFunctionInfo>> getFunctionInfo(IRubyParseResult<Node> result) {
 		List<PPFunctionInfo> functions = Lists.newArrayList();
-		RubyCallFinder callFinder = new RubyCallFinder();
-		for(GenericCallNode found : callFinder.findCalls(result.getResult(), newFunctionFQN)) {
-			Object arguments = constEvaluator.eval(found.getArgs());
+		RubyCallFinder callFinder = new RubyCallFinder(result.getResult());
+		for(GenericCallNode found : callFinder.findCalls(newFunctionFQN)) {
+			Object arguments = callFinder.getConstEvaluator().eval(found.getArgs());
 
 			// Result should be a list with a String, and a Map
 			if(!(arguments instanceof List))
@@ -164,7 +162,8 @@ public class JRubyServices implements IRubyServices {
 		List<PPFunctionInfo> functions = Lists.newArrayList();
 		IRubyParseResult<Node> result = internalParse(file);
 		Node root = result.getResult();
-		ClassNode logClass = new RubyClassFinder().findClass(root, "Puppet", "Util", "Log");
+		RubyClassFinder classFinder = new RubyClassFinder(root);
+		ClassNode logClass = classFinder.findClass("Puppet", "Util", "Log");
 		if(logClass != null)
 			for(Node n : logClass.getBody().childNodes()) {
 				if(n.getNodeType() == NodeType.NEWLINENODE)
@@ -173,7 +172,7 @@ public class JRubyServices implements IRubyServices {
 				if(n.getNodeType() == NodeType.INSTASGNNODE) {
 					InstAsgnNode instAsgn = (InstAsgnNode) n;
 					if("levels".equals(instAsgn.getName())) {
-						Object value = constEvaluator.eval(instAsgn.getValue());
+						Object value = classFinder.getConstEvaluator().eval(instAsgn.getValue());
 						if(!(value instanceof List<?>))
 							break;
 						for(Object o : (List<?>) value) {
@@ -227,7 +226,7 @@ public class JRubyServices implements IRubyServices {
 	 * @return
 	 */
 	private IRubyParseResult<Map<String, String>> getRakefileTaskDescriptions(IRubyParseResult<Node> result) {
-		return new RubyResult<>(new RubyRakefileTaskFinder().findTasks(result.getResult()), result.getIssues());
+		return new RubyResult<>(new RubyRakefileTaskFinder(result.getResult()).findTasks(), result.getIssues());
 	}
 
 	@Override

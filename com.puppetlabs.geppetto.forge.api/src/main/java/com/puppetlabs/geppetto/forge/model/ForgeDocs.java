@@ -12,6 +12,7 @@
 package com.puppetlabs.geppetto.forge.model;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class ForgeDocs {
 	private Collection<Type> types;
@@ -25,7 +26,9 @@ public class ForgeDocs {
 	private VersionedName release;
 
 	public Collection<NamedDocItem> getFunctions() {
-		return functions;
+		return functions == null
+			? Collections.<NamedDocItem> emptySet()
+			: functions;
 	}
 
 	/**
@@ -43,7 +46,9 @@ public class ForgeDocs {
 	}
 
 	public Collection<Type> getTypes() {
-		return types;
+		return types == null
+			? Collections.<Type> emptySet()
+			: types;
 	}
 
 	/**

@@ -609,27 +609,27 @@
     <parameters name="provider" documentation=""/>
   </types>
   <types name="yumrepo" documentation="The client-side description of a yum repository. Repository&#xA;      configurations are found by parsing `/etc/yum.conf` and&#xA;      the files indicated by the `reposdir` option in that file&#xA;      (see `yum.conf(5)` for details).&#xA;&#xA;      Most parameters are identical to the ones documented&#xA;      in the `yum.conf(5)` man page.&#xA;&#xA;      Continuation lines that yum supports (for the `baseurl`, for example)&#xA;      are not supported. This type does not attempt to read or verify the&#xA;      exinstence of files listed in the `include` attribute.">
-    <properties name="proxy_password"/>
-    <properties name="enabled"/>
-    <properties name="metadata_expire"/>
-    <properties name="exclude"/>
-    <properties name="protect"/>
-    <properties name="http_caching"/>
-    <properties name="cost"/>
-    <properties name="includepkgs"/>
-    <properties name="include"/>
-    <properties name="proxy_username"/>
-    <properties name="gpgcheck"/>
-    <properties name="gpgkey"/>
-    <properties name="priority"/>
-    <properties name="proxy"/>
-    <properties name="mirrorlist"/>
-    <properties name="baseurl"/>
-    <properties name="failovermethod"/>
-    <properties name="keepalive"/>
-    <properties name="descr"/>
-    <properties name="enablegroups"/>
-    <properties name="timeout"/>
+    <properties name="proxy_password" documentation="Password for this proxy. ABSENT_DOC"/>
+    <properties name="enabled" documentation="Whether this repository is enabled, as represented by a&#xA;        `0` or `1`. ABSENT_DOC"/>
+    <properties name="metadata_expire" documentation="Number of seconds after which the metadata will expire.&#xA;        ABSENT_DOC"/>
+    <properties name="exclude" documentation="List of shell globs. Matching packages will never be&#xA;        considered in updates or installs for this repo.&#xA;        ABSENT_DOC"/>
+    <properties name="protect" documentation="Enable or disable protection for this repository. Requires&#xA;        that the `protectbase` plugin is installed and enabled.&#xA;        ABSENT_DOC"/>
+    <properties name="http_caching" documentation="What to cache from this repository. ABSENT_DOC"/>
+    <properties name="cost" documentation="Cost of this repository.&#xA;ABSENT_DOC"/>
+    <properties name="includepkgs" documentation="List of shell globs. If this is set, only packages&#xA;        matching one of the globs will be considered for&#xA;        update or install from this repo. ABSENT_DOC"/>
+    <properties name="include" documentation="The URL of a remote file containing additional yum configuration&#xA;        settings. Puppet does not check for this file's existence or validity.&#xA;        ABSENT_DOC"/>
+    <properties name="proxy_username" documentation="Username for this proxy. ABSENT_DOC"/>
+    <properties name="gpgcheck" documentation="Whether to check the GPG signature on packages installed&#xA;        from this repository, as represented by a `0` or `1`.&#xA;        ABSENT_DOC"/>
+    <properties name="gpgkey" documentation="The URL for the GPG key with which packages from this&#xA;        repository are signed. ABSENT_DOC"/>
+    <properties name="priority" documentation="Priority of this repository from 1-99. Requires that&#xA;        the `priorities` plugin is installed and enabled.&#xA;        ABSENT_DOC"/>
+    <properties name="proxy" documentation="URL to the proxy server for this repository. ABSENT_DOC"/>
+    <properties name="mirrorlist" documentation="The URL that holds the list of mirrors for this repository.&#xA;        ABSENT_DOC"/>
+    <properties name="baseurl" documentation="The URL for this repository. ABSENT_DOC"/>
+    <properties name="failovermethod" documentation="The failover methode for this repository; should be either&#xA;        `roundrobin` or `priority`. ABSENT_DOC"/>
+    <properties name="keepalive" documentation="Whether HTTP/1.1 keepalive should be used with this repository, as&#xA;        represented by a `0` or `1`. ABSENT_DOC"/>
+    <properties name="descr" documentation="A human-readable description of the repository.&#xA;        This corresponds to the name parameter in `yum.conf(5)`.&#xA;        ABSENT_DOC"/>
+    <properties name="enablegroups" documentation="Whether yum will allow the use of package groups for this&#xA;        repository, as represented by a `0` or `1`. ABSENT_DOC"/>
+    <properties name="timeout" documentation="Number of seconds to wait for a connection before timing&#xA;        out. ABSENT_DOC"/>
     <parameters name="name" documentation="The name of the repository.  This corresponds to the&#xA;        `repositoryid` parameter in `yum.conf(5)`." namevar="true"/>
   </types>
   <types name="vlan" documentation="Manages a VLAN on a router or switch.">
@@ -653,7 +653,7 @@
     <parameters name="unless" documentation="If this parameter is set, then this `exec` will run unless&#xA;        the command returns 0.  For example:&#xA;&#xA;            exec { &quot;/bin/echo root >> /usr/lib/cron/cron.allow&quot;:&#xA;              path   => &quot;/usr/bin:/usr/sbin:/bin&quot;,&#xA;              unless => &quot;grep root /usr/lib/cron/cron.allow 2>/dev/null&quot;&#xA;            }&#xA;&#xA;        This would add `root` to the cron.allow file (on Solaris) unless&#xA;        `grep` determines it's already there.&#xA;&#xA;        Note that this command follows the same rules as the main command,&#xA;        which is to say that it must be fully qualified if the path is not set."/>
     <parameters name="try_sleep" documentation="The time to sleep in seconds between 'tries'."/>
     <parameters name="command" documentation="The actual command to execute.  Must either be fully qualified&#xA;        or a search path for the command must be provided.  If the command&#xA;        succeeds, any output produced will be logged at the instance's&#xA;        normal log level (usually `notice`), but if the command fails&#xA;        (meaning its return code does not match the specified code) then&#xA;        any output is logged at the `err` log level." namevar="true"/>
-    <parameters name="path"/>
+    <parameters name="path" documentation="The search path used for command execution.&#xA;        Commands must be fully qualified if no path is specified.  Paths&#xA;        can be specified as an array or as a ':' separated list."/>
     <parameters name="tries" documentation="The number of times execution of the command should be tried.&#xA;        Defaults to '1'. This many attempts will be made to execute&#xA;        the command until an acceptable return code is returned.&#xA;        Note that the timeout paramater applies to each try rather than&#xA;        to the complete set of tries."/>
     <parameters name="group" documentation="The group to run the command as.  This seems to work quite&#xA;        haphazardly on different platforms -- it is a platform issue&#xA;        not a Ruby or Puppet one, since the same variety exists when&#xA;        running commands as different users in the shell."/>
     <parameters name="user" documentation="The user to run the command as.  Note that if you&#xA;        use this then any error output is not currently captured.  This&#xA;        is because of a bug within Ruby.  If you are using Puppet to&#xA;        create this user, the exec will automatically require the user,&#xA;        as long as it is specified by name."/>
