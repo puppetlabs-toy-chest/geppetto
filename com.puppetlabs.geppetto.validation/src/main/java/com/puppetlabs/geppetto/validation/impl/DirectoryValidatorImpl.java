@@ -222,13 +222,23 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 	}
 
 	/**
-	 * Translate and add Xtext issue diagnostics to the chain.
+	 * Translate and add Xtext module issue diagnostics to the chain.
 	 *
 	 * @param issue
 	 * @param processedFile
 	 */
-	private void addIssueDiagnostic(Issue issue, File processedFile) {
-		ValidationServiceImpl.addIssueDiagnostic(diagnostics, issue, processedFile, root);
+	private void addModuleIssueDiagnostic(Issue issue, File processedFile) {
+		ValidationServiceImpl.addModuleIssueDiagnostic(diagnostics, issue, processedFile, root);
+	}
+
+	/**
+	 * Translate and add Xtext PP issue diagnostics to the chain.
+	 *
+	 * @param issue
+	 * @param processedFile
+	 */
+	private void addPPIssueDiagnostic(Issue issue, File processedFile) {
+		ValidationServiceImpl.addPPIssueDiagnostic(diagnostics, issue, processedFile, root);
 	}
 
 	/**
@@ -780,7 +790,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 			};
 
 			for(Issue issue : validator.validate(r.getValue(), CheckMode.ALL, cancelMonitor))
-				addIssueDiagnostic(issue, r.getKey());
+				addModuleIssueDiagnostic(issue, r.getKey());
 		}
 	}
 
@@ -815,7 +825,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 			if(options.isValidationCandidate(f)) {
 				List<Issue> issues = validator.validate(r.getValue(), CheckMode.ALL, cancelMonitor);
 				for(Issue issue : issues)
-					addIssueDiagnostic(issue, f);
+					addPPIssueDiagnostic(issue, f);
 			}
 		}
 

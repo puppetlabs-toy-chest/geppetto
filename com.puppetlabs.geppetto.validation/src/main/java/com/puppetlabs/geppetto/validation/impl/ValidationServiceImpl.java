@@ -91,18 +91,7 @@ public class ValidationServiceImpl implements ValidationService {
 		diagnostics.addChild(dft);
 	}
 
-	/**
-	 * Translate and add Xtext issue diagnostics to the chain.
-	 *
-	 * @param diagnostics
-	 * @param issue
-	 * @param rootDirectory
-	 * @param rootDirectory
-	 */
-	public static void addIssueDiagnostic(Diagnostic diagnostics, Issue issue, File processedFile, File rootDirectory) {
-		DiagnosticType type = issue.isSyntaxError()
-			? ValidationService.PP_SYNTAX
-			: ValidationService.PP_LINKING;
+	private static void addIssueDiagnostic(Diagnostic diagnostics, DiagnosticType type, Issue issue, File processedFile, File rootDirectory) {
 		DetailedFileDiagnostic dft = new DetailedFileDiagnostic(
 			translateIssueSeverity(issue.getSeverity()), type, issue.getMessage(), relativeFile(processedFile, rootDirectory));
 
@@ -118,6 +107,32 @@ public class ValidationServiceImpl implements ValidationService {
 		dft.setIssueData(issue.getData());
 		dft.setNode("");
 		diagnostics.addChild(dft);
+	}
+
+	/**
+	 * Translate and add Xtext PP issue diagnostics to the chain.
+	 *
+	 * @param diagnostics
+	 * @param issue
+	 * @param rootDirectory
+	 * @param rootDirectory
+	 */
+	public static void addModuleIssueDiagnostic(Diagnostic diagnostics, Issue issue, File processedFile, File rootDirectory) {
+		addIssueDiagnostic(diagnostics, ValidationService.MODULE, issue, processedFile, rootDirectory);
+	}
+
+	/**
+	 * Translate and add Xtext PP issue diagnostics to the chain.
+	 *
+	 * @param diagnostics
+	 * @param issue
+	 * @param rootDirectory
+	 * @param rootDirectory
+	 */
+	public static void addPPIssueDiagnostic(Diagnostic diagnostics, Issue issue, File processedFile, File rootDirectory) {
+		addIssueDiagnostic(diagnostics, issue.isSyntaxError()
+			? ValidationService.PP_SYNTAX
+			: ValidationService.PP_LINKING, issue, processedFile, rootDirectory);
 	}
 
 	/**
@@ -311,7 +326,7 @@ public class ValidationServiceImpl implements ValidationService {
 
 		List<Issue> issues = rv.validate(r, CheckMode.ALL, cancelMonitor);
 		for(Issue issue : issues) {
-			addIssueDiagnostic(diagnostics, issue, f, f.getParentFile());
+			addPPIssueDiagnostic(diagnostics, issue, f, f.getParentFile());
 		}
 		worked(ticker, 1);
 		return r;
@@ -342,7 +357,7 @@ public class ValidationServiceImpl implements ValidationService {
 			List<Issue> issues = rv.validate(r, CheckMode.ALL, cancelMonitor);
 			worked(ticker, 1);
 			for(Issue issue : issues) {
-				addIssueDiagnostic(diagnostics, issue, f, root);
+				addModuleIssueDiagnostic(diagnostics, issue, f, root);
 			}
 		}
 		catch(IOException e) {
@@ -367,7 +382,7 @@ public class ValidationServiceImpl implements ValidationService {
 			List<Issue> issues = rv.validate(r, CheckMode.ALL, cancelMonitor);
 			worked(ticker, 1);
 			for(Issue issue : issues) {
-				addIssueDiagnostic(diagnostics, issue, f, root);
+				addPPIssueDiagnostic(diagnostics, issue, f, root);
 			}
 		}
 		catch(IOException e) {
