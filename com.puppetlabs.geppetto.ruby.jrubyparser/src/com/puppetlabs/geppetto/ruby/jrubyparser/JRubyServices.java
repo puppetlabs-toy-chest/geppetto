@@ -64,6 +64,8 @@ public class JRubyServices implements IRubyServices {
 	@Inject
 	private RubyParserConfiguration parserConfig;
 
+	private final ConstEvaluator constEvaluator = new ConstEvaluator();
+
 	/**
 	 * Where the parsing "magic" takes place. This impl is used instead of a
 	 * similar in the Parser util class since that impl uses a Null warning
@@ -116,7 +118,7 @@ public class JRubyServices implements IRubyServices {
 		List<PPFunctionInfo> functions = Lists.newArrayList();
 		RubyCallFinder callFinder = new RubyCallFinder();
 		for(GenericCallNode found : callFinder.findCalls(result.getResult(), newFunctionFQN)) {
-			Object arguments = new ConstEvaluator().eval(found.getArgs());
+			Object arguments = constEvaluator.eval(found.getArgs());
 
 			// Result should be a list with a String, and a Map
 			if(!(arguments instanceof List))
@@ -171,7 +173,7 @@ public class JRubyServices implements IRubyServices {
 				if(n.getNodeType() == NodeType.INSTASGNNODE) {
 					InstAsgnNode instAsgn = (InstAsgnNode) n;
 					if("levels".equals(instAsgn.getName())) {
-						Object value = new ConstEvaluator().eval(instAsgn.getValue());
+						Object value = constEvaluator.eval(instAsgn.getValue());
 						if(!(value instanceof List<?>))
 							break;
 						for(Object o : (List<?>) value) {

@@ -480,18 +480,12 @@ public class PPTypeFinder {
 	 * @return
 	 */
 	private List<String> getArgs(IArgumentNode callNode) {
-		List<String> stringResult = Lists.newArrayList();
 		Object result = constEvaluator.eval(callNode.getArgs());
 		if(!(result instanceof List<?>))
-			return stringResult;
-		List<?> argList = (List<?>) result;
-		if(argList.size() < 1)
-			return stringResult;
-		for(Object o : argList)
-			if(o != null)
-				stringResult.add(o.toString());
-
-		return stringResult;
+			return Collections.emptyList();
+		@SuppressWarnings("unchecked")
+		List<String> list = (List<String>) result;
+		return list;
 	}
 
 	PPTypeInfo.Entry getEntry(BlockAcceptingNode callNode) {
@@ -504,7 +498,7 @@ public class PPTypeFinder {
 					n = ((NewlineNode) n).getNextNode();
 				if(n.getNodeType() == NodeType.FCALLNODE) {
 					FCallNode cn = (FCallNode) n;
-					if("desc".equals(cn.getName()))
+					if(DESC.equals(cn.getName()))
 						desc = getFirstArgDefault(cn, "");
 					// return new PPTypeInfo.Entry(getFirstArgDefault(cn, ""),
 					// false);
@@ -528,17 +522,10 @@ public class PPTypeFinder {
 	 * @return
 	 */
 	private String getFirstArg(IArgumentNode callNode) {
-		Object result = constEvaluator.eval(callNode.getArgs());
-		if(!(result instanceof List<?>))
-			return null;
-		List<?> argList = (List<?>) result;
-		if(argList.size() < 1)
-			return null;
-		// If a constant expression contained dynamic parts it may result in a
-		// null entry
-		if(argList.get(0) == null)
-			return null;
-		return argList.get(0).toString();
+		List<String> args = getArgs(callNode);
+		return args.isEmpty()
+			? null
+			: args.get(0);
 	}
 
 	private String getFirstArgDefault(IArgumentNode callNode, String defaultValue) {

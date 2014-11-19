@@ -142,8 +142,8 @@ public class ValidationOptions {
 	 * @return the excludeGlobs
 	 */
 	public Set<String> getExcludeGlobs() {
-		return excludeGlobs == null
-			? Collections.<String> emptySet()
+		return excludeGlobs == null || excludeGlobs.isEmpty()
+			? DEFAULT_EXCLUDES
 			: excludeGlobs;
 	}
 

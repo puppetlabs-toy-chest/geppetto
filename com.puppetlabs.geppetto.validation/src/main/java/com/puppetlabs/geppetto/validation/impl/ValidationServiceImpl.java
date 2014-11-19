@@ -10,6 +10,8 @@
  */
 package com.puppetlabs.geppetto.validation.impl;
 
+import static com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics.ISSUE_PROPOSAL_SUFFIX;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -103,7 +105,10 @@ public class ValidationServiceImpl implements ValidationService {
 			dft.setLength(issue.getLength());
 			dft.setOffset(issue.getOffset());
 		}
-		dft.setIssue(issue.getCode());
+		String issueCode = issue.getCode();
+		if(issueCode != null && issueCode.endsWith(ISSUE_PROPOSAL_SUFFIX))
+			issueCode = issueCode.substring(0, issueCode.length() - ISSUE_PROPOSAL_SUFFIX.length());
+		dft.setIssue(issueCode);
 		dft.setIssueData(issue.getData());
 		dft.setNode("");
 		diagnostics.addChild(dft);

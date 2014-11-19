@@ -96,6 +96,23 @@ public class PptpResourceTests extends AbstractRubyTests {
 	}
 
 	@Test
+	public void testLoadConcatenatedDoc() throws Exception {
+		String expectedDoc = "An optional SQL command to execute prior to the main :command; "
+			+ "this is generally intended to be used for idempotency, to check "
+			+ "for the existence of an object in the database to determine whether "
+			+ "or not the main SQL command needs to be executed at all.";
+
+		Type type = doTypeResource("testData/pp-modules-ruby/module-z/lib/puppet/type/postgresql_psql.rb", "postgresql_psql");
+
+		assertEquals("Should have found 7 parameters", 7, type.getParameters().size());
+		assertEquals("Should have found one property", 1, type.getProperties().size());
+
+		Parameter param = findParameter(type, "unless");
+		assertNotNull("Should have found a parameter called 'unless'", param);
+		assertEquals("Should have found expected description of 'unless'", expectedDoc, param.getDocumentation());
+	}
+
+	@Test
 	public void testLoadType() throws Exception {
 		Type type = doTypeResource("testData/pp-modules-ruby/module-x/lib/puppet/type/thing.rb", "thing");
 
