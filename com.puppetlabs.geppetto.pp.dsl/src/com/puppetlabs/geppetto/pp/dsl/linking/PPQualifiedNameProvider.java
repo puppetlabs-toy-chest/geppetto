@@ -18,6 +18,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.pp.Definition;
 import com.puppetlabs.geppetto.pp.DefinitionArgument;
 import com.puppetlabs.geppetto.pp.HostClassDefinition;
@@ -27,6 +28,7 @@ import com.puppetlabs.geppetto.pp.VariableExpression;
 /**
  * A Puppet Qualified Name provider.
  */
+@Singleton
 public class PPQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
 	public static QualifiedName splice(QualifiedName a, QualifiedName b) {

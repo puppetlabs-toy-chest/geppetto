@@ -64,6 +64,8 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.puppetlabs.geppetto.common.os.IFileExcluder;
+import com.puppetlabs.geppetto.forge.Forge;
+import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
 import com.puppetlabs.geppetto.pp.dsl.PPDSLConstants;
 import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapter;
 import com.puppetlabs.geppetto.pp.dsl.adapters.PPImportedNamesAdapterFactory;
@@ -74,6 +76,7 @@ import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.IConfigurableProvider;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath.ISearchPathProvider;
 import com.puppetlabs.geppetto.pp.dsl.parser.antlr.PPParser;
+import com.puppetlabs.geppetto.ruby.RubyHelper;
 
 /**
  * Runner/Helper that can perform diagnostics/validation of PP files.
@@ -233,6 +236,12 @@ public class PPDiagnosticsRunner {
 	@Inject
 	private ISerializer serializer;
 
+	@Inject
+	private ModuleInjections moduleInjections;
+
+	@Inject
+	private RubyInjections rubyInjections;
+
 	private final Map<String, File> pathToFileMap;
 
 	private String ROOTCONTAINER = null;
@@ -354,10 +363,6 @@ public class PPDiagnosticsRunner {
 		_configureTransitiveClosure(processed, rootModule, restricted, mi);
 	}
 
-	// private PPGrammarAccess getGrammarAccess() {
-	// return get(PPGrammarAccess.class);
-	// }
-
 	private ModuleExport createExport(IEObjectDescription desc) {
 		// String name = converter.toString(desc.getName());
 		File f = uri2File(desc.getEObjectURI());
@@ -373,6 +378,10 @@ public class PPDiagnosticsRunner {
 		ModuleExport me = new ModuleExport(f, desc, offset, line, length);
 		return me;
 	}
+
+	// private PPGrammarAccess getGrammarAccess() {
+	// return get(PPGrammarAccess.class);
+	// }
 
 	/**
 	 * Translates all Exports and Imports and stores this in an ExportsPerModule.
@@ -483,8 +492,23 @@ public class PPDiagnosticsRunner {
 		return searchPathProvider.get(null);
 	}
 
+	/**
+	 * @return
+	 */
+	public Forge getForge() {
+		return moduleInjections.getForge();
+	}
+
 	IQualifiedNameConverter getIQualifiedNameConverter() {
 		return qualifiedNameConverter;
+	}
+
+	public IResourceValidator getModuleResourceValidator() {
+		return moduleInjections.getResourceValidator();
+	}
+
+	public ModuleUtil getModuleUtil() {
+		return moduleInjections.getModuleUtil();
 	}
 
 	public IResourceValidator getPPResourceValidator() {
@@ -502,6 +526,10 @@ public class PPDiagnosticsRunner {
 
 	public EList<Resource> getResources() {
 		return resourceSet.getResources();
+	}
+
+	public RubyHelper getRubyHelper() {
+		return rubyInjections.getRubyHelper();
 	}
 
 	public boolean isExcluded(File f) {

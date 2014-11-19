@@ -1,5 +1,6 @@
 package com.puppetlabs.geppetto.ruby.jrubyparser;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +24,14 @@ import com.google.common.collect.Maps;
  */
 public class ConstEvaluator extends AbstractJRubyVisitor {
 	private List<String> addAll(List<String> a, List<String> b) {
-		a.addAll(b);
-		return a;
+		if(a.isEmpty())
+			return b;
+		if(b.isEmpty())
+			return a;
+		List<String> result = Lists.newArrayListWithExpectedSize(a.size() + b.size());
+		result.addAll(a);
+		result.addAll(b);
+		return result;
 	}
 
 	public Object eval(Node node) {
@@ -41,14 +48,30 @@ public class ConstEvaluator extends AbstractJRubyVisitor {
 		return addAll(stringList(a), stringList(b));
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<String> stringList(Object x) {
-		if(x instanceof List)
-			return (List<String>) x; // have faith
+		if(x instanceof List) {
+			List<?> list = (List<?>) x;
+			int top = list.size();
+			if(top == 0)
+				return Collections.emptyList();
+			if(top == 1) {
+				Object v = list.get(0);
+				return v instanceof String
+					? Collections.singletonList((String) v)
+					: Collections.<String> emptyList();
+			}
+			List<String> copy = Lists.newArrayListWithCapacity(top);
+			for(int idx = 0; idx < top; ++idx) {
+				Object v = list.get(idx);
+				if(v instanceof String)
+					copy.add((String) v);
+			}
+			return copy;
+		}
 		if(x instanceof String)
-			return Lists.newArrayList((String) x);
+			return Collections.singletonList((String) x);
 		if(x == null)
-			return Lists.newArrayList(); // empty list
+			return Collections.emptyList(); // empty list
 		throw new IllegalArgumentException("Not a string or lists of strings");
 	}
 
@@ -90,6 +113,7 @@ public class ConstEvaluator extends AbstractJRubyVisitor {
 		return result;
 	}
 
+	@Override
 	public Object visitListNode(ListNode iVisited) {
 		List<Object> result = Lists.newArrayList();
 		for(Node n : iVisited.childNodes())

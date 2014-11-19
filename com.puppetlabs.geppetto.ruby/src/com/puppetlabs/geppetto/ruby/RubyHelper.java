@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.diagnostic.DetailedFileDiagnostic;
@@ -90,17 +89,19 @@ public class RubyHelper {
 
 	private static void addProviderParameter(Type type) {
 		synchronized(type) {
-			List<Parameter> params = type.getParameters();
-			for(Parameter param : params)
+			for(Parameter param : type.getParameters())
 				if("provider".equals(param.getName()))
 					return;
-
-			Parameter p = PPTPFactory.eINSTANCE.createParameter();
-			p.setName("provider");
-			p.setDocumentation("");
-			p.setRequired(false);
-			params.add(p);
+			addProviderParameterNoCheck(type);
 		}
+	}
+
+	private static void addProviderParameterNoCheck(Type type) {
+		Parameter p = PPTPFactory.eINSTANCE.createParameter();
+		p.setName("provider");
+		p.setDocumentation("");
+		p.setRequired(false);
+		type.getParameters().add(p);
 	}
 
 	private static void checkArgs(File file) throws FileNotFoundException {
@@ -119,10 +120,6 @@ public class RubyHelper {
 
 	@Inject
 	private IRubyServices rubyProvider;
-
-	private final Map<String, Map<String, Type>> knownTypes = Maps.newHashMap();
-
-	private final Map<String, Map<String, Map<String, Provider>>> knownProviders = Maps.newHashMap();
 
 	private TPVariable addTPVariable(ITargetElementContainer container, String name, String documentation, boolean deprecated) {
 		TPVariable var = PPTPFactory.eINSTANCE.createTPVariable();
@@ -200,24 +197,6 @@ public class RubyHelper {
 		return rubyProvider.getMetaTypeProperties(fileName, reader);
 	}
 
-	private String getModuleRoot(EObject object) {
-		Resource r = object.eResource();
-		if(r != null) {
-			URI uri = r.getURI();
-			if(uri != null) {
-				String path = uri.path();
-				if(path != null) {
-					int idx = path.indexOf("/lib/puppet/");
-					if(idx == 0)
-						return "";
-					else if(idx > 0)
-						return path.substring(0, idx);
-				}
-			}
-		}
-		return null;
-	}
-
 	public IRubyParseResult<List<PPProviderInfo>> getProviderInfo(File file) throws IOException, RubySyntaxException {
 		checkArgs(file);
 		return rubyProvider.getProviderInfo(file);
@@ -275,6 +254,14 @@ public class RubyHelper {
 	public IRubyParseResult<List<PPTypeInfo>> getTypeInfo(String fileName, Reader reader) throws IOException, RubySyntaxException {
 		checkArgs(fileName, reader);
 		return rubyProvider.getTypeInfo(fileName, reader);
+	}
+
+	private List<String> getUpToPuppetSegments(Resource resource) {
+		List<String> segments = resource.getURI().segmentsList();
+		int lastPuppet = segments.lastIndexOf("puppet");
+		return lastPuppet > 0
+			? segments.subList(0, lastPuppet)
+			: null;
 	}
 
 	private void handleException(Exception e, Diagnostic diag) {
@@ -826,44 +813,60 @@ public class RubyHelper {
 	}
 
 	public synchronized void registerProvider(Provider provider) {
-		String moduleRoot = getModuleRoot(provider);
-		if(moduleRoot == null)
+		Resource resource = provider.eResource();
+		if(resource == null)
 			return;
 
-		Map<String, Map<String, Provider>> moduleProviders = knownProviders.get(moduleRoot);
-		if(moduleProviders == null) {
-			moduleProviders = Maps.newHashMap();
-			knownProviders.put(moduleRoot, moduleProviders);
-		}
-		Map<String, Provider> typeProviders = moduleProviders.get(provider.getTypeName());
-		if(typeProviders == null) {
-			typeProviders = Maps.newHashMap();
-			moduleProviders.put(provider.getTypeName(), typeProviders);
-		}
-		typeProviders.put(provider.getName(), provider);
+		ResourceSet rs = resource.getResourceSet();
+		if(rs == null)
+			return;
 
-		Map<String, Type> moduleTypes = knownTypes.get(moduleRoot);
-		if(moduleTypes != null) {
-			Type type = moduleTypes.get(provider.getTypeName());
-			if(type != null)
-				addProviderParameter(type);
-		}
+		List<String> path = getUpToPuppetSegments(resource);
+		if(path == null)
+			return;
+
+		String tname = provider.getTypeName();
+		RESOURCES: for(Resource r : rs.getResources())
+			if(r != resource)
+				for(EObject o : r.getContents())
+					if(o instanceof Type) {
+						Type t = (Type) o;
+						if(t.getName().equals(tname) && path.equals(getUpToPuppetSegments(r))) {
+							addProviderParameter(t);
+							break RESOURCES;
+						}
+					}
 	}
 
 	public synchronized void registerType(Type type) {
-		String moduleRoot = getModuleRoot(type);
-		if(moduleRoot == null)
-			return;
+		synchronized(type) {
+			List<Parameter> params = type.getParameters();
+			for(Parameter param : params)
+				if("provider".equals(param.getName()))
+					return;
 
-		Map<String, Type> moduleTypes = knownTypes.get(moduleRoot);
-		if(moduleTypes == null) {
-			moduleTypes = Maps.newHashMap();
-			knownTypes.put(moduleRoot, moduleTypes);
+			Resource resource = type.eResource();
+			if(resource == null)
+				return;
+
+			List<String> path = getUpToPuppetSegments(resource);
+			if(path == null)
+				return;
+
+			ResourceSet rs = resource.getResourceSet();
+			if(rs == null)
+				return;
+
+			String tname = type.getName();
+			RESOURCES: for(Resource r : rs.getResources())
+				if(r != resource)
+					for(EObject o : r.getContents()) {
+						if(o instanceof Provider && tname.equals(((Provider) o).getTypeName()) && path.equals(getUpToPuppetSegments(r))) {
+							addProviderParameterNoCheck(type);
+							break RESOURCES;
+						}
+					}
 		}
-		moduleTypes.put(type.getName(), type);
-		Map<String, Map<String, Provider>> moduleProviders = knownProviders.get(moduleRoot);
-		if(moduleProviders != null && moduleProviders.containsKey(type.getName()))
-			addProviderParameter(type);
 	}
 
 	private RubyResult<List<Provider>> transformProviders(IRubyParseResult<List<PPProviderInfo>> providerInfos) {

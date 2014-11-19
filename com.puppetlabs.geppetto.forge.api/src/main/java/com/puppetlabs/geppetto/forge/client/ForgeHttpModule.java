@@ -51,31 +51,35 @@ public abstract class ForgeHttpModule extends AbstractModule {
 		bind(MetadataRepository.class).to(MetadataRepositoryImpl.class);
 	}
 
+	protected abstract String doGetBaseURL();
+
 	@Provides
 	@Named(BASE_URL_NAME)
-	protected abstract String getBaseURL();
+	public final String getBaseURL() {
+		return doGetBaseURL();
+	}
 
 	@Provides
 	@Named(API_OAUTH_URL_NAME)
-	public String provideOAuthURL() {
+	public final String provideOAuthURL() {
 		return appendURLSegment(getBaseURL(), "/oauth/token");
 	}
 
 	@Provides
 	@Named(API_V1_URL_NAME)
-	public String provideV1URL() {
+	public final String provideV1URL() {
 		return appendURLSegment(getBaseURL(), "/v1/");
 	}
 
 	@Provides
 	@Named(API_V2_URL_NAME)
-	public String provideV2URL() {
+	public final String provideV2URL() {
 		return appendURLSegment(getBaseURL(), "/v2/");
 	}
 
 	@Provides
 	@Named(API_V3_URL_NAME)
-	public String provideV3URL() {
+	public final String provideV3URL() {
 		return appendURLSegment(getBaseURL(), "/v3/");
 	}
 }

@@ -34,7 +34,7 @@ public abstract class AbstractForgeServiceMojo extends AbstractForgeMojo {
 		super.addModules(diagnostic, modules);
 		modules.add(new ForgeHttpModule() {
 			@Override
-			protected String getBaseURL() {
+			protected String doGetBaseURL() {
 				return serviceURL;
 			}
 		});

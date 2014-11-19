@@ -6,8 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *   Itemis AB (http://www.itemis.eu) - initial API and implementation
- *   Puppet Labs - adpated for validation
+ *   Puppet Labs
  *
  */
 package com.puppetlabs.geppetto.validation.runner;
@@ -16,18 +15,17 @@ import com.google.inject.Injector;
 import com.puppetlabs.geppetto.ruby.RubyHelper;
 import com.puppetlabs.geppetto.ruby.RubyStandaloneSetup;
 import com.puppetlabs.geppetto.ruby.jrubyparser.JRubyServices;
-import com.puppetlabs.geppetto.validation.ValidationOptions;
 
-/**
- * Runner/Helper that can perform diagnostics/validation of ruby files.
- */
-public class RubyDiagnosticsRunner extends RubyStandaloneSetup {
+public class RubyInjections {
 	private final Injector injector;
 
-	public RubyDiagnosticsRunner(ValidationOptions options) {
-		injector = setUp(JRubyServices.class);
+	public RubyInjections() {
+		this.injector = new RubyStandaloneSetup().setUp(JRubyServices.class);
 	}
 
+	/**
+	 * @return the rubyHelper
+	 */
 	public RubyHelper getRubyHelper() {
 		return injector.getInstance(RubyHelper.class);
 	}

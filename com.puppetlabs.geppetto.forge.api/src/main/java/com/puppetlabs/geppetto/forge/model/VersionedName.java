@@ -19,6 +19,8 @@ import com.puppetlabs.geppetto.semver.Version;
  * A Module name with a version.
  */
 public class VersionedName implements Serializable, Comparable<VersionedName> {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Find the first dash or a slash that is followed by a digit. That position
 	 * must denote the separator between the name and the version since the version
@@ -43,8 +45,6 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 		}
 		return -1;
 	}
-
-	private static final long serialVersionUID = 1L;
 
 	private final ModuleName moduleName;
 
@@ -143,8 +143,16 @@ public class VersionedName implements Serializable, Comparable<VersionedName> {
 	 */
 	@Override
 	public String toString() {
+		return toString('/');
+	}
+
+	/**
+	 * Returns a string representation of this versioned name using the default
+	 * version separator character '/'.
+	 */
+	public String toString(char sep) {
 		StringBuilder bld = new StringBuilder();
-		toString(bld, '/');
+		toString(bld, sep);
 		return bld.toString();
 	}
 

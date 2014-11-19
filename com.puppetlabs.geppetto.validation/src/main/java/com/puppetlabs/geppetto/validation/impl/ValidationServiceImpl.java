@@ -30,11 +30,13 @@ import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.puppetlabs.geppetto.common.os.FileExcluderProvider;
 import com.puppetlabs.geppetto.diagnostic.DetailedFileDiagnostic;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.diagnostic.DiagnosticType;
 import com.puppetlabs.geppetto.diagnostic.ExceptionDiagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
+import com.puppetlabs.geppetto.pp.dsl.validation.ValidationAdvisorProvider;
 import com.puppetlabs.geppetto.ruby.RubyHelper;
 import com.puppetlabs.geppetto.ruby.spi.IRubyIssue;
 import com.puppetlabs.geppetto.ruby.spi.IRubyServices;
@@ -43,15 +45,16 @@ import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
 import com.puppetlabs.geppetto.validation.runner.BuildResult;
 import com.puppetlabs.geppetto.validation.runner.DirectoryValidatorFactory;
-import com.puppetlabs.geppetto.validation.runner.ModuleDiagnosticsRunner;
+import com.puppetlabs.geppetto.validation.runner.ModuleInjections;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsRunner;
-import com.puppetlabs.geppetto.validation.runner.RubyDiagnosticsRunner;
 
 /**
  * Note that all use of monitor assumes SubMonitor semantics (the receiver does *not* call done on monitors, this is the
  * responsibility of the caller if caller is not using a SubMonitor).
  */
-public class ValidationServiceImpl {
+public class ValidationServiceImpl implements ValidationService {
+	private static final String[] emptyData = new String[0];
+
 	/**
 	 * Add an exception diagnostic (not associated with any particular file).
 	 *
@@ -83,7 +86,7 @@ public class ValidationServiceImpl {
 		dft.setLength(-1);
 		dft.setOffset(-1);
 		dft.setIssue(issueId);
-		dft.setIssueData(new String[] {});
+		dft.setIssueData(emptyData);
 		dft.setNode("");
 		diagnostics.addChild(dft);
 	}
@@ -140,7 +143,7 @@ public class ValidationServiceImpl {
 		dft.setLength(issue.getLength());
 		dft.setOffset(issue.getStartOffset());
 		dft.setIssue(issue.getIdString());
-		dft.setIssueData(new String[] {}); // TODO: the Ruby issue passes // Object[]
+		dft.setIssueData(emptyData); // TODO: the Ruby issue passes // Object[]
 		dft.setNode("");
 		diagnostics.addChild(dft);
 	}
@@ -193,18 +196,29 @@ public class ValidationServiceImpl {
 	private Provider<PPDiagnosticsRunner> ppDiagRunnerProvider;
 
 	@Inject
-	private ValidationOptions options;
+	private ValidationAdvisorProvider advisorProvider;
+
+	@Inject
+	private FileExcluderProvider fileExcluderProvider;
+
+	@Inject
+	private ModuleInjections moduleInjections;
+
+	private void configureProviders(ValidationOptions options) {
+		advisorProvider.setComplianceLevel(options.getComplianceLevel());
+		advisorProvider.setProblemsAdvisor(options.getProblemsAdvisor());
+		fileExcluderProvider.setExcludeGlobs(options.getExcludeGlobs());
+		fileExcluderProvider.setRoot(options.getValidationRoot().toPath());
+		moduleInjections.setOptions(options);
+	}
 
 	private boolean hasModulesSubDirectory(File root) {
 		File modulesDir = new File(root, "modules");
 		return modulesDir.isDirectory();
 	}
 
-	/**
-	 * @param monitor
-	 *            - client should call done unless using a SubMonitor
-	 */
-	public BuildResult validate(Diagnostic diagnostics, File source, IProgressMonitor monitor) {
+	@Override
+	public BuildResult validate(Diagnostic diagnostics, ValidationOptions options, File source, IProgressMonitor monitor) {
 		if(diagnostics == null)
 			throw new IllegalArgumentException("diagnostics can not be null");
 		if(source == null)
@@ -213,12 +227,14 @@ public class ValidationServiceImpl {
 			throw new IllegalArgumentException("source does not exist");
 		if(!source.canRead())
 			throw new IllegalArgumentException("source can not be read");
+
 		String sourceName = source.getName();
 		boolean isDirectory = source.isDirectory();
 		boolean isPP = !isDirectory && sourceName.endsWith(".pp");
 		boolean isRB = !isDirectory && sourceName.endsWith(".rb");
 		boolean isMetadataJsonFile = !isDirectory && sourceName.equals(Forge.METADATA_JSON_NAME);
 
+		configureProviders(options);
 		FileType fileType = options.getFileType();
 		if(fileType == FileType.DETECT) {
 			if(!isDirectory)
@@ -244,8 +260,7 @@ public class ValidationServiceImpl {
 				validatePPFile(ppDiagRunnerProvider.get(), diagnostics, source, source.getParentFile(), monitor);
 			}
 			else if(isRB) {
-				RubyDiagnosticsRunner rubyDr = new RubyDiagnosticsRunner(options);
-				RubyHelper rubyHelper = rubyDr.getRubyHelper();
+				RubyHelper rubyHelper = ppDiagRunnerProvider.get().getRubyHelper();
 				rubyServicesPresent = rubyHelper.isRubyServicesAvailable();
 				validateRubyFile(rubyHelper, diagnostics, source, source.getParentFile(), monitor);
 			}
@@ -269,14 +284,14 @@ public class ValidationServiceImpl {
 		}
 	}
 
-	/**
-	 * TODO: Is currently limited to .pp content.
-	 */
-	public Resource validate(Diagnostic diagnostics, String code, IProgressMonitor monitor) {
+	@Override
+	public Resource validate(Diagnostic diagnostics, ValidationOptions options, String code, IProgressMonitor monitor) {
 		if(diagnostics == null)
 			throw new IllegalArgumentException("DiagnosticChain can not be null");
 		if(code == null)
 			throw new IllegalArgumentException("code can not be null");
+
+		configureProviders(options);
 		final SubMonitor ticker = SubMonitor.convert(monitor, 3);
 
 		Resource r = null;
@@ -313,11 +328,10 @@ public class ValidationServiceImpl {
 		final SubMonitor ticker = SubMonitor.convert(monitor, 2);
 		worked(ticker, 1);
 		try {
-			ModuleDiagnosticsRunner mdRunner = new ModuleDiagnosticsRunner(options);
 			FileInputStream input = new FileInputStream(f);
 			PPDiagnosticsRunner ppDr = new PPDiagnosticsRunner();
 			Resource r = ppDr.loadResource(input, URI.createFileURI(f.getPath()));
-			IResourceValidator rv = mdRunner.getModuleResourceValidator();
+			IResourceValidator rv = ppDr.getModuleResourceValidator();
 			final CancelIndicator cancelMonitor = new CancelIndicator() {
 				@Override
 				public boolean isCanceled() {

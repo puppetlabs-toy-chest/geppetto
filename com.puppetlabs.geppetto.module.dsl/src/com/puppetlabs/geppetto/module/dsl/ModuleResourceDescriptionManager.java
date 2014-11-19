@@ -9,8 +9,10 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.common.os.IFileExcluder;
 
+@Singleton
 public class ModuleResourceDescriptionManager extends DefaultResourceDescriptionManager {
 	@Inject
 	private IFileExcluder fileExcluder;

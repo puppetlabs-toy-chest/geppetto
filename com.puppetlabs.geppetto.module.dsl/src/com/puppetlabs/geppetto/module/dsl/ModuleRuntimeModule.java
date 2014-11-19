@@ -21,10 +21,16 @@ import com.puppetlabs.geppetto.module.dsl.generator.ModuleGenerator;
 import com.puppetlabs.geppetto.module.dsl.linking.ModuleLinkingDiagnosticMessageProvider;
 import com.puppetlabs.geppetto.module.dsl.scoping.ModuleQualifiedNameConverter;
 import com.puppetlabs.geppetto.module.dsl.scoping.ModuleQualifiedNameProvider;
+import com.puppetlabs.geppetto.module.dsl.validation.DefaultModuleValidationAdvisor;
+import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
+import com.puppetlabs.geppetto.module.dsl.validation.ModuleValidationAdvisorWrapper;
 
 public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 
 	private final FileExcluderProvider fileExcluderProvider = new FileExcluderProvider();
+
+	private final ModuleValidationAdvisorWrapper advisorWrapper = new ModuleValidationAdvisorWrapper(
+		DefaultModuleValidationAdvisor.INSTANCE);
 
 	@Override
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
@@ -70,6 +76,18 @@ public class ModuleRuntimeModule extends AbstractModuleRuntimeModule {
 
 	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
 		return ModuleResourceDescriptionManager.class;
+	}
+
+	public Provider<IModuleValidationAdvisor> provideIModuleValidationAdvisor() {
+		return new Provider<IModuleValidationAdvisor>() {
+			public IModuleValidationAdvisor get() {
+				return advisorWrapper;
+			}
+		};
+	}
+
+	public ModuleValidationAdvisorWrapper bindModuleValidationAdvisorWrapper() {
+		return advisorWrapper;
 	}
 
 	/**

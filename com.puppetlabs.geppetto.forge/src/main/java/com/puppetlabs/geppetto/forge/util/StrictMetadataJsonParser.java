@@ -19,7 +19,7 @@ import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.forge.model.NamedTypeItem;
+import com.puppetlabs.geppetto.forge.model.NamedDocItem;
 import com.puppetlabs.geppetto.forge.model.Requirement;
 import com.puppetlabs.geppetto.forge.model.SupportedOS;
 import com.puppetlabs.geppetto.forge.model.Type;
@@ -205,7 +205,7 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 		return dep;
 	}
 
-	private NamedTypeItem createNamedTypeItem(JElement jsonItem) {
+	private NamedDocItem createNamedTypeItem(JElement jsonItem) {
 		if(!(jsonItem instanceof JObject))
 			return null;
 
@@ -219,19 +219,19 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 				doc = entry.getElement().toStringOrNull();
 		}
 		if(name != null) {
-			NamedTypeItem item = new NamedTypeItem();
+			NamedDocItem item = new NamedDocItem();
 			item.setName(name);
-			item.setDocumentation(doc);
+			item.setDoc(doc);
 			return item;
 		}
 		return null;
 	}
 
-	private List<NamedTypeItem> createNamedTypeItemList(JElement element) {
+	private List<NamedDocItem> createNamedTypeItemList(JElement element) {
 		if(!(element instanceof JArray))
 			return null;
 
-		ArrayList<NamedTypeItem> items = new ArrayList<NamedTypeItem>();
+		ArrayList<NamedDocItem> items = new ArrayList<NamedDocItem>();
 		for(JElement item : ((JArray) element).getValues())
 			items.add(createNamedTypeItem(item));
 		return items;
@@ -296,9 +296,9 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 
 		String name = null;
 		String doc = null;
-		List<NamedTypeItem> parameters = null;
-		List<NamedTypeItem> providers = null;
-		List<NamedTypeItem> properties = null;
+		List<NamedDocItem> parameters = null;
+		List<NamedDocItem> providers = null;
+		List<NamedDocItem> properties = null;
 		for(JEntry entry : ((JObject) jsonType).getEntries()) {
 			String key = entry.getKey();
 			JElement val = entry.getElement();
@@ -318,7 +318,7 @@ public class StrictMetadataJsonParser extends MetadataJsonParser {
 
 		Type type = new Type();
 		type.setName(name);
-		type.setDocumentation(doc);
+		type.setDoc(doc);
 		type.setParameters(parameters);
 		type.setProperties(properties);
 		type.setProviders(providers);

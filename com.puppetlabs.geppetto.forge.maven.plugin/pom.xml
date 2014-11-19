@@ -90,6 +90,11 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.sisu</groupId>
+			<artifactId>org.eclipse.sisu.plexus</artifactId>
+			<version>0.2.1</version>
+		</dependency>
 
 		<!-- Test dependencies -->
 		<dependency>
@@ -98,9 +103,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-compat</artifactId>
-			<version>${mavenVersion}</version>
+			<groupId>org.apache.maven.plugin-testing</groupId>
+			<artifactId>maven-plugin-testing-harness</artifactId>
+			<version>3.2.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

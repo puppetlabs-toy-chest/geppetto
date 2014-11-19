@@ -8,9 +8,12 @@ import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.inject.Singleton;
+
 /**
  * Converters for metadata.json parser/serializer
  */
+@Singleton
 public class ModuleConverters extends DefaultTerminalConverters {
 	private static IValueConverter<Object> NULL_CONVERTER = new AbstractLexerBasedConverter<Object>() {
 		@Override

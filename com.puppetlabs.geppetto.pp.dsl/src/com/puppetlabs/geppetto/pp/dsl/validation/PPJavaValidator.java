@@ -342,7 +342,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		if(advisor().allowRHSConditionals())
 			return;
 
-		Expression container = (Expression) o.eContainer();
+		Object container = o.eContainer();
 		if(container instanceof ExpressionBlock)
 			return;
 

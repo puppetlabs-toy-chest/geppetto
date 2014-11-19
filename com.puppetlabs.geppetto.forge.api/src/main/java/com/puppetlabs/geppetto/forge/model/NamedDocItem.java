@@ -13,9 +13,9 @@ package com.puppetlabs.geppetto.forge.model;
 import com.google.gson.annotations.Expose;
 
 /**
- * Property, Parameter, or Provider for a {@link Type}.
+ * Property, Parameter, or Provider for a {@link Type} or a Function
  */
-public class NamedTypeItem extends Entity {
+public class NamedDocItem extends Entity {
 	@Expose
 	private String name;
 
@@ -26,16 +26,16 @@ public class NamedTypeItem extends Entity {
 	public boolean equals(Object o) {
 		if(this == o)
 			return true;
-		if(!(o instanceof NamedTypeItem))
+		if(!(o instanceof NamedDocItem))
 			return false;
-		NamedTypeItem no = (NamedTypeItem) o;
+		NamedDocItem no = (NamedDocItem) o;
 		return safeEquals(name, no.name) && safeEquals(doc, no.doc);
 	}
 
 	/**
 	 * @return Documentation for the property
 	 */
-	public String getDocumentation() {
+	public String getDoc() {
 		return doc;
 	}
 
@@ -55,7 +55,7 @@ public class NamedTypeItem extends Entity {
 	 * @param documentation
 	 *            Documentation for the property
 	 */
-	public void setDocumentation(String documentation) {
+	public void setDoc(String documentation) {
 		this.doc = trimToNull(documentation);
 	}
 

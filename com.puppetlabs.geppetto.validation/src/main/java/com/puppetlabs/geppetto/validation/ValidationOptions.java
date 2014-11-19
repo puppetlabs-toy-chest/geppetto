@@ -63,7 +63,7 @@ public class ValidationOptions {
 
 	private Set<String> excludeGlobs;
 
-	private boolean extractTypes;
+	private boolean extractDocs;
 
 	private FileFilter fileFilter;
 
@@ -74,6 +74,10 @@ public class ValidationOptions {
 	private IModuleValidationAdvisor moduleValidationAdvisor;
 
 	private IPotentialProblemsAdvisor problemsAdvisor;
+
+	private boolean produceGraph;
+
+	private boolean rubyWarnings;
 
 	private String searchPath;
 
@@ -94,12 +98,14 @@ public class ValidationOptions {
 		encodingProvider = source.encodingProvider;
 		environment = source.environment;
 		excludeGlobs = source.excludeGlobs;
-		extractTypes = source.extractTypes;
+		extractDocs = source.extractDocs;
 		fileFilter = source.fileFilter;
 		fileType = source.fileType;
 		manifestDir = source.manifestDir;
 		moduleValidationAdvisor = source.moduleValidationAdvisor;
 		problemsAdvisor = source.problemsAdvisor;
+		produceGraph = source.produceGraph;
+		rubyWarnings = source.rubyWarnings;
 		searchPath = source.searchPath;
 		validationFilter = source.validationFilter;
 		validationRoot = source.validationRoot;
@@ -228,17 +234,24 @@ public class ValidationOptions {
 	}
 
 	/**
-	 * @return wether or not type documentation should be extracted
+	 * @return wether or not type and function documentation should be extracted
 	 */
-	public boolean isExtractTypes() {
-		return extractTypes;
+	public boolean isExtractDocs() {
+		return extractDocs;
+	}
+
+	/**
+	 * @return wether or not to add ruby warnings to the diagnostic output
+	 */
+	public boolean isProduceGraph() {
+		return produceGraph;
 	}
 
 	/**
 	 * @return wether or not to add ruby warnings to the diagnostic output
 	 */
 	public boolean isRubyWarnings() {
-		return true;
+		return rubyWarnings;
 	}
 
 	/**
@@ -379,11 +392,11 @@ public class ValidationOptions {
 	}
 
 	/**
-	 * @param extractTypes
-	 *            the extractTypes to set
+	 * @param extractDocs
+	 *            the extractDocs to set
 	 */
-	public void setExtractTypes(boolean extractTypes) {
-		this.extractTypes = extractTypes;
+	public void setExtractDocs(boolean extractDocs) {
+		this.extractDocs = extractDocs;
 	}
 
 	/**
@@ -432,6 +445,22 @@ public class ValidationOptions {
 	 */
 	public void setProblemsAdvisor(IPotentialProblemsAdvisor problemsAdvisor) {
 		this.problemsAdvisor = problemsAdvisor;
+	}
+
+	/**
+	 * @param produceGraph
+	 *            the produceGraph to set
+	 */
+	public void setProduceGraph(boolean produceGraph) {
+		this.produceGraph = produceGraph;
+	}
+
+	/**
+	 * @param rubyWarnings
+	 *            the rubyWarnings to set
+	 */
+	public void setRubyWarnings(boolean rubyWarnings) {
+		this.rubyWarnings = rubyWarnings;
 	}
 
 	/**

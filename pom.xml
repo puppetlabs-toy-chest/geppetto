@@ -16,7 +16,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<mavenVersion>3.0.5</mavenVersion>
+		<mavenVersion>3.2.3</mavenVersion>
 		<geppettoVersion>4.0.0-SNAPSHOT</geppettoVersion>
 		<nexusServer>https://geppetto-nexus.puppetlabs.com</nexusServer>
 		<parentSiteURL>${nexusServer}/content/sites/geppetto-site</parentSiteURL>
@@ -32,8 +32,8 @@
 
 		<!-- we'd like to use stock Guice, but that breaks Maven embedder because 
 			it uses a modified Guice called Sisu -->
-		<guice.groupId>org.sonatype.sisu</guice.groupId>
-		<guice.artifactId>sisu-guice</guice.artifactId>
+		<guice.groupId>com.google.inject</guice.groupId>
+		<guice.artifactId>guice</guice.artifactId>
 		<emf.version>2.10.0-v20140514-1158</emf.version>
 		<xtext.version>2.7.1-v201409090713</xtext.version>
 		<buckminster.home>${user.home}/buildtools/buckminster</buckminster.home>
@@ -156,17 +156,22 @@
 			<dependency>
 				<groupId>com.google.inject</groupId>
 				<artifactId>guice</artifactId>
-				<version>3.0</version>
+				<version>4.0-beta5</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.inject.extensions</groupId>
 				<artifactId>guice-multibindings</artifactId>
-				<version>3.0</version>
+				<version>4.0-beta5</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.inject.extensions</groupId>
+				<artifactId>guice-assistedinject</artifactId>
+				<version>4.0-beta5</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>17.0</version>
+				<version>18.0</version>
 			</dependency>
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
@@ -345,7 +350,7 @@
 			<dependency>
 				<groupId>org.sonatype.sisu</groupId>
 				<artifactId>sisu-guice</artifactId>
-				<version>3.1.9</version>
+				<version>3.2.4</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

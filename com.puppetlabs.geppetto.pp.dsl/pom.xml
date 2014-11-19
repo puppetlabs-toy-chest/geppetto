@@ -117,8 +117,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-multibindings</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-assistedinject</artifactId>
-			<version>3.0</version>
 		</dependency>
 	</dependencies>
 </project>

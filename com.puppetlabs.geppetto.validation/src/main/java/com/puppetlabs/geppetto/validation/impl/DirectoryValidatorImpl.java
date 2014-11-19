@@ -54,7 +54,7 @@ import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
-import com.puppetlabs.geppetto.forge.model.NamedTypeItem;
+import com.puppetlabs.geppetto.forge.model.NamedDocItem;
 import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
 import com.puppetlabs.geppetto.module.dsl.metadata.JsonMetadata;
 import com.puppetlabs.geppetto.module.dsl.validation.IModuleValidationAdvisor;
@@ -65,6 +65,7 @@ import com.puppetlabs.geppetto.pp.dsl.adapters.ResourcePropertiesAdapterFactory;
 import com.puppetlabs.geppetto.pp.dsl.linking.PPSearchPath;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
+import com.puppetlabs.geppetto.pp.pptp.Function;
 import com.puppetlabs.geppetto.pp.pptp.IDocumented;
 import com.puppetlabs.geppetto.pp.pptp.INamed;
 import com.puppetlabs.geppetto.pp.pptp.Provider;
@@ -83,12 +84,10 @@ import com.puppetlabs.geppetto.validation.runner.AllModulesState;
 import com.puppetlabs.geppetto.validation.runner.BuildResult;
 import com.puppetlabs.geppetto.validation.runner.DirectoryValidator;
 import com.puppetlabs.geppetto.validation.runner.MetadataInfo;
-import com.puppetlabs.geppetto.validation.runner.ModuleDiagnosticsRunner;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsRunner;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Rakefile;
 import com.puppetlabs.geppetto.validation.runner.RakefileInfo.Raketask;
-import com.puppetlabs.geppetto.validation.runner.RubyDiagnosticsRunner;
 
 public class DirectoryValidatorImpl implements DirectoryValidator {
 	private static final String NAME_OF_DIR_WITH_RESTRICTED_SCOPE = "roles";
@@ -142,15 +141,15 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 
 	};
 
-	private static <T extends INamed & IDocumented> List<NamedTypeItem> convertToNamedTypeItems(Collection<T> items) {
+	private static <T extends INamed & IDocumented> List<NamedDocItem> convertToNamedTypeItems(Collection<T> items) {
 		if(items == null || items.isEmpty())
 			return Collections.emptyList();
 
-		List<NamedTypeItem> fitems = Lists.newArrayListWithCapacity(items.size());
+		List<NamedDocItem> fitems = Lists.newArrayListWithCapacity(items.size());
 		for(T item : items) {
-			NamedTypeItem npItem = new NamedTypeItem();
+			NamedDocItem npItem = new NamedDocItem();
 			npItem.setName(item.getName());
-			npItem.setDocumentation(item.getDocumentation());
+			npItem.setDoc(item.getDocumentation());
 			fitems.add(npItem);
 		}
 		return fitems;
@@ -168,8 +167,6 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 	private final List<File> ppFiles;
 
 	private final PPDiagnosticsRunner ppRunner;
-
-	private final ModuleDiagnosticsRunner mdRunner;
 
 	private final List<File> metadataFiles;
 
@@ -189,9 +186,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 		this.options = options;
 		this.ppRunner = ppRunner;
 
-		mdRunner = new ModuleDiagnosticsRunner(options);
-		mdRunner.createInjectorAndDoEMFRegistration();
-		rubyHelper = new RubyDiagnosticsRunner(options).getRubyHelper();
+		rubyHelper = ppRunner.getRubyHelper();
 		ppFiles = findPPFiles();
 		rbFiles = findRubyFiles();
 		rakeFiles = findRakefiles();
@@ -370,7 +365,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 
 		final IPath nodeRootPath = new Path(root.getAbsolutePath()).append(NAME_OF_DIR_WITH_RESTRICTED_SCOPE);
 		final Multimap<ModuleName, MetadataInfo> moduleData = ArrayListMultimap.create();
-		ModuleUtil mdUtil = mdRunner.getModuleUtil();
+		ModuleUtil mdUtil = ppRunner.getModuleUtil();
 		for(File f : filesOnPath) {
 			// load and remember all that loaded ok
 
@@ -519,7 +514,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 						continue;
 
 					Diagnostic loadDiag = new Diagnostic();
-					Metadata m = mdRunner.getForge().loadModulefile(f, loadDiag);
+					Metadata m = ppRunner.getForge().loadModulefile(f, loadDiag);
 					if(loadDiag.getSeverity() >= Diagnostic.ERROR) {
 						diagnostics.addChildren(loadDiag.getChildren());
 						continue;
@@ -607,6 +602,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 		// Load all ruby
 		Multimap<String, Provider> allProviders = ArrayListMultimap.create();
 		Map<File, Type> allTypes = Maps.newHashMap();
+		Map<File, Function> allFunctions = Maps.newHashMap();
 		for(File f : rbFiles) {
 			try {
 				// Skip "Rakefile.rb" or they will be processed twice (but still tick x2
@@ -631,7 +627,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 						if(diag instanceof RubyIssueDiagnostic)
 							addRubyIssueDiagnostic(((RubyIssueDiagnostic) diag).getIssue(), f);
 
-					if(options.isExtractTypes())
+					if(options.isExtractDocs())
 						for(EObject c : r.getContents()) {
 							if(c instanceof Type)
 								allTypes.put(f, (Type) c);
@@ -639,6 +635,8 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 								Provider p = (Provider) c;
 								allProviders.put(p.getTypeName(), p);
 							}
+							else if(c instanceof Function)
+								allFunctions.put(f, (Function) c);
 						}
 				}
 
@@ -651,7 +649,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 			}
 		}
 
-		if(options.isExtractTypes()) {
+		if(options.isExtractDocs()) {
 			// Key all MetadataInfo with their respective module directory
 			Map<java.nio.file.Path, MetadataInfo> mdInfos = Maps.newHashMap();
 			for(MetadataInfo mdInfo : moduleInfos.values())
@@ -660,7 +658,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 			for(Map.Entry<File, Type> typeEntry : allTypes.entrySet()) {
 				Type t = typeEntry.getValue();
 				com.puppetlabs.geppetto.forge.model.Type ft = new com.puppetlabs.geppetto.forge.model.Type();
-				ft.setDocumentation(t.getDocumentation());
+				ft.setDoc(t.getDocumentation());
 				ft.setName(t.getName());
 				ft.setParameters(convertToNamedTypeItems(t.getParameters()));
 				ft.setProperties(convertToNamedTypeItems(t.getProperties()));
@@ -670,6 +668,18 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 				for(Map.Entry<java.nio.file.Path, MetadataInfo> mdEntry : mdInfos.entrySet())
 					if(typePath.startsWith(mdEntry.getKey())) {
 						mdEntry.getValue().addType(ft);
+						break;
+					}
+			}
+			for(Map.Entry<File, Function> functionEntry : allFunctions.entrySet()) {
+				Function f = functionEntry.getValue();
+				NamedDocItem ff = new NamedDocItem();
+				ff.setDoc(f.getDocumentation());
+				ff.setName(f.getName());
+				java.nio.file.Path typePath = functionEntry.getKey().toPath();
+				for(Map.Entry<java.nio.file.Path, MetadataInfo> mdEntry : mdInfos.entrySet())
+					if(typePath.startsWith(mdEntry.getKey())) {
+						mdEntry.getValue().addFunction(ff);
 						break;
 					}
 			}
@@ -759,7 +769,7 @@ public class DirectoryValidatorImpl implements DirectoryValidator {
 	}
 
 	private void validateModules(List<Entry<File, Resource>> modulesToValidate, final SubMonitor ticker) {
-		IResourceValidator validator = mdRunner.getModuleResourceValidator();
+		IResourceValidator validator = ppRunner.getModuleResourceValidator();
 		for(Entry<File, Resource> r : modulesToValidate) {
 
 			CancelIndicator cancelMonitor = new CancelIndicator() {

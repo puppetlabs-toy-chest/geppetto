@@ -17,15 +17,15 @@ import com.google.gson.annotations.Expose;
 
 /**
  */
-public class Type extends NamedTypeItem {
+public class Type extends NamedDocItem {
 	@Expose
-	private List<NamedTypeItem> properties = Collections.emptyList();
+	private List<NamedDocItem> properties = Collections.emptyList();
 
 	@Expose
-	private List<NamedTypeItem> parameters = Collections.emptyList();
+	private List<NamedDocItem> parameters = Collections.emptyList();
 
 	@Expose
-	private List<NamedTypeItem> providers = Collections.emptyList();
+	private List<NamedDocItem> providers = Collections.emptyList();
 
 	@Override
 	public boolean equals(Object o) {
@@ -40,21 +40,21 @@ public class Type extends NamedTypeItem {
 	/**
 	 * @return the parameters
 	 */
-	public List<NamedTypeItem> getParameters() {
+	public List<NamedDocItem> getParameters() {
 		return parameters;
 	}
 
 	/**
 	 * @return the properties
 	 */
-	public List<NamedTypeItem> getProperties() {
+	public List<NamedDocItem> getProperties() {
 		return properties;
 	}
 
 	/**
 	 * @return the providers
 	 */
-	public List<NamedTypeItem> getProviders() {
+	public List<NamedDocItem> getProviders() {
 		return providers;
 	}
 
@@ -62,7 +62,7 @@ public class Type extends NamedTypeItem {
 	 * @param parameters
 	 *            the parameters to set
 	 */
-	public void setParameters(List<NamedTypeItem> parameters) {
+	public void setParameters(List<NamedDocItem> parameters) {
 		this.parameters = asUnmodifiableList(parameters);
 	}
 
@@ -70,7 +70,7 @@ public class Type extends NamedTypeItem {
 	 * @param properties
 	 *            the properties to set
 	 */
-	public void setProperties(List<NamedTypeItem> properties) {
+	public void setProperties(List<NamedDocItem> properties) {
 		this.properties = asUnmodifiableList(properties);
 	}
 
@@ -78,7 +78,7 @@ public class Type extends NamedTypeItem {
 	 * @param providers
 	 *            the providers to set
 	 */
-	public void setProviders(List<NamedTypeItem> providers) {
+	public void setProviders(List<NamedDocItem> providers) {
 		this.providers = asUnmodifiableList(providers);
 		;
 	}

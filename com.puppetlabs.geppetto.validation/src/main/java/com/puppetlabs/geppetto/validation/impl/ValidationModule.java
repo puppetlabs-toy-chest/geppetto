@@ -6,8 +6,14 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.resource.IContainer.Manager;
 
+import com.google.inject.Binder;
+import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
 import com.puppetlabs.geppetto.validation.ValidationService;
+import com.puppetlabs.geppetto.validation.runner.DirectoryValidator;
+import com.puppetlabs.geppetto.validation.runner.DirectoryValidatorFactory;
+import com.puppetlabs.geppetto.validation.runner.ModuleInjections;
+import com.puppetlabs.geppetto.validation.runner.RubyInjections;
 import com.puppetlabs.geppetto.validation.runner.ValidationStateBasedContainerManager;
 
 public class ValidationModule extends PPRuntimeModule {
@@ -38,6 +44,19 @@ public class ValidationModule extends PPRuntimeModule {
 	}
 
 	public Class<? extends ValidationService> bindValidationService() {
-		return ValidationServiceOptionsBinder.class;
+		return ValidationServiceImpl.class;
+	}
+
+	public void configureDirectoryValidator(Binder binder) {
+		binder.install(new FactoryModuleBuilder().implement(DirectoryValidator.class, DirectoryValidatorImpl.class).build(
+			DirectoryValidatorFactory.class));
+	}
+
+	public void configureModuleInjections(Binder binder) {
+		binder.bind(ModuleInjections.class).toInstance(new ModuleInjections());
+	}
+
+	public void configureRubyInjections(Binder binder) {
+		binder.bind(RubyInjections.class).toInstance(new RubyInjections());
 	}
 }

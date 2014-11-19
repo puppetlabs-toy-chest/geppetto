@@ -52,6 +52,8 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 
 	private static final SimpleDateFormat ISO_8601_TZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
+	private static final String[] emptyData = new String[0];
+
 	public static int getSeverity(String severityString) {
 		int severity = OK;
 		switch(severityString.toUpperCase()) {
@@ -98,7 +100,7 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 
 	private String message;
 
-	private List<Diagnostic> children;
+	private List<Diagnostic> children = Collections.emptyList();
 
 	private DiagnosticType type;
 
@@ -140,9 +142,15 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	public void addChild(Diagnostic child) {
 		if(getSeverity() < child.getSeverity())
 			setSeverity(child.getSeverity());
-		if(children == null)
-			children = new ArrayList<Diagnostic>();
-		children.add(child);
+		int sz = children.size();
+		if(sz == 0)
+			children = Collections.singletonList(child);
+		else if(sz == 1) {
+			children = new ArrayList<>(children);
+			children.add(child);
+		}
+		else
+			children.add(child);
 		childAdded(child);
 	}
 
@@ -209,9 +217,7 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	}
 
 	public List<Diagnostic> getChildren() {
-		return children == null
-			? Collections.<Diagnostic> emptyList()
-			: children;
+		return children;
 	}
 
 	public int getErrorCount() {
@@ -225,12 +231,11 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	 * @return The first exception found or <code>null</code> if no exception exists.
 	 */
 	public Exception getException() {
-		if(children != null)
-			for(Diagnostic child : children) {
-				Exception found = child.getException();
-				if(found != null)
-					return found;
-			}
+		for(Diagnostic child : children) {
+			Exception found = child.getException();
+			if(found != null)
+				return found;
+		}
 		return null;
 	}
 
@@ -374,7 +379,7 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	 * @see #addChildren(Collection)
 	 */
 	public void setChildren(List<Diagnostic> children) {
-		this.children = null;
+		this.children = Collections.emptyList();
 		addChildren(children);
 	}
 
@@ -382,8 +387,10 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 		issue = newIssue;
 	}
 
-	public void setIssueData(String[] newIssueData) {
-		issueData = newIssueData;
+	public void setIssueData(String[] issueData) {
+		this.issueData = issueData == null || issueData.length == 0
+			? emptyData
+			: issueData;
 	}
 
 	/**
@@ -395,9 +402,8 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 	public void setMaxSeverity(int max) {
 		if(severity > max)
 			severity = max;
-		if(children != null)
-			for(Diagnostic child : children)
-				child.setMaxSeverity(severity);
+		for(Diagnostic child : children)
+			child.setMaxSeverity(severity);
 	}
 
 	/**
@@ -472,8 +478,9 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 			? null
 			: getFile().getPath();
 
+		int top = children.size();
 		if(getMessage() == null && resourcePath == null) {
-			if(children == null) {
+			if(top == 0) {
 				bld.append(getSeverityString());
 				return;
 			}
@@ -494,14 +501,13 @@ public class Diagnostic implements Formattable, Serializable, Iterable<Diagnosti
 			if(!appendMessage(bld))
 				bld.setLength(bld.length() - 1);
 
-			if(children != null) {
+			if(top > 0) {
 				bld.append('\n');
 				indent += 4;
 			}
 		}
 
-		if(children != null) {
-			int top = children.size();
+		if(top > 0) {
 			int idx = 0;
 			for(;;) {
 				children.get(idx).toString(severity, bld, includeTopSeverity, indent);

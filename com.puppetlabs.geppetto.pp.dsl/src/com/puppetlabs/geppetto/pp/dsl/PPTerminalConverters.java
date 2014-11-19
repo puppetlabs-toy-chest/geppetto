@@ -18,9 +18,12 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.inject.Singleton;
+
 /**
  * Converters for BeeLang terminals.
  */
+@Singleton
 public class PPTerminalConverters extends AbstractDeclarativeValueConverterService {
 
 	@ValueConverter(rule = "ATBoolean")

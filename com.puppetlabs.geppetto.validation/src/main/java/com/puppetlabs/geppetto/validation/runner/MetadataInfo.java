@@ -18,6 +18,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.puppetlabs.geppetto.forge.model.Dependency;
 import com.puppetlabs.geppetto.forge.model.Metadata;
+import com.puppetlabs.geppetto.forge.model.NamedDocItem;
 import com.puppetlabs.geppetto.forge.model.Type;
 import com.puppetlabs.geppetto.semver.VersionRange;
 
@@ -77,6 +78,8 @@ public class MetadataInfo {
 
 	private final List<Type> types;
 
+	private final List<NamedDocItem> functions;
+
 	private final boolean roleFlag;
 
 	public MetadataInfo(Metadata data, File f, boolean roleFlag) {
@@ -85,7 +88,12 @@ public class MetadataInfo {
 		this.resolvedDependencies = Lists.newArrayList();
 		this.unresolvedDependencies = Lists.newArrayList();
 		this.types = Lists.newArrayList();
+		this.functions = Lists.newArrayList();
 		this.roleFlag = roleFlag;
+	}
+
+	public void addFunction(NamedDocItem function) {
+		functions.add(function);
 	}
 
 	public void addResolvedDependency(Dependency d, MetadataInfo mi) {
@@ -106,6 +114,10 @@ public class MetadataInfo {
 
 	public File getFile() {
 		return file;
+	}
+
+	public Collection<NamedDocItem> getFunctions() {
+		return Collections.unmodifiableList(functions);
 	}
 
 	public Metadata getMetadata() {

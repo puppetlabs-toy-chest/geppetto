@@ -31,6 +31,7 @@ import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.pp.DefinitionArgument;
 import com.puppetlabs.geppetto.pp.Expression;
 import com.puppetlabs.geppetto.pp.HostClassDefinition;
@@ -47,6 +48,7 @@ import com.puppetlabs.geppetto.pp.pptp.TargetElement;
  * Overrides the default description strategy to provide the super class name for element
  * that implement this aspect.
  */
+@Singleton
 public class PPResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
 	public class DefaultReferenceDescription implements IReferenceDescription {
 

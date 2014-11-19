@@ -32,6 +32,16 @@ import com.puppetlabs.geppetto.forge.impl.ForgeModule;
 import com.puppetlabs.geppetto.forge.impl.ForgeServiceModule;
 
 public class AbstractForgeTest {
+	private static String TEST_FORGE_URI = "https://forgestagingapi.puppetlabs.com/";
+
+	// private static String TEST_FORGE_URI = "http://localhost:4567/";
+
+	private static Injector injector;
+
+	private static Injector commonInjector = Guice.createInjector(getCommonModule());
+
+	private static File basedir;
+
 	public static void delete(File fileOrDir) throws IOException {
 		File[] children = fileOrDir.listFiles();
 		if(children != null)
@@ -40,8 +50,6 @@ public class AbstractForgeTest {
 		if(!fileOrDir.delete() && fileOrDir.exists())
 			throw new IOException("Unable to delete " + fileOrDir);
 	}
-
-	// private static String TEST_FORGE_URI = "http://localhost:4567/";
 
 	private static File getBasedir() {
 		if(basedir == null) {
@@ -99,7 +107,7 @@ public class AbstractForgeTest {
 			try {
 				injector = commonInjector.createChildInjector(GsonModule.INSTANCE, new ForgeHttpModule() {
 					@Override
-					protected String getBaseURL() {
+					protected String doGetBaseURL() {
 						return System.getProperty("testForgeServiceURL", TEST_FORGE_URI);
 					}
 				}, new ForgeServiceModule(), new ForgeModule(), testBindings);
@@ -126,12 +134,4 @@ public class AbstractForgeTest {
 		}
 		return testFolder;
 	}
-
-	private static String TEST_FORGE_URI = "https://forgestagingapi.puppetlabs.com/";
-
-	private static Injector injector;
-
-	private static Injector commonInjector = Guice.createInjector(getCommonModule());
-
-	private static File basedir;
 }

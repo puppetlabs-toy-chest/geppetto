@@ -43,7 +43,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectBuilder;
 import org.apache.maven.project.ProjectBuildingRequest;
 import org.apache.maven.repository.RepositorySystem;
-import org.apache.maven.repository.internal.MavenRepositorySystemSession;
+import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.codehaus.plexus.ContainerConfiguration;
 import org.codehaus.plexus.DefaultContainerConfiguration;
 import org.codehaus.plexus.DefaultPlexusContainer;
@@ -274,7 +274,7 @@ public class AbstractForgeTestMojo {
 		MavenExecutionRequest request = new DefaultMavenExecutionRequest();
 		MavenExecutionResult result = new DefaultMavenExecutionResult();
 
-		MavenSession session = new MavenSession(container, new MavenRepositorySystemSession(), request, result);
+		MavenSession session = new MavenSession(container, MavenRepositorySystemUtils.newSession(), request, result);
 		session.setCurrentProject(project);
 		session.setProjects(Arrays.asList(project));
 		return session;

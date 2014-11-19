@@ -20,17 +20,13 @@ public class ForgeAPITestBase {
 			install(new ForgeHttpModule() {
 
 				@Override
-				protected String getBaseURL() {
+				protected String doGetBaseURL() {
 					return FORGE_STAGING_SERVICE_BASE_URL;
 				}
 			});
 			install(new OAuthModule(FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, TEST_USER, TEST_PASSWORD));
 			bind(HttpClient.class).toInstance(new DefaultHttpClient());
 		}
-	}
-
-	public static String[] getPuppetForgeClientIdentity() {
-		return new String[] { FORGE_CLIENT_ID, FORGE_CLIENT_SECRET };
 	}
 
 	public static final String TEST_USER = "geppetto";
@@ -48,4 +44,8 @@ public class ForgeAPITestBase {
 	private static final String FORGE_CLIENT_SECRET = "2227c9a7392382f58b5e4d084b705827cb574673ff7d2a5905ef21685fd48e40";
 
 	public static final String FORGE_STAGING_SERVICE_BASE_URL = "https://forgestagingapi.puppetlabs.com";
+
+	public static String[] getPuppetForgeClientIdentity() {
+		return new String[] { FORGE_CLIENT_ID, FORGE_CLIENT_SECRET };
+	}
 }

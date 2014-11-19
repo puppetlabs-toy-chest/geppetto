@@ -38,6 +38,8 @@ import com.puppetlabs.geppetto.module.dsl.ui.preferences.ModulePreferencesHelper
  * This is the central singleton for the Geppetto UI plugin.
  */
 public final class UIPlugin extends EMFPlugin implements BundleActivator {
+	private static UIPlugin INSTANCE;
+
 	public static Image createImage(String file) {
 		return getImageDesc(file).createImage();
 	}
@@ -80,8 +82,6 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 
 	private EclipseUIPlugin plugin;
 
-	private static UIPlugin INSTANCE;
-
 	public UIPlugin() {
 		super(new ResourceLocator[] {});
 	}
@@ -94,7 +94,7 @@ public final class UIPlugin extends EMFPlugin implements BundleActivator {
 		forgeModules.add(new ForgeServiceModule());
 		forgeModules.add(new ForgeHttpModule() {
 			@Override
-			protected String getBaseURL() {
+			protected String doGetBaseURL() {
 				return moduleInjector.getInstance(ModulePreferencesHelper.class).getForgeURI();
 			}
 		});

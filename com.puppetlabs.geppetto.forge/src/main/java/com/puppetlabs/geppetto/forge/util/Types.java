@@ -32,7 +32,7 @@ import org.jrubyparser.ast.StrNode;
 import org.jrubyparser.ast.SymbolNode;
 
 import com.puppetlabs.geppetto.common.os.FileUtils;
-import com.puppetlabs.geppetto.forge.model.NamedTypeItem;
+import com.puppetlabs.geppetto.forge.model.NamedDocItem;
 import com.puppetlabs.geppetto.forge.model.Type;
 
 /**
@@ -47,7 +47,7 @@ public class Types {
 			// That's OK. It's optional
 			return;
 
-		ArrayList<NamedTypeItem> providers = null;
+		ArrayList<NamedDocItem> providers = null;
 
 		for(File providerFile : providerFiles) {
 			String providerFileName = providerFile.getName();
@@ -84,10 +84,10 @@ public class Types {
 				if(symArgs.isEmpty())
 					continue;
 
-				NamedTypeItem provider = new NamedTypeItem();
+				NamedDocItem provider = new NamedDocItem();
 				provider.setName(((SymbolNode) symArgs.get(0)).getName());
 				if(providers == null)
-					providers = new ArrayList<NamedTypeItem>();
+					providers = new ArrayList<NamedDocItem>();
 				providers.add(provider);
 
 				List<Node> calls = RubyParserUtils.findNodes(call.getIter(), new NodeType[] { NodeType.BLOCKNODE, NodeType.FCALLNODE });
@@ -99,7 +99,7 @@ public class Types {
 						if("desc".equals(subCall.getName())) {
 							List<Node> strArgs = RubyParserUtils.findNodes(subCall.getArgs(), new NodeType[] { NodeType.STRNODE });
 							if(strArgs.size() >= 1)
-								provider.setDocumentation(((StrNode) strArgs.get(0)).getValue());
+								provider.setDoc(((StrNode) strArgs.get(0)).getValue());
 							break;
 						}
 					}
@@ -199,7 +199,7 @@ public class Types {
 
 			Node valueNode = asgnNode.getValue();
 			if(valueNode instanceof StrNode)
-				type.setDocumentation(((StrNode) valueNode).getValue());
+				type.setDoc(((StrNode) valueNode).getValue());
 			break;
 		}
 
@@ -210,8 +210,8 @@ public class Types {
 			// No block when there's just one call
 			nodes = RubyParserUtils.findNodes(iterNode, new NodeType[] { NodeType.FCALLNODE });
 
-		ArrayList<NamedTypeItem> parameters = null;
-		ArrayList<NamedTypeItem> properties = null;
+		ArrayList<NamedDocItem> parameters = null;
+		ArrayList<NamedDocItem> properties = null;
 
 		for(Node node : nodes) {
 			FCallNode callNode = (FCallNode) node;
@@ -223,15 +223,15 @@ public class Types {
 			if(pnodes.size() != 1)
 				throw new IOException("A newparam or newproperty call does not take exactly one symbol parameter in " + typeFileStr);
 
-			NamedTypeItem elem = new NamedTypeItem();
+			NamedDocItem elem = new NamedDocItem();
 			if(isParam) {
 				if(parameters == null)
-					parameters = new ArrayList<NamedTypeItem>();
+					parameters = new ArrayList<NamedDocItem>();
 				parameters.add(elem);
 			}
 			else {
 				if(properties == null)
-					properties = new ArrayList<NamedTypeItem>();
+					properties = new ArrayList<NamedDocItem>();
 				properties.add(elem);
 			}
 
@@ -248,7 +248,7 @@ public class Types {
 					List<Node> args = pcallNode.getArgs().childNodes();
 					if(args.size() != 1)
 						throw new IOException("A newparam or newproperty desc call does not take exactly one parameter in " + typeFileStr);
-					elem.setDocumentation(RubyParserUtils.stringValue(args.get(0)));
+					elem.setDoc(RubyParserUtils.stringValue(args.get(0)));
 					break;
 				}
 			}

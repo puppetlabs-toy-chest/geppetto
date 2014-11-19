@@ -13,9 +13,12 @@ package com.puppetlabs.geppetto.pp.dsl.linking;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 
+import com.google.inject.Singleton;
+
 /**
  * Puppet Qualified Name Converter defines the separator '::'
  */
+@Singleton
 public class PPQualifiedNameConverter extends IQualifiedNameConverter.DefaultImpl {
 	private static final String separator = "::";
 
