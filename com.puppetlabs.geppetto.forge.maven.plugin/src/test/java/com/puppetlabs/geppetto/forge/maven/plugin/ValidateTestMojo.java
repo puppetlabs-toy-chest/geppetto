@@ -1,6 +1,5 @@
 package com.puppetlabs.geppetto.forge.maven.plugin;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -8,13 +7,9 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.junit.Test;
 
 public class ValidateTestMojo extends AbstractForgeTestMojo {
-
 	@Test
 	public void moduleWithComplexRuby() throws Exception {
-		setTestForgeModulesRoot("test_module_complex_ruby");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_module_complex_ruby");
 		try {
 			validate.execute();
 			fail("Complex ruby was not detected");
@@ -26,10 +21,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithInterpolatedComplexRuby() throws Exception {
-		setTestForgeModulesRoot("test_module_interpolated_complex_ruby");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_module_interpolated_complex_ruby");
 		try {
 			validate.execute();
 			fail("Interpolated complex ruby was not detected");
@@ -41,10 +33,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithInvalidMetadata() throws Exception {
-		setTestForgeModulesRoot("test_metadata_invalid");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_metadata_invalid");
 		try {
 			validate.execute();
 			fail("Invalid metadata was not detected");
@@ -56,10 +45,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithNoMetadataNorModulefile() throws Exception {
-		setTestForgeModulesRoot("test_no_metadata_nor_modulefile");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_no_metadata_nor_modulefile");
 		try {
 			validate.execute();
 			fail("Module found although both metadata.json and Modulefile is missing");
@@ -71,10 +57,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithNoModulefile() throws Exception {
-		setTestForgeModulesRoot("test_metadata_no_modulefile");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_metadata_no_modulefile");
 		try {
 			validate.execute();
 		}
@@ -85,10 +68,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithoutMetadataName() throws Exception {
-		setTestForgeModulesRoot("test_metadata_no_name");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_metadata_no_name");
 		try {
 			validate.execute();
 			fail("Missing module name in metadata.json was not detected");
@@ -100,10 +80,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithoutMetadataVersion() throws Exception {
-		setTestForgeModulesRoot("test_metadata_no_version");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_metadata_no_version");
 		try {
 			validate.execute();
 			fail("Missing module version in metadata.json was not detected");
@@ -115,10 +92,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithoutName() throws Exception {
-		setTestForgeModulesRoot("test_module_no_name");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_module_no_name");
 		try {
 			validate.execute();
 			fail("Missing module name was not detected");
@@ -130,10 +104,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithoutVersion() throws Exception {
-		setTestForgeModulesRoot("test_module_no_version");
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate("test_module_no_version");
 		try {
 			validate.execute();
 			fail("Missing module version was not detected");
@@ -145,10 +116,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void unresolvedDependency() throws Exception {
-		setGeneratedTestForgeModulesRoot(ForgeIT.testModuleB);
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate(ForgeIT.testModuleB);
 		try {
 			validate.execute();
 			fail("Unresolved dependency was not detected");
@@ -160,10 +128,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void validateOK() throws Exception {
-		setGeneratedTestForgeModulesRoot(ForgeIT.testModuleC);
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate(ForgeIT.testModuleC);
 		try {
 			validate.execute();
 		}

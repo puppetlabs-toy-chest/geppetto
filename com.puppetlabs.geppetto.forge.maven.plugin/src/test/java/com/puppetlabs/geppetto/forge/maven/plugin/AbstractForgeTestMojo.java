@@ -7,79 +7,66 @@
  *
  * Contributors:
  *   Puppet Labs
+ *
  */
 package com.puppetlabs.geppetto.forge.maven.plugin;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.execution.DefaultMavenExecutionRequest;
-import org.apache.maven.execution.DefaultMavenExecutionResult;
-import org.apache.maven.execution.MavenExecutionRequest;
-import org.apache.maven.execution.MavenExecutionResult;
 import org.apache.maven.execution.MavenSession;
-import org.apache.maven.lifecycle.internal.MojoDescriptorCreator;
 import org.apache.maven.model.Plugin;
 import org.apache.maven.model.PluginExecution;
-import org.apache.maven.plugin.MavenPluginManager;
 import org.apache.maven.plugin.Mojo;
 import org.apache.maven.plugin.MojoExecution;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.descriptor.MojoDescriptor;
-import org.apache.maven.plugin.descriptor.Parameter;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
-import org.apache.maven.plugin.descriptor.PluginDescriptorBuilder;
+import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.apache.maven.plugin.testing.MojoRule;
 import org.apache.maven.project.MavenProject;
-import org.apache.maven.project.ProjectBuilder;
-import org.apache.maven.project.ProjectBuildingRequest;
-import org.apache.maven.repository.RepositorySystem;
-import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
-import org.codehaus.plexus.ContainerConfiguration;
-import org.codehaus.plexus.DefaultContainerConfiguration;
-import org.codehaus.plexus.DefaultPlexusContainer;
-import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.PlexusContainerException;
-import org.codehaus.plexus.classworlds.ClassWorld;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
-import org.codehaus.plexus.component.repository.ComponentDescriptor;
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
-import org.codehaus.plexus.util.InterpolationFilterReader;
-import org.codehaus.plexus.util.ReaderFactory;
-import org.codehaus.plexus.util.StringUtils;
-import org.codehaus.plexus.util.xml.XmlStreamReader;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 
-import com.puppetlabs.geppetto.common.os.FileUtils;
 import com.puppetlabs.geppetto.forge.model.VersionedName;
 
 public class AbstractForgeTestMojo {
-	File pom;
+	@Rule
+	public final MojoRule mojoRule = new MojoRule(new AbstractMojoTestCase() {
+		/**
+		 * Patched version of the mojo lookup that ensures that goal specific execution configuration
+		 * is appliled.
+		 */
+		@Override
+		protected Mojo lookupConfiguredMojo(MavenSession session, MojoExecution execution) throws Exception,
+				ComponentConfigurationException {
+			MavenProject project = session.getCurrentProject();
+			MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
+			PluginDescriptor pluginDescriptor = mojoDescriptor.getPluginDescriptor();
+			Plugin plugin = project.getPlugin(pluginDescriptor.getPluginLookupKey());
+			pluginDescriptor.setPlugin(plugin);
 
-	ProjectBuildingRequest buildingRequest;
+			Xpp3Dom finalConfiguration = execution.getConfiguration();
+			if(plugin != null) {
+				String goal = execution.getGoal();
+				for(PluginExecution pe : plugin.getExecutions()) {
+					if(pe.getGoals().contains(goal)) {
+						Xpp3Dom execConfig = (Xpp3Dom) pe.getConfiguration();
+						if(execConfig != null)
+							finalConfiguration = Xpp3Dom.mergeXpp3Dom(execConfig, finalConfiguration);
+						break;
+					}
+				}
+			}
+			execution.setConfiguration(finalConfiguration);
+			return super.lookupConfiguredMojo(session, execution);
+		}
+	});
 
-	Properties userProps;
-
-	private PlexusContainer container;
-
-	private PluginDescriptor pluginDescriptor;
-
-	private Map<String, MojoDescriptor> mojoDescriptors;
-
-	private File basedir;
-
-	private MavenSession mavenSession;
+	private MavenProject project;
 
 	protected void assertContains(String message, String match, Throwable e) {
 		String em = e.getMessage();
@@ -101,238 +88,40 @@ public class AbstractForgeTestMojo {
 		assertContains(message, "Missing required attribute \"" + key + '"', e);
 	}
 
-	protected MavenSession createMavenSession() {
-		buildingRequest.setUserProperties(userProps);
-		try {
-			MavenProject project = getContainer().lookup(ProjectBuilder.class).build(pom, buildingRequest).getProject();
-			mavenSession = newMavenSession(project);
-			return mavenSession;
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-			return null; // keep
-		}
-	}
-
-	private MavenSession createModuleSession(String moduleName) throws Exception {
-		MavenSession session = createMavenSession();
-		Package pkg = (Package) lookupConfiguredMojo(session, newMojoExecution("package"));
-		assertNotNull(pkg);
-
-		try {
-			pkg.execute();
-		}
-		catch(MojoFailureException e) {
-			fail("Packaging of " + moduleName + " failed: " + e.getMessage());
-		}
-		return session;
-	}
-
-	private void finalizeMojoConfiguration(MojoExecution mojoExecution) {
-		MojoDescriptor mojoDescriptor = mojoExecution.getMojoDescriptor();
-		MavenProject project = getMavenSession().getCurrentProject();
-		PluginDescriptor pluginDescriptor = mojoDescriptor.getPluginDescriptor();
-		Plugin plugin = project.getPlugin(pluginDescriptor.getPluginLookupKey());
-		pluginDescriptor.setPlugin(plugin);
-
-		Xpp3Dom executionConfiguration = mojoExecution.getConfiguration();
-		if(executionConfiguration == null)
-			executionConfiguration = new Xpp3Dom("configuration");
-
-		Xpp3Dom defaultConfiguration = MojoDescriptorCreator.convert(mojoDescriptor);
-		Xpp3Dom finalConfiguration = new Xpp3Dom("configuration");
-
-		if(mojoDescriptor.getParameters() != null) {
-			for(Parameter parameter : mojoDescriptor.getParameters()) {
-				Xpp3Dom parameterConfiguration = executionConfiguration.getChild(parameter.getName());
-
-				if(parameterConfiguration == null)
-					parameterConfiguration = executionConfiguration.getChild(parameter.getAlias());
-
-				Xpp3Dom parameterDefaults = defaultConfiguration.getChild(parameter.getName());
-				parameterConfiguration = Xpp3Dom.mergeXpp3Dom(parameterConfiguration, parameterDefaults, Boolean.TRUE);
-
-				if(parameterConfiguration != null) {
-					parameterConfiguration = new Xpp3Dom(parameterConfiguration, parameter.getName());
-
-					if(StringUtils.isEmpty(parameterConfiguration.getAttribute("implementation")) &&
-						StringUtils.isNotEmpty(parameter.getImplementation())) {
-						parameterConfiguration.setAttribute("implementation", parameter.getImplementation());
-					}
-					finalConfiguration.addChild(parameterConfiguration);
-				}
-			}
-		}
-
-		if(plugin != null) {
-			String goal = mojoExecution.getGoal();
-			for(PluginExecution pe : plugin.getExecutions()) {
-				if(pe.getGoals().contains(goal)) {
-					Xpp3Dom execConfig = (Xpp3Dom) pe.getConfiguration();
-					if(execConfig != null)
-						finalConfiguration = Xpp3Dom.mergeXpp3Dom(execConfig, finalConfiguration);
-					break;
-				}
-			}
-		}
-		mojoExecution.setConfiguration(finalConfiguration);
-	}
-
-	protected File getBasedir() {
-		if(basedir == null)
-			basedir = new File(new File(System.getProperty("basedir", ".")).toURI().normalize());
-		return basedir;
-	}
-
-	protected PlexusContainer getContainer() {
-		if(container == null) {
-			try {
-				container = new DefaultPlexusContainer(setupContainerConfiguration());
-			}
-			catch(PlexusContainerException e) {
-				e.printStackTrace();
-				fail("Failed to create plexus container.");
-			}
-		}
-		return container;
-	}
-
-	protected MavenSession getMavenSession() {
-		if(mavenSession == null)
-			fail("No maven session has been created");
-		return mavenSession;
-	}
-
-	protected Map<String, MojoDescriptor> getMojoDescriptors() {
-		if(mojoDescriptors == null) {
-			mojoDescriptors = new HashMap<String, MojoDescriptor>();
-			for(MojoDescriptor mojoDescriptor : getPluginDescriptor().getMojos()) {
-				mojoDescriptors.put(mojoDescriptor.getGoal(), mojoDescriptor);
-			}
-		}
-		return mojoDescriptors;
-	}
-
-	protected PluginDescriptor getPluginDescriptor() {
-		if(pluginDescriptor == null) {
-			try {
-				InputStream is = getClass().getResourceAsStream("/META-INF/maven/plugin.xml");
-				try {
-					XmlStreamReader reader = ReaderFactory.newXmlReader(is);
-					InterpolationFilterReader interpolationFilterReader = new InterpolationFilterReader(
-						new BufferedReader(reader), container.getContext().getContextData());
-
-					PlexusContainer pc = getContainer();
-					pluginDescriptor = new PluginDescriptorBuilder().build(interpolationFilterReader);
-					Artifact artifact = pc.lookup(RepositorySystem.class).createArtifact(
-						pluginDescriptor.getGroupId(), pluginDescriptor.getArtifactId(), pluginDescriptor.getVersion(), ".jar");
-					artifact.setFile(getBasedir());
-					pluginDescriptor.setClassRealm(pc.getContainerRealm());
-					pluginDescriptor.setPluginArtifact(artifact);
-					pluginDescriptor.setArtifacts(Arrays.asList(artifact));
-
-					for(ComponentDescriptor<?> desc : pluginDescriptor.getComponents())
-						pc.addComponentDescriptor(desc);
-				}
-				finally {
-					is.close();
-				}
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-				fail(e.getMessage());
-			}
-		}
-		return pluginDescriptor;
-	}
-
-	protected MavenPluginManager getPluginManager() {
-		try {
-			return getContainer().lookup(MavenPluginManager.class);
-		}
-		catch(ComponentLookupException e) {
-			e.printStackTrace();
-			fail("Failed to obtain plugin manager.");
-			return null;
-		}
-	}
-
-	protected File getTestFile(String path) {
-		return new File(getBasedir(), path);
-	}
-
-	protected Mojo lookupConfiguredMojo(MavenSession session, MojoExecution execution) throws Exception, ComponentConfigurationException {
-
-		Mojo mojo = getPluginManager().getConfiguredMojo(Mojo.class, session, execution);
-		if(mojo instanceof AbstractForgeMojo)
-			((AbstractForgeMojo) mojo).setLogger(new NOPLogger());
+	protected <T extends AbstractForgeMojo> T getMojo(File modulesRoot, String goal) throws Exception {
+		@SuppressWarnings("unchecked")
+		T mojo = (T) mojoRule.lookupConfiguredMojo(project, goal);
+		assertNotNull(mojo);
+		mojoRule.setVariableValueToObject(mojo, "modulesRoot", modulesRoot.getPath());
 		return mojo;
 	}
 
-	protected MavenSession newMavenSession(MavenProject project) {
-		MavenExecutionRequest request = new DefaultMavenExecutionRequest();
-		MavenExecutionResult result = new DefaultMavenExecutionResult();
-
-		MavenSession session = new MavenSession(container, MavenRepositorySystemUtils.newSession(), request, result);
-		session.setCurrentProject(project);
-		session.setProjects(Arrays.asList(project));
-		return session;
+	protected Package getPackage(String project) throws Exception {
+		return getMojo(new File(ForgeIT.WORKSPACE_DIR, project), "package");
 	}
 
-	protected MojoExecution newMojoExecution(Plugin plugin, String goal, String executionId) {
-		return new MojoExecution(plugin, goal, executionId);
+	protected Package getPackage(VersionedName release) throws Exception {
+		return getMojo(new File(ForgeIT.TEST_MODULES_DIR, release.getModuleName().getName()), "package");
 	}
 
-	protected MojoExecution newMojoExecution(String goal) {
-		MojoDescriptor mojoDescriptor = getMojoDescriptors().get(goal);
-		assertNotNull(mojoDescriptor);
-		MojoExecution execution = new MojoExecution(mojoDescriptor);
-		finalizeMojoConfiguration(execution);
-		return execution;
+	protected Publish getPublish(String project) throws Exception {
+		return getMojo(new File(ForgeIT.WORKSPACE_DIR, project), "publish");
 	}
 
-	protected MavenSession packageGeneratedModule(VersionedName moduleName) throws Exception {
-		setGeneratedTestForgeModulesRoot(moduleName);
-		return createModuleSession(moduleName.getModuleName().getName());
+	protected Publish getPublish(VersionedName release) throws Exception {
+		return getMojo(new File(ForgeIT.TEST_MODULES_DIR, release.getModuleName().getName()), "publish");
 	}
 
-	protected MavenSession packageModule(String moduleName) throws Exception {
-		setTestForgeModulesRoot(moduleName);
-		return createModuleSession(moduleName);
+	protected Validate getValidate(String project) throws Exception {
+		return getMojo(new File(ForgeIT.WORKSPACE_DIR, project), "validate");
 	}
 
-	protected void setGeneratedTestForgeModulesRoot(VersionedName vn) {
-		File projectFile = new File(ForgeIT.TEST_MODULES_DIR, vn.getModuleName().getName());
-		String absPath = projectFile.getAbsolutePath();
-		assertTrue("Project file " + absPath + " is not a directory", projectFile.isDirectory());
-		userProps.put("testForgeModulesRoot", absPath);
-	}
-
-	protected void setTestForgeModulesRoot(String project) {
-		File projectFile = getTestFile("src/test/workspace/" + project);
-		String absPath = projectFile.getAbsolutePath();
-		assertTrue("Project file " + absPath + " is not a directory", projectFile.isDirectory());
-		userProps.put("testForgeModulesRoot", absPath);
+	protected Validate getValidate(VersionedName release) throws Exception {
+		return getMojo(new File(ForgeIT.TEST_MODULES_DIR, release.getModuleName().getName()), "validate");
 	}
 
 	@Before
-	public void setUp() throws Exception {
-		pom = new File(ForgeIT.TEST_POM_DIR, "pom.xml");
-		Assert.assertNotNull(pom);
-		Assert.assertTrue(pom.exists());
-		MavenExecutionRequest request = new DefaultMavenExecutionRequest();
-
-		mavenSession = null;
-		buildingRequest = request.getProjectBuildingRequest();
-		userProps = new Properties();
-		userProps.put("testForgeServiceURL", System.getProperty("forge.base.url"));
-		FileUtils.rmR(new File(pom.getParent(), "target"));
-	}
-
-	protected ContainerConfiguration setupContainerConfiguration() {
-		ClassWorld classWorld = new ClassWorld("plexus.core", Thread.currentThread().getContextClassLoader());
-
-		return new DefaultContainerConfiguration().setClassWorld(classWorld).setName("embedder");
+	public void setup() throws Exception {
+		project = mojoRule.readMavenProject(ForgeIT.TEST_POM_DIR);
 	}
 }

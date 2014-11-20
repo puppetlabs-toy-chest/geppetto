@@ -39,6 +39,20 @@ import com.puppetlabs.geppetto.semver.VersionRange;
 // @fmtOn
 @RunWith(Suite.class)
 public class ForgeIT {
+	static File BASE_DIR;
+
+	static File WORKSPACE_DIR;
+
+	static File TEST_POM_DIR;
+
+	static File TEST_MODULES_DIR;
+
+	static VersionedName testModuleA;
+
+	static VersionedName testModuleB;
+
+	static VersionedName testModuleC;
+
 	private static String createInitPP(VersionedName release) {
 		StringBuilder bld = new StringBuilder();
 		bld.append("class ");
@@ -95,27 +109,20 @@ public class ForgeIT {
 
 	@BeforeClass
 	public static void init() throws IOException {
-		TEST_POM_DIR = new File(new File(System.getProperty("basedir", ".")), "target/test-projects/publisher");
+		BASE_DIR = new File(new File(System.getProperty("basedir", ".")).toURI().normalize());
+		WORKSPACE_DIR = new File(ForgeIT.BASE_DIR, "src/test/workspace");
+		TEST_POM_DIR = new File(BASE_DIR, "target/test-projects/publisher");
+
 		FileUtils.rmR(new File(TEST_POM_DIR, "target"));
 
 		testModuleA = new VersionedName("geppetto", generateModuleName(), "1.0.0");
 		testModuleB = new VersionedName("geppetto", generateModuleName(), "1.0.0");
 		testModuleC = new VersionedName("geppetto", generateModuleName(), "1.0.0");
 
-		TEST_MODULES_DIR = new File(new File(System.getProperty("basedir", ".")), "target/test-modules");
+		TEST_MODULES_DIR = new File(BASE_DIR, "target/test-modules");
 		createModule(TEST_MODULES_DIR, testModuleA, testModuleB);
 		createModule(TEST_MODULES_DIR, testModuleB, testModuleC);
 		createModule(TEST_MODULES_DIR, testModuleC);
 
 	}
-
-	static File TEST_POM_DIR;
-
-	static File TEST_MODULES_DIR;
-
-	static VersionedName testModuleA;
-
-	static VersionedName testModuleB;
-
-	static VersionedName testModuleC;
 }

@@ -1,6 +1,5 @@
 package com.puppetlabs.geppetto.forge.maven.plugin;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -12,10 +11,7 @@ public class ValidateTest2Mojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void moduleWithResolvedDependency() throws Exception {
-		setGeneratedTestForgeModulesRoot(ForgeIT.testModuleB);
-		Validate validate = (Validate) lookupConfiguredMojo(createMavenSession(), newMojoExecution("validate"));
-		assertNotNull(validate);
-
+		Validate validate = getValidate(ForgeIT.testModuleB);
 		try {
 			StringBuilder bld = new StringBuilder("Installing dependent module ");
 			ForgeIT.testModuleC.getModuleName().toString(bld);

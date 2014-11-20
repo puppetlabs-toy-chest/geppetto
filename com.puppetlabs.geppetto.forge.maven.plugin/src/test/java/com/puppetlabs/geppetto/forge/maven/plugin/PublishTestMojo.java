@@ -1,11 +1,9 @@
 package com.puppetlabs.geppetto.forge.maven.plugin;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.apache.http.client.HttpResponseException;
-import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoFailureException;
 import org.junit.Test;
 
@@ -13,10 +11,14 @@ public class PublishTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void publishOK() throws Exception {
-		MavenSession session = packageGeneratedModule(ForgeIT.testModuleC);
-		Publish publish = (Publish) lookupConfiguredMojo(session, newMojoExecution("publish"));
-		assertNotNull(publish);
-
+		Package pkg = getPackage(ForgeIT.testModuleC);
+		try {
+			pkg.execute();
+		}
+		catch(MojoFailureException e) {
+			fail("Packaging of module failed: " + e.getMessage());
+		}
+		Publish publish = getPublish(ForgeIT.testModuleC);
 		try {
 			publish.execute();
 		}
@@ -27,10 +29,14 @@ public class PublishTestMojo extends AbstractForgeTestMojo {
 
 	@Test
 	public void publishWrongOwner() throws Exception {
-		MavenSession session = packageModule("test_module_wrong_owner");
-		Publish publish = (Publish) lookupConfiguredMojo(session, newMojoExecution("publish"));
-		assertNotNull(publish);
-
+		Package pkg = getPackage("test_module_wrong_owner");
+		try {
+			pkg.execute();
+		}
+		catch(MojoFailureException e) {
+			fail("Packaging of module failed: " + e.getMessage());
+		}
+		Publish publish = getPublish("test_module_wrong_owner");
 		try {
 			publish.execute();
 			fail("Publishing succeeded with wrong owner");

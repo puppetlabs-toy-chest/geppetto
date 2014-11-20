@@ -1,10 +1,8 @@
 package com.puppetlabs.geppetto.forge.maven.plugin;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoFailureException;
 import org.eclipse.xtext.util.Wrapper;
 import org.junit.Test;
@@ -12,10 +10,14 @@ import org.junit.Test;
 public class RepublishTestMojo extends AbstractForgeTestMojo {
 	@Test
 	public void republish() throws Exception {
-		MavenSession session = packageGeneratedModule(ForgeIT.testModuleC);
-		Publish publish = (Publish) lookupConfiguredMojo(session, newMojoExecution("publish"));
-		assertNotNull(publish);
-
+		Package pkg = getPackage(ForgeIT.testModuleC);
+		try {
+			pkg.execute();
+		}
+		catch(MojoFailureException e) {
+			fail("Packaging of module failed: " + e.getMessage());
+		}
+		Publish publish = getPublish(ForgeIT.testModuleC);
 		try {
 			// Publish will execute but do nothing. The result is OK.
 			final Wrapper<Boolean> msgFound = new Wrapper<Boolean>(false);
