@@ -20,6 +20,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PPTP.ecore#//TargetEntry/label"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/metaVariables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/puppetTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PPTP.ecore#//TargetEntry/metaTypes"/>
     </genClasses>
     <genClasses ecoreClass="PPTP.ecore#//PuppetDistribution"/>
     <genClasses ecoreClass="PPTP.ecore#//Function">
