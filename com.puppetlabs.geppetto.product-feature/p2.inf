@@ -10,6 +10,74 @@ requires.0.namespace=org.eclipse.equinox.p2.iu
 requires.0.name=org.eclipse.xtext.logging
 requires.0.range=1.2.0
 
+# net
+requires.1.namespace=org.eclipse.equinox.p2.iu
+requires.1.name=org.eclipse.core.net.linux.x86
+requires.1.range=1.1.300
+requires.1.filter=(&(osgi.os=linux)(osgi.arch=x86))
+
+requires.2.namespace=org.eclipse.equinox.p2.iu
+requires.2.name=org.eclipse.core.net.linux.x86_64
+requires.2.range=1.1.100
+requires.2.filter=(&(osgi.os=linux)(osgi.arch=x86_64))
+
+requires.3.namespace=org.eclipse.equinox.p2.iu
+requires.3.name=org.eclipse.core.net.win32.x86
+requires.3.range=1.0.100
+requires.3.filter=(&(osgi.os=win32)(osgi.arch=x86))
+
+requires.4.namespace=org.eclipse.equinox.p2.iu
+requires.4.name=org.eclipse.core.net.win32.x86_64
+requires.4.range=1.0.100
+requires.4.filter=(&(osgi.os=win32)(osgi.arch=x86_64))
+
+# filesystem
+requires.5.namespace=org.eclipse.equinox.p2.iu
+requires.5.name=org.eclipse.core.filesystem.linux.x86
+requires.5.range=1.4.0
+requires.5.filter=(&(osgi.os=linux)(osgi.arch=x86))
+
+requires.6.namespace=org.eclipse.equinox.p2.iu
+requires.6.name=org.eclipse.core.filesystem.linux.x86_64
+requires.6.range=1.2.0
+requires.6.filter=(&(osgi.os=linux)(osgi.arch=x86_64))
+
+requires.7.namespace=org.eclipse.equinox.p2.iu
+requires.7.name=org.eclipse.core.filesystem.macos.x86
+requires.7.range=1.3.0
+requires.7.filter=(&(osgi.os=macos)(osgi.arch=x86))
+
+requires.8.namespace=org.eclipse.equinox.p2.iu
+requires.8.name=org.eclipse.core.filesystem.macos.x86_64
+requires.8.range=1.3.0
+requires.8.filter=(&(osgi.os=macos)(osgi.arch=x86_64))
+
+requires.9.namespace=org.eclipse.equinox.p2.iu
+requires.9.name=org.eclipse.core.filesystem.win32.x86
+requires.9.range=1.4.0
+requires.9.filter=(&(osgi.os=win32)(osgi.arch=x86))
+
+requires.10.namespace=org.eclipse.equinox.p2.iu
+requires.10.name=org.eclipse.core.filesystem.win32.x86_64
+requires.10.range=1.4.0
+requires.10.filter=(&(osgi.os=win32)(osgi.arch=x86_64))
+
+requires.11.namespace=org.eclipse.equinox.p2.iu
+requires.11.name=org.eclipse.core.filesystem.java7
+requires.11.range=1.0.0
+
+# Resources
+requires.12.namespace=org.eclipse.equinox.p2.iu
+requires.12.name=org.eclipse.core.resources.win32.x86
+requires.12.range=3.5.100
+requires.12.filter=(&(osgi.os=win32)(osgi.arch=x86))
+
+requires.13.namespace=org.eclipse.equinox.p2.iu
+requires.13.name=org.eclipse.core.resources.win32.x86_64
+requires.13.range=3.5.0
+requires.13.filter=(&(osgi.os=win32)(osgi.arch=x86_64))
+
+
 instructions.configure=\
 	org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(type:0,location:http${#58}//geppetto-updates.puppetlabs.com/4.x,name:Geppetto Updates);\
 	org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(type:1,location:http${#58}//geppetto-updates.puppetlabs.com/4.x,name:Geppetto Updates);\
