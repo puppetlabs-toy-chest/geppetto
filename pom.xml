@@ -34,8 +34,8 @@
 			it uses a modified Guice called Sisu -->
 		<guice.groupId>com.google.inject</guice.groupId>
 		<guice.artifactId>guice</guice.artifactId>
-		<emf.version>2.10.0-v20140514-1158</emf.version>
-		<xtext.version>2.7.1-v201409090713</xtext.version>
+		<emf.version>2.10.1-v20140901-1043</emf.version>
+		<xtext.version>2.7.2-v201409160908</xtext.version>
 		<buckminster.home>${user.home}/buildtools/buckminster</buckminster.home>
 		<skip.dslGen>false</skip.dslGen>
 	</properties>
@@ -92,7 +92,7 @@
 		<repository>
 			<id>puppetlabs-xtext</id>
 			<name>Puppet Labs Eclipse xtext</name>
-			<url>${nexusServer}/content/repositories/eclipse.xtext/</url>
+			<url>http://nexus.tada.se/content/repositories/eclipse.xtext/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -264,7 +264,7 @@
 			<dependency>
 				<groupId>org.eclipse.core</groupId>
 				<artifactId>org.eclipse.core.jobs</artifactId>
-				<version>3.6.0-v20140424-0053</version>
+				<version>3.6.1-v20141014-1248</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.core</groupId>
@@ -309,7 +309,7 @@
 			<dependency>
 				<groupId>org.eclipse.osgi</groupId>
 				<artifactId>org.eclipse.osgi</artifactId>
-				<version>3.10.0-v20140606-1445</version>
+				<version>3.10.2-v20141103-1919</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.xtext</groupId>

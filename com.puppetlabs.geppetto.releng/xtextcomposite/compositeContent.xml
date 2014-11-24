@@ -4,6 +4,7 @@
 	version="1.0.0">
 	<children size="2">
 		<child location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201409090713/" />
+		<child location="http://download.eclipse.org/eclipse/updates/4.4-M-builds/M20141119-0800/" />
 		<child location="http://download.eclipse.org/releases/luna/" />
 	</children>
 </repository>
