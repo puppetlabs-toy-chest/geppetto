@@ -89,7 +89,9 @@ public class FileDiagnostic extends Diagnostic {
 	}
 
 	public void setLineNumber(Integer newLineNumber) {
-		lineNumber = newLineNumber;
+		lineNumber = newLineNumber == null
+			? -1
+			: newLineNumber;
 	}
 
 	public void setNode(String newNode) {
