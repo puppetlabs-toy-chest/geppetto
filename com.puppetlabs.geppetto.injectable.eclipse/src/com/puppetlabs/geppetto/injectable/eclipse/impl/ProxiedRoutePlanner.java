@@ -74,6 +74,10 @@ public class ProxiedRoutePlanner implements HttpRoutePlanner {
 				HttpHost proxyHost = new HttpHost(proxyData.getHost(), proxyData.getPort());
 				return new HttpRoute(target, null, proxyHost, secure);
 			}
+			else if(proxyData.getType().equals(IProxyData.HTTPS_PROXY_TYPE)) {
+				HttpHost proxyHost = new HttpHost(proxyData.getHost(), proxyData.getPort(), "https");
+				return new HttpRoute(target, null, proxyHost, secure);
+			}
 
 		return new HttpRoute(target, local, secure);
 	}
