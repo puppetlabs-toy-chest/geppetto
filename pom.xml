@@ -307,6 +307,11 @@
 				<version>3.5.400-v20140428-1507</version>
 			</dependency>
 			<dependency>
+				<groupId>org.eclipse.jgit</groupId>
+				<artifactId>org.eclipse.jgit</artifactId>
+				<version>3.4.1.201406201815-r</version>
+			</dependency>
+			<dependency>
 				<groupId>org.eclipse.osgi</groupId>
 				<artifactId>org.eclipse.osgi</artifactId>
 				<version>3.10.2-v20141103-1919</version>
@@ -334,7 +339,7 @@
 			<dependency>
 				<groupId>com.puppetlabs.graph</groupId>
 				<artifactId>com.puppetlabs.graph</artifactId>
-				<version>1.0.3</version>
+				<version>1.0.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.puppetlabs.jruby</groupId>
@@ -381,6 +386,7 @@
 		<module>com.puppetlabs.geppetto.forge.maven.plugin</module>
 		<module>com.puppetlabs.geppetto.semver</module>
 		<module>com.puppetlabs.geppetto.semver.tests</module>
+		<module>com.puppetlabs.geppetto.shaded</module>
 	</modules>
 
 	<build>
@@ -526,6 +532,11 @@
 							<classpathContainer>org.eclipse.pde.core.requiredPlugins</classpathContainer>
 						</classpathContainers>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>2.3</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
