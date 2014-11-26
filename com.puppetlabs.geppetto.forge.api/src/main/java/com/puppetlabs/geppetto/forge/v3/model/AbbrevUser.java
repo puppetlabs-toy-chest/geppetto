@@ -6,6 +6,8 @@ import com.google.gson.annotations.Expose;
 import com.puppetlabs.geppetto.forge.model.Entity;
 
 public class AbbrevUser extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private URI uri;
 

@@ -16,6 +16,8 @@ import com.puppetlabs.geppetto.forge.FilePosition;
 import com.puppetlabs.geppetto.forge.model.Requirement;
 
 public class RequirementWithPosition extends Requirement implements FilePosition {
+	private static final long serialVersionUID = 1L;
+
 	private final int offset;
 
 	private final int length;

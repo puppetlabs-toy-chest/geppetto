@@ -19,6 +19,8 @@ import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.semver.Version;
 
 public class ModuleInfo extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String author;
 

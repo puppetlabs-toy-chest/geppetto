@@ -16,6 +16,8 @@ import com.google.gson.annotations.Expose;
  * A tag for a module
  */
 public class Tag extends TimestampedEntity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String name;
 

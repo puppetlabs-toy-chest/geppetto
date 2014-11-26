@@ -17,6 +17,8 @@ import com.puppetlabs.geppetto.forge.model.Entity;
  * This is a simply entity for self referring URL representation.
  */
 public class SelfLink extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private HalLink self;
 

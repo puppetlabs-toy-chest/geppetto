@@ -15,6 +15,8 @@ import java.util.Date;
 import com.google.gson.annotations.Expose;
 
 public class User extends AbbrevUser {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String display_name;
 

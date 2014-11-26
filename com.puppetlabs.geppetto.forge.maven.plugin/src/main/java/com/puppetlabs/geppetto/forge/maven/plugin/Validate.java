@@ -46,9 +46,9 @@ import com.puppetlabs.geppetto.puppetlint.PuppetLintService;
 import com.puppetlabs.geppetto.validation.FileType;
 import com.puppetlabs.geppetto.validation.ValidationOptions;
 import com.puppetlabs.geppetto.validation.ValidationService;
-import com.puppetlabs.geppetto.validation.impl.ValidationModule;
 import com.puppetlabs.geppetto.validation.runner.IEncodingProvider;
 import com.puppetlabs.geppetto.validation.runner.PPDiagnosticsSetup;
+import com.puppetlabs.geppetto.validation.runner.ValidationModule;
 
 /**
  * The <tt>validate</tt> goal can perform a very elaborate analyzis of the module using the Geppetto platform. It is

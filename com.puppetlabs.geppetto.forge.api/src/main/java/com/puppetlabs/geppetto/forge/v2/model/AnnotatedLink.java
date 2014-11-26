@@ -19,6 +19,8 @@ import com.puppetlabs.geppetto.forge.model.Entity;
  * more info.
  */
 public class AnnotatedLink extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String slug;
 

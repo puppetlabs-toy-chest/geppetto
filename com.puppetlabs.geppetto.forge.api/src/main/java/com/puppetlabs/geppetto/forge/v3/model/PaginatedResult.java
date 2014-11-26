@@ -8,6 +8,8 @@ import com.puppetlabs.geppetto.forge.model.Entity;
 import com.puppetlabs.geppetto.forge.v3.PaginationInfo;
 
 public class PaginatedResult<T extends Entity> extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private Pagination pagination;
 

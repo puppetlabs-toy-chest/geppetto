@@ -18,6 +18,8 @@ import com.puppetlabs.geppetto.forge.model.Entity;
 /**
  */
 public class TimestampedEntity extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private Date created_at;
 

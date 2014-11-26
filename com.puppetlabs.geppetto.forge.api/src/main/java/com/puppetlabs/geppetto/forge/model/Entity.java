@@ -10,6 +10,7 @@
  */
 package com.puppetlabs.geppetto.forge.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,7 +22,9 @@ import com.puppetlabs.geppetto.forge.client.GsonModule;
 /**
  * Super class of all model entitites. Provides basic JSON capability.
  */
-public class Entity {
+public class Entity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	protected static <T> List<T> asUnmodifiableList(List<T> list) {
 		int sz = list == null
 			? 0

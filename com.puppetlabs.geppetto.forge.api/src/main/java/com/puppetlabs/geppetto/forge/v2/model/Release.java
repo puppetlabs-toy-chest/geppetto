@@ -17,6 +17,8 @@ import com.puppetlabs.geppetto.forge.model.ModuleName;
  * Describes a module release
  */
 public class Release extends FlatRelease {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private Module module;
 

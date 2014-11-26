@@ -22,6 +22,7 @@ import com.puppetlabs.geppetto.semver.Version;
  * Module meta-data
  */
 public class Metadata extends Entity {
+	private static final long serialVersionUID = 1L;
 
 	@Expose
 	private String author;

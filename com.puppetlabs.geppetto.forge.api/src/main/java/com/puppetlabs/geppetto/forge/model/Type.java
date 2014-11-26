@@ -18,6 +18,8 @@ import com.google.gson.annotations.Expose;
 /**
  */
 public class Type extends NamedDocItem {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private List<NamedDocItem> properties = Collections.emptyList();
 

@@ -26,6 +26,8 @@ import com.puppetlabs.geppetto.forge.model.Metadata;
  * A release is a specific version of a module
  */
 public class Release extends AbbrevRelease {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private AbbrevModule module;
 

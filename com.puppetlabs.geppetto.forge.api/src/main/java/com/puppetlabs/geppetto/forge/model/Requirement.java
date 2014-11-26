@@ -18,6 +18,8 @@ import com.puppetlabs.geppetto.semver.VersionRange;
  * A module release requirement
  */
 public class Requirement extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String name;
 

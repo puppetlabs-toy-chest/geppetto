@@ -19,6 +19,8 @@ import java.util.Map;
  * Represents an Entity that holds checksums
  */
 public class Checksums extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	private Map<String, byte[]> checksums;
 
 	/**

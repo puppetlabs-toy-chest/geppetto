@@ -11,10 +11,13 @@
  */
 package com.puppetlabs.geppetto.forge.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
-public class ForgeDocs {
+public class ForgeDocs implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private Collection<Type> types;
 
 	private Collection<NamedDocItem> functions;

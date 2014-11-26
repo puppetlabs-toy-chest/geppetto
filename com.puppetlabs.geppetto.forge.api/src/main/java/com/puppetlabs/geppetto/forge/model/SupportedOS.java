@@ -20,6 +20,8 @@ import com.google.gson.annotations.Expose;
  * Captures information about what operating system releases the owner module release supports.
  */
 public class SupportedOS extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String operatingsystem;
 

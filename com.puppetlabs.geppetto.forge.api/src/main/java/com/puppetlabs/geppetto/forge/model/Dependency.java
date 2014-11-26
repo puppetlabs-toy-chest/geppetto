@@ -42,6 +42,8 @@ public class Dependency extends Entity {
 		}
 	}
 
+	private static final long serialVersionUID = 1L;
+
 	public static final JsonAdapter DEPENDENCY_ADAPTER = new JsonAdapter();
 
 	@Expose

@@ -11,9 +11,12 @@
  */
 package com.puppetlabs.geppetto.forge.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class ForgeResult {
+public class ForgeResult implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private Map<String, Object> results;
 
 	private String name;

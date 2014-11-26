@@ -21,6 +21,8 @@ import com.puppetlabs.geppetto.semver.Version;
  * Describes a module release
  */
 public class FlatRelease extends TimestampedEntity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private Version version;
 

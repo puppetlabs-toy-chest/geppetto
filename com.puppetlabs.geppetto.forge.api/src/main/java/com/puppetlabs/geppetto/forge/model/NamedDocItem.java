@@ -16,6 +16,8 @@ import com.google.gson.annotations.Expose;
  * Property, Parameter, or Provider for a {@link Type} or a Function
  */
 public class NamedDocItem extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String name;
 

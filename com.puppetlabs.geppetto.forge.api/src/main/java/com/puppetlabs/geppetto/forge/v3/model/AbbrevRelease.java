@@ -7,6 +7,8 @@ import com.puppetlabs.geppetto.forge.model.Entity;
 import com.puppetlabs.geppetto.semver.Version;
 
 public class AbbrevRelease extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private URI uri;
 

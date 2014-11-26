@@ -19,6 +19,8 @@ import com.puppetlabs.geppetto.forge.model.Entity;
  * href is exposed for now for now until we see a need for the other parameters.
  */
 public class HalLink extends Entity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String href;
 

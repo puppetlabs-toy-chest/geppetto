@@ -23,6 +23,8 @@ import com.puppetlabs.geppetto.forge.model.ModuleName;
 /**
  */
 public class Module extends TimestampedEntity {
+	private static final long serialVersionUID = 1L;
+
 	@Expose
 	private String name;
 
