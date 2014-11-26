@@ -13,7 +13,6 @@ package com.puppetlabs.geppetto.validation.runner;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.puppetlabs.geppetto.pp.dsl.PPStandaloneSetup;
-import com.puppetlabs.geppetto.validation.impl.ValidationModule;
 
 /**
  * Setup of PP runtime with overrides for validation service.

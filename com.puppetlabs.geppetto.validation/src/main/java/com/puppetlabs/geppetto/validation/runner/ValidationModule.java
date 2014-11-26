@@ -1,4 +1,4 @@
-package com.puppetlabs.geppetto.validation.impl;
+package com.puppetlabs.geppetto.validation.runner;
 
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
@@ -10,11 +10,8 @@ import com.google.inject.Binder;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.puppetlabs.geppetto.pp.dsl.PPRuntimeModule;
 import com.puppetlabs.geppetto.validation.ValidationService;
-import com.puppetlabs.geppetto.validation.runner.DirectoryValidator;
-import com.puppetlabs.geppetto.validation.runner.DirectoryValidatorFactory;
-import com.puppetlabs.geppetto.validation.runner.ModuleInjections;
-import com.puppetlabs.geppetto.validation.runner.RubyInjections;
-import com.puppetlabs.geppetto.validation.runner.ValidationStateBasedContainerManager;
+import com.puppetlabs.geppetto.validation.impl.DirectoryValidatorImpl;
+import com.puppetlabs.geppetto.validation.impl.ValidationServiceImpl;
 
 public class ValidationModule extends PPRuntimeModule {
 
