@@ -1,0 +1,5 @@
+# We list fragment here rather than as a plugin in entry in feature.xml to avoid
+# explicit version requirement
+requires.0.namespace=org.eclipse.equinox.p2.iu
+requires.0.name=org.eclipse.xtext.logging
+requires.0.range=1.2.0
