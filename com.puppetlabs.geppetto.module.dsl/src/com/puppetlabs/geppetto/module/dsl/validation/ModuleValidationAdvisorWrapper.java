@@ -15,6 +15,11 @@ public class ModuleValidationAdvisorWrapper implements IModuleValidationAdvisor 
 	}
 
 	@Override
+	public ValidationPreference getDependencyDeclaredMoreThanOnce() {
+		return advisor.getDependencyDeclaredMoreThanOnce();
+	}
+
+	@Override
 	public ValidationPreference getDependencyVersionMismatch() {
 		return advisor.getDependencyVersionMismatch();
 	}

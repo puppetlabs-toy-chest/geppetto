@@ -8,6 +8,8 @@ public class PotentialModuleProblemPreferencesPage extends AbstractPreferencePag
 	protected void createFieldEditors() {
 		addField(new ValidationPreferenceFieldEditor(PROBLEM_CIRCULAR_DEPENDENCY, //
 			"Circular Dependency", getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(PROBLEM_DEPENDENCY_DECLARED_MORE_THAN_ONCE, //
+			"Dependency Declared More Than Once", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(PROBLEM_DEPENDENCY_VERSION_MISMATCH, //
 			"Dependency Version Mismatch", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(PROBLEM_MODULE_CLASS_NOT_IN_INIT_PP, //
