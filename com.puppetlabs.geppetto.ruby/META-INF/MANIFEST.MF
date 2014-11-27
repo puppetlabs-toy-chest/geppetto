@@ -35,12 +35,14 @@ Export-Package: com.puppetlabs.geppetto.ruby;
    com.puppetlabs.geppetto.ruby.spi,
    com.puppetlabs.geppetto.pp.pptp",
  com.puppetlabs.geppetto.ruby.resource;
-  uses:="com.google.inject,
+  uses:="org.eclipse.emf.ecore,
+   com.puppetlabs.geppetto.ruby.spi,
+   org.eclipse.emf.ecore.resource.impl,
+   org.eclipse.xtext.naming,
+   com.puppetlabs.geppetto.ruby,
+   com.google.inject,
    org.eclipse.emf.common.util,
    org.eclipse.xtext.resource.impl,
    org.eclipse.xtext.resource.generic,
-   com.puppetlabs.geppetto.ruby.spi,
-   org.eclipse.emf.ecore.resource.impl,
-   com.puppetlabs.geppetto.ruby,
    org.eclipse.emf.ecore.resource",
  com.puppetlabs.geppetto.ruby.spi;uses:="com.puppetlabs.geppetto.diagnostic"

@@ -7,20 +7,27 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: com.puppetlabs.geppetto.forge;
-  uses:="com.puppetlabs.geppetto.semver,
-   com.puppetlabs.geppetto.diagnostic,
+  uses:="com.puppetlabs.geppetto.diagnostic,
+   com.puppetlabs.geppetto.semver,
    com.puppetlabs.geppetto.forge.client,
    com.puppetlabs.geppetto.forge.model",
- com.puppetlabs.geppetto.forge.impl,
- com.puppetlabs.geppetto.forge.util;
-  uses:="com.puppetlabs.geppetto.forge,
+ com.puppetlabs.geppetto.forge.impl;
+  uses:="com.puppetlabs.geppetto.diagnostic,
+   com.google.inject,
+   com.google.inject.multibindings,
    com.puppetlabs.geppetto.semver,
-   com.puppetlabs.geppetto.diagnostic,
-   org.jrubyparser.ast,
+   com.puppetlabs.geppetto.forge,
+   com.puppetlabs.geppetto.forge.model",
+ com.puppetlabs.geppetto.forge.util;
+  uses:="com.puppetlabs.geppetto.diagnostic,
+   com.puppetlabs.geppetto.semver,
    org.jrubyparser.lexer,
-   org.jrubyparser,
-   com.fasterxml.jackson.databind,
-   com.puppetlabs.geppetto.forge.model"
+   com.fasterxml.jackson.core,
+   com.google.inject,
+   org.jrubyparser.ast,
+   com.puppetlabs.geppetto.forge,
+   com.puppetlabs.geppetto.forge.model,
+   org.jrubyparser"
 Import-Package: com.fasterxml.jackson.core,
  com.fasterxml.jackson.databind,
  com.google.gson,
