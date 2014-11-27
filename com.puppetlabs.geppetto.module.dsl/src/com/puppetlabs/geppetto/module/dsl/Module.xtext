@@ -28,16 +28,16 @@ MetadataPair returns Pair:
 	| UnrecognizedMetadataPair;
 
 AuthorPair returns Pair:
-	name='"author"' ':' value=StringLiteral;
+	name='"author"' ':' value=(StringLiteral | NullValue);
 
 DependenciesPair returns Pair:
 	name='"dependencies"' ':' value=DependencyArray;
 
 IssuesUrlPair returns Pair:
-	name='"issues_url"' ':' value=StringLiteral;
+	name='"issues_url"' ':' value=(StringLiteral | NullValue);
 
 LicensePair returns Pair:
-	name='"license"' ':' value=StringLiteral;
+	name='"license"' ':' value=(StringLiteral | NullValue);
 
 NamePair returns Pair:
 	name='"name"' ':' value=ModuleName;
@@ -46,16 +46,16 @@ OperatingsystemSupportPair returns Pair:
 	name='"operatingsystem_support"' ':' value=OSArray;
 
 ProjectPagePair returns Pair:
-	name='"project_page"' ':' value=StringLiteral;
+	name='"project_page"' ':' value=(StringLiteral | NullValue);
 
 RequirementsPair returns Pair:
 	name='"requirements"' ':' value=RequirementArray;
 
 SourcePair returns Pair:
-	name='"source"' ':' value=StringLiteral;
+	name='"source"' ':' value=(StringLiteral | NullValue);
 
 SummaryPair returns Pair:
-	name='"summary"' ':' value=StringLiteral;
+	name='"summary"' ':' value=(StringLiteral | NullValue);
 
 TagsPair returns Pair:
 	name='"tags"' ':' value=TagArray;
@@ -142,7 +142,7 @@ JsonOS:
 	'{' pairs+=OSPair (',' pairs+=OSPair)* '}';
 
 OSPair returns Pair:
-	name='"operatingsystem"' ':' value=StringLiteral
+	name='"operatingsystem"' ':' value=(StringLiteral | NullValue)
 	| name='"operatingsystemrelease"' ':' value=StringArray
 	| UnrecognizedOSPair;
 

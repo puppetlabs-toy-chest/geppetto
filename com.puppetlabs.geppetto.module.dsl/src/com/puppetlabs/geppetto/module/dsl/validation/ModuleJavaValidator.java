@@ -1,6 +1,8 @@
 package com.puppetlabs.geppetto.module.dsl.validation;
 
-import static com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference.*;
+import static com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference.ERROR;
+import static com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference.IGNORE;
+import static com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference.WARNING;
 import static java.lang.String.format;
 
 import java.util.HashSet;
@@ -24,8 +26,20 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.module.dsl.ModuleUtil;
-import com.puppetlabs.geppetto.module.dsl.metadata.*;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonDependency;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonMetadata;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonModuleName;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonOS;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonObject;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonRequirement;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonTag;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonValue;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonVersion;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonVersionRange;
 import com.puppetlabs.geppetto.module.dsl.metadata.MetadataPackage.Literals;
+import com.puppetlabs.geppetto.module.dsl.metadata.RequirementNameValue;
+import com.puppetlabs.geppetto.module.dsl.metadata.UnrecognizedPair;
+import com.puppetlabs.geppetto.module.dsl.metadata.Value;
 import com.puppetlabs.geppetto.pp.PPPackage;
 import com.puppetlabs.geppetto.pp.dsl.validation.ValidationPreference;
 import com.puppetlabs.geppetto.semver.Version;
@@ -89,9 +103,16 @@ public class ModuleJavaValidator extends AbstractModuleJavaValidator implements 
 			List<JsonDependency> deps = moduleUtil.getDependencies(moduleUtil.getOwnerMetadata(dependency));
 			for(JsonDependency otherDep : deps)
 				if(otherDep != dependency && name.equals(moduleUtil.getRawName(otherDep))) {
-					error(
-						String.format("Dependency to '%s' is declared more than once", name), dependency.eContainer(),
-						Literals.JSON_ARRAY__VALUE, deps.indexOf(dependency), ISSUE__DEPENDENCY_DECLARED_MORE_THAN_ONCE);
+					ValidationPreference vp = validationAdvisor.getDependencyDeclaredMoreThanOnce();
+					if(vp != IGNORE) {
+						EObject dc = dependency.eContainer();
+						int idx = deps.indexOf(dependency);
+						String msg = String.format("Dependency to '%s' is declared more than once", name);
+						if(vp == WARNING)
+							warning(msg, dc, Literals.JSON_ARRAY__VALUE, idx, ISSUE__DEPENDENCY_DECLARED_MORE_THAN_ONCE);
+						else
+							error(msg, dc, Literals.JSON_ARRAY__VALUE, idx, ISSUE__DEPENDENCY_DECLARED_MORE_THAN_ONCE);
+					}
 					break;
 				}
 		}

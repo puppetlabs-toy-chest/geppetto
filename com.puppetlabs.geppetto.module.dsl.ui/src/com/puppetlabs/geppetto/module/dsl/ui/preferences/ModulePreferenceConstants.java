@@ -7,6 +7,8 @@ public interface ModulePreferenceConstants {
 
 	String PROBLEM_CIRCULAR_DEPENDENCY = "circularModuleDependency";
 
+	String PROBLEM_DEPENDENCY_DECLARED_MORE_THAN_ONCE = "dependencyDeclaredMoreThanOnce";
+
 	String PROBLEM_DEPENDENCY_VERSION_MISMATCH = "dependencyVersionRangeMismatch";
 
 	String PROBLEM_DEPRECATED_KEY = "deprecatedKey";

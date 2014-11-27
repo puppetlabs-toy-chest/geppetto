@@ -24,6 +24,7 @@ public class ModulePreferencesHelper implements ModulePreferenceConstants, IProp
 	// @fmtOff
 	private final List<String> requiresRebuild = Lists.newArrayList(
 		PROBLEM_CIRCULAR_DEPENDENCY,
+		PROBLEM_DEPENDENCY_DECLARED_MORE_THAN_ONCE,
 		PROBLEM_DEPENDENCY_VERSION_MISMATCH,
 		PROBLEM_DEPRECATED_KEY,
 		PROBLEM_MODULE_CLASS_NOT_IN_INIT_PP,
@@ -45,6 +46,7 @@ public class ModulePreferencesHelper implements ModulePreferenceConstants, IProp
 		store.setDefault(FORGE_LOGIN, ModuleName.safeOwner(System.getProperty("user.name")));
 		store.setDefault(PROBLEM_CIRCULAR_DEPENDENCY, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_DEPRECATED_KEY, ValidationPreference.WARNING.toString());
+		store.setDefault(PROBLEM_DEPENDENCY_DECLARED_MORE_THAN_ONCE, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_DEPENDENCY_VERSION_MISMATCH, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_MODULE_CLASS_NOT_IN_INIT_PP, ValidationPreference.WARNING.toString());
 		store.setDefault(PROBLEM_MODULE_NAME_NOT_STRICT, ValidationPreference.WARNING.toString());
@@ -62,6 +64,10 @@ public class ModulePreferencesHelper implements ModulePreferenceConstants, IProp
 
 	public ValidationPreference getCircularDependencyPreference() {
 		return getValidationPreference(PROBLEM_CIRCULAR_DEPENDENCY);
+	}
+
+	public ValidationPreference getDependencyDeclaredMoreThanOnce() {
+		return getValidationPreference(PROBLEM_DEPENDENCY_DECLARED_MORE_THAN_ONCE);
 	}
 
 	public ValidationPreference getDependencyVersionMismatchPreference() {

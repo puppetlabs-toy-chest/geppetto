@@ -993,7 +993,9 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(s.startsWith("$"))
 				s = s.substring(1);
 			if(seen.contains(s)) {
-				acceptor.acceptError("Duplicate definition of parameter", arg, IPPDiagnostics.ISSUE__DUPLICATE_PARAMETER);
+				ValidationPreference dupParam = advisor().getDuplicateParameter();
+				if(dupParam.isWarningOrError())
+					warningOrError(acceptor, dupParam, "Duplicate definition of parameter", arg, IPPDiagnostics.ISSUE__DUPLICATE_PARAMETER);
 			}
 			else
 				seen.add(s);
@@ -1013,8 +1015,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 						IPPDiagnostics.ISSUE__PARAM_DEFAULT_NOT_LAST);
 			}
 		}
-		IValidationAdvisor advisor = advisor();
-		ValidationPreference endComma = advisor.definitionArgumentListEndComma();
+		ValidationPreference endComma = advisor().definitionArgumentListEndComma();
 		if(endComma.isWarningOrError()) {
 			// Check if list ends with optional comma.
 			INode n = NodeModelUtils.getNode(o);

@@ -18,6 +18,11 @@ public class PreferencedBasedValidationAdvisor implements IModuleValidationAdvis
 	}
 
 	@Override
+	public ValidationPreference getDependencyDeclaredMoreThanOnce() {
+		return preferenceHelper.getDependencyDeclaredMoreThanOnce();
+	}
+
+	@Override
 	public ValidationPreference getDependencyVersionMismatch() {
 		return preferenceHelper.getDependencyVersionMismatchPreference();
 	}

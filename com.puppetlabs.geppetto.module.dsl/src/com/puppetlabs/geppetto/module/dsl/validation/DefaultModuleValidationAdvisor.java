@@ -84,4 +84,9 @@ public class DefaultModuleValidationAdvisor implements IModuleValidationAdvisor,
 	public ValidationPreference getWhitespaceInTag() {
 		return ValidationPreference.WARNING;
 	}
+
+	@Override
+	public ValidationPreference getDependencyDeclaredMoreThanOnce() {
+		return ValidationPreference.WARNING;
+	}
 }

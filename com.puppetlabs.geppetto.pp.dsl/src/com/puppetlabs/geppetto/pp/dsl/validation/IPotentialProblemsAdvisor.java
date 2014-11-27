@@ -16,6 +16,11 @@ package com.puppetlabs.geppetto.pp.dsl.validation;
 public interface IPotentialProblemsAdvisor extends IStylisticProblemsAdvisor {
 
 	/**
+	 * How should a duplicate parameter be handled
+	 */
+	ValidationPreference getDuplicateParameter();
+
+	/**
 	 * How should assignment to variable $string be treated. Puppet bug http://projects.puppetlabs.com/issues/14093.
 	 */
 	ValidationPreference getAssignmentToVarNamedString();

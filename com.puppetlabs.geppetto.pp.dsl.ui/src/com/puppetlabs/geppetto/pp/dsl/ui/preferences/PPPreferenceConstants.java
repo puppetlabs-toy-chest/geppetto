@@ -45,6 +45,8 @@ public class PPPreferenceConstants {
 
 	public static final String PROBLEM_DQ_STRING_NOT_REQUIRED_VAR = "dqStringNotRequiredVar";
 
+	public static final String PROBLEM_DUPLICATE_PARAMETER = "duplicateParameter";
+
 	public static final String PROBLEM_ENSURE_NOT_FIRST = "ensureNotFirst";
 
 	public static final String PROBLEM_INTERPOLATED_HYPHEN = "problemInterpolatedHyphen";

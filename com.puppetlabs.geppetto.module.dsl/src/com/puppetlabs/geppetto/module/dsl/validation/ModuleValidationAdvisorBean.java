@@ -21,6 +21,8 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 
 	private ValidationPreference circularDependency;
 
+	private ValidationPreference dependencyDeclaredMoreThanOnce;
+
 	private ValidationPreference dependencyVersionMismatch;
 
 	private ValidationPreference deprecatedKey;
@@ -74,6 +76,12 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 		return circularDependency == null
 			? DefaultModuleValidationAdvisor.INSTANCE.getCircularDependency()
 			: circularDependency;
+	}
+
+	@Override
+	@JsonProperty("dependency_declared_more_than_once")
+	public ValidationPreference getDependencyDeclaredMoreThanOnce() {
+		return dependencyDeclaredMoreThanOnce;
 	}
 
 	/**
@@ -242,6 +250,14 @@ public class ModuleValidationAdvisorBean implements IModuleValidationAdvisor, Se
 	 */
 	public void setCircularDependency(ValidationPreference circularDependency) {
 		this.circularDependency = circularDependency;
+	}
+
+	/**
+	 * @param dependencyDeclaredMoreThanOnce
+	 *            the dependencyDeclaredMoreThanOnce to set
+	 */
+	public void setDependencyDeclaredMoreThanOnce(ValidationPreference dependencyDeclaredMoreThanOnce) {
+		this.dependencyDeclaredMoreThanOnce = dependencyDeclaredMoreThanOnce;
 	}
 
 	/**

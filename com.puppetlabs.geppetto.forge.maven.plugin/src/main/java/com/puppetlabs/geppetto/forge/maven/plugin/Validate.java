@@ -245,6 +245,12 @@ public class Validate extends AbstractForgeServiceMojo {
 	private ValidationPreference circularDependency = WARNING;
 
 	/**
+	 * How should dependencies that have been declared more than once be reported
+	 */
+	@Parameter(property = "forge.validation.dependencyDeclaredMoreThanOnce", defaultValue = "WARNING")
+	private ValidationPreference dependencyDeclaredMoreThanOnce = WARNING;
+
+	/**
 	 * How should version ranges that doesn't match the target version be reported
 	 */
 	@Parameter(property = "forge.validation.dependencyVersionMismatch", defaultValue = "WARNING")
@@ -255,6 +261,12 @@ public class Validate extends AbstractForgeServiceMojo {
 	 */
 	@Parameter(property = "forge.validation.deprecatedKey", defaultValue = "WARNING")
 	private ValidationPreference deprecatedKey = WARNING;
+
+	/**
+	 * How should duplicate parameters be reported
+	 */
+	@Parameter(property = "forge.validation.duplicateParameter", defaultValue = "WARNING")
+	private ValidationPreference duplicateParameter = WARNING;
 
 	/**
 	 * How should empty or missing fields required by Puppet Forge be reported
@@ -327,6 +339,11 @@ public class Validate extends AbstractForgeServiceMojo {
 		@Override
 		public ValidationPreference getCircularDependency() {
 			return circularDependency;
+		}
+
+		@Override
+		public ValidationPreference getDependencyDeclaredMoreThanOnce() {
+			return dependencyDeclaredMoreThanOnce;
 		}
 
 		@Override
@@ -444,6 +461,11 @@ public class Validate extends AbstractForgeServiceMojo {
 		@Override
 		public ValidationPreference getDqStringNotRequiredVariable() {
 			return dqStringNotRequiredVariable;
+		}
+
+		@Override
+		public ValidationPreference getDuplicateParameter() {
+			return duplicateParameter;
 		}
 
 		@Override

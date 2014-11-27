@@ -68,4 +68,9 @@ public interface IModuleValidationAdvisor {
 	 * How should tags containing whitespace characters be handled
 	 */
 	ValidationPreference getWhitespaceInTag();
+
+	/**
+	 * How should duplicated dependencies be handled
+	 */
+	ValidationPreference getDependencyDeclaredMoreThanOnce();
 }
