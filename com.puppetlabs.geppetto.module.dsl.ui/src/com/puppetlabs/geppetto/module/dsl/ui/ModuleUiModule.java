@@ -73,7 +73,6 @@ public class ModuleUiModule extends AbstractModuleUiModule {
 		return PreferencedBasedValidationAdvisor.class;
 	}
 
-	@Override
 	public Class<? extends IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
 		return ModuleBuildParticipant.class;
 	}

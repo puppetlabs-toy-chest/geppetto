@@ -83,6 +83,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME,
 		PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED,
 		PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR,
+		PPPreferenceConstants.PROBLEM_DUPLICATE_PARAMETER,
 		PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST,
 		PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN,
 		PPPreferenceConstants.PROBLEM_MISSING_DEFAULT,
@@ -185,6 +186,10 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 
 	public ValidationPreference getDqStringNotRequiredVar() {
 		return getPreference(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR);
+	}
+
+	public ValidationPreference getDuplicateParameter() {
+		return getPreference(PPPreferenceConstants.PROBLEM_DUPLICATE_PARAMETER);
 	}
 
 	public ValidationPreference getEnsureShouldAppearFirst() {
@@ -328,6 +333,7 @@ public class PPPreferencesHelper implements IPreferenceStoreInitializer, IProper
 		store.setDefault(PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_DQ_STRING_NOT_REQUIRED_VAR, ValidationPreference.IGNORE.toString());
+		store.setDefault(PPPreferenceConstants.PROBLEM_DUPLICATE_PARAMETER, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_ENSURE_NOT_FIRST, ValidationPreference.IGNORE.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_INTERPOLATED_HYPHEN, ValidationPreference.WARNING.toString());
 		store.setDefault(PPPreferenceConstants.PROBLEM_MISSING_DEFAULT, ValidationPreference.WARNING.toString());

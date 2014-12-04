@@ -84,6 +84,11 @@ public class PreferenceBasedPotentialProblemsAdvisor implements IPotentialProble
 		return preferences.getDqStringNotRequiredVar();
 	}
 
+	@Override
+	public ValidationPreference getDuplicateParameter() {
+		return preferences.getDuplicateParameter();
+	}
+
 	/**
 	 * @see com.puppetlabs.geppetto.pp.dsl.validation.IStylisticProblemsAdvisor#getEnsureShouldAppearFirstInResource()
 	 */

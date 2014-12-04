@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <pptp:PuppetDistribution xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pptp="http://www.puppetlabs.com/geppetto/1.0.0/PPTP" description="Puppet Distribution" version="2.7.26" label="puppet">
   <contents xsi:type="pptp:NameSpace" name="settings" reserved="true">
-    <contents xsi:type="pptp:TPVariable" name="*"/>
     <contents xsi:type="pptp:TPVariable" name="allow_duplicate_certs" documentation="Whether to allow a new certificate request to overwrite an existing certificate."/>
     <contents xsi:type="pptp:TPVariable" name="archive_file_server" documentation="During an inspect run, the file bucket server to archive files to if archive_files is set."/>
     <contents xsi:type="pptp:TPVariable" name="archive_files" documentation="During an inspect run, whether to archive files whose contents are audited to a file bucket."/>

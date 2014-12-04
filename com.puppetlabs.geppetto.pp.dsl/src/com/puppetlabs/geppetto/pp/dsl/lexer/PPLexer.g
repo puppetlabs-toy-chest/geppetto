@@ -324,9 +324,9 @@ RULE_WS : (' '|'\u00A0'|'\t'|'\r'|'\n')+ {
 RULE_LAMBDA : {false}?=> '{' '|' ;
 
 // Do not check if matched text is a keyword (it is allowed after a '$'
-RULE_DOLLAR_VAR : '$' 
+RULE_DOLLAR_VAR : {!singleQuotedString}? => ('$' 
 	((':' ':')=>RULE_NS)? ('0'..'9'|'a'..'z'|'A'..'Z'|'_')+ 
-	((':' ':')=>RULE_NS ('0'..'9'|'a'..'z'|'A'..'Z'|'_')+)* ;
+	((':' ':')=>RULE_NS ('0'..'9'|'a'..'z'|'A'..'Z'|'_')+)*);
 
 // Covers non decimal numbers and names
 RULE_WORD_CHARS : ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|(':' ':')=>RULE_NS) ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|'-'|(':' ':')=>RULE_NS)*

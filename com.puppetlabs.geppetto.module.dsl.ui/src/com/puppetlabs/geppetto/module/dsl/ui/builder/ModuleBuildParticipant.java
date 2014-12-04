@@ -10,13 +10,7 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -69,11 +63,11 @@ public class ModuleBuildParticipant extends BuilderParticipant {
 	private final IModuleValidationAdvisor validationAdvisor;
 
 	@Inject
-	public ModuleBuildParticipant(ModuleUtil moduleUtil, Forge forge, IWorkspaceRoot workspaceRoot,
-			IModuleValidationAdvisor validationAdvisor, RebuildChecker rebuildChecker) {
+	public ModuleBuildParticipant(ModuleUtil moduleUtil, Forge forge, IWorkspace workspace, IModuleValidationAdvisor validationAdvisor,
+			RebuildChecker rebuildChecker) {
 		this.moduleUtil = moduleUtil;
 		this.forge = forge;
-		this.workspaceRoot = workspaceRoot;
+		this.workspaceRoot = workspace.getRoot();
 		this.validationAdvisor = validationAdvisor;
 		this.rebuildChecker = rebuildChecker;
 	}

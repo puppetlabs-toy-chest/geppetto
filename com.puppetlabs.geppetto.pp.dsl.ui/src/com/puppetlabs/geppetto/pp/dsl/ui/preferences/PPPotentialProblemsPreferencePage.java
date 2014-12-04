@@ -41,6 +41,8 @@ public class PPPotentialProblemsPreferencePage extends AbstractPreferencePage {
 			PPPreferenceConstants.PROBLEM_DEPRECATED_NODE_INHERITANCE, "Use of deprecated node inheritance", getFieldEditorParent()));
 		addField(new ValidationPreferenceFieldEditor(
 			PPPreferenceConstants.PROBLEM_DEPRECATED_VARIABLE_NAME, "Use of deprecated variable name", getFieldEditorParent()));
+		addField(new ValidationPreferenceFieldEditor(
+			PPPreferenceConstants.PROBLEM_DUPLICATE_PARAMETER, "Duplicate parameter", getFieldEditorParent()));
 	}
 
 }

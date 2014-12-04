@@ -23,8 +23,6 @@
 			versionDesignator="[4.10.0,5.0.0)" />
 		<cs:dependency name="com.puppetlabs.geppetto.m2e"
 			componentType="osgi.bundle" filter="(!(pruned.product.build=true))" />
-		<cs:dependency name="org.eclipse.emf.mwe2.launch"
-			componentType="osgi.bundle" filter="(!(pruned.product.build=true))" />
 		<cs:dependency name="org.eclipse.emf.mwe2.language"
 			componentType="osgi.bundle" filter="(!(pruned.product.build=true))" />
 		<cs:dependency name="org.eclipse.m2e.core"

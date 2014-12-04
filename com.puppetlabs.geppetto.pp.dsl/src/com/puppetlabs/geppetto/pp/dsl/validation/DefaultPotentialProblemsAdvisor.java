@@ -77,6 +77,11 @@ public class DefaultPotentialProblemsAdvisor implements IPotentialProblemsAdviso
 	}
 
 	@Override
+	public ValidationPreference getDuplicateParameter() {
+		return ValidationPreference.WARNING;
+	}
+
+	@Override
 	public ValidationPreference getEnsureShouldAppearFirstInResource() {
 		return ValidationPreference.IGNORE;
 	}

@@ -25,10 +25,6 @@ Workflow {
     }
     
     component = DirectoryCleaner {
-    	directory = "${runtimeProject}/model/generated"
-    }
-    
-    component = DirectoryCleaner {
     	directory = "${runtimeProject}.ui/src-gen"
     }
     
@@ -91,11 +87,6 @@ Workflow {
     		fragment = exporting.QualifiedNamesFragment auto-inject {}
     		fragment = builder.BuilderIntegrationFragment auto-inject {}
     
-    		// generator API
-    		fragment = generator.GeneratorFragment auto-inject {
-    			generateStub = false
-    		}
-    
     		// formatter API
     		fragment = formatting.FormatterFragment auto-inject {
     			generateXtendStub = false
@@ -118,9 +109,7 @@ Workflow {
     		}
     
     		// content assist API
-    		fragment = contentAssist.ContentAssistFragment auto-inject {
-    			generateStub = false
-    		}
+    		fragment = contentAssist.JavaBasedContentAssistFragment auto-inject {}
     
     		// generates a more lightweight Antlr parser and lexer tailored for content assist
     		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
@@ -141,10 +130,10 @@ Workflow {
     		// fragment = xbase.XtypeGeneratorFragment auto-inject {}
     
     		// provides a preference page for template proposals
-    		fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
+    		// fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
     
     		// provides a compare view
-    		fragment = compare.CompareFragment auto-inject {}
+    		// fragment = compare.CompareFragment auto-inject {}
     	}
     }
 }

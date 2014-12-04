@@ -76,6 +76,11 @@ public class ValidationAdvisor {
 		}
 
 		@Override
+		public ValidationPreference getDuplicateParameter() {
+			return problemsAdvisor.getDuplicateParameter();
+		}
+
+		@Override
 		public ValidationPreference getEnsureShouldAppearFirstInResource() {
 			return problemsAdvisor.getEnsureShouldAppearFirstInResource();
 		}

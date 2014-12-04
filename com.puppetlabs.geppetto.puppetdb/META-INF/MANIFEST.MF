@@ -20,4 +20,4 @@ Import-Package: com.google.inject;version="[1.3.0,1.4.0)",
  org.eclipse.core.runtime,
  org.eclipse.core.runtime.preferences,
  org.osgi.service.prefs
-Export-Package: com.puppetlabs.geppetto.puppetdb;uses:="com.puppetlabs.puppetdb.javaclient,com.google.inject"
+Export-Package: com.puppetlabs.geppetto.puppetdb;uses:="com.google.inject,com.puppetlabs.puppetdb.javaclient"

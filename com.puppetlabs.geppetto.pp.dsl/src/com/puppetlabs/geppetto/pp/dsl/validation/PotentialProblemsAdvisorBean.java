@@ -31,6 +31,8 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 
 	private final ValidationPreference dqStringNotRequiredVariable;
 
+	private final ValidationPreference duplicateParameter;
+
 	private final ValidationPreference ensureShouldAppearFirstInResource;
 
 	private final ValidationPreference interpolatedNonBraceEnclosedHyphens;
@@ -65,6 +67,7 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 		this.deprecatedVariableName = ppAdvisor.getDeprecatedVariableName();
 		this.dqStringNotRequired = ppAdvisor.getDqStringNotRequired();
 		this.dqStringNotRequiredVariable = ppAdvisor.getDqStringNotRequiredVariable();
+		this.duplicateParameter = ppAdvisor.getDuplicateParameter();
 		this.ensureShouldAppearFirstInResource = ppAdvisor.getEnsureShouldAppearFirstInResource();
 		this.interpolatedNonBraceEnclosedHyphens = ppAdvisor.getInterpolatedNonBraceEnclosedHyphens();
 		this.missingDefaultInSelector = ppAdvisor.getMissingDefaultInSelector();
@@ -90,6 +93,7 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 			@JsonProperty("deprecated_variable_name") ValidationPreference deprecatedVariableName,
 			@JsonProperty("dqString_not_required") ValidationPreference dqStringNotRequired,
 			@JsonProperty("dqString_not_required_variable") ValidationPreference dqStringNotRequiredVariable,
+			@JsonProperty("duplicate_parameter") ValidationPreference duplicateParameter,
 			@JsonProperty("ensure_should_appear_first_in_resource") ValidationPreference ensureShouldAppearFirstInResource,
 			@JsonProperty("interpolated_non_brace_enclosed_hyphens") ValidationPreference interpolatedNonBraceEnclosedHyphens,
 			@JsonProperty("missing_default_in_selector") ValidationPreference missingDefaultInSelector,
@@ -111,6 +115,7 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 		this.deprecatedVariableName = deprecatedVariableName;
 		this.dqStringNotRequired = dqStringNotRequired;
 		this.dqStringNotRequiredVariable = dqStringNotRequiredVariable;
+		this.duplicateParameter = duplicateParameter;
 		this.ensureShouldAppearFirstInResource = ensureShouldAppearFirstInResource;
 		this.interpolatedNonBraceEnclosedHyphens = interpolatedNonBraceEnclosedHyphens;
 		this.missingDefaultInSelector = missingDefaultInSelector;
@@ -200,6 +205,13 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 	}
 
 	@Override
+	public ValidationPreference getDuplicateParameter() {
+		return duplicateParameter == null
+			? DefaultPotentialProblemsAdvisor.INSTANCE.getDuplicateParameter()
+			: duplicateParameter;
+	}
+
+	@Override
 	public ValidationPreference getEnsureShouldAppearFirstInResource() {
 		return ensureShouldAppearFirstInResource == null
 			? DefaultPotentialProblemsAdvisor.INSTANCE.getEnsureShouldAppearFirstInResource()
@@ -284,6 +296,7 @@ public class PotentialProblemsAdvisorBean implements IPotentialProblemsAdvisor, 
 			deprecatedVariableName == null ? problemsAdvisor.getDeprecatedVariableName() : deprecatedVariableName,
 			dqStringNotRequired == null ? problemsAdvisor.getDqStringNotRequired() : dqStringNotRequired,
 			dqStringNotRequiredVariable == null ? problemsAdvisor.getDqStringNotRequiredVariable() : dqStringNotRequiredVariable,
+			duplicateParameter == null ? problemsAdvisor.getDuplicateParameter() : duplicateParameter,
 			ensureShouldAppearFirstInResource == null ? problemsAdvisor.getEnsureShouldAppearFirstInResource() : ensureShouldAppearFirstInResource,
 			interpolatedNonBraceEnclosedHyphens == null ? problemsAdvisor.getInterpolatedNonBraceEnclosedHyphens() : interpolatedNonBraceEnclosedHyphens,
 			missingDefaultInSelector == null ? problemsAdvisor.getMissingDefaultInSelector() : missingDefaultInSelector,

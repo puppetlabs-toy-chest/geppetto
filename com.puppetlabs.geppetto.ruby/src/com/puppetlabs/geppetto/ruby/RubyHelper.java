@@ -678,13 +678,6 @@ public class RubyHelper {
 		settings.setName("settings");
 		target.getContents().add(settings);
 
-		// Create a wildcard to match all settings::*
-		//
-		TPVariable wildcard = PPTPFactory.eINSTANCE.createTPVariable();
-		wildcard.setName("*");
-		wildcard.setAssignable(false);
-		settings.getContents().add(wildcard);
-
 		// Add known names in settings (the most common ones). This to avoid
 		// warnings
 		//
