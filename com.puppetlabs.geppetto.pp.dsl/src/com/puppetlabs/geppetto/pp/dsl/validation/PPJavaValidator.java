@@ -317,15 +317,16 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	@Inject
 	private PPGrammarAccess grammarAccess;
 
-	private final ImmutableSet<EClass> extendedRelationshipClasses = ImmutableSet.of(PPPackage.Literals.VARIABLE_EXPRESSION, //
+	private final ImmutableSet<EClass> extendedRelationshipClasses = ImmutableSet.of(//
+		PPPackage.Literals.VARIABLE_EXPRESSION, //
 		PPPackage.Literals.DOUBLE_QUOTED_STRING, //
 		PPPackage.Literals.SINGLE_QUOTED_STRING, //
 		PPPackage.Literals.LITERAL_HASH, //
 		PPPackage.Literals.LITERAL_LIST, //
 		PPPackage.Literals.SELECTOR_EXPRESSION, //
 		PPPackage.Literals.CASE_EXPRESSION, //
-		PPPackage.Literals.COLLECT_EXPRESSION
-	// ,
+		PPPackage.Literals.COLLECT_EXPRESSION, //
+		PPPackage.Literals.IF_EXPRESSION //
 	);
 
 	@Inject
