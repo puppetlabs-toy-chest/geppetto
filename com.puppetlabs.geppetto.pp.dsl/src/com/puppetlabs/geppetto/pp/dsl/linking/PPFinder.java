@@ -621,22 +621,6 @@ public class PPFinder {
 	}
 
 	/**
-	 * Finds a parameter or variable with the given name. More than one may be returned if the definition
-	 * is ambiguous.
-	 *
-	 * @param scopeDetermeningResource
-	 * @param name
-	 * @param importedNames
-	 * @return
-	 */
-	public SearchResult findVariable(EObject scopeDetermeningResource, String name, PPImportedNamesAdapter importedNames) {
-		if(name == null)
-			throw new IllegalArgumentException("name is null");
-		QualifiedName fqn = converter.toQualifiedName(name);
-		return findVariables(scopeDetermeningResource, fqn, importedNames, Match.NO_OUTER_EXISTS);
-	}
-
-	/**
 	 * Finds all matching variables in current and inherited scopes.
 	 *
 	 * @param scopeDetermeningResource
@@ -686,10 +670,15 @@ public class PPFinder {
 		SearchResult result = findExternal(scopeDetermeningObject, fqn, importedNames, matchingStrategy, CLASSES_FOR_VARIABLES);
 		if(result.getAdjusted().size() > 0 && matchingStrategy.isExists())
 			return result;
+
+		if(!singleSegment)
+			result.addAll(findInherited(
+				scopeDetermeningObject, fqn, importedNames, Lists.<QualifiedName> newArrayList(), matchingStrategy, CLASSES_FOR_VARIABLES));
+
 		QualifiedName scopeName = getNameOfScope(scopeDetermeningObject);
 		if(!scopeName.isEmpty()) {
 			fqn = scopeName.append(fqn);
-			return result.addAll(findInherited(
+			result.addAll(findInherited(
 				scopeDetermeningObject, fqn, importedNames, Lists.<QualifiedName> newArrayList(), matchingStrategy, CLASSES_FOR_VARIABLES));
 		}
 		return result;

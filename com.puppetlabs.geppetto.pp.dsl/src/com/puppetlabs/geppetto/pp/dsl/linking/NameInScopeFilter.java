@@ -74,8 +74,9 @@ public class NameInScopeFilter implements Iterable<IEObjectDescription> {
 
 			// it is faster to compare exact match as this is a common case, before trying isSuperTypeOf
 			int found = -1;
+			EClass cc = candidate.getEClass();
 			for(int i = 0; i < eclasses.length; i++)
-				if(eclasses[i] == candidate.getEClass() || eclasses[i].isSuperTypeOf(candidate.getEClass())) {
+				if(eclasses[i] == cc || eclasses[i].isSuperTypeOf(cc)) {
 					found = i;
 					break;
 				}
