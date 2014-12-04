@@ -649,6 +649,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(octal) {
 				PPType vtype = typeEvaluator.type(value);
 				switch(vtype) {
+					case UNDEF:
 					case DYNAMIC:
 					case DYNAMIC_STRING:
 						// Can't validate this
