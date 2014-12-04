@@ -97,12 +97,16 @@ class CacheImpl implements Cache {
 		StringBuilder bld = new StringBuilder();
 		ModuleUtils.buildFileNameWithExtension(qname, version, bld);
 		File cachedFile = new File(getLocation(), bld.toString());
-		if(!cachedFile.exists()) {
+		if(!cachedFile.exists() || cachedFile.length() == 0) {
 			File dir = cachedFile.getParentFile();
 			dir.mkdirs();
 			OutputStream output = new FileOutputStream(cachedFile);
 			try {
 				files.download(new VersionedName(qname, version), output);
+			}
+			catch(IOException e) {
+				cachedFile.delete();
+				throw e;
 			}
 			finally {
 				StreamUtil.close(output);
