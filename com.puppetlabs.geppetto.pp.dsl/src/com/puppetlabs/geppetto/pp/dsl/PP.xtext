@@ -478,7 +478,7 @@ LiteralExpression returns pp::Expression
 LiteralNameOrReference returns pp::LiteralNameOrReference
 	:  value = name 
 	;
-	
+
 UNION_VARIABLE_OR_NAME 
 	: dollarVariable
 	| name
@@ -587,7 +587,7 @@ TextExpression returns pp::TextExpression hidden()
 // Consumation without creation is ok, if made optional where it is assigned, it is not possible to
 // insert WS and comments into ExpressioNTextExpression.
 ExpressionWithHidden returns pp::Expression hidden(WS, SL_COMMENT, ML_COMMENT):
-	{pp::ParenthesisedExpression} expr = AssignmentExpression?
+	{pp::ParenthesisedExpression} expr = (AssignmentExpression | LiteralKeyword)?
 ;
 		
 StringPart returns pp::TextExpression /*hidden()*/: 
@@ -612,8 +612,12 @@ LiteralRegex returns pp::LiteralRegex
 // VALIDATION: checks that the name is a NAME (and not a reference).
 LiteralName returns pp::LiteralName
 	: value = name 
-	; 
-	 
+	;
+
+LiteralKeyword returns pp::LiteralNameOrReference
+	: value = keyword 
+	;
+
 VariableExpression returns pp::VariableExpression
 	: varName = dollarVariable 
 	; 
