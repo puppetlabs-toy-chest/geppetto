@@ -78,7 +78,7 @@ public class PPStylesheetProvider extends DefaultStylesheetProvider {
 			grammarAccess.getElseIfExpressionAccess().findKeywords("else", "elsif")));
 
 		final Selector relationshipEdgeOperator = Select.grammar(grammarAccess.getRelationshipExpressionAccess().getOpNameEdgeOperatorParserRuleCall_1_1_0());
-		final Selector atExpressionLeftBracket = Select.grammar(grammarAccess.getAtExpressionAccess().getLeftSquareBracketKeyword_1_1());
+		final Selector atExpressionLeftBracket = Select.grammar(grammarAccess.getAtExpressionAccess().getLeftSquareBracketKeyword_1_0_1());
 
 		// interpolation
 		final Selector interpolationStart = Select.grammar(

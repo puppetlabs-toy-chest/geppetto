@@ -48,7 +48,7 @@ public class AtExpressionLayout extends AbstractListLayout {
 
 	@Override
 	protected AbstractElement getLastSignificantGrammarElement() {
-		return grammarAccess.getAtExpressionAccess().getRightSquareBracketKeyword_1_3();
+		return grammarAccess.getAtExpressionAccess().getRightSquareBracketKeyword_1_0_3();
 	}
 
 	@Override
@@ -66,12 +66,12 @@ public class AtExpressionLayout extends AbstractListLayout {
 		while(itor.hasNext()) {
 			IDomNode n = itor.next();
 			EObject ge = n.getGrammarElement();
-			if(ge == access.getLeftSquareBracketKeyword_1_1()) {
+			if(ge == access.getLeftSquareBracketKeyword_1_0_1()) {
 				IDomNode nextLeaf = DomModelUtils.nextWhitespace(n);
 				if(DomModelUtils.isWhitespace(nextLeaf) && breakAndAlign)
 					nextLeaf.getStyles().add(StyleSet.withStyles(styles.oneLineBreak()));
 			}
-			else if(breakAndAlign && ge == access.getCommaKeyword_1_2_1_0()) {
+			else if(breakAndAlign && ge == access.getCommaKeyword_1_1_2_1_1_2()) {
 				IDomNode nextLeaf = DomModelUtils.nextWhitespace(n);
 				if(DomModelUtils.isWhitespace(nextLeaf))
 					nextLeaf.getStyles().add(StyleSet.withStyles(styles.oneLineBreak()));

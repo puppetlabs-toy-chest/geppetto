@@ -41,9 +41,9 @@ public class PPFormatter extends AbstractDeclarativeFormatter {
 		// -- no space between EXPR and [
 		// -- no space after opening [
 		// -- no space before closing ]
-		c.setNoSpace().before(ga.getAtExpressionAccess().getLeftSquareBracketKeyword_1_1());
-		c.setNoSpace().after(ga.getAtExpressionAccess().getLeftSquareBracketKeyword_1_1());
-		c.setNoSpace().before(ga.getAtExpressionAccess().getRightSquareBracketKeyword_1_3());
+		c.setNoSpace().before(ga.getAtExpressionAccess().getLeftSquareBracketKeyword_1_0_1());
+		c.setNoSpace().after(ga.getAtExpressionAccess().getLeftSquareBracketKeyword_1_0_1());
+		c.setNoSpace().before(ga.getAtExpressionAccess().getRightSquareBracketKeyword_1_0_3());
 
 	}
 

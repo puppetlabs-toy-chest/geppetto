@@ -11,6 +11,7 @@
 package com.puppetlabs.geppetto.pp.dsl.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Test;
 
 import com.puppetlabs.geppetto.pp.AppendExpression;
@@ -47,6 +48,13 @@ public class TestFutureExpressions extends AbstractPuppetTests {
 			}
 			// TODO: Add more
 		};
+	}
+
+	@Test
+	public void test_MethodCall_On_AtExpr_Ok() throws Exception {
+		String code = "$y = [[1,2,3]]\n$y[0].each | $n | { notice \"$n\" }";
+		XtextResource r = getResourceFromString(code);
+		resourceErrorDiagnostics(r).assertOK();
 	}
 
 	@Test

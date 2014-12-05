@@ -107,6 +107,31 @@ public class TestDoubleQuotedString extends AbstractPuppetTests {
 	}
 
 	@Test
+	public void test_Parse_DoubleQuotedString_DollarExprKeyword() throws Exception {
+		String original = "before${node}/after";
+		String code = doubleQuote(original);
+		XtextResource r = getResourceFromString(code);
+		EObject result = r.getContents().get(0);
+		assertTrue("Should be a PuppetManifest", result instanceof PuppetManifest);
+		result = ((PuppetManifest) result).getStatements().get(0);
+		assertTrue("Should be a DoubleQuotedString", result instanceof DoubleQuotedString);
+		DoubleQuotedString string = (DoubleQuotedString) result;
+
+		List<TextExpression> t = string.getStringPart(); // flattenTextExpression(string.getTextExpression());
+		assertEquals("List should have 3 entries", 3, t.size());
+		assertEquals("First element should be 'before'", "before", ((VerbatimTE) t.get(0)).getText());
+		TextExpression te = t.get(1);
+		assertTrue("Second element should be ExpressionTE", te instanceof ExpressionTE);
+		assertEquals("Third element should be '/after'", "/after", ((VerbatimTE) t.get(2)).getText());
+
+		Expression pe = ((ExpressionTE) te).getExpression();
+		assertTrue("ExpressionTE expr should be ParenthesisedExpression", pe instanceof ParenthesisedExpression);
+		Expression lr = ((ParenthesisedExpression) pe).getExpr();
+		assertTrue("Inner expression should be a LiteralNameOrReference", lr instanceof LiteralNameOrReference);
+		assertEquals("Name should be 'node'", "node", ((LiteralNameOrReference) lr).getValue());
+	}
+
+	@Test
 	public void test_Parse_DoubleQuotedString_DollarExprVar() throws Exception {
 		String original = "before${var}/after";
 		String code = doubleQuote(original);
