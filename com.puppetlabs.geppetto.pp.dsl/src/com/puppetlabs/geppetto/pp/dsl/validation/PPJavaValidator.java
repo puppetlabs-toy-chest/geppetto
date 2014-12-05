@@ -907,8 +907,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		EObject container = o.eContainer();
 		if(!(container instanceof PuppetManifest || container instanceof HostClassDefinition))
 			acceptor.acceptError(
-				"A '" + typeLabel + "' may only appear at top level or directly inside a class.", o.eContainer(), o.eContainingFeature(),
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_AT_TOPLEVEL_OR_CLASS);
+				"A '" + typeLabel + "' may only appear at top level or directly inside a class.", o,
+				IPPDiagnostics.ISSUE__NOT_AT_TOPLEVEL_OR_CLASS);
 
 		if(!isCLASSNAME(o.getClassName())) {
 			// invalid name
