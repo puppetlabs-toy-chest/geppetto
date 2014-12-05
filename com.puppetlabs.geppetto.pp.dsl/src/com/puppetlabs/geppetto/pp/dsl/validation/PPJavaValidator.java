@@ -1813,7 +1813,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		for(Integer i : duplicates)
 			if(caseExpressions.get(i) != null)
-				acceptor.acceptError("Duplicate selector case", caseExpressions.get(i), IPPDiagnostics.ISSUE__DUPLICATE_CASE);
+				acceptor.acceptWarning("Duplicate selector case", caseExpressions.get(i), IPPDiagnostics.ISSUE__DUPLICATE_CASE);
 
 		// check missing comma between entries
 		final int count = o.getParameters().size();
