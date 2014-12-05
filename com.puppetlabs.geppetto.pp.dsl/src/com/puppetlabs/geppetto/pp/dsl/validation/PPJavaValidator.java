@@ -2253,6 +2253,10 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	 * @return
 	 */
 	protected boolean isSELECTOR_LHS(Expression lhs) {
+		if(advisor().allowTypeDefinitions())
+			// Any expression can be a selector in puppet vesions >= 4.0
+			return true;
+
 		// the lhs can be one of:
 		// name, type, quotedtext, variable, funccall, boolean, undef, default, or regex.
 		// Or after fix of puppet issue #5515 also hash/At
