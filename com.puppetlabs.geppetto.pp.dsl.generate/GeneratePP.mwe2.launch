@@ -9,5 +9,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="src/GeneratePP.mwe2"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="com.puppetlabs.geppetto.pp.dsl.generate"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-XX:-UseTLAB -XX:-DisableExplicitGC -XX:+UseG1GC -XX:MaxPermSize=128m -Xmx3072m"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-XX:-UseTLAB -XX:-DisableExplicitGC -XX:+UseG1GC -XX:MaxPermSize=128m -Xmx4096m"/>
 </launchConfiguration>

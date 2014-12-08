@@ -317,15 +317,16 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	@Inject
 	private PPGrammarAccess grammarAccess;
 
-	private final ImmutableSet<EClass> extendedRelationshipClasses = ImmutableSet.of(PPPackage.Literals.VARIABLE_EXPRESSION, //
+	private final ImmutableSet<EClass> extendedRelationshipClasses = ImmutableSet.of(//
+		PPPackage.Literals.VARIABLE_EXPRESSION, //
 		PPPackage.Literals.DOUBLE_QUOTED_STRING, //
 		PPPackage.Literals.SINGLE_QUOTED_STRING, //
 		PPPackage.Literals.LITERAL_HASH, //
 		PPPackage.Literals.LITERAL_LIST, //
 		PPPackage.Literals.SELECTOR_EXPRESSION, //
 		PPPackage.Literals.CASE_EXPRESSION, //
-		PPPackage.Literals.COLLECT_EXPRESSION
-	// ,
+		PPPackage.Literals.COLLECT_EXPRESSION, //
+		PPPackage.Literals.IF_EXPRESSION //
 	);
 
 	@Inject
@@ -906,8 +907,8 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 		EObject container = o.eContainer();
 		if(!(container instanceof PuppetManifest || container instanceof HostClassDefinition))
 			acceptor.acceptError(
-				"A '" + typeLabel + "' may only appear at top level or directly inside a class.", o.eContainer(), o.eContainingFeature(),
-				INSIGNIFICANT_INDEX, IPPDiagnostics.ISSUE__NOT_AT_TOPLEVEL_OR_CLASS);
+				"A '" + typeLabel + "' may only appear at top level or directly inside a class.", o,
+				IPPDiagnostics.ISSUE__NOT_AT_TOPLEVEL_OR_CLASS);
 
 		if(!isCLASSNAME(o.getClassName())) {
 			// invalid name
@@ -1812,7 +1813,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 
 		for(Integer i : duplicates)
 			if(caseExpressions.get(i) != null)
-				acceptor.acceptError("Duplicate selector case", caseExpressions.get(i), IPPDiagnostics.ISSUE__DUPLICATE_CASE);
+				acceptor.acceptWarning("Duplicate selector case", caseExpressions.get(i), IPPDiagnostics.ISSUE__DUPLICATE_CASE);
 
 		// check missing comma between entries
 		final int count = o.getParameters().size();
@@ -2252,6 +2253,10 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 	 * @return
 	 */
 	protected boolean isSELECTOR_LHS(Expression lhs) {
+		if(advisor().allowTypeDefinitions())
+			// Any expression can be a selector in puppet vesions >= 4.0
+			return true;
+
 		// the lhs can be one of:
 		// name, type, quotedtext, variable, funccall, boolean, undef, default, or regex.
 		// Or after fix of puppet issue #5515 also hash/At

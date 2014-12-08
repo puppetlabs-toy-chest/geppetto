@@ -288,13 +288,17 @@ SelectorEntry returns pp::Expression
 // VALIDATION: checks At dual roles and validates accordingly (only single parameter for normal At) etc.	
 AtExpression  returns pp::Expression:
 	MethodCall 
-	({pp::AtExpression.leftExpr=current}
+	(({pp::AtExpression.leftExpr=current}
 		'['  
 			(parameters += Expression (','  parameters += Expression)*)?
 		']' 
-	)*
+	) ({pp::MethodCall.leftExpr = current} '.' (methodExpr = LiteralName
+		( parenthesized = LPARBoolean  // remember if an empty list had parentheses or not
+			(parameters+=Expression (',' parameters += Expression)* ','? /*endComma? */)?
+		')' )?)?
+		lambda = LambdaExpression? 
+	)*)*
 	;
-	
 
 MethodCall returns pp::Expression
 	: FunctionCall ({pp::MethodCall.leftExpr = current} '.' (methodExpr = LiteralName

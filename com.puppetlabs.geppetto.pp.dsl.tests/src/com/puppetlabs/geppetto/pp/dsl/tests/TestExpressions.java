@@ -51,8 +51,6 @@ import com.puppetlabs.geppetto.pp.dsl.validation.IPPDiagnostics;
  */
 public class TestExpressions extends AbstractPuppetTests implements AbstractPuppetTests.SerializationTestControl {
 
-	private PrintStream savedOut;
-
 	// @formatter:off
 	static final String Sample_Relationship = "file { 'file1':\n" + //
 		"} -> file { 'file2':\n" + //
@@ -84,6 +82,8 @@ public class TestExpressions extends AbstractPuppetTests implements AbstractPupp
 		"} else {\n" + //
 		"  true\n" + //
 		"}\n";
+
+	private PrintStream savedOut;
 
 	private String doubleQuote(String s) {
 		return '"' + s + '"';
