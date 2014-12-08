@@ -318,7 +318,7 @@ public class RubyRakefileTaskFinder extends RubyFinder {
 		}
 		else if(fName.equals("desc")) {
 			// argument is the description
-			lastDesc = Joiner.on("").join(constEvaluator.stringList(constEvaluator.eval(root.getArgs())));
+			lastDesc = Joiner.on("").skipNulls().join(constEvaluator.stringList(constEvaluator.eval(root.getArgs())));
 		}
 		else {
 			lastDesc = ""; // consume, not valid any more
