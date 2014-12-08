@@ -24,7 +24,16 @@ import com.puppetlabs.geppetto.forge.model.Metadata;
 import com.puppetlabs.geppetto.forge.model.ModuleName;
 import com.puppetlabs.geppetto.forge.model.Requirement;
 import com.puppetlabs.geppetto.forge.model.SupportedOS;
-import com.puppetlabs.geppetto.module.dsl.metadata.*;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonArray;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonDependency;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonMetadata;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonOS;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonObject;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonRequirement;
+import com.puppetlabs.geppetto.module.dsl.metadata.JsonValue;
+import com.puppetlabs.geppetto.module.dsl.metadata.MetadataRefPair;
+import com.puppetlabs.geppetto.module.dsl.metadata.Pair;
+import com.puppetlabs.geppetto.module.dsl.metadata.Value;
 import com.puppetlabs.geppetto.module.dsl.model.MetadataUtil;
 import com.puppetlabs.geppetto.semver.Version;
 import com.puppetlabs.geppetto.semver.VersionRange;
@@ -61,6 +70,15 @@ public class ModuleUtil {
 
 	public ModuleName createModuleName(String fullName) {
 		return createModuleName(qnConverter.toQualifiedName(fullName));
+	}
+
+	public Version createVersion(String version) {
+		try {
+			return Version.create(version);
+		}
+		catch(IllegalArgumentException e) {
+			return null;
+		}
 	}
 
 	public ModuleName createModuleName(QualifiedName fqn) {
@@ -115,7 +133,7 @@ public class ModuleUtil {
 			else if(name.equals("tags"))
 				apiMd.setTags(getApiTags(metadata));
 			else if(name.equals("version"))
-				apiMd.setVersion(Version.create(getString(value)));
+				apiMd.setVersion(createVersion(getString(value)));
 			else
 				apiMd.addDynamicAttribute(name, getApiValue(value));
 		}
@@ -312,12 +330,7 @@ public class ModuleUtil {
 	}
 
 	public Version getVersion(JsonMetadata metadata) {
-		try {
-			return Version.create(getString(metadata, "version"));
-		}
-		catch(IllegalArgumentException e) {
-			return null;
-		}
+		return createVersion(getString(metadata, "version"));
 	}
 
 	public boolean isDeprecatedKey(JsonObject obj, String key) {
