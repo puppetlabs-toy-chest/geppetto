@@ -4,7 +4,7 @@
 
 	<groupId>com.puppetlabs.geppetto</groupId>
 	<artifactId>parent</artifactId>
-	<version>4.3.0</version>
+	<version>4.3.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Geppetto Site Project</name>
@@ -16,7 +16,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<mavenVersion>3.0.5</mavenVersion>
+		<mavenVersion>3.2.3</mavenVersion>
 		<geppettoVersion>4.0.0-SNAPSHOT</geppettoVersion>
 		<nexusServer>https://geppetto-nexus.puppetlabs.com</nexusServer>
 		<parentSiteURL>${nexusServer}/content/sites/geppetto-site</parentSiteURL>
@@ -32,11 +32,12 @@
 
 		<!-- we'd like to use stock Guice, but that breaks Maven embedder because 
 			it uses a modified Guice called Sisu -->
-		<guice.groupId>org.sonatype.sisu</guice.groupId>
-		<guice.artifactId>sisu-guice</guice.artifactId>
-		<emf.version>2.10.0-v20140514-1158</emf.version>
-		<xtext.version>2.7.1-v201409090713</xtext.version>
+		<guice.groupId>com.google.inject</guice.groupId>
+		<guice.artifactId>guice</guice.artifactId>
+		<emf.version>2.10.1-v20140901-1043</emf.version>
+		<xtext.version>2.7.2-v201409160908</xtext.version>
 		<buckminster.home>${user.home}/buildtools/buckminster</buckminster.home>
+		<skip.dslGen>true</skip.dslGen>
 	</properties>
 
 	<organization>
@@ -50,7 +51,7 @@
 		<connection>scm:git:git://github.com/puppetlabs/geppetto.git</connection>
 		<url>https://github.com/puppetlabs/geppetto</url>
 		<developerConnection>scm:git:git@github.com:puppetlabs/geppetto.git</developerConnection>
-		<tag>geppetto-4.3.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
@@ -155,17 +156,22 @@
 			<dependency>
 				<groupId>com.google.inject</groupId>
 				<artifactId>guice</artifactId>
-				<version>3.0</version>
+				<version>4.0-beta5</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.inject.extensions</groupId>
 				<artifactId>guice-multibindings</artifactId>
-				<version>3.0</version>
+				<version>4.0-beta5</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.inject.extensions</groupId>
+				<artifactId>guice-assistedinject</artifactId>
+				<version>4.0-beta5</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>17.0</version>
+				<version>18.0</version>
 			</dependency>
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
@@ -185,7 +191,7 @@
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-compress</artifactId>
-				<version>1.7</version>
+				<version>1.8.1</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
@@ -258,7 +264,7 @@
 			<dependency>
 				<groupId>org.eclipse.core</groupId>
 				<artifactId>org.eclipse.core.jobs</artifactId>
-				<version>3.6.0-v20140424-0053</version>
+				<version>3.6.1-v20141014-1248</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.core</groupId>
@@ -301,9 +307,14 @@
 				<version>3.5.400-v20140428-1507</version>
 			</dependency>
 			<dependency>
+				<groupId>org.eclipse.jgit</groupId>
+				<artifactId>org.eclipse.jgit</artifactId>
+				<version>3.4.1.201406201815-r</version>
+			</dependency>
+			<dependency>
 				<groupId>org.eclipse.osgi</groupId>
 				<artifactId>org.eclipse.osgi</artifactId>
-				<version>3.10.0-v20140606-1445</version>
+				<version>3.10.2-v20141103-1919</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.xtext</groupId>
@@ -328,12 +339,12 @@
 			<dependency>
 				<groupId>com.puppetlabs.graph</groupId>
 				<artifactId>com.puppetlabs.graph</artifactId>
-				<version>1.0.3</version>
+				<version>1.0.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.puppetlabs.jruby</groupId>
 				<artifactId>jrubyparser</artifactId>
-				<version>0.4</version>
+				<version>0.5.4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sonatype.aether</groupId>
@@ -344,7 +355,7 @@
 			<dependency>
 				<groupId>org.sonatype.sisu</groupId>
 				<artifactId>sisu-guice</artifactId>
-				<version>3.1.9</version>
+				<version>3.2.4</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -435,6 +446,7 @@
 							<goal>run</goal>
 						</goals>
 						<configuration>
+							<skip>${skip.dslGen}</skip>
 							<target>
 								<dirname property="git.clones.root" file="${basedir}" />
 								<basename property="geppetto.clone" file="${basedir}" />
@@ -499,6 +511,11 @@
 							<classpathContainer>org.eclipse.pde.core.requiredPlugins</classpathContainer>
 						</classpathContainers>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>2.3</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
