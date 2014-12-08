@@ -92,7 +92,7 @@
 		<repository>
 			<id>puppetlabs-xtext</id>
 			<name>Puppet Labs Eclipse xtext</name>
-			<url>http://nexus.tada.se/content/repositories/eclipse.xtext/</url>
+			<url>${nexusServer}/content/repositories/eclipse.xtext/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
