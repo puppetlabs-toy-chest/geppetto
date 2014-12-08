@@ -198,8 +198,8 @@ public class CommentProcessor {
 		int leftMarginSize = out.getLeftMargin();
 		if(Alignment.right == out.getMarkerColumnAlignment())
 			indentSize += out.getMarkerColumnWidth() - out.getRepeatingToken().length();
-		CharSequence indent = new CharSequences.Spaces(indentSize);
-		CharSequence leftMargin = new CharSequences.Spaces(leftMarginSize);
+		CharSequence indent = CharSequences.spaces(indentSize);
+		CharSequence leftMargin = CharSequences.spaces(leftMarginSize);
 
 		ensureTrailingLines(lines, options);
 		try {
@@ -297,6 +297,13 @@ public class CommentProcessor {
 	public List<CharSequence> foldLine(CharSequence s, int width, ICommentFormatterAdvice advice) {
 		ArrayList<CharSequence> result = Lists.newArrayList();
 		int originalIndentation = CharSequences.indexOfNonWhitespace(s, 0);
+		if(originalIndentation >= width) {
+			// A comment that starts with white space characters that
+			// goes beyond the total comment with. We sanitize that
+			// to make the comment readable. See issue GEP-225
+			originalIndentation = Math.min(32, width - 8);
+		}
+
 		if(originalIndentation == -1) {
 			result.add(""); // protect against all whitespace (should not happen).
 		}
