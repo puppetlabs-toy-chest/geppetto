@@ -7,8 +7,8 @@
 # Credentials must have been configured in $HOME/.m2/settings.xml
 #
 REPOSITORY_ID=eclipse.xtext
-SERVER_ID=tada.se
-REPOSITORY_URL=http://nexus.tada.se/content/repositories/$REPOSITORY_ID
+SERVER_ID=eclipse.xtext
+REPOSITORY_URL=https://geppetto-nexus.puppetlabs.com/content/repositories/$REPOSITORY_ID
 echo "Deploying files from '$PWD'" > "$PWD/deploy.log"
 for jarFile in `find "$PWD/com" "$PWD/org" -type f -name '*.jar'`; do
 	pomFile=${jarFile%.jar}.pom
