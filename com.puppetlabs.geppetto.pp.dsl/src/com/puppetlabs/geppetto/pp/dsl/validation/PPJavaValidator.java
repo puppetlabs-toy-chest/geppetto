@@ -922,7 +922,7 @@ public class PPJavaValidator extends AbstractPPJavaValidator implements IPPDiagn
 			if(hyphens.isWarningOrError()) {
 				int hyphenIdx = o.getClassName().indexOf("-");
 				if(hyphenIdx >= 0) {
-					String message = "Hyphen '-' in name only unofficially supported in some puppet versions.";
+					String message = "Hyphen '-' in name only (unofficially) supported in some puppet versions < 3.0";
 					if(hyphens == ValidationPreference.WARNING)
 						acceptor.acceptWarning(message, o, PPPackage.Literals.DEFINITION__CLASS_NAME, IPPDiagnostics.ISSUE__HYPHEN_IN_NAME);
 					else
