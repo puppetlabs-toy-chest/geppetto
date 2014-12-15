@@ -114,7 +114,7 @@ public class ValidateTestMojo extends AbstractForgeTestMojo {
 		}
 	}
 
-	@Test
+	//	@Test
 	public void unresolvedDependency() throws Exception {
 		Validate validate = getValidate(ForgeIT.testModuleB);
 		try {

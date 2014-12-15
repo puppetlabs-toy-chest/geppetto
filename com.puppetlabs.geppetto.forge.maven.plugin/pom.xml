@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -34,18 +35,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-core</artifactId>
-			<version>${mavenVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>${mavenVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.plugin-tools</groupId>
@@ -86,17 +77,14 @@
 			<artifactId>com.puppetlabs.geppetto.validation</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
+
+		<!-- Test dependencies -->
 		<dependency>
 			<groupId>org.eclipse.sisu</groupId>
 			<artifactId>org.eclipse.sisu.plexus</artifactId>
 			<version>0.2.1</version>
+			<scope>test</scope>
 		</dependency>
-
-		<!-- Test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -155,7 +143,9 @@
 						<configuration>
 							<target>
 								<mkdir dir="${project.build.directory}/generated-site/xhtml" />
-								<move failonerror="false" file="${project.build.directory}/generated-site/xdoc/plugin-info.html" tofile="${project.build.directory}/generated-site/xhtml/plugin-info.xhtml.vm" />
+								<move failonerror="false"
+									file="${project.build.directory}/generated-site/xdoc/plugin-info.html"
+									tofile="${project.build.directory}/generated-site/xhtml/plugin-info.xhtml.vm" />
 							</target>
 						</configuration>
 						<goals>
@@ -231,6 +221,86 @@
 					</systemProperties>
 					<forkMode>never</forkMode>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-shade-plugin</artifactId>
+				<configuration>
+					<promoteTransitiveDependencies>true</promoteTransitiveDependencies>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>aopalliance:*</include>
+									<include>com.fasterxml.jackson.core:*</include>
+									<include>com.google.code.gson:*</include>
+									<include>com.google.guava:*</include>
+									<include>com.google.inject:*</include>
+									<include>com.google.inject.extensions:*</include>
+									<include>com.puppetlabs.geppetto:*</include>
+									<include>com.puppetlabs.graph:*</include>
+									<include>com.puppetlabs.puppetdb:*</include>
+									<include>com.puppetlabs.jruby:*</include>
+									<include>commons-codec:*</include>
+									<include>commons-lang:*</include>
+									<include>commons-logging:*</include>
+									<include>javax.inject:*</include>
+									<include>org.antlr.runtime:*</include>
+									<include>org.apache.commons:*</include>
+									<include>org.apache.httpcomponents:*</include>
+									<include>org.apache.log4j:*</include>
+									<include>org.eclipse.core:*</include>
+									<include>org.eclipse.emf:*</include>
+									<include>org.eclipse.equinox:*</include>
+									<include>org.eclipse.osgi:*</include>
+									<include>org.eclipse.xtext:*</include>
+								</includes>
+							</artifactSet>
+							<relocations>
+								<relocation>
+									<pattern>com.google.inject</pattern>
+									<shadedPattern>puppetlabs.shaded.com.google.inject</shadedPattern>
+								</relocation>
+							</relocations>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>plugin.properties</resource>
+								</transformer>
+							</transformers>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>.*</exclude>
+										<exclude>META-INF/ECLIPSE*</exclude>
+										<exclude>META-INF/*_gen</exclude>
+										<exclude>about_files/**</exclude>
+										<exclude>schema/**</exclude>
+										<exclude>about.*</exclude>
+										<exclude>plugin.xml</exclude>
+										<exclude>*.profile</exclude>
+										<exclude>profile.list</exclude>
+										<exclude>systembunlde.properties</exclude>
+										<exclude>LICENSE</exclude>
+										<exclude>NOTICE</exclude>
+									</excludes>
+								</filter>
+								<filter>
+									<artifact>org.eclipse.xtext:*</artifact>
+									<excludes>
+										<exclude>log4j.properties</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

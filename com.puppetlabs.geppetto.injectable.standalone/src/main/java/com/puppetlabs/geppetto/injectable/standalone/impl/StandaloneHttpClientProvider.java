@@ -1,6 +1,6 @@
 package com.puppetlabs.geppetto.injectable.standalone.impl;
 
-import javax.annotation.Nullable;
+import com.puppetlabs.geppetto.common.annotations.Nullable;
 import javax.inject.Named;
 
 import org.apache.http.client.HttpClient;

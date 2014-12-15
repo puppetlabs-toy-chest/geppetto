@@ -33,8 +33,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
@@ -51,10 +49,6 @@ import com.puppetlabs.geppetto.validation.ValidationService;
  * Goal which performs basic validation.
  */
 public abstract class AbstractForgeMojo extends AbstractMojo {
-	static final String IMPORTED_MODULES_ROOT = "importedModules";
-
-	static final Charset UTF_8 = Charset.forName("UTF-8");
-
 	public static boolean isNull(String field) {
 		if(field == null)
 			return true;
@@ -87,6 +81,10 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 		}
 	}
 
+	static final String IMPORTED_MODULES_ROOT = "importedModules";
+
+	static final Charset UTF_8 = Charset.forName("UTF-8");
+
 	/**
 	 * The directory where this plug-in will search for modules. The directory itself
 	 * can be a module or it may be the root of a hierarchy where modules can be found.
@@ -105,8 +103,6 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 
 	private transient Injector injector;
 
-	private transient Logger log;
-
 	protected void addModules(Diagnostic diagnostic, List<Module> modules) {
 		modules.add(new ForgeMavenModule(getFileFilter(), session.getCurrentProject()));
 		modules.add(getCommonModule());
@@ -118,7 +114,7 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		Diagnostic diagnostic = new LoggingDiagnostic(getLogger());
+		Diagnostic diagnostic = new LoggingDiagnostic(getLog());
 		try {
 			List<Module> modules = new ArrayList<Module>();
 			addModules(diagnostic, modules);
@@ -222,13 +218,6 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 		return injector;
 	}
 
-	protected Logger getLogger() {
-		if(log == null) {
-			log = LoggerFactory.getLogger(getClass());
-		}
-		return log;
-	}
-
 	protected Metadata getModuleMetadata(File moduleDirectory, Diagnostic diag) throws IOException {
 		File mdJson = new File(moduleDirectory, Forge.METADATA_JSON_NAME);
 		if(mdJson.exists())
@@ -278,8 +267,4 @@ public abstract class AbstractForgeMojo extends AbstractMojo {
 	}
 
 	protected abstract void invoke(Diagnostic result) throws Exception;
-
-	public void setLogger(Logger log) {
-		this.log = log;
-	}
 }

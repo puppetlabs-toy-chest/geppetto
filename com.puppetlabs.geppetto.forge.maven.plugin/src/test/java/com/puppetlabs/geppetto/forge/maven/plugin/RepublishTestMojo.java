@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.testing.SilentLog;
 import org.eclipse.xtext.util.Wrapper;
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ public class RepublishTestMojo extends AbstractForgeTestMojo {
 			ForgeIT.testModuleC.getVersion().toString(bld);
 			bld.append(" has already been published");
 			final String expectedMessage = bld.toString();
-			publish.setLogger(new NOPLogger() {
+			publish.setLog(new SilentLog() {
 				@Override
 				public void warn(String message) {
 					if(message.contains(expectedMessage))

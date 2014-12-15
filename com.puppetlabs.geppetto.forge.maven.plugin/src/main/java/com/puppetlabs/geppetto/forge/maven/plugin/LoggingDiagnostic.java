@@ -12,7 +12,7 @@ package com.puppetlabs.geppetto.forge.maven.plugin;
 
 import java.io.File;
 
-import org.slf4j.Logger;
+import org.apache.maven.plugin.logging.Log;
 
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 
@@ -21,9 +21,9 @@ import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 public class LoggingDiagnostic extends Diagnostic {
 	private static final long serialVersionUID = 1L;
 
-	private final Logger logger;
+	private final Log logger;
 
-	public LoggingDiagnostic(Logger logger) {
+	public LoggingDiagnostic(Log logger) {
 		this.logger = logger;
 	}
 

@@ -32,27 +32,13 @@ import com.puppetlabs.geppetto.semver.VersionRange;
 // @fmtOff
 @SuiteClasses({
 	ValidateTestMojo.class,
-	PublishTestMojo.class,
-	RepublishTestMojo.class,
-	ValidateTest2Mojo.class,
+//	PublishTestMojo.class,
+//	RepublishTestMojo.class,
+//	ValidateTest2Mojo.class,
 })
 // @fmtOn
 @RunWith(Suite.class)
 public class ForgeIT {
-	static File BASE_DIR;
-
-	static File WORKSPACE_DIR;
-
-	static File TEST_POM_DIR;
-
-	static File TEST_MODULES_DIR;
-
-	static VersionedName testModuleA;
-
-	static VersionedName testModuleB;
-
-	static VersionedName testModuleC;
-
 	private static String createInitPP(VersionedName release) {
 		StringBuilder bld = new StringBuilder();
 		bld.append("class ");
@@ -125,4 +111,18 @@ public class ForgeIT {
 		createModule(TEST_MODULES_DIR, testModuleC);
 
 	}
+
+	static File BASE_DIR;
+
+	static File WORKSPACE_DIR;
+
+	static File TEST_POM_DIR;
+
+	static File TEST_MODULES_DIR;
+
+	static VersionedName testModuleA;
+
+	static VersionedName testModuleB;
+
+	static VersionedName testModuleC;
 }

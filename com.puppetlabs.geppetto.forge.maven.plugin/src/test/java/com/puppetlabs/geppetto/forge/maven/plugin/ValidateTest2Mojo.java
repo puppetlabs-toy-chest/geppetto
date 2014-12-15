@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.testing.SilentLog;
 import org.eclipse.xtext.util.Wrapper;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class ValidateTest2Mojo extends AbstractForgeTestMojo {
 			ForgeIT.testModuleC.getVersion().toString(bld);
 			final String expectedMessage = bld.toString();
 			final Wrapper<Boolean> msgFound = new Wrapper<Boolean>(false);
-			validate.setLogger(new NOPLogger() {
+			validate.setLog(new SilentLog() {
 				@Override
 				public void info(String message) {
 					if(message.contains(expectedMessage))
