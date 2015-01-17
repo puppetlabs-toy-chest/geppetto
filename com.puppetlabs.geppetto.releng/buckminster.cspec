@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0"
 	name="com.puppetlabs.geppetto.releng" componentType="buckminster"
-	version="4.3.0.qualifier" shortDesc="Puppet Labs Geppetto Releng">
+	version="4.3.1.qualifier" shortDesc="Puppet Labs Geppetto Releng">
 	<cs:dependencies>
 		<cs:dependency name="com.puppetlabs.geppetto.product"
 			componentType="eclipse.feature" />
