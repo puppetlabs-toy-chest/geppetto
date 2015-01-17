@@ -10,9 +10,12 @@
  */
 package com.puppetlabs.geppetto.pp.dsl.ui.preferences;
 
+import java.util.Map;
+
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 
+import com.google.common.collect.Maps;
 import com.puppetlabs.geppetto.pp.dsl.target.PuppetTarget;
 import com.puppetlabs.geppetto.pp.dsl.ui.preferences.editors.AbstractPreferencePage;
 
@@ -31,6 +34,19 @@ public class PPGeneralPreferencePage extends AbstractPreferencePage {
 	 */
 	private static class PuppetVersionFieldEditor extends RadioGroupFieldEditor {
 
+		private static final Map<String, String> deprecatedVersions;
+
+		static {
+			deprecatedVersions = Maps.newHashMap();
+			deprecatedVersions.put("2.8", "3.0");
+			deprecatedVersions.put("PE 2.0", "2.7");
+			deprecatedVersions.put("PE 2.7", "2.7");
+			deprecatedVersions.put("PE 2.8", "2.7");
+			deprecatedVersions.put("PE 3.0", "3.0");
+			deprecatedVersions.put("PE 3.1", "3.3");
+			deprecatedVersions.put("PE 3.7", "3.7");
+		}
+
 		/**
 		 * @param puppetTargetVersion
 		 * @param string
@@ -42,32 +58,27 @@ public class PPGeneralPreferencePage extends AbstractPreferencePage {
 			super(puppetTargetVersion, string, i, strings, fieldEditorParent);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * Method declared on FieldEditor.
-		 */
 		@Override
 		protected void doLoad() {
 			String v = getPreferenceStore().getString(getPreferenceName());
-			if("2.8".equals(v)) {
-				getPreferenceStore().setValue(getPreferenceName(), "3.0");
+			if(v != null) {
+				v = deprecatedVersions.get(v);
+				if(v != null)
+					getPreferenceStore().setValue(getPreferenceName(), v);
 			}
 			super.doLoad();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * Method declared on FieldEditor.
-		 */
 		@Override
 		protected void doLoadDefault() {
 			String v = getPreferenceStore().getDefaultString(getPreferenceName());
-			if("2.8".equals(v)) {
-				getPreferenceStore().setDefault(getPreferenceName(), "3.0");
+			if(v != null) {
+				v = deprecatedVersions.get(v);
+				if(v != null)
+					getPreferenceStore().setDefault(getPreferenceName(), v);
 			}
 			super.doLoadDefault();
 		}
-
 	}
 
 	@Override
