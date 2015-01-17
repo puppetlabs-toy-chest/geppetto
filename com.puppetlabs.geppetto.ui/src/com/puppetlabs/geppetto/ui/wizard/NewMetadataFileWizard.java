@@ -1,7 +1,6 @@
 package com.puppetlabs.geppetto.ui.wizard;
 
 import static com.puppetlabs.geppetto.forge.Forge.METADATA_JSON_NAME;
-import static com.puppetlabs.geppetto.forge.Forge.MODULEFILE_NAME;
 import static com.puppetlabs.geppetto.forge.model.Constants.UTF_8;
 
 import java.io.ByteArrayInputStream;
@@ -88,8 +87,8 @@ public class NewMetadataFileWizard extends BasicNewResourceWizard implements INe
 		@Override
 		protected boolean validatePage() {
 			boolean valid = super.validatePage();
-			if(!getFileName().equals(MODULEFILE_NAME)) {
-				setErrorMessage("File name must be '" + MODULEFILE_NAME + '\'');
+			if(!getFileName().equals(METADATA_JSON_NAME)) {
+				setErrorMessage("File name must be '" + METADATA_JSON_NAME + '\'');
 				valid = false;
 			}
 			return valid;

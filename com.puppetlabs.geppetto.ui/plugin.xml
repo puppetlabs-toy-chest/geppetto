@@ -31,7 +31,7 @@
       </wizard>
       <wizard
             category="com.puppetlabs.geppetto.ui.newWizardCategory"
-            class="com.puppetlabs.geppetto.ui.wizard.NewManifestWizard"
+            class="com.puppetlabs.geppetto.ui.GeppettoExecutableExtensionFactory:com.puppetlabs.geppetto.ui.wizard.NewManifestWizard"
             icon="icons/obj16/new_pp.png"
             id="com.puppetlabs.geppetto.ui.NewManifestWizard"
             name="New Puppet Manifest">
@@ -44,7 +44,7 @@
       </wizard>
       <wizard
             category="com.puppetlabs.geppetto.ui.newWizardCategory"
-            class="com.puppetlabs.geppetto.ui.wizard.NewMetadataFileWizard"
+            class="com.puppetlabs.geppetto.ui.GeppettoExecutableExtensionFactory:com.puppetlabs.geppetto.ui.wizard.NewMetadataFileWizard"
             icon="icons/obj16/puppet-16.png"
             id="com.puppetlabs.geppetto.ui.NewMetadataFileWizard"
             name="New Puppet Metadata">
