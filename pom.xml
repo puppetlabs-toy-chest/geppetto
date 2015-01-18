@@ -4,7 +4,7 @@
 
 	<groupId>com.puppetlabs.geppetto</groupId>
 	<artifactId>parent</artifactId>
-	<version>4.3.1-SNAPSHOT</version>
+	<version>4.3.1</version>
 	<packaging>pom</packaging>
 
 	<name>Geppetto Site Project</name>
@@ -51,7 +51,7 @@
 		<connection>scm:git:git://github.com/puppetlabs/geppetto.git</connection>
 		<url>https://github.com/puppetlabs/geppetto</url>
 		<developerConnection>scm:git:git@github.com:puppetlabs/geppetto.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>geppetto-4.3.1</tag>
 	</scm>
 
 	<distributionManagement>
@@ -340,7 +340,7 @@
 			<dependency>
 				<groupId>com.puppetlabs.graph</groupId>
 				<artifactId>com.puppetlabs.graph</artifactId>
-				<version>1.0.4-SNAPSHOT</version>
+				<version>1.0.4</version>
 			</dependency>
 			<dependency>
 				<groupId>com.puppetlabs.jruby</groupId>
