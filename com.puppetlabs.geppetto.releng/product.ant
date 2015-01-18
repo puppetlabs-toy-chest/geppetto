@@ -1,31 +1,54 @@
 <project name="Product packaging">
 	<import file="${buckminster.pdetasks}"/>
 
-	<target name="create.product.zip">
-		<property name="output" location="${sp:output}"/>
+	<property name="output" location="${sp:output}"/>
 
-		<!-- This assumes that we only have one single product -->
-		<property name="product.config" location="${sp:products}"/>
+	<!-- This assumes that we only have one single product -->
+	<property name="product.config" location="${sp:products}"/>
+	<extractProductName file="${product.config}" property="product.name"/>
+	<lower string="${product.name}" to="lc.product.name"/>
+	<property name="product.install.directory" value="${output}/${lc.product.name}"/>
 
-		<!-- We use the feature version as the product version -->
-		<property name="feature.manifest" location="${sp:manifest}"/>
-		<extractFeatureVersion file="${feature.manifest}" property="product.version"/>
+	<!-- We use the feature version as the product version -->
+	<property name="feature.manifest" location="${sp:manifest}"/>
+	<extractFeatureVersion file="${feature.manifest}" property="product.version"/>
 
-		<scriptdef language="javascript" name="unqualified.version">
-		    <attribute name="version" /> 
-		    <attribute name="property" />
+	<scriptdef language="javascript" name="unqualified.version">
+	    <attribute name="version" /> 
+	    <attribute name="property" />
 
-		    project.setProperty( attributes.get( "property" ),
-				org.eclipse.buckminster.core.version.VersionHelper.replaceQualifier(
-					org.eclipse.equinox.p2.metadata.Version.create(attributes.get( "version" )), null).toString() );
-		</scriptdef>
+	    project.setProperty( attributes.get( "property" ),
+			org.eclipse.buckminster.core.version.VersionHelper.replaceQualifier(
+				org.eclipse.equinox.p2.metadata.Version.create(attributes.get( "version" )), null).toString() );
+	</scriptdef>
+	<unqualified.version version="${product.version}" property="unqualified.product.version"/>
 
-		<extractProductId file="${product.config}" property="product.id"/>
-		
-		<!-- -->
-		<extractProductName file="${product.config}" property="product.name"/>
-		<lower string="${product.name}" to="lc.product.name"/>
-		<property name="product.install.directory" value="${output}/${lc.product.name}"/>
+	<condition property="isMac">
+		<equals arg1="${product.os}" arg2="macosx"/>
+	</condition>
+
+	<target name="create.product.zip" depends="create.product,add.mac.extras">
+		<exec dir="${output}" executable="zip" outputproperty="zip.output" failonerror="true">
+			<arg value="-r"/>
+			<arg value="-9"/>
+			<arg value="${lc.product.name}-${product.os}.${product.ws}.${product.arch}-${unqualified.product.version}-${build.id}.zip"/>
+			<arg value="${lc.product.name}"/>
+		</exec>
+		<echo message="${zip.output}"/>
+	</target>
+
+	<target name="add.mac.extras" if="isMac">
+		<copy file="${basedir}/Info.plist" todir="${product.install.directory}/${product.name}.app/Contents" overwrite="true">
+			<filterset>
+				<filter token="VERSION" value="${unqualified.product.version}"/>
+				<filter token="NAME" value="${product.name}"/>
+			</filterset>
+		</copy>
+	</target>
+
+	<target name="create.product">
+
+		<extractProductId file="${product.config}" property="product.id"/>		
 		<makeurl property="product.repository" file="${sp:product.repository}"/>
 
 		<delete dir="${product.install.directory}" includeemptydirs="true" failonerror="false"/>
@@ -46,14 +69,5 @@
 		    <iu id="org.eclipse.egit.feature.group"/>
 		    <iu id="org.eclipse.jgit.feature.group"/>
 		</p2.director>
-
-		<unqualified.version version="${product.version}" property="unqualified.product.version"/>
-		<exec dir="${output}" executable="zip" outputproperty="zip.output" failonerror="true">
-			<arg value="-r"/>
-			<arg value="-9"/>
-			<arg value="${lc.product.name}-${product.os}.${product.ws}.${product.arch}-${unqualified.product.version}-${build.id}.zip"/>
-			<arg value="${lc.product.name}"/>
-		</exec>
-		<echo message="${zip.output}"/>
 	</target>
 </project>
