@@ -12,7 +12,7 @@ with the command:
 
 If it reports 1.6.x then Geppetto will not run unless you take action. You can either
 tell Geppetto to explicitly use a Java other than the default
-(see _&lt;geppetto install dir&gt;/Geppetto.app/Contents/Info.plist_ for more info), or you can
+(see _<geppetto install dir>/Geppetto.app/Contents/Info.plist_ for more info), or you can
 change the default.
 
 Start a command shell and navigate to:
