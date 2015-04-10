@@ -24,6 +24,8 @@
         <mapRules xsi:type="aggregator:ExclusionRule" name="javax.inject"/>
         <mapRules xsi:type="aggregator:ExclusionRule" name="javax.xml"/>
       </repositories>
+      <mavenMappings namePattern="^com\.google\.inject$" groupId="com.google.inject" artifactId="guice"/>
+      <mavenMappings namePattern="^com\.google\.guava$" groupId="com.google.guava" artifactId="guava"/>
     </contributions>
   </validationSets>
   <configurations operatingSystem="macosx" windowSystem="cocoa"/>

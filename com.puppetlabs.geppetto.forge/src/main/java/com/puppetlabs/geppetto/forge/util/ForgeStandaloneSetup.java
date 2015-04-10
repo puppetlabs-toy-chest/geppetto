@@ -17,6 +17,7 @@ import java.util.List;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.puppetlabs.geppetto.common.util.ModuleProvider;
 import com.puppetlabs.geppetto.diagnostic.Diagnostic;
 import com.puppetlabs.geppetto.forge.Forge;
 import com.puppetlabs.geppetto.forge.ForgeService;
@@ -28,6 +29,12 @@ import com.puppetlabs.geppetto.injectable.CommonModuleProvider;
  */
 public class ForgeStandaloneSetup {
 	private Injector injector;
+
+	private final List<ModuleProvider> moduleProviders = new ArrayList<>();
+
+	public void addModuleProvider(ModuleProvider provider) {
+		moduleProviders.add(provider);
+	}
 
 	protected void addModules(Diagnostic diagnostic, List<Module> modules) {
 		modules.add(new ForgeModule());
@@ -50,6 +57,8 @@ public class ForgeStandaloneSetup {
 		if(injector == null) {
 			List<Module> modules = new ArrayList<>();
 			addModules(diag, modules);
+			for(ModuleProvider provider : moduleProviders)
+				provider.addModules(modules);
 			if(diag.getSeverity() <= Diagnostic.WARNING) {
 				injector = createInjector(modules);
 			}

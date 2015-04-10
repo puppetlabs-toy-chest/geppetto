@@ -96,6 +96,11 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 	@Nullable
 	private Authenticator authenticator;
 
+	@Inject(optional = true)
+	@Named(PE_AUTH_TOKEN)
+	@Nullable
+	private String peAuthToken;
+
 	private String userAgent = USER_AGENT;
 
 	private transient String credentials;
@@ -135,8 +140,9 @@ public class ForgeHttpClient implements Constants, ForgeClient {
 	protected void configureRequest(final HttpRequestBase request) {
 		if(credentials != null)
 			request.addHeader(HttpHeaders.AUTHORIZATION, credentials);
-		else
-			request.addHeader(HttpHeaders.USER_AGENT, userAgent);
+		else if(peAuthToken != null)
+			request.addHeader(HttpHeaders.AUTHORIZATION, peAuthToken);
+		request.addHeader(HttpHeaders.USER_AGENT, userAgent);
 	}
 
 	private HttpGet createGetRequest(String urlStr, Map<String, String> params) {

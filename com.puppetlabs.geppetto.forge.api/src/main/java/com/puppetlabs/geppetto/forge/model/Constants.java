@@ -105,6 +105,11 @@ public interface Constants {
 	String CONTENT_TYPE_JSON = "application/json"; //$NON-NLS-1$
 
 	/**
+	 * Injection name for the PE license file
+	 */
+	String PE_AUTH_TOKEN = "pe-auth-token";
+
+	/**
 	 * Injection name for credentials
 	 */
 	String CREDENTIALS_NAME = "credentials"; //$NON-NLS-1$

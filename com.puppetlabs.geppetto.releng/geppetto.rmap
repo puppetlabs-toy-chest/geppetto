@@ -13,6 +13,7 @@
   <rm:locator pattern="^org\.polarion\.eclipse\.team\.svn\.connector(\..+)?$" searchPathRef="svn.connectors"/>
   <rm:locator pattern="^com\.fasterxml\.jackson(\..+)?$" searchPathRef="maven.central"/>
   <rm:locator pattern="^org\.jruby(\..+)?$" searchPathRef="maven.central"/>
+  <rm:locator pattern="^org\.yaml(\..+)?$" searchPathRef="maven.central"/>
   <rm:locator pattern="^org\.apache\.commons\.compress(\..+)?$" searchPathRef="maven.central" failOnError= "false"/>
   <rm:locator searchPathRef="platform" failOnError="false"/>
   <rm:locator searchPathRef="xtext" failOnError="false"/>
@@ -89,6 +90,7 @@
         <maven:entry artifactId="jackson-annotations" groupId="com.fasterxml.jackson.core" name="com.fasterxml.jackson.core.jackson-annotations"/>
         <maven:entry artifactId="jackson-core" groupId="com.fasterxml.jackson.core" name="com.fasterxml.jackson.core.jackson-core"/>
         <maven:entry artifactId="jackson-databind" groupId="com.fasterxml.jackson.core" name="com.fasterxml.jackson.core.jackson-databind"/>
+        <maven:entry artifactId="snakeyaml" groupId="org.yaml" name="org.yaml.snakeyaml"/>
       </maven:mappings>
     </rm:provider>
   </rm:searchPath>
