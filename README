@@ -1,4 +1,5 @@
 Important: Geppetto is no longer supported nor maintained by Puppet Labs.
+Please check out https://puppet-vscode.github.io instead.
 
 Geppetto is aimed at developing tools to simplify the process of authoring and
 consuming Puppet modules and manifests.
